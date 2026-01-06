@@ -1,0 +1,39 @@
+@layer base {
+  html {
+    color: var(--color-black);
+    background-color: var(--color-white);
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
+    overflow-x: hidden;
+  }
+
+  button {
+    text-transform: inherit;
+    letter-spacing: inherit;
+    touch-action: manipulation;
+    user-select: none;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  svg {
+    display: block;
+  }
+
+  blockquote,
+  figcaption,
+  figure,
+  cite,
+  address {
+    font-style: normal;
+  }
+}
