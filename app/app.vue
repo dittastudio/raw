@@ -4,6 +4,7 @@ import { VueLenis } from 'lenis/vue'
 
 const story = await useStory<Settings>('/settings')
 const route = useRoute()
+const url = useRequestURL()
 
 const globalClasses = computed(() => ({
   'is-storyblok-editor': storyblokEditor(route.query),
@@ -17,7 +18,7 @@ useHead({
 
 useSeoMeta({
   titleTemplate: title => (title ? `${title} - RAW` : 'RAW'),
-  robots: 'index, follow',
+  robots: url.host === 'raw.london' ? 'index, follow' : 'noindex, nofollow',
 })
 </script>
 
