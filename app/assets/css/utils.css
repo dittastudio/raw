@@ -11,6 +11,14 @@
   padding-inline: var(--app-outer-gutter);
 }
 
+@utility text-outline-none {
+  @supports((text-stroke: 1px black) or (-webkit-text-stroke: 1px black)) {
+    -webkit-text-stroke: 0;
+    text-stroke: 0;
+    color: currentColor;
+  }
+}
+
 @utility text-outline-black {
   @supports((text-stroke: 1px black) or (-webkit-text-stroke: 1px black)) {
     -webkit-text-stroke: 1px var(--color-black);
