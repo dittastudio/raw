@@ -2,17 +2,17 @@
 import type { Link } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
 interface Props {
-  navigation?: Link[]
+  items?: Link[]
 }
 
-const { navigation } = defineProps<Props>()
+const { items } = defineProps<Props>()
 </script>
 
 <template>
   <nav>
     <ul>
       <li
-        v-for="item in navigation"
+        v-for="item in items"
         :key="item._uid"
       >
         <StoryblokLink :item="item.link">

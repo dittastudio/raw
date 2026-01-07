@@ -35,6 +35,7 @@ export interface Project {
 }
 
 export interface Settings {
+  navigation?: Link[];
   component: "settings";
   _uid: string;
 }

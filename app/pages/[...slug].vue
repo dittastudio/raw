@@ -10,6 +10,7 @@ const imageOptions = {
   smart: true,
   quality: 80,
 }
+
 const route = useRoute()
 const story = await useStory<Page>(
   route.path,
@@ -22,15 +23,11 @@ useSeoMeta({
   description: story.value?.content.seo_description,
   ogTitle: story.value?.content.seo_title ?? '',
   ogDescription: story.value?.content.seo_description,
-  ogImage:
-    storyblokImage(story.value?.content.seo_image?.filename, imageOptions)
-    || null,
+  ogImage: storyblokImage(story.value?.content.seo_image?.filename, imageOptions) || null,
   ogType: 'website',
   twitterTitle: story.value?.content.seo_title ?? '',
   twitterCard: 'summary_large_image',
-  twitterImage:
-    storyblokImage(story.value?.content.seo_image?.filename, imageOptions)
-    || null,
+  twitterImage: storyblokImage(story.value?.content.seo_image?.filename, imageOptions) || null,
 })
 </script>
 

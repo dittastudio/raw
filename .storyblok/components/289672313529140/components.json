@@ -231,9 +231,21 @@
     "display_name": null,
     "description": "Settings for the global content of the website",
     "created_at": "2026-01-06T16:27:28.640Z",
-    "updated_at": "2026-01-06T16:28:37.378Z",
+    "updated_at": "2026-01-07T13:13:36.680Z",
     "id": 131183610438016,
-    "schema": {},
+    "schema": {
+      "navigation": {
+        "type": "bloks",
+        "pos": 0,
+        "id": "P3g2KiXRRwu6DVqFjoz-9Q",
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "link"
+        ],
+        "component_denylist": []
+      }
+    },
     "image": null,
     "preview_field": null,
     "is_root": true,

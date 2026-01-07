@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import type { Settings } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import { VueLenis } from 'lenis/vue'
 
+const story = await useStory<Settings>('/settings')
 const route = useRoute()
 
 const globalClasses = computed(() => ({
@@ -21,6 +23,11 @@ useSeoMeta({
 
 <template>
   <VueLenis root>
+    <AppNavigation
+      v-if="story.content?.navigation"
+      :items="story.content.navigation"
+    />
+
     <div class="w-full h-screen flex flex-col items-center justify-center bg-pink">
       <div class="flex flex-col items-center justify-center gap-10 text-center">
         <h1 class="text-84 font-extrabold uppercase">
