@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
-const relations = []
+const relations: string[] = []
 
 const imageOptions = {
   width: 1200,
