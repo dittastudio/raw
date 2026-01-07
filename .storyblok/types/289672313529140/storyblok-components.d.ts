@@ -36,6 +36,13 @@ export interface Project {
 
 export interface Settings {
   navigation?: Link[];
+  statement?: string;
+  cta_title?: string;
+  cta_link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  links?: Link[];
+  company_email?: string;
+  company_telephone?: string;
+  company_address?: string;
   component: "settings";
   _uid: string;
 }

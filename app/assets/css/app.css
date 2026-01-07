@@ -62,6 +62,11 @@
   --text-50--line-height: 1.2;
   --text-50--letter-spacing: -0.015em;
 
+  /* https://utopia.fyi/type/calculator/?c=375,20,1.2,1300,50,1.25,5,2,&s=0.75,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+  --text-50-fluid: clamp(1.25rem, 0.4899rem + 3.2432vw, 3.125rem);
+  --text-50-fluid--line-height: 1.2;
+  --text-50-fluid--letter-spacing: -0.015em;
+
   /* 84px */
   --text-84: 5.25rem;
   --text-84--line-height: 1;

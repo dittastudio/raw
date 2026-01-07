@@ -56,6 +56,31 @@ useSeoMeta({
 
     <NuxtPage />
 
+    <AppStatement
+      v-if="story.content?.statement"
+      :statement="story.content.statement"
+      :title="story.content.cta_title"
+      :link="story.content.cta_link"
+    />
+
+    <!-- Hello Will...for <AppFooter /> you could use these... -->
+    <pre>
+{{ story.content.company_email }}
+{{ story.content.company_telephone }}
+{{ story.content.company_address }}
+    </pre>
+
+    <ul v-if="story.content.links">
+      <li
+        v-for="item in story.content.links"
+        :key="item._uid"
+      >
+        <StoryblokLink :item="item.link">
+          {{ item.title }}
+        </StoryblokLink>
+      </li>
+    </ul>
+
     <DevOnly>
       <DevGuide />
     </DevOnly>
