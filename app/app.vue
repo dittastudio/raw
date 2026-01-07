@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Settings } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import { VueLenis } from 'lenis/vue'
+import IconLogo from '@/assets/icons/logo.svg?component'
 
 const story = await useStory<Settings>('/settings')
 const route = useRoute()
@@ -23,10 +24,16 @@ useSeoMeta({
 
 <template>
   <VueLenis root>
-    <AppNavigation
-      v-if="story.content?.navigation"
-      :items="story.content.navigation"
-    />
+    <div class="fixed top-0 p-8 w-full flex flex-row items-center justify-between z-50">
+      <IconLogo class="text-black w-auto h-8 block" />
+
+      <div class="w-full">
+        <AppNavigation
+          v-if="story.content?.navigation"
+          :items="story.content.navigation"
+        />
+      </div>
+    </div>
 
     <div class="w-full h-screen flex flex-col items-center justify-center bg-pink">
       <div class="flex flex-col items-center justify-center gap-10 text-center">
