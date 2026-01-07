@@ -1,0 +1,12 @@
+{
+  "name": "raw-migration",
+  "type": "module",
+  "private": true,
+  "author": "ditta",
+  "scripts": {
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

@@ -2,6 +2,7 @@
   "name": "raw",
   "type": "module",
   "private": true,
+  "author": "ditta",
   "scripts": {
     "sb:login": "storyblok login",
     "sb:logout": "storyblok logout",
