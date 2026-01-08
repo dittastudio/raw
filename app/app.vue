@@ -38,7 +38,7 @@ useSeoMeta({
 
     <div class="w-full h-screen flex flex-col items-center justify-center bg-pink">
       <div class="flex flex-col items-center justify-center gap-10 text-center">
-        <h1 class="text-84 font-extrabold uppercase">
+        <h1 class="text-84 font-bold uppercase">
           Brave Thinking.
           <span class="block text-outline-black">
             Backed by proof.

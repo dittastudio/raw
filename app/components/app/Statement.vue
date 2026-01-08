@@ -15,7 +15,7 @@ const { statement, title, link } = defineProps<Props>()
     <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
       <h6
         v-if="statement"
-        class="text-50-fluid font-extrabold uppercase text-center"
+        class="text-50-fluid font-bold uppercase text-center"
       >
         {{ statement }}
       </h6>

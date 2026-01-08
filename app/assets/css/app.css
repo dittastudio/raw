@@ -9,10 +9,10 @@
   --color-\*: initial;
   --color-white: hsla(0, 0%, 100%, 1);
   --color-black: hsla(200, 5%, 12%, 1);
-  --color-blue: hsla(197, 77%, 73%, 1);
-  --color-green: hsla(89, 64%, 77%, 1);
-  --color-pink: hsla(335, 100%, 88%, 1);
-  --color-purple: hsla(276, 92%, 81%, 1);
+  --color-blue: hsla(197, 77%, 73%, 1); /* #84d0ef */
+  --color-green: hsla(89, 64%, 77%, 1); /* #c6eaa0 */
+  --color-pink: hsla(335, 100%, 88%, 1); /* #ffc3dc */
+  --color-purple: hsla(276, 92%, 81%, 1); /* #d8a4fb */
 
   --breakpoint-\*: initial;
   --breakpoint-2xs: 375px;
