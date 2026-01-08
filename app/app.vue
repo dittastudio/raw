@@ -64,6 +64,12 @@ useSeoMeta({
       :link="story.content.cta_link"
     />
 
+    <AppFooter />
+
+    <div class="wrapper">
+      Hello
+    </div>
+
     <!-- Hello Will...for <AppFooter /> you could use these... -->
     <pre>
 {{ story.content.company_email }}

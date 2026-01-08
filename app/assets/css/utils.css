@@ -1,5 +1,11 @@
 @utility wrapper {
   width: 100%;
+  margin-inline: auto;
+  padding-inline: var(--app-outer-gutter);
+}
+
+@utility wrapper-max {
+  width: 100%;
   max-width: var(--breakpoint-2xl);
   margin-inline: auto;
   padding-inline: var(--app-outer-gutter);
