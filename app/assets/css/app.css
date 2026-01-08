@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "./resets.css";
-@import "./page.css";
 @import "./transitions.css";
 @import "./utils.css";
 @import "./fonts.css";
@@ -107,4 +106,30 @@
 
   --ease-outBack: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-inOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@layer theme {
+  :root {
+    --app-inner-gutter: 10px;
+    --app-outer-gutter: 20px;
+
+    @variant sm {
+      --app-inner-gutter: 20px;
+    }
+
+    @variant md {
+      --app-outer-gutter: 30px;
+    }
+  }
+
+  ::selection {
+    color: --alpha(var(--color-white) / 99%);
+    background-color: var(--color-black);
+  }
+
+  .is-storyblok-editor {
+    a {
+      pointer-events: none !important;
+    }
+  }
 }
