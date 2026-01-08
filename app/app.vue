@@ -64,29 +64,13 @@ useSeoMeta({
       :link="story.content.cta_link"
     />
 
-    <AppFooter />
-
-    <div class="wrapper">
-      Hello
-    </div>
-
-    <!-- Hello Will...for <AppFooter /> you could use these... -->
-    <pre>
-{{ story.content.company_email }}
-{{ story.content.company_telephone }}
-{{ story.content.company_address }}
-    </pre>
-
-    <ul v-if="story.content.links">
-      <li
-        v-for="item in story.content.links"
-        :key="item._uid"
-      >
-        <StoryblokLink :item="item.link">
-          {{ item.title }}
-        </StoryblokLink>
-      </li>
-    </ul>
+    <AppFooter
+      :text="story.content.newsletter_text"
+      :links="story.content.links"
+      :email="story.content.company_email"
+      :telephone="story.content.company_telephone"
+      :address="story.content.company_address"
+    />
 
     <DevOnly>
       <DevGuide />
