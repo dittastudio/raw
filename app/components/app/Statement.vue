@@ -14,12 +14,12 @@ const { statement, title, link } = defineProps<Props>()
   <div class="w-full bg-green">
     <div class="wrapper py-24 flex flex-col items-center justify-center">
       <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
-        <h6
+        <h5
           v-if="statement"
-          class="text-50-fluid font-bold uppercase text-center"
+          class="text-50-fluid font-bold font-display uppercase text-center"
         >
           {{ statement }}
-        </h6>
+        </h5>
 
         <StoryblokLink
           v-if="title && link"
