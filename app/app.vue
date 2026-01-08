@@ -5,6 +5,7 @@ import IconLogo from '@/assets/icons/logo.svg?component'
 
 const story = await useStory<Settings>('/settings')
 const route = useRoute()
+const url = useRequestURL()
 
 const globalClasses = computed(() => ({
   'is-storyblok-editor': storyblokEditor(route.query),
@@ -18,7 +19,7 @@ useHead({
 
 useSeoMeta({
   titleTemplate: title => (title ? `${title} - RAW` : 'RAW'),
-  robots: 'index, follow',
+  robots: url.host === 'raw.london' ? 'index, follow' : 'noindex, nofollow',
 })
 </script>
 
@@ -37,7 +38,7 @@ useSeoMeta({
 
     <div class="w-full h-screen flex flex-col items-center justify-center bg-pink">
       <div class="flex flex-col items-center justify-center gap-10 text-center">
-        <h1 class="text-84 font-extrabold uppercase">
+        <h1 class="text-84 font-bold uppercase">
           Brave Thinking.
           <span class="block text-outline-black">
             Backed by proof.

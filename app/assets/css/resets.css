@@ -2,7 +2,6 @@
   html {
     color: var(--color-black);
     background-color: var(--color-white);
-    overflow-x: hidden;
   }
 
   body {
@@ -10,7 +9,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-tap-highlight-color: transparent;
-    overflow-x: hidden;
   }
 
   button {
