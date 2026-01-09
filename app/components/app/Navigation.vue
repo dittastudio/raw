@@ -10,7 +10,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav class="bg-black text-white lg:bg-transparent lg:text-black">
+  <nav class="bg-offblack text-white lg:bg-transparent lg:text-offblack">
     <ul class="flex items-center justify-center lg:gap-12 flex-col lg:flex-row uppercase font-display text-32 lg:font-mono lg:text-20 font-bold">
       <li
         v-for="item in items"

@@ -1,6 +1,6 @@
 @layer base {
   html {
-    color: var(--color-black);
+    color: var(--color-offblack);
     background-color: var(--color-white);
   }
 

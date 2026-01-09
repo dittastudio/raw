@@ -85,12 +85,9 @@ onUnmounted(() => {
 
 <style scoped>
 .morph-gradient {
-  --color1: 18, 113, 255;
-  --color2: 221, 74, 255;
-  --color3: 100, 220, 255;
-  --color4: 200, 50, 50;
-  --color5: 180, 180, 50;
-  --color-interactive: 140, 100, 255;
+  --color1: 198, 234, 160;
+  --color2: 255, 195, 220;
+  --color-interactive: 132, 208, 239;
   --circle-size: 50%;
   --blending: none;
 
