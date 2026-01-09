@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Link } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Link, Logo } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {
@@ -8,9 +8,10 @@ interface Props {
   email?: string
   telephone?: string
   address?: string
+  logos?: Logo[]
 }
 
-const { text, links, email, telephone, address } = defineProps<Props>()
+const { text, links, email, telephone, address, logos } = defineProps<Props>()
 </script>
 
 <template>
@@ -69,8 +70,39 @@ const { text, links, email, telephone, address } = defineProps<Props>()
         </ul>
       </div>
 
-      <div class="grid-area-logos">
-        LOGOS
+      <div class="grid-area-logos bg-[tomato]">
+        <ul
+          v-if="logos"
+          class="type-p"
+        >
+          <li
+            v-for="item in logos"
+            :key="item._uid"
+          >
+            <StoryblokLink
+              v-if="item.link"
+              :item="item.link"
+            >
+              {{ item.title }}
+            </StoryblokLink>
+
+            <span v-else>
+              {{ item.title }}
+            </span>
+
+            <NuxtImg
+              v-if="item.image?.filename"
+              :src="item.image.filename"
+              :alt="item.image.alt || item.title || 'Logo'"
+              class=""
+              :width="150"
+              :height="50"
+              loading="lazy"
+            />
+
+            <!-- {{ item.image }} -->
+          </li>
+        </ul>
       </div>
     </div>
   </footer>

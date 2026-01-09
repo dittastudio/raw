@@ -70,6 +70,7 @@ useSeoMeta({
       :email="story.content.company_email"
       :telephone="story.content.company_telephone"
       :address="story.content.company_address"
+      :logos="story.content.logos"
     />
 
     <DevOnly>

@@ -8,8 +8,16 @@ export interface Link {
   _uid: string;
 }
 
+export interface Logo {
+  image: StoryblokAsset;
+  title: string;
+  link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  component: "logo";
+  _uid: string;
+}
+
 export interface Page {
-  blocks?: (Link | Page | Post | Project | Settings)[];
+  blocks?: (Link | Logo | Page | Post | Project | Settings)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
@@ -44,6 +52,7 @@ export interface Settings {
   company_email?: string;
   company_telephone?: string;
   company_address?: string;
+  logos?: Logo[];
   component: "settings";
   _uid: string;
 }
