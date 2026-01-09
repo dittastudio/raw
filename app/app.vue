@@ -36,21 +36,17 @@ useSeoMeta({
       </div>
     </div>
 
-    <div class="w-full h-screen flex flex-col items-center justify-center bg-pink">
+    <div class="w-full min-h-screen flex flex-col items-center justify-center bg-pink">
       <div class="flex flex-col items-center justify-center gap-10 text-center">
-        <h1 class="text-84 font-bold uppercase">
+        <h1 class="type-h1">
           Brave Thinking.
           <span class="block text-outline-black">
             Backed by proof.
           </span>
         </h1>
 
-        <p class="text-28 max-w-148">
+        <p class="type-h4 max-w-[30em] text-balance">
           The agency that de-risks big ideas through data
-        </p>
-
-        <p class="text-16 max-w-148 font-mono">
-          We’re a talented and diverse crew who’ll root for your cause like it’s our own - your critical friends asking tough questions, uncovering opportunities and standing shoulder to shoulder with you from brief to launch.
         </p>
       </div>
     </div>
@@ -64,23 +60,13 @@ useSeoMeta({
       :link="story.content.cta_link"
     />
 
-    <!-- Hello Will...for <AppFooter /> you could use these... -->
-    <pre>
-      {{ story.content.company_email }}
-      {{ story.content.company_telephone }}
-      {{ story.content.company_address }}
-    </pre>
-
-    <ul v-if="story.content.links">
-      <li
-        v-for="item in story.content.links"
-        :key="item._uid"
-      >
-        <StoryblokLink :item="item.link">
-          {{ item.title }}
-        </StoryblokLink>
-      </li>
-    </ul>
+    <AppFooter
+      :text="story.content.newsletter_text"
+      :links="story.content.links"
+      :email="story.content.company_email"
+      :telephone="story.content.company_telephone"
+      :address="story.content.company_address"
+    />
 
     <DevOnly>
       <DevGuide />

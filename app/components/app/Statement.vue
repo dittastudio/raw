@@ -11,26 +11,28 @@ const { statement, title, link } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center w-full bg-green px-8 py-24">
-    <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
-      <h6
-        v-if="statement"
-        class="text-50-fluid font-bold uppercase text-center"
-      >
-        {{ statement }}
-      </h6>
-
-      <StoryblokLink
-        v-if="title && link"
-        :item="link"
-      >
-        <UiButton
-          colour="dark"
-          mode="solid"
+  <div class="w-full bg-green">
+    <div class="wrapper py-24 flex flex-col items-center justify-center">
+      <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
+        <h5
+          v-if="statement"
+          class="type-h2 text-center"
         >
-          {{ title }}
-        </UiButton>
-      </StoryblokLink>
+          {{ statement }}
+        </h5>
+
+        <StoryblokLink
+          v-if="title && link"
+          :item="link"
+        >
+          <UiButton
+            colour="dark"
+            mode="solid"
+          >
+            {{ title }}
+          </UiButton>
+        </StoryblokLink>
+      </div>
     </div>
   </div>
 </template>

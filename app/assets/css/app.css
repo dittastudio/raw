@@ -41,11 +41,12 @@
   --text-42: 2.625rem; /* 42px */
   --text-50: 3.125rem; /* 50px */
   --text-84: 5.25rem; /* 84px */
-  --text-fluid-h1: clamp(1.625rem, 0.3486rem + 5.446vw, 5.25rem);
-  --text-fluid-h2: clamp(1.25rem, 0.5898rem + 2.8169vw, 3.125rem);
-  --text-fluid-h4: clamp(1rem, 0.7359rem + 1.1268vw, 1.75rem);
-  --text-fluid-h5: clamp(1rem, 0.912rem + 0.3756vw, 1.25rem);
-  --text-fluid-p: clamp(0.875rem, 0.831rem + 0.1878vw, 1rem);
+  --text-fluid-h1: clamp(1.625rem, 0.3486rem + 5.446vw, 5.25rem); /* 26px - 84px */
+  --text-fluid-h2: clamp(1.25rem, 0.5898rem + 2.8169vw, 3.125rem); /* 20px - 50px */
+  --text-fluid-h3: clamp(1.125rem, 0.5968rem + 2.2535vw, 2.625rem); /* 18px - 42px */
+  --text-fluid-h4: clamp(1rem, 0.7359rem + 1.1268vw, 1.75rem); /* 16px - 28px */
+  --text-fluid-h5: clamp(1rem, 0.912rem + 0.3756vw, 1.25rem); /* 16px - 20px */
+  --text-fluid-p: clamp(0.875rem, 0.831rem + 0.1878vw, 1rem); /* 14px - 16px */
 
   --ease-inQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
   --ease-outQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);

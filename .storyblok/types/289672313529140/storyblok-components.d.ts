@@ -39,6 +39,7 @@ export interface Settings {
   statement?: string;
   cta_title?: string;
   cta_link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  newsletter_text?: string;
   links?: Link[];
   company_email?: string;
   company_telephone?: string;
