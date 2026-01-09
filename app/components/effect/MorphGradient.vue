@@ -50,7 +50,7 @@ onUnmounted(() => {
         <filter id="goo">
           <feGaussianBlur
             in="SourceGraphic"
-            stdDeviation="10"
+            stdDeviation="40"
             result="blur"
           />
 
@@ -92,7 +92,7 @@ onUnmounted(() => {
   --color5: 180, 180, 50;
   --color-interactive: 140, 100, 255;
   --circle-size: 50%;
-  --blending: hard-light;
+  --blending: none;
 
   width: 100%;
   height: 100%;
@@ -107,7 +107,7 @@ onUnmounted(() => {
 }
 
 .morph-gradient__container {
-  filter: url(#goo) blur(5px);
+  filter: url(#goo) blur(6px);
   width: 100%;
   height: 100%;
 }
@@ -116,14 +116,14 @@ onUnmounted(() => {
   position: absolute;
   background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
   /* background: red; */
-  /* mix-blend-mode: var(--blending); */
+  mix-blend-mode: var(--blending);
 
   width: var(--circle-size);
-  height: var(--circle-size);
-  /* aspect-ratio: 1/1; */
+  /* height: var(--circle-size); */
+  aspect-ratio: 1/1;
   top: calc(50% - var(--circle-size) / 2);
   left: calc(50% - var(--circle-size) / 2);
-  /* border-radius: 50%; */
+  border-radius: 50%;
 
   transform-origin: center center;
   animation: moveVertical 30s ease infinite;
@@ -135,14 +135,14 @@ onUnmounted(() => {
   position: absolute;
   background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
   /* background: blue; */
-  /* mix-blend-mode: var(--blending); */
+  mix-blend-mode: var(--blending);
 
   width: var(--circle-size);
-  height: var(--circle-size);
-  /* aspect-ratio: 1/1; */
+  /* height: var(--circle-size); */
+  aspect-ratio: 1/1;
   top: calc(50% - var(--circle-size) / 2);
   left: calc(50% - var(--circle-size) / 2);
-  /* border-radius: 50%; */
+  border-radius: 50%;
 
   /* transform-origin: calc(50% - 100px); */
   animation: moveHorizontal 20s reverse infinite;
@@ -157,17 +157,18 @@ onUnmounted(() => {
   position: absolute;
   background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
   /* background: green; */
-  /* mix-blend-mode: var(--blending); */
+  mix-blend-mode: var(--blending);
+  /* z-index: -2; */
 
   width: var(--size);
-  height: var(--size);
+  /* height: var(--size); */
   top: 0;
   left: 0;
-  /* aspect-ratio: 1/1; */
+  aspect-ratio: 1/1;
   translate: -50% -50%;
-  /* border-radius: 50%; */
+  border-radius: 50%;
 
-  opacity: 0.7;
+  opacity: 1;
 }
 
 @keyframes moveInCircle {
