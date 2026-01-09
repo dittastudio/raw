@@ -21,8 +21,8 @@ const { text, links, email, telephone, address } = defineProps<Props>()
       </div>
     </div>
 
-    <div class="w-full grid gap-(--app-inner-gutter) grid-cols-4 sm:grid-cols-8 md:grid-cols-12 py-5 sm:py-(--app-outer-gutter)">
-      <div class="col-span-full sm:col-span-5 sm:row-span-full bg-[red]">
+    <div class="w-full grid grid-footer gap-(--app-inner-gutter) py-(--app-outer-gutter) sm:pb-[clamp(20px,10vw,130px)]">
+      <div class="grid-area-newsletter bg-[red]">
         <h6
           v-if="text"
           class="font-display text-16 md:text-28 text-balance"
@@ -31,10 +31,7 @@ const { text, links, email, telephone, address } = defineProps<Props>()
         </h6>
       </div>
 
-      <div
-        v-if="email || telephone"
-        class="col-span-2 sm:col-span-3 bg-[orange] max-sm:text-14"
-      >
+      <div class="grid-area-contact bg-[orange] max-sm:text-14">
         <p v-if="email">
           <NuxtLink :to="`mailto:${email}`">
             {{ email }}
@@ -48,25 +45,81 @@ const { text, links, email, telephone, address } = defineProps<Props>()
         </p>
       </div>
 
-      <address
-        v-if="address"
-        class="col-span-2 sm:col-span-3 bg-[lime] max-sm:text-14"
-        v-html="address"
-      />
+      <div class="grid-area-location bg-[lime]">
+        <address
+          v-if="address"
+          class="max-sm:text-14 whitespace-pre"
+          v-html="address"
+        />
+      </div>
 
-      <ul
-        v-if="links"
-        class="col-span-2 sm:col-span-3 bg-[pink] max-sm:text-14"
-      >
-        <li
-          v-for="item in links"
-          :key="item._uid"
+      <div class="grid-area-links bg-[pink]">
+        <ul
+          v-if="links"
+          class="max-sm:text-14"
         >
-          <StoryblokLink :item="item.link">
-            {{ item.title }}
-          </StoryblokLink>
-        </li>
-      </ul>
+          <li
+            v-for="item in links"
+            :key="item._uid"
+          >
+            <StoryblokLink :item="item.link">
+              {{ item.title }}
+            </StoryblokLink>
+          </li>
+        </ul>
+      </div>
+
+      <div class="grid-area-logos">
+        LOGOS
+      </div>
     </div>
   </footer>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.grid-footer {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "newsletter newsletter"
+    "contact location"
+    "links logos";
+
+  @variant md {
+    grid-template-columns: 5fr 3fr;
+    grid-template-areas:
+      "newsletter contact"
+      "newsletter location"
+      "logos links";
+  }
+
+  @variant xl {
+    grid-template-columns: 6fr 2fr 4fr;
+    grid-template-areas:
+      "newsletter links contact"
+      "newsletter links location"
+      "newsletter links logos";
+  }
+}
+
+.grid-area-newsletter {
+  grid-area: newsletter;
+}
+
+.grid-area-contact {
+  grid-area: contact;
+}
+
+.grid-area-location {
+  grid-area: location;
+}
+
+.grid-area-links {
+  grid-area: links;
+}
+
+.grid-area-logos {
+  grid-area: logos;
+}
+</style>
