@@ -36,7 +36,7 @@ useSeoMeta({
       </div>
     </div>
 
-    <div class="relative w-full min-h-screen flex flex-col items-center justify-center bg-pink">
+    <div class="relative overflow-hidden w-full min-h-screen flex flex-col items-center justify-center bg-pink">
       <div class="absolute inset-0">
         <EffectMorphGradient />
       </div>
