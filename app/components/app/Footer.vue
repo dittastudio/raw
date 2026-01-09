@@ -23,7 +23,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
     </div>
 
     <div class="w-full grid grid-footer gap-(--app-inner-gutter) py-(--app-outer-gutter) sm:pb-[clamp(20px,10vw,130px)]">
-      <div class="grid-area-newsletter bg-[red]">
+      <div class="grid-area-newsletter">
         <h6
           v-if="text"
           class="type-h4 text-balance"
@@ -32,7 +32,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
         </h6>
       </div>
 
-      <div class="grid-area-contact bg-[orange] type-p">
+      <div class="grid-area-contact type-p">
         <p v-if="email">
           <NuxtLink :to="`mailto:${email}`">
             {{ email }}
@@ -46,15 +46,15 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
         </p>
       </div>
 
-      <div class="grid-area-location bg-[lime]">
+      <div class="grid-area-location">
         <address
           v-if="address"
-          class="type-p whitespace-pre"
+          class="type-p whitespace-pre-line"
           v-html="address"
         />
       </div>
 
-      <div class="grid-area-links bg-[pink]">
+      <div class="grid-area-links">
         <ul
           v-if="links"
           class="type-p"
@@ -70,10 +70,10 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
         </ul>
       </div>
 
-      <div class="grid-area-logos bg-[tomato]">
+      <div class="grid-area-logos">
         <ul
           v-if="logos"
-          class="type-p"
+          class="flex items-center justify-start gap-[calc(var(--app-outer-gutter)/2)] sm:gap-(--app-outer-gutter) pt-6 type-p"
         >
           <li
             v-for="item in logos"
@@ -82,25 +82,31 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
             <StoryblokLink
               v-if="item.link"
               :item="item.link"
+              class="block size-10 sm:size-15"
             >
-              {{ item.title }}
+              <NuxtImg
+                v-if="item.image?.filename"
+                class="block size-full object-contain"
+                :src="item.image.filename"
+                :alt="item.image.alt || item.title || 'Logo'"
+                :width="200"
+                loading="lazy"
+              />
             </StoryblokLink>
 
-            <span v-else>
-              {{ item.title }}
+            <span
+              v-else
+              class="block size-10 sm:size-15"
+            >
+              <NuxtImg
+                v-if="item.image?.filename"
+                class="block size-full object-contain"
+                :src="item.image.filename"
+                :alt="item.image.alt || item.title || 'Logo'"
+                :width="200"
+                loading="lazy"
+              />
             </span>
-
-            <NuxtImg
-              v-if="item.image?.filename"
-              :src="item.image.filename"
-              :alt="item.image.alt || item.title || 'Logo'"
-              class=""
-              :width="150"
-              :height="50"
-              loading="lazy"
-            />
-
-            <!-- {{ item.image }} -->
           </li>
         </ul>
       </div>
