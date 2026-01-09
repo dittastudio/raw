@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./resets.css";
+@import "./type.css";
 @import "./transitions.css";
 @import "./utils.css";
 @import "./fonts.css";
@@ -31,50 +32,20 @@
 
   --text-\*: initial;
 
-  /* 16px */
-  --text-16: 1rem;
-  --text-16--line-height: 1.3;
-  --text-16--letter-spacing: 0.01em;
-
-  /* 20px */
-  --text-20: 1.25rem;
-  --text-20--line-height: 1.3;
-  --text-20--letter-spacing: 0.005em;
-
-  /* 28px */
-  --text-28: 1.75rem;
-  --text-28--line-height: 1.3;
-  --text-28--letter-spacing: 0em;
-
-  /* 32px */
-  --text-32: 2rem;
-  --text-32--line-height: 1;
-  --text-32--letter-spacing: 0em;
-
-  /* 42px */
-  --text-42: 2.625rem;
-  --text-42--line-height: 1.2;
-  --text-42--letter-spacing: 0em;
-
-  /* 50px */
-  --text-50: 3.125rem;
-  --text-50--line-height: 1.2;
-  --text-50--letter-spacing: -0.015em;
-
-  /* https://utopia.fyi/type/calculator/?c=375,20,1.2,1300,50,1.25,5,2,&s=0.75,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
-  --text-50-fluid: clamp(1.25rem, 0.4899rem + 3.2432vw, 3.125rem);
-  --text-50-fluid--line-height: 1.2;
-  --text-50-fluid--letter-spacing: -0.015em;
-
-  /* 84px */
-  --text-84: 5.25rem;
-  --text-84--line-height: 1;
-  --text-84--letter-spacing: -0.03em;
-
-  --tracking-\*: initial;
-  --tracking-sm: 0.04em;
-  --tracking-md: 0.06em;
-  --tracking-lg: 0.15em;
+  --text-14: 0.875rem; /* 14px */
+  --text-16: 1rem; /* 16px */
+  --text-20: 1.25rem; /* 20px */
+  --text-26: 1.5rem; /* 26px */
+  --text-28: 1.75rem; /* 28px */
+  --text-32: 2rem; /* 32px */
+  --text-42: 2.625rem; /* 42px */
+  --text-50: 3.125rem; /* 50px */
+  --text-84: 5.25rem; /* 84px */
+  --text-fluid-h1: clamp(1.625rem, 0.3486rem + 5.446vw, 5.25rem);
+  --text-fluid-h2: clamp(1.25rem, 0.5898rem + 2.8169vw, 3.125rem);
+  --text-fluid-h4: clamp(1rem, 0.7359rem + 1.1268vw, 1.75rem);
+  --text-fluid-h5: clamp(1rem, 0.912rem + 0.3756vw, 1.25rem);
+  --text-fluid-p: clamp(0.875rem, 0.831rem + 0.1878vw, 1rem);
 
   --ease-inQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
   --ease-outQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);

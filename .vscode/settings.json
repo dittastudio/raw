@@ -1,5 +1,4 @@
 {
-  "vscode_custom_css.imports": ["file:///Users/michaelpumo/Documents/vscode/app.css"],
   "workbench.editorAssociations": { "*.svg": "default" },
   "eslint.useFlatConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -35,5 +34,7 @@
     "gql",
     "graphql"
   ],
-  "svg.preview.background": "custom"
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  }
 }

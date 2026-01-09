@@ -66,9 +66,9 @@ useSeoMeta({
 
     <!-- Hello Will...for <AppFooter /> you could use these... -->
     <pre>
-{{ story.content.company_email }}
-{{ story.content.company_telephone }}
-{{ story.content.company_address }}
+      {{ story.content.company_email }}
+      {{ story.content.company_telephone }}
+      {{ story.content.company_address }}
     </pre>
 
     <ul v-if="story.content.links">

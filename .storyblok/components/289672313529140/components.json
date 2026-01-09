@@ -231,7 +231,7 @@
     "display_name": null,
     "description": "Settings for the global content of the website",
     "created_at": "2026-01-06T16:27:28.640Z",
-    "updated_at": "2026-01-07T20:10:40.726Z",
+    "updated_at": "2026-01-08T19:10:07.642Z",
     "id": 131183610438016,
     "schema": {
       "navigation": {
@@ -264,9 +264,14 @@
         "id": "0O1YQgp4S5mCXseiHplXrA",
         "display_name": "CTA Link"
       },
+      "newsletter_text": {
+        "type": "text",
+        "pos": 4,
+        "id": "zXg7pzRfQGGdO8PD98UkPw"
+      },
       "links": {
         "type": "bloks",
-        "pos": 4,
+        "pos": 5,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -281,17 +286,17 @@
       },
       "company_email": {
         "type": "text",
-        "pos": 5,
+        "pos": 6,
         "id": "d52tHlAtSn-R_jedEJJxzw"
       },
       "company_telephone": {
         "type": "text",
-        "pos": 6,
+        "pos": 7,
         "id": "Wqedvb7-SdC62myJrsfrFw"
       },
       "company_address": {
         "type": "textarea",
-        "pos": 7,
+        "pos": 8,
         "id": "pn_At08IRwCLl-RwRal48A"
       }
     },

@@ -1,0 +1,123 @@
+/* h1 */
+@utility type-display-84 {
+  font-family: var(--font-display);
+  font-size: var(--text-84);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+@utility type-display-50 {
+  font-family: var(--font-display);
+  font-size: var(--text-50);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-42 {
+  font-family: var(--font-display);
+  font-size: var(--text-42);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-32 {
+  font-family: var(--font-display);
+  font-size: var(--text-32);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-28 {
+  font-family: var(--font-display);
+  font-size: var(--text-28);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
+
+@utility type-display-26 {
+  font-family: var(--font-display);
+  font-size: var(--text-26);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-20 {
+  font-family: var(--font-display);
+  font-size: var(--text-20);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@utility type-display-16 {
+  font-family: var(--font-display);
+  font-size: var(--text-16);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
+
+@utility type-mono-20 {
+  font-family: var(--font-mono);
+  font-size: var(--text-20);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
+
+@utility type-mono-16 {
+  font-family: var(--font-mono);
+  font-size: var(--text-16);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
+
+@utility type-mono-14 {
+  font-family: var(--font-mono);
+  font-size: var(--text-14);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
+
+@utility type-h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-fluid-h1);
+  line-height: 1;
+  letter-spacing: -0.03em;
+
+  @variant md {
+    letter-spacing: -0.05em;
+  }
+}
+
+@utility type-h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-fluid-h2);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@utility type-h3 {
+  @apply type-display-42;
+}
+
+@utility type-h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-fluid-h4);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
+
+@utility type-h5 {
+  font-family: var(--font-display);
+  font-size: var(--text-fluid-h5);
+  line-height: 1;
+
+  @variant sm {
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility type-p {
+  font-family: var(--font-mono);
+  font-size: var(--text-fluid-p);
+  line-height: 1.25;
+  letter-spacing: 0em;
+}
