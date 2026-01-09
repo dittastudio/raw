@@ -21,10 +21,10 @@
   }
 }
 
-@utility text-outline-black {
+@utility text-outline-offblack {
   @supports((text-stroke: 1px black) or (-webkit-text-stroke: 1px black)) {
-    -webkit-text-stroke: 1px var(--color-black);
-    text-stroke: 1px var(--color-black);
+    -webkit-text-stroke: 1px var(--color-offblack);
+    text-stroke: 1px var(--color-offblack);
     color: transparent;
   }
 }

@@ -15,7 +15,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
 </script>
 
 <template>
-  <footer class="wrapper bg-black text-white">
+  <footer class="wrapper bg-offblack text-white">
     <div class="w-full grid gap-x-(--app-inner-gutter) grid-cols-4 sm:grid-cols-8 md:grid-cols-12 border-b border-white py-(--app-outer-gutter) sm:pb-[clamp(20px,10vw,130px)]">
       <div class="col-span-full sm:col-span-5 md:col-span-7">
         <IconLogo class="w-full h-auto block" />
