@@ -36,16 +36,20 @@ useSeoMeta({
       </div>
     </div>
 
-    <div class="w-full min-h-screen flex flex-col items-center justify-center bg-pink">
-      <div class="flex flex-col items-center justify-center gap-10 text-center">
-        <h1 class="text-84 font-bold font-display uppercase">
+    <div class="relative w-full min-h-screen flex flex-col items-center justify-center bg-pink">
+      <div class="absolute inset-0">
+        <EffectMorphGradient />
+      </div>
+
+      <div class="z-1 flex flex-col items-center justify-center gap-10 text-center">
+        <h1 class="type-h1">
           Brave Thinking.
           <span class="block text-outline-black">
             Backed by proof.
           </span>
         </h1>
 
-        <p class="text-28 max-w-148 text-balance">
+        <p class="type-h4 max-w-[30em] text-balance">
           The agency that de-risks big ideas through data
         </p>
       </div>

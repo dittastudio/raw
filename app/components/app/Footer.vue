@@ -25,13 +25,13 @@ const { text, links, email, telephone, address } = defineProps<Props>()
       <div class="grid-area-newsletter bg-[red]">
         <h6
           v-if="text"
-          class="font-display text-16 md:text-28 text-balance"
+          class="type-h4 text-balance"
         >
           {{ text }}
         </h6>
       </div>
 
-      <div class="grid-area-contact bg-[orange] max-sm:text-14">
+      <div class="grid-area-contact bg-[orange] type-p">
         <p v-if="email">
           <NuxtLink :to="`mailto:${email}`">
             {{ email }}
@@ -48,7 +48,7 @@ const { text, links, email, telephone, address } = defineProps<Props>()
       <div class="grid-area-location bg-[lime]">
         <address
           v-if="address"
-          class="max-sm:text-14 whitespace-pre"
+          class="type-p whitespace-pre"
           v-html="address"
         />
       </div>
@@ -56,7 +56,7 @@ const { text, links, email, telephone, address } = defineProps<Props>()
       <div class="grid-area-links bg-[pink]">
         <ul
           v-if="links"
-          class="max-sm:text-14"
+          class="type-p"
         >
           <li
             v-for="item in links"
