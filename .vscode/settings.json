@@ -1,5 +1,6 @@
 {
   "vscode_custom_css.imports": ["file:///Users/michaelpumo/Documents/vscode/app.css"],
+  "css.lint.unknownAtRules": "ignore",
   "workbench.editorAssociations": { "*.svg": "default" },
   "eslint.useFlatConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
