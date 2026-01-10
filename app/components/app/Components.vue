@@ -1,8 +1,5 @@
 <script lang="ts" setup>
-import type {
-  Page,
-  Project,
-} from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Page, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
 interface Props {
   content: Page | Project
