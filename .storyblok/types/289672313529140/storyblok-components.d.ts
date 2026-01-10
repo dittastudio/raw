@@ -46,6 +46,7 @@ export interface Project {
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
+  blocks?: BlockHero[];
   component: "project";
   _uid: string;
 }
