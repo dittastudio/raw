@@ -23,7 +23,7 @@
   "dependencies": {
     "@storyblok/nuxt": "^8.2.3",
     "@tailwindcss/vite": "^4.1.18",
-    "@unhead/vue": "^2.1.1",
+    "@unhead/vue": "^2.1.2",
     "@vee-validate/zod": "^4.15.1",
     "@vueuse/core": "^14.1.0",
     "gsap": "^3.14.2",
@@ -42,7 +42,7 @@
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/sitemap": "^7.5.2",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/node": "^25.0.5",
+    "@types/node": "^25.0.6",
     "del-cli": "^7.0.0",
     "eslint": "^9.39.2",
     "storyblok": "^4.12.0",
@@ -51,5 +51,8 @@
     "typescript": "^5.9.3",
     "vite-plugin-devtools-json": "^1.0.0",
     "vite-svg-loader": "^5.1.0"
+  },
+  "overrides": {
+    "zod": "^4.3.5"
   }
 }
