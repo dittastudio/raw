@@ -139,11 +139,12 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
   }
 
   @variant xl {
-    grid-template-columns: 6fr 2fr 4fr;
+    /* Disgusting hack. Columns need to match areas available. */
+    grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
-      "newsletter links contact"
-      "newsletter links location"
-      "newsletter links logos";
+      "newsletter newsletter newsletter links contact contact"
+      "newsletter newsletter newsletter links location location"
+      "newsletter newsletter newsletter links logos logos";
   }
 }
 
