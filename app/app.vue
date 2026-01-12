@@ -27,25 +27,6 @@ useSeoMeta({
   <VueLenis root>
     <AppHeader :navigation="story.content.navigation" />
 
-    <div class="relative overflow-hidden w-full min-h-screen flex flex-col items-center justify-center">
-      <div class="absolute inset-0">
-        <EffectMorphGradient />
-      </div>
-
-      <div class="z-1 flex flex-col items-center justify-center gap-10 text-center">
-        <h1 class="type-h1">
-          Brave Thinking.
-          <span class="block text-outline-offblack">
-            Backed by proof.
-          </span>
-        </h1>
-
-        <p class="type-h4 max-w-[30em] text-balance">
-          The agency that de-risks big ideas through data
-        </p>
-      </div>
-    </div>
-
     <NuxtPage />
 
     <AppStatement
@@ -61,6 +42,7 @@ useSeoMeta({
       :email="story.content.company_email"
       :telephone="story.content.company_telephone"
       :address="story.content.company_address"
+      :logos="story.content.logos"
     />
 
     <DevOnly>

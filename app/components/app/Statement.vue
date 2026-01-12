@@ -12,7 +12,7 @@ const { statement, title, link } = defineProps<Props>()
 
 <template>
   <div class="w-full bg-green">
-    <div class="wrapper py-24 flex flex-col items-center justify-center">
+    <div class="wrapper py-25 flex flex-col items-center justify-center">
       <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
         <h5
           v-if="statement"
