@@ -36,6 +36,7 @@ const route = useRoute()
         v-for="item in items"
         :key="item._uid"
         :class="{
+          'navigation__item': true,
           'lg:font-bold': determineHref(item.link).startsWith(route.path) && route.path !== '/',
           'text-outline-white lg:text-outline-none lg:font-normal': !determineHref(item.link).startsWith(route.path) || route.path === '/',
         }"
@@ -50,3 +51,28 @@ const route = useRoute()
     </ul>
   </nav>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.navigation__item {
+  --logo-width: 82px;
+  --nav-gap:--spacing(12);
+
+  @variant lg {
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &:nth-last-child(2) {
+      margin-right: auto;
+    }
+
+    &:last-child {
+      display: flex;
+      justify-content: flex-end;
+      width: calc(var(--logo-width) - var(--nav-gap));
+    }
+  }
+}
+</style>
