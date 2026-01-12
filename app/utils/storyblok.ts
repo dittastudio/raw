@@ -1,4 +1,4 @@
-import type { Page, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokMultilink, StoryblokRichtext } from '@@/.storyblok/types/storyblok'
 import type { ImageModifiers } from '@nuxt/image'
 import type { ISbStoryData } from '@storyblok/js'
@@ -42,13 +42,17 @@ const storyblokRichTextContent = (
 const storyblokSlug = (path: string): string =>
   ['/', ''].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
-const isProject = (
-  story: ISbStoryData<Page | Project> | null | undefined,
-): story is ISbStoryData<Project> =>
-  Boolean(story?.content?.component === 'project')
 const isPage = (
-  story: ISbStoryData<Page | Project> | null | undefined,
+  story: ISbStoryData<Page | Post | Project> | null | undefined,
 ): story is ISbStoryData<Page> => Boolean(story?.content?.component === 'page')
+
+const isPost = (
+  story: ISbStoryData<Page | Post | Project> | null | undefined,
+): story is ISbStoryData<Post> => Boolean(story?.content?.component === 'post')
+
+const isProject = (
+  story: ISbStoryData<Page | Post | Project> | null | undefined,
+): story is ISbStoryData<Project> => Boolean(story?.content?.component === 'project')
 
 const storyblokImage = (
   filename: string | null | undefined,
@@ -103,6 +107,7 @@ const determineHref = (item: StoryblokMultilink) =>
 export {
   determineHref,
   isPage,
+  isPost,
   isProject,
   storyblokAssetType,
   storyblokEditor,
