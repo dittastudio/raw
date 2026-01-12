@@ -10,13 +10,14 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav class="bg-offblack text-white lg:bg-transparent lg:text-offblack">
+  <nav>
     <ul
       class="
         flex
         flex-col
         items-center
         justify-center
+        gap-2
         lg:flex-row
         lg:gap-12
         font-display

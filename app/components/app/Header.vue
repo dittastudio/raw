@@ -10,10 +10,10 @@ const { navigation } = defineProps<Props>()
 </script>
 
 <template>
-  <header class="sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-50">
+  <header class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10">
     <IconLogo class="text-offblack w-auto h-8 block" />
 
-    <div class="w-full">
+    <div data-lenis-prevent class="header__navigation w-full">
       <AppNavigation
         v-if="navigation"
         :items="navigation"
@@ -23,5 +23,33 @@ const { navigation } = defineProps<Props>()
 </template>
 
 <style scoped>
-/* @reference "@/assets/css/app.css"; */
+@reference "@/assets/css/app.css";
+
+.header {
+  height: var(--app-header-height);
+
+  & + * {
+    margin-top: calc(var(--app-header-height) * -1);
+  }
+}
+
+
+.header__navigation {
+  @variant max-lg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100dvh;
+    background-color: var(--color-offblack);
+    color: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;
+    align-items: safe center;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-block: var(--app-header-height);
+  }
+}
 </style>
