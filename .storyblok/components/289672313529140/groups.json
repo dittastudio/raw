@@ -14,6 +14,13 @@
     "parent_uuid": null
   },
   {
+    "name": "Post Blocks",
+    "id": 133326716759846,
+    "uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "parent_id": null,
+    "parent_uuid": null
+  },
+  {
     "name": "Types",
     "id": 131188020616377,
     "uuid": "08f3ebfd-247f-4b10-b3af-dc46b5a9a80d",

@@ -242,22 +242,114 @@
     "metadata": {}
   },
   {
+    "name": "person",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T14:50:26.442Z",
+    "updated_at": "2026-01-12T16:26:59.121Z",
+    "id": 133283129116447,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "pos": 0,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "id": "LvI9Da7FRAituCZehjDJwQ",
+        "asset_folder_id": 133290567152459
+      },
+      "name": {
+        "type": "text",
+        "pos": 1,
+        "required": true,
+        "id": "Hcl371ELSv28rmadjHTqGw"
+      },
+      "biography": {
+        "type": "textarea",
+        "pos": 2,
+        "id": "7yYKtVNiTcefbz0yo_Q2OA"
+      },
+      "position": {
+        "type": "text",
+        "pos": 3,
+        "required": true,
+        "id": "48XLRperQIyTyH7d8RCPvA"
+      },
+      "email": {
+        "type": "text",
+        "pos": 4,
+        "id": "QsVBsAAUR2Stjre1AKQKiQ"
+      },
+      "linkedin": {
+        "type": "text",
+        "pos": 5,
+        "id": "vxNmdBISTtCrsB6dl3_E1w"
+      }
+    },
+    "image": null,
+    "preview_field": "image",
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "person",
+    "component_group_uuid": "08f3ebfd-247f-4b10-b3af-dc46b5a9a80d",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": "image",
+    "metadata": {}
+  },
+  {
     "name": "post",
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-01-06T23:05:38.400Z",
+    "updated_at": "2026-01-12T18:43:43.591Z",
     "id": 131188076458425,
     "schema": {
+      "hero": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "id": "PxYHklgtT8-ZaBfy3fIW5A"
+      },
+      "author": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "required": true,
+        "source": "internal_stories",
+        "folder_slug": "people/",
+        "filter_content_type": [
+          "person"
+        ],
+        "entry_appearance": "card",
+        "id": "EZb54pc2SE28YuJxQdX7_g"
+      },
       "category": {
         "type": "options",
-        "pos": 0,
+        "pos": 2,
         "source": "internal",
         "datasource_slug": "category",
         "exclude_empty_option": true,
         "min_options": 1,
         "required": true,
         "id": "YsFi5nf_SnqY-8m3_FpyxQ"
+      },
+      "tab-87c5d3eb-2390-40c7-afd8-e24b263999e5": {
+        "display_name": "Content",
+        "keys": [
+          "blocks"
+        ],
+        "pos": 3,
+        "type": "tab",
+        "id": "h8XT6yOQQMev2OJLJjmZ5Q"
       },
       "tab-d1be1461-8b44-4f55-8950-fba96982c4f9": {
         "display_name": "SEO",
@@ -266,33 +358,51 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 0,
+        "pos": 4,
         "type": "tab",
-        "id": "0b4UYYtET1WJUPupaYLE-Q"
+        "id": "0b4UYYtET1WJUPupaYLE-Q",
+        "name": "tab-d1be1461-8b44-4f55-8950-fba96982c4f9"
       },
       "seo_title": {
         "type": "text",
-        "pos": 2,
+        "pos": 5,
         "id": "osiPAj9TRe6WAZ5q-rIDoQ",
         "required": true,
         "display_name": "Title"
       },
       "seo_description": {
         "type": "text",
-        "pos": 3,
+        "pos": 6,
         "id": "Y1niTZM1RQKGc_rzdC4Bdg",
         "required": true,
         "display_name": "Description"
       },
       "seo_image": {
         "type": "asset",
-        "pos": 4,
+        "pos": 7,
         "required": true,
         "filetypes": [
           "images"
         ],
         "id": "GeTJUhvXRz6362cJNSqtSA",
         "display_name": "Image"
+      },
+      "blocks": {
+        "type": "bloks",
+        "pos": 8,
+        "id": "F8gsyVNHRcuIjE6vuldKjw",
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "post_gallery",
+          "post_heading",
+          "post_html",
+          "post_image",
+          "post_list",
+          "post_quote",
+          "post_text"
+        ],
+        "component_denylist": []
       }
     },
     "image": null,
@@ -304,6 +414,271 @@
     "preset_id": null,
     "real_name": "post",
     "component_group_uuid": "08f3ebfd-247f-4b10-b3af-dc46b5a9a80d",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_gallery",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T18:01:43.377Z",
+    "updated_at": "2026-01-12T18:02:06.348Z",
+    "id": 133330138639232,
+    "schema": {
+      "items": {
+        "type": "bloks",
+        "pos": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "post_image"
+        ],
+        "component_denylist": [],
+        "id": "U8VQ3m-bT8qmGuM1UmhaJA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_gallery",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_heading",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T17:49:39.859Z",
+    "updated_at": "2026-01-12T17:49:58.074Z",
+    "id": 133327175113585,
+    "schema": {
+      "heading": {
+        "type": "text",
+        "pos": 0,
+        "id": "lpzrFVTvQwWsA8nEjlC6Vg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_heading",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_html",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T17:53:39.993Z",
+    "updated_at": "2026-01-12T17:53:49.870Z",
+    "id": 133328158722931,
+    "schema": {
+      "html": {
+        "type": "textarea",
+        "pos": 0,
+        "id": "sdqp_BfVQxazXZyyKXnq_A"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_html",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_image",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T17:50:58.789Z",
+    "updated_at": "2026-01-12T17:51:13.067Z",
+    "id": 133327498406770,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "pos": 0,
+        "id": "yQ0h5xIMR5WDysKK11_oGg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_image",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_list",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T18:05:28.664Z",
+    "updated_at": "2026-01-12T18:05:44.466Z",
+    "id": 133331061414788,
+    "schema": {
+      "items": {
+        "type": "bloks",
+        "pos": 0,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "post_list_item"
+        ],
+        "component_denylist": [],
+        "id": "3O4v_gr_QWK1W4DEuBPFFA"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_list",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_list_item",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T18:05:12.785Z",
+    "updated_at": "2026-01-12T18:05:18.881Z",
+    "id": 133330996382595,
+    "schema": {
+      "text": {
+        "type": "text",
+        "pos": 0,
+        "id": "VGskfTogTD-Va64u5J9m8A"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_list_item",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_quote",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T18:09:03.466Z",
+    "updated_at": "2026-01-12T18:09:35.151Z",
+    "id": 133331941243785,
+    "schema": {
+      "citation": {
+        "type": "text",
+        "pos": 0,
+        "id": "QyqCk-C1QIGotQJUNNcXYw"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "post_text"
+        ],
+        "component_denylist": [],
+        "id": "3fdfy0bFSyqbuLtmsb2OiQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_quote",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_text",
+    "display_name": null,
+    "description": "",
+    "created_at": "2026-01-12T17:48:34.789Z",
+    "updated_at": "2026-01-12T17:49:21.247Z",
+    "id": 133326908582768,
+    "schema": {
+      "text": {
+        "type": "richtext",
+        "pos": 0,
+        "customize_toolbar": false,
+        "allow_target_blank": true,
+        "id": "qfK9ZLlsTkOLy_3Xv7hy7g"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "post_text",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
     "color": null,
     "icon": null,
     "internal_tags_list": [],
