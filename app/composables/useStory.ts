@@ -1,8 +1,4 @@
-import type {
-  ISbStoriesParams,
-  ISbStoryData,
-  StoryblokBridgeConfigV2,
-} from '@storyblok/js'
+import type { ISbStoriesParams, ISbStoryData, StoryblokBridgeConfigV2 } from '@storyblok/js'
 
 type UseAsyncDataOptions = Omit<
   Parameters<typeof useAsyncStoryblok>[1],

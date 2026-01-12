@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
 const relations: string[] = []
 
@@ -12,7 +12,7 @@ const imageOptions = {
 }
 
 const route = useRoute()
-const story = await useStory<Page>(
+const story = await useStory<Page | Post | Project>(
   route.path,
   { resolve_relations: relations },
   { resolveRelations: relations },
@@ -33,9 +33,8 @@ useSeoMeta({
 
 <template>
   <main class="w-full min-h-svh">
-    <AppComponents
-      v-if="story"
-      :content="story.content"
-    />
+    <TemplatePage v-if="isPage(story)" :story="story" />
+    <TemplatePost v-else-if="isPost(story)" :story="story" />
+    <TemplateProject v-else-if="isProject(story)" :story="story" />
   </main>
 </template>
