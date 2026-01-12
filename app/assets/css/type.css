@@ -115,9 +115,10 @@
 }
 
 @utility type-h5 {
-  font-family: var(--font-display);
+  font-family: var(--font-mono);
   font-size: var(--text-fluid-h5);
   line-height: 1.25;
+  letter-spacing: 0em;
 
   @variant sm {
     letter-spacing: -0.03em;

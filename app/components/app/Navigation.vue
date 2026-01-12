@@ -11,7 +11,26 @@ const route = useRoute()
 
 <template>
   <nav class="bg-offblack text-white lg:bg-transparent lg:text-offblack">
-    <ul class="flex items-center justify-center lg:gap-12 flex-col lg:flex-row uppercase font-display text-32 lg:font-mono lg:text-20 font-bold">
+    <ul
+      class="
+        flex
+        flex-col
+        items-center
+        justify-center
+        lg:flex-row
+        lg:gap-12
+        font-display
+        leading-none
+        font-bold
+        lg:font-normal
+        lg:font-mono
+        text-32
+        lg:text-20
+        tracking-[-0.03em]
+        lg:tracking-[0.04em]
+        uppercase
+      "
+    >
       <li
         v-for="item in items"
         :key="item._uid"
