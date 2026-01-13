@@ -2,7 +2,7 @@
 import type { Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
 const relations: string[] = [
-  'post.author'
+  'post.author',
 ]
 
 const imageOptions = {
@@ -35,8 +35,19 @@ useSeoMeta({
 
 <template>
   <main class="w-full min-h-svh">
-    <TemplatePage v-if="isPage(story)" :story="story" />
-    <TemplatePost v-else-if="isPost(story)" :story="story" />
-    <TemplateProject v-else-if="isProject(story)" :story="story" />
+    <TemplatePage
+      v-if="isPage(story)"
+      :story="story"
+    />
+
+    <TemplatePost
+      v-else-if="isPost(story)"
+      :story="story"
+    />
+
+    <TemplateProject
+      v-else-if="isProject(story)"
+      :story="story"
+    />
   </main>
 </template>

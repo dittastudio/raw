@@ -15,6 +15,6 @@ export const getAssetData = (url) => {
     filename: url.split('?')[0].split('/').pop(),
     folder: `./temp/${url.split('?')[0].split('/').slice(0, -1).pop()}`,
     filepath: `./temp/${url.split('?')[0].split('/').slice(0, -1).pop()}/${url.split('?')[0].split('/').pop()}`,
-    ext: url.split('?')[0].split('/').pop().split('.').pop()
+    ext: url.split('?')[0].split('/').pop().split('.').pop(),
   }
 }
