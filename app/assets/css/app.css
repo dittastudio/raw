@@ -88,17 +88,15 @@
 
     --app-header-height: 72px;
     --app-header-logo-width: 86px;
+    --app-header-logo-height: 32px;
 
     @variant sm {
       --app-inner-gutter: 20px;
     }
 
     @variant md {
-      --app-outer-gutter: 30px;
-    }
-
-    @variant lg {
       --app-header-height: 92px;
+      --app-outer-gutter: 30px;
     }
   }
 

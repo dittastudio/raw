@@ -7,18 +7,39 @@ interface Props {
 }
 
 const { navigation } = defineProps<Props>()
+
+const isOpen = ref(false)
 </script>
 
 <template>
-  <header class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10">
-    <NuxtLink to="/">
-      <IconLogo class="text-offblack w-(--app-header-logo-width) h-8 block" />
+  <header
+    :class="{ 'is-open': isOpen }"
+    class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10"
+  >
+    <NuxtLink
+      class="p-7.5 -m-7.5"
+      to="/"
+    >
+      <IconLogo class="text-offblack w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
     </NuxtLink>
+
+    <button
+      class="p-7.5 -m-7.5 z-1 lg:hidden"
+      @click="isOpen = !isOpen"
+    >
+      <AppSwitch
+        :is-open="isOpen"
+      />
+    </button>
 
     <div
       data-lenis-prevent
       class="header__navigation w-full"
     >
+      <!-- :class="{
+        'max-lg:opacity-0 max-lg:pointer-events-none': !isOpen,
+        'max-lg:opacity-100 max-lg:pointer-events-auto': isOpen,
+      }" -->
       <AppNavigation
         v-if="navigation"
         :items="navigation"
@@ -39,6 +60,14 @@ const { navigation } = defineProps<Props>()
 }
 
 .header__navigation {
+  --disc-size: 16px;
+  --disc-offset: 36px;
+
+  @variant md {
+    --disc-size: 16px;
+    --disc-offset: 46px;
+  }
+
   @variant max-lg {
     position: absolute;
     top: 0;
@@ -55,6 +84,14 @@ const { navigation } = defineProps<Props>()
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-block: var(--app-header-height);
+
+    clip-path: circle(var(--disc-size) at calc(100% - var(--disc-offset)) var(--disc-offset));
+    transition: clip-path 0.4s cubic-bezier(0.34, 1.06, 0.24, 1);
+
+    .header.is-open & {
+      clip-path: circle(150% at calc(100% - var(--disc-offset)) var(--disc-offset));
+      transition: clip-path 0.4s var(--ease-in-out);
+    }
   }
 }
 </style>

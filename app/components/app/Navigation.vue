@@ -10,7 +10,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav class="navigation w-full">
+  <nav class="w-full">
     <ul
       class="
         navigation__list
@@ -55,14 +55,8 @@ const route = useRoute()
 
 <style scoped>
 @reference "@/assets/css/app.css";
-.navigation {
-  --link-padding-x: --spacing(6);
-
-  width: 100%;
-}
 
 .navigation__item {
-
   @variant lg {
     &:first-child {
       margin-left: auto;
@@ -81,6 +75,8 @@ const route = useRoute()
 }
 
 .navigation__link {
+  --link-padding-x: --spacing(6);
+
   transition: opacity 0.2s var(--ease-out);
 
   .navigation__list:hover &:not(:hover) {
