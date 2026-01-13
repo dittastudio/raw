@@ -14,6 +14,7 @@ const route = useRoute()
     <ul
       class="
         navigation__list
+        pointer-events-none
         flex
         flex-col
         items-center
@@ -42,7 +43,7 @@ const route = useRoute()
       >
         <StoryblokLink
           :item="item.link"
-          class="block p-2 lg:py-7.5 lg:px-6"
+          class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-6"
         >
           {{ item.title }}
         </StoryblokLink>
@@ -76,12 +77,14 @@ const route = useRoute()
       justify-content: flex-end;
       width: calc(var(--logo-width) - var(--nav-gap));
     }
+  }
+}
 
-    transition: opacity 0.2s var(--ease-out);
+.navigation__link {
+  transition: opacity 0.2s var(--ease-out);
 
-    .navigation__list:hover &:not(:hover,:last-child) {
-      opacity: 0.5;
-    }
+  .navigation__list:hover &:not(:hover) {
+    opacity: 0.5;
   }
 }
 </style>

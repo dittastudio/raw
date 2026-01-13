@@ -11,9 +11,14 @@ const { navigation } = defineProps<Props>()
 
 <template>
   <header class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10">
-    <IconLogo class="text-offblack w-auto h-8 block" />
+    <NuxtLink to="/">
+      <IconLogo class="text-offblack w-auto h-8 block" />
+    </NuxtLink>
 
-    <div data-lenis-prevent class="header__navigation w-full">
+    <div
+      data-lenis-prevent
+      class="header__navigation w-full"
+    >
       <AppNavigation
         v-if="navigation"
         :items="navigation"
@@ -32,7 +37,6 @@ const { navigation } = defineProps<Props>()
     margin-top: calc(var(--app-header-height) * -1);
   }
 }
-
 
 .header__navigation {
   @variant max-lg {
