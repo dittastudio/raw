@@ -30,7 +30,7 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
     <div class="wrapper w-full flex flex-col gap-18">
       <header class="w-full pt-18 pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
         <div class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4">
-          CATEGORY
+          <pre>{{ story.content.category }}</pre>
         </div>
 
         <div class="flex flex-col gap-18 col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">

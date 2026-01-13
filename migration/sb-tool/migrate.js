@@ -1,7 +1,5 @@
 import { Wp2Storyblok } from './index.js'
 
-// https://raw.london/raw-london-agency-brand-2024/
-
 const migration = new Wp2Storyblok('https://raw.london/wp-json', {
   token: process.env.NUXT_STORYBLOK_MANAGEMENT_TOKEN,
   space_id: 289825226535458,

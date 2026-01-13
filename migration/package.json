@@ -1,0 +1,24 @@
+{
+  "name": "wp-migration",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Pumo's attempt at migration from WP.",
+  "author": "Michael Pumo",
+  "license": "ISC",
+  "main": "index.ts",
+  "scripts": {
+    "migrate": "tsx --env-file=../.env migrate.ts"
+  },
+  "dependencies": {
+    "@storyblok/js": "^4.4.4",
+    "form-data": "^4.0.5",
+    "probe-image-size": "^7.2.3",
+    "storyblok-markdown-richtext": "^1.0.3",
+    "turndown": "^7.2.2"
+  },
+  "devDependencies": {
+    "@types/probe-image-size": "^7.2.5",
+    "@types/turndown": "^5.0.6",
+    "tsx": "^4.21.0"
+  }
+}
