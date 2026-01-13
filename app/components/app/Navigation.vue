@@ -10,15 +10,17 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav class="bg-offblack text-white lg:bg-transparent lg:text-offblack">
+  <nav class="w-full">
     <ul
       class="
+        navigation__list
+        pointer-events-none
         flex
         flex-col
         items-center
         justify-center
+        max-lg:w-full
         lg:flex-row
-        lg:gap-12
         font-display
         leading-none
         font-bold
@@ -34,14 +36,15 @@ const route = useRoute()
       <li
         v-for="item in items"
         :key="item._uid"
+        class="navigation__item max-lg:w-full"
         :class="{
-          'lg:font-bold': determineHref(item.link).startsWith(route.path) && route.path !== '/',
+          'lg:font-normal lg:underline underline-offset-2 decoration-[0.075em]': determineHref(item.link).startsWith(route.path) && route.path !== '/',
           'text-outline-white lg:text-outline-none lg:font-normal': !determineHref(item.link).startsWith(route.path) || route.path === '/',
         }"
       >
         <StoryblokLink
           :item="item.link"
-          class="block"
+          class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-(--link-padding-x)"
         >
           {{ item.title }}
         </StoryblokLink>
@@ -49,3 +52,41 @@ const route = useRoute()
     </ul>
   </nav>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.navigation__item {
+  @variant lg {
+    &:first-child {
+      margin-left: auto;
+    }
+
+    &:nth-last-child(2) {
+      margin-right: auto;
+    }
+
+    &:last-child {
+      display: flex;
+      justify-content: flex-end;
+      width: var(--app-header-logo-width);
+    }
+  }
+}
+
+.navigation__link {
+  --link-padding-x: --spacing(6);
+
+  transition: opacity 0.2s var(--ease-out);
+
+  .navigation__list:hover &:not(:hover) {
+    opacity: 0.5;
+  }
+
+  @variant lg {
+    .navigation__item:last-child & {
+      margin-right: calc(-1 * var(--link-padding-x));
+    }
+  }
+}
+</style>
