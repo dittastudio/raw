@@ -87,6 +87,7 @@
     --app-outer-gutter: 20px;
 
     --app-header-height: 72px;
+    --app-header-logo-width: 86px;
 
     @variant sm {
       --app-inner-gutter: 20px;

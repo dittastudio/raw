@@ -10,7 +10,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav>
+  <nav class="navigation w-full">
     <ul
       class="
         navigation__list
@@ -19,6 +19,7 @@ const route = useRoute()
         flex-col
         items-center
         justify-center
+        max-lg:w-full
         lg:flex-row
         font-display
         leading-none
@@ -35,15 +36,15 @@ const route = useRoute()
       <li
         v-for="item in items"
         :key="item._uid"
+        class="navigation__item max-lg:w-full"
         :class="{
-          'navigation__item': true,
-          'lg:font-normal lg:underline underline-offset-2': determineHref(item.link).startsWith(route.path) && route.path !== '/',
+          'lg:font-normal lg:underline underline-offset-2 decoration-[0.075em]': determineHref(item.link).startsWith(route.path) && route.path !== '/',
           'text-outline-white lg:text-outline-none lg:font-normal': !determineHref(item.link).startsWith(route.path) || route.path === '/',
         }"
       >
         <StoryblokLink
           :item="item.link"
-          class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-6"
+          class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-(--link-padding-x)"
         >
           {{ item.title }}
         </StoryblokLink>
@@ -54,14 +55,13 @@ const route = useRoute()
 
 <style scoped>
 @reference "@/assets/css/app.css";
+.navigation {
+  --link-padding-x: --spacing(6);
 
-.navigation__list {
-
+  width: 100%;
 }
 
 .navigation__item {
-  --logo-width: 82px;
-  --nav-gap:--spacing(12);
 
   @variant lg {
     &:first-child {
@@ -75,7 +75,7 @@ const route = useRoute()
     &:last-child {
       display: flex;
       justify-content: flex-end;
-      width: calc(var(--logo-width) - var(--nav-gap));
+      width: var(--app-header-logo-width);
     }
   }
 }
@@ -85,6 +85,12 @@ const route = useRoute()
 
   .navigation__list:hover &:not(:hover) {
     opacity: 0.5;
+  }
+
+  @variant lg {
+    .navigation__item:last-child & {
+      margin-right: calc(-1 * var(--link-padding-x));
+    }
   }
 }
 </style>

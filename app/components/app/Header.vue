@@ -12,7 +12,7 @@ const { navigation } = defineProps<Props>()
 <template>
   <header class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10">
     <NuxtLink to="/">
-      <IconLogo class="text-offblack w-auto h-8 block" />
+      <IconLogo class="text-offblack w-(--app-header-logo-width) h-8 block" />
     </NuxtLink>
 
     <div
@@ -51,6 +51,7 @@ const { navigation } = defineProps<Props>()
     flex-direction: column;
     justify-content: safe center;
     align-items: safe center;
+    text-align: center;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     padding-block: var(--app-header-height);
