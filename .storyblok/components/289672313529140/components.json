@@ -76,6 +76,54 @@
     "metadata": {}
   },
   {
+    "name": "block_impact_statement",
+    "display_name": "Impact Statement",
+    "description": "",
+    "created_at": "2026-01-13T22:49:11.433Z",
+    "updated_at": "2026-01-13T23:36:10.144Z",
+    "id": 133754681079760,
+    "schema": {
+      "theme": {
+        "type": "option",
+        "pos": 0,
+        "use_uuid": true,
+        "id": "9tVuSuyyT-2CTpvlqiYblQ",
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "light"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "minimum": 1,
+        "component_whitelist": [
+          "title_copy"
+        ],
+        "component_denylist": [],
+        "id": "0FAQ5Gy4QqCyYSPe5v5xLA",
+        "display_name": "Items"
+      }
+    },
+    "image": "//a.storyblok.com/f/289672313529140/x/76aa71aad7/screenshot-2026-01-13-at-22-51-13.jpg",
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Impact Statement",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "layout-list",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "link",
     "display_name": null,
     "description": "Creates a link to anywhere",
@@ -175,19 +223,23 @@
     "display_name": null,
     "description": null,
     "created_at": "2026-01-06T14:40:46.968Z",
-    "updated_at": "2026-01-10T16:19:16.462Z",
+    "updated_at": "2026-01-13T23:27:49.514Z",
     "id": 131157389192885,
     "schema": {
       "blocks": {
         "type": "bloks",
         "id": "lyVLs15bQCmzh1VCc_gAXw",
         "pos": 0,
-        "restrict_type": "",
+        "restrict_type": "groups",
         "restrict_components": true,
-        "component_whitelist": [
-          "block_hero"
+        "component_whitelist": [],
+        "component_denylist": [],
+        "component_group_whitelist": [
+          "790a2850-0eb3-4a25-884f-b297e8a1d61e"
         ],
-        "component_denylist": []
+        "component_group_denylist": [],
+        "component_tag_whitelist": [],
+        "component_tag_denylist": []
       },
       "tab-a012b6af-5d9a-4985-832a-84f119d934c0": {
         "display_name": "SEO",
@@ -308,7 +360,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-01-12T18:43:43.591Z",
+    "updated_at": "2026-01-13T21:18:34.921Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -380,7 +432,7 @@
       "seo_image": {
         "type": "asset",
         "pos": 7,
-        "required": true,
+        "required": false,
         "filetypes": [
           "images"
         ],
@@ -398,7 +450,6 @@
           "post_heading",
           "post_html",
           "post_image",
-          "post_list",
           "post_quote",
           "post_text"
         ],
@@ -426,19 +477,16 @@
     "display_name": "Gallery",
     "description": "",
     "created_at": "2026-01-12T18:01:43.377Z",
-    "updated_at": "2026-01-12T19:17:04.205Z",
+    "updated_at": "2026-01-13T21:40:31.302Z",
     "id": 133330138639232,
     "schema": {
       "items": {
-        "type": "bloks",
-        "pos": 0,
-        "restrict_type": "",
-        "restrict_components": true,
-        "component_whitelist": [
-          "post_image"
-        ],
-        "component_denylist": [],
-        "id": "U8VQ3m-bT8qmGuM1UmhaJA"
+        "type": "multiasset",
+        "pos": 1,
+        "id": "g_d9eDSwRk6N0p7UMhzR6g",
+        "filetypes": [
+          "images"
+        ]
       }
     },
     "image": null,
@@ -449,6 +497,39 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "Gallery",
+    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "post_gallery_item",
+    "display_name": "Gallery Item",
+    "description": "",
+    "created_at": "2026-01-13T21:35:27.813Z",
+    "updated_at": "2026-01-13T21:36:38.852Z",
+    "id": 133736561927964,
+    "schema": {
+      "image": {
+        "type": "asset",
+        "pos": 0,
+        "id": "hDBBsd37TIS2sMrBGLaEyA",
+        "filetypes": [
+          "images"
+        ]
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Gallery Item",
     "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
     "color": null,
     "icon": null,
@@ -492,13 +573,15 @@
     "display_name": "HTML",
     "description": "",
     "created_at": "2026-01-12T17:53:39.993Z",
-    "updated_at": "2026-01-12T19:17:17.903Z",
+    "updated_at": "2026-01-13T21:37:51.863Z",
     "id": 133328158722931,
     "schema": {
       "html": {
         "type": "textarea",
         "pos": 0,
-        "id": "sdqp_BfVQxazXZyyKXnq_A"
+        "id": "sdqp_BfVQxazXZyyKXnq_A",
+        "display_name": "HTML",
+        "description": "Do not paste code in here you don't understand. It can be very dangerous. Consult a developer. This field is only here for migration purposes of the old website that used custom HTML blocks for video. Once we have a better solution, this field will be removed."
       }
     },
     "image": null,
@@ -522,13 +605,16 @@
     "display_name": "Image",
     "description": "",
     "created_at": "2026-01-12T17:50:58.789Z",
-    "updated_at": "2026-01-12T19:21:42.265Z",
+    "updated_at": "2026-01-13T21:36:01.736Z",
     "id": 133327498406770,
     "schema": {
       "image": {
         "type": "asset",
         "pos": 0,
-        "id": "yQ0h5xIMR5WDysKK11_oGg"
+        "id": "yQ0h5xIMR5WDysKK11_oGg",
+        "filetypes": [
+          "images"
+        ]
       }
     },
     "image": null,
@@ -548,94 +634,22 @@
     "metadata": {}
   },
   {
-    "name": "post_list",
-    "display_name": "List",
-    "description": "",
-    "created_at": "2026-01-12T18:05:28.664Z",
-    "updated_at": "2026-01-12T19:17:33.789Z",
-    "id": 133331061414788,
-    "schema": {
-      "items": {
-        "type": "bloks",
-        "pos": 0,
-        "restrict_type": "",
-        "restrict_components": true,
-        "component_whitelist": [
-          "post_list_item"
-        ],
-        "component_denylist": [],
-        "id": "3O4v_gr_QWK1W4DEuBPFFA"
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "List",
-    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
-    "color": null,
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
-    "name": "post_list_item",
-    "display_name": "List Item",
-    "description": "",
-    "created_at": "2026-01-12T18:05:12.785Z",
-    "updated_at": "2026-01-12T19:17:47.480Z",
-    "id": 133330996382595,
-    "schema": {
-      "text": {
-        "type": "text",
-        "pos": 0,
-        "id": "VGskfTogTD-Va64u5J9m8A"
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "List Item",
-    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
-    "color": null,
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
     "name": "post_quote",
     "display_name": "Quote",
     "description": "",
     "created_at": "2026-01-12T18:09:03.466Z",
-    "updated_at": "2026-01-12T19:17:55.873Z",
+    "updated_at": "2026-01-13T21:07:53.306Z",
     "id": 133331941243785,
     "schema": {
+      "quote": {
+        "type": "richtext",
+        "pos": 0,
+        "id": "GSSKiQ1tQqCkotrFu38vDA"
+      },
       "citation": {
         "type": "text",
-        "pos": 0,
-        "id": "QyqCk-C1QIGotQJUNNcXYw"
-      },
-      "items": {
-        "type": "bloks",
         "pos": 1,
-        "restrict_type": "",
-        "restrict_components": true,
-        "component_whitelist": [
-          "post_text"
-        ],
-        "component_denylist": [],
-        "id": "3fdfy0bFSyqbuLtmsb2OiQ"
+        "id": "QyqCk-C1QIGotQJUNNcXYw"
       }
     },
     "image": null,
@@ -851,6 +865,60 @@
     "preset_id": null,
     "real_name": "settings",
     "component_group_uuid": "08f3ebfd-247f-4b10-b3af-dc46b5a9a80d",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "title_copy",
+    "display_name": "Title & Copy",
+    "description": "",
+    "created_at": "2026-01-13T23:06:18.961Z",
+    "updated_at": "2026-01-13T23:09:03.005Z",
+    "id": 133758889830392,
+    "schema": {
+      "title": {
+        "type": "richtext",
+        "pos": 0,
+        "id": "5V9qWj81RHWBZnt0jY4CkA",
+        "style_options": [
+          {
+            "_uid": "9a901605-db42-4180-bc82-925a40ef0ec5",
+            "name": "Outlined",
+            "value": "is-outlined"
+          }
+        ],
+        "customize_toolbar": true,
+        "toolbar": [
+          "h1",
+          "h2",
+          "h3",
+          "unset"
+        ]
+      },
+      "copy": {
+        "type": "richtext",
+        "pos": 1,
+        "id": "DAfQWVQfRtKh44893qpCiw",
+        "customize_toolbar": true,
+        "toolbar": [
+          "unset",
+          "paragraph"
+        ]
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Title & Copy",
+    "component_group_uuid": "7fcb11a1-5f87-4c0b-ba8f-0bda6cd7387f",
     "color": null,
     "icon": null,
     "internal_tags_list": [],

@@ -9,8 +9,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="hero relative overflow-hidden w-full min-h-screen flex flex-col items-center justify-center"
-  :class="block.colour">
+  <div
+    class="hero relative overflow-hidden w-full min-h-screen flex flex-col items-center justify-center"
+    :class="block.colour"
+  >
     <div class="absolute inset-0">
       <EffectMorphGradient />
     </div>
@@ -32,7 +34,6 @@ const { block } = defineProps<Props>()
     </div>
   </div>
 </template>
-
 
 <style scoped>
 @reference "@/assets/css/app.css";
