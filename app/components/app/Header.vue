@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { Link } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type Lenis from 'lenis'
+import { useLenis } from 'lenis/vue'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {
@@ -8,38 +10,97 @@ interface Props {
 
 const { navigation } = defineProps<Props>()
 
-const isOpen = ref(false)
+const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const ready = ref(false)
+
+const toggleHeaderMenu = () => {
+  isHeaderOpen.value = !isHeaderOpen.value
+}
+
+const hasScrolled = ref(false)
+const hasScrolledUp = ref(false)
+const hasScrolledDown = ref(false)
+
+const handleScroll = (lenis: Lenis) => {
+  const triggerPoint = 50
+  const scrollPos = lenis.scroll
+
+  hasScrolled.value = scrollPos > triggerPoint
+
+  if (lenis.direction === -1) {
+    // Scrolling up
+    hasScrolledUp.value = scrollPos > triggerPoint
+    hasScrolledDown.value = false
+  }
+  else if (lenis.direction === 1) {
+    // Scrolling down
+    hasScrolledUp.value = false
+    hasScrolledDown.value = scrollPos > triggerPoint
+  }
+}
+
+const handleMouseEnter = () => {
+  hasScrolledUp.value = true
+  hasScrolledDown.value = false
+}
+
+onMounted(async () => {
+  const lenis = useLenis()
+
+  if (lenis?.value) {
+    handleScroll(lenis.value)
+
+    lenis.value.on('scroll', handleScroll)
+  }
+
+  await wait(500)
+  ready.value = true
+})
+
+const isScreenLg = useAtMedia(getMediaQuery('lg'))
+
+watchEffect(() => {
+  if (import.meta.client && isScreenLg.value)
+    isHeaderOpen.value = false
+})
+
+// Lock/unlock Lenis scroll when header menu is open/closed
+watchEffect(() => {
+  const lenis = useLenis()
+
+  if (import.meta.client && lenis?.value)
+    isHeaderOpen.value ? lenis.value.stop() : lenis.value.start()
+})
 </script>
 
 <template>
   <header
-    :class="{ 'is-open': isOpen }"
+    :class="{
+      'is-open': isHeaderOpen,
+      'transition-[opacity,translate] duration-300 ease-out': ready,
+      'opacity-0 -translate-y-2': !ready || hasScrolledDown && !isHeaderOpen,
+    }"
     class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10"
+    @mouseenter="handleMouseEnter"
   >
     <NuxtLink
-      class="p-7.5 -m-7.5"
+      class="p-5 -m-5 md:p-7.5 md:-m-7.5"
       to="/"
     >
       <IconLogo class="text-offblack w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
     </NuxtLink>
 
     <button
-      class="p-7.5 -m-7.5 z-1 lg:hidden"
-      @click="isOpen = !isOpen"
+      class="p-5 -m-5 md:p-7.5 md:-m-7.5 z-1 lg:hidden"
+      @click="toggleHeaderMenu"
     >
-      <AppSwitch
-        :is-open="isOpen"
-      />
+      <AppHeaderSwitch />
     </button>
 
     <div
       data-lenis-prevent
       class="header__navigation w-full"
     >
-      <!-- :class="{
-        'max-lg:opacity-0 max-lg:pointer-events-none': !isOpen,
-        'max-lg:opacity-100 max-lg:pointer-events-auto': isOpen,
-      }" -->
       <AppNavigation
         v-if="navigation"
         :items="navigation"
@@ -54,7 +115,7 @@ const isOpen = ref(false)
 .header {
   height: var(--app-header-height);
 
-  & + * {
+  & + * { /* TEMPORARY: will refactor later down the line */
     margin-top: calc(var(--app-header-height) * -1);
   }
 }
@@ -83,14 +144,15 @@ const isOpen = ref(false)
     text-align: center;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     padding-block: var(--app-header-height);
 
     clip-path: circle(var(--disc-size) at calc(100% - var(--disc-offset)) var(--disc-offset));
-    transition: clip-path 0.4s cubic-bezier(0.34, 1.06, 0.24, 1);
+    transition: clip-path 0.5s cubic-bezier(0.34, 1.06, 0.24, 1);
 
     .header.is-open & {
       clip-path: circle(150% at calc(100% - var(--disc-offset)) var(--disc-offset));
-      transition: clip-path 0.4s var(--ease-in-out);
+      transition: clip-path 0.5s var(--ease-outQuart);
     }
   }
 }
