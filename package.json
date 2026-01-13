@@ -21,7 +21,7 @@
     "nuke": "del-cli '.output' 'dist' '.nuxt' 'node_modules' 'package-lock.json'"
   },
   "dependencies": {
-    "@storyblok/nuxt": "^8.2.3",
+    "@storyblok/nuxt": "^8.2.4",
     "@tailwindcss/vite": "^4.1.18",
     "@unhead/vue": "^2.1.2",
     "@vee-validate/zod": "^4.15.1",
@@ -42,10 +42,10 @@
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/sitemap": "^7.5.2",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/node": "^25.0.6",
+    "@types/node": "^25.0.7",
     "del-cli": "^7.0.0",
     "eslint": "^9.39.2",
-    "storyblok": "^4.12.0",
+    "storyblok": "^4.12.1",
     "storyblok-markdown-richtext": "^1.0.3",
     "tailwind-merge": "^3.4.0",
     "typescript": "^5.9.3",
