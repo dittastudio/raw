@@ -278,7 +278,7 @@ const run = async () => {
         console.log('✅ Successfully created post: ', fields.name)
       }
       else {
-        console.log('❌ Failed to create post: ', fields.name)
+        console.log('❌ Problem encountered creating post: ', fields.name)
       }
     }
     catch (error: any) {
