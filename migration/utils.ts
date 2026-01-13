@@ -97,18 +97,6 @@ async function uploadFileToStoryblok(fileUrl: string) {
 
     const filename = `https://a.storyblok.com/${data.fields.key}`
     const asset = {
-      // filename,
-      // id: data.id,
-      // alt: '',
-      // name: '',
-      // focus: '',
-      // title: '',
-      // source: '',
-      // copyright: '',
-      // fieldtype: 'asset',
-      // meta_data: {},
-      // is_external_url: false,
-
       alt: '',
       copyright: '',
       fieldtype: 'asset',
