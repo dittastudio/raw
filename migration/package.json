@@ -1,14 +1,14 @@
 {
   "name": "wp2storyblok",
+  "type": "module",
   "version": "1.0.0",
   "description": "",
+  "author": "",
+  "license": "ISC",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "migrate": "node --env-file=../.env migrate.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",
     "axios": "^0.21.1",

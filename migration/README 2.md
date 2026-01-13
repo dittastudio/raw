@@ -1,9 +1,9 @@
 <div align="center">
-	<a  href="https://www.storyblok.com?utm_source=github.com&utm_medium=readme&utm_campaign=wordpress-importer"  align="center">
-		<img  src="https://a.storyblok.com/f/88751/1776x360/ffa245ed47/sb-wp-git-hero.png"  alt="Storyblok Logo">
-	</a>
-	<h1  align="center">Storyblok WordPress importer</h1>
-	<p  align="center">A simple script for migrating content from WordPress to <a href="https://www.storyblok.com?utm_source=github.com&utm_medium=referral&utm_campaign=wordpress-importer">Storyblok</a>.</p>
+  <a  href="https://www.storyblok.com?utm_source=github.com&utm_medium=readme&utm_campaign=wordpress-importer"  align="center">
+    <img  src="https://a.storyblok.com/f/88751/1776x360/ffa245ed47/sb-wp-git-hero.png"  alt="Storyblok Logo">
+  </a>
+  <h1  align="center">Storyblok WordPress importer</h1>
+  <p  align="center">A simple script for migrating content from WordPress to <a href="https://www.storyblok.com?utm_source=github.com&utm_medium=referral&utm_campaign=wordpress-importer">Storyblok</a>.</p>
 </div>
 
 <p align="center">
@@ -22,13 +22,13 @@
 
 ### Prerequisets
 This script has been tested on WordPress v5 with API v2. WordPress REST API must be publicly available during the migration process as this script won't handle authentication.
-On the <a href="https://www.storyblok.com" target="_blank">Storyblok</a> side you just need a space. In case the space is not an empty one, we recommend to test it before with a copy of the original space to make sure the migration process doesn't cause an issue to the existing content. 
+On the <a href="https://www.storyblok.com" target="_blank">Storyblok</a> side you just need a space. In case the space is not an empty one, we recommend to test it before with a copy of the original space to make sure the migration process doesn't cause an issue to the existing content.
 
 ### How to use
 To use the script, just import it, initialise a new instance of the `Wp2Storyblok` class and run the `Wp2Storyblok.migrate()` method.
 
 ```javascript
-import {Wp2Storyblok} from './index.js'
+import { Wp2Storyblok } from './index.js'
 
 const wp2storyblok = new Wp2Storyblok('http://yoursite.com/wp-json', {
   token: 'storyblok-oauth-token',
@@ -38,16 +38,16 @@ const wp2storyblok = new Wp2Storyblok('http://yoursite.com/wp-json', {
       name: 'core/paragraph',
       new_block_name: 'richtext',
       schema_mapping: {
-        'attrs.content': 'content'
-      }
+        'attrs.content': 'content',
+      },
     },
     {
       name: 'core/image',
       new_block_name: 'image',
       schema_mapping: {
-        'attrs.url': 'image'
-      }
-    }
+        'attrs.url': 'image',
+      },
+    },
   ],
   content_types: [
     {
@@ -58,21 +58,21 @@ const wp2storyblok = new Wp2Storyblok('http://yoursite.com/wp-json', {
         {
           name: 'categories',
           field: 'categories',
-          type: 'value'
-        }
+          type: 'value',
+        },
       ],
       schema_mapping: {
-        title: 'name',
+        'title': 'name',
         '_links.wp:featuredmedia.0': 'content.preview_image',
-        content: {
+        'content': {
           field: 'content.body_items',
           component: 'rich-text',
           component_field: 'content',
-          categories: 'content.categories'
-        }
-      }
-    }
-  ]
+          categories: 'content.categories',
+        },
+      },
+    },
+  ],
 })
 
 wp2storyblok.migrate()
@@ -82,7 +82,7 @@ wp2storyblok.migrate()
 
 - `endpoint` String, The main endpoint for the WordPress REST API, without the `/wp/v2/` part
 - `settings` Object
-  - (`region` String, Optional, The region of your Storyblok space. Default is `eu`) 
+  - (`region` String, Optional, The region of your Storyblok space. Default is `eu`)
   - `token` String, The oauth token for the management API that can be retrieved in the account section of https://app.storyblok.com
   - `space_id` Integer, The id of your space
   - `content_types` Array of Objects
@@ -116,17 +116,17 @@ In case you want a field to be migrated as content inside a nested block in a fi
 ```json
 "schema_mapping": {
   "content": {
-    "field": "content.body_items", 
-    "component": "rich-text", 
-    "component_field": "content" 
+    "field": "content.body_items",
+    "component": "rich-text",
+    "component_field": "content"
   }
 }
 ```
 
 #### WordPress Blocks Mapping
 You can import blocks created with Gutenber as components in Storyblok. To achieve this you need to install the [REST API blocks plugin](https://wordpress.org/plugins/rest-api-blocks/) and fill out the `blocks_mapping` property in the migration settings.
-You need to create an array of objects where you specify the name of the block from Gutenberg (called `blockName` in the REST API), the name of the component in Storyblok and then the schema mapping in the same format as for the content types. 
-The blocks from Gutenberg are returned by the REST API inside the main object of an entry in a property called `blocks`. 
+You need to create an array of objects where you specify the name of the block from Gutenberg (called `blockName` in the REST API), the name of the component in Storyblok and then the schema mapping in the same format as for the content types.
+The blocks from Gutenberg are returned by the REST API inside the main object of an entry in a property called `blocks`.
 
 ```json
   {
@@ -141,12 +141,11 @@ The blocks from Gutenberg are returned by the REST API inside the main object of
 ```
 
 #### Importing Taxonomies
-Taxonomies can be imported along with the other fields. You need to fill out the `taxonomies` settings in the settings of your `content_type` and the script will get the taxonomy value from WordPress instead of the taxonomy id and it will add it to your Stories in the field you chose. 
+Taxonomies can be imported along with the other fields. You need to fill out the `taxonomies` settings in the settings of your `content_type` and the script will get the taxonomy value from WordPress instead of the taxonomy id and it will add it to your Stories in the field you chose.
 
 ## 🔗 Related Links
 
-
-* **[How To Migrate From WordPress To A Headless CMS](https://www.smashingmagazine.com/2021/07/wordpress-headless-cms-storyblok/)**: In this article, we will look at when it makes sense to migrate from a monolithic project to a headless setup and the benefits that come with it. In addition to a step-by-step guide on how to migrate WordPress to Storyblok Headless CMS, the problems that will arise during the process and how to deal with them;  
+* **[How To Migrate From WordPress To A Headless CMS](https://www.smashingmagazine.com/2021/07/wordpress-headless-cms-storyblok/)**: In this article, we will look at when it makes sense to migrate from a monolithic project to a headless setup and the benefits that come with it. In addition to a step-by-step guide on how to migrate WordPress to Storyblok Headless CMS, the problems that will arise during the process and how to deal with them;
 * **[Storyblok Technologies Hub](https://www.storyblok.com/technologies?utm_source=github.com&utm_medium=referral&utm_campaign=wordpress-importe)**: we prepared technology hubs so that you can find selected beginner tutorials, videos, boilerplates, and even cheatsheets all in one place.
 
 ## ℹ️ More Resources

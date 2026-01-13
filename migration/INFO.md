@@ -21,8 +21,7 @@ core/quote -> innerBlocks
   citation -> attrs.citation
   core/paragraph
 
-
-### Post Schema
+### Post Schema
 
 | WP Field      | SB Field | SB Type |
 | ----------- | ----------- | ----------- |

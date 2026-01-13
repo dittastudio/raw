@@ -8,16 +8,16 @@ const wp2storyblok = new Wp2Storyblok('https://raw.london/wp-json', {
       name: 'core/paragraph',
       new_block_name: 'richtext',
       schema_mapping: {
-        'attrs.content': 'content'
-      }
+        'attrs.content': 'content',
+      },
     },
     {
       name: 'core/image',
       new_block_name: 'image',
       schema_mapping: {
-        'attrs.url': 'image'
-      }
-    }
+        'attrs.url': 'image',
+      },
+    },
   ],
   content_types: [
     {
@@ -28,21 +28,21 @@ const wp2storyblok = new Wp2Storyblok('https://raw.london/wp-json', {
         {
           name: 'categories',
           field: 'categories',
-          type: 'value'
-        }
+          type: 'value',
+        },
       ],
       schema_mapping: {
-        title: 'name',
+        'title': 'name',
         '_links.wp:featuredmedia.0': 'content.preview_image',
-        content: {
+        'content': {
           field: 'content.body_items',
           component: 'rich-text',
           component_field: 'content',
-          categories: 'content.categories'
-        }
-      }
-    }
-  ]
+          categories: 'content.categories',
+        },
+      },
+    },
+  ],
 })
 
 wp2storyblok.migrate()
