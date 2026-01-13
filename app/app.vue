@@ -21,6 +21,9 @@ useSeoMeta({
   titleTemplate: title => (title ? `${title} - RAW` : 'RAW'),
   robots: url.host === 'raw.london' ? 'index, follow' : 'noindex, nofollow',
 })
+
+// Set up states
+useState<boolean>('isHeaderOpen', () => false)
 </script>
 
 <template>

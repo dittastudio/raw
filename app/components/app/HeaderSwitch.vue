@@ -1,16 +1,12 @@
 <script lang="ts" setup>
-interface Props {
-  isOpen: boolean
-}
-
-const { isOpen } = defineProps<Props>()
+const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
 </script>
 
 <template>
   <span
-    class="switch relative flex items-center justify-center xbg-green text-white rounded-full"
+    class="header-switch relative flex items-center justify-center xbg-green text-white rounded-full"
     :class="{
-      'is-open': isOpen,
+      'is-open': isHeaderOpen,
     }"
   >
     <span
@@ -26,7 +22,7 @@ const { isOpen } = defineProps<Props>()
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.switch {
+.header-switch {
   width: var(--app-header-logo-height);
   height: var(--app-header-logo-height);
 
@@ -38,10 +34,10 @@ const { isOpen } = defineProps<Props>()
 }
 
 @keyframes open {
-  from {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(45deg);
   }
 }
@@ -50,7 +46,7 @@ const { isOpen } = defineProps<Props>()
   0% {
     transform: rotate(45deg);
   }
-  99.99% {
+  99.9999% {
     transform: rotate(90deg);
   }
   100% {

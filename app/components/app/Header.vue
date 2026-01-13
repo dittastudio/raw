@@ -8,13 +8,86 @@ interface Props {
 
 const { navigation } = defineProps<Props>()
 
-const isOpen = ref(false)
+const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const ready = ref(false)
+
+const toggleHeaderMenu = () => {
+  isHeaderOpen.value = !isHeaderOpen.value
+}
+
+const prevScrollPos = ref(0)
+const hasScrolled = ref(false)
+const hasScrolledUp = ref(false)
+const hasScrolledDown = ref(false)
+const raf = ref<number | null>(null)
+
+const handleScroll = () => {
+  const triggerPoint = 50
+  const scrollPos = window.scrollY
+
+  hasScrolled.value = scrollPos > triggerPoint
+
+  // Scrolling up
+  if (prevScrollPos.value > scrollPos) {
+    hasScrolledUp.value = scrollPos > triggerPoint
+    hasScrolledDown.value = false
+  }
+  // Scrolling down
+  else {
+    hasScrolledUp.value = false
+    hasScrolledDown.value = scrollPos > triggerPoint
+  }
+
+  prevScrollPos.value = scrollPos
+
+  raf.value = null
+}
+
+const rAFHeaderScroll = () => {
+  if (!raf.value)
+    raf.value = requestAnimationFrame(handleScroll)
+}
+
+const handleMouseEnter = () => {
+  hasScrolledUp.value = true
+  hasScrolledDown.value = false
+}
+
+onMounted(async () => {
+  rAFHeaderScroll()
+  window.addEventListener('scroll', rAFHeaderScroll)
+
+  await wait(500)
+  ready.value = true
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', rAFHeaderScroll)
+  raf.value && cancelAnimationFrame(raf.value)
+})
+
+const isScreenLg = useAtMedia(getMediaQuery('lg'))
+
+watchEffect(() => {
+  if (import.meta.client && isScreenLg.value)
+    isHeaderOpen.value = false
+})
 </script>
 
 <template>
   <header
-    :class="{ 'is-open': isOpen }"
+    :class="{
+      'is-open': isHeaderOpen,
+      // 'has-scrolled': hasScrolled,
+      // 'has-scrolled-up': hasScrolledUp,
+      // 'has-scrolled-down': hasScrolledDown,
+      'transition-[opacity,translate] duration-300 ease-out': ready,
+      'opacity-0 -translate-y-2': ready && hasScrolledDown,
+      // 'opacity-0 -translate-y-3': !ready,
+      // 'opacity-100 translate-y-0 transition-[opacity,translate] duration-1000 ease-outQuart': ready && !hasScrolled,
+    }"
     class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10"
+    @mouseenter="handleMouseEnter"
   >
     <NuxtLink
       class="p-7.5 -m-7.5"
@@ -25,21 +98,15 @@ const isOpen = ref(false)
 
     <button
       class="p-7.5 -m-7.5 z-1 lg:hidden"
-      @click="isOpen = !isOpen"
+      @click="toggleHeaderMenu"
     >
-      <AppSwitch
-        :is-open="isOpen"
-      />
+      <AppHeaderSwitch />
     </button>
 
     <div
       data-lenis-prevent
       class="header__navigation w-full"
     >
-      <!-- :class="{
-        'max-lg:opacity-0 max-lg:pointer-events-none': !isOpen,
-        'max-lg:opacity-100 max-lg:pointer-events-auto': isOpen,
-      }" -->
       <AppNavigation
         v-if="navigation"
         :items="navigation"
@@ -83,6 +150,7 @@ const isOpen = ref(false)
     text-align: center;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     padding-block: var(--app-header-height);
 
     clip-path: circle(var(--disc-size) at calc(100% - var(--disc-offset)) var(--disc-offset));
