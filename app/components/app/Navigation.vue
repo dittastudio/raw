@@ -13,13 +13,12 @@ const route = useRoute()
   <nav>
     <ul
       class="
+        navigation__list
         flex
         flex-col
         items-center
         justify-center
-        gap-2
         lg:flex-row
-        lg:gap-12
         font-display
         leading-none
         font-bold
@@ -37,13 +36,13 @@ const route = useRoute()
         :key="item._uid"
         :class="{
           'navigation__item': true,
-          'lg:font-bold': determineHref(item.link).startsWith(route.path) && route.path !== '/',
+          'lg:font-normal lg:underline underline-offset-2': determineHref(item.link).startsWith(route.path) && route.path !== '/',
           'text-outline-white lg:text-outline-none lg:font-normal': !determineHref(item.link).startsWith(route.path) || route.path === '/',
         }"
       >
         <StoryblokLink
           :item="item.link"
-          class="block"
+          class="block p-2 lg:py-7.5 lg:px-6"
         >
           {{ item.title }}
         </StoryblokLink>
@@ -54,6 +53,10 @@ const route = useRoute()
 
 <style scoped>
 @reference "@/assets/css/app.css";
+
+.navigation__list {
+
+}
 
 .navigation__item {
   --logo-width: 82px;
@@ -72,6 +75,12 @@ const route = useRoute()
       display: flex;
       justify-content: flex-end;
       width: calc(var(--logo-width) - var(--nav-gap));
+    }
+
+    transition: opacity 0.2s var(--ease-out);
+
+    .navigation__list:hover &:not(:hover,:last-child) {
+      opacity: 0.5;
     }
   }
 }
