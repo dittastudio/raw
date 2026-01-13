@@ -79,6 +79,8 @@ const { items } = defineProps<Props>()
 
   transition:
     opacity 0.2s var(--ease-out),
+    -webkit-text-stroke 0.2s var(--ease-out),
+    text-stroke 0.2s var(--ease-out),
     color 0.2s var(--ease-out);
 
   .navigation__list:hover &:not(:hover) {
@@ -104,7 +106,9 @@ const { items } = defineProps<Props>()
     text-decoration-line: underline;
     text-underline-offset: 2px;
 
-    transition: text-decoration 0.2s var(--ease-out);
+    transition:
+      opacity 0.2s var(--ease-out),
+      text-decoration 0.2s var(--ease-out);
 
     &.router-link-active {
       text-decoration-color: currentColor;
