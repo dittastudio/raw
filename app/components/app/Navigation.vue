@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { items } = defineProps<Props>()
-const route = useRoute()
 </script>
 
 <template>
@@ -37,11 +36,11 @@ const route = useRoute()
         v-for="item in items"
         :key="item._uid"
         class="navigation__item max-lg:w-full"
-        :class="{
+      >
+        <!-- :class="{
           'lg:font-normal lg:underline underline-offset-2 decoration-[0.075em]': determineHref(item.link).startsWith(route.path) && route.path !== '/',
           'text-outline-white lg:text-outline-none lg:font-normal': !determineHref(item.link).startsWith(route.path) || route.path === '/',
-        }"
-      >
+        }" -->
         <StoryblokLink
           :item="item.link"
           class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-(--link-padding-x)"
@@ -77,7 +76,11 @@ const route = useRoute()
 .navigation__link {
   --link-padding-x: --spacing(6);
 
-  transition: opacity 0.2s var(--ease-out);
+  transition:
+    opacity 0.2s var(--ease-out),
+    -webkit-text-stroke 0.2s var(--ease-out),
+    text-stroke 0.2s var(--ease-out),
+    color 0.2s var(--ease-out);
 
   .navigation__list:hover &:not(:hover) {
     opacity: 0.5;
@@ -86,6 +89,28 @@ const route = useRoute()
   @variant lg {
     .navigation__item:last-child & {
       margin-right: calc(-1 * var(--link-padding-x));
+    }
+  }
+
+  @variant max-lg {
+    &:not(.router-link-active) {
+      @apply text-outline-white;
+    }
+  }
+
+  @variant lg {
+    text-decoration-style: solid;
+    text-decoration-thickness: 0.075em;
+    text-decoration-color: transparent;
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+
+    transition:
+      opacity 0.2s var(--ease-out),
+      text-decoration 0.2s var(--ease-out);
+
+    &.router-link-active {
+      text-decoration-color: currentColor;
     }
   }
 }
