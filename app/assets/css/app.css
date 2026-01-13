@@ -86,11 +86,16 @@
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
 
+    --app-header-height: 72px;
+    --app-header-logo-width: 86px;
+    --app-header-logo-height: 32px;
+
     @variant sm {
       --app-inner-gutter: 20px;
     }
 
     @variant md {
+      --app-header-height: 92px;
       --app-outer-gutter: 30px;
     }
   }
