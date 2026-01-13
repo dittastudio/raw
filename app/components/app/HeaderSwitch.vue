@@ -1,13 +1,24 @@
 <script lang="ts" setup>
 const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const isAnimating = ref(false)
+
+watch(isHeaderOpen, () => {
+  isAnimating.value = true
+})
+
+const handleAnimationEnd = () => {
+  isAnimating.value = false
+}
 </script>
 
 <template>
   <span
-    class="header-switch relative flex items-center justify-center xbg-green text-white rounded-full"
+    class="header-switch relative flex items-center justify-center text-white rounded-full"
     :class="{
       'is-open': isHeaderOpen,
+      'is-animating': isAnimating,
     }"
+    @animationend="handleAnimationEnd"
   >
     <span
       class="absolute h-[50%] w-[2px] bg-current rounded-full"
@@ -26,31 +37,39 @@ const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
   width: var(--app-header-logo-height);
   height: var(--app-header-logo-height);
 
-  animation: close 0.5s var(--ease-outQuart) forwards;
+  rotate: 0deg;
 
   &.is-open {
+    rotate: 45deg;
+  }
+
+  &.is-animating:not(.is-open) {
+    animation: close 0.5s var(--ease-outQuart) forwards;
+  }
+
+  &.is-animating.is-open {
     animation: open 0.5s var(--ease-outQuart) forwards;
   }
 }
 
 @keyframes open {
   0% {
-    transform: rotate(0deg);
+    rotate: 0deg;
   }
   100% {
-    transform: rotate(45deg);
+    rotate: 45deg;
   }
 }
 
 @keyframes close {
   0% {
-    transform: rotate(45deg);
+    rotate: 45deg;
   }
   99.9999% {
-    transform: rotate(90deg);
+    rotate: 90deg;
   }
   100% {
-    transform: rotate(0deg);
+    rotate: 0deg;
   }
 }
 </style>

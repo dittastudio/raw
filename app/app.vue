@@ -1,7 +1,10 @@
 <script lang="ts" setup>
 import type { Settings } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import { VueLenis } from 'lenis/vue'
-// import IconLogo from '@/assets/icons/logo.svg?component'
+
+const lenisOptions = {
+  lerp: 0.5,
+}
 
 const story = await useStory<Settings>('/settings')
 const route = useRoute()
@@ -23,11 +26,19 @@ useSeoMeta({
 })
 
 // Set up states
-useState<boolean>('isHeaderOpen', () => false)
+const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+
+watch(() => route.fullPath, async () => {
+  await wait(500)
+  isHeaderOpen.value = false
+})
 </script>
 
 <template>
-  <VueLenis root>
+  <VueLenis
+    root
+    :options="lenisOptions"
+  >
     <AppHeader :navigation="story.content.navigation" />
 
     <NuxtPage />
