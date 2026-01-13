@@ -60,11 +60,11 @@ const isOpen = ref(false)
 }
 
 .header__navigation {
-  --disc-size: 16px;
+  --disc-size: 18px;
   --disc-offset: 36px;
 
   @variant md {
-    --disc-size: 16px;
+    --disc-size: 18px;
     --disc-offset: 46px;
   }
 

@@ -27,8 +27,8 @@ const { isOpen } = defineProps<Props>()
 @reference "@/assets/css/app.css";
 
 .switch {
-  width: 32px;
-  height: 32px;
+  width: var(--app-header-logo-height);
+  height: var(--app-header-logo-height);
 
   animation: close 0.5s var(--ease-outQuart) forwards;
 
