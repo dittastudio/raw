@@ -239,8 +239,8 @@ const run = async () => {
         created_at: new Date(post.date).toISOString(),
         published_at: new Date(post.date).toISOString(),
         updated_at: new Date(post.modified).toISOString(),
-        seo_title: post.yoast_head_json?.title || '',
-        seo_description: post.yoast_head_json?.description || '',
+        seo_title: post.yoast_head_json?.og_title || post.yoast_head_json?.title || post.title.rendered || '',
+        seo_description: post.yoast_head_json?.og_description || post.yoast_head_json?.description || post.title.rendered || '',
         seo_image: mainImage,
         hero: mainImage,
         category: mapCategories(post.categories),
@@ -285,7 +285,7 @@ const run = async () => {
       console.error('Error: ', error)
     }
 
-    console.log(`⏰ Waiting ${INTERVAL_WAIT_MS}ms before next post to prevent rate limits...`)
+    console.log(`⏰ Waiting ${INTERVAL_WAIT_MS}ms before next post to prevent rate limits...\n`)
 
     await wait(INTERVAL_WAIT_MS)
   }
