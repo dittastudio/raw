@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import type { Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
-const relations: string[] = []
+const relations: string[] = [
+  'post.author'
+]
 
 const imageOptions = {
   width: 1200,
