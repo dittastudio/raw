@@ -31,6 +31,8 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   twitterImage: storyblokImage(story.value?.content.seo_image?.filename, imageOptions) || null,
 })
+
+console.log('Loaded story:', story.value)
 </script>
 
 <template>
