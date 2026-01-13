@@ -13,21 +13,32 @@ const handleAnimationEnd = () => {
 
 <template>
   <span
-    class="header-switch relative flex items-center justify-center text-white rounded-full"
+    class="
+      header-switch
+      relative
+      flex
+      items-center
+      justify-center
+      text-white
+      rounded-full
+      before:content-['']
+      before:absolute before:w-[2px]
+      before:h-[50%]
+      before:bg-current
+      before:rounded-full
+      after:content-['']
+      after:absolute
+      after:w-[50%]
+      after:h-[2px]
+      after:bg-current
+      after:rounded-full
+    "
     :class="{
       'is-open': isHeaderOpen,
       'is-animating': isAnimating,
     }"
     @animationend="handleAnimationEnd"
-  >
-    <span
-      class="absolute h-[50%] w-[2px] bg-current rounded-full"
-    />
-
-    <span
-      class="absolute h-[2px] w-[50%] bg-current rounded-full"
-    />
-  </span>
+  />
 </template>
 
 <style scoped>

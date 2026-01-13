@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { items } = defineProps<Props>()
-// const route = useRoute()
 </script>
 
 <template>
