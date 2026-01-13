@@ -1,12 +1,20 @@
 {
-  "name": "raw-migration",
+  "name": "wp2storyblok",
   "type": "module",
-  "private": true,
-  "author": "ditta",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "license": "ISC",
+  "main": "index.js",
   "scripts": {
+    "migrate": "node --env-file=../.env migrate.js"
   },
   "dependencies": {
-  },
-  "devDependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.21.1",
+    "form-data": "^4.0.0",
+    "storyblok-js-client": "^6.7.1",
+    "storyblok-markdown-richtext": "^1.0.1",
+    "turndown": "^7.0.0"
   }
 }
