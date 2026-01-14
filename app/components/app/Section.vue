@@ -8,6 +8,9 @@ interface Props {
 const { block } = defineProps<Props>()
 
 console.log('Section block:', block)
+
+// Will...don't apply the colours here...just update the vars. Colours should be within the blocks themselves.
+// Cheers!
 </script>
 
 <template>
