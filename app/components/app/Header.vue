@@ -88,7 +88,7 @@ watchEffect(() => {
       class="p-5 -m-5 md:p-7.5 md:-m-7.5"
       to="/"
     >
-      <IconLogo class="text-offblack w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
+      <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
     </NuxtLink>
 
     <button

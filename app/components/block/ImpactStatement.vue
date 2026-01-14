@@ -13,7 +13,7 @@ const { block } = defineProps<Props>()
     <div
       v-for="item in block.items"
       :key="item._uid"
-      class="grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20"
+      class="impact-statement__item grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20"
     >
       <div
         v-if="storyblokRichTextContent(item.title)"
@@ -53,26 +53,30 @@ const { block } = defineProps<Props>()
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.impact-statement {
-  &__headline {
-    :deep(h2, h3, h4) {
-      @apply type-h2;
+.impact-statement__item {
+  & + & {
+    margin-block-start: --spacing(30);
+  }
+}
 
-      text-wrap: balance;
-    }
+.impact-statement__headline {
+  :deep(h2, h3, h4) {
+    @apply type-h2;
+
+    text-wrap: balance;
+  }
+}
+
+.impact-statement__text {
+  :deep(p) {
+    @apply type-p;
+    text-wrap: pretty;
+
+    max-width: 24em;
   }
 
-  &__text {
-    :deep(p) {
-      @apply type-p;
-      text-wrap: pretty;
-
-      max-width: 24em;
-    }
-
-    :deep(p + p) {
-      padding-top: 1.25em;
-    }
+  :deep(p + p) {
+    padding-top: 1.25em;
   }
 }
 </style>
