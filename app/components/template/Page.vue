@@ -10,9 +10,10 @@ const { story } = defineProps<Props>()
 </script>
 
 <template>
-  <section
+  <AppSection
     v-for="block in story.content.blocks"
     :key="block._uid"
+    :block="block"
   >
     <BlockHero
       v-if="block.component === 'block_hero'"
@@ -23,5 +24,5 @@ const { story } = defineProps<Props>()
       v-if="block.component === 'block_impact_statement'"
       :block="block"
     />
-  </section>
+  </AppSection>
 </template>
