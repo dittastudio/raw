@@ -3,9 +3,9 @@
 import type { ISbStoryData } from '@storyblok/js';
 import type { StoryblokMultiasset, StoryblokAsset, StoryblokRichtext, StoryblokMultilink } from '../storyblok.d.ts';
 export interface BlockHero {
+  theme?: "is-light" | "is-dark";
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
-  colour: "is-light" | "is-dark";
   component: "block_hero";
   _uid: string;
 }
@@ -67,12 +67,6 @@ export interface Post {
 export interface PostGallery {
   items?: StoryblokMultiasset;
   component: "post_gallery";
-  _uid: string;
-}
-
-export interface PostGalleryItem {
-  image?: StoryblokAsset;
-  component: "post_gallery_item";
   _uid: string;
 }
 
