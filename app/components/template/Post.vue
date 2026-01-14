@@ -38,6 +38,8 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
             {{ story.name }}
           </h1>
 
+          <pre>{{ author }}</pre>
+
           <div
             v-if="author"
             class="flex items-center justify-start gap-6"

@@ -2,9 +2,9 @@ import type { Post, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, Po
 import type { StoryblokAsset } from '../.storyblok/types/storyblok.d.ts'
 import { addToStoryblok, convertHtmlToJson, excludedSlugs, mapCategories, uploadFileToStoryblok, wait } from './utils'
 
-const PARENT = 133603998123034
+const PARENT = 134064420646816
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
-const INTERVAL_WAIT_MS = 250
+const INTERVAL_WAIT_MS = 500
 
 const processBlocks = async (blockData: Record<number, any>): Promise<Post['blocks']> => {
   const blocks = Object.values(blockData)
@@ -75,6 +75,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
       if (!uploadedImage) {
         continue
       }
+
+      // Wait between image uploads to avoid rate limits
+      await wait(INTERVAL_WAIT_MS)
 
       const component: PostImage = {
         _uid: crypto.randomUUID(),
@@ -260,8 +263,8 @@ const getWpPosts = async (page: number = 1, perPage: number = 5): Promise<WpPost
 }
 
 const run = async () => {
-  const maxPosts = 10 // Safe maximum number of posts to migrate (make it a low as needed for testing).
-  const perPage = 5 // Keep it low because RAW's server can't cope with too much JSON. 💩
+  const maxPosts = 400 // Safe maximum number of posts to migrate (make it a low as needed for testing).
+  const perPage = 8 // Keep it low because RAW's server can't cope with too much JSON. 💩
   let page = 1
   let morePosts = true
   let totalProcessed = 0
@@ -302,7 +305,7 @@ const run = async () => {
         continue
       }
 
-      console.log(`✏️ Migrating post ${totalProcessed + 1}/${maxPosts}: ${postTitle}`)
+      console.log(`✏️ Migrating post ${totalProcessed + 1} of ${maxPosts} max: ${postTitle}`)
 
       try {
         const postImage = post.yoast_head_json?.og_image?.[0]?.url ? await uploadFileToStoryblok(post.yoast_head_json.og_image[0].url) : null
@@ -323,19 +326,19 @@ const run = async () => {
           blocks: post.has_blocks && Object.keys(post.block_data).length ? await processBlocks(post.block_data) : [],
         }
 
-        const createStoryPost = await addToStoryblok({
-          publish: true,
-          first_published_at: fields.first_published_at,
-          created_at: fields.created_at,
-          published_at: fields.published_at,
-          updated_at: fields.updated_at,
-          // @ts-expect-error - Storyblok story creation.
-          // We know content matches Post interface but post type shows required (but auto-generated on creation). meh.
+        const payload = {
+          publish: 0,
           story: {
             parent_id: PARENT,
+            published: false,
             is_startpage: false,
+            is_folder: false,
             name: fields.name,
             slug: fields.slug,
+            first_published_at: fields.first_published_at,
+            created_at: fields.created_at,
+            published_at: fields.published_at,
+            updated_at: fields.updated_at,
             content: {
               _uid: crypto.randomUUID(),
               component: 'post',
@@ -348,7 +351,12 @@ const run = async () => {
               blocks: fields.blocks,
             },
           },
-        })
+        }
+
+        // @ts-expect-error - Storyblok story creation.
+        // We know content matches Post interface but post type shows required (but auto-generated on creation). meh.
+        const createStoryPost = await addToStoryblok(payload)
+        const data = await createStoryPost?.json()
 
         if (createStoryPost?.ok) {
           console.log(`✅ Successfully created post: ${fields.name}`)
@@ -356,6 +364,9 @@ const run = async () => {
         }
         else {
           console.log(`⚠️ Problem encountered creating post: ${fields.name}`)
+          console.log(createStoryPost)
+          console.log(data)
+          console.log(payload)
         }
       }
       catch (error: any) {

@@ -6,8 +6,8 @@ import FormData from 'form-data'
 import pkg from 'storyblok-markdown-richtext'
 import TurndownService from 'turndown'
 
-const SPACE = 289825226535458
-const ASSET_FOLDER = 133698267522379
+const SPACE = 289672313529140
+const ASSET_FOLDER = 134034324236001
 
 const convertHtmlToJson = (html?: string) => {
   const { markdownToRichtext } = pkg
@@ -23,7 +23,7 @@ interface Story {
 
 async function addToStoryblok(data: Story) {
   try {
-    return await fetch(`https://api.storyblok.com/v1/spaces/${SPACE}/stories/`, {
+    return await fetch(`https://mapi.storyblok.com/v1/spaces/${SPACE}/stories/`, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -69,17 +69,19 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
   }
 
   const splitFile = fileUrl?.split('/')
-  const fileName = splitFile[splitFile.length - 1]
+  const originalFileName = splitFile[splitFile.length - 1]
+  const extension = originalFileName.split('.').pop() || ''
+  const fileName = `${crypto.randomUUID()}.${extension}`
 
   try {
-    const fetchImage = await fetch(fileUrl)
+    const fetchSrcImage = await fetch(fileUrl)
 
-    if (!fetchImage.ok) {
-      console.error(`❌ Failed to fetch image: ${fileUrl} (${fetchImage.status})`)
+    if (!fetchSrcImage.ok) {
+      console.error(`❌ Failed to fetch image: ${fileUrl} (${fetchSrcImage.status})`)
       return
     }
 
-    const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
+    const imgBuffer = Buffer.from(await fetchSrcImage.arrayBuffer())
     const probeModule = await import('probe-image-size')
     const probe = probeModule.default ?? probeModule
     const dimensions = probe.sync(imgBuffer)
@@ -100,6 +102,7 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
           'Authorization': process.env.NUXT_STORYBLOK_MANAGEMENT_TOKEN || '',
         },
         body: JSON.stringify({
+          validate_upload: 1,
           filename: fileName,
           size: `${width}x${height}`,
           asset_folder_id: ASSET_FOLDER,
