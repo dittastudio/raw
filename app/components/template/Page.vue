@@ -33,7 +33,7 @@ const { story } = defineProps<Props>()
 
 .section {
   &--block_impact_statement {
-    padding-block: 120px;
+    padding-block: --spacing(35);
   }
 }
 </style>

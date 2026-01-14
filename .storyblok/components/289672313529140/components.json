@@ -4,12 +4,36 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-01-10T16:19:45.669Z",
+    "updated_at": "2026-01-14T15:37:28.586Z",
     "id": 132594684570052,
     "schema": {
+      "theme": {
+        "type": "option",
+        "pos": 0,
+        "use_uuid": true,
+        "required": false,
+        "options": [
+          {
+            "_uid": "ac4def2b-fda9-47f4-9cf1-760399b2c858",
+            "name": "Light",
+            "value": "is-light"
+          },
+          {
+            "_uid": "2c33ae08-1fcd-46cf-9b92-33ef7a0135f4",
+            "value": "is-dark",
+            "name": "Dark"
+          }
+        ],
+        "exclude_empty_option": true,
+        "default_value": "light",
+        "id": "BmrYdk1fTiOQo5l9tMEL_A",
+        "display_name": "Theme",
+        "source": "internal",
+        "datasource_slug": "theme"
+      },
       "headline": {
         "type": "richtext",
-        "pos": 0,
+        "pos": 1,
         "required": false,
         "customize_toolbar": true,
         "toolbar": [
@@ -29,34 +53,13 @@
       },
       "text": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 2,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
           "paragraph",
           "unset"
         ]
-      },
-      "colour": {
-        "type": "option",
-        "pos": 2,
-        "use_uuid": true,
-        "required": true,
-        "options": [
-          {
-            "_uid": "ac4def2b-fda9-47f4-9cf1-760399b2c858",
-            "name": "Light",
-            "value": "is-light"
-          },
-          {
-            "_uid": "2c33ae08-1fcd-46cf-9b92-33ef7a0135f4",
-            "value": "is-dark",
-            "name": "Dark"
-          }
-        ],
-        "exclude_empty_option": true,
-        "default_value": "is-light",
-        "id": "BmrYdk1fTiOQo5l9tMEL_A"
       }
     },
     "image": null,
@@ -506,39 +509,6 @@
     "metadata": {}
   },
   {
-    "name": "post_gallery_item",
-    "display_name": "Gallery Item",
-    "description": "",
-    "created_at": "2026-01-13T21:35:27.813Z",
-    "updated_at": "2026-01-13T21:36:38.852Z",
-    "id": 133736561927964,
-    "schema": {
-      "image": {
-        "type": "asset",
-        "pos": 0,
-        "id": "hDBBsd37TIS2sMrBGLaEyA",
-        "filetypes": [
-          "images"
-        ]
-      }
-    },
-    "image": null,
-    "preview_field": null,
-    "is_root": false,
-    "preview_tmpl": null,
-    "is_nestable": true,
-    "all_presets": [],
-    "preset_id": null,
-    "real_name": "Gallery Item",
-    "component_group_uuid": "ef43f0e2-b155-4f0a-afed-2413ea2837d9",
-    "color": null,
-    "icon": null,
-    "internal_tags_list": [],
-    "internal_tag_ids": [],
-    "content_type_asset_preview": null,
-    "metadata": {}
-  },
-  {
     "name": "post_heading",
     "display_name": "Heading",
     "description": "",
@@ -573,7 +543,7 @@
     "display_name": "HTML",
     "description": "",
     "created_at": "2026-01-12T17:53:39.993Z",
-    "updated_at": "2026-01-13T21:37:51.863Z",
+    "updated_at": "2026-01-14T15:08:01.372Z",
     "id": 133328158722931,
     "schema": {
       "html": {
@@ -581,7 +551,7 @@
         "pos": 0,
         "id": "sdqp_BfVQxazXZyyKXnq_A",
         "display_name": "HTML",
-        "description": "Do not paste code in here you don't understand. It can be very dangerous. Consult a developer. This field is only here for migration purposes of the old website that used custom HTML blocks for video. Once we have a better solution, this field will be removed."
+        "description": "⚠️ Do not paste code in here you don't understand. It can be very dangerous. Consult a developer. This field is only here for migration purposes of the old website that used custom HTML blocks for video. Once we have a better solution, this field will be removed."
       }
     },
     "image": null,

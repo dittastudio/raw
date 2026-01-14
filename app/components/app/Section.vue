@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockImpactStatement } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockHero, BlockImpactStatement } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
 interface Props {
-  block: BlockImpactStatement
+  block: BlockHero | BlockImpactStatement
 }
 
 const { block } = defineProps<Props>()
@@ -44,6 +44,8 @@ const themeColors = {
   },
 }
 
+let observer: IntersectionObserver | null = null
+
 const updateThemeVariables = (theme: keyof typeof themeColors) => {
   const colors = themeColors[theme]
 
@@ -72,7 +74,7 @@ onMounted(() => {
   initialColors.background = computedStyle.getPropertyValue('--app-background-color').trim()
   initialColors.text = computedStyle.getPropertyValue('--app-text-color').trim()
 
-  const observer = new IntersectionObserver(
+  observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -90,19 +92,37 @@ onMounted(() => {
   )
 
   observer.observe(sectionRef.value)
+})
 
-  onUnmounted(() => {
-    observer.disconnect()
+onUnmounted(() => {
+  observer?.disconnect()
 
-    if (activeSection.value === sectionId) {
-      activeSection.value = null
-    }
-  })
+  if (activeSection.value === sectionId) {
+    activeSection.value = null
+  }
 })
 </script>
 
 <template>
-  <section ref="sectionRef">
+  <section
+    ref="sectionRef"
+    class="section"
+  >
     <slot />
   </section>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.section :deep(.is-outlined) {
+  @supports((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
+    -webkit-text-stroke: 0.015em var(--app-text-color);
+    text-stroke: 0.015em var(--app-text-color);
+    color: transparent;
+    transition:
+      -webkit-text-stroke var(--app-transition-duration) var(--app-transition-ease),
+      text-stroke var(--app-transition-duration) var(--app-transition-ease);
+  }
+}
+</style>
