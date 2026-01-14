@@ -86,6 +86,9 @@
 
 @layer theme {
   :root {
+    --app-color: var(--color-offblack);
+    --app-background: var(--color-white);
+
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
 

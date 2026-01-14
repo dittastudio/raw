@@ -10,6 +10,13 @@ export interface BlockHero {
   _uid: string;
 }
 
+export interface BlockImpactStatement {
+  theme?: number | string;
+  items?: TitleCopy[];
+  component: "block_impact_statement";
+  _uid: string;
+}
+
 export interface Link {
   title: string;
   link: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
@@ -26,7 +33,7 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: BlockHero[];
+  blocks?: (BlockHero | BlockImpactStatement)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
@@ -121,6 +128,13 @@ export interface Settings {
   company_address?: string;
   logos?: Logo[];
   component: "settings";
+  _uid: string;
+}
+
+export interface TitleCopy {
+  title?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  component: "title_copy";
   _uid: string;
 }
 
