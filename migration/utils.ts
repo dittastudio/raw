@@ -42,22 +42,28 @@ interface SignedRequest {
   fields: Record<string, string>
 }
 
-async function filePrepare(signed_request: SignedRequest, file: Buffer) {
-  const form = new FormData()
+async function filePrepare(signed_request: SignedRequest, file: Buffer): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const form = new FormData()
 
-  for (const key in signed_request.fields) {
-    form.append(key, signed_request.fields[key])
-  }
-
-  form.append('file', file)
-  form.submit(signed_request.post_url, (err) => {
-    if (err) {
-      throw err
+    for (const key in signed_request.fields) {
+      form.append(key, signed_request.fields[key])
     }
+
+    form.append('file', file)
+
+    form.submit(signed_request.post_url, (err) => {
+      if (err) {
+        reject(err)
+      }
+      else {
+        resolve()
+      }
+    })
   })
 }
 
-async function uploadFileToStoryblok(fileUrl: string) {
+async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | undefined> {
   if (!fileUrl) {
     return
   }
@@ -65,14 +71,26 @@ async function uploadFileToStoryblok(fileUrl: string) {
   const splitFile = fileUrl?.split('/')
   const fileName = splitFile[splitFile.length - 1]
 
-  const fetchImage = await fetch(fileUrl)
-  const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
-
-  const probeModule = await import('probe-image-size')
-  const probe = probeModule.default ?? probeModule
-  const { width, height } = probe.sync(imgBuffer)
-
   try {
+    const fetchImage = await fetch(fileUrl)
+
+    if (!fetchImage.ok) {
+      console.error(`❌ Failed to fetch image: ${fileUrl} (${fetchImage.status})`)
+      return
+    }
+
+    const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
+    const probeModule = await import('probe-image-size')
+    const probe = probeModule.default ?? probeModule
+    const dimensions = probe.sync(imgBuffer)
+
+    if (!dimensions) {
+      console.error(`❌ Failed to detect image dimensions: ${fileUrl}`)
+      return
+    }
+
+    const { width, height } = dimensions
+
     const response = await fetch(
       `https://mapi.storyblok.com/v1/spaces/${SPACE}/assets/`,
       {
@@ -89,9 +107,12 @@ async function uploadFileToStoryblok(fileUrl: string) {
       },
     )
 
+    if (!response.ok) {
+      console.error(`❌ Storyblok asset creation failed: ${response.status} ${response.statusText}`)
+      return
+    }
+
     const data = await response.json()
-    const fetchImage = await fetch(fileUrl)
-    const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
 
     await filePrepare(data, imgBuffer)
 
@@ -121,15 +142,90 @@ async function uploadFileToStoryblok(fileUrl: string) {
     return asset
   }
   catch (error) {
-    console.log(error)
+    console.error(`❌ Error uploading file to Storyblok: ${fileUrl}`, error)
+    return undefined
   }
 }
 
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
+const excludedSlugs = new Set([
+  'raws-hot-video-picks-of-the-week-35',
+  'raws-hot-video-picks-of-the-week-36',
+  'raws-hot-video-picks-of-the-week-37',
+  'raws-hot-video-picks-of-the-week-38',
+  'raws-hot-video-picks-of-the-week-25',
+  'raws-hot-video-picks-of-the-week-26',
+  'raws-hot-video-picks-of-the-week-27',
+  'raws-hot-video-picks-of-the-week-28',
+  'raws-hot-video-picks-of-the-week-29',
+  'raws-hot-video-picks-of-the-week-30',
+  'raws-hot-video-picks-of-the-week-31',
+  'raws-hot-video-picks-of-the-week-32',
+  'raws-hot-video-picks-of-the-week-33',
+  'raws-hot-video-picks-of-the-week-34',
+  'raws-hot-video-picks-of-the-week-17',
+  'raws-hot-video-picks-of-the-week-12',
+  'raws-hot-video-picks-of-the-week-18',
+  'raws-hot-video-picks-of-the-week-19',
+  'raws-hot-video-picks-of-the-week-20',
+  'raws-hot-video-picks-of-the-week-22',
+  'raws-hot-video-picks-of-the-week-21',
+  'raws-hot-video-picks-of-the-week-23',
+  'animation-special-raws-hot-video-picks-of-the-week',
+  'raws-hot-video-picks-of-the-week-24',
+  'raws-hot-video-picks-of-the-week-5',
+  'raws-hot-video-picks-of-the-week-6',
+  'raws-hot-video-picks-of-the-week-7',
+  'raws-hot-video-picks-of-the-week-16',
+  'raws-hot-video-picks-of-the-week-8',
+  'raws-hot-video-picks-of-the-week-10',
+  'raws-hot-video-picks-of-the-week-9',
+  'raws-hot-video-picks-of-the-week-11',
+  'raws-hot-video-picks-of-the-week-15',
+  'raws-hot-video-picks-of-the-week-14',
+  'raws-hot-video-picks-of-the-week-13',
+  'halloween-special-raws-hot-video-picks-of-the-week',
+  'raws-hot-video-picks-of-the-week-39',
+  'raws-hot-video-picks-of-the-week-2',
+  'raws-hot-video-picks-of-the-week',
+  'raws-hot-video-picks-of-the-week-3',
+  'raws-hot-video-picks-of-the-week-4',
+  'raws-hot-video-picks-of-the-week-27-september-2017',
+  'your-weekly-dose-of-video-inspiration-10-nov-2017',
+  'your-weekly-dose-of-video-inspiration-3-nov-2017',
+  'your-weekly-dose-of-video-inspiration-27-oct-2017',
+  'your-weekly-dose-of-video-inspiration-20-oct-2017',
+  'raws-best-video-picks-of-the-week-6-october-2017',
+  'your-weekly-dose-of-video-inspiration-9-feb-2018',
+  'your-weekly-dose-of-video-inspiration-12-jan-2018',
+  'your-weekly-dose-of-video-inspiration-15-dec-2017',
+  'your-weekly-dose-of-christmas-video-inspiration-5-december-2017',
+  'your-weekly-dose-of-video-inspiration-24-november-2017',
+  'your-weekly-dose-of-video-inspiration-17-november-2017',
+  'weekly-dose-video-inspiration-2-march-2018',
+  'weekly-dose-video-inspiration-23-feb-2018',
+  'your-weekly-dose-of-video-inspiration-12-feb-2018',
+])
+
+const mapCategories = (categories: number[]): string[] => {
+  // The hard-coded category ids and slugs from WordPress.
+  const categoryMap: Record<number, string> = {
+    1: 'event-launches',
+    10: 'events',
+    12: 'insights',
+    15: 'inspiration',
+    6: 'news',
+  }
+
+  return categories.map(id => categoryMap[id] || '')
+}
+
 export {
   addToStoryblok,
   convertHtmlToJson,
+  excludedSlugs,
+  mapCategories,
   uploadFileToStoryblok,
   wait,
 }
