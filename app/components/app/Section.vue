@@ -12,11 +12,6 @@ const sectionId = block._uid
 
 const activeSection = useState<string | null>('activeSection', () => null)
 
-const initialColors = {
-  background: '',
-  text: '',
-}
-
 const themeColors = {
   dark: {
     background: 'var(--color-offblack)',
@@ -56,32 +51,16 @@ const updateThemeVariables = (theme: keyof typeof themeColors) => {
   }
 }
 
-const revertToInitialColors = () => {
-  if (activeSection.value === sectionId && initialColors.background && initialColors.text) {
-    document.documentElement.style.setProperty('--app-background-color', initialColors.background)
-    document.documentElement.style.setProperty('--app-text-color', initialColors.text)
-    activeSection.value = null
-  }
-}
-
 onMounted(() => {
   if (!sectionRef.value || !block.theme) {
     return
   }
-
-  const computedStyle = getComputedStyle(document.documentElement)
-
-  initialColors.background = computedStyle.getPropertyValue('--app-background-color').trim()
-  initialColors.text = computedStyle.getPropertyValue('--app-text-color').trim()
 
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           updateThemeVariables(block.theme as keyof typeof themeColors)
-        }
-        else {
-          revertToInitialColors()
         }
       })
     },
