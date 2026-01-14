@@ -249,7 +249,7 @@ const getWpPosts = async (page: number = 1, perPage: number = 5): Promise<WpPost
     'has_blocks',
     'block_data',
   ]
-  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?page=${page}&per_page=${perPage}&_fields=${fields.join(',')}`)
+  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields.join(',')}`)
 
   if (!response.ok) {
     console.error(`❌ WordPress API error: ${response.status} ${response.statusText}`)
