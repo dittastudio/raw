@@ -77,32 +77,44 @@
   --ease-outCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
   --ease-inOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
+  --ease-inBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
   --ease-outBack: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-inOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* Force CSS variables for breakpoints and colors */
+  /* Force CSS variables */
+  --force-colors: var(--color-offblack) var(--color-white) var(--color-blue) var(--color-green) var(--color-pink) var(--color-purple);
   --force-breakpoints: var(--breakpoint-2xs) var(--breakpoint-xs) var(--breakpoint-sm) var(--breakpoint-md) var(--breakpoint-lg) var(--breakpoint-xl) var(--breakpoint-2xl);
 }
 
 @layer theme {
   :root {
-    --app-color: var(--color-offblack);
-    --app-background: var(--color-white);
+    --app-transition-duration: 0.3s;
+    --app-transition-ease: var(--ease-out);
+    --app-text-color: var(--color-offblack);
+    --app-background-color: var(--color-white);
 
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
+
+    --app-grid: repeat(4, minmax(0, 1fr));
 
     --app-header-height: 72px;
     --app-header-logo-width: 86px;
     --app-header-logo-height: 32px;
 
+
     @variant sm {
       --app-inner-gutter: 20px;
+
+      --app-grid: repeat(8, minmax(0, 1fr));
     }
 
     @variant md {
-      --app-header-height: 92px;
       --app-outer-gutter: 30px;
+
+      --app-grid: repeat(12, minmax(0, 1fr));
+
+      --app-header-height: 92px;
     }
   }
 

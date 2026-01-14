@@ -20,6 +20,9 @@ const handleAnimationEnd = () => {
       items-center
       justify-center
       text-white
+      outline-1
+      outline-offset-2
+      outline-(--app-text-color)/10
       rounded-full
       before:content-['']
       before:absolute before:w-[2px]
@@ -55,7 +58,7 @@ const handleAnimationEnd = () => {
   }
 
   &.is-animating:not(.is-open) {
-    animation: close 0.5s var(--ease-outQuart) forwards;
+    animation: close 0.5s var(--ease-inOutBack) forwards;
   }
 
   &.is-animating.is-open {

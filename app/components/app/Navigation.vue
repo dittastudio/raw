@@ -37,10 +37,6 @@ const { items } = defineProps<Props>()
         :key="item._uid"
         class="navigation__item max-lg:w-full"
       >
-        <!-- :class="{
-          'lg:font-normal lg:underline underline-offset-2 decoration-[0.075em]': determineHref(item.link).startsWith(route.path) && route.path !== '/',
-          'text-outline-white lg:text-outline-none lg:font-normal': !determineHref(item.link).startsWith(route.path) || route.path === '/',
-        }" -->
         <StoryblokLink
           :item="item.link"
           class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-(--link-padding-x)"
