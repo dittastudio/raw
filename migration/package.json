@@ -7,7 +7,8 @@
   "license": "ISC",
   "main": "index.ts",
   "scripts": {
-    "migrate": "tsx --env-file=../.env migrate.ts"
+    "migrate": "tsx --env-file=../.env migrate.ts",
+    "download": "tsx --env-file=../.env download.ts"
   },
   "dependencies": {
     "@storyblok/js": "^4.4.4",
