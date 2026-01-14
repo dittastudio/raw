@@ -127,9 +127,83 @@ async function uploadFileToStoryblok(fileUrl: string) {
 
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
+const excludedSlugs = [
+  'raws-hot-video-picks-of-the-week-35',
+  'raws-hot-video-picks-of-the-week-36',
+  'raws-hot-video-picks-of-the-week-37',
+  'raws-hot-video-picks-of-the-week-38',
+  'raws-hot-video-picks-of-the-week-25',
+  'raws-hot-video-picks-of-the-week-26',
+  'raws-hot-video-picks-of-the-week-27',
+  'raws-hot-video-picks-of-the-week-28',
+  'raws-hot-video-picks-of-the-week-29',
+  'raws-hot-video-picks-of-the-week-30',
+  'raws-hot-video-picks-of-the-week-31',
+  'raws-hot-video-picks-of-the-week-32',
+  'raws-hot-video-picks-of-the-week-33',
+  'raws-hot-video-picks-of-the-week-34',
+  'raws-hot-video-picks-of-the-week-17',
+  'raws-hot-video-picks-of-the-week-12',
+  'raws-hot-video-picks-of-the-week-18',
+  'raws-hot-video-picks-of-the-week-19',
+  'raws-hot-video-picks-of-the-week-20',
+  'raws-hot-video-picks-of-the-week-22',
+  'raws-hot-video-picks-of-the-week-21',
+  'raws-hot-video-picks-of-the-week-23',
+  'animation-special-raws-hot-video-picks-of-the-week',
+  'raws-hot-video-picks-of-the-week-24',
+  'raws-hot-video-picks-of-the-week-5',
+  'raws-hot-video-picks-of-the-week-6',
+  'raws-hot-video-picks-of-the-week-7',
+  'raws-hot-video-picks-of-the-week-16',
+  'raws-hot-video-picks-of-the-week-8',
+  'raws-hot-video-picks-of-the-week-10',
+  'raws-hot-video-picks-of-the-week-9',
+  'raws-hot-video-picks-of-the-week-11',
+  'raws-hot-video-picks-of-the-week-15',
+  'raws-hot-video-picks-of-the-week-14',
+  'raws-hot-video-picks-of-the-week-13',
+  'halloween-special-raws-hot-video-picks-of-the-week',
+  'raws-hot-video-picks-of-the-week-39',
+  'raws-hot-video-picks-of-the-week-2',
+  'raws-hot-video-picks-of-the-week',
+  'raws-hot-video-picks-of-the-week-3',
+  'raws-hot-video-picks-of-the-week-4',
+  'raws-hot-video-picks-of-the-week-27-september-2017',
+  'your-weekly-dose-of-video-inspiration-10-nov-2017',
+  'your-weekly-dose-of-video-inspiration-3-nov-2017',
+  'your-weekly-dose-of-video-inspiration-27-oct-2017',
+  'your-weekly-dose-of-video-inspiration-20-oct-2017',
+  'raws-best-video-picks-of-the-week-6-october-2017',
+  'your-weekly-dose-of-video-inspiration-9-feb-2018',
+  'your-weekly-dose-of-video-inspiration-12-jan-2018',
+  'your-weekly-dose-of-video-inspiration-15-dec-2017',
+  'your-weekly-dose-of-christmas-video-inspiration-5-december-2017',
+  'your-weekly-dose-of-video-inspiration-24-november-2017',
+  'your-weekly-dose-of-video-inspiration-17-november-2017',
+  'weekly-dose-video-inspiration-2-march-2018',
+  'weekly-dose-video-inspiration-23-feb-2018',
+  'your-weekly-dose-of-video-inspiration-12-feb-2018',
+] as const
+
+const mapCategories = (categories: number[]): string[] => {
+  // The hard-coded category ids and slugs from WordPress.
+  const categoryMap: Record<number, string> = {
+    1: 'event-launches',
+    10: 'events',
+    12: 'insights',
+    15: 'inspiration',
+    6: 'news',
+  }
+
+  return categories.map(id => categoryMap[id] || '')
+}
+
 export {
   addToStoryblok,
   convertHtmlToJson,
+  excludedSlugs,
+  mapCategories,
   uploadFileToStoryblok,
   wait,
 }

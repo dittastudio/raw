@@ -1,27 +1,31 @@
 import type { Post, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText } from '../.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokAsset } from '../.storyblok/types/storyblok.d.ts'
-import { addToStoryblok, convertHtmlToJson, uploadFileToStoryblok, wait } from './utils'
+import { addToStoryblok, convertHtmlToJson, excludedSlugs, mapCategories, uploadFileToStoryblok, wait } from './utils'
 
 const PARENT = 133603998123034
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
 const INTERVAL_WAIT_MS = 300
 
 const getWpPosts = async (): Promise<any> => {
-  const response = await fetch('https://raw.london/wp-json/wp/v2/posts?page=1&per_page=10')
+  const fields = [
+    'id',
+    'date',
+    'modified',
+    'slug',
+    'status',
+    'title.rendered',
+    'yoast_head_json.title',
+    'yoast_head_json.description',
+    'yoast_head_json.og_title',
+    'yoast_head_json.og_description',
+    'yoast_head_json.og_image',
+    'categories',
+    'has_blocks',
+    'block_data',
+  ]
+  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?page=1&per_page=10&_fields=${fields.join(',')}`)
+
   return await response.json()
-}
-
-const mapCategories = (categories: number[]): string[] => {
-  // The category ids and slugs from WordPress.
-  const categoryMap: Record<number, string> = {
-    1: 'event-launches',
-    10: 'events',
-    12: 'insights',
-    15: 'inspiration',
-    6: 'news',
-  }
-
-  return categories.map(id => categoryMap[id] || '')
 }
 
 const processBlocks = async (blockData: Record<number, any>): Promise<Post['blocks']> => {
@@ -224,25 +228,35 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
 const run = async () => {
   const posts = await getWpPosts()
+  const postLength = posts.length
 
-  console.log(`🚀 Found ${posts.length} posts to migrate.`)
+  console.log(`🚀 Found ${postLength} posts to migrate.`)
 
   for (const post of posts) {
-    console.log(`📝 Migrating post: ${post.title.rendered}`)
+    const postTitle = post.title.rendered?.trim() || ''
+    const postSlug = post.slug.trim() || ''
+
+    if (!postSlug || excludedSlugs.includes(postSlug)) {
+      console.log(`🍌 Skipping post: ${postTitle}\n`)
+      continue
+    }
+
+    console.log(`✏️ Migrating post: ${postTitle}`)
 
     try {
-      const mainImage = post.yoast_head_json?.og_image?.[0]?.url ? await uploadFileToStoryblok(post.yoast_head_json.og_image[0].url) : null
+      const postImage = post.yoast_head_json?.og_image?.[0]?.url ? await uploadFileToStoryblok(post.yoast_head_json.og_image[0].url) : null
 
       const fields = {
-        name: post.title.rendered,
-        slug: post.slug,
+        name: postTitle,
+        slug: postSlug,
+        first_published_at: new Date(post.date).toISOString(),
         created_at: new Date(post.date).toISOString(),
         published_at: new Date(post.date).toISOString(),
         updated_at: new Date(post.modified).toISOString(),
-        seo_title: post.yoast_head_json?.og_title || post.yoast_head_json?.title || post.title.rendered || '',
-        seo_description: post.yoast_head_json?.og_description || post.yoast_head_json?.description || post.title.rendered || '',
-        seo_image: mainImage,
-        hero: mainImage,
+        seo_title: post.yoast_head_json?.og_title || post.yoast_head_json?.title || postTitle || '',
+        seo_description: post.yoast_head_json?.og_description || post.yoast_head_json?.description || postTitle || '',
+        seo_image: postImage,
+        hero: postImage,
         category: mapCategories(post.categories),
         author: AUTHOR,
         blocks: post.has_blocks && Object.keys(post.block_data).length ? await processBlocks(post.block_data) : [],
@@ -250,16 +264,17 @@ const run = async () => {
 
       const createStoryPost = await addToStoryblok({
         publish: true,
+        first_published_at: fields.first_published_at,
+        created_at: fields.created_at,
+        published_at: fields.published_at,
+        updated_at: fields.updated_at,
         // @ts-expect-error - Storyblok story creation.
-        // We know content matches Post interface but post type shows required (but auto-generated on creation).
+        // We know content matches Post interface but post type shows required (but auto-generated on creation). meh.
         story: {
-          parent_id: PARENT, // Folder id
+          parent_id: PARENT,
           is_startpage: false,
           name: fields.name,
           slug: fields.slug,
-          created_at: fields.created_at,
-          published_at: fields.published_at,
-          updated_at: fields.updated_at,
           content: {
             _uid: crypto.randomUUID(),
             component: 'post',
@@ -275,14 +290,14 @@ const run = async () => {
       })
 
       if (createStoryPost?.ok) {
-        console.log('✅ Successfully created post: ', fields.name)
+        console.log(`✅ Successfully created post: ${fields.name}`)
       }
       else {
-        console.log('❌ Problem encountered creating post: ', fields.name)
+        console.log(`⚠️ Problem encountered creating post: ${fields.name}`)
       }
     }
     catch (error: any) {
-      console.error('Error: ', error)
+      console.error(`❌ Error migrating post: ${postTitle}`, error)
     }
 
     console.log(`⏰ Waiting ${INTERVAL_WAIT_MS}ms before next post to prevent rate limits...\n`)
