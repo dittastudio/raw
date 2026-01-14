@@ -9,10 +9,7 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div
-    class="impact-statement wrapper-max"
-    :class="`theme-${block.theme}`"
-  >
+  <div class="impact-statement wrapper-max">
     <div
       v-for="item in block.items"
       :key="item._uid"
