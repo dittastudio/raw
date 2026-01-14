@@ -60,16 +60,17 @@ onMounted(async () => {
 const isScreenLg = useAtMedia(getMediaQuery('lg'))
 
 watchEffect(() => {
-  if (import.meta.client && isScreenLg.value)
+  if (import.meta.client && isScreenLg.value) {
     isHeaderOpen.value = false
+  }
 })
 
-// Lock/unlock Lenis scroll when header menu is open/closed
 watchEffect(() => {
   const lenis = useLenis()
 
-  if (import.meta.client && lenis?.value)
+  if (import.meta.client && lenis?.value) {
     isHeaderOpen.value ? lenis.value.stop() : lenis.value.start()
+  }
 })
 </script>
 

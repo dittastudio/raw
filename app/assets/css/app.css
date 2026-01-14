@@ -78,6 +78,7 @@
   --ease-outCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
   --ease-inOutCirc: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 
+  --ease-inBack: cubic-bezier(0.6, -0.28, 0.735, 0.045);
   --ease-outBack: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-inOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 

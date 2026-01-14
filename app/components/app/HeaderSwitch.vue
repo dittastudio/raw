@@ -55,7 +55,7 @@ const handleAnimationEnd = () => {
   }
 
   &.is-animating:not(.is-open) {
-    animation: close 0.5s var(--ease-outQuart) forwards;
+    animation: close 0.5s var(--ease-inOutBack) forwards;
   }
 
   &.is-animating.is-open {
