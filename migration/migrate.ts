@@ -5,6 +5,7 @@ import { addToStoryblok, convertHtmlToJson, excludedSlugs, mapCategories, upload
 const PARENT = 134064420646816
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
 const INTERVAL_WAIT_MS = 500
+const VERBOSE_LOGS = false
 
 const processBlocks = async (blockData: Record<number, any>): Promise<Post['blocks']> => {
   const blocks = Object.values(blockData)
@@ -27,7 +28,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
     else if (block.blockName === 'core/heading') {
       const content = block.attrs?.content?.trim()
@@ -44,7 +47,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
     else if (block.blockName === 'core/html') {
       const content = block.rendered?.trim()
@@ -61,7 +66,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
     else if (block.blockName === 'core/image') {
       const imageUrl = block.attrs?.url
@@ -87,7 +94,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
     else if (block.blockName === 'core/quote') {
       const citation = block.attrs?.citation?.trim()
@@ -124,7 +133,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
     else if (block.blockName === 'core/list') {
       const innerBlocks = block.innerBlocks || []
@@ -159,7 +170,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
     else if (block.blockName === 'core/gallery') {
       const innerBlocks = block.innerBlocks || []
@@ -204,7 +217,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
 
       processed.push(component)
 
-      console.log(`🔥 Block: ${block.blockName}`)
+      if (VERBOSE_LOGS) {
+        console.log(`🔥 Block: ${block.blockName}`)
+      }
     }
   }
 
