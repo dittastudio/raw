@@ -9,7 +9,7 @@ const { colour = 'dark', mode = 'solid' } = defineProps<Props>()
 
 <template>
   <span
-    class="inline-block rounded-full select-none px-4.5 pt-1.5 pb-2 type-p transition-colors duration-200 ease-in-out"
+    class="inline-block rounded-full select-none px-5 pt-2 pb-[9px] type-p transition-colors duration-200 ease-out"
     :class="{
       'text-offblack outline outline-offblack -outline-offset-1 hover:bg-offblack hover:text-white': colour === 'dark' && mode === 'outline',
       'text-white outline outline-white -outline-offset-1 hover:bg-white hover:text-offblack': colour === 'light' && mode === 'outline',

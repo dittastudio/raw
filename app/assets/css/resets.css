@@ -1,7 +1,11 @@
 @layer base {
   html {
-    color: var(--color-offblack);
-    background-color: var(--color-white);
+    color: var(--app-text-color);
+    background-color: var(--app-background-color);
+
+    transition:
+      color var(--app-transition-duration) var(--app-transition-ease),
+      background-color var(--app-transition-duration) var(--app-transition-ease);
   }
 
   body {

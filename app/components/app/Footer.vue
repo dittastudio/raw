@@ -32,7 +32,10 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
             {{ text }}
           </h6>
 
-          <NewsletterSignup legend="Newsletter" class="md:max-w-82 pb-6" />
+          <NewsletterSignup
+            legend="Newsletter"
+            class="md:max-w-82 pb-6"
+          />
         </div>
       </div>
 
@@ -74,6 +77,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
             </li>
           </ul>
         </div>
+
         <div class="grid-area-logos">
           <ul
             v-if="logos"
@@ -97,7 +101,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
                   loading="lazy"
                 />
               </StoryblokLink>
-  
+
               <span
                 v-else
                 class="block size-10 sm:size-15"
@@ -115,7 +119,6 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
           </ul>
         </div>
       </div>
-
     </div>
   </footer>
 </template>
