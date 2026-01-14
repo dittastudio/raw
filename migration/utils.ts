@@ -42,22 +42,28 @@ interface SignedRequest {
   fields: Record<string, string>
 }
 
-async function filePrepare(signed_request: SignedRequest, file: Buffer) {
-  const form = new FormData()
+async function filePrepare(signed_request: SignedRequest, file: Buffer): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    const form = new FormData()
 
-  for (const key in signed_request.fields) {
-    form.append(key, signed_request.fields[key])
-  }
-
-  form.append('file', file)
-  form.submit(signed_request.post_url, (err) => {
-    if (err) {
-      throw err
+    for (const key in signed_request.fields) {
+      form.append(key, signed_request.fields[key])
     }
+
+    form.append('file', file)
+
+    form.submit(signed_request.post_url, (err) => {
+      if (err) {
+        reject(err)
+      }
+      else {
+        resolve()
+      }
+    })
   })
 }
 
-async function uploadFileToStoryblok(fileUrl: string) {
+async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | undefined> {
   if (!fileUrl) {
     return
   }
@@ -65,14 +71,26 @@ async function uploadFileToStoryblok(fileUrl: string) {
   const splitFile = fileUrl?.split('/')
   const fileName = splitFile[splitFile.length - 1]
 
-  const fetchImage = await fetch(fileUrl)
-  const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
-
-  const probeModule = await import('probe-image-size')
-  const probe = probeModule.default ?? probeModule
-  const { width, height } = probe.sync(imgBuffer)
-
   try {
+    const fetchImage = await fetch(fileUrl)
+
+    if (!fetchImage.ok) {
+      console.error(`❌ Failed to fetch image: ${fileUrl} (${fetchImage.status})`)
+      return
+    }
+
+    const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
+    const probeModule = await import('probe-image-size')
+    const probe = probeModule.default ?? probeModule
+    const dimensions = probe.sync(imgBuffer)
+
+    if (!dimensions) {
+      console.error(`❌ Failed to detect image dimensions: ${fileUrl}`)
+      return
+    }
+
+    const { width, height } = dimensions
+
     const response = await fetch(
       `https://mapi.storyblok.com/v1/spaces/${SPACE}/assets/`,
       {
@@ -89,9 +107,12 @@ async function uploadFileToStoryblok(fileUrl: string) {
       },
     )
 
+    if (!response.ok) {
+      console.error(`❌ Storyblok asset creation failed: ${response.status} ${response.statusText}`)
+      return
+    }
+
     const data = await response.json()
-    const fetchImage = await fetch(fileUrl)
-    const imgBuffer = Buffer.from(await fetchImage.arrayBuffer())
 
     await filePrepare(data, imgBuffer)
 
@@ -121,13 +142,14 @@ async function uploadFileToStoryblok(fileUrl: string) {
     return asset
   }
   catch (error) {
-    console.log(error)
+    console.error(`❌ Error uploading file to Storyblok: ${fileUrl}`, error)
+    return undefined
   }
 }
 
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
-const excludedSlugs = [
+const excludedSlugs = new Set([
   'raws-hot-video-picks-of-the-week-35',
   'raws-hot-video-picks-of-the-week-36',
   'raws-hot-video-picks-of-the-week-37',
@@ -184,7 +206,7 @@ const excludedSlugs = [
   'weekly-dose-video-inspiration-2-march-2018',
   'weekly-dose-video-inspiration-23-feb-2018',
   'your-weekly-dose-of-video-inspiration-12-feb-2018',
-] as const
+])
 
 const mapCategories = (categories: number[]): string[] => {
   // The hard-coded category ids and slugs from WordPress.
