@@ -4,6 +4,7 @@
 @import "./transitions.css";
 @import "./utils.css";
 @import "./fonts.css";
+@import "./themes.css";
 
 @theme {
   --color-\*: initial;
@@ -80,7 +81,7 @@
   --ease-outBack: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-inOutBack: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* Force CSS variables for breakpoints and colors */
+  /* Force CSS variables for breakpoints */
   --force-breakpoints: var(--breakpoint-2xs) var(--breakpoint-xs) var(--breakpoint-sm) var(--breakpoint-md) var(--breakpoint-lg) var(--breakpoint-xl) var(--breakpoint-2xl);
 }
 
@@ -89,17 +90,25 @@
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
 
+    --app-grid: repeat(4, minmax(0, 1fr));
+
     --app-header-height: 72px;
     --app-header-logo-width: 86px;
     --app-header-logo-height: 32px;
 
+
     @variant sm {
       --app-inner-gutter: 20px;
+
+      --app-grid: repeat(8, minmax(0, 1fr));
     }
 
     @variant md {
-      --app-header-height: 92px;
       --app-outer-gutter: 30px;
+
+      --app-grid: repeat(12, minmax(0, 1fr));
+
+      --app-header-height: 92px;
     }
   }
 

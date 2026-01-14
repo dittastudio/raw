@@ -10,23 +10,42 @@ const { block } = defineProps<Props>()
 
 <template>
   <div
-    class="impact-statement wrapper py-30"
+    class="impact-statement wrapper-max"
+    :class="`theme-${block.theme}`"
   >
     <div
       v-for="item in block.items"
       :key="item._uid"
-      class="z-1 flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)"
+      class="grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20"
     >
       <div
         v-if="storyblokRichTextContent(item.title)"
-        class="impact-statement__headline"
+        class="
+          impact-statement__headline
+          col-span-full
+          sm:col-start-2
+          sm:col-span-7
+          md:col-start-2
+          md:col-span-7
+        "
       >
         <StoryblokText :html="item.title" />
       </div>
 
       <div
         v-if="storyblokRichTextContent(item.copy)"
-        class="impact-statement__text"
+        class="
+          impact-statement__text
+          row-start-2
+          col-start-2
+          col-span-3
+          sm:col-start-5
+          sm:col-span-4
+          md:col-start-9
+          md:col-span-4
+          lg:col-start-9
+          lg:col-span-3
+        "
       >
         <StoryblokText :html="item.copy" />
       </div>
@@ -39,25 +58,23 @@ const { block } = defineProps<Props>()
 
 .impact-statement {
   &__headline {
-    :deep(h1) {
-      @apply type-h1;
-    }
-
-    :deep(h2) {
+    :deep(h2, h3, h4) {
       @apply type-h2;
-    }
 
-    :deep(h3) {
-      @apply type-h3;
+      text-wrap: balance;
     }
   }
 
   &__text {
     :deep(p) {
-      @apply type-h4;
+      @apply type-p;
+      text-wrap: pretty;
 
-      text-wrap: balance;
-      max-width: 30em;
+      max-width: 24em;
+    }
+
+    :deep(p + p) {
+      padding-top: 1.25em;
     }
   }
 }
