@@ -71,6 +71,19 @@ const { block } = defineProps<Props>()
 <style scoped>
 @reference "@/assets/css/app.css";
 
+.hero {
+  animation: bg-cycle 3s var(--ease-inOutQuart) infinite alternate;
+}
+
+@keyframes bg-cycle {
+  0% {
+    background-color: var(--color-white);
+  }
+  100% {
+    background-color: var(--color-green);
+  }
+}
+
 .hero__headline {
   :deep(h1) {
     @apply type-h1;
