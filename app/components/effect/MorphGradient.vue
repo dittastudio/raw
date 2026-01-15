@@ -8,6 +8,7 @@ const targetX = ref(0)
 const targetY = ref(0)
 
 const interactiveElement = ref<HTMLDivElement>()
+const containerElement = ref<HTMLDivElement>()
 
 let animationFrameId: number
 
@@ -25,8 +26,15 @@ function animate() {
 }
 
 function handleMouseMove(event: MouseEvent) {
-  targetX.value = event.clientX
-  targetY.value = event.clientY
+  if (!containerElement.value) {
+    targetX.value = event.clientX
+    targetY.value = event.clientY
+    return
+  }
+
+  const bounds = containerElement.value.getBoundingClientRect()
+  targetX.value = event.clientX - bounds.left
+  targetY.value = event.clientY - bounds.top
 }
 
 onMounted(() => {
@@ -70,7 +78,10 @@ onUnmounted(() => {
       </defs>
     </svg>
 
-    <div class="morph-gradient__container">
+    <div
+      ref="containerElement"
+      class="morph-gradient__container"
+    >
       <div class="g1" />
 
       <div class="g2" />
