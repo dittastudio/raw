@@ -1,5 +1,23 @@
 <script setup lang="ts">
-const SMOOTHING_FACTOR = 20
+import type { Themes } from '@@/types/app'
+
+interface MorphGradientProps {
+  ballColour1?: Themes
+  ballColour2?: Themes
+  ballCursorColour?: Themes
+}
+
+const {
+  ballColour1 = 'green',
+  ballColour2 = 'pink',
+  ballCursorColour = 'blue',
+} = defineProps<MorphGradientProps>()
+
+const ballColour1Var = computed(() => `var(--color-${ballColour1})`)
+const ballColour2Var = computed(() => `var(--color-${ballColour2})`)
+const ballCursorColourVar = computed(() => `var(--color-${ballCursorColour})`)
+
+const SMOOTHING_FACTOR = 16
 
 const currentX = ref(0)
 const currentY = ref(0)
@@ -95,10 +113,12 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+@reference "@/assets/css/app.css";
+
 .morph-gradient {
-  --color1: 198, 234, 160;
-  --color2: 255, 195, 220;
-  --color-interactive: 132, 208, 239;
+  --color1: v-bind(ballColour1Var);
+  --color2: v-bind(ballColour2Var);
+  --color-interactive: v-bind(ballCursorColourVar);
   --circle-size: 50%;
   --blending: none;
 
@@ -122,7 +142,7 @@ onUnmounted(() => {
 
 .g1 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+  background: radial-gradient(circle at center, --alpha(var(--color1) / 0.8) 0, --alpha(var(--color1) / 0) 50%) no-repeat;
   /* background: red; */
   mix-blend-mode: var(--blending);
 
@@ -141,7 +161,7 @@ onUnmounted(() => {
 
 .g2 {
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+  background: radial-gradient(circle at center, --alpha(var(--color2) / 0.8) 0, --alpha(var(--color2) / 0) 50%) no-repeat;
   /* background: blue; */
   mix-blend-mode: var(--blending);
 
@@ -163,7 +183,7 @@ onUnmounted(() => {
   --size: 50%;
 
   position: absolute;
-  background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+  background: radial-gradient(circle at center, --alpha(var(--color-interactive) / 0.8) 0, --alpha(var(--color-interactive) / 0) 50%) no-repeat;
   /* background: green; */
   mix-blend-mode: var(--blending);
   /* z-index: -2; */
