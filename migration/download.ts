@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { wait } from './utils.js'
+import { wait, wpExcludedPosts, wpFields } from './utils'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -13,11 +13,17 @@ async function download() {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true })
   }
 
-  const urls: string[] = []
 
-  for (let i = 1; i <= 34; i++) {
-    urls.push(`https://raw.london/wp-json/wp/v2/posts?page=${i}&per_page=10&_fields=id,date,modified,slug,title.rendered,yoast_head_json.title,yoast_head_json.description,yoast_head_json.og_title,yoast_head_json.og_description,yoast_head_json.og_image,categories,has_blocks,block_data`)
-  }
+  // USE THIS TO DOWNLOAD SPECIFIC PAGES ONLY
+  // const fields = wpFields.join(',')
+  // const excludeIds = wpExcludedPosts.map(item => item.id).join(',')
+  // const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`)
+
+  // const urls: string[] = []
+
+  // for (let i = 1; i <= 34; i++) {
+  //   urls.push(`https://raw.london/wp-json/wp/v2/posts?page=${i}&per_page=10&_fields=id,date,modified,slug,title.rendered,yoast_head_json.title,yoast_head_json.description,yoast_head_json.og_title,yoast_head_json.og_description,yoast_head_json.og_image,categories,has_blocks,block_data`)
+  // }
 
   console.log(`Found ${urls.length} URLs to download`)
 
@@ -32,6 +38,7 @@ async function download() {
       }
       
       const data = await response.json()
+
       const filename = `posts-${index.toString().padStart(2, '0')}.json`
       const filepath = path.join(OUTPUT_DIR, filename)
       

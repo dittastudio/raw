@@ -1,6 +1,11 @@
 import type { Post, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText } from '../.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokAsset } from '../.storyblok/types/storyblok.d.ts'
-import { addToStoryblok, convertHtmlToJson, excludedSlugs, mapCategories, uploadFileToStoryblok, wait } from './utils'
+import { addToStoryblok, convertHtmlToJson, mapCategories, uploadFileToStoryblok, wait, wpExcludedPosts, wpFields } from './utils'
+
+// vimeo and youtube embed blocks:
+// https://raw.london/wp-admin/post.php?post=5214&action=edit
+// twitter embed
+// https://raw.london/wp-admin/post.php?post=5143&action=edit
 
 const PARENT = 134064420646816
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
@@ -221,6 +226,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
         console.log(`🔥 Block: ${block.blockName}`)
       }
     }
+    else {
+      console.log(`⚠️  Encountered unknown block type: ${block.blockName}`)
+    }
   }
 
   return processed
@@ -251,23 +259,9 @@ interface WpPost {
 }
 
 const getWpPosts = async (page: number = 1, perPage: number = 5): Promise<WpPost[]> => {
-  const fields = [
-    'id',
-    'date',
-    'modified',
-    'slug',
-    'status',
-    'title.rendered',
-    'yoast_head_json.title',
-    'yoast_head_json.description',
-    'yoast_head_json.og_title',
-    'yoast_head_json.og_description',
-    'yoast_head_json.og_image',
-    'categories',
-    'has_blocks',
-    'block_data',
-  ]
-  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields.join(',')}`)
+  const fields = wpFields.join(',')
+  const excludeIds = wpExcludedPosts.map(item => item.id).join(',')
+  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`)
 
   if (!response.ok) {
     console.error(`❌ WordPress API error: ${response.status} ${response.statusText}`)
@@ -278,8 +272,8 @@ const getWpPosts = async (page: number = 1, perPage: number = 5): Promise<WpPost
 }
 
 const run = async () => {
-  const maxPosts = 400 // Safe maximum number of posts to migrate (make it a low as needed for testing).
-  const perPage = 8 // Keep it low because RAW's server can't cope with too much JSON. 💩
+  const maxPosts = 2 // Safe maximum number of posts to migrate (make it a low as needed for testing).
+  const perPage = 1 // Keep it low because RAW's server can't cope with too much JSON. 💩
   let page = 1
   let morePosts = true
   let totalProcessed = 0
@@ -315,8 +309,8 @@ const run = async () => {
       const postTitle = post.title.rendered?.trim() || ''
       const postSlug = post.slug.trim() || ''
 
-      if (!postSlug || excludedSlugs.has(postSlug)) {
-        console.log(`🍌 Skipping post: ${postTitle}\n`)
+      if (!postSlug) {
+        console.log(`🍌 Post does not have a slug: ${postTitle}\n`)
         continue
       }
 
@@ -398,7 +392,7 @@ const run = async () => {
       console.log(`✨ Reached the end of posts.`)
       morePosts = false
     }
-    else {
+    else if (totalProcessed < maxPosts) {
       page++
       console.log(`👍🏻 Moving on to page ${page}...\n`)
       await wait(INTERVAL_WAIT_MS)
