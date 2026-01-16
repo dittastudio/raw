@@ -13,13 +13,30 @@ const { navigation } = defineProps<Props>()
 const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
 const ready = ref(false)
 
-const toggleHeaderMenu = () => {
-  isHeaderOpen.value = !isHeaderOpen.value
-}
-
 const hasScrolled = ref(false)
 const hasScrolledUp = ref(false)
 const hasScrolledDown = ref(false)
+const ignoreNextHide = ref(false)
+
+const closeHeaderMenu = () => {
+  if (!isHeaderOpen.value) {
+    return
+  }
+
+  isHeaderOpen.value = false
+  hasScrolledUp.value = true
+  hasScrolledDown.value = false
+  ignoreNextHide.value = true
+}
+
+const toggleHeaderMenu = () => {
+  if (isHeaderOpen.value) {
+    closeHeaderMenu()
+    return
+  }
+
+  isHeaderOpen.value = true
+}
 
 const handleScroll = (lenis: Lenis) => {
   const triggerPoint = 50
@@ -35,13 +52,37 @@ const handleScroll = (lenis: Lenis) => {
   else if (lenis.direction === 1) {
     // Scrolling down
     hasScrolledUp.value = false
-    hasScrolledDown.value = scrollPos > triggerPoint
+
+    if (ignoreNextHide.value) {
+      ignoreNextHide.value = false
+      hasScrolledDown.value = false
+    }
+    else {
+      hasScrolledDown.value = scrollPos > triggerPoint
+    }
   }
 }
 
 const handleMouseEnter = () => {
   hasScrolledUp.value = true
   hasScrolledDown.value = false
+  ignoreNextHide.value = true
+}
+
+const hideHeader = computed(() => {
+  return !ready.value
+    || (
+      hasScrolledDown.value
+      && !isHeaderOpen.value
+      && !hasScrolledUp.value
+      && !ignoreNextHide.value
+    )
+})
+
+const handleKeydown = (event: KeyboardEvent) => {
+  if (event.key === 'Escape') {
+    closeHeaderMenu()
+  }
 }
 
 onMounted(async () => {
@@ -53,8 +94,18 @@ onMounted(async () => {
     lenis.value.on('scroll', handleScroll)
   }
 
+  if (import.meta.client) {
+    window.addEventListener('keydown', handleKeydown)
+  }
+
   await wait(500)
   ready.value = true
+})
+
+onUnmounted(() => {
+  if (import.meta.client) {
+    window.removeEventListener('keydown', handleKeydown)
+  }
 })
 
 const isScreenLg = useAtMedia(getMediaQuery('lg'))
@@ -78,8 +129,8 @@ watchEffect(() => {
   <header
     :class="{
       'is-open': isHeaderOpen,
+      'opacity-0 -translate-y-2': hideHeader,
       'transition-[opacity,translate] duration-300 ease-out': ready,
-      'opacity-0 -translate-y-2': !ready || hasScrolledDown && !isHeaderOpen,
     }"
     class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10"
     @mouseenter="handleMouseEnter"
@@ -92,7 +143,8 @@ watchEffect(() => {
     </NuxtLink>
 
     <button
-      class="p-5 -m-5 md:p-7.5 md:-m-7.5 z-1 lg:hidden"
+      class="p-5 -m-5 md:p-7.5 md:-m-7.5 z-1 lg:hidden outline-none"
+      type="button"
       @click="toggleHeaderMenu"
     >
       <AppHeaderSwitch />
