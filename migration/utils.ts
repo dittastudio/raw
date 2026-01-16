@@ -52,13 +52,13 @@ async function filePrepare(signed_request: SignedRequest, file: Buffer): Promise
 
     form.append('file', file)
 
-    form.submit(signed_request.post_url, (err) => {
-      if (err) {
-        reject(err)
+    form.submit(signed_request.post_url, (err, res) => {
+      if (err || res.statusCode !== 204) {
+        return reject(err || new Error('Upload failed'))
       }
-      else {
-        resolve()
-      }
+
+      res.resume()
+      resolve()
     })
   })
 }
@@ -93,7 +93,8 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
 
     const { width, height } = dimensions
 
-    const response = await fetch(
+    // Step 1: Get signed upload request
+    const signedResponse = await fetch(
       `https://mapi.storyblok.com/v1/spaces/${SPACE}/assets/`,
       {
         method: 'POST',
@@ -102,29 +103,47 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
           'Authorization': process.env.NUXT_STORYBLOK_MANAGEMENT_TOKEN || '',
         },
         body: JSON.stringify({
-          validate_upload: 1,
           filename: fileName,
           size: `${width}x${height}`,
+          validate_upload: 1,
           asset_folder_id: ASSET_FOLDER,
         }),
       },
     )
 
-    if (!response.ok) {
-      console.error(`❌ Storyblok asset creation failed: ${response.status} ${response.statusText}`)
+    if (!signedResponse.ok) {
+      console.error(`❌ Storyblok signed request failed: ${signedResponse.status}`)
       return
     }
 
-    const data = await response.json()
+    const signedData = await signedResponse.json()
 
-    await filePrepare(data, imgBuffer)
+    // Step 2: Upload file to S3
+    await filePrepare(signedData, imgBuffer)
 
-    const filename = `https://a.storyblok.com/${data.fields.key}`
+    // Step 3: Register the uploaded asset with Storyblok
+    const assetResponse = await fetch(
+      `https://mapi.storyblok.com/v1/spaces/${SPACE}/assets/${signedData.id}/finish_upload`,
+      {
+        method: 'GET',
+        headers: {
+          'Authorization': process.env.NUXT_STORYBLOK_MANAGEMENT_TOKEN || '',
+        }
+      },
+    )
+
+    if (!assetResponse.ok) {
+      console.error(`❌ Failed to register asset: ${assetResponse.status}`)
+      return
+    }
+
+    const filename = `https://a.storyblok.com/${signedData.fields.key}`
+
     const asset = {
       alt: '',
       copyright: '',
       fieldtype: 'asset',
-      id: data.id,
+      id: signedData.id,
       filename,
       name: '',
       title: '',
@@ -152,64 +171,81 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
 
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
-const excludedSlugs = new Set([
-  'raws-hot-video-picks-of-the-week-35',
-  'raws-hot-video-picks-of-the-week-36',
-  'raws-hot-video-picks-of-the-week-37',
-  'raws-hot-video-picks-of-the-week-38',
-  'raws-hot-video-picks-of-the-week-25',
-  'raws-hot-video-picks-of-the-week-26',
-  'raws-hot-video-picks-of-the-week-27',
-  'raws-hot-video-picks-of-the-week-28',
-  'raws-hot-video-picks-of-the-week-29',
-  'raws-hot-video-picks-of-the-week-30',
-  'raws-hot-video-picks-of-the-week-31',
-  'raws-hot-video-picks-of-the-week-32',
-  'raws-hot-video-picks-of-the-week-33',
-  'raws-hot-video-picks-of-the-week-34',
-  'raws-hot-video-picks-of-the-week-17',
-  'raws-hot-video-picks-of-the-week-12',
-  'raws-hot-video-picks-of-the-week-18',
-  'raws-hot-video-picks-of-the-week-19',
-  'raws-hot-video-picks-of-the-week-20',
-  'raws-hot-video-picks-of-the-week-22',
-  'raws-hot-video-picks-of-the-week-21',
-  'raws-hot-video-picks-of-the-week-23',
-  'animation-special-raws-hot-video-picks-of-the-week',
-  'raws-hot-video-picks-of-the-week-24',
-  'raws-hot-video-picks-of-the-week-5',
-  'raws-hot-video-picks-of-the-week-6',
-  'raws-hot-video-picks-of-the-week-7',
-  'raws-hot-video-picks-of-the-week-16',
-  'raws-hot-video-picks-of-the-week-8',
-  'raws-hot-video-picks-of-the-week-10',
-  'raws-hot-video-picks-of-the-week-9',
-  'raws-hot-video-picks-of-the-week-11',
-  'raws-hot-video-picks-of-the-week-15',
-  'raws-hot-video-picks-of-the-week-14',
-  'raws-hot-video-picks-of-the-week-13',
-  'halloween-special-raws-hot-video-picks-of-the-week',
-  'raws-hot-video-picks-of-the-week-39',
-  'raws-hot-video-picks-of-the-week-2',
-  'raws-hot-video-picks-of-the-week',
-  'raws-hot-video-picks-of-the-week-3',
-  'raws-hot-video-picks-of-the-week-4',
-  'raws-hot-video-picks-of-the-week-27-september-2017',
-  'your-weekly-dose-of-video-inspiration-10-nov-2017',
-  'your-weekly-dose-of-video-inspiration-3-nov-2017',
-  'your-weekly-dose-of-video-inspiration-27-oct-2017',
-  'your-weekly-dose-of-video-inspiration-20-oct-2017',
-  'raws-best-video-picks-of-the-week-6-october-2017',
-  'your-weekly-dose-of-video-inspiration-9-feb-2018',
-  'your-weekly-dose-of-video-inspiration-12-jan-2018',
-  'your-weekly-dose-of-video-inspiration-15-dec-2017',
-  'your-weekly-dose-of-christmas-video-inspiration-5-december-2017',
-  'your-weekly-dose-of-video-inspiration-24-november-2017',
-  'your-weekly-dose-of-video-inspiration-17-november-2017',
-  'weekly-dose-video-inspiration-2-march-2018',
-  'weekly-dose-video-inspiration-23-feb-2018',
-  'your-weekly-dose-of-video-inspiration-12-feb-2018',
-])
+const wpExcludedPosts = [
+  { id: 3059, slug: 'weekly-dose-video-inspiration-2-march-2018' },
+  { id: 3036, slug: 'weekly-dose-video-inspiration-23-feb-2018' },
+  { id: 2982, slug: 'your-weekly-dose-of-video-inspiration-12-feb-2018' },
+  { id: 2953, slug: 'your-weekly-dose-of-video-inspiration-9-feb-2018' },
+  { id: 2775, slug: 'your-weekly-dose-of-video-inspiration-12-jan-2018' },
+  { id: 7008, slug: 'your-weekly-dose-of-video-inspiration-15-dec-2017' },
+  { id: 2560, slug: 'your-weekly-dose-of-christmas-video-inspiration-5-december-2017' },
+  { id: 2530, slug: 'your-weekly-dose-of-video-inspiration-24-november-2017' },
+  { id: 2521, slug: 'your-weekly-dose-of-video-inspiration-17-november-2017' },
+  { id: 2504, slug: 'your-weekly-dose-of-video-inspiration-10-nov-2017' },
+  { id: 6994, slug: 'your-weekly-dose-of-video-inspiration-3-nov-2017' },
+  { id: 6989, slug: 'your-weekly-dose-of-video-inspiration-27-oct-2017' },
+  { id: 6986, slug: 'your-weekly-dose-of-video-inspiration-20-oct-2017' },
+  { id: 6980, slug: 'raws-best-video-picks-of-the-week-6-october-2017' },
+  { id: 1839, slug: 'raws-hot-video-picks-of-the-week-27-september-2017' },
+  { id: 6950, slug: 'raws-hot-video-picks-of-the-week-39' },
+  { id: 833, slug: 'raws-hot-video-picks-of-the-week-2' },
+  { id: 6934, slug: 'raws-hot-video-picks-of-the-week' },
+  { id: 1054, slug: 'raws-hot-video-picks-of-the-week-3' },
+  { id: 1058, slug: 'raws-hot-video-picks-of-the-week-4' },
+  { id: 1063, slug: 'raws-hot-video-picks-of-the-week-5' },
+  { id: 1066, slug: 'raws-hot-video-picks-of-the-week-6' },
+  { id: 1069, slug: 'raws-hot-video-picks-of-the-week-7' },
+  { id: 6925, slug: 'raws-hot-video-picks-of-the-week-8' },
+  { id: 6885, slug: 'raws-hot-video-picks-of-the-week-9' },
+  { id: 1078, slug: 'raws-hot-video-picks-of-the-week-10' },
+  { id: 1081, slug: 'raws-hot-video-picks-of-the-week-11' },
+  { id: 1088, slug: 'raws-hot-video-picks-of-the-week-16' },
+  { id: 1091, slug: 'raws-hot-video-picks-of-the-week-15' },
+  { id: 1094, slug: 'raws-hot-video-picks-of-the-week-14' },
+  { id: 1097, slug: 'raws-hot-video-picks-of-the-week-13' },
+  { id: 921, slug: 'halloween-special-raws-hot-video-picks-of-the-week' },
+  { id: 1100, slug: 'raws-hot-video-picks-of-the-week-17' },
+  { id: 1103, slug: 'raws-hot-video-picks-of-the-week-12' },
+  { id: 1106, slug: 'raws-hot-video-picks-of-the-week-18' },
+  { id: 1109, slug: 'raws-hot-video-picks-of-the-week-19' },
+  { id: 1112, slug: 'raws-hot-video-picks-of-the-week-20' },
+  { id: 1119, slug: 'raws-hot-video-picks-of-the-week-22' },
+  { id: 1121, slug: 'raws-hot-video-picks-of-the-week-21' },
+  { id: 1128, slug: 'raws-hot-video-picks-of-the-week-23' },
+  { id: 1131, slug: 'animation-special-raws-hot-video-picks-of-the-week' },
+  { id: 1134, slug: 'raws-hot-video-picks-of-the-week-24' },
+  { id: 1137, slug: 'raws-hot-video-picks-of-the-week-25' },
+  { id: 1140, slug: 'raws-hot-video-picks-of-the-week-26' },
+  { id: 1143, slug: 'raws-hot-video-picks-of-the-week-27' },
+  { id: 1147, slug: 'raws-hot-video-picks-of-the-week-28' },
+  { id: 1152, slug: 'raws-hot-video-picks-of-the-week-29' },
+  { id: 1155, slug: 'raws-hot-video-picks-of-the-week-30' },
+  { id: 1160, slug: 'raws-hot-video-picks-of-the-week-31' },
+  { id: 1163, slug: 'raws-hot-video-picks-of-the-week-32' },
+  { id: 1166, slug: 'raws-hot-video-picks-of-the-week-33' },
+  { id: 1169, slug: 'raws-hot-video-picks-of-the-week-34' },
+  { id: 1174, slug: 'raws-hot-video-picks-of-the-week-35' },
+  { id: 1178, slug: 'raws-hot-video-picks-of-the-week-36' },
+  { id: 6850, slug: 'raws-hot-video-picks-of-the-week-37' },
+  { id: 1185, slug: 'raws-hot-video-picks-of-the-week-38' },
+]
+
+const wpFields = [
+  'id',
+  'date',
+  'modified',
+  'slug',
+  'status',
+  'title.rendered',
+  'yoast_head_json.title',
+  'yoast_head_json.description',
+  'yoast_head_json.og_title',
+  'yoast_head_json.og_description',
+  'yoast_head_json.og_image',
+  'categories',
+  'has_blocks',
+  'block_data',
+]
 
 const mapCategories = (categories: number[]): string[] => {
   // The hard-coded category ids and slugs from WordPress.
@@ -227,8 +263,9 @@ const mapCategories = (categories: number[]): string[] => {
 export {
   addToStoryblok,
   convertHtmlToJson,
-  excludedSlugs,
   mapCategories,
   uploadFileToStoryblok,
   wait,
+  wpExcludedPosts,
+  wpFields,
 }

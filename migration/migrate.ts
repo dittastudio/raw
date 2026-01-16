@@ -1,6 +1,11 @@
 import type { Post, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText } from '../.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokAsset } from '../.storyblok/types/storyblok.d.ts'
-import { addToStoryblok, convertHtmlToJson, excludedSlugs, mapCategories, uploadFileToStoryblok, wait } from './utils'
+import { addToStoryblok, convertHtmlToJson, mapCategories, uploadFileToStoryblok, wait, wpExcludedPosts, wpFields } from './utils'
+
+// vimeo and youtube embed blocks:
+// https://raw.london/wp-admin/post.php?post=5214&action=edit
+// twitter embed
+// https://raw.london/wp-admin/post.php?post=5143&action=edit
 
 const PARENT = 134064420646816
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
@@ -221,6 +226,9 @@ const processBlocks = async (blockData: Record<number, any>): Promise<Post['bloc
         console.log(`🔥 Block: ${block.blockName}`)
       }
     }
+    else {
+      console.log(`⚠️  Encountered unknown block type: ${block.blockName}`)
+    }
   }
 
   return processed
@@ -250,36 +258,47 @@ interface WpPost {
   block_data: Record<number, any>
 }
 
-const getWpPosts = async (page: number = 1, perPage: number = 5): Promise<WpPost[]> => {
-  const fields = [
-    'id',
-    'date',
-    'modified',
-    'slug',
-    'status',
-    'title.rendered',
-    'yoast_head_json.title',
-    'yoast_head_json.description',
-    'yoast_head_json.og_title',
-    'yoast_head_json.og_description',
-    'yoast_head_json.og_image',
-    'categories',
-    'has_blocks',
-    'block_data',
-  ]
-  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields.join(',')}`)
+const getWpPosts = async (page: number = 1, perPage: number = 5, maxRetries: number = 3): Promise<WpPost[]> => {
+  const fields = wpFields.join(',')
+  const excludeIds = wpExcludedPosts.map(item => item.id).join(',')
 
-  if (!response.ok) {
-    console.error(`❌ WordPress API error: ${response.status} ${response.statusText}`)
-    return []
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`)
+
+      if (!response.ok) {
+        if (attempt < maxRetries) {
+          console.error(`❌ WordPress API error: ${response.status} ${response.statusText}. Retrying in 5 seconds... (Attempt ${attempt + 1}/${maxRetries})`)
+          await wait(5000)
+          continue
+        }
+
+        console.error(`❌ WordPress API error: ${response.status} ${response.statusText}`)
+
+        return []
+      }
+
+      return await response.json()
+    }
+    catch (error) {
+      if (attempt < maxRetries) {
+        console.error(`❌ Request failed: ${error}. Retrying in 5 seconds... (Attempt ${attempt + 1}/${maxRetries})`)
+        await wait(5000)
+        continue
+      }
+
+      console.error(`❌ Request failed after ${maxRetries + 1} attempts:`, error)
+
+      return []
+    }
   }
 
-  return await response.json()
+  return []
 }
 
 const run = async () => {
   const maxPosts = 400 // Safe maximum number of posts to migrate (make it a low as needed for testing).
-  const perPage = 8 // Keep it low because RAW's server can't cope with too much JSON. 💩
+  const perPage = 1 // Keep it low because RAW's server can't cope with too much JSON. 💩
   let page = 1
   let morePosts = true
   let totalProcessed = 0
@@ -315,8 +334,8 @@ const run = async () => {
       const postTitle = post.title.rendered?.trim() || ''
       const postSlug = post.slug.trim() || ''
 
-      if (!postSlug || excludedSlugs.has(postSlug)) {
-        console.log(`🍌 Skipping post: ${postTitle}\n`)
+      if (!postSlug) {
+        console.log(`🍌 Post does not have a slug: ${postTitle}\n`)
         continue
       }
 
@@ -398,7 +417,7 @@ const run = async () => {
       console.log(`✨ Reached the end of posts.`)
       morePosts = false
     }
-    else {
+    else if (totalProcessed < maxPosts) {
       page++
       console.log(`👍🏻 Moving on to page ${page}...\n`)
       await wait(INTERVAL_WAIT_MS)
