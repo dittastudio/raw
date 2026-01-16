@@ -30,9 +30,14 @@ const { story } = defineProps<Props>()
       v-if="block.component === 'block_impact_statement'"
       :block="block"
     />
+
+    <BlockTestimonials
+      v-if="block.component === 'block_testimonials'"
+      :block="block"
+    />
   </AppSection>
 
-  <UiCarousel
+  <!-- <UiCarousel
     :items="['1', '2', '3']"
     :options="{ loop: true }"
   >
@@ -57,7 +62,7 @@ const { story } = defineProps<Props>()
         </div>
       </div>
     </template>
-  </UiCarousel>
+  </UiCarousel> -->
 </template>
 
 <style scoped>

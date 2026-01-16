@@ -15,6 +15,8 @@ interface Props<T> {
   options?: KeenSliderOptions
   perView?: number
   spacing?: number
+  autoplay?: boolean
+  autoplayInterval?: number
 }
 
 const {
@@ -22,9 +24,96 @@ const {
   options = {},
   perView = 1,
   spacing = 0,
+  autoplay = false,
+  autoplayInterval = 5000,
 } = defineProps<Props<T>>()
 
 const details = ref<TrackDetails>()
+const isInView = ref(false)
+
+const isAutoplayActive = computed(() => autoplay && isInView.value)
+
+const autoplayControls = {
+  start: () => {},
+  stop: () => {},
+}
+
+const createAutoplayPlugin = ({
+  isActive,
+  interval,
+}: {
+  isActive: () => boolean
+  interval: () => number
+}) => {
+  return (slider: KeenSliderInstance) => {
+    let timeout: ReturnType<typeof setTimeout> | undefined
+    let mouseOver = false
+
+    const clear = () => {
+      if (timeout) {
+        clearTimeout(timeout)
+        timeout = undefined
+      }
+    }
+
+    const schedule = () => {
+      clear()
+      if (!isActive() || mouseOver) {
+        return
+      }
+
+      timeout = setTimeout(() => {
+        if (!isActive() || mouseOver) {
+          return
+        }
+
+        slider.next()
+      }, interval())
+    }
+
+    const stop = () => {
+      clear()
+    }
+
+    const start = () => {
+      schedule()
+    }
+
+    autoplayControls.start = start
+    autoplayControls.stop = stop
+
+    const handleMouseOver = () => {
+      mouseOver = true
+      stop()
+    }
+
+    const handleMouseOut = () => {
+      mouseOver = false
+      start()
+    }
+
+    slider.on('created', () => {
+      slider.container.addEventListener('mouseover', handleMouseOver)
+      slider.container.addEventListener('mouseout', handleMouseOut)
+
+      start()
+    })
+
+    slider.on('dragStarted', () => {
+      stop()
+    })
+
+    slider.on('animationEnded', start)
+    slider.on('updated', start)
+
+    slider.on('destroyed', () => {
+      stop()
+
+      slider.container.removeEventListener('mouseover', handleMouseOver)
+      slider.container.removeEventListener('mouseout', handleMouseOut)
+    })
+  }
+}
 
 const [container, slider] = useKeenSlider({
   loop: false,
@@ -46,7 +135,12 @@ const [container, slider] = useKeenSlider({
     })
   },
   ...options,
-})
+}, [
+  createAutoplayPlugin({
+    isActive: () => isAutoplayActive.value,
+    interval: () => autoplayInterval,
+  }),
+])
 
 watch(() => [perView, spacing], ([newPerView, newSpacing]) => {
   slider.value?.update({
@@ -79,8 +173,6 @@ const carousel = {
 // Provide carousel to child components
 provide('carousel', carousel)
 
-const isInView = ref(false)
-
 useIntersectionObserver(
   container,
   ([entry]) => {
@@ -92,6 +184,15 @@ useIntersectionObserver(
     threshold: 0.3,
   },
 )
+
+watch(isAutoplayActive, (active) => {
+  if (active) {
+    autoplayControls.start()
+    return
+  }
+
+  autoplayControls.stop()
+})
 
 onKeyStroke('ArrowLeft', (e: KeyboardEvent) => {
   if (isInView.value) {
