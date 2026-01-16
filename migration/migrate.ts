@@ -258,21 +258,46 @@ interface WpPost {
   block_data: Record<number, any>
 }
 
-const getWpPosts = async (page: number = 1, perPage: number = 5): Promise<WpPost[]> => {
+const getWpPosts = async (page: number = 1, perPage: number = 5, maxRetries: number = 3): Promise<WpPost[]> => {
   const fields = wpFields.join(',')
   const excludeIds = wpExcludedPosts.map(item => item.id).join(',')
-  const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`)
 
-  if (!response.ok) {
-    console.error(`❌ WordPress API error: ${response.status} ${response.statusText}`)
-    return []
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`)
+
+      if (!response.ok) {
+        if (attempt < maxRetries) {
+          console.error(`❌ WordPress API error: ${response.status} ${response.statusText}. Retrying in 5 seconds... (Attempt ${attempt + 1}/${maxRetries})`)
+          await wait(5000)
+          continue
+        }
+
+        console.error(`❌ WordPress API error: ${response.status} ${response.statusText}`)
+
+        return []
+      }
+
+      return await response.json()
+    }
+    catch (error) {
+      if (attempt < maxRetries) {
+        console.error(`❌ Request failed: ${error}. Retrying in 5 seconds... (Attempt ${attempt + 1}/${maxRetries})`)
+        await wait(5000)
+        continue
+      }
+
+      console.error(`❌ Request failed after ${maxRetries + 1} attempts:`, error)
+
+      return []
+    }
   }
 
-  return await response.json()
+  return []
 }
 
 const run = async () => {
-  const maxPosts = 2 // Safe maximum number of posts to migrate (make it a low as needed for testing).
+  const maxPosts = 400 // Safe maximum number of posts to migrate (make it a low as needed for testing).
   const perPage = 1 // Keep it low because RAW's server can't cope with too much JSON. 💩
   let page = 1
   let morePosts = true
