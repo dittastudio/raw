@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { ISbStoryData } from '@storyblok/js'
 import type { Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
   story: ISbStoryData<Project>

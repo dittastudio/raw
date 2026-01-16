@@ -22,12 +22,12 @@ const { story } = defineProps<Props>()
     />
 
     <BlockHeroBrand
-      v-if="block.component === 'block_hero_brand'"
+      v-else-if="block.component === 'block_hero_brand'"
       :block="block"
     />
 
     <BlockImpactStatement
-      v-if="block.component === 'block_impact_statement'"
+      v-else-if="block.component === 'block_impact_statement'"
       :block="block"
     />
 

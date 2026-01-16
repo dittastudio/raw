@@ -398,9 +398,7 @@ const run = async () => {
         }
         else {
           console.log(`⚠️ Problem encountered creating post: ${fields.name}`)
-          console.log(createStoryPost)
           console.log(data)
-          console.log(payload)
         }
       }
       catch (error: any) {
