@@ -128,7 +128,7 @@ const slideClass = computed(() => {
           :src="image.filename || ''"
           :alt="image.alt || ''"
           height="40"
-          densities="x1 x2 x3"
+          densities="x1 x2"
           format="webp"
           :modifiers="{
             smart: true,
