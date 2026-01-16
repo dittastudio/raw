@@ -10,6 +10,15 @@ export interface BlockHero {
   _uid: string;
 }
 
+export interface BlockHeroBrand {
+  headline?: StoryblokRichtext;
+  headline_2?: StoryblokRichtext;
+  text?: StoryblokRichtext;
+  logo_ticker?: StoryblokMultiasset;
+  component: "block_hero_brand";
+  _uid: string;
+}
+
 export interface BlockImpactStatement {
   theme?: number | string;
   items?: TitleCopy[];
@@ -33,7 +42,7 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: (BlockHero | BlockImpactStatement)[];
+  blocks?: (BlockHero | BlockHeroBrand | BlockImpactStatement)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
@@ -54,13 +63,19 @@ export interface Person {
 
 export interface Post {
   hero?: StoryblokAsset;
-  author: ISbStoryData<Person> | string;
-  category: (number | string)[];
-  seo_title: string;
-  seo_description: string;
+  author?: ISbStoryData<Person> | string;
+  category?: (number | string)[];
+  seo_title?: string;
+  seo_description?: string;
   seo_image?: StoryblokAsset;
-  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText)[];
+  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed)[];
   component: "post";
+  _uid: string;
+}
+
+export interface PostEmbed {
+  url?: string;
+  component: "post_embed";
   _uid: string;
 }
 

@@ -9,11 +9,7 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="hero relative overflow-hidden w-full min-h-screen flex flex-col items-center justify-center">
-    <div class="absolute inset-0">
-      <EffectMorphGradient />
-    </div>
-
+  <div class="hero relative w-full min-h-screen flex flex-col items-center justify-center">
     <div class="z-1 flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
       <div
         v-if="storyblokRichTextContent(block.headline)"
