@@ -1,51 +1,41 @@
 <script lang="ts" setup>
-import { toTypedSchema } from '@vee-validate/zod'
-import { useField, useForm, useValidateForm } from 'vee-validate'
-import { z } from 'zod'
+import { useRegle } from '#imports'
+import { email as ruleEmail, required as ruleRequired } from '@regle/rules'
 
 interface Props {
   legend?: string
 }
 
 const { legend } = defineProps<Props>()
+
+const { r$ } = useRegle({ email: '' }, {
+  email: {
+    ruleRequired,
+    ruleEmail,
+  },
+})
+
 const loading = ref<boolean>(false)
 const status = ref<{
   type: 'error' | 'success'
   message: string
 } | null>(null)
 
-const validationSchema = toTypedSchema(
-  z.object({
-    email: z
-      .email()
-      .trim(),
-  }),
-)
-
-const { errors } = useForm({
-  validationSchema,
-  initialValues: {
-    email: '',
-  },
-})
-
-const validate = useValidateForm()
-const { value: email } = useField<string>('email')
 const defaultErrorMessage = 'Please check the form and try again.'
 
 const onSubmit = async () => {
   try {
     loading.value = true
 
-    const { valid } = await validate()
+    const { valid, data } = await r$.$validate()
 
-    if (!valid) {
+    if (!valid || !data.email) {
       return
     }
 
     const formData = new FormData()
 
-    formData.append('email', email.value.trim())
+    formData.append('email', data.email.trim())
 
     const createApplication = await $fetch('/api/highlevel', {
       method: 'POST',
@@ -98,7 +88,7 @@ const onSubmit = async () => {
             >
               <FormInput
                 id="email"
-                v-model="email"
+                v-model="r$.$value.email"
                 placeholder="Your email address"
                 field="email"
                 class="border-none type-p"
@@ -110,23 +100,17 @@ const onSubmit = async () => {
                 colour="light"
                 mode="outline"
               >
-                {{  loading ? '...' : 'Submit' }}
+                {{ loading ? '...' : 'Submit' }}
               </UiButton>
             </button>
           </div>
 
-          <FormMessage
-            v-if="errors.email"
-            :message="errors.email"
+          <FormMessages
+            v-if="r$.email.$error"
+            :messages="r$.email.$errors"
             class="type-p"
           />
         </FormFieldset>
-
-        <FormMessage
-          v-if="status"
-          :type="status.type"
-          :message="status.message"
-        />
       </FormBase>
     </template>
   </div>
