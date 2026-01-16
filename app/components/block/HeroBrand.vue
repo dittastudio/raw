@@ -115,21 +115,25 @@ const slideClass = computed(() => {
 
   <div class="py-10">
     <UiTicker
-      duration="65s"
+      duration="30s"
       direction="right"
     >
       <template
         v-for="image in block.logo_ticker"
         :key="image.id"
       >
-        <img
-          class="w-auto h-10 object-contain"
-          :src="storyblokImage(image.filename, { height: 200 })"
+        <NuxtImg
+          class="block w-auto h-10 object-contain"
+          :src="image.filename || ''"
           :alt="image.alt || ''"
           width="200"
-          height="200"
-          loading="lazy"
-        >
+          provider="storyblok"
+          format="webp"
+          quality="85"
+          :modifiers="{
+            smart: true,
+          }"
+        />
       </template>
     </UiTicker>
   </div>

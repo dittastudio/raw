@@ -16,13 +16,14 @@ const goTo = (index: number) => {
 <template>
   <div
     v-if="carousel && dots.length > 1"
-    class="mt-6 flex items-center justify-center gap-2"
+    class="flex items-center justify-center gap-2"
   >
     <button
       v-for="dot in dots"
       :key="dot"
       type="button"
       class="
+        block
         size-2.5
         rounded-full
         border

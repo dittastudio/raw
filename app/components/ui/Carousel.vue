@@ -109,23 +109,25 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
 </script>
 
 <template>
-  <div
-    ref="container"
-    class="keen-slider size-full relative flex touch-pan-y select-none overflow-hidden"
-  >
+  <div class="relative size-full">
     <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="keen-slider__slide shrink-0"
-      :class="{ 'is-active': details?.abs === index }"
+      ref="container"
+      class="keen-slider size-full flex touch-pan-y select-none overflow-hidden"
     >
-      <slot
-        name="item"
-        :item="item"
-        :index="index"
-      />
+      <div
+        v-for="(item, index) in items"
+        :key="index"
+        class="keen-slider__slide shrink-0"
+        :class="{ 'is-active': details?.abs === index }"
+      >
+        <slot
+          name="item"
+          :item="item"
+          :index="index"
+        />
+      </div>
     </div>
-  </div>
 
-  <slot name="other" />
+    <slot name="other" />
+  </div>
 </template>

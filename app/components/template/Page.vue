@@ -37,13 +37,25 @@ const { story } = defineProps<Props>()
     :options="{ loop: true }"
   >
     <template #item="{ item, index }">
-      <div class="w-full h-60 bg-pink flex items-center justify-center">
+      <div class="w-full h-60 bg-pink flex flex-col items-start justify-end wrapper">
         {{ item }} - {{ index + 1 }}
+
+        <h4 class="type-h4">
+          this is a title
+        </h4>
+
+        <p class="type-p">
+          this is a description
+        </p>
       </div>
     </template>
 
     <template #other>
-      <UiCarouselDots />
+      <div class="absolute inset-0 flex items-end justify-start wrapper pointer-events-none">
+        <div class="pointer-events-auto">
+          <UiCarouselDots />
+        </div>
+      </div>
     </template>
   </UiCarousel>
 </template>
