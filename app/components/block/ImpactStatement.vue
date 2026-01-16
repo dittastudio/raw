@@ -9,7 +9,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="impact-statement wrapper-max">
+  <div
+    v-editable="block"
+    class="impact-statement wrapper-max"
+  >
     <div
       v-for="item in block.items"
       :key="item._uid"

@@ -48,6 +48,7 @@ const slideClass = computed(() => {
 
 <template>
   <div
+    v-editable="block"
     class="
       hero
       relative

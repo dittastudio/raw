@@ -31,6 +31,17 @@ const { story } = defineProps<Props>()
       :block="block"
     />
   </AppSection>
+
+  <UiCarousel
+    :items="['1', '2', '3']"
+    :options="{ loop: true }"
+  >
+    <template #item="{ item, index }">
+      <div class="w-full h-60 bg-pink flex items-center justify-center">
+        {{ item }} - {{ index + 1 }}
+      </div>
+    </template>
+  </UiCarousel>
 </template>
 
 <style scoped>
