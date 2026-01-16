@@ -13,6 +13,7 @@ export interface BlockHero {
 export interface BlockHeroBrand {
   theme?: "is-light" | "is-dark";
   headline?: StoryblokRichtext;
+  headline_2?: StoryblokRichtext;
   text?: StoryblokRichtext;
   component: "block_hero_brand";
   _uid: string;

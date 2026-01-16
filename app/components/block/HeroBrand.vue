@@ -7,6 +7,43 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
+
+const activeSlide = ref<1 | 2 | null>(null)
+const slideIntervalMs = 4000
+let slideIntervalId: ReturnType<typeof setInterval> | null = null
+let slideTimeoutId: ReturnType<typeof setTimeout> | null = null
+
+const startSlideRotation = () => {
+  slideTimeoutId = setTimeout(() => {
+    activeSlide.value = 2
+    slideIntervalId = setInterval(() => {
+      activeSlide.value = activeSlide.value === 1 ? 2 : 1
+    }, slideIntervalMs)
+  }, slideIntervalMs)
+}
+
+const stopSlideRotation = () => {
+  if (slideTimeoutId) {
+    clearTimeout(slideTimeoutId)
+    slideTimeoutId = null
+  }
+
+  if (slideIntervalId) {
+    clearInterval(slideIntervalId)
+    slideIntervalId = null
+  }
+}
+
+onMounted(startSlideRotation)
+onBeforeUnmount(stopSlideRotation)
+
+const slideClass = computed(() => {
+  if (activeSlide.value === null) {
+    return ''
+  }
+
+  return activeSlide.value === 1 ? 'is-slide-1' : 'is-slide-2'
+})
 </script>
 
 <template>
@@ -22,8 +59,9 @@ const { block } = defineProps<Props>()
       items-center
       justify-center
     "
+    :class="slideClass"
   >
-    <div class="absolute inset-0">
+    <div class="absolute inset-0 transform-gpu">
       <EffectMorphGradient
         ball-colour1="pink"
         ball-colour2="pink"
@@ -33,6 +71,7 @@ const { block } = defineProps<Props>()
 
     <div
       class="
+        @container/hero
         z-1
         wrapper-max
         pt-60
@@ -48,10 +87,16 @@ const { block } = defineProps<Props>()
       "
     >
       <div
-        v-if="storyblokRichTextContent(block.headline)"
-        class="hero__headline"
+        v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
+        class="hero__headline relative"
       >
-        <StoryblokText :html="block.headline" />
+        <div class="hero__headline-1 opacity-100">
+          <StoryblokText :html="block.headline" />
+        </div>
+
+        <div class="hero__headline-2 absolute inset-0 opacity-0">
+          <StoryblokText :html="block.headline_2" />
+        </div>
       </div>
 
       <div class="w-full max-h-full">
@@ -71,30 +116,11 @@ const { block } = defineProps<Props>()
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.hero {
-  animation: bg-cycle 3s var(--ease-inOutQuart) infinite alternate;
-}
-
-@keyframes bg-cycle {
-  0% {
-    background-color: var(--color-white);
-  }
-  100% {
-    background-color: var(--color-green);
-  }
-}
-
 .hero__headline {
-  :deep(h1) {
+  :deep(h1, h2) {
     @apply type-h1;
-  }
 
-  :deep(h2) {
-    @apply type-h2;
-  }
-
-  :deep(h3) {
-    @apply type-h3;
+    font-size: min(50px, 5cqi);
   }
 }
 
@@ -103,6 +129,60 @@ const { block } = defineProps<Props>()
     @apply type-h4;
 
     text-wrap: balance;
+  }
+}
+
+/* Animations */
+.hero {
+  background-color: var(--color-white);
+  transition: background-color 1s var(--ease-out);
+
+  &.is-slide-1 {
+    background-color: var(--color-white);
+  }
+
+  &.is-slide-2 {
+    background-color: var(--color-green);
+  }
+}
+
+.hero__headline-1 {
+  .hero.is-slide-1 & {
+    animation: fade-in 1s var(--ease-out) 0.25s both;
+  }
+
+  .hero.is-slide-2 & {
+    animation: fade-out 0.25s var(--ease-out) both;
+  }
+}
+
+.hero__headline-2 {
+  .hero.is-slide-1 & {
+    animation: fade-out 0.25s var(--ease-out) both;
+  }
+
+  .hero.is-slide-2 & {
+    animation: fade-in 1s var(--ease-out) 0.25s both;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 </style>
