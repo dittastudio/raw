@@ -61,7 +61,7 @@ const slideClass = computed(() => {
     "
     :class="slideClass"
   >
-    <div class="absolute inset-0 transform-gpu">
+    <div class="absolute inset-0">
       <EffectMorphGradient
         ball-colour1="pink"
         ball-colour2="pink"
@@ -123,8 +123,8 @@ const slideClass = computed(() => {
       >
         <img
           class="w-auto h-10 object-contain"
-          :src="storyblokImage(image.filename, { height: 100 })"
-          :alt="image.alt"
+          :src="storyblokImage(image.filename, { height: 200 })"
+          :alt="image.alt || ''"
         >
       </template>
     </UiTicker>

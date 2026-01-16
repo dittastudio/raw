@@ -67,7 +67,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="morph-gradient">
+  <div class="morph-gradient isolate">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="morph-gradient__svg"
@@ -98,7 +98,7 @@ onUnmounted(() => {
 
     <div
       ref="containerElement"
-      class="morph-gradient__container"
+      class="morph-gradient__container transform-gpu backface-hidden"
     >
       <div class="g1" />
 
@@ -144,11 +144,11 @@ onUnmounted(() => {
   position: absolute;
   background: radial-gradient(circle at center, --alpha(var(--color1) / 0.8) 0, --alpha(var(--color1) / 0) 50%) no-repeat;
   /* background: red; */
-  mix-blend-mode: var(--blending);
+  /* mix-blend-mode: var(--blending); */
 
   width: var(--circle-size);
   /* height: var(--circle-size); */
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
   top: calc(50% - var(--circle-size) / 2);
   left: calc(50% - var(--circle-size) / 2);
   border-radius: 50%;
@@ -163,11 +163,11 @@ onUnmounted(() => {
   position: absolute;
   background: radial-gradient(circle at center, --alpha(var(--color2) / 0.8) 0, --alpha(var(--color2) / 0) 50%) no-repeat;
   /* background: blue; */
-  mix-blend-mode: var(--blending);
+  /* mix-blend-mode: var(--blending); */
 
   width: var(--circle-size);
   /* height: var(--circle-size); */
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
   top: calc(50% - var(--circle-size) / 2);
   left: calc(50% - var(--circle-size) / 2);
   border-radius: 50%;
@@ -185,14 +185,14 @@ onUnmounted(() => {
   position: absolute;
   background: radial-gradient(circle at center, --alpha(var(--color-interactive) / 0.8) 0, --alpha(var(--color-interactive) / 0) 50%) no-repeat;
   /* background: green; */
-  mix-blend-mode: var(--blending);
+  /* mix-blend-mode: var(--blending); */
   /* z-index: -2; */
 
   width: var(--size);
   /* height: var(--size); */
   top: 0;
   left: 0;
-  aspect-ratio: 1/1;
+  aspect-ratio: 1;
   translate: -50% -50%;
   border-radius: 50%;
 
