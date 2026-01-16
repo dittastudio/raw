@@ -16,27 +16,32 @@ const goTo = (index: number) => {
 <template>
   <div
     v-if="carousel && dots.length > 1"
-    class="flex items-center justify-center gap-2"
+    class="flex"
   >
     <button
       v-for="dot in dots"
       :key="dot"
       type="button"
-      class="
-        block
-        size-2.5
-        rounded-full
-        border
-        border-solid
-        border-current
-        transition-colors
-        duration-200
-        ease-smooth
-      "
-      :class="dot === currentDot ? 'bg-current' : 'bg-transparent'"
+      class="block p-1 -my-1"
       :aria-label="`Go to slide ${dot + 1}`"
       :aria-current="dot === currentDot ? 'true' : undefined"
       @click="goTo(dot)"
-    />
+    >
+      <span
+        class="
+          block
+          size-2.5
+          rounded-full
+          border
+          border-solid
+          border-current
+          transition-colors
+          duration-200
+          ease-smooth
+          bg-current
+        "
+        :class="dot === currentDot ? 'bg-current' : 'bg-transparent'"
+      />
+    </button>
   </div>
 </template>
