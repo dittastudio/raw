@@ -122,7 +122,7 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
     await filePrepare(signedData, imgBuffer)
 
     // Step 3: Register the uploaded asset with Storyblok
-    const assetResponse = await fetch(
+    const assetFinalization = await fetch(
       `https://mapi.storyblok.com/v1/spaces/${SPACE}/assets/${signedData.id}/finish_upload`,
       {
         method: 'GET',
@@ -132,8 +132,8 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
       },
     )
 
-    if (!assetResponse.ok) {
-      console.error(`❌ Failed to register asset: ${assetResponse.status}`)
+    if (!assetFinalization.ok) {
+      console.error(`❌ Failed to register asset: ${assetFinalization.status}`)
       return
     }
 
