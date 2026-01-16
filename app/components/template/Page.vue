@@ -41,6 +41,10 @@ const { story } = defineProps<Props>()
         {{ item }} - {{ index + 1 }}
       </div>
     </template>
+
+    <template #other>
+      <UiCarouselDots />
+    </template>
   </UiCarousel>
 </template>
 

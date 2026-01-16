@@ -4,8 +4,8 @@ import { onKeyStroke, useIntersectionObserver } from '@vueuse/core'
 import { useKeenSlider } from 'keen-slider/vue.es'
 
 export interface Carousel {
-  slider: Ref<KeenSliderInstance>
-  details: Ref<TrackDetails>
+  slider: Ref<KeenSliderInstance | undefined>
+  details: Ref<TrackDetails | undefined>
   next: () => void
   previous: () => void
 }
@@ -26,9 +26,6 @@ const {
 
 const details = ref<TrackDetails>()
 
-const dots = ref<number[]>([])
-const currentDot = ref(0)
-
 const [container, slider] = useKeenSlider({
   loop: false,
   mode: 'snap',
@@ -42,20 +39,10 @@ const [container, slider] = useKeenSlider({
     spacing,
   },
   created(slider) {
-    const trackDetails = slider.track.details
-    const count = trackDetails.slides.length
-
-    details.value = trackDetails
-    currentDot.value = trackDetails.rel
-    dots.value = Array.from({ length: count }, (_, index) => index)
+    details.value = slider.track.details
 
     slider.on('detailsChanged', (s) => {
-      const updatedDetails = s.track.details
-      const updatedCount = updatedDetails.slides.length
-
-      details.value = updatedDetails
-      currentDot.value = updatedDetails.rel
-      dots.value = Array.from({ length: updatedCount }, (_, index) => index)
+      details.value = s.track.details
     })
   },
   ...options,
@@ -80,10 +67,6 @@ const next = () => {
 
 const previous = () => {
   slider.value?.prev()
-}
-
-const goTo = (index: number) => {
-  slider.value?.moveToIdx(index)
 }
 
 const carousel = {
@@ -144,26 +127,5 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
     </div>
   </div>
 
-  <div
-    v-if="dots.length > 1"
-    class="mt-6 flex items-center justify-center gap-2"
-  >
-    <button
-      v-for="dot in dots"
-      :key="dot"
-      type="button"
-      class="
-          size-2 rounded-full transition
-          ring-1 ring-transparent
-          hover:ring-black/50
-          focus-visible:outline-none
-          focus-visible:ring-2
-          focus-visible:ring-black
-        "
-      :class="dot === currentDot ? 'bg-black' : 'bg-black/30'"
-      :aria-label="`Go to slide ${dot + 1}`"
-      :aria-current="dot === currentDot ? 'true' : undefined"
-      @click="goTo(dot)"
-    />
-  </div>
+  <slot name="other" />
 </template>
