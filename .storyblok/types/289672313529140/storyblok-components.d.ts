@@ -26,6 +26,13 @@ export interface BlockImpactStatement {
   _uid: string;
 }
 
+export interface BlockTestimonials {
+  theme?: number | string;
+  items?: Testimonial[];
+  component: "block_testimonials";
+  _uid: string;
+}
+
 export interface Link {
   title: string;
   link: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
@@ -42,7 +49,7 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: (BlockHero | BlockHeroBrand | BlockImpactStatement)[];
+  blocks?: (BlockHero | BlockHeroBrand | BlockImpactStatement | BlockTestimonials)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
@@ -137,6 +144,14 @@ export interface Settings {
   company_address?: string;
   logos?: Logo[];
   component: "settings";
+  _uid: string;
+}
+
+export interface Testimonial {
+  quote?: string;
+  name?: string;
+  desc?: string;
+  component: "testimonial";
   _uid: string;
 }
 
