@@ -59,6 +59,7 @@ const slideClass = computed(() => {
       flex-col
       items-center
       justify-center
+      text-offblack
     "
     :class="slideClass"
   >
@@ -113,7 +114,7 @@ const slideClass = computed(() => {
     </div>
   </div>
 
-  <div class="py-10">
+  <div class="py-10 bg-white">
     <UiTicker
       duration="30s"
       direction="right"

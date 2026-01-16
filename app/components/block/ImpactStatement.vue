@@ -16,7 +16,7 @@ const { block } = defineProps<Props>()
     <div
       v-for="item in block.items"
       :key="item._uid"
-      class="impact-statement__item grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20"
+      class="impact-statement__item grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20 lg:gap-y-40"
     >
       <div
         v-if="storyblokRichTextContent(item.title)"
@@ -59,6 +59,10 @@ const { block } = defineProps<Props>()
 .impact-statement__item {
   & + & {
     margin-block-start: --spacing(30);
+
+    @variant lg {
+      margin-block-start: --spacing(60);
+    }
   }
 }
 
