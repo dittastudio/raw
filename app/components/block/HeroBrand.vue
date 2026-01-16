@@ -112,7 +112,7 @@ const slideClass = computed(() => {
     </div>
   </div>
 
-  <div class="py-6">
+  <div class="py-10">
     <UiTicker
       duration="65s"
       direction="right"
@@ -125,6 +125,9 @@ const slideClass = computed(() => {
           class="w-auto h-10 object-contain"
           :src="storyblokImage(image.filename, { height: 200 })"
           :alt="image.alt || ''"
+          width="200"
+          height="200"
+          loading="lazy"
         >
       </template>
     </UiTicker>

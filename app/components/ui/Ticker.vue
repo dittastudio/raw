@@ -4,8 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// const REPEAT_COUNT = 9
-
 export interface Props {
   duration?: string
   direction?: 'left' | 'right'
@@ -18,11 +16,6 @@ const wrappers = useTemplateRef('wrappers')
 const lists = useTemplateRef('lists')
 
 let scrollTrigger: ScrollTrigger | null = null
-
-// Optimize array creation
-// const multipleWords = computed(() => {
-//   return Array.from({ length: REPEAT_COUNT }).fill(copy).flat()
-// })
 
 onMounted(() => {
   if (!container.value) {
@@ -94,7 +87,7 @@ onUnmounted(() => {
           class="ui-ticker__list select-none flex justify-center shrink-0 min-w-full transform-gpu"
         >
           <div
-            class="ui-ticker__words flex shrink-0 items-center justify-around min-w-full"
+            class="flex gap-10 px-5 shrink-0 items-center justify-around min-w-full"
           >
             <slot />
           </div>
@@ -117,13 +110,6 @@ onUnmounted(() => {
 
 .ui-ticker__list {
   animation: ticker-left var(--duration) linear infinite paused;
-}
-
-.ui-ticker__words {
-  --gap: --spacing(10);
-
-  gap: var(--gap);
-  padding: calc(var(--gap) / 2);
 }
 
 @keyframes ticker-left {
