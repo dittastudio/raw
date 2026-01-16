@@ -123,16 +123,16 @@ const slideClass = computed(() => {
         :key="image.id"
       >
         <NuxtImg
-          class="block w-auto h-10 object-contain"
+          class="block w-auto h-10"
           :src="image.filename || ''"
           :alt="image.alt || ''"
-          width="200"
-          provider="storyblok"
+          height="40"
+          densities="x1 x2 x3"
           format="webp"
-          quality="85"
           :modifiers="{
             smart: true,
           }"
+          loading="lazy"
         />
       </template>
     </UiTicker>
