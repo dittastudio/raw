@@ -48,6 +48,7 @@ const slideClass = computed(() => {
 
 <template>
   <div
+    v-editable="block"
     class="
       hero
       relative
@@ -58,6 +59,7 @@ const slideClass = computed(() => {
       flex-col
       items-center
       justify-center
+      text-offblack
     "
     :class="slideClass"
   >
@@ -112,20 +114,27 @@ const slideClass = computed(() => {
     </div>
   </div>
 
-  <div class="py-6">
+  <div class="py-10 bg-white">
     <UiTicker
-      duration="65s"
+      duration="30s"
       direction="right"
     >
       <template
         v-for="image in block.logo_ticker"
         :key="image.id"
       >
-        <img
-          class="w-auto h-10 object-contain"
-          :src="storyblokImage(image.filename, { height: 200 })"
+        <NuxtImg
+          class="block w-auto h-10"
+          :src="image.filename || ''"
           :alt="image.alt || ''"
-        >
+          height="40"
+          densities="x1 x2 x3"
+          format="webp"
+          :modifiers="{
+            smart: true,
+          }"
+          loading="lazy"
+        />
       </template>
     </UiTicker>
   </div>

@@ -30,6 +30,11 @@ const { story } = defineProps<Props>()
       v-else-if="block.component === 'block_impact_statement'"
       :block="block"
     />
+
+    <BlockTestimonials
+      v-if="block.component === 'block_testimonials'"
+      :block="block"
+    />
   </AppSection>
 </template>
 
