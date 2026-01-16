@@ -111,6 +111,24 @@ const slideClass = computed(() => {
       </div>
     </div>
   </div>
+
+  <div class="py-6">
+    <UiTicker
+      duration="65s"
+      direction="right"
+    >
+      <template
+        v-for="image in block.logo_ticker"
+        :key="image.id"
+      >
+        <img
+          class="w-auto h-10 object-contain"
+          :src="storyblokImage(image.filename, { height: 100 })"
+          :alt="image.alt"
+        >
+      </template>
+    </UiTicker>
+  </div>
 </template>
 
 <style scoped>

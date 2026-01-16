@@ -83,33 +83,9 @@
     "display_name": "Hero Brand",
     "description": "Displays a large hero which houses a large central Raw logo.",
     "created_at": "2026-01-15T10:13:39.202Z",
-    "updated_at": "2026-01-15T15:09:21.891Z",
+    "updated_at": "2026-01-16T11:46:59.425Z",
     "id": 134276789061080,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "required": false,
-        "options": [
-          {
-            "_uid": "ac4def2b-fda9-47f4-9cf1-760399b2c858",
-            "name": "Light",
-            "value": "is-light"
-          },
-          {
-            "_uid": "2c33ae08-1fcd-46cf-9b92-33ef7a0135f4",
-            "value": "is-dark",
-            "name": "Dark"
-          }
-        ],
-        "exclude_empty_option": true,
-        "default_value": "light",
-        "id": "BmrYdk1fTiOQo5l9tMEL_A",
-        "display_name": "Theme",
-        "source": "internal",
-        "datasource_slug": "theme"
-      },
       "headline": {
         "type": "richtext",
         "pos": 1,
@@ -149,6 +125,15 @@
           "paragraph",
           "unset"
         ]
+      },
+      "logo_ticker": {
+        "type": "multiasset",
+        "pos": 3,
+        "filetypes": [
+          "images"
+        ],
+        "id": "6DjiyvloT_ikNyHHol8Y5A",
+        "asset_folder_id": 134653467982768
       }
     },
     "image": "//a.storyblok.com/f/289672313529140/x/1b570cbc46/screenshot-2026-01-15-at-10-15-11.jpg",
