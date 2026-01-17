@@ -260,9 +260,29 @@ const mapCategories = (categories: number[]): string[] => {
   return categories.map(id => categoryMap[id] || '')
 }
 
+const decodeHtmlEntities = (text: string): string => {
+  const entities: Record<string, string> = {
+    '&#8217;': `'`,
+    '&#8216;': `'`,
+    '&#8220;': '"',
+    '&#8221;': '"',
+    '&#8211;': '-',
+    '&#8212;': '—',
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#039;': "'",
+    '&nbsp;': ' ',
+  }
+
+  return text.replace(/&#?\w+;/g, match => entities[match] || match)
+}
+
 export {
   addToStoryblok,
   convertHtmlToJson,
+  decodeHtmlEntities,
   mapCategories,
   uploadFileToStoryblok,
   wait,
