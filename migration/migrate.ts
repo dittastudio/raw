@@ -8,10 +8,11 @@ const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte
 const INTERVAL_WAIT_MS = 500
 const VERBOSE_LOGS = false
 
+// Annoying overloads for TS to be happy.
 function processParagraphBlock(block: BlockParagraph, asString: true): string | null
 function processParagraphBlock(block: BlockParagraph, asString?: false): PostText | null
 function processParagraphBlock(block: BlockParagraph, asString: boolean = false): PostText | string | null {
-  const content = block.rendered?.trim()
+  const content = decodeHtmlEntities(block.rendered?.trim() || '')
 
   // Sometimes we get empty <p> tags. Ignore them.
   if (!content || content === '<p></p>' || content === '<li></li>') {
@@ -26,7 +27,7 @@ function processParagraphBlock(block: BlockParagraph, asString: boolean = false)
     _uid: crypto.randomUUID(),
     component: 'post_text',
     text: convertHtmlToJson(content),
-  } as PostText
+  }
 }
 
 const processHeadingBlock = (block: BlockHeading): PostHeading | null => {
@@ -44,7 +45,7 @@ const processHeadingBlock = (block: BlockHeading): PostHeading | null => {
 }
 
 const processHtmlBlock = (block: BlockHtml): PostHtml | null => {
-  const content = block.rendered?.trim()
+  const content = decodeHtmlEntities(block.rendered?.trim() || '')
 
   if (!content) {
     return null
@@ -78,7 +79,7 @@ const processImageBlock = async (block: BlockImage): Promise<PostImage | null> =
 }
 
 const processQuoteBlock = (block: BlockQuote): PostQuote | null => {
-  const citation = block.attrs?.citation?.trim()
+  const citation = decodeHtmlEntities(block.attrs?.citation?.trim() || '')
   const innerBlocks = block.innerBlocks || []
 
   if (!innerBlocks.length) {
@@ -104,8 +105,8 @@ const processQuoteBlock = (block: BlockQuote): PostQuote | null => {
   return {
     _uid: crypto.randomUUID(),
     component: 'post_quote',
-    quote: items.length ? convertHtmlToJson(items.join(' ')) : undefined,
-    citation: citation || undefined,
+    quote: items.length ? convertHtmlToJson(items.join(' ')) : '',
+    citation,
   }
 }
 
@@ -165,7 +166,7 @@ const processListBlock = (block: BlockList): PostText | null => {
   return {
     _uid: crypto.randomUUID(),
     component: 'post_text',
-    text: items.length ? convertHtmlToJson(`<ul>${items.join('')}</ul>`) : undefined,
+    text: items.length ? convertHtmlToJson(`<ul>${items.join('')}</ul>`) : '',
   }
 }
 
