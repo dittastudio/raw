@@ -1,233 +1,300 @@
-import type { Post, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText } from '../.storyblok/types/289672313529140/storyblok-components'
+import type { Post, PostEmbed, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText } from '../.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokAsset } from '../.storyblok/types/storyblok.d.ts'
-import { addToStoryblok, convertHtmlToJson, mapCategories, uploadFileToStoryblok, wait, wpExcludedPosts, wpFields } from './utils'
-
-// vimeo and youtube embed blocks:
-// https://raw.london/wp-admin/post.php?post=5214&action=edit
-// twitter embed
-// https://raw.london/wp-admin/post.php?post=5143&action=edit
+import type { BlockEmbed, BlockGallery, BlockHeading, BlockHtml, BlockImage, BlockList, BlockParagraph, BlockQuote, BlockUnknown } from './wp-block-types'
+import { addToStoryblok, convertHtmlToJson, decodeHtmlEntities, mapCategories, uploadFileToStoryblok, wait, wpExcludedPosts, wpFields } from './utils'
 
 const PARENT = 134064420646816
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
 const INTERVAL_WAIT_MS = 500
 const VERBOSE_LOGS = false
 
-const processBlocks = async (blockData: Record<number, any>): Promise<Post['blocks']> => {
+function processParagraphBlock(block: BlockParagraph, asString: true): string | null
+function processParagraphBlock(block: BlockParagraph, asString?: false): PostText | null
+function processParagraphBlock(block: BlockParagraph, asString: boolean = false): PostText | string | null {
+  const content = block.rendered?.trim()
+
+  // Sometimes we get empty <p> tags. Ignore them.
+  if (!content || content === '<p></p>' || content === '<li></li>') {
+    return null
+  }
+
+  if (asString && typeof content === 'string') {
+    return content
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_text',
+    text: convertHtmlToJson(content),
+  } as PostText
+}
+
+const processHeadingBlock = (block: BlockHeading): PostHeading | null => {
+  const content = block.attrs?.content?.trim()
+
+  if (!content) {
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_heading',
+    heading: content,
+  }
+}
+
+const processHtmlBlock = (block: BlockHtml): PostHtml | null => {
+  const content = block.rendered?.trim()
+
+  if (!content) {
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_html',
+    html: content,
+  }
+}
+
+const processImageBlock = async (block: BlockImage): Promise<PostImage | null> => {
+  const url = block.attrs?.url?.trim()
+
+  if (!url) {
+    return null
+  }
+
+  const uploadedImage = await uploadFileToStoryblok(url)
+
+  if (!uploadedImage) {
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_image',
+    image: uploadedImage,
+  }
+}
+
+const processQuoteBlock = (block: BlockQuote): PostQuote | null => {
+  const citation = block.attrs?.citation?.trim()
+  const innerBlocks = block.innerBlocks || []
+
+  if (!innerBlocks.length) {
+    return null
+  }
+
+  const items: string[] = []
+
+  for (const innerBlock of innerBlocks) {
+    if (innerBlock.blockName === 'core/paragraph') {
+      const content = processParagraphBlock(innerBlock, true)
+
+      if (content) {
+        items.push(content)
+      }
+    }
+  }
+
+  if (!items.length) {
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_quote',
+    quote: items.length ? convertHtmlToJson(items.join(' ')) : undefined,
+    citation: citation || undefined,
+  }
+}
+
+const processGalleryBlock = async (block: BlockGallery): Promise<PostGallery | null> => {
+  const innerBlocks = block.innerBlocks || []
+
+  if (!innerBlocks.length) {
+    return null
+  }
+
+  const items: StoryblokAsset[] = []
+
+  for (const innerBlock of innerBlocks) {
+    if (innerBlock.blockName === 'core/image') {
+      const content = await processImageBlock(innerBlock)
+
+      if (content && content.image) {
+        items.push(content.image)
+      }
+    }
+  }
+
+  if (!items.length) {
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_gallery',
+    items,
+  }
+}
+
+const processListBlock = (block: BlockList): PostText | null => {
+  const innerBlocks = block.innerBlocks || []
+
+  if (!innerBlocks.length) {
+    return null
+  }
+
+  const items: string[] = []
+
+  for (const innerBlock of innerBlocks) {
+    if (innerBlock.blockName === 'core/list-item') {
+      const content = processParagraphBlock(innerBlock, true)
+
+      if (content) {
+        items.push(content)
+      }
+    }
+  }
+
+  if (!items.length) {
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_text',
+    text: items.length ? convertHtmlToJson(`<ul>${items.join('')}</ul>`) : undefined,
+  }
+}
+
+const processEmbedBlock = async (block: BlockEmbed): Promise<PostEmbed | null> => {
+  const url = block.attrs?.url?.trim()
+
+  if (!url || !url.startsWith('http')) {
+    return null
+  }
+
+  try {
+    const parsedUrl = new URL(url)
+
+    if (!parsedUrl.hostname || parsedUrl.hostname.length < 3) {
+      console.log(`⚠️ Invalid embed URL (invalid hostname): ${url}`)
+      return null
+    }
+  }
+  catch {
+    console.log(`⚠️  Invalid embed URL (malformed): ${url}`)
+    return null
+  }
+
+  return {
+    _uid: crypto.randomUUID(),
+    component: 'post_embed',
+    url,
+  }
+}
+
+const processBlocks = async (blockData: Record<number, BlockParagraph | BlockHeading | BlockHtml | BlockImage | BlockQuote | BlockList | BlockGallery | BlockEmbed>): Promise<Post['blocks']> => {
   const blocks = Object.values(blockData)
   const processed: Post['blocks'] = []
 
   for (const block of blocks) {
     if (block.blockName === 'core/paragraph') {
-      const content = block.rendered?.trim()
+      const component = processParagraphBlock(block)
 
-      // Sometimes we get empty <p> tags. Ignore them.
-      if (!content || content === '<p></p>') {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const component: PostText = {
-        _uid: crypto.randomUUID(),
-        component: 'post_text',
-        text: convertHtmlToJson(content),
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
+        }
       }
     }
     else if (block.blockName === 'core/heading') {
-      const content = block.attrs?.content?.trim()
+      const component = processHeadingBlock(block)
 
-      if (!content) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const component: PostHeading = {
-        _uid: crypto.randomUUID(),
-        component: 'post_heading',
-        heading: content,
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
+        }
       }
     }
     else if (block.blockName === 'core/html') {
-      const content = block.rendered?.trim()
+      const component = processHtmlBlock(block)
 
-      if (!content) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const component: PostHtml = {
-        _uid: crypto.randomUUID(),
-        component: 'post_html',
-        html: content,
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
+        }
       }
     }
     else if (block.blockName === 'core/image') {
-      const imageUrl = block.attrs?.url
+      const component = await processImageBlock(block)
 
-      if (!imageUrl) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const uploadedImage = await uploadFileToStoryblok(imageUrl)
+        // Wait between image uploads to avoid rate limits
+        await wait(INTERVAL_WAIT_MS)
 
-      if (!uploadedImage) {
-        continue
-      }
-
-      // Wait between image uploads to avoid rate limits
-      await wait(INTERVAL_WAIT_MS)
-
-      const component: PostImage = {
-        _uid: crypto.randomUUID(),
-        component: 'post_image',
-        image: uploadedImage,
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
+        }
       }
     }
     else if (block.blockName === 'core/quote') {
-      const citation = block.attrs?.citation?.trim()
-      const innerBlocks = block.innerBlocks || []
+      const component = processQuoteBlock(block)
 
-      if (!innerBlocks.length) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const items: string[] = []
-
-      for (const innerBlock of innerBlocks) {
-        if (innerBlock.blockName === 'core/paragraph') {
-          const content = innerBlock.rendered?.trim()
-
-          if (!content || content === '<p></p>') {
-            continue
-          }
-
-          items.push(content)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
         }
-      }
-
-      if (!items.length) {
-        continue
-      }
-
-      const component: PostQuote = {
-        _uid: crypto.randomUUID(),
-        component: 'post_quote',
-        quote: items.length ? convertHtmlToJson(items.join(' ')) : undefined,
-        citation: citation || undefined,
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
       }
     }
     else if (block.blockName === 'core/list') {
-      const innerBlocks = block.innerBlocks || []
+      const component = processListBlock(block)
 
-      if (!innerBlocks.length) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const items: string[] = []
-
-      for (const innerBlock of innerBlocks) {
-        if (innerBlock.blockName === 'core/list-item') {
-          const content = innerBlock.rendered?.trim()
-
-          if (!content || content === '<li></li>' || content === '<p></p>') {
-            continue
-          }
-
-          items.push(content)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
         }
-      }
-
-      if (!items.length) {
-        continue
-      }
-
-      const component: PostText = {
-        _uid: crypto.randomUUID(),
-        component: 'post_text',
-        text: items.length ? convertHtmlToJson(`<ul>${items.join('')}</ul>`) : undefined,
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
       }
     }
     else if (block.blockName === 'core/gallery') {
-      const innerBlocks = block.innerBlocks || []
+      const component = await processGalleryBlock(block)
 
-      if (!innerBlocks.length) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const items: StoryblokAsset[] = []
-
-      for (const innerBlock of innerBlocks) {
-        if (innerBlock.blockName === 'core/image') {
-          const imageUrl = innerBlock.attrs?.url
-
-          if (!imageUrl) {
-            continue
-          }
-
-          const uploadedImage = await uploadFileToStoryblok(imageUrl)
-
-          if (!uploadedImage) {
-            console.log(`⚠️ Failed to upload gallery image: ${imageUrl}`)
-            continue
-          }
-
-          items.push(uploadedImage)
-
-          // Wait between image uploads to avoid rate limits
-          await wait(INTERVAL_WAIT_MS)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
         }
       }
+    }
+    else if (block.blockName === 'core/embed') {
+      const component = await processEmbedBlock(block)
 
-      if (!items.length) {
-        continue
-      }
+      if (component) {
+        processed.push(component)
 
-      const component: PostGallery = {
-        _uid: crypto.randomUUID(),
-        component: 'post_gallery',
-        items,
-      }
-
-      processed.push(component)
-
-      if (VERBOSE_LOGS) {
-        console.log(`🔥 Block: ${block.blockName}`)
+        if (VERBOSE_LOGS) {
+          console.log(`🔥 Block: ${block.blockName}`)
+        }
       }
     }
     else {
-      console.log(`⚠️  Encountered unknown block type: ${block.blockName}`)
+      const unknownBlock = block as BlockUnknown
+      console.log(`⚠️  Encountered unknown block type: ${unknownBlock.blockName}`)
     }
   }
 
@@ -254,8 +321,8 @@ interface WpPost {
   }
   categories: number[]
   has_blocks: boolean
-  // Could mock all the blocks if we really wanted? Urgh.
-  block_data: Record<number, any>
+  // Mocked WP blocks: Use with caution and double check actual JSON response.
+  block_data: Record<number, BlockParagraph | BlockHeading | BlockHtml | BlockImage | BlockQuote | BlockList | BlockGallery>
 }
 
 const getWpPosts = async (page: number = 1, perPage: number = 5, maxRetries: number = 3): Promise<WpPost[]> => {
@@ -331,7 +398,7 @@ const run = async () => {
         break
       }
 
-      const postTitle = post.title.rendered?.trim() || ''
+      const postTitle = decodeHtmlEntities(post.title.rendered?.trim() || '')
       const postSlug = post.slug.trim() || ''
 
       if (!postSlug) {
