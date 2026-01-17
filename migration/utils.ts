@@ -172,6 +172,11 @@ async function uploadFileToStoryblok(fileUrl: string): Promise<StoryblokAsset | 
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
 const wpExcludedPosts = [
+  //Results in 500 error.
+  { id: 6475, slug: 'christmas-adverts-2020' },
+  { id: 4736, slug: 'using-customer-experience-to-transform-charity-comms' },
+
+  // Old video posts no longer needed.
   { id: 3059, slug: 'weekly-dose-video-inspiration-2-march-2018' },
   { id: 3036, slug: 'weekly-dose-video-inspiration-23-feb-2018' },
   { id: 2982, slug: 'your-weekly-dose-of-video-inspiration-12-feb-2018' },
@@ -269,6 +274,7 @@ const decodeHtmlEntities = (text: string): string => {
     '&#8211;': '-',
     '&#8212;': '—',
     '&amp;': '&',
+    '&#038;': '&',
     '&lt;': '<',
     '&gt;': '>',
     '&quot;': '"',

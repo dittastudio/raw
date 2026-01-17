@@ -332,11 +332,13 @@ const getWpPosts = async (page: number = 1, perPage: number = 5, maxRetries: num
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     try {
-      const response = await fetch(`https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`)
+      const url = `https://raw.london/wp-json/wp/v2/posts?status=publish&page=${page}&per_page=${perPage}&_fields=${fields}&exclude=${excludeIds}`
+      const response = await fetch(url)
 
       if (!response.ok) {
         if (attempt < maxRetries) {
           console.error(`❌ WordPress API error: ${response.status} ${response.statusText}. Retrying in 5 seconds... (Attempt ${attempt + 1}/${maxRetries})`)
+          console.log(`URL: ${url}`)
           await wait(5000)
           continue
         }
