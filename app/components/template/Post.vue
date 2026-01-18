@@ -84,7 +84,10 @@ const category = computed(() => {
             </div>
 
             <div>
-              <p class="font-bold">
+              <p
+                v-if="author.name"
+                class="font-bold"
+              >
                 {{ author.name }}
               </p>
 
