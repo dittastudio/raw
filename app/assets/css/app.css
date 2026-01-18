@@ -8,6 +8,7 @@
 @theme {
   --color-\*: initial;
   --color-white: hsla(0, 0%, 100%, 1);
+  --color-offwhite: hsla(50, 33%, 96%, 1); /* #f8f7f1 */
   --color-black: hsla(0, 0%, 0%, 1); /* #000000 */
   --color-offblack: hsla(200, 5%, 12%, 1); /* #1e2021 */
   --color-blue: hsla(197, 77%, 73%, 1); /* #84d0ef */

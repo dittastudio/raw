@@ -602,13 +602,14 @@
     "display_name": "Embed",
     "description": "",
     "created_at": "2026-01-14T21:51:40.405Z",
-    "updated_at": "2026-01-14T21:52:03.494Z",
+    "updated_at": "2026-01-17T01:11:39.689Z",
     "id": 134094440066440,
     "schema": {
       "url": {
         "type": "text",
         "pos": 0,
-        "id": "ob8U9SfeTFytW4UEjny8uQ"
+        "id": "ob8U9SfeTFytW4UEjny8uQ",
+        "display_name": "URL"
       }
     },
     "image": null,

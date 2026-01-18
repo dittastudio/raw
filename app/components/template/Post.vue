@@ -11,7 +11,7 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
 </script>
 
 <template>
-  <article>
+  <article class="w-full bg-offwhite">
     <NuxtImg
       v-if="story.content.hero?.filename && storyblokAssetType(story.content.hero.filename) === 'image'"
       class="block w-full h-auto"
@@ -19,8 +19,6 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
       :alt="story.content.hero.alt || story.name"
       :width="1000"
       :height="Math.round(storyblokImageDimensions(story.content.hero.filename).height / storyblokImageDimensions(story.content.hero.filename).width * 1000)"
-      provider="storyblok"
-      format="webp"
       quality="85"
       :modifiers="{
         smart: true,
@@ -34,11 +32,9 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
         </div>
 
         <div class="flex flex-col gap-18 col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
-          <h1 class="type-display-28">
+          <h1 class="type-display-28 text-pretty">
             {{ story.name }}
           </h1>
-
-          <pre>{{ author }}</pre>
 
           <div
             v-if="author"
@@ -54,8 +50,6 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
                 :alt="author.content.image.alt || story.name"
                 :width="100"
                 :height="Math.round(storyblokImageDimensions(author.content.image.filename).height / storyblokImageDimensions(author.content.image.filename).width * 100)"
-                provider="storyblok"
-                format="webp"
                 quality="85"
                 :modifiers="{
                   smart: true,
@@ -68,7 +62,12 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
                 {{ author.name }}
               </p>
 
-              <time :datetime="story.created_at">{{ formatDate(story.created_at) }}</time>
+              <time
+                v-if="story.first_published_at"
+                :datetime="story.first_published_at"
+              >
+                {{ formatDate(story.first_published_at) }}
+              </time>
             </div>
           </div>
         </div>
@@ -76,12 +75,40 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
 
       <div class="w-full grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
         <div class="flex flex-col gap-6 w-full col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
+          <!--
+            Examples:
+            http://0.0.0.0:3000/posts/raw-london-agency-brand-2024
+          -->
           <section
             v-for="block in story.content.blocks"
             :key="block._uid"
           >
+            <p class="border-2 border-green type-mono-14 py-1.5 px-3 rounded-2xl">
+              {{ block.component }}
+            </p>
+
             <BlockPostHeading
               v-if="block.component === 'post_heading'"
+              :block="block"
+            />
+
+            <BlockPostGallery
+              v-else-if="block.component === 'post_gallery'"
+              :block="block"
+            />
+
+            <BlockPostHtml
+              v-else-if="block.component === 'post_html'"
+              :block="block"
+            />
+
+            <BlockPostImage
+              v-else-if="block.component === 'post_image'"
+              :block="block"
+            />
+
+            <BlockPostQuote
+              v-else-if="block.component === 'post_quote'"
               :block="block"
             />
 
