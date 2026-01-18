@@ -8,6 +8,26 @@ interface Props {
 
 const { story } = defineProps<Props>()
 const author = computed(() => typeof story.content.author !== 'string' ? story.content.author : null)
+const storyblokApi = useStoryblokApi()
+const { data: categories } = await useAsyncData('categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
+  datasource: 'category',
+}))
+
+interface CategoryEntry {
+  id: number
+  value: string
+  name: string
+}
+
+const category = computed(() => {
+  if (categories.value?.data.datasource_entries) {
+    const postCategory = Array.isArray(story.content.category) ? story.content.category[0] : story.content.category
+    const entry = categories.value.data.datasource_entries.find((entry: CategoryEntry) => entry.value === postCategory)
+    return entry ? entry.name : null
+  }
+
+  return null
+})
 </script>
 
 <template>
@@ -27,8 +47,13 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
 
     <div class="wrapper w-full flex flex-col gap-18">
       <header class="w-full pt-18 pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
-        <div class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4">
-          <pre>{{ story.content.category }}</pre>
+        <div
+          v-if="category"
+          class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4"
+        >
+          <p class="font-bold type-mono-20">
+            {{ category }}
+          </p>
         </div>
 
         <div class="flex flex-col gap-18 col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
