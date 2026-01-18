@@ -16,8 +16,6 @@ const { data: oembed, error } = await useAsyncData(
     },
   }),
 )
-
-console.log('oembed', oembed)
 </script>
 
 <template>

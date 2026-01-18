@@ -9,7 +9,8 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div>
-    {{ block }}
-  </div>
+  <div
+    v-if="block.html"
+    v-html="block.html"
+  />
 </template>
