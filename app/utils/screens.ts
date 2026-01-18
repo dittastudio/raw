@@ -1,7 +1,8 @@
 // Grab breakpoints from Tailwind CSS main.css
 const getBreakpoint = (breakpoint: string): number => {
-  if (!import.meta.client)
+  if (!import.meta.client) {
     return 0
+  }
 
   const value = getComputedStyle(document.documentElement)
     .getPropertyValue(`--breakpoint-${breakpoint}`)
