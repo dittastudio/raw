@@ -19,6 +19,16 @@ export interface BlockHeroBrand {
   _uid: string;
 }
 
+export interface BlockHoverList {
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  component: "block_hover_list";
+  _uid: string;
+}
+
 export interface BlockImpactStatement {
   theme?: number | string;
   items?: TitleCopy[];
@@ -49,7 +59,7 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: (BlockHero | BlockHeroBrand | BlockImpactStatement | BlockTestimonials)[];
+  blocks?: (BlockHero | BlockHeroBrand | BlockHoverList | BlockImpactStatement | BlockTestimonials)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;

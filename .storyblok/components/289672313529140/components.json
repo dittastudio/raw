@@ -153,6 +153,77 @@
     "metadata": {}
   },
   {
+    "name": "block_hover_list",
+    "display_name": "Hover List",
+    "description": "",
+    "created_at": "2026-01-18T18:27:53.343Z",
+    "updated_at": "2026-01-18T18:31:44.225Z",
+    "id": 135459935652633,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "ngxAVQX-SGmtXTKuC5RJsA"
+      },
+      "headline": {
+        "type": "richtext",
+        "pos": 1,
+        "id": "FuO6792QSiK7MgQHPMNtqA",
+        "customize_toolbar": true,
+        "toolbar": [
+          "h2",
+          "h3",
+          "h4",
+          "unset"
+        ],
+        "style_options": [
+          {
+            "_uid": "32b97c2c-2de3-40bd-ad77-6d92f718c63c",
+            "name": "Outlined",
+            "value": "is-outlined"
+          }
+        ]
+      },
+      "copy": {
+        "type": "richtext",
+        "pos": 2,
+        "id": "smv5StJ1TiuGHdeYWVfzrw",
+        "customize_toolbar": true,
+        "toolbar": [
+          "unset",
+          "paragraph"
+        ]
+      },
+      "cta_title": {
+        "type": "text",
+        "pos": 3,
+        "id": "3wQLCrLPTmOL5GkyubG5Nw"
+      },
+      "cta": {
+        "type": "multilink",
+        "pos": 4,
+        "email_link_type": true,
+        "allow_target_blank": true,
+        "id": "FBvAqJ90TSeEs-KkB_lcGQ"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Hover List",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "between-horizontal-start",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_impact_statement",
     "display_name": "Impact Statement",
     "description": "",
@@ -205,7 +276,7 @@
     "display_name": "Testimonials",
     "description": "",
     "created_at": "2026-01-16T15:37:59.970Z",
-    "updated_at": "2026-01-16T16:28:43.601Z",
+    "updated_at": "2026-01-18T18:27:30.937Z",
     "id": 134710394762064,
     "schema": {
       "theme": {
@@ -232,7 +303,7 @@
         "display_name": "Items"
       }
     },
-    "image": "//a.storyblok.com/f/289672313529140/x/76aa71aad7/screenshot-2026-01-13-at-22-51-13.jpg",
+    "image": "//a.storyblok.com/f/289672313529140/x/847743401c/screenshot-2026-01-18-at-18-27-09.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -242,7 +313,7 @@
     "real_name": "Testimonials",
     "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
     "color": "var(--sb-color-accent-background-green-cyan)",
-    "icon": "layout-list",
+    "icon": "align-center",
     "internal_tags_list": [],
     "internal_tag_ids": [],
     "content_type_asset_preview": null,

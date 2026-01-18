@@ -76,19 +76,21 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
       <div class="w-full grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
         <div class="flex flex-col gap-6 w-full col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
           <!--
-            Examples:
+            Examples with all blocks:
             http://0.0.0.0:3000/posts/raw-london-agency-brand-2024
+            http://0.0.0.0:3000/posts/raw-london-shortlisted-for-purpose-awards-emea-2023
           -->
           <section
             v-for="block in story.content.blocks"
             :key="block._uid"
           >
-            <p class="border-2 border-green type-mono-14 py-1.5 px-3 rounded-2xl">
-              {{ block.component }}
-            </p>
+            <BlockPostEmbed
+              v-if="block.component === 'post_embed'"
+              :block="block"
+            />
 
             <BlockPostHeading
-              v-if="block.component === 'post_heading'"
+              v-else-if="block.component === 'post_heading'"
               :block="block"
             />
 
