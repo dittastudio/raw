@@ -11,6 +11,7 @@ const { block } = defineProps<Props>()
 <template>
   <ul
     v-if="block.items?.length"
+    v-editable="block"
     class="grid gap-4"
     :class="{
       'grid-cols-1': block.items.length === 1,

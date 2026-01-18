@@ -9,7 +9,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="w-full">
+  <div
+    v-editable="block"
+    class="w-full"
+  >
     <NuxtImg
       v-if="block.image?.filename && storyblokAssetType(block.image.filename) === 'image'"
       class="block w-full h-auto"

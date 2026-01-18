@@ -11,6 +11,7 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-if="block.html"
+    v-editable="block"
     v-html="block.html"
   />
 </template>

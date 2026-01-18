@@ -11,6 +11,7 @@ const { block } = defineProps<Props>()
 <template>
   <figure
     v-if="storyblokRichTextContent(block.quote)"
+    v-editable="block"
     class="flex flex-col gap-4"
   >
     <blockquote>

@@ -21,6 +21,7 @@ const { data: oembed, error } = await useAsyncData(
 <template>
   <div
     v-if="oembed && !error"
+    v-editable="block"
     class="oembed overflow-hidden w-full"
     :style="{
       '--oembed-width': oembed.width || 16,
