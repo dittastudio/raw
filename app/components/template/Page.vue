@@ -35,6 +35,11 @@ const { story } = defineProps<Props>()
       v-if="block.component === 'block_testimonials'"
       :block="block"
     />
+
+    <BlockHoverList
+      v-else-if="block.component === 'block_hover_list'"
+      :block="block"
+    />
   </AppSection>
 </template>
 
@@ -42,7 +47,9 @@ const { story } = defineProps<Props>()
 @reference "@/assets/css/app.css";
 
 .section {
-  &--block_impact_statement {
+  &--block_impact_statement,
+  &--block_hover_list,
+  &--block_testimonials {
     padding-block: --spacing(35);
   }
 }
