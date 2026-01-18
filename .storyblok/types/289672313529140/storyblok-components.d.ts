@@ -81,7 +81,7 @@ export interface Person {
 export interface Post {
   hero?: StoryblokAsset;
   author?: ISbStoryData<Person> | string;
-  category?: (number | string)[];
+  category?: number | string;
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;

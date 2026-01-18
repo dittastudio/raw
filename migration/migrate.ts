@@ -413,6 +413,7 @@ const run = async () => {
 
       try {
         const postImage = post.yoast_head_json?.og_image?.[0]?.url ? await uploadFileToStoryblok(post.yoast_head_json.og_image[0].url) : null
+        const postCategories = mapCategories(post.categories)
 
         const fields = {
           name: postTitle,
@@ -425,7 +426,7 @@ const run = async () => {
           seo_description: post.yoast_head_json?.og_description || post.yoast_head_json?.description || postTitle || '',
           seo_image: postImage,
           hero: postImage,
-          category: mapCategories(post.categories),
+          category: postCategories?.[0] ?? 'news',
           author: AUTHOR,
           blocks: post.has_blocks && Object.keys(post.block_data).length ? await processBlocks(post.block_data) : [],
         }

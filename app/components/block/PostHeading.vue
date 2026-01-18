@@ -9,5 +9,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <h3 class="font-bold">{{ block.heading }}</h3>
+  <h3
+    v-editable="block"
+    class="font-bold type-mono-20"
+  >
+    {{ block.heading }}
+  </h3>
 </template>

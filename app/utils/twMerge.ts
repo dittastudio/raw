@@ -22,6 +22,7 @@ export const twMerge = extendTailwindMerge({
       ],
       'text-color': [
         'text-white',
+        'text-offwhite',
         'text-black',
         'text-offblack',
         'text-blue',

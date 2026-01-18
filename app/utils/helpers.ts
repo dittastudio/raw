@@ -1,9 +1,11 @@
 const formatDate = (dateString: string): string => {
   const date = new Date(dateString)
   const day = date.getDate()
-  
+
   const getOrdinalSuffix = (day: number): string => {
-    if (day > 3 && day < 21) return 'th'
+    if (day > 3 && day < 21) {
+      return 'th'
+    }
 
     switch (day % 10) {
       case 1: return 'st'
@@ -12,12 +14,12 @@ const formatDate = (dateString: string): string => {
       default: return 'th'
     }
   }
-  
+
   const formatter = new Intl.DateTimeFormat('en-GB', {
     year: 'numeric',
     month: 'long',
   })
-  
+
   const monthYear = formatter.format(date)
   return `${day}${getOrdinalSuffix(day)} ${monthYear}`
 }

@@ -8,10 +8,31 @@ interface Props {
 
 const { story } = defineProps<Props>()
 const author = computed(() => typeof story.content.author !== 'string' ? story.content.author : null)
+const storyblokApi = useStoryblokApi()
+
+const { data: categories } = await useAsyncData('categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
+  datasource: 'category',
+}))
+
+interface CategoryEntry {
+  id: number
+  value: string
+  name: string
+}
+
+const category = computed(() => {
+  if (categories.value?.data.datasource_entries) {
+    const postCategory = Array.isArray(story.content.category) ? story.content.category[0] : story.content.category
+    const entry = categories.value.data.datasource_entries.find((entry: CategoryEntry) => entry.value === postCategory)
+    return entry ? entry.name : null
+  }
+
+  return null
+})
 </script>
 
 <template>
-  <article>
+  <article class="w-full bg-offwhite">
     <NuxtImg
       v-if="story.content.hero?.filename && storyblokAssetType(story.content.hero.filename) === 'image'"
       class="block w-full h-auto"
@@ -19,8 +40,6 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
       :alt="story.content.hero.alt || story.name"
       :width="1000"
       :height="Math.round(storyblokImageDimensions(story.content.hero.filename).height / storyblokImageDimensions(story.content.hero.filename).width * 1000)"
-      provider="storyblok"
-      format="webp"
       quality="85"
       :modifiers="{
         smart: true,
@@ -28,17 +47,26 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
     />
 
     <div class="wrapper w-full flex flex-col gap-18">
-      <header class="w-full pt-18 pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
-        <div class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4">
-          <pre>{{ story.content.category }}</pre>
+      <header
+        class="w-full pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) gap-y-[calc(var(--app-inner-gutter)*2)] grid-cols-1 md:grid-cols-12"
+        :class="{
+          'pt-18': story.content.hero?.filename,
+          'pt-[calc(--spacing(18)+var(--app-header-height))]': !story.content.hero?.filename,
+        }"
+      >
+        <div
+          v-if="category"
+          class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4"
+        >
+          <p class="font-bold type-mono-20">
+            {{ category }}
+          </p>
         </div>
 
         <div class="flex flex-col gap-18 col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
-          <h1 class="type-display-28">
+          <h1 class="type-display-28 text-pretty">
             {{ story.name }}
           </h1>
-
-          <pre>{{ author }}</pre>
 
           <div
             v-if="author"
@@ -46,7 +74,7 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
           >
             <div
               v-if="author.content.image?.filename && storyblokAssetType(author.content.image.filename) === 'image'"
-              class="size-18 rounded-full"
+              class="size-18 rounded-full overflow-hidden"
             >
               <NuxtImg
                 class="block size-full object-cover rounded-full"
@@ -54,8 +82,6 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
                 :alt="author.content.image.alt || story.name"
                 :width="100"
                 :height="Math.round(storyblokImageDimensions(author.content.image.filename).height / storyblokImageDimensions(author.content.image.filename).width * 100)"
-                provider="storyblok"
-                format="webp"
                 quality="85"
                 :modifiers="{
                   smart: true,
@@ -64,11 +90,19 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
             </div>
 
             <div>
-              <p class="font-bold">
+              <p
+                v-if="author.name"
+                class="font-bold"
+              >
                 {{ author.name }}
               </p>
 
-              <time :datetime="story.created_at">{{ formatDate(story.created_at) }}</time>
+              <time
+                v-if="story.first_published_at"
+                :datetime="story.first_published_at"
+              >
+                {{ formatDate(story.first_published_at) }}
+              </time>
             </div>
           </div>
         </div>
@@ -76,12 +110,42 @@ const author = computed(() => typeof story.content.author !== 'string' ? story.c
 
       <div class="w-full grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
         <div class="flex flex-col gap-6 w-full col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
+          <!--
+            Examples with all blocks:
+            http://0.0.0.0:3000/posts/raw-london-agency-brand-2024
+            http://0.0.0.0:3000/posts/raw-london-shortlisted-for-purpose-awards-emea-2023
+          -->
           <section
             v-for="block in story.content.blocks"
             :key="block._uid"
           >
+            <BlockPostEmbed
+              v-if="block.component === 'post_embed'"
+              :block="block"
+            />
+
             <BlockPostHeading
-              v-if="block.component === 'post_heading'"
+              v-else-if="block.component === 'post_heading'"
+              :block="block"
+            />
+
+            <BlockPostGallery
+              v-else-if="block.component === 'post_gallery'"
+              :block="block"
+            />
+
+            <BlockPostHtml
+              v-else-if="block.component === 'post_html'"
+              :block="block"
+            />
+
+            <BlockPostImage
+              v-else-if="block.component === 'post_image'"
+              :block="block"
+            />
+
+            <BlockPostQuote
+              v-else-if="block.component === 'post_quote'"
               :block="block"
             />
 
