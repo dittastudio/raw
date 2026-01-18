@@ -47,7 +47,13 @@ const category = computed(() => {
     />
 
     <div class="wrapper w-full flex flex-col gap-18">
-      <header class="w-full pt-18 pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12">
+      <header
+        class="w-full pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) gap-y-[calc(var(--app-inner-gutter)*2)] grid-cols-1 md:grid-cols-12"
+        :class="{
+          'pt-18': story.content.hero?.filename,
+          'pt-[calc(--spacing(18)+var(--app-header-height))]': !story.content.hero?.filename,
+        }"
+      >
         <div
           v-if="category"
           class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4"
@@ -68,7 +74,7 @@ const category = computed(() => {
           >
             <div
               v-if="author.content.image?.filename && storyblokAssetType(author.content.image.filename) === 'image'"
-              class="size-18 rounded-full"
+              class="size-18 rounded-full overflow-hidden"
             >
               <NuxtImg
                 class="block size-full object-cover rounded-full"
