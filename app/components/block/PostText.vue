@@ -9,7 +9,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div v-if="storyblokRichTextContent(block.text)">
+  <div
+    v-if="storyblokRichTextContent(block.text)"
+    class="prose w-full"
+  >
     <StoryblokText :html="block.text" />
   </div>
 </template>

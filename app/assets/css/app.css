@@ -4,6 +4,7 @@
 @import "./transitions.css";
 @import "./utils.css";
 @import "./fonts.css";
+@import "./prose.css";
 
 @theme {
   --color-\*: initial;
