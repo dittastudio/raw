@@ -8,8 +8,6 @@ interface Props {
 
 const { block } = defineProps<Props>()
 const storyblokApi = useStoryblokApi()
-// const route = useRoute()
-// const routeQueryCategory = computed(() => route.query?.category ?? null)
 
 const { data: categories } = await useAsyncData('categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
   datasource: 'category',
@@ -72,16 +70,16 @@ const { data: posts } = await useAsyncData('posts', async () => {
   >
     <div class="wrapper-max">
       <div class="w-full py-22 flex flex-col items-start justify-center gap-6">
-        <h2 class="type-display-28">
-          Categories
-        </h2>
-
         <FilterDatasource
           v-if="categories?.data.datasource_entries.length"
           slug="category"
           :entries="categories.data.datasource_entries"
         >
           <template #default="{ filters, applied }">
+            <h2 class="type-display-28">
+              {{ applied.item?.name ? applied.item.name === 'All' ? 'All Posts' : applied.item.name : 'All Posts' }}
+            </h2>
+
             <ul class="w-full flex items-center justify-start gap-4 md:gap-5">
               <li
                 v-for="filter in filters"
@@ -93,8 +91,8 @@ const { data: posts } = await useAsyncData('posts', async () => {
                   class="block hover:opacity-100 transition-opacity duration-200 ease-out whitespace-nowrap"
                   :class="[
                     {
-                      'opacity-40': applied !== filter.value,
-                      'opacity-100': applied === filter.value || (!applied && !filter.value),
+                      'opacity-40': applied.slug !== filter.value,
+                      'opacity-100': applied.slug === filter.value || (!applied.slug && !filter.value),
                     },
                   ]"
                 >
