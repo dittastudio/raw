@@ -36,6 +36,11 @@ export interface BlockImpactStatement {
   _uid: string;
 }
 
+export interface BlockPosts {
+  component: "block_posts";
+  _uid: string;
+}
+
 export interface BlockTestimonials {
   theme?: number | string;
   items?: Testimonial[];
@@ -59,7 +64,7 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: (BlockHero | BlockHeroBrand | BlockHoverList | BlockImpactStatement | BlockTestimonials)[];
+  blocks?: (BlockHero | BlockHeroBrand | BlockHoverList | BlockImpactStatement | BlockPosts | BlockTestimonials)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;

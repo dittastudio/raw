@@ -24,18 +24,17 @@ const {
       grid
       grid-cols-(--app-grid)
       gap-x-(--app-inner-gutter)
-      gap-y-20
-      lg:gap-y-40
+
     "
   >
     <div
       v-if="title"
       class="
-          ui-content__title
-          col-span-full
-          md:col-start-1
-          md:col-span-3
-        "
+        ui-content__title
+        col-span-full
+        md:col-start-1
+        md:col-span-3
+      "
     >
       <h2 class="type-h5">
         {{ title }}
@@ -45,11 +44,11 @@ const {
     <div
       v-if="storyblokRichTextContent(headline)"
       class="
-          ui-content__headline
-          col-span-full
-          md:col-start-4
-          md:col-span-9
-        "
+        ui-content__headline
+        col-span-full
+        md:col-start-4
+        md:col-span-9
+      "
     >
       <StoryblokText :html="headline" />
     </div>
@@ -57,17 +56,16 @@ const {
     <div
       v-if="storyblokRichTextContent(copy)"
       class="
-          ui-content__text
-          xrow-start-2
-          col-start-2
-          col-span-3
-          sm:col-start-5
-          sm:col-span-4
-          md:col-start-9
-          md:col-span-4
-          lg:col-start-9
-          lg:col-span-3
-        "
+        ui-content__copy
+        col-start-2
+        col-span-3
+        sm:col-start-5
+        sm:col-span-4
+        md:col-start-9
+        md:col-span-4
+        lg:col-start-9
+        lg:col-span-3
+      "
     >
       <StoryblokText :html="copy" />
     </div>
@@ -75,9 +73,12 @@ const {
     <div
       v-if="cta?.cached_url"
       class="
-          row-start-3
-          col-span-full
-        "
+        ui-content__cta
+      "
+      :class="{
+        'col-span-full md:col-start-4 md:col-span-9': !storyblokRichTextContent(copy),
+        'col-start-2 col-span-3 sm:col-start-5 sm:col-span-4 md:col-start-9 md:col-span-4 lg:col-span-3 lg:col-start-9': storyblokRichTextContent(copy),
+      }"
     >
       <StoryblokLink
         class="inline-block"
@@ -103,9 +104,15 @@ const {
 
     text-wrap: balance;
   }
+
+  @variant max-md {
+    .ui-content__title + & {
+      margin-block-start: --spacing(8);
+    }
+  }
 }
 
-.ui-content__text {
+.ui-content__copy {
   :deep(p) {
     @apply type-p;
     text-wrap: pretty;
@@ -115,6 +122,17 @@ const {
 
   :deep(p + p) {
     padding-top: 1.25em;
+  }
+
+  .ui-content__headline + & {
+    margin-block-start: --spacing(20);
+  }
+}
+
+.ui-content__cta {
+  .ui-content__headline + &,
+  .ui-content__copy + & {
+    margin-block-start: --spacing(8);
   }
 }
 </style>
