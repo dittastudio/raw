@@ -12,14 +12,14 @@ const { headline, slug, image, category } = defineProps<Props>()
 </script>
 
 <template>
-  <article>
+  <article class="size-full">
     <NuxtLink
-      class="flex flex-col gap-4"
+      class="flex flex-col items-start justify-start gap-6 size-full border-b border-offblack pb-6"
       :to="`/${slug}`"
     >
       <NuxtImg
         v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
-        class="block w-full h-auto"
+        class="block w-full aspect-video object-cover"
         :src="image.filename"
         :alt="image.alt || headline || ''"
         :width="500"
@@ -36,12 +36,17 @@ const { headline, slug, image, category } = defineProps<Props>()
 
       <h3
         v-if="headline"
-        class="font-bold type-mono-20 text-pretty"
+        class="font-bold type-mono-20 text-balance max-w-[64ch]"
       >
         {{ headline }}
       </h3>
 
-      <slot name="author" />
+      <div
+        v-if="$slots.author"
+        class="mt-auto"
+      >
+        <slot name="author" />
+      </div>
     </NuxtLink>
   </article>
 </template>
