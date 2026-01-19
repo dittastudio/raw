@@ -8,6 +8,7 @@ interface Props {
 
 const { block } = defineProps<Props>()
 const storyblokApi = useStoryblokApi()
+const route = useRoute()
 
 const { data: categories } = await useAsyncData('categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
   datasource: 'category',
@@ -29,21 +30,28 @@ const getCategory = (value?: string | string[] | number): Entry | undefined => {
   return undefined
 }
 
+const perPage = 10
+const page = computed(() => {
+  const raw = Array.isArray(route.query.page) ? route.query.page[0] : route.query.page
+  const n = Number(raw ?? 1)
+  return Number.isFinite(n) && n > 0 ? n : 1
+})
+
 const { data: posts } = await useAsyncData('posts', async () => {
   const { data } = await storyblokApi.get('cdn/stories', {
     content_type: 'post',
-    per_page: 10,
+    per_page: perPage * page.value,
     page: 1,
     sort_by: 'first_published_at:desc',
     version: 'published',
     resolve_relations: [
       'post.author',
     ],
-    // filter_query: {
-    //   category: {
-    //     in: 'design',
-    //   },
-    // },
+    filter_query: {
+      category: {
+        in: getCategory((route.query.category as string) || '')?.value,
+      },
+    },
   })
   return data.stories
 }, {
@@ -60,6 +68,7 @@ const { data: posts } = await useAsyncData('posts', async () => {
 
     return payload
   },
+  watch: [route],
 })
 </script>
 
