@@ -20,11 +20,13 @@ export interface BlockHeroBrand {
 }
 
 export interface BlockHoverList {
+  theme?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  items?: ListItem[];
   component: "block_hover_list";
   _uid: string;
 }
@@ -52,6 +54,14 @@ export interface Link {
   title: string;
   link: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   component: "link";
+  _uid: string;
+}
+
+export interface ListItem {
+  title?: string;
+  copy?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
+  component: "list_item";
   _uid: string;
 }
 

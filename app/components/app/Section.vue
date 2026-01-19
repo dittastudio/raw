@@ -90,18 +90,3 @@ onUnmounted(() => {
     <slot />
   </section>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.section :deep(.is-outlined) {
-  @supports((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
-    -webkit-text-stroke: 0.015em var(--app-text-color);
-    text-stroke: 0.015em var(--app-text-color);
-    color: transparent;
-    transition:
-      -webkit-text-stroke var(--app-transition-duration) var(--app-transition-ease),
-      text-stroke var(--app-transition-duration) var(--app-transition-ease);
-  }
-}
-</style>

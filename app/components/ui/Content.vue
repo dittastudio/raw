@@ -3,9 +3,9 @@ import type { StoryblokMultilink, StoryblokRichtext } from '@@/.storyblok/types/
 
 interface Props {
   title?: string
-  headline?: StoryblokRichtext
-  copy: StoryblokRichtext
-  cta?: StoryblokMultilink
+  headline?: StoryblokRichtext | undefined
+  copy?: StoryblokRichtext | undefined
+  cta?: StoryblokMultilink | undefined
 }
 
 const {
