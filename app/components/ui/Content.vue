@@ -85,7 +85,6 @@ const {
         :item="cta"
       >
         <UiButton
-          colour="dark"
           mode="solid"
         >
           {{ cta.title }}
