@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import type { BlockTypes } from '@@/types/app'
+import type { Themes } from '@@/types/app'
 
 interface Props {
-  block: BlockTypes
+  theme?: Themes
 }
 
-const { block } = defineProps<Props>()
+const { theme } = defineProps<Props>()
 
 const sectionRef = useTemplateRef('sectionRef')
-const sectionId = block._uid
+const sectionId = useId()
 
 const activeSection = useState<string | null>('activeSection', () => null)
 
@@ -16,26 +16,38 @@ const themeColors = {
   dark: {
     background: 'var(--color-offblack)',
     text: 'var(--color-white)',
+    buttonBackground: 'var(--color-white)',
+    buttonText: 'var(--color-offblack)',
   },
   light: {
     background: 'var(--color-white)',
     text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-white)',
   },
   blue: {
     background: 'var(--color-blue)',
     text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-white)',
   },
   green: {
     background: 'var(--color-green)',
     text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-white)',
   },
   pink: {
     background: 'var(--color-pink)',
     text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-white)',
   },
   purple: {
     background: 'var(--color-purple)',
     text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-white)',
   },
 }
 
@@ -47,12 +59,14 @@ const updateThemeVariables = (theme: keyof typeof themeColors) => {
   if (colors) {
     document.documentElement.style.setProperty('--app-background-color', colors.background)
     document.documentElement.style.setProperty('--app-text-color', colors.text)
+    document.documentElement.style.setProperty('--app-button-background-color', colors.buttonBackground)
+    document.documentElement.style.setProperty('--app-button-text-color', colors.buttonText)
     activeSection.value = sectionId
   }
 }
 
 onMounted(() => {
-  if (!sectionRef.value || !block.theme) {
+  if (!sectionRef.value || !theme) {
     return
   }
 
@@ -60,7 +74,7 @@ onMounted(() => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          updateThemeVariables(block.theme as keyof typeof themeColors)
+          updateThemeVariables(theme)
         }
       })
     },

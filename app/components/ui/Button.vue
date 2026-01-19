@@ -45,8 +45,8 @@ const animateMe = (event: MouseEvent) => {
       ease-out
     "
     :class="{
-      'bg-(--app-text-color) text-white': mode === 'solid',
-      'bg-white outline outline-(--app-text-color) -outline-offset-1 [a:hover_&]:bg-(--app-text-color) [a:hover_&]:text-white': mode === 'outline',
+      'bg-(--app-button-background-color) text-(--app-button-text-color)': mode === 'solid',
+      'bg-white outline outline-(--app-button-text-color) -outline-offset-1 [a:hover_&]:bg-(--app-text-color) [a:hover_&]:text-white': mode === 'outline',
     }"
     @mousemove="animateMe"
   >

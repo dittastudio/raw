@@ -3,7 +3,7 @@
 import type { ISbStoryData } from '@storyblok/js';
 import type { StoryblokMultiasset, StoryblokAsset, StoryblokRichtext, StoryblokMultilink } from '../storyblok.d.ts';
 export interface BlockHero {
-  theme?: "is-light" | "is-dark";
+  theme?: number | string;
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
   component: "block_hero";
