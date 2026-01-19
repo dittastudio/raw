@@ -17,18 +17,20 @@ const { headline, slug, image, category } = defineProps<Props>()
       class="flex flex-col items-start justify-start gap-6 size-full border-b border-offblack pb-6"
       :to="`/${slug}`"
     >
-      <NuxtImg
-        v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
-        class="block w-full aspect-video object-cover"
-        :src="image.filename"
-        :alt="image.alt || headline || ''"
-        :width="500"
-        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
-        quality="85"
-        :modifiers="{
-          smart: true,
-        }"
-      />
+      <div class="w-full overflow-hidden aspect-video bg-white/50">
+        <NuxtImg
+          v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
+          class="block size-full object-cover"
+          :src="image.filename"
+          :alt="image.alt || headline || ''"
+          :width="500"
+          :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
+          quality="85"
+          :modifiers="{
+            smart: true,
+          }"
+        />
+      </div>
 
       <p v-if="category">
         {{ category }}
