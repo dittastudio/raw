@@ -31,6 +31,11 @@ const { story } = defineProps<Props>()
       :block="block"
     />
 
+    <BlockPosts
+      v-else-if="block.component === 'block_posts'"
+      :block="block"
+    />
+
     <BlockTestimonials
       v-if="block.component === 'block_testimonials'"
       :block="block"

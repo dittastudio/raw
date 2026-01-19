@@ -20,11 +20,13 @@ export interface BlockHeroBrand {
 }
 
 export interface BlockHoverList {
+  theme?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  items?: ListItem[];
   component: "block_hover_list";
   _uid: string;
 }
@@ -33,6 +35,11 @@ export interface BlockImpactStatement {
   theme?: number | string;
   items?: TitleCopy[];
   component: "block_impact_statement";
+  _uid: string;
+}
+
+export interface BlockPosts {
+  component: "block_posts";
   _uid: string;
 }
 
@@ -50,6 +57,14 @@ export interface Link {
   _uid: string;
 }
 
+export interface ListItem {
+  title?: string;
+  copy?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
+  component: "list_item";
+  _uid: string;
+}
+
 export interface Logo {
   image: StoryblokAsset;
   title: string;
@@ -59,7 +74,7 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: (BlockHero | BlockHeroBrand | BlockHoverList | BlockImpactStatement | BlockTestimonials)[];
+  blocks?: (BlockHero | BlockHeroBrand | BlockHoverList | BlockImpactStatement | BlockPosts | BlockTestimonials)[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;

@@ -68,43 +68,12 @@ const category = computed(() => {
             {{ story.name }}
           </h1>
 
-          <div
+          <CardAuthor
             v-if="author"
-            class="flex items-center justify-start gap-6"
-          >
-            <div
-              v-if="author.content.image?.filename && storyblokAssetType(author.content.image.filename) === 'image'"
-              class="size-18 rounded-full overflow-hidden"
-            >
-              <NuxtImg
-                class="block size-full object-cover rounded-full"
-                :src="author.content.image.filename"
-                :alt="author.content.image.alt || story.name"
-                :width="100"
-                :height="Math.round(storyblokImageDimensions(author.content.image.filename).height / storyblokImageDimensions(author.content.image.filename).width * 100)"
-                quality="85"
-                :modifiers="{
-                  smart: true,
-                }"
-              />
-            </div>
-
-            <div>
-              <p
-                v-if="author.name"
-                class="font-bold"
-              >
-                {{ author.name }}
-              </p>
-
-              <time
-                v-if="story.first_published_at"
-                :datetime="story.first_published_at"
-              >
-                {{ formatDate(story.first_published_at) }}
-              </time>
-            </div>
-          </div>
+            :name="author.name"
+            :image="author.content.image"
+            :date="story.first_published_at"
+          />
         </div>
       </header>
 
