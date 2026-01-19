@@ -68,8 +68,8 @@ const { data: posts } = await useAsyncData('posts', async () => {
     v-editable="block"
     class="w-full bg-offwhite text-offblack"
   >
-    <div class="wrapper-max">
-      <div class="w-full py-22 flex flex-col items-start justify-center gap-6">
+    <div class="wrapper-max py-22 flex flex-col items-start justify-center gap-22">
+      <div class="w-full flex flex-col items-start justify-center gap-6">
         <FilterDatasource
           v-if="categories?.data.datasource_entries.length"
           slug="category"
@@ -108,33 +108,48 @@ const { data: posts } = await useAsyncData('posts', async () => {
         name="fade"
         mode="out-in"
       >
-        <ul
+        <div
           v-if="posts?.length"
           :key="`posts-key-${$route.fullPath}`"
-          class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full"
+          class="w-full flex flex-col items-start justify-center gap-22"
         >
-          <li
-            v-for="post in posts"
-            :key="post.uuid"
-          >
-            <CardPost
-              :headline="post.name"
-              :slug="post.full_slug"
-              :image="post.hero"
-              :category="getCategory(post.category)?.name"
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <li
+              v-for="post in posts"
+              :key="post.uuid"
             >
-              <template #author>
-                <CardAuthor
-                  v-if="post.author"
-                  :name="post.author.name"
-                  :image="post.author.content.image"
-                  :date="post.first_published_at"
-                  size="small"
-                />
-              </template>
-            </CardPost>
-          </li>
-        </ul>
+              <CardPost
+                :headline="post.name"
+                :slug="post.full_slug"
+                :image="post.hero"
+                :category="getCategory(post.category)?.name"
+              >
+                <template #author>
+                  <CardAuthor
+                    v-if="post.author"
+                    :name="post.author.name"
+                    :image="post.author.content.image"
+                    :date="post.first_published_at"
+                    size="small"
+                  />
+                </template>
+              </CardPost>
+            </li>
+          </ul>
+
+          <div class="w-full flex flex-col items-center justify-center">
+            <NuxtLink
+              :to="{
+                path: $route.path,
+                query: { ...$route.query, page: ((Number($route.query.page) || 1) + 1).toString() },
+              }"
+            >
+              <UiButton colour="dark">
+                Load more
+              </UiButton>
+            </NuxtLink>
+          </div>
+        </div>
 
         <div
           v-else
