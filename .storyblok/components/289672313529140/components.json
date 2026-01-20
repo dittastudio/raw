@@ -146,7 +146,11 @@
     "display_name": "Hover List",
     "description": "",
     "created_at": "2026-01-18T18:27:53.343Z",
+<<<<<<< HEAD
     "updated_at": "2026-01-19T17:55:32.013Z",
+=======
+    "updated_at": "2026-01-19T11:35:27.037Z",
+>>>>>>> develop
     "id": 135459935652633,
     "schema": {
       "theme": {
@@ -206,7 +210,11 @@
       },
       "items": {
         "type": "bloks",
+<<<<<<< HEAD
         "pos": 7,
+=======
+        "pos": 6,
+>>>>>>> develop
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
