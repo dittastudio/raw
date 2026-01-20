@@ -123,11 +123,6 @@ const [container, slider] = useKeenSlider({
     duration: 500,
   },
   slides: items?.length || 0,
-  // slides: {
-
-  //   perView,
-  //   spacing,
-  // },
   detailsChanged: (slider) => {
     opacities.value = slider.track.details.slides.map((s: any) => s.portion)
   },
@@ -145,16 +140,6 @@ const [container, slider] = useKeenSlider({
     interval: () => autoplayInterval,
   }),
 ])
-
-// watch(() => [perView, spacing], ([newPerView, newSpacing]) => {
-//   slider.value?.update({
-//     slides: {
-//       perView: newPerView,
-//       spacing: newSpacing,
-//     },
-//     ...options,
-//   })
-// })
 
 const next = () => {
   slider.value?.next()
@@ -219,10 +204,9 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="ui-carousel-fade__slide shrink-0x w-full"
+        class="ui-carousel-fade__slide shrink-0 w-full"
         :class="[
           opacities[index] === 1 ? 'pointer-events-auto' : 'pointer-events-none',
-          { 'is-active': details?.rel === index },
         ]"
         :style="{ opacity: opacities[index] }"
       >
@@ -230,6 +214,7 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
           name="item"
           :item="item"
           :index="index"
+          :is-active="details?.rel === index"
         />
       </div>
     </div>
