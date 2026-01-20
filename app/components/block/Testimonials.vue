@@ -10,7 +10,7 @@ const { block } = defineProps<Props>()
 
 <template>
   <div v-editable="block">
-    <UiCarousel
+    <UiCarouselFade
       :items="block.items"
       :options="{ loop: true }"
       autoplay
@@ -41,7 +41,7 @@ const { block } = defineProps<Props>()
           </div>
         </div>
       </template>
-    </UiCarousel>
+    </UiCarouselFade>
   </div>
 </template>
 
