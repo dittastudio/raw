@@ -10,7 +10,7 @@
       type="checkbox"
     >
 
-    <div class="wrapper ease-smooth fixed inset-0 z-40 w-full h-full transition-opacity duration-200 pointer-events-none opacity-0 peer-checked:opacity-100">
+    <div class="wrapper-max ease-smooth fixed inset-0 z-40 w-full h-full transition-opacity duration-200 pointer-events-none opacity-0 peer-checked:opacity-100">
       <div class="grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid) h-screen">
         <div
           v-for="i in 12"

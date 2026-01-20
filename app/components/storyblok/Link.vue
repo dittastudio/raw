@@ -15,7 +15,7 @@ const customAttributes = {
 
 const attributes = {
   ...customAttributes,
-  to: href?.trim().replace(/\/+$/, ''),
+  to: storyblokSlug(href),
   target: item?.target ?? item?.linktype === 'asset' ? '_blank' : null,
 }
 </script>

@@ -9,10 +9,7 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div
-    v-editable="block"
-    class="py-10"
-  >
+  <div v-editable="block">
     <UiCarousel
       :items="block.items"
       :options="{ loop: true }"
@@ -47,3 +44,17 @@ const { block } = defineProps<Props>()
     </UiCarousel>
   </div>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.testimonials__quote {
+  opacity: 0;
+  transition: opacity 0.05s var(--ease-out);
+
+  .is-active & {
+    opacity: 1;
+    transition: opacity 0.4s var(--ease-out) 0.1s;
+  }
+}
+</style>

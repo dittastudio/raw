@@ -219,7 +219,7 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
         v-for="(item, index) in items"
         :key="index"
         class="keen-slider__slide shrink-0"
-        :class="{ 'is-active': details?.abs === index }"
+        :class="{ 'is-active': details?.rel === index }"
       >
         <slot
           name="item"
