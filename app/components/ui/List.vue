@@ -93,13 +93,13 @@ const accentIsOpenClasses = computed(() => {
     case 'dark':
       return 'max-md:bg-offblack max-md:text-white'
     case 'blue':
-      return 'max-md:bg-blue max-md:text-white'
+      return 'max-md:bg-blue max-md:text-offblack'
     case 'green':
-      return 'max-md:bg-green max-md:text-white'
+      return 'max-md:bg-green max-md:text-offblack'
     case 'pink':
-      return 'max-md:bg-pink max-md:text-white'
+      return 'max-md:bg-pink max-md:text-offblack'
     case 'purple':
-      return 'max-md:bg-purple max-md:text-white'
+      return 'max-md:bg-purple max-md:text-offblack'
     default:
       return ''
   }
@@ -112,13 +112,13 @@ const accentMaskClasses = computed(() => {
     case 'dark':
       return 'md:bg-offblack md:text-white'
     case 'blue':
-      return 'md:bg-blue md:text-white'
+      return 'md:bg-blue md:text-offblack'
     case 'green':
-      return 'md:bg-green md:text-white'
+      return 'md:bg-green md:text-offblack'
     case 'pink':
-      return 'md:bg-pink md:text-white'
+      return 'md:bg-pink md:text-offblack'
     case 'purple':
-      return 'md:bg-purple md:text-white'
+      return 'md:bg-purple md:text-offblack'
     default:
       return ''
   }
