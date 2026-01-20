@@ -25,7 +25,7 @@ const handleAnimationEnd = () => {
       flex
       items-center
       justify-center
-      text-(--app-text-color)
+      text-current
       rounded-full
       before:content-['']
       before:absolute before:w-px

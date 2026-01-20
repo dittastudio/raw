@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
+// import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -8,23 +8,13 @@ interface Props {
 }
 
 const { story } = defineProps<Props>()
-
-const blocks = computed(() => story.content.blocks?.map((block) => {
-  const theme = ('theme' in block ? block.theme : undefined) as Themes | undefined
-
-  return {
-    ...block,
-    theme: theme ?? 'light',
-  }
-}),
-)
 </script>
 
 <template>
   <UiSection
-    v-for="block in blocks"
+    v-for="block in story.content.blocks"
     :key="block._uid"
-    :theme="block.component === 'block_hover_list' ? 'light' : block.theme"
+    :theme="block.theme"
     :class="`section section--${block.component}`"
   >
     <BlockHero

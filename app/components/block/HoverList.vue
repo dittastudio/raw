@@ -9,7 +9,7 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const items = computed(() => block.items ?? [])
-const theme = computed<Themes>(() => (block.theme as Themes) ?? 'light')
+const accent = computed<Themes>(() => (block.accent as Themes) ?? 'light')
 </script>
 
 <template>
@@ -33,7 +33,7 @@ const theme = computed<Themes>(() => (block.theme as Themes) ?? 'light')
 
     <UiList
       v-if="items.length"
-      :theme="theme"
+      :accent="accent"
       :items="items"
     />
   </div>

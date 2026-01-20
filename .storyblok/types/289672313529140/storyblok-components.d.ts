@@ -21,6 +21,7 @@ export interface BlockHeroBrand {
 
 export interface BlockHoverList {
   theme?: number | string;
+  accent?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
