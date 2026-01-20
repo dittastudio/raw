@@ -118,7 +118,7 @@ const createAutoplayPlugin = ({
 const [container, slider] = useKeenSlider({
   loop: false,
   mode: 'snap',
-  dragSpeed: 1,
+  dragSpeed: 0,
   rubberband: true,
   defaultAnimation: {
     duration: 500,

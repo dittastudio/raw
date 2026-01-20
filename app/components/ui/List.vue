@@ -12,23 +12,6 @@ const {
   items,
 } = defineProps<Props>()
 
-// const themeHoverClasses = computed(() => {
-//   console.log(theme)
-
-//   switch (theme) {
-//     case 'blue':
-//       return 'md:hover:bg-blue'
-//     case 'green':
-//       return 'md:hover:bg-green'
-//     case 'pink':
-//       return 'md:hover:bg-pink'
-//     case 'purple':
-//       return 'md:hover:bg-purple'
-//     default:
-//       return ''
-//   }
-// })
-
 const isScreenMd = useAtMedia(getMediaQuery('md'))
 
 const listEl = ref<HTMLElement | null>(null)
@@ -167,7 +150,12 @@ const themeMaskClasses = computed(() => {
 
     <ul
       class="ui-list__list ui-list__list--mask"
-      :class="themeMaskClasses"
+      :class="[
+        themeMaskClasses,
+        {
+          'text-white': theme === 'dark',
+        },
+      ]"
       :style="maskStyle"
       aria-hidden="true"
     >
