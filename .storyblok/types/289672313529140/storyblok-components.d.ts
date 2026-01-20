@@ -43,6 +43,18 @@ export interface BlockPosts {
   _uid: string;
 }
 
+export interface BlockTeam {
+  theme?: number | string;
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  teams?: Team[];
+  component: "block_team";
+  _uid: string;
+}
+
 export interface BlockTestimonials {
   theme?: number | string;
   items?: Testimonial[];
@@ -74,7 +86,15 @@ export interface Logo {
 }
 
 export interface Page {
-  blocks?: (BlockHero | BlockHeroBrand | BlockHoverList | BlockImpactStatement | BlockPosts | BlockTestimonials)[];
+  blocks?: (
+    | BlockHero
+    | BlockHeroBrand
+    | BlockHoverList
+    | BlockImpactStatement
+    | BlockPosts
+    | BlockTeam
+    | BlockTestimonials
+  )[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
@@ -169,6 +189,13 @@ export interface Settings {
   company_address?: string;
   logos?: Logo[];
   component: "settings";
+  _uid: string;
+}
+
+export interface Team {
+  title?: string;
+  people: (ISbStoryData<Person> | string)[];
+  component: "team";
   _uid: string;
 }
 
