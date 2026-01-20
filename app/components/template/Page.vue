@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
-// import type { Themes } from '@@/types/app'
+import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -14,7 +14,7 @@ const { story } = defineProps<Props>()
   <UiSection
     v-for="block in story.content.blocks"
     :key="block._uid"
-    :theme="block.theme"
+    :theme="'theme' in block && block.theme ? block.theme as Themes : undefined"
     :class="`section section--${block.component}`"
   >
     <BlockHero
