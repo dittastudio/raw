@@ -1349,17 +1349,9 @@
     "display_name": "Slide",
     "description": "Slide",
     "created_at": "2026-01-20T17:23:08.792Z",
-    "updated_at": "2026-01-20T17:26:21.551Z",
+    "updated_at": "2026-01-20T18:58:44.673Z",
     "id": 136151813303369,
     "schema": {
-      "logo": {
-        "type": "asset",
-        "pos": 0,
-        "id": "ydX6SJ2XSQ-DiFTtOaLbeQ",
-        "filetypes": [
-          "images"
-        ]
-      },
       "media": {
         "type": "asset",
         "pos": 1,

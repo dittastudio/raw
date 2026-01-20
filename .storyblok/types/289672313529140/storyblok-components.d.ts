@@ -208,7 +208,6 @@ export interface Settings {
 }
 
 export interface Slide {
-  logo?: StoryblokAsset;
   media?: StoryblokAsset;
   copy?: StoryblokRichtext;
   component: "slide";
