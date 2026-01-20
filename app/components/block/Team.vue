@@ -7,7 +7,6 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
-// const theme = computed<Themes>(() => (block.theme as Themes) ?? 'light')
 </script>
 
 <template>
@@ -38,7 +37,7 @@ const { block } = defineProps<Props>()
         :key="team._uid"
         :title="team.title"
         :people="team.people"
-        :accent="block.accent as Themes"
+        :accent="(block.accent as Themes)"
       />
     </div>
   </div>

@@ -11,7 +11,7 @@ interface Props {
 
 const { image, name, position, accent } = defineProps<Props>()
 
-const accessClasses = {
+const accentClasses = {
   dark: 'bg-offblack text-white',
   light: 'bg-white text-offblack',
   blue: 'bg-blue text-offblack',
@@ -40,7 +40,7 @@ const accessClasses = {
 
     <div
       class="col-start-1 row-start-1 flex flex-col gap-1 w-full p-4 transition-transform duration-300 ease-out translate-y-full group-hover:translate-y-0"
-      :class="accessClasses[accent]"
+      :class="accentClasses[accent]"
     >
       <h5
         v-if="name"
