@@ -27,6 +27,11 @@ const { story } = defineProps<Props>()
       :block="block"
     />
 
+    <BlockImpactDetails
+      v-else-if="block.component === 'block_impact_details'"
+      :block="block"
+    />
+
     <BlockImpactStatement
       v-else-if="block.component === 'block_impact_statement'"
       :block="block"

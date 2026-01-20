@@ -84,9 +84,7 @@ const {
         class="inline-block"
         :item="cta"
       >
-        <UiButton
-          mode="solid"
-        >
+        <UiButton mode="solid">
           {{ cta.title }}
         </UiButton>
       </StoryblokLink>
@@ -116,8 +114,8 @@ const {
 .ui-content__copy {
   :deep(p) {
     @apply type-p;
-    text-wrap: pretty;
 
+    text-wrap: pretty;
     max-width: 24em;
   }
 
