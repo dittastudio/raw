@@ -89,9 +89,9 @@ const handleListExit = () => {
 const accentIsOpenClasses = computed(() => {
   switch (accent) {
     case 'light':
-      return 'max-md:bg-white max-md:text-offblack'
+      return 'max-md:bg-offwhite max-md:text-offblack'
     case 'dark':
-      return 'max-md:bg-offblack max-md:text-white'
+      return 'max-md:bg-offblack max-md:text-offwhite'
     case 'blue':
       return 'max-md:bg-blue max-md:text-offblack'
     case 'green':
@@ -108,9 +108,9 @@ const accentIsOpenClasses = computed(() => {
 const accentMaskClasses = computed(() => {
   switch (accent) {
     case 'light':
-      return 'md:bg-white md:text-offblack'
+      return 'md:bg-offwhite md:text-offblack'
     case 'dark':
-      return 'md:bg-offblack md:text-white'
+      return 'md:bg-offblack md:text-offwhite'
     case 'blue':
       return 'md:bg-blue md:text-offblack'
     case 'green':

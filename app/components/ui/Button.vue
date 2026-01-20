@@ -28,9 +28,9 @@ const animateMe = (event: MouseEvent) => {
 const solidThemeClasses = computed(() => {
   switch (themeOverride) {
     case 'light':
-      return 'bg-white text-offblack'
+      return 'bg-offwhite text-offblack'
     case 'dark':
-      return 'bg-offblack text-white'
+      return 'bg-offblack text-offwhite'
     case 'blue':
       return 'bg-blue text-offblack'
     case 'green':
@@ -47,9 +47,9 @@ const solidThemeClasses = computed(() => {
 const outlineThemeClasses = computed(() => {
   switch (themeOverride) {
     case 'light':
-      return 'bg-white text-offblack outline outline-offblack -outline-offset-1'
+      return 'bg-offwhite text-offblack outline outline-offblack -outline-offset-1'
     case 'dark':
-      return 'bg-offblack text-white outline outline-white -outline-offset-1'
+      return 'bg-offblack text-offwhite outline outline-offwhite -outline-offset-1'
     case 'blue':
       return 'bg-blue text-offblack outline outline-offblack -outline-offset-1'
     case 'green':

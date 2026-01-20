@@ -90,7 +90,7 @@ const { items } = defineProps<Props>()
 
   @variant max-lg {
     &:not(.router-link-active) {
-      @apply text-outline-white;
+      @apply text-outline-offwhite;
     }
   }
 

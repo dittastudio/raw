@@ -15,39 +15,39 @@ const activeSection = useState<string | null>('activeSection', () => null)
 const themeColors = {
   dark: {
     background: 'var(--color-offblack)',
-    text: 'var(--color-white)',
-    buttonBackground: 'var(--color-white)',
+    text: 'var(--color-offwhite)',
+    buttonBackground: 'var(--color-offwhite)',
     buttonText: 'var(--color-offblack)',
   },
   light: {
-    background: 'var(--color-white)',
+    background: 'var(--color-offwhite)',
     text: 'var(--color-offblack)',
     buttonBackground: 'var(--color-offblack)',
-    buttonText: 'var(--color-white)',
+    buttonText: 'var(--color-offwhite)',
   },
   blue: {
     background: 'var(--color-blue)',
     text: 'var(--color-offblack)',
     buttonBackground: 'var(--color-offblack)',
-    buttonText: 'var(--color-white)',
+    buttonText: 'var(--color-offwhite)',
   },
   green: {
     background: 'var(--color-green)',
     text: 'var(--color-offblack)',
     buttonBackground: 'var(--color-offblack)',
-    buttonText: 'var(--color-white)',
+    buttonText: 'var(--color-offwhite)',
   },
   pink: {
     background: 'var(--color-pink)',
     text: 'var(--color-offblack)',
     buttonBackground: 'var(--color-offblack)',
-    buttonText: 'var(--color-white)',
+    buttonText: 'var(--color-offwhite)',
   },
   purple: {
     background: 'var(--color-purple)',
     text: 'var(--color-offblack)',
     buttonBackground: 'var(--color-offblack)',
-    buttonText: 'var(--color-white)',
+    buttonText: 'var(--color-offwhite)',
   },
 }
 
