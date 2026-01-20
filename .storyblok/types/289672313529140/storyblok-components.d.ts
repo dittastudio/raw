@@ -46,6 +46,7 @@ export interface BlockPosts {
 
 export interface BlockTeam {
   theme?: number | string;
+  accent?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
