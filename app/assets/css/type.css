@@ -105,6 +105,7 @@
   font-size: var(--text-fluid-h3);
   line-height: 1.25;
   letter-spacing: -0.05em;
+  text-transform: none;
 }
 
 @utility type-h4 {
@@ -112,13 +113,16 @@
   font-size: var(--text-fluid-h4);
   line-height: 1.25;
   letter-spacing: 0em;
+  text-transform: none;
 }
 
 @utility type-h5 {
   font-family: var(--font-mono);
   font-size: var(--text-fluid-h5);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.25;
   letter-spacing: 0em;
+  text-transform: none;
 
   @variant sm {
     letter-spacing: -0.03em;
@@ -128,6 +132,8 @@
 @utility type-p {
   font-family: var(--font-mono);
   font-size: var(--text-fluid-p);
+  font-weight: var(--font-weight-normal);
   line-height: 1.25;
   letter-spacing: 0em;
+  text-transform: none;
 }
