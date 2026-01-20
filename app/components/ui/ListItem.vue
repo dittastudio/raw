@@ -11,15 +11,6 @@ interface Props {
 const { index, item, isOpen, type = 'default' } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
-
-const accentIsOpenClasses = computed(() => {
-  switch (accent) {
-    case 'dark':
-      return 'text-white'
-    default:
-      return 'text-offblack'
-  }
-})
 </script>
 
 <template>

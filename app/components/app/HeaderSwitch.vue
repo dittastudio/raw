@@ -19,7 +19,7 @@ const handleAnimationEnd = () => {
       flex
       items-center
       justify-center
-      text-white
+      text-offwhite
       outline-1
       outline-offset-2
       outline-(--app-text-color)/10

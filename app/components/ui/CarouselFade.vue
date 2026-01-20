@@ -13,8 +13,6 @@ export interface Carousel {
 interface Props<T> {
   items?: T[]
   options?: KeenSliderOptions
-  perView?: number
-  spacing?: number
   autoplay?: boolean
   autoplayInterval?: number
 }
@@ -22,14 +20,13 @@ interface Props<T> {
 const {
   items,
   options = {},
-  perView = 1,
-  spacing = 0,
   autoplay = false,
   autoplayInterval = 5000,
 } = defineProps<Props<T>>()
 
 const details = ref<TrackDetails>()
 const isInView = ref(false)
+const opacities = ref<number[]>([])
 
 const isAutoplayActive = computed(() => autoplay && isInView.value)
 
@@ -118,14 +115,12 @@ const createAutoplayPlugin = ({
 const [container, slider] = useKeenSlider({
   loop: false,
   mode: 'snap',
-  dragSpeed: 1,
-  rubberband: true,
   defaultAnimation: {
     duration: 500,
   },
-  slides: {
-    perView,
-    spacing,
+  slides: items?.length || 0,
+  detailsChanged: (slider) => {
+    opacities.value = slider.track.details.slides.map((s: any) => s.portion)
   },
   created(slider) {
     details.value = slider.track.details
@@ -141,19 +136,6 @@ const [container, slider] = useKeenSlider({
     interval: () => autoplayInterval,
   }),
 ])
-
-watch(() => [perView, spacing], ([newPerView, newSpacing]) => {
-  slider.value?.update({
-    defaultAnimation: {
-      duration: 500,
-    },
-    slides: {
-      perView: newPerView,
-      spacing: newSpacing,
-    },
-    ...options,
-  })
-})
 
 const next = () => {
   slider.value?.next()
@@ -213,18 +195,22 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
   <div class="relative size-full">
     <div
       ref="container"
-      class="keen-slider size-full flex touch-pan-y select-none overflow-hidden"
+      class="ui-carousel-fade__slider relative size-full flex touch-pan-y select-none overflow-hidden"
     >
       <div
         v-for="(item, index) in items"
         :key="index"
-        class="keen-slider__slide shrink-0"
-        :class="{ 'is-active': details?.rel === index }"
+        class="ui-carousel-fade__slide shrink-0 w-full"
+        :class="[
+          opacities[index] === 1 ? 'pointer-events-auto' : 'pointer-events-none',
+        ]"
+        :style="{ opacity: opacities[index] }"
       >
         <slot
           name="item"
           :item="item"
           :index="index"
+          :is-active="details?.rel === index"
         />
       </div>
     </div>
@@ -232,3 +218,16 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
     <slot name="other" />
   </div>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.ui-carousel-fade__slider {
+  display: grid;
+  grid-template-areas: "stack";
+}
+
+.ui-carousel-fade__slide {
+  grid-area: stack;
+}
+</style>
