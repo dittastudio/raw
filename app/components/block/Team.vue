@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import type { BlockTeam } from '@@/.storyblok/types/289672313529140/storyblok-components'
-// import type { Themes } from '@@/types/app'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockTeam
 }
 
 const { block } = defineProps<Props>()
-// const theme = computed<Themes>(() => (block.theme as Themes) ?? 'light')
 </script>
 
 <template>
@@ -38,6 +37,7 @@ const { block } = defineProps<Props>()
         :key="team._uid"
         :title="team.title"
         :people="team.people"
+        :accent="(block.accent as Themes)"
       />
     </div>
   </div>
