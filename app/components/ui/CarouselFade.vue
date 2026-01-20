@@ -13,8 +13,6 @@ export interface Carousel {
 interface Props<T> {
   items?: T[]
   options?: KeenSliderOptions
-  perView?: number
-  spacing?: number
   autoplay?: boolean
   autoplayInterval?: number
 }
@@ -22,8 +20,6 @@ interface Props<T> {
 const {
   items,
   options = {},
-  perView = 1,
-  spacing = 0,
   autoplay = false,
   autoplayInterval = 5000,
 } = defineProps<Props<T>>()
