@@ -3,12 +3,12 @@ import type { ListItem } from '@@/.storyblok/types/289672313529140/storyblok-com
 import type { Themes } from '@@/types/app'
 
 interface Props {
-  theme: Themes
+  accent: Themes
   items: ListItem[]
 }
 
 const {
-  theme,
+  accent,
   items,
 } = defineProps<Props>()
 
@@ -86,39 +86,39 @@ const handleListExit = () => {
   clearMaskClip()
 }
 
-const themeIsOpenClasses = computed(() => {
-  switch (theme) {
+const accentIsOpenClasses = computed(() => {
+  switch (accent) {
     case 'light':
-      return 'max-md:bg-white'
+      return 'max-md:bg-white max-md:text-offblack'
     case 'dark':
-      return 'max-md:bg-offblack'
+      return 'max-md:bg-offblack max-md:text-white'
     case 'blue':
-      return 'max-md:bg-blue'
+      return 'max-md:bg-blue max-md:text-white'
     case 'green':
-      return 'max-md:bg-green'
+      return 'max-md:bg-green max-md:text-white'
     case 'pink':
-      return 'max-md:bg-pink'
+      return 'max-md:bg-pink max-md:text-white'
     case 'purple':
-      return 'max-md:bg-purple'
+      return 'max-md:bg-purple max-md:text-white'
     default:
       return ''
   }
 })
 
-const themeMaskClasses = computed(() => {
-  switch (theme) {
+const accentMaskClasses = computed(() => {
+  switch (accent) {
     case 'light':
-      return 'md:bg-white'
+      return 'md:bg-white md:text-offblack'
     case 'dark':
-      return 'md:bg-offblack'
+      return 'md:bg-offblack md:text-white'
     case 'blue':
-      return 'md:bg-blue'
+      return 'md:bg-blue md:text-white'
     case 'green':
-      return 'md:bg-green'
+      return 'md:bg-green md:text-white'
     case 'pink':
-      return 'md:bg-pink'
+      return 'md:bg-pink md:text-white'
     case 'purple':
-      return 'md:bg-purple'
+      return 'md:bg-purple md:text-white'
     default:
       return ''
   }
@@ -150,12 +150,7 @@ const themeMaskClasses = computed(() => {
 
     <ul
       class="ui-list__list ui-list__list--mask"
-      :class="[
-        themeMaskClasses,
-        {
-          'text-white': theme === 'dark',
-        },
-      ]"
+      :class="accentMaskClasses"
       :style="maskStyle"
       aria-hidden="true"
     >
@@ -163,7 +158,7 @@ const themeMaskClasses = computed(() => {
         v-for="(item, index) in items"
         :key="item._uid"
         class="ui-list__item wrapper-max"
-        :class="openIndex === index ? themeIsOpenClasses : ''"
+        :class="openIndex === index ? accentIsOpenClasses : ''"
         @click="!isScreenMd && toggleItem(index)"
       >
         <UiListItem
@@ -204,8 +199,8 @@ const themeMaskClasses = computed(() => {
   user-select: none;
   cursor: default;
 
-  &::before,
-  &:last-child::after {
+  .ui-list__list--default &::before,
+  .ui-list__list--default &:last-child::after {
     content: '';
     position: absolute;
     left: 0;
@@ -217,11 +212,11 @@ const themeMaskClasses = computed(() => {
     opacity: 0.5;
   }
 
-  &::before {
+  .ui-list__list--default &::before {
     bottom: 100%;
   }
 
-  &:last-child::after {
+  .ui-list__list--default &:last-child::after {
     top: 100%;
   }
 }

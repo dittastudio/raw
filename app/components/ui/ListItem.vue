@@ -11,6 +11,15 @@ interface Props {
 const { index, item, isOpen, type = 'default' } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
+
+const accentIsOpenClasses = computed(() => {
+  switch (accent) {
+    case 'dark':
+      return 'text-white'
+    default:
+      return 'text-offblack'
+  }
+})
 </script>
 
 <template>
@@ -23,12 +32,24 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
       },
     ]"
   >
-    <span class="ui-list-item__number type-h2">
+    <span
+      class="ui-list-item__number type-h2"
+      :class="{
+        'text-outline-current': type === 'default',
+      }"
+    >
       {{ (index + 1).toString().padStart(2, '0') }}
     </span>
 
     <h3 class="ui-list-item__title type-h2">
-      {{ item.title }}
+      <span
+        :class="{
+          'text-outline-current': type === 'default',
+        }"
+        class="type-h2"
+      >
+        {{ item.title }}
+      </span>
 
       <UiPlusMinus
         class="md:hidden"
@@ -81,10 +102,6 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   @variant md {
     grid-column: span 3;
   }
-
-  .ui-list-item--default & {
-    @apply text-outline-current;
-  }
 }
 
 .ui-list-item__title {
@@ -99,10 +116,6 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
   @variant md {
     grid-column: span 5;
-  }
-
-  .ui-list-item--default & {
-    @apply text-outline-current;
   }
 }
 
