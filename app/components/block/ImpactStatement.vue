@@ -67,7 +67,9 @@ const { block } = defineProps<Props>()
 }
 
 .impact-statement__headline {
-  :deep(h2, h3, h4) {
+  :deep(h2),
+  :deep(h3),
+  :deep(h4) {
     @apply type-h2;
 
     text-wrap: balance;

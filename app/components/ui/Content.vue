@@ -98,7 +98,9 @@ const {
 @reference "@/assets/css/app.css";
 
 .ui-content__headline {
-  :deep(h2, h3, h4) {
+  :deep(h2),
+  :deep(h3),
+  :deep(h4)  {
     @apply type-h2;
 
     text-wrap: balance;

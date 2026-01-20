@@ -144,7 +144,8 @@ const slideClass = computed(() => {
 @reference "@/assets/css/app.css";
 
 .hero__headline {
-  :deep(h1, h2) {
+  :deep(h1),
+  :deep(h2) {
     @apply type-h1;
 
     font-size: min(50px, 5cqi);
