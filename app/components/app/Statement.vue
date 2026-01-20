@@ -26,8 +26,8 @@ const { statement, title, link } = defineProps<Props>()
           :item="link"
         >
           <UiButton
-            colour="dark"
-            mode="solid"
+            theme-override="dark"
+            type="solid"
           >
             {{ title }}
           </UiButton>

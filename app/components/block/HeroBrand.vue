@@ -114,7 +114,7 @@ const slideClass = computed(() => {
     </div>
   </div>
 
-  <div class="py-10 bg-white">
+  <div class="py-10 bg-offwhite">
     <UiTicker
       duration="30s"
       direction="right"
@@ -161,11 +161,11 @@ const slideClass = computed(() => {
 
 /* Animations */
 .hero {
-  background-color: var(--color-white);
+  background-color: var(--color-offwhite);
   transition: background-color 1s var(--ease-out);
 
   &.is-slide-1 {
-    background-color: var(--color-white);
+    background-color: var(--color-offwhite);
   }
 
   &.is-slide-2 {

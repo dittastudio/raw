@@ -189,7 +189,7 @@ watchEffect(() => {
     width: 100%;
     height: 100dvh;
     background-color: var(--color-offblack);
-    color: var(--color-white);
+    color: var(--color-offwhite);
     display: flex;
     flex-direction: column;
     justify-content: safe center;

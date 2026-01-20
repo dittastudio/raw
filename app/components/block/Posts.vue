@@ -153,7 +153,7 @@ const { data: posts } = await useAsyncData('posts', async () => {
                 query: { ...$route.query, page: ((Number($route.query.page) || 1) + 1).toString() },
               }"
             >
-              <UiButton colour="dark">
+              <UiButton theme-override="dark">
                 Load more
               </UiButton>
             </NuxtLink>

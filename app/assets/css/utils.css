@@ -21,9 +21,9 @@
   }
 }
 
-@utility text-outline-white {
+@utility text-outline-offwhite {
   @supports((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
-    -webkit-text-stroke: 1px var(--color-white);
+    -webkit-text-stroke: 1px var(--color-offwhite);
     text-stroke: 1px var(--color-white);
     color: transparent;
   }

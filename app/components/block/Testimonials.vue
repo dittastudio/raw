@@ -10,14 +10,17 @@ const { block } = defineProps<Props>()
 
 <template>
   <div v-editable="block">
-    <UiCarousel
+    <UiCarouselFade
       :items="block.items"
       :options="{ loop: true }"
       autoplay
       :autoplay-interval="4000"
     >
-      <template #item="{ item }">
-        <blockquote class="testimonials__quote wrapper-max flex flex-col items-center justify-center text-center gap-y-10 md:gap-y-15">
+      <template #item="{ item, isActive }">
+        <blockquote
+          class="testimonials__quote wrapper-max flex flex-col items-center justify-center text-center gap-y-10 md:gap-y-15"
+          :class="{ 'is-active': isActive }"
+        >
           <p class="type-h4 max-w-[35ch] before:content-[open-quote] after:content-[close-quote] text-balance">
             {{ item.quote }}
           </p>
@@ -41,7 +44,7 @@ const { block } = defineProps<Props>()
           </div>
         </div>
       </template>
-    </UiCarousel>
+    </UiCarouselFade>
   </div>
 </template>
 
@@ -50,11 +53,19 @@ const { block } = defineProps<Props>()
 
 .testimonials__quote {
   opacity: 0;
-  transition: opacity 0.05s var(--ease-out);
+  scale: 0.975;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  transition:
+    opacity 0.25s var(--ease-in),
+    scale 0.25s var(--ease-in);
 
-  .is-active & {
+  &.is-active {
     opacity: 1;
-    transition: opacity 0.4s var(--ease-out) 0.1s;
+    scale: 1;
+    transition:
+      opacity 0.5s var(--ease-out) 0.25s,
+      scale 0.5s var(--ease-out) 0.25s;
   }
 }
 </style>
