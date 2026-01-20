@@ -9,7 +9,7 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const items = computed(() => block.items ?? [])
-const accent = computed<Themes>(() => (block.accent as Themes) ?? 'light')
+const accent = computed(() => (block.accent as Themes) ?? 'light')
 </script>
 
 <template>
@@ -38,7 +38,3 @@ const accent = computed<Themes>(() => (block.accent as Themes) ?? 'light')
     />
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-</style>
