@@ -1,9 +1,18 @@
 <script lang="ts" setup>
 import type { Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
+const route = useRoute()
+
 const relations: string[] = [
   'post.author',
+  'team.people',
 ]
+
+const story = await useStory<Page | Post | Project>(
+  route.path,
+  { resolve_relations: relations },
+  { resolveRelations: relations },
+)
 
 const imageOptions = {
   width: 1200,
@@ -12,13 +21,6 @@ const imageOptions = {
   smart: true,
   quality: 80,
 }
-
-const route = useRoute()
-const story = await useStory<Page | Post | Project>(
-  route.path,
-  { resolve_relations: relations },
-  { resolveRelations: relations },
-)
 
 useSeoMeta({
   title: story.value?.content.seo_title ?? '',

@@ -11,7 +11,7 @@ const { block } = defineProps<Props>()
 <template>
   <h3
     v-editable="block"
-    class="font-bold type-mono-20"
+    class="type-h5"
   >
     {{ block.heading }}
   </h3>

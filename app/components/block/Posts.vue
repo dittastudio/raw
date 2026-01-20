@@ -93,7 +93,7 @@ const { data: posts } = await useAsyncData('posts', async () => {
               <li
                 v-for="filter in filters"
                 :key="filter.id"
-                class="type-mono-16 md:type-mono-20 font-bold flex items-center justify-center not-last:after:content-['|'] after:ml-4 md:after:ml-5"
+                class="type-h5 flex items-center justify-center not-last:after:content-['|'] after:ml-4 md:after:ml-5"
               >
                 <NuxtLink
                   :to="filter.to"
@@ -122,7 +122,7 @@ const { data: posts } = await useAsyncData('posts', async () => {
           :key="`posts-key-${$route.fullPath}`"
           class="w-full flex flex-col items-start justify-center gap-22"
         >
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-(--app-inner-gutter) w-full">
             <li
               v-for="post in posts"
               :key="post.uuid"
@@ -136,7 +136,7 @@ const { data: posts } = await useAsyncData('posts', async () => {
                 <template #author>
                   <CardAuthor
                     v-if="post.author"
-                    :name="post.author.name"
+                    :name="post.author.content.name"
                     :image="post.author.content.image"
                     :date="post.first_published_at"
                     size="small"

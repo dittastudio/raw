@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
-// import type { Themes } from '@@/types/app'
+import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -14,7 +14,7 @@ const { story } = defineProps<Props>()
   <UiSection
     v-for="block in story.content.blocks"
     :key="block._uid"
-    :theme="block.theme"
+    :theme="'theme' in block && block.theme ? block.theme as Themes : undefined"
     :class="`section section--${block.component}`"
   >
     <BlockHero
@@ -37,8 +37,13 @@ const { story } = defineProps<Props>()
       :block="block"
     />
 
+    <BlockTeam
+      v-else-if="block.component === 'block_team'"
+      :block="block"
+    />
+
     <BlockTestimonials
-      v-if="block.component === 'block_testimonials'"
+      v-else-if="block.component === 'block_testimonials'"
       :block="block"
     />
 
@@ -53,8 +58,9 @@ const { story } = defineProps<Props>()
 @reference "@/assets/css/app.css";
 
 .section {
-  &--block_impact_statement,
   &--block_hover_list,
+  &--block_impact_statement,
+  &--block_team,
   &--block_testimonials {
     padding-block: --spacing(35);
   }

@@ -17,7 +17,7 @@ const { headline, slug, image, category } = defineProps<Props>()
       class="flex flex-col items-start justify-start gap-6 size-full border-b border-offblack pb-6"
       :to="`/${slug}`"
     >
-      <div class="w-full overflow-hidden aspect-video bg-white/50">
+      <div class="w-full overflow-hidden aspect-video">
         <NuxtImg
           v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
           class="block size-full object-cover"
@@ -38,7 +38,7 @@ const { headline, slug, image, category } = defineProps<Props>()
 
       <h3
         v-if="headline"
-        class="font-bold type-mono-20 text-balance max-w-[64ch]"
+        class="type-h5 text-balance max-w-[64ch]"
       >
         {{ headline }}
       </h3>
