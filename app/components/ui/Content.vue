@@ -6,6 +6,7 @@ interface Props {
   headline?: StoryblokRichtext | undefined
   copy?: StoryblokRichtext | undefined
   cta?: StoryblokMultilink | undefined
+  ctaType?: 'solid' | 'outline'
 }
 
 const {
@@ -84,9 +85,7 @@ const {
         class="inline-block"
         :item="cta"
       >
-        <UiButton
-          mode="solid"
-        >
+        <UiButton :type="ctaType">
           {{ cta.title }}
         </UiButton>
       </StoryblokLink>

@@ -2,6 +2,18 @@
 // DO NOT MODIFY THIS FILE BY HAND.
 import type { ISbStoryData } from '@storyblok/js';
 import type { StoryblokMultiasset, StoryblokAsset, StoryblokRichtext, StoryblokMultilink } from '../storyblok.d.ts';
+export interface BlockCarousel {
+  theme?: number | string;
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  slides?: Slide[];
+  component: "block_carousel";
+  _uid: string;
+}
+
 export interface BlockHero {
   theme?: number | string;
   headline?: StoryblokRichtext;
@@ -46,6 +58,7 @@ export interface BlockPosts {
 
 export interface BlockTeam {
   theme?: number | string;
+  accent?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
@@ -88,6 +101,7 @@ export interface Logo {
 
 export interface Page {
   blocks?: (
+    | BlockCarousel
     | BlockHero
     | BlockHeroBrand
     | BlockHoverList
@@ -190,6 +204,14 @@ export interface Settings {
   company_address?: string;
   logos?: Logo[];
   component: "settings";
+  _uid: string;
+}
+
+export interface Slide {
+  logo?: StoryblokAsset;
+  media?: StoryblokAsset;
+  copy?: StoryblokRichtext;
+  component: "slide";
   _uid: string;
 }
 

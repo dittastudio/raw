@@ -1,9 +1,12 @@
 <script lang="ts" setup>
+import type { Themes } from '@@/types/app'
+
 interface Props {
-  mode?: 'solid' | 'outline'
+  type?: 'solid' | 'outline'
+  themeOverride?: Themes
 }
 
-const { mode = 'solid' } = defineProps<Props>()
+const { type = 'solid', themeOverride } = defineProps<Props>()
 
 const hover = useTemplateRef<HTMLSpanElement>('hover')
 
@@ -21,6 +24,44 @@ const animateMe = (event: MouseEvent) => {
   el.style.setProperty('--x', `${xMove}px`)
   el.style.setProperty('--y', `${yMove}px`)
 }
+
+const solidThemeClasses = computed(() => {
+  switch (themeOverride) {
+    case 'light':
+      return 'bg-white text-offblack'
+    case 'dark':
+      return 'bg-offblack text-white'
+    case 'blue':
+      return 'bg-blue text-offblack'
+    case 'green':
+      return 'bg-green text-offblack'
+    case 'pink':
+      return 'bg-pink text-offblack'
+    case 'purple':
+      return 'bg-purple text-offblack'
+    default:
+      return 'bg-(--app-button-background-color) text-(--app-button-text-color)'
+  }
+})
+
+const outlineThemeClasses = computed(() => {
+  switch (themeOverride) {
+    case 'light':
+      return 'bg-white text-offblack outline outline-offblack -outline-offset-1'
+    case 'dark':
+      return 'bg-offblack text-white outline outline-white -outline-offset-1'
+    case 'blue':
+      return 'bg-blue text-offblack outline outline-offblack -outline-offset-1'
+    case 'green':
+      return 'bg-green text-offblack outline outline-offblack -outline-offset-1'
+    case 'pink':
+      return 'bg-pink text-offblack outline outline-offblack -outline-offset-1'
+    case 'purple':
+      return 'bg-purple text-offblack outline outline-offblack -outline-offset-1'
+    default:
+      return 'bg-(--app-background-color) outline outline-(--app-text-color) -outline-offset-1'
+  }
+})
 </script>
 
 <template>
@@ -45,8 +86,8 @@ const animateMe = (event: MouseEvent) => {
       ease-out
     "
     :class="{
-      'bg-(--app-button-background-color) text-(--app-button-text-color)': mode === 'solid',
-      'bg-white outline outline-(--app-button-text-color) -outline-offset-1 [a:hover_&]:bg-(--app-text-color) [a:hover_&]:text-white': mode === 'outline',
+      [solidThemeClasses]: type === 'solid',
+      [outlineThemeClasses]: type === 'outline',
     }"
     @mousemove="animateMe"
   >
