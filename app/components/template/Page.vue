@@ -9,16 +9,15 @@ interface Props {
 
 const { story } = defineProps<Props>()
 
-const blocks = computed(() => {
-  return story.content.blocks?.map((block) => {
-    const theme = ('theme' in block ? block.theme : undefined) as Themes | undefined
+const blocks = computed(() => story.content.blocks?.map((block) => {
+  const theme = ('theme' in block ? block.theme : undefined) as Themes | undefined
 
-    return {
-      ...block,
-      theme: theme ?? 'light',
-    }
-  })
-})
+  return {
+    ...block,
+    theme: theme ?? 'light',
+  }
+}),
+)
 </script>
 
 <template>
@@ -48,8 +47,13 @@ const blocks = computed(() => {
       :block="block"
     />
 
+    <BlockTeam
+      v-else-if="block.component === 'block_team'"
+      :block="block"
+    />
+
     <BlockTestimonials
-      v-if="block.component === 'block_testimonials'"
+      v-else-if="block.component === 'block_testimonials'"
       :block="block"
     />
 
@@ -64,8 +68,9 @@ const blocks = computed(() => {
 @reference "@/assets/css/app.css";
 
 .section {
-  &--block_impact_statement,
   &--block_hover_list,
+  &--block_impact_statement,
+  &--block_team,
   &--block_testimonials {
     padding-block: --spacing(35);
   }

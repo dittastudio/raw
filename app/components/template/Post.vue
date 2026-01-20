@@ -58,7 +58,7 @@ const category = computed(() => {
           v-if="category"
           class="col-span-full md:col-start-1 md:col-end-3 lg:col-end-4"
         >
-          <p class="font-bold type-mono-20">
+          <p class="type-h5">
             {{ category }}
           </p>
         </div>
@@ -70,7 +70,7 @@ const category = computed(() => {
 
           <CardAuthor
             v-if="author"
-            :name="author.name"
+            :name="author.content.name"
             :image="author.content.image"
             :date="story.first_published_at"
           />
