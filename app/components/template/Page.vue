@@ -72,7 +72,7 @@ const { story } = defineProps<Props>()
   &--block_impact_statement,
   &--block_team,
   &--block_testimonials {
-    padding-block: --spacing(30);
+    padding-block: --spacing(38);
   }
 
   &--block_carousel {

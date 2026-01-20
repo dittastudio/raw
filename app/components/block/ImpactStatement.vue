@@ -11,81 +11,13 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-editable="block"
-    class="impact-statement wrapper-max"
+    class="grid gap-38"
   >
-    <div
+    <UiContent
       v-for="item in block.items"
       :key="item._uid"
-      class="impact-statement__item grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20"
-    >
-      <div
-        v-if="storyblokRichTextContent(item.title)"
-        class="
-          impact-statement__headline
-          col-span-full
-          sm:col-start-2
-          sm:col-span-7
-          md:col-start-2
-          md:col-span-7
-        "
-      >
-        <StoryblokText :html="item.title" />
-      </div>
-
-      <div
-        v-if="storyblokRichTextContent(item.copy)"
-        class="
-          impact-statement__text
-          row-start-2
-          col-start-2
-          col-span-3
-          sm:col-start-5
-          sm:col-span-4
-          md:col-start-9
-          md:col-span-4
-          lg:col-start-9
-          lg:col-span-3
-        "
-      >
-        <StoryblokText :html="item.copy" />
-      </div>
-    </div>
+      :headline="item.title"
+      :copy="item.copy"
+    />
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.impact-statement__item {
-  & + & {
-    margin-block-start: --spacing(30);
-
-    @variant lg {
-      margin-block-start: --spacing(60);
-    }
-  }
-}
-
-.impact-statement__headline {
-  :deep(h2),
-  :deep(h3),
-  :deep(h4) {
-    @apply type-h2;
-
-    text-wrap: balance;
-  }
-}
-
-.impact-statement__text {
-  :deep(p) {
-    @apply type-p;
-    text-wrap: pretty;
-
-    max-width: 24em;
-  }
-
-  :deep(p + p) {
-    padding-top: 1.25em;
-  }
-}
-</style>
