@@ -8,7 +8,7 @@ interface Props {
 }
 
 const {
-  theme: _theme,
+  theme,
   items,
 } = defineProps<Props>()
 
@@ -34,6 +34,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 const listEl = ref<HTMLElement | null>(null)
 const clipTop = ref<number | null>(null)
 const clipBottom = ref<number | null>(null)
+const lastHoverIndex = ref<number | null>(null)
 
 const maskStyle = computed(() => {
   if (clipTop.value === null || clipBottom.value === null) {
@@ -53,7 +54,7 @@ const toggleItem = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
 }
 
-const setMaskClip = (event: MouseEvent) => {
+const setMaskClip = (event: MouseEvent, index: number) => {
   if (!isScreenMd.value || !listEl.value) {
     return
   }
@@ -69,86 +70,120 @@ const setMaskClip = (event: MouseEvent) => {
 
   clipTop.value = Math.max(0, itemRect.top - listRect.top)
   clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+
+  lastHoverIndex.value = index
 }
 
 const clearMaskClip = () => {
   clipTop.value = null
   clipBottom.value = null
+  lastHoverIndex.value = null
 }
 
-// Desktop
-// const activeIndex = ref<number | null>(null)
-// const hoverDirections = ref<Array<'up' | 'down'>>([])
+const handleListExit = () => {
+  if (!isScreenMd.value || !listEl.value) {
+    clearMaskClip()
+    return
+  }
 
-// const setHoverDirection = (index: number) => {
-//   const lastIndex = activeIndex.value
-//   const direction = lastIndex === null || lastIndex === index || index > lastIndex
-//     ? 'down'
-//     : 'up'
+  const listHeight = listEl.value.getBoundingClientRect().height
 
-//   hoverDirections.value[index] = direction
+  if (lastHoverIndex.value === 0) {
+    clipTop.value = 0
+    clipBottom.value = Math.max(0, listHeight)
+    return
+  }
 
-//   if (lastIndex !== null && lastIndex !== index) {
-//     hoverDirections.value[lastIndex] = direction
-//   }
+  if (lastHoverIndex.value === items.length - 1) {
+    clipTop.value = Math.max(0, listHeight)
+    clipBottom.value = 0
+    return
+  }
 
-//   activeIndex.value = index
-// }
+  clearMaskClip()
+}
 
-// const clearHover = () => {
-//   activeIndex.value = null
-// }
+const themeIsOpenClasses = computed(() => {
+  switch (theme) {
+    case 'light':
+      return 'max-md:bg-white'
+    case 'dark':
+      return 'max-md:bg-offblack'
+    case 'blue':
+      return 'max-md:bg-blue'
+    case 'green':
+      return 'max-md:bg-green'
+    case 'pink':
+      return 'max-md:bg-pink'
+    case 'purple':
+      return 'max-md:bg-purple'
+    default:
+      return ''
+  }
+})
 
-// watch(
-//   () => items.length,
-//   (length) => {
-//     hoverDirections.value = Array.from({ length }, () => 'down')
-//   },
-//   { immediate: true },
-// )
+const themeMaskClasses = computed(() => {
+  switch (theme) {
+    case 'light':
+      return 'md:bg-white'
+    case 'dark':
+      return 'md:bg-offblack'
+    case 'blue':
+      return 'md:bg-blue'
+    case 'green':
+      return 'md:bg-green'
+    case 'pink':
+      return 'md:bg-pink'
+    case 'purple':
+      return 'md:bg-purple'
+    default:
+      return ''
+  }
+})
 </script>
 
 <template>
   <div class="relative">
-    <ul ref="listEl">
+    <ul
+      ref="listEl"
+      class="ui-list__list ui-list__list--default"
+      @mouseleave="handleListExit"
+    >
       <li
         v-for="(item, index) in items"
         :key="item._uid"
-        class="ui-list__item"
+        class="ui-list__item wrapper-max"
         @click="!isScreenMd && toggleItem(index)"
-        @mouseenter="setMaskClip"
-        @mouseleave="clearMaskClip"
+        @mouseenter="setMaskClip($event, index)"
       >
-        <div class="ui-list__item-inner">
-          <UiListItem
-            type="default"
-            :index="index"
-            :item="item"
-            :is-open="openIndex === index"
-          />
-        </div>
+        <UiListItem
+          type="default"
+          :index="index"
+          :item="item"
+          :is-open="openIndex === index"
+        />
       </li>
     </ul>
 
     <ul
-      class="ui-list__mask absolute inset-0 bg-blue"
+      class="ui-list__list ui-list__list--mask"
+      :class="themeMaskClasses"
       :style="maskStyle"
       aria-hidden="true"
     >
       <li
         v-for="(item, index) in items"
         :key="item._uid"
-        class="ui-list__item"
+        class="ui-list__item wrapper-max"
+        :class="openIndex === index ? themeIsOpenClasses : ''"
         @click="!isScreenMd && toggleItem(index)"
       >
-        <div class="ui-list__item-inner">
-          <UiListItem
-            type="mask"
-            :index="index"
-            :item="item"
-            :is-open="openIndex === index"
-          />
-        </div>
+        <UiListItem
+          type="mask"
+          :index="index"
+          :item="item"
+          :is-open="openIndex === index"
+        />
       </li>
     </ul>
   </div>
@@ -157,24 +192,50 @@ const clearMaskClip = () => {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.ui-list__item {
-  --hover-duration: 200ms;
+.ui-list__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
 
+.ui-list__list--mask {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+
+  @variant md {
+    clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
+    transition: clip-path 200ms var(--ease-in-out);
+  }
+}
+
+.ui-list__item {
   position: relative;
-  transition: background-color var(--hover-duration) var(--ease-out);
+  transition: background-color 0.2s var(--ease-out);
   user-select: none;
   cursor: default;
-}
 
-.ui-list__item-inner {
-  border-top: 1px solid --alpha(currentColor / 100%);
-  border-bottom: 1px solid --alpha(currentColor / 100%);
-}
+  &::before,
+  &:last-child::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    z-index: 1;
+    pointer-events: none;
+    border-top: 1px solid currentColor;
+    opacity: 0.5;
+  }
 
-.ui-list__mask {
-  clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
-  transition: clip-path 200ms var(--ease-in-out);
-  pointer-events: none;
+  &::before {
+    bottom: 100%;
+  }
+
+  &:last-child::after {
+    top: 100%;
+  }
 }
 
 .ui-list__container {
@@ -183,10 +244,6 @@ const clearMaskClip = () => {
   column-gap: var(--app-inner-gutter);
   align-items: center;
   padding-block: --spacing(4);
-}
-
-.ui-list__container--mask {
-
 }
 
 .ui-list__number {

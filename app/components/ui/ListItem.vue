@@ -16,7 +16,12 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 <template>
   <div
     class="ui-list-item"
-    :class="`ui-list-item--${type}`"
+    :class="[
+      `ui-list-item--${type}`,
+      {
+        'is-open': isOpen,
+      },
+    ]"
   >
     <span class="ui-list-item__number type-h2">
       {{ (index + 1).toString().padStart(2, '0') }}
@@ -55,6 +60,17 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   padding-block: --spacing(4);
 }
 
+.ui-list-item--mask {
+  @variant max-md {
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-out);
+
+    &.is-open {
+      opacity: 1;
+    }
+  }
+}
+
 .ui-list-item__number {
   grid-column: span 1;
 
@@ -65,10 +81,10 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   @variant md {
     grid-column: span 3;
   }
-}
 
-.ui-list-item--default .ui-list-item__number {
-  @apply text-outline-current;
+  .ui-list-item--default & {
+    @apply text-outline-current;
+  }
 }
 
 .ui-list-item__title {
@@ -84,10 +100,10 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   @variant md {
     grid-column: span 5;
   }
-}
 
-.ui-list-item--default .ui-list-item__title {
-  @apply text-outline-current;
+  .ui-list-item--default & {
+    @apply text-outline-current;
+  }
 }
 
 .ui-list-item__copy {
@@ -100,9 +116,9 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   @variant md {
     grid-column: span 4;
   }
-}
 
-.ui-list-item--default .ui-list-item__copy {
-  opacity: 0;
+  .ui-list-item--default & {
+    opacity: 0;
+  }
 }
 </style>
