@@ -16,23 +16,33 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
 const listEl = ref<HTMLElement | null>(null)
 const clipTop = ref<number | null>(null)
+const clipRight = ref<number | null>(null)
 const clipBottom = ref<number | null>(null)
+const clipLeft = ref<number | null>(null)
 const maskActive = ref(false)
 const maskTransitionEnabled = ref(false)
+const lastHoverIndex = ref<number | null>(null)
 
 const maskStyle = computed(() => {
   const baseStyle = {
     '--mask-opacity': maskActive.value ? '1' : '0',
   }
 
-  if (clipTop.value === null || clipBottom.value === null) {
+  if (
+    clipTop.value === null
+    || clipRight.value === null
+    || clipBottom.value === null
+    || clipLeft.value === null
+  ) {
     return baseStyle
   }
 
   return {
     ...baseStyle,
     '--clip-top': `${clipTop.value}px`,
+    '--clip-right': `${clipRight.value}px`,
     '--clip-bottom': `${clipBottom.value}px`,
+    '--clip-left': `${clipLeft.value}px`,
   }
 })
 
@@ -43,7 +53,7 @@ const toggleItem = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
 }
 
-const setMaskClip = (event: MouseEvent) => {
+const setMaskClip = (event: MouseEvent, index: number) => {
   if (!isScreenMd.value || !listEl.value) {
     return
   }
@@ -58,7 +68,9 @@ const setMaskClip = (event: MouseEvent) => {
   const itemRect = itemEl.getBoundingClientRect()
 
   clipTop.value = Math.max(0, itemRect.top - listRect.top)
+  clipRight.value = Math.max(0, listRect.right - itemRect.right)
   clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+  clipLeft.value = Math.max(0, itemRect.left - listRect.left)
 
   if (!maskActive.value) {
     maskActive.value = true
@@ -76,13 +88,18 @@ const setMaskClip = (event: MouseEvent) => {
   else if (!maskTransitionEnabled.value) {
     maskTransitionEnabled.value = true
   }
+
+  lastHoverIndex.value = index
 }
 
 const clearMaskClip = () => {
   clipTop.value = null
+  clipRight.value = null
   clipBottom.value = null
+  clipLeft.value = null
   maskActive.value = false
   maskTransitionEnabled.value = false
+  lastHoverIndex.value = null
 }
 
 const handleListExit = () => {
@@ -145,9 +162,9 @@ const accentMaskClasses = computed(() => {
         :key="item._uid"
         class="ui-list__item wrapper-max"
         @click="!isScreenMd && toggleItem(index)"
-        @mouseenter="setMaskClip($event)"
+        @mouseenter="setMaskClip($event, index)"
       >
-        <UiListItem
+        <UiGridItem
           type="default"
           :index="index"
           :item="item"
@@ -172,7 +189,7 @@ const accentMaskClasses = computed(() => {
         :class="openIndex === index ? accentIsOpenClasses : ''"
         @click="!isScreenMd && toggleItem(index)"
       >
-        <UiListItem
+        <UiGridItem
           type="mask"
           :index="index"
           :item="item"
@@ -190,6 +207,10 @@ const accentMaskClasses = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1px;
+
+  @variant md {
+    flex-direction: row;
+  }
 }
 
 .ui-list__list--mask {
@@ -200,7 +221,12 @@ const accentMaskClasses = computed(() => {
 
   @variant md {
     opacity: var(--mask-opacity, 0);
-    clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
+    clip-path: inset(
+      var(--clip-top, 0)
+      var(--clip-right, 100%)
+      var(--clip-bottom, 100%)
+      var(--clip-left, 0)
+    );
     transition: opacity 0.2s var(--ease-in-out);
   }
 }
@@ -214,12 +240,12 @@ const accentMaskClasses = computed(() => {
 }
 
 .ui-list__item {
-  position: relative;
+  /* position: relative; */
   transition: background-color 0.2s var(--ease-out);
   user-select: none;
   cursor: default;
 
-  .ui-list__list--default &::before,
+  /* .ui-list__list--default &::before,
   .ui-list__list--default &:last-child::after {
     content: '';
     position: absolute;
@@ -238,7 +264,7 @@ const accentMaskClasses = computed(() => {
 
   .ui-list__list--default &:last-child::after {
     top: 100%;
-  }
+  } */
 }
 
 .ui-list__container {
