@@ -21,14 +21,8 @@ const accent = computed(() => (block.accent as Themes) ?? 'light')
       :title="block.title"
       :headline="block.headline"
       :copy="block.copy"
-      :cta="
-        block.cta
-          ? {
-            ...block.cta,
-            title: block.cta_title ?? block.cta.title,
-          }
-          : undefined
-      "
+      :cta="block.cta"
+      :cta-title="block.cta_title"
     />
 
     <UiGrid
