@@ -229,7 +229,6 @@ const accentMaskClasses = computed(() => {
     z-index: 1;
     pointer-events: none;
     border-top: 1px solid currentColor;
-    opacity: 0.5;
   }
 
   .ui-list__list--default &::before {
