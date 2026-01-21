@@ -212,59 +212,11 @@ const outlineThemeClasses = computed(() => {
 
   &--1 {
     --direction: 0.75;
-    /* scale: 0.9; */
   }
 
   &--2 {
     --direction: 1;
     scale: 0.9;
-  }
-}
-
-.ui-button__blob__inner {
-  /* animation: pulsing 3s linear infinite; */
-}
-
-@keyframes pulsing {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  25% {
-    transform: scale(1.015);
-  }
-
-  50% {
-    transform: scale(1.02);
-  }
-
-  75% {
-    transform: scale(1.01);
-  }
-}
-
-@keyframes enter {
-  from {
-    translate: 0 0 0;
-    opacity: 0;
-  }
-
-  to {
-    translate: calc(var(--x) * var(--direction)) calc(var(--y) * var(--direction)) 0;
-    opacity: 1;
-  }
-}
-
-@keyframes exit {
-  from {
-    translate: calc(var(--x) * var(--direction)) calc(var(--y) * var(--direction)) 0;
-    opacity: 1;
-  }
-
-  to {
-    translate: 0 0 0;
-    opacity: 0;
   }
 }
 </style>

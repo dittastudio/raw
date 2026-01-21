@@ -66,6 +66,11 @@ const { story } = defineProps<Props>()
       v-else-if="block.component === 'block_carousel'"
       :block="block"
     />
+
+    <BlockLogoWall
+      v-else-if="block.component === 'block_logo_wall'"
+      :block="block"
+    />
   </UiSection>
 </template>
 
@@ -78,7 +83,8 @@ const { story } = defineProps<Props>()
   &--block_impact_details,
   &--block_team,
   &--block_testimonials,
-  &--block_hover_grid {
+  &--block_hover_grid,
+  &--block_logo_wall {
     padding-block: --spacing(38);
   }
 
