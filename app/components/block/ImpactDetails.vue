@@ -49,7 +49,7 @@ const media = computed(() => block.media?.[0])
       </div>
 
       <div
-        class="grid gap-10 col-start-2 sm:col-start-5 md:col-start-9 col-span-full"
+        class="flex flex-col gap-10 col-start-2 sm:col-start-5 md:col-start-9 col-span-full"
         :class="{
           'max-md:row-start-1': media && (storyblokRichTextContent(block.copy) || block.cta?.cached_url),
         }"
