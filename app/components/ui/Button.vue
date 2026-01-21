@@ -97,7 +97,7 @@ const outlineThemeClasses = computed(() => {
       ui-button
       relative
       isolate
-      inline-block
+      inline-flex
       rounded-full
       select-none
       type-p
@@ -105,35 +105,7 @@ const outlineThemeClasses = computed(() => {
     @mousemove="hoverHandler"
     @mouseleave="hoverOut"
   >
-    <div class="ui-button__container absolute -inset-1 flex items-center justify-center overflow-hidden">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="fixed top-0 left-0 w-0 h-0"
-      >
-        <defs>
-          <filter id="goo2">
-            <feGaussianBlur
-              in="SourceGraphic"
-              stdDeviation="30"
-              result="blur"
-            />
-
-            <feColorMatrix
-              in="blur"
-              mode="matrix"
-              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-              result="goo2"
-            />
-
-            <feComposite
-              in="SourceGraphic"
-              in2="goo2"
-              operator="atop"
-            />
-          </filter>
-        </defs>
-      </svg>
-
+    <div class="ui-button__container absolute inset-0 flex items-center justify-center">
       <span class="ui-button__blob ui-button__blob--1">
         <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-green" />
       </span>
@@ -179,12 +151,6 @@ const outlineThemeClasses = computed(() => {
   --t: 1;
 }
 
-.ui-button__container {
-  filter: url(#goo2) blur(6px);
-  width: 100%;
-  height: 100%;
-}
-
 .ui-button__shadow {
   --t: 1;
 
@@ -221,18 +187,16 @@ const outlineThemeClasses = computed(() => {
 }
 
 .ui-button__blob {
+  --t: 5;
+
   pointer-events: none;
-  --t: 1;
-  /* will-change: translate; */
   position: absolute;
-  /* inset: 0; */
-  width: 50%;
-  /* height: 100%; */
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   display: block;
-  border-radius: 50%;
-  /* filter: blur(20px); */
+  border-radius: 999px;
+  filter: blur(1px);
   opacity: 0;
   transition:
     opacity 0.4s var(--ease-out),
@@ -247,11 +211,13 @@ const outlineThemeClasses = computed(() => {
   }
 
   &--1 {
-    --direction: 1;
+    --direction: 0.75;
+    /* scale: 0.9; */
   }
 
   &--2 {
-    --direction: -1;
+    --direction: 1;
+    scale: 0.9;
   }
 }
 
