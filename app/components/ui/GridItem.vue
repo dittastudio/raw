@@ -3,12 +3,11 @@ import type { ListItem } from '@@/.storyblok/types/289672313529140/storyblok-com
 
 interface Props {
   type?: 'default' | 'mask'
-  index: number
   item: ListItem
   isOpen: boolean
 }
 
-const { index, item, isOpen, type = 'default' } = defineProps<Props>()
+const { item, isOpen, type = 'default' } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
 </script>

@@ -46,7 +46,6 @@ const maskStyle = computed(() => {
   }
 })
 
-// Mobile
 const openIndex = ref<number | null>(null)
 
 const toggleItem = (index: number) => {
@@ -167,7 +166,6 @@ const accentMaskClasses = computed(() => {
         >
           <UiGridItem
             type="default"
-            :index="index"
             :item="item"
             :is-open="openIndex === index"
           />
@@ -194,7 +192,6 @@ const accentMaskClasses = computed(() => {
         >
           <UiGridItem
             type="mask"
-            :index="index"
             :item="item"
             :is-open="openIndex === index"
           />
@@ -264,6 +261,7 @@ const accentMaskClasses = computed(() => {
 
   .ui-list__list--default & {
     background-color: var(--app-background-color);
+    transition: background-color var(--app-transition-duration) var(--app-transition-ease);
   }
 }
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Themes } from '@@/types/app'
 
-interface MorphGradientProps {
+interface Props {
   ballColour1?: Themes
   ballColour2?: Themes
   ballCursorColour?: Themes
@@ -11,7 +11,7 @@ const {
   ballColour1 = 'green',
   ballColour2 = 'pink',
   ballCursorColour = 'blue',
-} = defineProps<MorphGradientProps>()
+} = defineProps<Props>()
 
 const ballColour1Var = computed(() => `var(--color-${ballColour1})`)
 const ballColour2Var = computed(() => `var(--color-${ballColour2})`)
