@@ -17,7 +17,7 @@ const animateMe = (event: MouseEvent) => {
   }
   const { offsetX: x, offsetY: y } = event
   const { offsetWidth: width, offsetHeight: height } = el
-  const move = 5
+  const move = 3
   const xMove = (x / width) * (move * 2) - move
   const yMove = (y / height) * (move * 2) - move
 
@@ -72,30 +72,45 @@ const outlineThemeClasses = computed(() => {
       inline-block
       rounded-full
       select-none
-      px-5
-      pt-2
-      pb-2.25
       type-p
-      underline
-      underline-offset-2
-      decoration-[0.075em]
-      decoration-transparent
-      [a:hover_&]:decoration-current
-      transition-colors
-      duration-200
-      ease-out
     "
-    :class="{
-      [solidThemeClasses]: type === 'solid',
-      [outlineThemeClasses]: type === 'outline',
-    }"
     @mousemove="animateMe"
   >
-    <span class="ui-button__blob ui-button__blob--1" />
 
-    <span class="ui-button__blob ui-button__blob--2" />
+    <span class="ui-button__blob ui-button__blob--1">
+      <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-green" />
+    </span>
 
-    <slot />
+    <span class="ui-button__blob ui-button__blob--2">
+      <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-pink" />
+    </span>
+
+    <span
+      class="
+        block
+        relative
+        z-1
+        px-5
+        pt-2
+        pb-2.25
+        rounded-full
+        underline
+        underline-offset-2
+        decoration-[0.075em]
+        decoration-transparent
+        [a:hover_&]:decoration-current
+        [button:hover_&]:decoration-current
+        transition-colors
+        duration-200
+        ease-out
+      "
+      :class="{
+        [solidThemeClasses]: type === 'solid',
+        [outlineThemeClasses]: type === 'outline',
+      }"
+    >
+      <slot />
+    </span>
   </span>
 </template>
 
@@ -104,6 +119,7 @@ const outlineThemeClasses = computed(() => {
 
 .ui-button {
   position: relative;
+  isolation: isolate;
 }
 
 .ui-button__blob {
@@ -117,40 +133,64 @@ const outlineThemeClasses = computed(() => {
   filter: blur(1px);
   animation: exit 0.3s var(--ease-out) forwards;
 
-  .ui-button:hover & {
+  a:hover &,
+  button:hover & {
     animation: enter 0.3s var(--ease-out) forwards;
   }
 
   &--1 {
     --direction: 1;
-
-    background-color: var(--color-green);
   }
 
   &--2 {
     --direction: -1;
+  }
+}
 
-    background-color: var(--color-pink);
+.ui-button__blob__inner {
+  animation: pulsing 3s linear infinite;
+}
+
+@keyframes pulsing {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: scale(1.015);
+  }
+
+  50% {
+    transform: scale(1.02);
+  }
+
+  75% {
+    transform: scale(1.01);
   }
 }
 
 @keyframes enter {
   from {
     translate: 0 0 0;
+    opacity: 0;
   }
 
   to {
     translate: calc(var(--x) * var(--direction)) calc(var(--y) * var(--direction)) 0;
+    opacity: 1;
   }
 }
 
 @keyframes exit {
   from {
     translate: calc(var(--x) * var(--direction)) calc(var(--y) * var(--direction)) 0;
+    opacity: 1;
   }
 
   to {
     translate: 0 0 0;
+    opacity: 0;
   }
 }
 </style>
