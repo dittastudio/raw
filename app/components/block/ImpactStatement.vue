@@ -11,7 +11,7 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-editable="block"
-    class="grid gap-38"
+    class="flex flex-col gap-36"
   >
     <UiContent
       v-for="item in block.items"
