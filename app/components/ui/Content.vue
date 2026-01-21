@@ -25,7 +25,8 @@ const {
       grid
       grid-cols-(--app-grid)
       gap-x-(--app-inner-gutter)
-      gap-y-20
+      gap-y-10
+      md:gap-y-20
     "
   >
     <div
@@ -61,17 +62,13 @@ const {
       v-if="storyblokRichTextContent(copy) || cta?.cached_url"
       class="
         ui-content__copy
-        col-start-2
-        col-span-3
-        sm:col-start-5
-        sm:col-span-4
-        md:col-start-9
-        md:col-span-4
-        lg:col-start-9
-        lg:col-span-3
         grid
         gap-10
       "
+      :class="{
+        'col-start-2 col-span-3 sm:col-start-5 sm:col-span-4 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-3': storyblokRichTextContent(copy),
+        'col-start-1 col-span-full md:col-start-4': !storyblokRichTextContent(copy),
+      }"
     >
       <div v-if="storyblokRichTextContent(copy)">
         <StoryblokText :html="copy" />
