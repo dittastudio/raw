@@ -72,6 +72,11 @@ const { story } = defineProps<Props>()
         v-else-if="block.component === 'block_carousel'"
         :block="block"
       />
+
+      <BlockLogoWall
+        v-else-if="block.component === 'block_logo_wall'"
+        :block="block"
+      />
     </UiSection>
   </div>
 </template>

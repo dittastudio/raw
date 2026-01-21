@@ -77,6 +77,15 @@ export interface BlockImpactStatement {
   _uid: string;
 }
 
+export interface BlockLogoWall {
+  title?: string;
+  headline?: StoryblokRichtext;
+  logos?: StoryblokMultiasset;
+  theme?: number | string;
+  component: "block_logo_wall";
+  _uid: string;
+}
+
 export interface BlockPosts {
   component: "block_posts";
   _uid: string;
@@ -140,6 +149,7 @@ export interface Page {
     | BlockHoverList
     | BlockImpactDetails
     | BlockImpactStatement
+    | BlockLogoWall
     | BlockPosts
     | BlockTeam
     | BlockTestimonials

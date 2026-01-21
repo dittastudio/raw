@@ -591,6 +591,70 @@
     "metadata": {}
   },
   {
+    "name": "block_logo_wall",
+    "display_name": "Logo Wall",
+    "description": "",
+    "created_at": "2026-01-21T16:53:11.246Z",
+    "updated_at": "2026-01-21T16:56:18.514Z",
+    "id": 136498344949214,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "JHCNzaRXR_GWMDCviJXU2g"
+      },
+      "headline": {
+        "type": "richtext",
+        "pos": 1,
+        "style_options": [
+          {
+            "_uid": "219b8a5e-51d5-40c6-acb4-f2290235de13",
+            "name": "Outlined",
+            "value": "is-outlined"
+          }
+        ],
+        "customize_toolbar": true,
+        "toolbar": [
+          "h2",
+          "h3",
+          "h4",
+          "unset"
+        ],
+        "id": "jMTnAVgTRDmQ7xk7xG49FA"
+      },
+      "logos": {
+        "type": "multiasset",
+        "pos": 2,
+        "id": "qOVM0yITQKOffPrG3iAbSg"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "id": "9tVuSuyyT-2CTpvlqiYblQ",
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "light"
+      }
+    },
+    "image": "//a.storyblok.com/f/289672313529140/x/243f2c3a33/screenshot-2026-01-21-at-16-54-12.jpg",
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Logo Wall",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "sticker",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_posts",
     "display_name": "Posts",
     "description": "Gets latest posts with filtering.",
