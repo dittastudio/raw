@@ -77,7 +77,7 @@ const { data: posts } = await useAsyncData('posts', async () => {
     v-editable="block"
     class="w-full bg-offwhite text-offblack"
   >
-    <div class="wrapper-max py-22 flex flex-col items-start justify-center gap-22">
+    <div class="wrapper-max flex flex-col items-start justify-center gap-22">
       <div class="w-full flex flex-col items-start justify-center gap-6">
         <FilterDatasource
           v-if="categories?.data.datasource_entries.length"

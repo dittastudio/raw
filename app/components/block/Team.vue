@@ -24,7 +24,7 @@ const { block } = defineProps<Props>()
 
     <div
       v-if="block.teams"
-      class="wrapper-max grid gap-35"
+      class="wrapper-max grid gap-18 md:gap-36"
     >
       <UiTeam
         v-for="team in block.teams"
