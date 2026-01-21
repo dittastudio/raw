@@ -151,52 +151,56 @@ const accentMaskClasses = computed(() => {
 </script>
 
 <template>
-  <div class="relative">
-    <ul
-      ref="listEl"
-      class="ui-list__list ui-list__list--default"
-      @mouseleave="handleListExit"
-    >
-      <li
-        v-for="(item, index) in items"
-        :key="item._uid"
-        class="ui-list__item wrapper-max"
-        @click="!isScreenMd && toggleItem(index)"
-        @mouseenter="setMaskClip($event, index)"
+  <div class="md:wrapper-max">
+    <div class="relative overflow-hidden max-md:border-t max-md:border-b max-md:border-current">
+      <ul
+        ref="listEl"
+        class="ui-list__list ui-list__list--default"
+        @mouseleave="handleListExit"
       >
-        <UiGridItem
-          type="default"
-          :index="index"
-          :item="item"
-          :is-open="openIndex === index"
-        />
-      </li>
-    </ul>
+        <li
+          v-for="(item, index) in items"
+          :key="item._uid"
+          class="ui-list__item"
+          @click="!isScreenMd && toggleItem(index)"
+          @mouseenter="setMaskClip($event, index)"
+        >
+          <UiGridItem
+            type="default"
+            :index="index"
+            :item="item"
+            :is-open="openIndex === index"
+          />
+        </li>
+      </ul>
 
-    <ul
-      class="ui-list__list ui-list__list--mask"
-      :class="[
-        accentMaskClasses,
-        maskTransitionEnabled ? 'ui-list__list--mask-transition' : '',
-      ]"
-      :style="maskStyle"
-      aria-hidden="true"
-    >
-      <li
-        v-for="(item, index) in items"
-        :key="item._uid"
-        class="ui-list__item wrapper-max"
-        :class="openIndex === index ? accentIsOpenClasses : ''"
-        @click="!isScreenMd && toggleItem(index)"
+      <ul
+        class="ui-list__list ui-list__list--mask"
+        :class="[
+          maskTransitionEnabled ? 'ui-list__list--mask-transition' : '',
+        ]"
+        :style="maskStyle"
+        aria-hidden="true"
       >
-        <UiGridItem
-          type="mask"
-          :index="index"
-          :item="item"
-          :is-open="openIndex === index"
-        />
-      </li>
-    </ul>
+        <li
+          v-for="(item, index) in items"
+          :key="item._uid"
+          class="ui-list__item"
+          :class="[
+            openIndex === index ? accentIsOpenClasses : '',
+            accentMaskClasses,
+          ]"
+          @click="!isScreenMd && toggleItem(index)"
+        >
+          <UiGridItem
+            type="mask"
+            :index="index"
+            :item="item"
+            :is-open="openIndex === index"
+          />
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -208,8 +212,13 @@ const accentMaskClasses = computed(() => {
   flex-direction: column;
   gap: 1px;
 
+  &:not(&--mask) {
+    background-color: currentColor;
+  }
+
   @variant md {
     flex-direction: row;
+    flex-wrap: wrap;
   }
 }
 
@@ -240,31 +249,22 @@ const accentMaskClasses = computed(() => {
 }
 
 .ui-list__item {
-  /* position: relative; */
   transition: background-color 0.2s var(--ease-out);
   user-select: none;
   cursor: default;
 
-  /* .ui-list__list--default &::before,
-  .ui-list__list--default &:last-child::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    z-index: 1;
-    pointer-events: none;
-    border-top: 1px solid currentColor;
-    opacity: 0.5;
+  @variant md {
+    flex-basis: calc(50% - 1px);
+    flex-grow: 1;
   }
 
-  .ui-list__list--default &::before {
-    bottom: 100%;
+  @variant lg {
+    flex-basis: calc(25% - 1px);
   }
 
-  .ui-list__list--default &:last-child::after {
-    top: 100%;
-  } */
+  .ui-list__list--default & {
+    background-color: var(--app-background-color);
+  }
 }
 
 .ui-list__container {

@@ -37,7 +37,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
         :is-open="isOpen"
         :is-disabled="isScreenMd"
       >
-        <p class="type-p max-md:pt-4">
+        <p class="type-p pt-4 md:pt-16">
           {{ item.copy }}
         </p>
       </UiExpandable>
@@ -49,7 +49,11 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 @reference "@/assets/css/app.css";
 
 .ui-list-item {
-  padding-block: --spacing(4);
+  padding: var(--app-outer-gutter);
+
+  @variant md {
+    padding: --spacing(16) var(--app-outer-gutter);
+  }
 }
 
 .ui-list-item--mask {
