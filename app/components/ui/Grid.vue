@@ -16,23 +16,33 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
 const listEl = ref<HTMLElement | null>(null)
 const clipTop = ref<number | null>(null)
+const clipRight = ref<number | null>(null)
 const clipBottom = ref<number | null>(null)
+const clipLeft = ref<number | null>(null)
 const maskActive = ref(false)
 const maskTransitionEnabled = ref(false)
+const lastHoverIndex = ref<number | null>(null)
 
 const maskStyle = computed(() => {
   const baseStyle = {
     '--mask-opacity': maskActive.value ? '1' : '0',
   }
 
-  if (clipTop.value === null || clipBottom.value === null) {
+  if (
+    clipTop.value === null
+    || clipRight.value === null
+    || clipBottom.value === null
+    || clipLeft.value === null
+  ) {
     return baseStyle
   }
 
   return {
     ...baseStyle,
     '--clip-top': `${clipTop.value}px`,
+    '--clip-right': `${clipRight.value}px`,
     '--clip-bottom': `${clipBottom.value}px`,
+    '--clip-left': `${clipLeft.value}px`,
   }
 })
 
@@ -43,7 +53,7 @@ const toggleItem = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
 }
 
-const setMaskClip = (event: MouseEvent) => {
+const setMaskClip = (event: MouseEvent, index: number) => {
   if (!isScreenMd.value || !listEl.value) {
     return
   }
@@ -58,7 +68,9 @@ const setMaskClip = (event: MouseEvent) => {
   const itemRect = itemEl.getBoundingClientRect()
 
   clipTop.value = Math.max(0, itemRect.top - listRect.top)
+  clipRight.value = Math.max(0, listRect.right - itemRect.right)
   clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+  clipLeft.value = Math.max(0, itemRect.left - listRect.left)
 
   if (!maskActive.value) {
     maskActive.value = true
@@ -76,13 +88,18 @@ const setMaskClip = (event: MouseEvent) => {
   else if (!maskTransitionEnabled.value) {
     maskTransitionEnabled.value = true
   }
+
+  lastHoverIndex.value = index
 }
 
 const clearMaskClip = () => {
   clipTop.value = null
+  clipRight.value = null
   clipBottom.value = null
+  clipLeft.value = null
   maskActive.value = false
   maskTransitionEnabled.value = false
+  lastHoverIndex.value = null
 }
 
 const handleListExit = () => {
@@ -134,52 +151,56 @@ const accentMaskClasses = computed(() => {
 </script>
 
 <template>
-  <div class="relative">
-    <ul
-      ref="listEl"
-      class="ui-list__list ui-list__list--default"
-      @mouseleave="handleListExit"
-    >
-      <li
-        v-for="(item, index) in items"
-        :key="item._uid"
-        class="ui-list__item wrapper-max"
-        @click="!isScreenMd && toggleItem(index)"
-        @mouseenter="setMaskClip($event)"
+  <div class="md:wrapper-max">
+    <div class="relative overflow-hidden max-md:border-t max-md:border-b max-md:border-current">
+      <ul
+        ref="listEl"
+        class="ui-list__list ui-list__list--default"
+        @mouseleave="handleListExit"
       >
-        <UiListItem
-          type="default"
-          :index="index"
-          :item="item"
-          :is-open="openIndex === index"
-        />
-      </li>
-    </ul>
+        <li
+          v-for="(item, index) in items"
+          :key="item._uid"
+          class="ui-list__item"
+          @click="!isScreenMd && toggleItem(index)"
+          @mouseenter="setMaskClip($event, index)"
+        >
+          <UiGridItem
+            type="default"
+            :index="index"
+            :item="item"
+            :is-open="openIndex === index"
+          />
+        </li>
+      </ul>
 
-    <ul
-      class="ui-list__list ui-list__list--mask"
-      :class="[
-        accentMaskClasses,
-        maskTransitionEnabled ? 'ui-list__list--mask-transition' : '',
-      ]"
-      :style="maskStyle"
-      aria-hidden="true"
-    >
-      <li
-        v-for="(item, index) in items"
-        :key="item._uid"
-        class="ui-list__item wrapper-max"
-        :class="openIndex === index ? accentIsOpenClasses : ''"
-        @click="!isScreenMd && toggleItem(index)"
+      <ul
+        class="ui-list__list ui-list__list--mask"
+        :class="[
+          maskTransitionEnabled ? 'ui-list__list--mask-transition' : '',
+        ]"
+        :style="maskStyle"
+        aria-hidden="true"
       >
-        <UiListItem
-          type="mask"
-          :index="index"
-          :item="item"
-          :is-open="openIndex === index"
-        />
-      </li>
-    </ul>
+        <li
+          v-for="(item, index) in items"
+          :key="item._uid"
+          class="ui-list__item"
+          :class="[
+            openIndex === index ? accentIsOpenClasses : '',
+            accentMaskClasses,
+          ]"
+          @click="!isScreenMd && toggleItem(index)"
+        >
+          <UiGridItem
+            type="mask"
+            :index="index"
+            :item="item"
+            :is-open="openIndex === index"
+          />
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -190,6 +211,15 @@ const accentMaskClasses = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1px;
+
+  &:not(&--mask) {
+    background-color: currentColor;
+  }
+
+  @variant md {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
 
 .ui-list__list--mask {
@@ -200,7 +230,12 @@ const accentMaskClasses = computed(() => {
 
   @variant md {
     opacity: var(--mask-opacity, 0);
-    clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
+    clip-path: inset(
+      var(--clip-top, 0)
+      var(--clip-right, 100%)
+      var(--clip-bottom, 100%)
+      var(--clip-left, 0)
+    );
     transition: opacity 0.2s var(--ease-in-out);
   }
 }
@@ -214,29 +249,21 @@ const accentMaskClasses = computed(() => {
 }
 
 .ui-list__item {
-  position: relative;
   transition: background-color 0.2s var(--ease-out);
   user-select: none;
   cursor: default;
 
-  .ui-list__list--default &::before,
-  .ui-list__list--default &:last-child::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    z-index: 1;
-    pointer-events: none;
-    border-top: 1px solid currentColor;
+  @variant md {
+    flex-basis: calc(50% - 1px);
+    flex-grow: 1;
   }
 
-  .ui-list__list--default &::before {
-    bottom: 100%;
+  @variant lg {
+    flex-basis: calc(25% - 1px);
   }
 
-  .ui-list__list--default &:last-child::after {
-    top: 100%;
+  .ui-list__list--default & {
+    background-color: var(--app-background-color);
   }
 }
 

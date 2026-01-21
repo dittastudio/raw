@@ -57,6 +57,11 @@ const { story } = defineProps<Props>()
       :block="block"
     />
 
+    <BlockHoverGrid
+      v-else-if="block.component === 'block_hover_grid'"
+      :block="block"
+    />
+
     <BlockCarousel
       v-else-if="block.component === 'block_carousel'"
       :block="block"
@@ -71,7 +76,8 @@ const { story } = defineProps<Props>()
   &--block_hover_list,
   &--block_impact_statement,
   &--block_team,
-  &--block_testimonials {
+  &--block_testimonials,
+  &--block_hover_grid {
     padding-block: --spacing(38);
   }
 
