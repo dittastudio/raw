@@ -18,14 +18,8 @@ const { block } = defineProps<Props>()
       :title="block.title"
       :headline="block.headline"
       :copy="block.copy"
-      :cta="
-        block.cta
-          ? {
-            ...block.cta,
-            title: block.cta_title ?? block.cta.title,
-          }
-          : undefined
-      "
+      :cta="block.cta"
+      :cta-title="block.cta_title"
     />
 
     <div

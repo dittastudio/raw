@@ -1,4 +1,4 @@
-import type { Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Image, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokMultilink, StoryblokRichtext } from '@@/.storyblok/types/storyblok'
 import type { ImageModifiers } from '@nuxt/image'
 import type { ISbStoryData } from '@storyblok/js'
@@ -41,6 +41,8 @@ const storyblokRichTextContent = (
 
 const storyblokSlug = (path: string): string =>
   ['/', ''].includes(path) ? '/home' : path.replace(/\/+$/, '')
+
+const isImageComponent = (media: Image): media is Image => media.component === 'image'
 
 const isPage = (
   story: ISbStoryData<Page | Post | Project> | null | undefined,
@@ -106,6 +108,7 @@ const determineHref = (item: StoryblokMultilink) =>
 
 export {
   determineHref,
+  isImageComponent,
   isPage,
   isPost,
   isProject,

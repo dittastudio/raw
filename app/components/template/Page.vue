@@ -75,6 +75,7 @@ const { story } = defineProps<Props>()
 .section {
   &--block_hover_list,
   &--block_impact_statement,
+  &--block_impact_details,
   &--block_team,
   &--block_testimonials,
   &--block_hover_grid {
