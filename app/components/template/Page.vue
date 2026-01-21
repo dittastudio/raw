@@ -77,6 +77,11 @@ const { story } = defineProps<Props>()
         v-else-if="block.component === 'block_logo_wall'"
         :block="block"
       />
+
+      <BlockContact
+        v-else-if="block.component === 'block_contact'"
+        :block="block"
+      />
     </UiSection>
   </div>
 </template>

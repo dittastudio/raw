@@ -93,6 +93,76 @@
     "metadata": {}
   },
   {
+    "name": "block_contact",
+    "display_name": "Contact",
+    "description": "",
+    "created_at": "2026-01-21T18:18:48.937Z",
+    "updated_at": "2026-01-21T18:30:03.945Z",
+    "id": 136519388948249,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "JHCNzaRXR_GWMDCviJXU2g"
+      },
+      "headline": {
+        "type": "richtext",
+        "pos": 1,
+        "style_options": [
+          {
+            "_uid": "219b8a5e-51d5-40c6-acb4-f2290235de13",
+            "name": "Outlined",
+            "value": "is-outlined"
+          }
+        ],
+        "customize_toolbar": true,
+        "toolbar": [
+          "h2",
+          "h3",
+          "h4",
+          "unset"
+        ],
+        "id": "jMTnAVgTRDmQ7xk7xG49FA"
+      },
+      "info": {
+        "type": "bloks",
+        "pos": 2,
+        "id": "CdIqYZGnQk6k9M0u3mMtrA",
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "info_item"
+        ],
+        "component_denylist": []
+      },
+      "theme": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "id": "9tVuSuyyT-2CTpvlqiYblQ",
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "light"
+      }
+    },
+    "image": "//a.storyblok.com/f/289672313529140/x/243f2c3a33/screenshot-2026-01-21-at-16-54-12.jpg",
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Contact",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "sticker",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_hero",
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
@@ -850,6 +920,78 @@
     "all_presets": [],
     "preset_id": null,
     "real_name": "image",
+    "component_group_uuid": "7fcb11a1-5f87-4c0b-ba8f-0bda6cd7387f",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "info_item",
+    "display_name": "Info Item",
+    "description": "",
+    "created_at": "2026-01-21T18:25:51.654Z",
+    "updated_at": "2026-01-21T18:32:23.080Z",
+    "id": 136521120380730,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "5V9qWj81RHWBZnt0jY4CkA",
+        "style_options": [
+          {
+            "_uid": "9a901605-db42-4180-bc82-925a40ef0ec5",
+            "name": "Outlined",
+            "value": "is-outlined"
+          }
+        ],
+        "customize_toolbar": true,
+        "toolbar": [
+          "h2",
+          "unset",
+          "h3",
+          "h4"
+        ]
+      },
+      "column_one": {
+        "type": "richtext",
+        "pos": 1,
+        "id": "DAfQWVQfRtKh44893qpCiw",
+        "customize_toolbar": true,
+        "toolbar": [
+          "unset",
+          "paragraph",
+          "link",
+          "italic",
+          "bold"
+        ],
+        "allow_target_blank": true
+      },
+      "column_two": {
+        "type": "richtext",
+        "pos": 2,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "unset",
+          "italic",
+          "link",
+          "paragraph"
+        ],
+        "allow_target_blank": true,
+        "id": "kg-FdIHgQJeXkQp7oOf6Sg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Info Item",
     "component_group_uuid": "7fcb11a1-5f87-4c0b-ba8f-0bda6cd7387f",
     "color": null,
     "icon": null,

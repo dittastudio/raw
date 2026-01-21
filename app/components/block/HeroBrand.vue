@@ -114,7 +114,10 @@ const slideClass = computed(() => {
     </div>
   </div>
 
-  <div class="py-10 bg-offwhite">
+  <div
+    v-if="block.logo_ticker"
+    class="py-10 bg-offwhite"
+  >
     <UiTicker
       duration="30s"
       direction="right"

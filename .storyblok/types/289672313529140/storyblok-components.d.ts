@@ -14,6 +14,15 @@ export interface BlockCarousel {
   _uid: string;
 }
 
+export interface BlockContact {
+  title?: string;
+  headline?: StoryblokRichtext;
+  info?: InfoItem[];
+  theme?: number | string;
+  component: "block_contact";
+  _uid: string;
+}
+
 export interface BlockHero {
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
@@ -117,6 +126,14 @@ export interface Image {
   _uid: string;
 }
 
+export interface InfoItem {
+  title?: string;
+  column_one?: StoryblokRichtext;
+  column_two?: StoryblokRichtext;
+  component: "info_item";
+  _uid: string;
+}
+
 export interface Link {
   title: string;
   link: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
@@ -143,6 +160,7 @@ export interface Logo {
 export interface Page {
   blocks?: (
     | BlockCarousel
+    | BlockContact
     | BlockHero
     | BlockHeroBrand
     | BlockHoverGrid

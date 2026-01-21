@@ -72,11 +72,20 @@ const {
 
 .ui-content__headline {
   :deep(h2),
-  :deep(h3),
-  :deep(h4)  {
+  :deep(h3) {
     @apply type-h2;
 
     text-wrap: balance;
+  }
+
+  :deep(h4) {
+    @apply type-h4;
+
+    text-wrap: balance;
+  }
+
+  :deep(h4 + *) {
+    padding-top: 1.25em;
   }
 }
 
