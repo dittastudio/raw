@@ -32,7 +32,7 @@ const { block } = defineProps<Props>()
         <div class="relative size-full isolate">
           <NuxtImg
             v-if="item.media?.filename"
-            class="block size-full aspect-[10/16] sm:aspect-video object-cover"
+            class="block size-full aspect-10/16 sm:aspect-video object-cover"
             :src="item.media.filename"
             :alt="item.media.alt || ''"
             sizes="
