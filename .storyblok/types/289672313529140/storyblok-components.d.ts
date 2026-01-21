@@ -31,6 +31,19 @@ export interface BlockHeroBrand {
   _uid: string;
 }
 
+export interface BlockHoverGrid {
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  items?: ListItem[];
+  theme?: number | string;
+  accent?: number | string;
+  component: "block_hover_grid";
+  _uid: string;
+}
+
 export interface BlockHoverList {
   title?: string;
   headline?: StoryblokRichtext;
@@ -117,6 +130,7 @@ export interface Page {
     | BlockCarousel
     | BlockHero
     | BlockHeroBrand
+    | BlockHoverGrid
     | BlockHoverList
     | BlockImpactDetails
     | BlockImpactStatement
