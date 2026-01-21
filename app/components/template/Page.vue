@@ -19,7 +19,7 @@ const { story } = defineProps<Props>()
       :class="[
         'last:pb-20 last:md:pb-36',
         {
-          'py-20 md:py-36': block.component === 'block_testimonials',
+          'py-20 md:py-36': ['block_testimonials'].includes(block.component),
         },
       ]"
     >
