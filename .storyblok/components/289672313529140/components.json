@@ -4,27 +4,17 @@
     "display_name": "Carousel",
     "description": "",
     "created_at": "2026-01-20T17:20:53.569Z",
-    "updated_at": "2026-01-20T17:32:08.490Z",
+    "updated_at": "2026-01-20T21:51:48.823Z",
     "id": 136151259425859,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "id": "9tVuSuyyT-2CTpvlqiYblQ",
-        "source": "internal",
-        "datasource_slug": "theme",
-        "exclude_empty_option": true,
-        "default_value": "light"
-      },
       "title": {
         "type": "text",
-        "pos": 1,
+        "pos": 0,
         "id": "v47Y3qk0SwaYjmlqt2a_hA"
       },
       "headline": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 1,
         "style_options": [
           {
             "_uid": "ba0ddafd-eee7-4985-8c9d-6ba9d3bd3383",
@@ -41,7 +31,7 @@
       },
       "copy": {
         "type": "richtext",
-        "pos": 3,
+        "pos": 2,
         "id": "d3JJ9zeMSmedWOE_wfkeuw",
         "customize_toolbar": true,
         "toolbar": [
@@ -51,12 +41,12 @@
       },
       "cta_title": {
         "type": "text",
-        "pos": 4,
+        "pos": 3,
         "id": "i5SdQfGmQjCgfV9a4lP4BQ"
       },
       "cta": {
         "type": "multilink",
-        "pos": 5,
+        "pos": 4,
         "id": "-Tp_NOACS3ayxs1jE1Kqyg",
         "email_link_type": true,
         "show_anchor": false,
@@ -64,7 +54,7 @@
       },
       "slides": {
         "type": "bloks",
-        "pos": 6,
+        "pos": 5,
         "restrict_type": "",
         "restrict_components": true,
         "minimum": 1,
@@ -74,6 +64,16 @@
         "component_denylist": [],
         "id": "0FAQ5Gy4QqCyYSPe5v5xLA",
         "display_name": "Slides"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "id": "9tVuSuyyT-2CTpvlqiYblQ",
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "light"
       }
     },
     "image": "//a.storyblok.com/f/289672313529140/x/2e7e9fb190/screenshot-2026-01-20-at-17-21-57.jpg",
@@ -97,25 +97,12 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-01-19T17:47:38.008Z",
+    "updated_at": "2026-01-20T21:51:21.666Z",
     "id": 132594684570052,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "required": false,
-        "options": [],
-        "exclude_empty_option": false,
-        "default_value": "light",
-        "id": "BmrYdk1fTiOQo5l9tMEL_A",
-        "display_name": "Theme",
-        "source": "internal",
-        "datasource_slug": "theme"
-      },
       "headline": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 0,
         "required": false,
         "customize_toolbar": true,
         "toolbar": [
@@ -135,13 +122,26 @@
       },
       "text": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 1,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
           "paragraph",
           "unset"
         ]
+      },
+      "theme": {
+        "type": "option",
+        "pos": 2,
+        "use_uuid": true,
+        "required": false,
+        "options": [],
+        "exclude_empty_option": false,
+        "default_value": "light",
+        "id": "BmrYdk1fTiOQo5l9tMEL_A",
+        "display_name": "Theme",
+        "source": "internal",
+        "datasource_slug": "theme"
       }
     },
     "image": null,
@@ -239,35 +239,17 @@
     "display_name": "Hover List",
     "description": "",
     "created_at": "2026-01-18T18:27:53.343Z",
-    "updated_at": "2026-01-20T14:10:00.890Z",
+    "updated_at": "2026-01-20T21:51:58.020Z",
     "id": 135459935652633,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "theme",
-        "default_value": "light",
-        "id": "ErZTwpRTR-en-pK9Hn5ynw"
-      },
-      "accent": {
-        "type": "option",
-        "pos": 1,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "theme",
-        "id": "Nk4IXfCTQrOQlwBID_EgZA",
-        "default_value": "blue"
-      },
       "title": {
         "type": "text",
-        "pos": 2,
+        "pos": 0,
         "id": "ngxAVQX-SGmtXTKuC5RJsA"
       },
       "headline": {
         "type": "richtext",
-        "pos": 3,
+        "pos": 1,
         "id": "FuO6792QSiK7MgQHPMNtqA",
         "customize_toolbar": true,
         "toolbar": [
@@ -286,7 +268,7 @@
       },
       "copy": {
         "type": "richtext",
-        "pos": 4,
+        "pos": 2,
         "id": "smv5StJ1TiuGHdeYWVfzrw",
         "customize_toolbar": true,
         "toolbar": [
@@ -296,19 +278,19 @@
       },
       "cta_title": {
         "type": "text",
-        "pos": 5,
+        "pos": 3,
         "id": "3wQLCrLPTmOL5GkyubG5Nw"
       },
       "cta": {
         "type": "multilink",
-        "pos": 6,
+        "pos": 4,
         "email_link_type": true,
         "allow_target_blank": true,
         "id": "FBvAqJ90TSeEs-KkB_lcGQ"
       },
       "items": {
         "type": "bloks",
-        "pos": 7,
+        "pos": 5,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -316,6 +298,24 @@
         ],
         "component_denylist": [],
         "id": "8TfK8RQPS-CJSXv6ciDEtA"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "default_value": "light",
+        "id": "ErZTwpRTR-en-pK9Hn5ynw"
+      },
+      "accent": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "id": "Nk4IXfCTQrOQlwBID_EgZA",
+        "default_value": "blue"
       }
     },
     "image": null,
@@ -335,26 +335,119 @@
     "metadata": {}
   },
   {
+    "name": "block_impact_details",
+    "display_name": "Impact Details",
+    "description": "Impactful headline with content for further details.",
+    "created_at": "2026-01-20T21:36:05.929Z",
+    "updated_at": "2026-01-20T21:50:55.688Z",
+    "id": 136213978857390,
+    "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "ngxAVQX-SGmtXTKuC5RJsA"
+      },
+      "headline": {
+        "type": "richtext",
+        "pos": 1,
+        "id": "FuO6792QSiK7MgQHPMNtqA",
+        "customize_toolbar": true,
+        "toolbar": [
+          "h2",
+          "h3",
+          "h4",
+          "unset"
+        ],
+        "style_options": [
+          {
+            "_uid": "32b97c2c-2de3-40bd-ad77-6d92f718c63c",
+            "name": "Outlined",
+            "value": "is-outlined"
+          }
+        ]
+      },
+      "copy": {
+        "type": "richtext",
+        "pos": 2,
+        "id": "smv5StJ1TiuGHdeYWVfzrw",
+        "customize_toolbar": true,
+        "toolbar": [
+          "unset",
+          "paragraph",
+          "bold",
+          "link",
+          "olist",
+          "list"
+        ]
+      },
+      "cta_title": {
+        "type": "text",
+        "pos": 3,
+        "id": "3wQLCrLPTmOL5GkyubG5Nw"
+      },
+      "cta": {
+        "type": "multilink",
+        "pos": 4,
+        "email_link_type": true,
+        "allow_target_blank": true,
+        "id": "FBvAqJ90TSeEs-KkB_lcGQ"
+      },
+      "image": {
+        "type": "asset",
+        "pos": 5,
+        "filetypes": [
+          "images"
+        ],
+        "id": "AmCrlyniSNW2q9AFJiyPYg"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "default_value": "dark",
+        "id": "ErZTwpRTR-en-pK9Hn5ynw",
+        "exclude_empty_option": true
+      },
+      "accent": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "blue",
+        "id": "oJMIG_sMSg6Ence4PVDvXg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Impact Details",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "layout-list",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_impact_statement",
     "display_name": "Impact Statement",
     "description": "",
     "created_at": "2026-01-13T22:49:11.433Z",
-    "updated_at": "2026-01-13T23:36:10.144Z",
+    "updated_at": "2026-01-20T21:52:08.007Z",
     "id": 133754681079760,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "id": "9tVuSuyyT-2CTpvlqiYblQ",
-        "source": "internal",
-        "datasource_slug": "theme",
-        "exclude_empty_option": true,
-        "default_value": "light"
-      },
       "items": {
         "type": "bloks",
-        "pos": 1,
+        "pos": 0,
         "restrict_type": "",
         "restrict_components": true,
         "minimum": 1,
@@ -364,6 +457,16 @@
         "component_denylist": [],
         "id": "0FAQ5Gy4QqCyYSPe5v5xLA",
         "display_name": "Items"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "id": "9tVuSuyyT-2CTpvlqiYblQ",
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "light"
       }
     },
     "image": "//a.storyblok.com/f/289672313529140/x/76aa71aad7/screenshot-2026-01-13-at-22-51-13.jpg",
@@ -411,37 +514,17 @@
     "display_name": "Team",
     "description": "Display teams of selected people.",
     "created_at": "2026-01-20T12:22:18.524Z",
-    "updated_at": "2026-01-20T16:31:56.893Z",
+    "updated_at": "2026-01-20T21:51:09.060Z",
     "id": 136077879403799,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "theme",
-        "default_value": "dark",
-        "id": "ErZTwpRTR-en-pK9Hn5ynw",
-        "exclude_empty_option": true
-      },
-      "accent": {
-        "type": "option",
-        "pos": 1,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "theme",
-        "exclude_empty_option": true,
-        "default_value": "blue",
-        "id": "oJMIG_sMSg6Ence4PVDvXg"
-      },
       "title": {
         "type": "text",
-        "pos": 2,
+        "pos": 0,
         "id": "ngxAVQX-SGmtXTKuC5RJsA"
       },
       "headline": {
         "type": "richtext",
-        "pos": 3,
+        "pos": 1,
         "id": "FuO6792QSiK7MgQHPMNtqA",
         "customize_toolbar": true,
         "toolbar": [
@@ -460,7 +543,7 @@
       },
       "copy": {
         "type": "richtext",
-        "pos": 4,
+        "pos": 2,
         "id": "smv5StJ1TiuGHdeYWVfzrw",
         "customize_toolbar": true,
         "toolbar": [
@@ -470,19 +553,19 @@
       },
       "cta_title": {
         "type": "text",
-        "pos": 5,
+        "pos": 3,
         "id": "3wQLCrLPTmOL5GkyubG5Nw"
       },
       "cta": {
         "type": "multilink",
-        "pos": 6,
+        "pos": 4,
         "email_link_type": true,
         "allow_target_blank": true,
         "id": "FBvAqJ90TSeEs-KkB_lcGQ"
       },
       "teams": {
         "type": "bloks",
-        "pos": 7,
+        "pos": 5,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -490,6 +573,26 @@
         ],
         "component_denylist": [],
         "id": "8TfK8RQPS-CJSXv6ciDEtA"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "default_value": "dark",
+        "id": "ErZTwpRTR-en-pK9Hn5ynw",
+        "exclude_empty_option": true
+      },
+      "accent": {
+        "type": "option",
+        "pos": 7,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "blue",
+        "id": "oJMIG_sMSg6Ence4PVDvXg"
       }
     },
     "image": null,
@@ -502,7 +605,7 @@
     "real_name": "Team",
     "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
     "color": "var(--sb-color-accent-background-green-cyan)",
-    "icon": "layout-list",
+    "icon": "wallet",
     "internal_tags_list": [],
     "internal_tag_ids": [],
     "content_type_asset_preview": null,
@@ -513,22 +616,12 @@
     "display_name": "Testimonials",
     "description": "",
     "created_at": "2026-01-16T15:37:59.970Z",
-    "updated_at": "2026-01-18T18:27:30.937Z",
+    "updated_at": "2026-01-20T21:52:19.379Z",
     "id": 134710394762064,
     "schema": {
-      "theme": {
-        "type": "option",
-        "pos": 0,
-        "use_uuid": true,
-        "id": "9tVuSuyyT-2CTpvlqiYblQ",
-        "source": "internal",
-        "datasource_slug": "theme",
-        "exclude_empty_option": true,
-        "default_value": "light"
-      },
       "items": {
         "type": "bloks",
-        "pos": 1,
+        "pos": 0,
         "restrict_type": "",
         "restrict_components": true,
         "minimum": 1,
@@ -538,6 +631,16 @@
         "component_denylist": [],
         "id": "0FAQ5Gy4QqCyYSPe5v5xLA",
         "display_name": "Items"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "id": "9tVuSuyyT-2CTpvlqiYblQ",
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "default_value": "light"
       }
     },
     "image": "//a.storyblok.com/f/289672313529140/x/847743401c/screenshot-2026-01-18-at-18-27-09.jpg",

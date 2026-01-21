@@ -3,21 +3,21 @@
 import type { ISbStoryData } from '@storyblok/js';
 import type { StoryblokMultiasset, StoryblokAsset, StoryblokRichtext, StoryblokMultilink } from '../storyblok.d.ts';
 export interface BlockCarousel {
-  theme?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   slides?: Slide[];
+  theme?: number | string;
   component: "block_carousel";
   _uid: string;
 }
 
 export interface BlockHero {
-  theme?: number | string;
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
+  theme?: number | string;
   component: "block_hero";
   _uid: string;
 }
@@ -32,21 +32,34 @@ export interface BlockHeroBrand {
 }
 
 export interface BlockHoverList {
-  theme?: number | string;
-  accent?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   items?: ListItem[];
+  theme?: number | string;
+  accent?: number | string;
   component: "block_hover_list";
   _uid: string;
 }
 
-export interface BlockImpactStatement {
+export interface BlockImpactDetails {
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  image?: StoryblokAsset;
   theme?: number | string;
+  accent?: number | string;
+  component: "block_impact_details";
+  _uid: string;
+}
+
+export interface BlockImpactStatement {
   items?: TitleCopy[];
+  theme?: number | string;
   component: "block_impact_statement";
   _uid: string;
 }
@@ -57,21 +70,21 @@ export interface BlockPosts {
 }
 
 export interface BlockTeam {
-  theme?: number | string;
-  accent?: number | string;
   title?: string;
   headline?: StoryblokRichtext;
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   teams?: Team[];
+  theme?: number | string;
+  accent?: number | string;
   component: "block_team";
   _uid: string;
 }
 
 export interface BlockTestimonials {
-  theme?: number | string;
   items?: Testimonial[];
+  theme?: number | string;
   component: "block_testimonials";
   _uid: string;
 }
@@ -105,6 +118,7 @@ export interface Page {
     | BlockHero
     | BlockHeroBrand
     | BlockHoverList
+    | BlockImpactDetails
     | BlockImpactStatement
     | BlockPosts
     | BlockTeam
