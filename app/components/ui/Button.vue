@@ -74,7 +74,7 @@ const outlineThemeClasses = computed(() => {
       select-none
       px-5
       pt-2
-      pb-[9px]
+      pb-2.25
       type-p
       underline
       underline-offset-2
@@ -91,13 +91,9 @@ const outlineThemeClasses = computed(() => {
     }"
     @mousemove="animateMe"
   >
-    <span
-      class="ui-button__blob ui-button__blob--1"
-    />
+    <span class="ui-button__blob ui-button__blob--1" />
 
-    <span
-      class="ui-button__blob ui-button__blob--2"
-    />
+    <span class="ui-button__blob ui-button__blob--2" />
 
     <slot />
   </span>
