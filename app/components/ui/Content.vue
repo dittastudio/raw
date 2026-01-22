@@ -26,9 +26,9 @@ const {
       v-if="title"
       class="ui-content__title col-span-full md:col-start-1 md:col-span-3"
     >
-      <p class="type-h5">
+      <h2 class="type-h5">
         {{ title }}
-      </p>
+      </h2>
     </div>
 
     <div
@@ -71,21 +71,10 @@ const {
 @reference "@/assets/css/app.css";
 
 .ui-content__headline {
-  :deep(h2),
   :deep(h3) {
     @apply type-h2;
 
     text-wrap: balance;
-  }
-
-  :deep(h4) {
-    @apply type-h4;
-
-    text-wrap: balance;
-  }
-
-  :deep(h4 + *) {
-    padding-top: 1.25em;
   }
 }
 
