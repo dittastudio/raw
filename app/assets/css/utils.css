@@ -38,3 +38,8 @@
     color: transparent;
   }
 }
+
+@utility invert-appearance {
+  filter: invert(1) brightness(200%);
+  mix-blend-mode: difference;
+}

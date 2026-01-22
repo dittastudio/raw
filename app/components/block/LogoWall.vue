@@ -26,7 +26,7 @@ const { block } = defineProps<Props>()
         >
           <NuxtImg
             v-if="logo.filename"
-            class="block w-auto h-10 md:h-15 object-contain"
+            class="invert-appearance block w-auto h-10 md:h-15 object-contain"
             :src="logo.filename"
             :alt="logo.alt"
             :height="60"
