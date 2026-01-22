@@ -14,6 +14,7 @@ const {
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
 
+const maskEl = ref<HTMLElement | null>(null)
 const listEl = ref<HTMLElement | null>(null)
 const clipTop = ref<number | null>(null)
 const clipRight = ref<number | null>(null)
@@ -151,7 +152,7 @@ const accentMaskClasses = computed(() => {
 
 <template>
   <div class="md:wrapper-max">
-    <div class="relative overflow-hidden max-md:border-t max-md:border-b max-md:border-current">
+    <div class="relative overflow-x-clip">
       <ul
         ref="listEl"
         class="ui-list__list ui-list__list--default"
@@ -161,21 +162,35 @@ const accentMaskClasses = computed(() => {
           v-for="(item, index) in items"
           :key="item._uid"
           class="ui-list__item"
+          :class="[
+            openIndex === index ? accentIsOpenClasses : '',
+          ]"
           @click="!isScreenMd && toggleItem(index)"
           @mouseenter="setMaskClip($event, index)"
         >
-          <UiGridItem
-            type="default"
-            :item="item"
-            :is-open="openIndex === index"
-          />
+          <div class="relative z-1">
+            <UiGridItem
+              type="default"
+              :item="item"
+              :is-open="openIndex === index"
+            />
+          </div>
         </li>
       </ul>
 
-      <ul
+      <div
+        ref="maskEl"
+        :style="maskStyle"
+        :class="[
+          maskTransitionEnabled ? 'is-transitioning' : '',
+        ]"
+        class="ui-list__mask absolute inset-0 bg-blue pointer-events-none"
+      />
+
+      <!-- <ul
         class="ui-list__list ui-list__list--mask"
         :class="[
-          maskTransitionEnabled ? 'ui-list__list--mask-transition' : '',
+          maskTransitionEnabled ? 'is-transitioning' : '',
         ]"
         :style="maskStyle"
         aria-hidden="true"
@@ -196,7 +211,7 @@ const accentMaskClasses = computed(() => {
             :is-open="openIndex === index"
           />
         </li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </template>
@@ -207,19 +222,19 @@ const accentMaskClasses = computed(() => {
 .ui-list__list {
   display: flex;
   flex-direction: column;
-  gap: 1px;
-
-  &:not(&--mask) {
-    background-color: currentColor;
-  }
 
   @variant md {
     flex-direction: row;
     flex-wrap: wrap;
+
+    margin-left: -1px;
+    margin-top: -1px;
+    margin-right: -1px;
+    margin-bottom: -1px;
   }
 }
 
-.ui-list__list--mask {
+/* .ui-list__list--mask {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -235,34 +250,59 @@ const accentMaskClasses = computed(() => {
     );
     transition: opacity 0.2s var(--ease-in-out);
   }
-}
+} */
 
-.ui-list__list--mask-transition {
+.ui-list__mask {
   @variant md {
-    transition:
-      clip-path 0.2s var(--ease-in-out),
-      opacity 0.2s var(--ease-in-out);
+    opacity: var(--mask-opacity, 0);
+    clip-path: inset(
+      var(--clip-top, 0)
+      var(--clip-right, 100%)
+      var(--clip-bottom, 100%)
+      var(--clip-left, 0)
+    );
+    transition: opacity 0.2s var(--ease-in-out);
+
+    &.is-transitioning {
+      transition:
+        clip-path 0.2s var(--ease-in-out),
+        opacity 0.2s var(--ease-in-out);
+    }
   }
 }
 
 .ui-list__item {
+  position: relative;
   transition: background-color 0.2s var(--ease-out);
   user-select: none;
   cursor: default;
+  /* border: 1px solid var(--color-offblack); */
+  /* margin-left: -1px;
+  margin-top: -1px; */
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    width: calc(100% + 1px);
+    height: calc(100% + 1px);
+    z-index: 2;
+    border: 1px solid var(--color-offblack);
+  }
 
   @variant md {
-    flex-basis: calc(50% - 1px);
+    flex-basis: 50%;
     flex-grow: 1;
   }
 
   @variant lg {
-    flex-basis: calc(25% - 1px);
+    flex-basis: 25%;
   }
 
-  .ui-list__list--default & {
-    background-color: var(--app-background-color);
+  /* .ui-list__list--default & {
+
     transition: background-color var(--app-transition-duration) var(--app-transition-ease);
-  }
+  } */
 }
 
 .ui-list__container {

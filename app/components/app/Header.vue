@@ -143,7 +143,7 @@ watchEffect(() => {
     </NuxtLink>
 
     <button
-      class="p-5 -m-5 md:p-7.5 md:-m-7.5 z-1 lg:hidden outline-none"
+      class="z-1 block lg:hidden outline-none"
       type="button"
       @click="toggleHeaderMenu"
     >
@@ -174,12 +174,14 @@ watchEffect(() => {
 }
 
 .header__navigation {
-  --disc-size: 18px;
-  --disc-offset: 36px;
+  --disc-size: 19px;
+  --disc-x-offset: 39px;
+  --disc-y-offset: 49px;
 
   @variant md {
-    --disc-size: 18px;
-    --disc-offset: 46px;
+    --disc-size: 19px;
+    --disc-x-offset: 49px;
+    --disc-y-offset: 46px;
   }
 
   @variant max-lg {
@@ -200,11 +202,11 @@ watchEffect(() => {
     overscroll-behavior: contain;
     padding-block: var(--app-header-height);
 
-    clip-path: circle(var(--disc-size) at calc(100% - var(--disc-offset)) var(--disc-offset));
+    clip-path: circle(var(--disc-size) at calc(100% - var(--disc-x-offset)) var(--disc-y-offset));
     transition: clip-path 0.5s cubic-bezier(0.34, 1.06, 0.24, 1);
 
     .header.is-open & {
-      clip-path: circle(150% at calc(100% - var(--disc-offset)) var(--disc-offset));
+      clip-path: circle(150% at calc(100% - var(--disc-x-offset)) var(--disc-y-offset));
       transition: clip-path 0.5s var(--ease-outQuart);
     }
   }

@@ -105,7 +105,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   }
 
   .ui-list-item--default & {
-    opacity: 0;
+    /* opacity: 0; */
   }
 }
 </style>
