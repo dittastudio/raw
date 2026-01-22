@@ -93,7 +93,7 @@
     --app-transition-duration: 0.4s;
     --app-transition-ease: var(--ease-out);
     --app-text-color: var(--color-offblack);
-    --app-background-color: var(--color-white);
+    --app-background-color: var(--color-offwhite);
 
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
