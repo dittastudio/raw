@@ -9,8 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div
+  <UiTheme
     v-editable="block"
+    theme="light"
     class="hero relative w-full min-h-screen flex flex-col items-center justify-center"
   >
     <div class="z-1 flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
@@ -28,7 +29,7 @@ const { block } = defineProps<Props>()
         <StoryblokText :html="block.text" />
       </div>
     </div>
-  </div>
+  </UiTheme>
 </template>
 
 <style scoped>

@@ -7,10 +7,10 @@ interface Props {
 
 const { theme } = defineProps<Props>()
 
-const sectionRef = useTemplateRef('sectionRef')
-const sectionId = useId()
+const themeRef = useTemplateRef('themeRef')
+const themeId = useId()
 
-const activeSection = useState<string | null>('activeSection', () => null)
+const activeTheme = useState<string | null>('activeTheme', () => null)
 
 const themeColors = {
   dark: {
@@ -61,12 +61,12 @@ const updateThemeVariables = (theme: keyof typeof themeColors) => {
     document.documentElement.style.setProperty('--app-text-color', colors.text)
     document.documentElement.style.setProperty('--app-button-background-color', colors.buttonBackground)
     document.documentElement.style.setProperty('--app-button-text-color', colors.buttonText)
-    activeSection.value = sectionId
+    activeTheme.value = themeId
   }
 }
 
 onMounted(() => {
-  if (!sectionRef.value || !theme) {
+  if (!themeRef.value || !theme) {
     return
   }
 
@@ -84,23 +84,20 @@ onMounted(() => {
     },
   )
 
-  observer.observe(sectionRef.value)
+  observer.observe(themeRef.value)
 })
 
 onUnmounted(() => {
   observer?.disconnect()
 
-  if (activeSection.value === sectionId) {
-    activeSection.value = null
+  if (activeTheme.value === themeId) {
+    activeTheme.value = null
   }
 })
 </script>
 
 <template>
-  <section
-    ref="sectionRef"
-    class="section"
-  >
+  <div ref="themeRef">
     <slot />
-  </section>
+  </div>
 </template>

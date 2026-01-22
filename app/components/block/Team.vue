@@ -10,8 +10,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div
+  <UiTheme
     v-editable="block"
+    :theme="(block.theme as Themes)"
     class="grid gap-y-35"
   >
     <UiContent
@@ -34,5 +35,5 @@ const { block } = defineProps<Props>()
         :accent="(block.accent as Themes)"
       />
     </div>
-  </div>
+  </UiTheme>
 </template>

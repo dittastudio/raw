@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockTestimonials } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockTestimonials
@@ -9,7 +10,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <div v-editable="block">
+  <UiTheme
+    v-editable="block"
+    :theme="(block.theme as Themes)"
+  >
     <UiCarouselFade
       :items="block.items"
       :options="{ loop: true }"
@@ -45,7 +49,7 @@ const { block } = defineProps<Props>()
         </div>
       </template>
     </UiCarouselFade>
-  </div>
+  </UiTheme>
 </template>
 
 <style scoped>

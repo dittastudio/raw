@@ -13,8 +13,9 @@ const accent = computed(() => (block.accent as Themes) ?? 'light')
 </script>
 
 <template>
-  <div
+  <UiTheme
     v-editable="block"
+    :theme="(block.theme as Themes)"
     class="hover-list flex flex-col gap-y-20"
   >
     <UiContent
@@ -30,5 +31,5 @@ const accent = computed(() => (block.accent as Themes) ?? 'light')
       :accent="accent"
       :items="items"
     />
-  </div>
+  </UiTheme>
 </template>

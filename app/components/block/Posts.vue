@@ -73,9 +73,10 @@ const { data: posts } = await useAsyncData('posts', async () => {
 </script>
 
 <template>
-  <div
+  <UiTheme
     v-editable="block"
-    class="w-full bg-offwhite text-offblack"
+    theme="light"
+    class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">
       <div class="w-full flex flex-col items-start justify-center gap-6">
@@ -170,5 +171,5 @@ const { data: posts } = await useAsyncData('posts', async () => {
         </div>
       </Transition>
     </div>
-  </div>
+  </UiTheme>
 </template>
