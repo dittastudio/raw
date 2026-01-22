@@ -4,7 +4,7 @@
     "display_name": "Carousel",
     "description": "",
     "created_at": "2026-01-20T17:20:53.569Z",
-    "updated_at": "2026-01-20T21:51:48.823Z",
+    "updated_at": "2026-01-22T16:44:54.922Z",
     "id": 136151259425859,
     "schema": {
       "title": {
@@ -24,8 +24,8 @@
         ],
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
-          "unset"
+          "unset",
+          "h3"
         ],
         "id": "dWhRiI5YTw6dv13MY7WmMQ"
       },
@@ -97,7 +97,7 @@
     "display_name": "Contact",
     "description": "",
     "created_at": "2026-01-21T18:18:48.937Z",
-    "updated_at": "2026-01-21T18:30:03.945Z",
+    "updated_at": "2026-01-22T16:45:07.743Z",
     "id": 136519388948249,
     "schema": {
       "title": {
@@ -117,9 +117,7 @@
         ],
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "h3",
-          "h4",
           "unset"
         ],
         "id": "jMTnAVgTRDmQ7xk7xG49FA"
@@ -235,7 +233,7 @@
     "display_name": "Hero Brand",
     "description": "Displays a large hero which houses a large central Raw logo.",
     "created_at": "2026-01-15T10:13:39.202Z",
-    "updated_at": "2026-01-16T11:46:59.425Z",
+    "updated_at": "2026-01-22T16:23:56.219Z",
     "id": 134276789061080,
     "schema": {
       "headline": {
@@ -285,7 +283,8 @@
           "images"
         ],
         "id": "6DjiyvloT_ikNyHHol8Y5A",
-        "asset_folder_id": 134653467982768
+        "asset_folder_id": 134653467982768,
+        "description": "Upload black and white SVGs for best results."
       }
     },
     "image": "//a.storyblok.com/f/289672313529140/x/1b570cbc46/screenshot-2026-01-15-at-10-15-11.jpg",
@@ -309,7 +308,7 @@
     "display_name": "Hover Grid",
     "description": "",
     "created_at": "2026-01-21T09:55:39.731Z",
-    "updated_at": "2026-01-21T09:56:10.652Z",
+    "updated_at": "2026-01-22T16:42:40.394Z",
     "id": 136395733949303,
     "schema": {
       "title": {
@@ -323,9 +322,7 @@
         "id": "FuO6792QSiK7MgQHPMNtqA",
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "h3",
-          "h4",
           "unset"
         ],
         "style_options": [
@@ -409,7 +406,7 @@
     "display_name": "Hover List",
     "description": "",
     "created_at": "2026-01-18T18:27:53.343Z",
-    "updated_at": "2026-01-20T21:51:58.020Z",
+    "updated_at": "2026-01-22T16:43:16.951Z",
     "id": 135459935652633,
     "schema": {
       "title": {
@@ -423,9 +420,7 @@
         "id": "FuO6792QSiK7MgQHPMNtqA",
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "h3",
-          "h4",
           "unset"
         ],
         "style_options": [
@@ -509,7 +504,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-01-21T15:00:52.128Z",
+    "updated_at": "2026-01-22T16:43:32.243Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -523,9 +518,7 @@
         "id": "FuO6792QSiK7MgQHPMNtqA",
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "h3",
-          "h4",
           "unset"
         ],
         "style_options": [
@@ -665,7 +658,7 @@
     "display_name": "Logo Wall",
     "description": "",
     "created_at": "2026-01-21T16:53:11.246Z",
-    "updated_at": "2026-01-21T16:56:18.514Z",
+    "updated_at": "2026-01-22T16:43:52.245Z",
     "id": 136498344949214,
     "schema": {
       "title": {
@@ -685,9 +678,7 @@
         ],
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "h3",
-          "h4",
           "unset"
         ],
         "id": "jMTnAVgTRDmQ7xk7xG49FA"
@@ -695,7 +686,11 @@
       "logos": {
         "type": "multiasset",
         "pos": 2,
-        "id": "qOVM0yITQKOffPrG3iAbSg"
+        "id": "qOVM0yITQKOffPrG3iAbSg",
+        "description": "Upload black and white SVGs for best results.",
+        "filetypes": [
+          "images"
+        ]
       },
       "theme": {
         "type": "option",
@@ -753,7 +748,7 @@
     "display_name": "Team",
     "description": "Display teams of selected people.",
     "created_at": "2026-01-20T12:22:18.524Z",
-    "updated_at": "2026-01-20T21:51:09.060Z",
+    "updated_at": "2026-01-22T16:44:24.163Z",
     "id": 136077879403799,
     "schema": {
       "title": {
@@ -767,9 +762,7 @@
         "id": "FuO6792QSiK7MgQHPMNtqA",
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "h3",
-          "h4",
           "unset"
         ],
         "style_options": [
@@ -1954,7 +1947,7 @@
     "display_name": "Title & Copy",
     "description": "",
     "created_at": "2026-01-13T23:06:18.961Z",
-    "updated_at": "2026-01-14T08:52:35.940Z",
+    "updated_at": "2026-01-22T16:47:51.060Z",
     "id": 133758889830392,
     "schema": {
       "title": {
@@ -1970,10 +1963,8 @@
         ],
         "customize_toolbar": true,
         "toolbar": [
-          "h2",
           "unset",
-          "h3",
-          "h4"
+          "h3"
         ]
       },
       "copy": {
