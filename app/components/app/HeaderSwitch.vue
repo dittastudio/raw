@@ -21,18 +21,18 @@ const handleAnimationEnd = () => {
       justify-center
       text-offwhite
       outline-1
-      outline-offset-2
+      outline-offset-0
       outline-(--app-text-color)/10
       rounded-full
       before:content-['']
-      before:absolute before:w-[2px]
+      before:absolute before:w-[1px]
       before:h-[50%]
       before:bg-current
       before:rounded-full
       after:content-['']
       after:absolute
       after:w-[50%]
-      after:h-[2px]
+      after:h-[1px]
       after:bg-current
       after:rounded-full
     "
@@ -48,8 +48,8 @@ const handleAnimationEnd = () => {
 @reference "@/assets/css/app.css";
 
 .header-switch {
-  width: var(--app-header-logo-height);
-  height: var(--app-header-logo-height);
+  width: 38px;
+  height: 38px;
 
   rotate: 0deg;
 

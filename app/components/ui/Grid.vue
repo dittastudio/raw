@@ -151,7 +151,7 @@ const accentMaskClasses = computed(() => {
 
 <template>
   <div class="md:wrapper-max">
-    <div class="relative overflow-hidden max-md:border-t max-md:border-b max-md:border-current">
+    <div class="relative overflow-hidden border-t border-b border-current">
       <ul
         ref="listEl"
         class="ui-list__list ui-list__list--default"

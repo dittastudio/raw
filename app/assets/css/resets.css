@@ -17,9 +17,9 @@
       color: transparent;
     }
 
-    /* transition:
+    transition:
       -webkit-text-stroke var(--app-transition-duration) var(--app-transition-ease),
-      text-stroke var(--app-transition-duration) var(--app-transition-ease); */
+      text-stroke var(--app-transition-duration) var(--app-transition-ease);
   }
 
   body {
