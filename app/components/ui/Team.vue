@@ -24,7 +24,7 @@ const peoples = computed(() => people?.filter(person => typeof person !== 'strin
 
     <ul
       v-if="peoples?.length"
-      class="grid grid-cols-1 @lg:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @7xl:grid-cols-6 gap-(--app-outer-gutter) @2xl:gap-(--app-inner-gutter) w-full"
+      class="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @7xl:grid-cols-6 gap-(--app-outer-gutter) @2xl:gap-(--app-inner-gutter) w-full"
     >
       <li
         v-for="(person, index) in peoples"

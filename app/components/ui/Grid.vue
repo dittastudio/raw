@@ -175,7 +175,7 @@ const accentMaskClasses = computed(() => {
       <ul
         class="ui-list__list ui-list__list--mask"
         :class="[
-          maskTransitionEnabled ? 'ui-list__list--mask-transition' : '',
+          maskTransitionEnabled ? 'is-transitioning' : '',
         ]"
         :style="maskStyle"
         aria-hidden="true"
@@ -237,7 +237,7 @@ const accentMaskClasses = computed(() => {
   }
 }
 
-.ui-list__list--mask-transition {
+.is-transitioning {
   @variant md {
     transition:
       clip-path 0.2s var(--ease-in-out),
@@ -253,15 +253,17 @@ const accentMaskClasses = computed(() => {
   @variant md {
     flex-grow: 1;
     flex-basis: calc(50% - 1px);
+    aspect-ratio: 3 / 2;
   }
 
   @variant lg {
     flex-basis: calc(25% - 1px);
   }
 
-  /* So when count is divisible by 4 but there's one remainder, make 'em 3 columns BOOM! */
   &:first-child:nth-last-child(4n+1),
-  &:first-child:nth-last-child(4n+1) ~ & {
+  &:first-child:nth-last-child(4n+1) ~ &,
+  &:first-child:nth-last-child(3n),
+  &:first-child:nth-last-child(3n) ~ & {
     @variant md {
       flex-basis: calc(33.34% - 1px);
     }

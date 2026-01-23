@@ -50,13 +50,13 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 .ui-list-item {
   padding: var(--app-outer-gutter);
 
-  @variant md {
+  @container (min-width: 800px) {
     padding: --spacing(16) var(--app-outer-gutter);
   }
 }
 
 .ui-list-item--mask {
-  @variant max-md {
+  @container (max-width: 799px) {
     opacity: 0;
     transition: opacity 0.2s var(--ease-out);
 
@@ -73,7 +73,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     grid-column: span 2;
   }
 
-  @variant md {
+  @container (min-width: 800px) {
     grid-column: span 3;
   }
 }
@@ -88,7 +88,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     grid-column: span 6;
   }
 
-  @variant md {
+  @container (min-width: 800px) {
     grid-column: span 5;
   }
 }
@@ -100,7 +100,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     grid-column: 3 / span 6;
   }
 
-  @variant md {
+  @container (min-width: 800px) {
     grid-column: span 4;
   }
 

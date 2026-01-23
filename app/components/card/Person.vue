@@ -39,7 +39,20 @@ const accentClasses = {
     </div>
 
     <div
-      class="col-start-1 row-start-1 flex flex-col gap-1 w-full p-4 transition-transform duration-300 ease-out translate-y-full group-hover:translate-y-0"
+      class="
+        col-start-1
+        row-start-1
+        flex
+        flex-col
+        gap-1
+        w-full
+        p-4
+        only-hover:transition-transform
+        only-hover:duration-300
+        only-hover:ease-out
+        only-hover:translate-y-full
+        group-hover:translate-y-0
+      "
       :class="accentClasses[accent]"
     >
       <h5
