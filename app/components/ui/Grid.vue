@@ -251,12 +251,20 @@ const accentMaskClasses = computed(() => {
   cursor: default;
 
   @variant md {
-    flex-basis: calc(50% - 1px);
     flex-grow: 1;
+    flex-basis: calc(50% - 1px);
   }
 
   @variant lg {
     flex-basis: calc(25% - 1px);
+  }
+
+  /* So when count is divisible by 4 but there's one remainder, make 'em 3 columns BOOM! */
+  &:first-child:nth-last-child(4n+1),
+  &:first-child:nth-last-child(4n+1) ~ & {
+    @variant md {
+      flex-basis: calc(33.34% - 1px);
+    }
   }
 
   .ui-list__list--default & {
