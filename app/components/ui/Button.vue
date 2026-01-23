@@ -152,6 +152,22 @@ const outlineThemeClasses = computed(() => {
   --t: 1;
 }
 
+.ui-button__inner {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: --alpha(currentColor / 10%);
+    opacity: 0;
+    transition: opacity 0.2s var(--ease-out);
+  }
+
+  a:active &::after,
+  button:not(:disabled):active &::after {
+    opacity: 1;
+  }
+}
+
 .ui-button__shadow {
   --t: 1;
 
@@ -178,7 +194,8 @@ const outlineThemeClasses = computed(() => {
     opacity 0.4s var(--ease-out),
     translate 0s 0.4s;
 
-  .ui-button:hover & {
+  a:hover &,
+  button:not(:disabled):hover & {
     translate: calc(var(--x) / var(--t) * 1px) calc(var(--y) / var(--t) * 1px) 0;
     opacity: 0.3;
     transition:
@@ -203,7 +220,8 @@ const outlineThemeClasses = computed(() => {
     opacity 0.4s var(--ease-out),
     translate 0s 0.4s;
 
-  .ui-button:hover & {
+  a:hover &,
+  button:not(:disabled):hover &  {
     opacity: 1;
     translate: calc((var(--x) * var(--direction)) / var(--t) * 1px) calc((var(--y) * var(--direction)) / (var(--t) / 3) * 1px) 0;
     transition:
