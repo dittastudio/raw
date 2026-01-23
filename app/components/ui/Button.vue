@@ -125,9 +125,9 @@ const outlineThemeClasses = computed(() => {
         pt-2
         pb-2.25
         rounded-full
-        transition-colors
-        duration-200
-        ease-out
+        transition-[border,background-color]
+        duration-(--app-transition-duration)
+        ease-(--app-transition-ease)
         overflow-hidden
       "
       :class="{
@@ -169,7 +169,7 @@ const outlineThemeClasses = computed(() => {
   margin: auto;
 
   opacity: 0;
-  background-color: currentColor;
+  background-color: white;
   filter: blur(20px);
   border-radius: 50%;
 
@@ -187,7 +187,7 @@ const outlineThemeClasses = computed(() => {
 }
 
 .ui-button__blob {
-  --t: 5;
+  --t: 8;
 
   pointer-events: none;
   position: absolute;
@@ -204,7 +204,7 @@ const outlineThemeClasses = computed(() => {
 
   .ui-button:hover & {
     opacity: 1;
-    translate: calc((var(--x) * var(--direction)) / var(--t) * 1px) calc((var(--y) * var(--direction)) / var(--t) * 1px) 0;
+    translate: calc((var(--x) * var(--direction)) / var(--t) * 1px) calc((var(--y) * var(--direction)) / (var(--t) / 3) * 1px) 0;
     transition:
       opacity 0.2s var(--ease-out),
       translate 0.2s var(--ease-out);

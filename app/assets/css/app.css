@@ -90,7 +90,7 @@
 
 @layer theme {
   :root {
-    --app-transition-duration: 0.4s;
+    --app-transition-duration: 0.5s;
     --app-transition-ease: var(--ease-out);
     --app-text-color: var(--color-offblack);
     --app-background-color: var(--color-offwhite);

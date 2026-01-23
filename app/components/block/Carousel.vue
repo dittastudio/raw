@@ -68,7 +68,7 @@ const { block } = defineProps<Props>()
               z-1
             "
           >
-            <div class="wrapper-max">
+            <div class="wrapper-max text-offwhite">
               <StoryblokText :html="item.copy" />
             </div>
           </div>
@@ -78,7 +78,7 @@ const { block } = defineProps<Props>()
       <template #other>
         <div class="absolute bottom-0 left-0 right-0 z-1 wrapper-max pb-[calc(var(--app-outer-gutter)*1.25)] lg:pb-20 pointer-events-none">
           <div class="pointer-events-auto">
-            <UiCarouselDots />
+            <UiCarouselDots class="text-offwhite" />
           </div>
         </div>
       </template>
