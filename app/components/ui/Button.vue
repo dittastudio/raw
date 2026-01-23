@@ -117,6 +117,7 @@ const outlineThemeClasses = computed(() => {
 
     <span
       class="
+        ui-button__inner
         block
         pointer-events-none
         relative

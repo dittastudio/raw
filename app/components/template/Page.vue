@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
-// import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -11,15 +10,6 @@ const { story } = defineProps<Props>()
 </script>
 
 <template>
-  <!-- <UiSection
-    v-for="block in story.content.blocks"
-    :key="block._uid"
-    :theme="'theme' in block && block.theme ? block.theme as Themes : undefined"
-    :class="{
-      'py-20 md:py-36': !['block_hero', 'block_hero_brand'].includes(block.component),
-    }"
-  > -->
-
   <section
     v-for="block in story.content.blocks"
     :key="block._uid"
@@ -79,6 +69,11 @@ const { story } = defineProps<Props>()
 
     <BlockLogoWall
       v-else-if="block.component === 'block_logo_wall'"
+      :block="block"
+    />
+
+    <BlockSplitText
+      v-else-if="block.component === 'block_split_text'"
       :block="block"
     />
 
