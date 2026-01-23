@@ -61,15 +61,15 @@ const { block } = defineProps<Props>()
   transform: translateZ(0);
   backface-visibility: hidden;
   transition:
-    opacity 0.25s var(--ease-in),
-    scale 0.25s var(--ease-in);
+    opacity 0.15s var(--ease-in),
+    scale 0.15s var(--ease-in);
 
   &.is-active {
     opacity: 1;
     scale: 1;
     transition:
-      opacity 0.5s var(--ease-out) 0.25s,
-      scale 0.5s var(--ease-out) 0.25s;
+      opacity 0.3s var(--ease-out) 0.15s,
+      scale 0.3s var(--ease-out) 0.15s;
   }
 }
 </style>
