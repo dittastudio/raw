@@ -13,14 +13,21 @@ const { block } = defineProps<Props>()
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="flex flex-col gap-19 md:gap-38"
   >
-    <UiContent
-      :title="block.title"
-      :headline="block.headline"
-    />
+    <div class="wrapper-max flex flex-col gap-19 md:gap-38">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-x-(--app-inner-gutter) gap-y-6">
+        <h2 class="col-span-full md:col-span-1 type-h5">
+          {{ block.title }}
+        </h2>
 
-    <div class="wrapper-max">
+        <div
+          v-if="storyblokRichTextContent(block.headline)"
+          class="col-span-full md:col-span-2 type-h4 [&_*+*]:mt-[1.25em] [&_*]:text-balance"
+        >
+          <StoryblokText :html="block.headline" />
+        </div>
+      </div>
+
       <ul class="contact__list flex flex-col">
         <li
           v-for="info in block.info"
