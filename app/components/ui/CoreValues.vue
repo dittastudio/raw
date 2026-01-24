@@ -200,6 +200,10 @@ const hoverOut = () => {
   height: 100%;
   filter: url(#goo) blur(3px);
   z-index: -1;
+  pointer-events: none;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transform: translateZ(0);
 }
 
 .ui-core-values__follow {
@@ -217,10 +221,19 @@ const hoverOut = () => {
   margin: auto;
   aspect-ratio: 1;
   translate: calc(var(--x) / var(--t) * 1px) calc(var(--y) / var(--t) * 1px) 0;
-  transition: translate 0.2s var(--ease-out);
+  transition:
+    translate 0s var(--ease-out) 0.5s,
+    opacity 0.5s var(--ease-out);
   border-radius: 50%;
-  opacity: 1;
-  pointer-events: none;
+  opacity: 0;
+
+  .ui-core-values:hover & {
+    opacity: 1;
+    translate: calc(var(--x) / var(--t) * 1px) calc(var(--y) / var(--t) * 1px) 0;
+    transition:
+      translate 0.2s var(--ease-out),
+      opacity 0.2s var(--ease-out);
+  }
 }
 
 .ui-core-values {
@@ -282,14 +295,15 @@ const hoverOut = () => {
 
 @keyframes breathe {
   0%, 100% {
-    transform: scale(0.95);
+    transform: scale(0.95) translateZ(0);
   }
   50% {
-    transform: scale(1.05);
+    transform: scale(1.05) translateZ(0);
   }
 }
 
 .ui-core-values__orb {
+  transform: translateZ(0);
   animation: breathe 5s var(--ease-inOutSine) infinite;
 }
 </style>
