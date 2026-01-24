@@ -48,7 +48,7 @@ const category = computed(() => {
 
     <div class="wrapper w-full flex flex-col gap-18">
       <header
-        class="w-full pb-10 border-b border-offblack grid gap-x-(--app-inner-gutter) gap-y-[calc(var(--app-inner-gutter)*2)] grid-cols-1 md:grid-cols-12"
+        class="w-full pb-9 border-b border-offblack grid gap-x-(--app-inner-gutter) gap-y-[calc(var(--app-inner-gutter)*2)] grid-cols-1 md:grid-cols-12"
         :class="{
           'pt-18': story.content.hero?.filename,
           'pt-[calc(--spacing(18)+var(--app-header-height))]': !story.content.hero?.filename,
@@ -128,6 +128,31 @@ const category = computed(() => {
               :block="block"
             />
           </section>
+        </div>
+      </div>
+
+      <div
+        v-if="author"
+        class="prose w-full grid gap-x-(--app-inner-gutter) grid-cols-1 md:grid-cols-12"
+      >
+        <div class="border-t border-offblack py-18 w-full col-span-full md:col-start-4 lg:col-start-5 md:col-end-11">
+          <h5
+            v-if="author.content.name"
+            class="type-mono-20 font-bold"
+          >
+            {{ author.content.name }}
+          </h5>
+
+          <p v-if="author.content.biography">
+            {{ author.content.biography }}
+          </p>
+
+          <p v-if="author.content.email">
+            Want to say hi? Email
+            <NuxtLink :to="`mailto:${author.content.email}`">
+              {{ author.content.email }}
+            </NuxtLink>
+          </p>
         </div>
       </div>
     </div>
