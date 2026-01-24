@@ -285,6 +285,14 @@ const decodeHtmlEntities = (text: string): string => {
   return text.replace(/&#?\w+;/g, match => entities[match] || match)
 }
 
+const extractWistiaId = (html: string): string | null => {
+  const match = html.match(
+    /wistia_async_([a-zA-Z0-9]+)|media-id=["']([a-zA-Z0-9]+)["']|embed\/([a-zA-Z0-9]+)\.(?:js|jsonp)|medias\/([a-zA-Z0-9]+)\//
+  )
+
+  return match?.slice(1).find(Boolean) ?? null
+}
+
 export {
   addToStoryblok,
   convertHtmlToJson,
@@ -294,4 +302,5 @@ export {
   wait,
   wpExcludedPosts,
   wpFields,
+  extractWistiaId,
 }

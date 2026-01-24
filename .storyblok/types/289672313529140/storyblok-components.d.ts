@@ -211,7 +211,7 @@ export interface Post {
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;
-  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed)[];
+  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
   component: "post";
   _uid: string;
 }
@@ -256,6 +256,12 @@ export interface PostQuote {
 export interface PostText {
   text?: StoryblokRichtext;
   component: "post_text";
+  _uid: string;
+}
+
+export interface PostWistia {
+  id: string;
+  component: "post_wistia";
   _uid: string;
 }
 

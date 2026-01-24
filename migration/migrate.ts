@@ -1,7 +1,7 @@
-import type { Post, PostEmbed, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText } from '../.storyblok/types/289672313529140/storyblok-components'
+import type { Post, PostEmbed, PostGallery, PostHeading, PostHtml, PostImage, PostQuote, PostText, PostWistia } from '../.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokAsset } from '../.storyblok/types/storyblok.d.ts'
 import type { BlockEmbed, BlockGallery, BlockHeading, BlockHtml, BlockImage, BlockList, BlockParagraph, BlockQuote, BlockUnknown } from './wp-block-types'
-import { addToStoryblok, convertHtmlToJson, decodeHtmlEntities, mapCategories, uploadFileToStoryblok, wait, wpExcludedPosts, wpFields } from './utils'
+import { addToStoryblok, convertHtmlToJson, decodeHtmlEntities, extractWistiaId, mapCategories, uploadFileToStoryblok, wait, wpExcludedPosts, wpFields } from './utils'
 
 const PARENT = 134064420646816
 const AUTHOR = '4e09f764-a3fd-4d59-96a3-1ba3d192dabb' // Hard-coded to Charlotte.
@@ -44,12 +44,24 @@ const processHeadingBlock = (block: BlockHeading): PostHeading | null => {
   }
 }
 
-const processHtmlBlock = (block: BlockHtml): PostHtml | null => {
+const processHtmlBlock = (block: BlockHtml): PostHtml | PostWistia | null => {
   const content = decodeHtmlEntities(block.rendered?.trim() || '')
 
   if (!content) {
     return null
   }
+
+  const wistiaId = extractWistiaId(content)
+
+  if (wistiaId && wistiaId.length) {
+    return {
+      _uid: crypto.randomUUID(),
+      component: 'post_wistia',
+      id: wistiaId,
+    }
+  }
+
+  console.log(`⚠️  Wistia ID not found, defaulting to raw HTML component.`)
 
   return {
     _uid: crypto.randomUUID(),
