@@ -21,7 +21,7 @@
     "nuke": "del-cli '.output' 'dist' '.nuxt' 'node_modules' 'package-lock.json'"
   },
   "dependencies": {
-    "@regle/nuxt": "^1.17.0",
+    "@regle/nuxt": "^1.17.1",
     "@storyblok/nuxt": "^9.0.0",
     "@tailwindcss/vite": "^4.1.18",
     "@unhead/vue": "^2.1.2",
@@ -30,20 +30,20 @@
     "keen-slider": "^6.8.6",
     "lenis": "^1.3.17",
     "linkedom": "^0.18.12",
-    "nuxt": "^4.2.2",
+    "nuxt": "^4.3.0",
     "postcss-nested": "^7.0.2",
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.27",
     "vue-router": "^4.6.4",
-    "zod": "^4.3.5"
+    "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.1.0",
-    "@nuxt/eslint": "^1.12.1",
+    "@antfu/eslint-config": "^7.2.0",
+    "@nuxt/eslint": "^1.13.0",
     "@nuxt/image": "^2.0.0",
     "@nuxtjs/sitemap": "^7.5.2",
     "@total-typescript/ts-reset": "^0.6.1",
-    "@types/node": "^25.0.9",
+    "@types/node": "^25.0.10",
     "del-cli": "^7.0.0",
     "eslint": "^9.39.2",
     "storyblok": "^4.13.0",
