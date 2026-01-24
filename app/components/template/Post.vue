@@ -122,6 +122,11 @@ const category = computed(() => {
               v-else-if="block.component === 'post_text'"
               :block="block"
             />
+
+            <BlockPostWistia
+              v-else-if="block.component === 'post_wistia'"
+              :block="block"
+            />
           </section>
         </div>
       </div>
