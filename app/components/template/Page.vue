@@ -81,9 +81,10 @@ const { story } = defineProps<Props>()
       v-else-if="block.component === 'block_contact'"
       :block="block"
     />
-  </section>
 
-  <section class="py-20 md:py-36 wrapper-max">
-    <UiTruths />
+    <BlockTruths
+      v-else-if="block.component === 'block_truths'"
+      :block="block"
+    />
   </section>
 </template>

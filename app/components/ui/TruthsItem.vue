@@ -1,28 +1,31 @@
 <script lang="ts" setup>
 interface Props {
-  isBackground: boolean
-  items: {
+  isMasked?: boolean
+  headline?: string
+  copy?: string
+  items?: {
     title: string
     copy: string
   }[] | undefined
-  headline: string
-  copy: string
 }
 
-const { isBackground, items, headline, copy } = defineProps<Props>()
+const { isMasked = false, items, headline, copy } = defineProps<Props>()
 </script>
 
 <template>
   <div
     class="ui-truths-item relative grid grid-cols-1 md:grid-cols-4 gap-[calc(var(--app-inner-gutter)*2)] text-(--app-background-color)"
     :class="{
-      'is-background': isBackground,
+      'is-masked': isMasked,
     }"
   >
-    <div
+    <template
       v-for="(item, index) in items"
       :key="item.title"
-      class="
+    >
+      <div
+        v-if="item.title && item.copy"
+        class="
         ui-truths-item__item
         col-span-full
         md:col-span-1
@@ -39,12 +42,12 @@ const { isBackground, items, headline, copy } = defineProps<Props>()
         aspect-square
         cursor-default
       "
-      :style="{
-        '--index': index,
-      }"
-    >
-      <div
-        class="
+        :style="{
+          '--index': index,
+        }"
+      >
+        <div
+          class="
           absolute
           inset-0
           size-full
@@ -56,10 +59,10 @@ const { isBackground, items, headline, copy } = defineProps<Props>()
           ease-outQaurt
           group-hover:scale-110
         "
-      />
+        />
 
-      <div
-        class="
+        <div
+          class="
           relative
           z-1
           size-full
@@ -70,26 +73,30 @@ const { isBackground, items, headline, copy } = defineProps<Props>()
           justify-center
           p-[10%]
         "
-        :class="{
-          'opacity-0': isBackground,
-        }"
-      >
-        <h3 class="type-h4 text-[min(10cqi,22px)] max-w-[8ch]">
-          {{ item.title }}
-        </h3>
+          :class="{
+            'opacity-0': isMasked,
+          }"
+        >
+          <h3 class="type-h4 text-[min(10cqi,22px)] max-w-[8ch]">
+            {{ item.title }}
+          </h3>
 
-        <UiExpandable open-on-hover>
-          <p class="type-p text-[min(6cqi,16px)] pt-[1em] text-pretty">
-            {{ item.copy }}
-          </p>
-        </UiExpandable>
+          <UiExpandable open-on-hover>
+            <p class="type-p text-[min(6cqi,16px)] pt-[1em] text-pretty">
+              {{ item.copy }}
+            </p>
+          </UiExpandable>
+        </div>
       </div>
-    </div>
+    </template>
 
-    <div class="ui-truths-item__headline col-span-full md:col-span-4 bg-(--theme-background-color) rounded-full p-[6%] text-center">
+    <div
+      v-if="headline && copy"
+      class="ui-truths-item__headline col-span-full md:col-span-4 bg-(--theme-background-color) rounded-full p-[6%] text-center"
+    >
       <div
         :class="{
-          'opacity-0': isBackground,
+          'opacity-0': isMasked,
         }"
       >
         <h6 class="type-h2">
@@ -108,21 +115,26 @@ const { isBackground, items, headline, copy } = defineProps<Props>()
 @reference "@/assets/css/app.css";
 
 .ui-truths-item {
+  --breathe-duration: 3s;
   --theme-background-color: var(--app-text-color);
 
-  &.is-background {
+  &.is-masked {
     --theme-background-color: var(--color-pink);
   }
 }
 
 .ui-truths-item__item {
-  animation: breathe 3s var(--ease-inOutSine) infinite forwards;
-  animation-delay: calc(var(--index) * 0.5s);
+  .ui-truths-item.is-masked & {
+    animation: breathe var(--breathe-duration) var(--ease-inOutSine) infinite forwards;
+    animation-delay: calc(var(--index) * 0.5s);
+  }
 }
 
 .ui-truths-item__headline {
-  animation: breathe 3s var(--ease-inOutSine) infinite forwards;
-  animation-delay: calc(5 * 0.5s);
+  .ui-truths-item.is-masked & {
+    animation: breathe var(--breathe-duration) var(--ease-inOutSine) infinite forwards;
+    animation-delay: calc(5 * 0.5s);
+  }
 }
 
 @keyframes breathe {
