@@ -25,12 +25,14 @@ const { block } = defineProps<Props>()
       :cta-type="block.theme === 'dark' ? 'outline' : 'solid'"
     />
 
-    <UiTruths
-      :item="({
-        headline: block.bottom_headline,
-        copy: block.bottom_copy,
-        items: block.items,
-      } as TTruthsItem)"
-    />
+    <div class="wrapper-max">
+      <UiTruths
+        :item="({
+          headline: block.bottom_headline,
+          copy: block.bottom_copy,
+          items: block.items,
+        } as TTruthsItem)"
+      />
+    </div>
   </UiTheme>
 </template>

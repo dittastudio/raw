@@ -14,7 +14,18 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
 
 <template>
   <div
-    class="ui-truths-item relative grid grid-cols-1 md:grid-cols-4 gap-[calc(var(--app-inner-gutter)*2)] text-(--app-background-color)"
+    class="
+      ui-truths-item
+      relative
+      grid
+      grid-cols-1
+      md:grid-cols-4
+      gap-[calc(var(--app-inner-gutter)*2)]
+      text-(--app-background-color)
+      transition-[color]
+      duration-(--app-transition-duration)
+      ease-(--app-transition-ease)
+    "
     :class="{
       'is-masked': isMasked,
     }"
@@ -53,10 +64,10 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
           size-full
           rounded-[inherit]
           bg-(--theme-background-color)
+          transition-[scale,background-color]
+          duration-(--app-transition-duration)
+          ease-(--app-transition-ease)
           -z-1
-          transition-[scale]
-          duration-500
-          ease-outQaurt
           group-hover:scale-110
         "
         />
@@ -92,7 +103,18 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
 
     <div
       v-if="headline && copy"
-      class="ui-truths-item__headline col-span-full md:col-span-4 bg-(--theme-background-color) rounded-full p-[6%] text-center"
+      class="
+        ui-truths-item__headline
+        col-span-full
+        md:col-span-4
+        bg-(--theme-background-color)
+        rounded-full
+        p-[6%]
+        text-center
+        transition-[background-color]
+        duration-(--app-transition-duration)
+        ease-(--app-transition-ease)
+      "
     >
       <div
         :class="{
