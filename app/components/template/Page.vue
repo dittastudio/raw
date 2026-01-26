@@ -84,6 +84,6 @@ const { story } = defineProps<Props>()
   </section>
 
   <section class="py-20 md:py-36 wrapper-max">
-    <UiCoreValues />
+    <UiTruths />
   </section>
 </template>
