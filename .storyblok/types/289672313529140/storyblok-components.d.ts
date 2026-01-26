@@ -133,6 +133,20 @@ export interface BlockTestimonials {
   _uid: string;
 }
 
+export interface BlockTruths {
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  items?: ListItem[];
+  bottom_headline?: string;
+  bottom_copy?: string;
+  theme?: number | string;
+  component: "block_truths";
+  _uid: string;
+}
+
 export interface Copy {
   copy?: StoryblokRichtext;
   component: "copy";
@@ -192,6 +206,7 @@ export interface Page {
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
+    | BlockTruths
   )[];
   seo_title: string;
   seo_description: string;
