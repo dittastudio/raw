@@ -20,6 +20,7 @@ const filters = computed(() => {
       path: route.path,
       query: {
         ...route.query,
+        page: undefined,
         [slug]: entry.value,
       },
     },
@@ -35,7 +36,7 @@ const filters = computed(() => {
       name: 'All',
       to: {
         path: route.path,
-        query: rest,
+        query: { ...rest, page: undefined },
       },
     },
     ...others,
