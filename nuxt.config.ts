@@ -47,6 +47,11 @@ export default defineNuxtConfig({
     },
   },
   css: ['~/assets/css/app.css'],
+  vue: {
+    compilerOptions: {
+      isCustomElement: tag => tag.startsWith('mux-'),
+    },
+  },
   site: {
     url: 'https://raw.london',
     name: 'RAW',
