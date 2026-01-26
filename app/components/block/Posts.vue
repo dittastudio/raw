@@ -31,45 +31,92 @@ const getCategory = (value?: string | string[] | number): Entry | undefined => {
 }
 
 const perPage = 10
+
 const page = computed(() => {
   const raw = Array.isArray(route.query.page) ? route.query.page[0] : route.query.page
   const n = Number(raw ?? 1)
   return Number.isFinite(n) && n > 0 ? n : 1
 })
 
-const { data: posts } = await useAsyncData('posts', async () => {
+const refreshKey = computed(() => route.fullPath)
+
+const categoryValue = computed(() => {
+  const raw = Array.isArray(route.query.category) ? route.query.category[0] : route.query.category
+  return getCategory(raw || '')?.value
+})
+
+interface PostCardPayload {
+  uuid: string
+  name: string
+  full_slug: string
+  first_published_at?: string
+  hero: Post['hero']
+  category: Post['category']
+  author?: ISbStoryData<Person>
+}
+
+interface PostsPayload {
+  posts: PostCardPayload[]
+  hasMore: boolean
+}
+
+interface PostsTransformInput {
+  stories: ISbStoryData<Post>[]
+  requested: number
+}
+
+const { data: postsPayload } = await useAsyncData('posts', async () => {
+  const requested = perPage * page.value
+
   const { data } = await storyblokApi.get('cdn/stories', {
     content_type: 'post',
-    per_page: perPage * page.value,
+    per_page: requested + 1,
     page: 1,
     sort_by: 'first_published_at:desc',
     version: 'published',
     resolve_relations: [
       'post.author',
     ],
-    filter_query: {
-      category: {
-        in: getCategory((route.query.category as string) || '')?.value,
-      },
-    },
+    ...(categoryValue.value
+      ? {
+          filter_query: {
+            category: {
+              in: categoryValue.value,
+            },
+          },
+        }
+      : {}),
   })
-  return data.stories
+
+  return {
+    stories: data.stories as ISbStoryData<Post>[],
+    requested,
+  }
 }, {
-  transform: (data: ISbStoryData<Post>[]) => {
-    const payload = data.map(post => ({
+  transform: (input: PostsTransformInput): PostsPayload => {
+    const hasMore = input.stories.length > input.requested
+    const visibleStories = input.stories.slice(0, input.requested)
+
+    const payload = visibleStories.map(post => ({
       uuid: post.uuid,
       name: post.name,
       full_slug: post.full_slug,
-      first_published_at: post.first_published_at,
+      first_published_at: post.first_published_at ?? undefined,
       hero: post.content.hero,
       category: post.content.category,
       author: post.content.author as ISbStoryData<Person> | undefined,
     }))
 
-    return payload
+    return {
+      posts: payload,
+      hasMore,
+    }
   },
-  watch: [route],
+  watch: [refreshKey],
 })
+
+const posts = computed(() => postsPayload.value?.posts ?? [])
+const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
 </script>
 
 <template>
@@ -147,7 +194,10 @@ const { data: posts } = await useAsyncData('posts', async () => {
             </li>
           </ul>
 
-          <div class="w-full flex flex-col items-center justify-center">
+          <div
+            v-if="hasMore"
+            class="w-full flex flex-col items-center justify-center"
+          >
             <NuxtLink
               :to="{
                 path: $route.path,
@@ -161,14 +211,12 @@ const { data: posts } = await useAsyncData('posts', async () => {
           </div>
         </div>
 
-        <div
+        <p
           v-else
-          class="w-full"
+          class="type-mono-16"
         >
-          <p>
-            There are no posts available for this category.
-          </p>
-        </div>
+          There are no posts available for {{ getCategory(categoryValue)?.name || 'this filter' }}.
+        </p>
       </Transition>
     </div>
   </UiTheme>

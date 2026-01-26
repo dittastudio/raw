@@ -21,6 +21,8 @@
     "nuke": "del-cli '.output' 'dist' '.nuxt' 'node_modules' 'package-lock.json'"
   },
   "dependencies": {
+    "@mux/mux-node": "^12.8.1",
+    "@mux/mux-player": "^3.10.2",
     "@regle/nuxt": "^1.17.1",
     "@storyblok/nuxt": "^9.0.0",
     "@tailwindcss/vite": "^4.1.18",

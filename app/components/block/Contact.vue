@@ -22,7 +22,7 @@ const { block } = defineProps<Props>()
 
         <div
           v-if="storyblokRichTextContent(block.headline)"
-          class="col-span-full md:col-span-2 type-h4 [&_*+*]:mt-[1.25em] [&_*]:text-balance"
+          class="col-span-full md:col-span-2 type-h4 [&_*+*]:mt-[1.25em] **:text-balance"
         >
           <StoryblokText :html="block.headline" />
         </div>
