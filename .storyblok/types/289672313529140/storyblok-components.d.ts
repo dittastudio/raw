@@ -95,6 +95,12 @@ export interface BlockLogoWall {
   _uid: string;
 }
 
+export interface BlockMuxVideo {
+  asset?: unknown;
+  component: "block_mux_video";
+  _uid: string;
+}
+
 export interface BlockPosts {
   component: "block_posts";
   _uid: string;
@@ -181,6 +187,7 @@ export interface Page {
     | BlockImpactDetails
     | BlockImpactStatement
     | BlockLogoWall
+    | BlockMuxVideo
     | BlockPosts
     | BlockSplitText
     | BlockTeam
