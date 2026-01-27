@@ -2,9 +2,9 @@
   {
     "name": "block_bcorp",
     "display_name": "B Corp Graph",
-    "description": "Display teams of selected people.",
+    "description": "",
     "created_at": "2026-01-27T21:58:45.009Z",
-    "updated_at": "2026-01-27T22:02:07.560Z",
+    "updated_at": "2026-01-27T22:07:10.443Z",
     "id": 138696806447243,
     "schema": {
       "title": {
