@@ -17,60 +17,30 @@ const ballColour1Var = computed(() => `var(--color-${ballColour1})`)
 const ballColour2Var = computed(() => `var(--color-${ballColour2})`)
 const ballCursorColourVar = computed(() => `var(--color-${ballCursorColour})`)
 
-const SMOOTHING_FACTOR = 16
-
-const currentX = ref(0)
-const currentY = ref(0)
-
-const targetX = ref(0)
-const targetY = ref(0)
-
-const interactiveElement = ref<HTMLDivElement>()
 const containerElement = ref<HTMLDivElement>()
 
-let animationFrameId: number
+const { position, onMouseMove, onMouseLeave } = useSmoothMouse(containerElement)
 
-function animate() {
-  currentX.value += (targetX.value - currentX.value) / SMOOTHING_FACTOR
-  currentY.value += (targetY.value - currentY.value) / SMOOTHING_FACTOR
-
-  if (interactiveElement.value) {
-    const x = Math.round(currentX.value)
-    const y = Math.round(currentY.value)
-    interactiveElement.value.style.transform = `translate(${x}px, ${y}px)`
-  }
-
-  animationFrameId = requestAnimationFrame(animate)
-}
-
-function handleMouseMove(event: MouseEvent) {
+watchEffect(() => {
   if (!containerElement.value) {
-    targetX.value = event.clientX
-    targetY.value = event.clientY
     return
   }
 
-  const bounds = containerElement.value.getBoundingClientRect()
-  targetX.value = event.clientX - bounds.left
-  targetY.value = event.clientY - bounds.top
-}
-
-onMounted(() => {
-  window.addEventListener('mousemove', handleMouseMove)
-  animate()
-})
-
-onUnmounted(() => {
-  window.removeEventListener('mousemove', handleMouseMove)
-  cancelAnimationFrame(animationFrameId)
+  containerElement.value.style.setProperty('--x', String(position.value.x))
+  containerElement.value.style.setProperty('--y', String(position.value.y))
 })
 </script>
 
 <template>
-  <div class="morph-gradient isolate">
+  <div
+    ref="containerElement"
+    class="morph-gradient relative size-full isolate"
+    @mousemove="onMouseMove"
+    @mouseleave="onMouseLeave"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="morph-gradient__svg"
+      class="absolute size-0 hidden"
     >
       <defs>
         <filter id="goo">
@@ -97,18 +67,16 @@ onUnmounted(() => {
     </svg>
 
     <div
-      ref="containerElement"
-      class="morph-gradient__container transform-gpu backface-hidden"
+      class="morph-gradient__container transform-gpu backface-hidden pointer-events-none"
     >
       <div class="g1" />
 
       <div class="g2" />
 
-      <div
-        ref="interactiveElement"
-        class="interactive"
-      />
+      <div class="interactive" />
     </div>
+
+    <slot />
   </div>
 </template>
 
@@ -121,9 +89,8 @@ onUnmounted(() => {
   --color-interactive: v-bind(ballCursorColourVar);
   --circle-size: 50%;
   --blending: none;
-
-  width: 100%;
-  height: 100%;
+  /* --x: 0;
+  --y: 0; */
 }
 
 .morph-gradient__svg {
@@ -136,18 +103,18 @@ onUnmounted(() => {
 
 .morph-gradient__container {
   filter: url(#goo) blur(6px);
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 .g1 {
   position: absolute;
   background: radial-gradient(circle at center, --alpha(var(--color1) / 0.8) 0, --alpha(var(--color1) / 0) 50%) no-repeat;
-  /* background: red; */
-  /* mix-blend-mode: var(--blending); */
 
   width: var(--circle-size);
-  /* height: var(--circle-size); */
   aspect-ratio: 1;
   top: calc(50% - var(--circle-size) / 2);
   left: calc(50% - var(--circle-size) / 2);
@@ -162,17 +129,13 @@ onUnmounted(() => {
 .g2 {
   position: absolute;
   background: radial-gradient(circle at center, --alpha(var(--color2) / 0.8) 0, --alpha(var(--color2) / 0) 50%) no-repeat;
-  /* background: blue; */
-  /* mix-blend-mode: var(--blending); */
 
   width: var(--circle-size);
-  /* height: var(--circle-size); */
   aspect-ratio: 1;
   top: calc(50% - var(--circle-size) / 2);
   left: calc(50% - var(--circle-size) / 2);
   border-radius: 50%;
 
-  /* transform-origin: calc(50% - 100px); */
   animation: moveHorizontal 20s reverse infinite;
 
   opacity: 1;
@@ -184,16 +147,12 @@ onUnmounted(() => {
 
   position: absolute;
   background: radial-gradient(circle at center, --alpha(var(--color-interactive) / 0.8) 0, --alpha(var(--color-interactive) / 0) 50%) no-repeat;
-  /* background: green; */
-  /* mix-blend-mode: var(--blending); */
-  /* z-index: -2; */
 
   width: var(--size);
-  /* height: var(--size); */
-  top: 0;
-  left: 0;
   aspect-ratio: 1;
-  translate: -50% -50%;
+  top: 50%;
+  left: 50%;
+  translate: calc(var(--x) * 1px - 50%) calc(var(--y) * 1px - 50%) 0;
   border-radius: 50%;
 
   opacity: 1;

@@ -10,46 +10,29 @@ const { type = 'solid', themeOverride } = defineProps<Props>()
 
 const hover = useTemplateRef<HTMLSpanElement>('hover')
 
-const hoverHandler = (event: MouseEvent) => {
+const mainMouse = useSmoothMouse(hover, { range: 0.9 })
+const blobMouse = useSmoothMouse(hover, { range: 0.6 })
+
+const onMouseMove = (event: MouseEvent) => {
+  mainMouse.onMouseMove(event)
+  blobMouse.onMouseMove(event)
+}
+
+const onMouseLeave = () => {
+  mainMouse.onMouseLeave()
+  blobMouse.onMouseLeave()
+}
+
+watchEffect(() => {
   if (!hover.value) {
     return
   }
 
-  const { top, left, width, height } = hover.value.getBoundingClientRect()
-
-  hover.value.style.setProperty(
-    '--x',
-    String(event.clientX - (left + Math.floor(width / 2))),
-  )
-  hover.value.style.setProperty(
-    '--y',
-    String(event.clientY - (top + Math.floor(height / 2))),
-  )
-}
-
-const hoverOut = () => {
-  if (!hover.value) {
-    return
-  }
-
-  hover.value.style.setProperty('--x', '0')
-  hover.value.style.setProperty('--y', '0')
-}
-
-// const animateMe = (event: MouseEvent) => {
-//   const el = hover.value
-//   if (!el) {
-//     return
-//   }
-//   const { offsetX: x, offsetY: y } = event
-//   const { offsetWidth: width, offsetHeight: height } = el
-//   const move = 3
-//   const xMove = (x / width) * (move * 2) - move
-//   const yMove = (y / height) * (move * 2) - move
-
-//   el.style.setProperty('--x', `${xMove}px`)
-//   el.style.setProperty('--y', `${yMove}px`)
-// }
+  hover.value.style.setProperty('--x', String(mainMouse.position.value.x))
+  hover.value.style.setProperty('--y', String(mainMouse.position.value.y))
+  hover.value.style.setProperty('--blob-x', String(blobMouse.position.value.x))
+  hover.value.style.setProperty('--blob-y', String(blobMouse.position.value.y))
+})
 
 const solidThemeClasses = computed(() => {
   switch (themeOverride) {
@@ -102,8 +85,8 @@ const outlineThemeClasses = computed(() => {
       select-none
       type-p
     "
-    @mousemove="hoverHandler"
-    @mouseleave="hoverOut"
+    @mousemove="onMouseMove"
+    @mouseleave="onMouseLeave"
   >
     <div class="ui-button__container absolute inset-0 flex items-center justify-center">
       <span class="ui-button__blob ui-button__blob--1">
@@ -149,7 +132,8 @@ const outlineThemeClasses = computed(() => {
 .ui-button {
   --x: 0;
   --y: 0;
-  --t: 1;
+  --blob-x: 0;
+  --blob-y: 0;
 }
 
 .ui-button__inner {
@@ -169,8 +153,6 @@ const outlineThemeClasses = computed(() => {
 }
 
 .ui-button__shadow {
-  --t: 1;
-
   pointer-events: none;
   content: '';
 
@@ -196,7 +178,7 @@ const outlineThemeClasses = computed(() => {
 
   a:hover &,
   button:not(:disabled):hover & {
-    translate: calc(var(--x) / var(--t) * 1px) calc(var(--y) / var(--t) * 1px) 0;
+    translate: calc(var(--x) * 1px) calc(var(--y) * 1px) 0;
     opacity: 0.3;
     transition:
       opacity 0.2s var(--ease-out),
@@ -205,8 +187,6 @@ const outlineThemeClasses = computed(() => {
 }
 
 .ui-button__blob {
-  --t: 8;
-
   pointer-events: none;
   position: absolute;
   width: 100%;
@@ -223,7 +203,7 @@ const outlineThemeClasses = computed(() => {
   a:hover &,
   button:not(:disabled):hover &  {
     opacity: 1;
-    translate: calc((var(--x) * var(--direction)) / var(--t) * 1px) calc((var(--y) * var(--direction)) / (var(--t) / 3) * 1px) 0;
+    translate: calc((var(--blob-x) / 3) * var(--direction) * 1px) calc(var(--blob-y) * var(--direction) * 1px) 0;
     transition:
       opacity 0.2s var(--ease-out),
       translate 0.2s var(--ease-out);

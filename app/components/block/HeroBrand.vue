@@ -64,16 +64,16 @@ const slideClass = computed(() => {
     "
     :class="slideClass"
   >
-    <div class="absolute inset-0">
-      <EffectMorphGradient
-        ball-colour1="pink"
-        ball-colour2="pink"
-        ball-cursor-colour="pink"
-      />
-    </div>
+    <!-- <div class="absolute inset-0"> -->
+    <EffectMorphGradient
+      ball-colour1="pink"
+      ball-colour2="pink"
+      ball-cursor-colour="pink"
+    >
+      <!-- </div> -->
 
-    <div
-      class="
+      <div
+        class="
         @container/hero
         z-1
         wrapper-max
@@ -88,31 +88,32 @@ const slideClass = computed(() => {
         w-full
         h-full
       "
-    >
-      <div
-        v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
-        class="hero__headline relative"
       >
-        <div class="hero__headline-1 opacity-100">
-          <StoryblokText :html="block.headline" />
+        <div
+          v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
+          class="hero__headline relative"
+        >
+          <div class="hero__headline-1 opacity-100">
+            <StoryblokText :html="block.headline" />
+          </div>
+
+          <div class="hero__headline-2 absolute inset-0 opacity-0">
+            <StoryblokText :html="block.headline_2" />
+          </div>
         </div>
 
-        <div class="hero__headline-2 absolute inset-0 opacity-0">
-          <StoryblokText :html="block.headline_2" />
+        <div class="w-full max-h-full">
+          <IconLogo class="size-full" />
+        </div>
+
+        <div
+          v-if="storyblokRichTextContent(block.text)"
+          class="hero__text"
+        >
+          <StoryblokText :html="block.text" />
         </div>
       </div>
-
-      <div class="w-full max-h-full">
-        <IconLogo class="size-full" />
-      </div>
-
-      <div
-        v-if="storyblokRichTextContent(block.text)"
-        class="hero__text"
-      >
-        <StoryblokText :html="block.text" />
-      </div>
-    </div>
+    </EffectMorphGradient>
   </UiTheme>
 
   <div
@@ -166,15 +167,21 @@ const slideClass = computed(() => {
 
 /* Animations */
 .hero {
+  position: relative;
   background-color: var(--color-offwhite);
-  transition: background-color 1s var(--ease-out);
 
-  &.is-slide-1 {
-    background-color: var(--color-offwhite);
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--color-green);
+    opacity: 0;
+    transition: opacity 1s var(--ease-out);
+    pointer-events: none;
   }
 
-  &.is-slide-2 {
-    background-color: var(--color-green);
+  &.is-slide-2::before {
+    opacity: 1;
   }
 }
 

@@ -22,10 +22,12 @@ const { position, onMouseMove, onMouseLeave } = useSmoothMouse(container, {
 })
 
 watch(position, ({ x, y }) => {
-  if (container.value) {
-    container.value.style.setProperty('--x', String(x))
-    container.value.style.setProperty('--y', String(y))
+  if (!container.value) {
+    return
   }
+
+  container.value.style.setProperty('--x', String(x))
+  container.value.style.setProperty('--y', String(y))
 })
 </script>
 
@@ -37,7 +39,7 @@ watch(position, ({ x, y }) => {
     @mouseleave="onMouseLeave"
   >
     <div class="max-w-[1120px] mx-auto">
-      <div class="relative ">
+      <div class="relative">
         <UiTruthsItem
           class="z-1"
           :headline="item.headline"
@@ -93,7 +95,9 @@ watch(position, ({ x, y }) => {
             :items="item.items"
           />
 
-          <div class="ui-truths__cursor" />
+          <div class="ui-truths__cursor">
+            <div class="ui-truths__cursor-inner" />
+          </div>
         </div>
       </div>
     </div>
@@ -106,7 +110,6 @@ watch(position, ({ x, y }) => {
 .ui-truths {
   --x: 0;
   --y: 0;
-
 }
 
 .ui-truths__background {
@@ -114,10 +117,10 @@ watch(position, ({ x, y }) => {
 }
 
 .ui-truths__cursor {
-  --cursor-size: 200%;
+  --cursor-size: 50%;
 
   @variant md {
-    --cursor-size: 50%;
+    --cursor-size: 25%;
   }
 
   width: var(--cursor-size);
@@ -127,7 +130,6 @@ watch(position, ({ x, y }) => {
   left: 50%;
   z-index: 10;
   border-radius: 50%;
-  background: radial-gradient(circle at center, --alpha(var(--color-green) / 1) 0, --alpha(var(--color-green) / 0) 50%) no-repeat;
   pointer-events: none;
   opacity: 0;
   translate: calc(var(--x) * 1px - 50%) calc(var(--y) * 1px - 50%) 0;
@@ -140,6 +142,38 @@ watch(position, ({ x, y }) => {
     transition:
       translate 0.2s var(--ease-out),
       opacity 0.2s var(--ease-out);
+  }
+}
+
+.ui-truths__cursor-inner {
+  width: 100%;
+  height: 100%;
+  background: var(--color-green);
+  border-radius: 50%;
+  opacity: 0.75;
+  animation:
+    ui-truths-blob 5s var(--ease-in-out) infinite,
+    ui-truths-rotate 10s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes ui-truths-blob {
+  0% {
+    border-radius: 25% 75% 35% 65% / 30% 45% 55% 70%;
+  }
+  33% {
+    border-radius: 75% 25% 70% 30% / 60% 30% 70% 40%;
+  }
+  66% {
+    border-radius: 35% 65% 20% 80% / 75% 25% 60% 40%;
+  }
+  100% {
+    border-radius: 25% 75% 35% 65% / 30% 45% 55% 70%;
+  }
+}
+
+@keyframes ui-truths-rotate {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
