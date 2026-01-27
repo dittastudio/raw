@@ -42,8 +42,14 @@ const storyblokRichTextContent = (
 const storyblokSlug = (path: string): string =>
   ['/', ''].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
+interface TypedMuxVideo extends MuxVideo {
+  video: {
+    playbackId?: string
+  }
+}
+
 const isImageComponent = (media: Image | MuxVideo): media is Image => media.component === 'image'
-const isMuxVideoComponent = (media: Image | MuxVideo): media is MuxVideo => media.component === 'mux_video'
+const isMuxVideoComponent = (media: Image | MuxVideo): media is TypedMuxVideo => media.component === 'mux_video'
 
 const isPage = (
   story: ISbStoryData<Page | Post | Project> | null | undefined,
