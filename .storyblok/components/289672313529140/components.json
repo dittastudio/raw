@@ -766,10 +766,10 @@
     "display_name": "Mux Video",
     "description": "Display a video from your Mux account.",
     "created_at": "2026-01-26T15:02:04.536Z",
-    "updated_at": "2026-01-27T12:47:22.292Z",
+    "updated_at": "2026-01-27T15:45:15.248Z",
     "id": 138240510105538,
     "schema": {
-      "asset": {
+      "video": {
         "type": "custom",
         "pos": 0,
         "field_type": "storyblok-mux-assets",
@@ -780,8 +780,26 @@
             "value": "https://raw-london.netlify.app/api/mux-assets"
           }
         ],
-        "required": false,
+        "required": true,
         "id": "2a1qs-ZHSbS0V6-zOEt1Eg"
+      },
+      "controls": {
+        "type": "boolean",
+        "pos": 1,
+        "id": "OU18DKxpQ7m2xWRXzp7FoQ",
+        "inline_label": true
+      },
+      "autoplay": {
+        "type": "boolean",
+        "pos": 2,
+        "id": "LU80i2xJRKK5i3RjMLpP6Q",
+        "inline_label": true
+      },
+      "loop": {
+        "type": "boolean",
+        "pos": 3,
+        "id": "zqExe-V4SUyo-GHj7dEXtA",
+        "inline_label": true
       }
     },
     "image": null,

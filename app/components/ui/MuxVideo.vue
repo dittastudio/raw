@@ -2,18 +2,18 @@
 import '@mux/mux-player'
 
 interface Props {
-  playerId: string
+  playbackId: string
   accentColor?: string
 }
 
-const { playerId, accentColor = '#000' } = defineProps<Props>()
+const { playbackId, accentColor = '#c6ea9f' } = defineProps<Props>()
 </script>
 
 <template>
   <mux-player
-    v-if="playerId"
-    :id="playerId"
-    :playback-id="playerId"
+    v-if="playbackId"
+    :id="playbackId"
+    :playback-id="playbackId"
     :accent-color="accentColor"
     metadata-video-title="Test VOD"
     class="block"
