@@ -33,6 +33,7 @@ export interface BlockGallery {
 export interface BlockHero {
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
+  media?: (MuxVideo | Image)[];
   theme?: number | string;
   component: "block_hero";
   _uid: string;
@@ -107,6 +108,7 @@ export interface BlockMuxVideo {
   controls?: boolean;
   autoplay?: boolean;
   loop?: boolean;
+  theme?: number | string;
   component: "block_mux_video";
   _uid: string;
 }
@@ -197,6 +199,12 @@ export interface Logo {
   title: string;
   link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   component: "logo";
+  _uid: string;
+}
+
+export interface MuxVideo {
+  video: unknown;
+  component: "mux_video";
   _uid: string;
 }
 

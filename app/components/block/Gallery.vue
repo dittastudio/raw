@@ -84,7 +84,7 @@ const getSizes = (index: number) => {
         <li
           v-for="(image, index) in block.items"
           :key="image.id"
-          class="grow-1 basis-1/2 md:basis-1/3 pl-(--app-inner-gutter)"
+          class="grow basis-1/2 md:basis-1/3 pl-(--app-inner-gutter)"
         >
           <NuxtImg
             v-if="image.filename && storyblokAssetType(image.filename) === 'image'"

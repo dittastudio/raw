@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
+const media = computed(() => block.media?.[0] || null)
 </script>
 
 <template>
@@ -29,6 +30,19 @@ const { block } = defineProps<Props>()
         <StoryblokText :html="block.text" />
       </div>
     </div>
+
+    <NuxtImg
+      v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
+      class="absolute inset-0 block size-full object-cover"
+      :src="media.image.filename"
+      :alt="media.image.alt || ''"
+      :width="1000"
+      :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 1000)"
+      quality="85"
+      :modifiers="{
+        smart: true,
+      }"
+    />
   </UiTheme>
 </template>
 
