@@ -15,9 +15,19 @@ export default defineEventHandler(async () => {
       throw new Error('No assets data found')
     }
 
-    const filtered = assets.data.filter(asset => asset.status === 'ready' && asset.playback_ids?.find(id => id.policy === 'public'))
+    // We don't need the whole payload, so filter and trim off what's unused.
+    // Ensure however that the data is in the original structure/shape.
+    const items = assets.data
+      .filter(asset => asset.status === 'ready' && asset.playback_ids?.find(id => id.policy === 'public'))
+      .map(asset => ({
+        id: asset.id,
+        playback_ids: asset.playback_ids,
+        meta: asset.meta,
+        tracks: asset.tracks?.filter(track => track.type === 'video'),
+        createdAt: asset.created_at,
+      }))
 
-    return filtered ?? []
+    return items ?? []
   }
   catch (error: any) {
     throw createError({
