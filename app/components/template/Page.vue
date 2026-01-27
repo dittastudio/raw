@@ -96,11 +96,10 @@ const { story } = defineProps<Props>()
       v-else-if="block.component === 'block_gallery'"
       :block="block"
     />
-  </section>
 
-  <section class="py-20 md:py-36 bg-offblack text-white">
-    <div class="wrapper-max">
-      <UiGraph />
-    </div>
+    <BlockBCorp
+      v-else-if="block.component === 'block_bcorp'"
+      :block="block"
+    />
   </section>
 </template>

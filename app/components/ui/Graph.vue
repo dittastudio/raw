@@ -1,31 +1,41 @@
 <script lang="ts" setup>
 import { TransitionPresets, useIntersectionObserver, useTransition } from '@vueuse/core'
 
+interface Props {
+  value1?: number
+  value2?: number
+  value3?: number
+}
+
+const { value1 = 109.5, value2 = 80, value3 = 50.9 } = defineProps<Props>()
+
 const root = useTemplateRef<HTMLElement>('root')
 const bar1 = useTemplateRef<SVGCircleElement>('bar1')
 const bar2 = useTemplateRef<SVGCircleElement>('bar2')
 const bar3 = useTemplateRef<SVGCircleElement>('bar3')
 
-const maxValue = 200
-const targetValues = [109.5, 80, 50.9]
+const maxValue = 250
 const durationMs = 2000
 const isAnimated = ref(false)
 
-const sourceValue1 = computed(() => (isAnimated.value ? targetValues[0] : 0))
-const sourceValue2 = computed(() => (isAnimated.value ? targetValues[1] : 0))
-const sourceValue3 = computed(() => (isAnimated.value ? targetValues[2] : 0))
+const sourceValue1 = computed(() => (isAnimated.value ? value1 : 0))
+const sourceValue2 = computed(() => (isAnimated.value ? value2 : 0))
+const sourceValue3 = computed(() => (isAnimated.value ? value3 : 0))
 
 const animatedValue1 = useTransition(sourceValue1, {
   duration: durationMs,
   transition: TransitionPresets.easeInOutExpo,
+  disabled: computed(() => !isAnimated.value),
 })
 const animatedValue2 = useTransition(sourceValue2, {
   duration: durationMs,
   transition: TransitionPresets.easeInOutExpo,
+  disabled: computed(() => !isAnimated.value),
 })
 const animatedValue3 = useTransition(sourceValue3, {
   duration: durationMs,
   transition: TransitionPresets.easeInOutExpo,
+  disabled: computed(() => !isAnimated.value),
 })
 
 const setCircleProgress = (element: SVGCircleElement | null, value: number) => {
@@ -65,7 +75,7 @@ onMounted(() => {
       }
     },
     {
-      threshold: 0.5,
+      threshold: 0,
     },
   )
 })
@@ -74,9 +84,9 @@ onMounted(() => {
 <template>
   <div
     ref="root"
-    class="ui-graph @container-[size] relative size-36 mx-auto"
+    class="ui-graph flex flex-col gap-10"
   >
-    <div class="size-full aspect-square max-h-full">
+    <div class="@container-[size] relative size-full aspect-square">
       <svg
         class="size-full rotate-90"
         width="400"
@@ -109,7 +119,7 @@ onMounted(() => {
             class="ui-graph__circle ui-graph__circle--background"
             cx="200"
             cy="200"
-            r="156"
+            r="158"
           />
 
           <!-- animated progress ring 2 -->
@@ -118,7 +128,7 @@ onMounted(() => {
             class="ui-graph__circle ui-graph__circle--animated stroke-green"
             cx="200"
             cy="200"
-            r="156"
+            r="158"
           />
         </g>
 
@@ -128,7 +138,7 @@ onMounted(() => {
             class="ui-graph__circle ui-graph__circle--background"
             cx="200"
             cy="200"
-            r="127"
+            r="131"
           />
 
           <!-- animated progress ring 3 -->
@@ -137,7 +147,7 @@ onMounted(() => {
             class="ui-graph__circle ui-graph__circle--animated stroke-pink"
             cx="200"
             cy="200"
-            r="127"
+            r="131"
           />
         </g>
       </svg>
@@ -150,7 +160,7 @@ onMounted(() => {
         items-center
         justify-center
         type-h2
-        text-[10cqmin]
+        text-[min(10cqmin,29px)]
         leading-none
       "
       >
@@ -162,10 +172,30 @@ onMounted(() => {
             gap-[0.1em]
           "
         >
-          {{ (animatedValue1 ?? 0).toFixed(1) }}<small>%</small>
+          {{ (animatedValue1 ?? 0).toFixed(1) }}
         </div>
       </div>
     </div>
+
+    <dl class="flex flex-col gap-3 type-p">
+      <div class="flex items-start gap-2">
+        <dt class="bg-blue size-5 rounded-full shrink-0" />
+
+        <dd>Overall score</dd>
+      </div>
+
+      <div class="flex items-start gap-2">
+        <dt class="bg-green size-5 rounded-full shrink-0" />
+
+        <dd>Qualifies for certification</dd>
+      </div>
+
+      <div class="flex items-start gap-2">
+        <dt class="bg-pink size-5 rounded-full shrink-0" />
+
+        <dd>Median score for ordinary businesses</dd>
+      </div>
+    </dl>
   </div>
 </template>
 
@@ -173,7 +203,7 @@ onMounted(() => {
 @reference "@/assets/css/app.css";
 
 .ui-graph__circle {
-  stroke-width: 20;
+  stroke-width: 18;
   stroke-linecap: round;
 }
 
