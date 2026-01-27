@@ -83,6 +83,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   align-items: center;
   justify-content: space-between;
   grid-column: span 3;
+  hyphens: auto;
 
   @variant sm {
     grid-column: span 6;
