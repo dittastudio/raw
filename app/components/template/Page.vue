@@ -97,4 +97,8 @@ const { story } = defineProps<Props>()
       :block="block"
     />
   </section>
+
+  <section>
+    <UiGraph />
+  </section>
 </template>

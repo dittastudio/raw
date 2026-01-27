@@ -103,7 +103,7 @@ export interface BlockLogoWall {
 }
 
 export interface BlockMuxVideo {
-  asset?: unknown;
+  video: unknown;
   component: "block_mux_video";
   _uid: string;
 }
