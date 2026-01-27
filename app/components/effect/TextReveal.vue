@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { tag = 'div', delay = 0, duration = 1, trigger = 'inview' } = defineProps<Props>()
-const text = useTemplateRef<HTMLElement>('text')
+const text = useTemplateRef('text')
 const ready = ref(false)
 
 const immediateFn = async () => {

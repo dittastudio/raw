@@ -14,7 +14,7 @@ interface Props {
 
 const { item } = defineProps<Props>()
 
-const container = useTemplateRef<HTMLDivElement>('container')
+const container = useTemplateRef('container')
 
 const { position, onMouseMove, onMouseLeave } = useSmoothMouse(container, {
   damping: 0.08,
@@ -38,7 +38,7 @@ watch(position, ({ x, y }) => {
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
-    <div class="max-w-[1120px] mx-auto">
+    <div class="max-w-280 mx-auto">
       <div class="relative">
         <UiTruthsItem
           class="z-1"
