@@ -30,7 +30,6 @@ const attrs = computed(() => ({
   >
     <div class="col-span-full lg:col-span-10 lg:col-start-2">
       <UiMuxVideo
-
         v-bind="attrs"
         :playback-id="block.video.playbackId"
       />

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockHero } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Themes } from '@@/types/app'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -31,7 +32,7 @@ onMounted(() => {
       yPercent: amount,
       ease: 'none',
       scrollTrigger: {
-        markers: true,
+        markers: false,
         trigger: heroRef.value,
         start: 'top bottom',
         end: 'bottom top',
@@ -49,7 +50,7 @@ onUnmounted(() => {
 <template>
   <UiTheme
     v-editable="block"
-    theme="light"
+    :theme="(block.theme as Themes)"
     class="hero relative w-full min-h-screen overflow-hidden grid place-items-center"
   >
     <div
@@ -88,6 +89,17 @@ onUnmounted(() => {
         :modifiers="{
           smart: true,
         }"
+      />
+
+      <UiMuxVideo
+        v-else-if="media && isMuxVideoComponent(media) && media.video?.playbackId"
+        class="size-full"
+        :playback-id="media.video.playbackId"
+        :is-cover="true"
+        playsinline
+        autoplay
+        muted
+        loop
       />
     </div>
   </UiTheme>

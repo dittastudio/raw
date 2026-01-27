@@ -4,9 +4,10 @@ import '@mux/mux-player'
 interface Props {
   playbackId: string
   accentColor?: string
+  isCover?: boolean
 }
 
-const { playbackId, accentColor = '#c6ea9f' } = defineProps<Props>()
+const { playbackId, accentColor = '#c6ea9f', isCover = false } = defineProps<Props>()
 </script>
 
 <template>
@@ -19,6 +20,7 @@ const { playbackId, accentColor = '#c6ea9f' } = defineProps<Props>()
     class="block"
     :style="{
       '--controls': Object.hasOwn($attrs, 'controls') ? null : 'none',
+      '--media-object-fit': isCover ? 'cover' : null,
     }"
   />
 </template>
