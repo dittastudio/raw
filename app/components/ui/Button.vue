@@ -8,7 +8,7 @@ interface Props {
 
 const { type = 'solid', themeOverride } = defineProps<Props>()
 
-const hover = useTemplateRef<HTMLSpanElement>('hover')
+const hover = useTemplateRef('hover')
 
 const mainMouse = useSmoothMouse(hover, { range: 0.9 })
 const blobMouse = useSmoothMouse(hover, { range: 0.6 })
