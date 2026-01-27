@@ -1,13 +1,19 @@
 <script lang="ts" setup>
-import { useIntersectionObserver } from '@vueuse/core'
+import { TransitionPresets, useIntersectionObserver, useTransition } from '@vueuse/core'
 
 const root = useTemplateRef<HTMLElement>('root')
 const bar = useTemplateRef<SVGCircleElement>('bar')
-const targetPercentage = 50
-const durationMs = 1500
+const maxValue = 200
+const targetValue = 109.5
+const durationMs = 2000
 const isAnimated = ref(false)
 
-const clampPercentage = (percentage: number) => Math.max(0, Math.min(100, percentage))
+const sourceValue = computed(() => (isAnimated.value ? targetValue : 0))
+const animatedValue = useTransition(sourceValue, {
+  duration: durationMs,
+  transition: TransitionPresets.easeInOutExpo,
+})
+const displayedPercent = computed(() => (animatedValue.value / maxValue) * 100)
 
 const setCircleProgress = (percentage: number) => {
   if (!bar.value) {
@@ -16,18 +22,15 @@ const setCircleProgress = (percentage: number) => {
 
   const radius = Number.parseFloat(bar.value.getAttribute('r') || '180')
   const circumference = 2 * Math.PI * radius
-  const clamped = clampPercentage(percentage)
+  const clamped = Math.max(0, Math.min(100, percentage))
   const offset = circumference - (clamped / 100) * circumference
 
   bar.value.style.setProperty('--circumference', `${circumference.toFixed(0)}`)
   bar.value.style.setProperty('--offset', `${offset.toFixed(0)}`)
 }
 
-const displayedPercentage = computed(() => (isAnimated.value ? targetPercentage : 0))
-const durationStyle = computed(() => `${isAnimated.value ? durationMs : 0}ms`)
-
 watchEffect(() => {
-  setCircleProgress(displayedPercentage.value)
+  setCircleProgress(displayedPercent.value)
 })
 
 onMounted(() => {
@@ -56,19 +59,10 @@ onMounted(() => {
   <div
     ref="root"
     class="ui-graph @container relative max-w-96 mx-auto"
-    :class="{ 'is-animated': isAnimated }"
-    :style="{
-      '--percentage': displayedPercentage,
-      '--duration': durationStyle,
-    }"
   >
     <div class="size-full aspect-square max-h-full">
       <svg
-        class="
-        progress-bar-circle__svg
-        size-full
-        -rotate-90
-      "
+        class="size-full rotate-90"
         width="400"
         height="400"
         viewBox="0 0 400 400"
@@ -76,11 +70,7 @@ onMounted(() => {
       >
         <!-- grey background ring -->
         <circle
-          class="
-          progress-bar-circle__ring-background
-          stroke-blue
-        "
-          stroke-width="29"
+          class="ui-graph__circle ui-graph__circle--background"
           cx="200"
           cy="200"
           r="185"
@@ -89,13 +79,7 @@ onMounted(() => {
         <!-- animated progress ring -->
         <circle
           ref="bar"
-          data-js-progress-bar
-          class="
-          progress-bar-circle__bar
-          stroke-green
-        "
-          stroke-width="29"
-          stroke-linecap="round"
+          class="ui-graph__circle ui-graph__circle--animated stroke-green"
           cx="200"
           cy="200"
           r="185"
@@ -104,25 +88,25 @@ onMounted(() => {
 
       <div
         class="
-        progress-bar-circle__number-outer
+        absolute
+        inset-0
+        flex
+        items-center
+        justify-center
+        type-h2
+        text-[min(40cqi,29px)]
+        leading-none
       "
       >
         <div
           class="
-        progress-bar-circle__number-inner
-      "
+            relative
+            flex
+            items-baseline
+            gap-[0.1em]
+          "
         >
-          <span
-            class="
-          progress-bar-circle__number
-        "
-          />
-
-          <small
-            class="
-          progress-bar-circle__unit
-        "
-          >%</small>
+          {{ animatedValue.toFixed(1) }}<small>%</small>
         </div>
       </div>
     </div>
@@ -132,65 +116,18 @@ onMounted(() => {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-@property --percentage-count {
-  syntax: '<integer>';
-  inherits: true;
-  initial-value: 0;
+.ui-graph__circle {
+  stroke-width: 20;
+  stroke-linecap: round;
 }
 
-@keyframes progress-percentage-animation {
-  from {
-    --percentage-count: 0;
-  }
-  to {
-    --percentage-count: var(--percentage);
-  }
+.ui-graph__circle--background {
+  stroke: --alpha(var(--color-white) / 10%);
 }
 
-.progress-bar-circle__bar {
+.ui-graph__circle--animated {
   stroke: var(--color-green);
   stroke-dasharray: var(--circumference) var(--circumference);
   stroke-dashoffset: var(--offset);
-
-  transition:
-    stroke-dashoffset var(--duration) var(--ease-inOutQuart),
-    stroke 0.2s var(--ease-out);
-}
-
-.progress-bar-circle__number-outer {
-  @apply absolute
-  inset-0
-  flex
-  items-center
-  justify-center
-  text-white
-  text-[min(40cqb,40cqi,160px)]
-  tracking-[-0.04em]
-  leading-none;
-}
-
-.progress-bar-circle__number-inner {
-  @apply relative
-  flex
-  items-baseline
-  gap-[0.1em];
-}
-
-.progress-bar-circle__number {
-  --percentage-count: 0;
-
-  counter-reset: progress-count var(--percentage-count);
-
-  &::before {
-    content: counter(progress-count);
-  }
-}
-
-.is-animated .progress-bar-circle__number {
-  animation: progress-percentage-animation var(--duration) var(--ease-out) forwards;
-}
-
-.progress-bar-circle__unit {
-  @apply text-[60%];
 }
 </style>

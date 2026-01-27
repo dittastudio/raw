@@ -98,7 +98,9 @@ const { story } = defineProps<Props>()
     />
   </section>
 
-  <section>
-    <UiGraph />
+  <section class="py-20 md:py-36 bg-offblack text-white">
+    <div class="wrapper-max">
+      <UiGraph />
+    </div>
   </section>
 </template>
