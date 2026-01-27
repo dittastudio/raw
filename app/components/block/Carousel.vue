@@ -52,6 +52,7 @@ const { block } = defineProps<Props>()
             :modifiers="{
               smart: true,
             }"
+            loading="lazy"
           />
 
           <div
