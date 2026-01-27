@@ -23,6 +23,13 @@ export interface BlockContact {
   _uid: string;
 }
 
+export interface BlockGallery {
+  items?: StoryblokMultiasset;
+  theme?: number | string;
+  component: "block_gallery";
+  _uid: string;
+}
+
 export interface BlockHero {
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
@@ -194,6 +201,7 @@ export interface Page {
   blocks?: (
     | BlockCarousel
     | BlockContact
+    | BlockGallery
     | BlockHero
     | BlockHeroBrand
     | BlockHoverGrid
