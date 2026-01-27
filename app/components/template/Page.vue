@@ -96,5 +96,10 @@ const { story } = defineProps<Props>()
       v-else-if="block.component === 'block_gallery'"
       :block="block"
     />
+
+    <BlockBCorp
+      v-else-if="block.component === 'block_bcorp'"
+      :block="block"
+    />
   </section>
 </template>

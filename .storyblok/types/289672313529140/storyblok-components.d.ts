@@ -2,6 +2,20 @@
 // DO NOT MODIFY THIS FILE BY HAND.
 import type { ISbStoryData } from '@storyblok/js';
 import type { StoryblokRichtext, StoryblokAsset, StoryblokMultiasset, StoryblokMultilink } from '../storyblok.d.ts';
+export interface BlockBcorp {
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  theme?: number | string;
+  overall_score?: string;
+  qualify_score?: string;
+  median_score?: string;
+  component: "block_bcorp";
+  _uid: string;
+}
+
 export interface BlockCarousel {
   title?: string;
   headline?: StoryblokRichtext;
@@ -210,6 +224,7 @@ export interface MuxVideo {
 
 export interface Page {
   blocks?: (
+    | BlockBcorp
     | BlockCarousel
     | BlockContact
     | BlockGallery

@@ -103,6 +103,7 @@
 @utility type-h3 {
   font-family: var(--font-display);
   font-size: var(--text-fluid-h3);
+  font-weight: normal;
   line-height: 1.25;
   letter-spacing: -0.05em;
   text-transform: none;
@@ -111,6 +112,7 @@
 @utility type-h4 {
   font-family: var(--font-display);
   font-size: var(--text-fluid-h4);
+  font-weight: normal;
   line-height: 1.25;
   letter-spacing: 0em;
   text-transform: none;
