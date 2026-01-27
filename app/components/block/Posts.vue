@@ -24,28 +24,24 @@ const getCategory = (value?: string | string[] | number): Entry | undefined => {
   if (categories.value?.data.datasource_entries && value) {
     const postCategory = Array.isArray(value) ? value[0] : value
     const entry = categories.value.data.datasource_entries.find((entry: Entry) => entry.value === postCategory)
-    return entry ?? undefined
+    return entry as Entry ?? undefined
   }
 
   return undefined
 }
 
-const perPage = 10
-
 const page = computed(() => {
   const raw = Array.isArray(route.query.page) ? route.query.page[0] : route.query.page
-  const n = Number(raw ?? 1)
-  return Number.isFinite(n) && n > 0 ? n : 1
+  const num = Number(raw ?? 1)
+  return Number.isFinite(num) && num > 0 ? num : 1
 })
-
-const refreshKey = computed(() => route.fullPath)
 
 const categoryValue = computed(() => {
-  const raw = Array.isArray(route.query.category) ? route.query.category[0] : route.query.category
-  return getCategory(raw || '')?.value
+  const query = Array.isArray(route.query.category) ? route.query.category[0] : route.query.category
+  return getCategory(query || '')?.value
 })
 
-interface PostCardPayload {
+interface Posts {
   uuid: string
   name: string
   full_slug: string
@@ -56,7 +52,7 @@ interface PostCardPayload {
 }
 
 interface PostsPayload {
-  posts: PostCardPayload[]
+  posts: Posts[]
   hasMore: boolean
 }
 
@@ -65,7 +61,9 @@ interface PostsTransformInput {
   requested: number
 }
 
-const { data: postsPayload } = await useAsyncData('posts', async () => {
+const perPage = 8
+
+const { data: postsPayload } = await useAsyncData(() => `posts-${categoryValue.value ?? 'all'}-${page.value}`, async () => {
   const requested = perPage * page.value
 
   const { data } = await storyblokApi.get('cdn/stories', {
@@ -77,15 +75,11 @@ const { data: postsPayload } = await useAsyncData('posts', async () => {
     resolve_relations: [
       'post.author',
     ],
-    ...(categoryValue.value
-      ? {
-          filter_query: {
-            category: {
-              in: categoryValue.value,
-            },
-          },
-        }
-      : {}),
+    filter_query: {
+      category: {
+        in: categoryValue.value,
+      },
+    },
   })
 
   return {
@@ -95,9 +89,9 @@ const { data: postsPayload } = await useAsyncData('posts', async () => {
 }, {
   transform: (input: PostsTransformInput): PostsPayload => {
     const hasMore = input.stories.length > input.requested
-    const visibleStories = input.stories.slice(0, input.requested)
+    const payload = hasMore ? input.stories.slice(0, -1) : input.stories
 
-    const payload = visibleStories.map(post => ({
+    const posts = payload.map(post => ({
       uuid: post.uuid,
       name: post.name,
       full_slug: post.full_slug,
@@ -108,11 +102,11 @@ const { data: postsPayload } = await useAsyncData('posts', async () => {
     }))
 
     return {
-      posts: payload,
+      posts,
       hasMore,
     }
   },
-  watch: [refreshKey],
+  watch: [categoryValue, page],
 })
 
 const posts = computed(() => postsPayload.value?.posts ?? [])

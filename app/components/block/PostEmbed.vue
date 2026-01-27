@@ -8,7 +8,7 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const { data: oembed, error } = await useAsyncData(
-  `oembed-${block.url}`,
+  () => `oembed-${block.url}`,
   async () => await $fetch('/api/oembed', {
     method: 'post',
     body: {
