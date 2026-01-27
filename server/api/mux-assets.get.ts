@@ -24,7 +24,7 @@ export default defineEventHandler(async () => {
         playback_ids: asset.playback_ids,
         meta: asset.meta,
         tracks: asset.tracks?.filter(track => track.type === 'video'),
-        createdAt: asset.created_at,
+        created_at: asset.created_at,
       }))
 
     return items ?? []
