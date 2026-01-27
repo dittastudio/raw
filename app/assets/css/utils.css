@@ -45,3 +45,5 @@
 }
 
 @custom-variant only-hover (@media (hover: hover));
+
+@custom-variant only-touch (@media (hover: none));

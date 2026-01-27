@@ -34,7 +34,7 @@ watch(position, ({ x, y }) => {
 <template>
   <div
     ref="container"
-    class="ui-truths relative p-(--app-outer-gutter) -m-(--app-outer-gutter)"
+    class="ui-truths relative p-(--app-outer-gutter) -m-(--app-outer-gutter) group/truths"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
@@ -89,6 +89,7 @@ watch(position, ({ x, y }) => {
           </svg>
 
           <UiTruthsItem
+            class="opacity-0 group-hover/truths:opacity-100 transition-opacity duration-1000 ease-out"
             :is-masked="true"
             :headline="item.headline"
             :copy="item.copy"
@@ -134,14 +135,14 @@ watch(position, ({ x, y }) => {
   opacity: 0;
   translate: calc(var(--x) * 1px - 50%) calc(var(--y) * 1px - 50%) 0;
   transition:
-    translate 0s var(--ease-out) 0.5s,
-    opacity 0.5s var(--ease-out);
+    translate 0s var(--ease-out) 1s,
+    opacity 1s var(--ease-out);
 
   .ui-truths:hover & {
     opacity: 1;
     transition:
-      translate 0.2s var(--ease-out),
-      opacity 0.2s var(--ease-out);
+      translate 0.1s var(--ease-out),
+      opacity 1s var(--ease-out);
   }
 }
 
