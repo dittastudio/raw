@@ -66,45 +66,14 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   }
 }
 
-.ui-list-item__number {
-  grid-column: span 1;
-
-  @variant sm {
-    grid-column: span 2;
-  }
-
-  @container (min-width: 800px) {
-    grid-column: span 3;
-  }
-}
-
 .ui-list-item__title {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  grid-column: span 3;
   hyphens: auto;
-
-  @variant sm {
-    grid-column: span 6;
-  }
-
-  @container (min-width: 800px) {
-    grid-column: span 5;
-  }
 }
 
 .ui-list-item__copy {
-  grid-column: 2 / span 3;
-
-  @variant sm {
-    grid-column: 3 / span 6;
-  }
-
-  @container (min-width: 800px) {
-    grid-column: span 4;
-  }
-
   .ui-list-item--default & {
     opacity: 0;
   }

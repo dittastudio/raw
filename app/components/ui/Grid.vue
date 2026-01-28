@@ -265,6 +265,10 @@ const accentMaskClasses = computed(() => {
   &:first-child:nth-last-child(3n),
   &:first-child:nth-last-child(3n) ~ & {
     @variant md {
+      flex-basis: calc(50% - 1px);
+    }
+
+    @variant lg {
       flex-basis: calc(33.34% - 1px);
     }
   }
@@ -272,57 +276,6 @@ const accentMaskClasses = computed(() => {
   .ui-list__list--default & {
     background-color: var(--app-background-color);
     transition: background-color var(--app-transition-duration) var(--app-transition-ease);
-  }
-}
-
-.ui-list__container {
-  display: grid;
-  grid-template-columns: var(--app-grid);
-  column-gap: var(--app-inner-gutter);
-  align-items: center;
-  padding-block: --spacing(4);
-}
-
-.ui-list__number {
-  grid-column: span 1;
-
-  @variant sm {
-    grid-column: span 2;
-  }
-
-  @variant md {
-    grid-column: span 3;
-  }
-}
-
-.ui-list__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  grid-column: span 3;
-
-  @variant sm {
-    grid-column: span 6;
-  }
-
-  @variant md {
-    grid-column: span 5;
-  }
-}
-
-.ui-list__copy {
-  grid-column: 2 / span 3;
-
-  @variant sm {
-    grid-column: 3 / span 6;
-  }
-
-  @variant md {
-    grid-column: span 4;
-  }
-
-  .ui-list__container--default & {
-    opacity: 0;
   }
 }
 </style>
