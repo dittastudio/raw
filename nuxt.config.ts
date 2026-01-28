@@ -78,6 +78,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: ['/'],
+      ignore: ['/posts/**'],
     },
   },
   vite: {
