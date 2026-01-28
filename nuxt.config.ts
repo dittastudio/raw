@@ -68,6 +68,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
+    '/posts/**': { prerender: false },
     '/**': { prerender: process.env.NUXT_PRERENDER === 'true' },
   },
   compatibilityDate: '2025-04-13',
@@ -78,7 +79,6 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: ['/'],
-      ignore: ['/posts/**'],
     },
   },
   vite: {
