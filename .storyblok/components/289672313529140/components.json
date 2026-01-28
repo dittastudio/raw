@@ -665,7 +665,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-01-22T16:43:32.243Z",
+    "updated_at": "2026-01-28T12:25:38.943Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -727,7 +727,7 @@
         "component_denylist": [],
         "maximum": 1,
         "id": "peWMo6W2T-yN123xL6PJEA",
-        "required": true
+        "required": false
       },
       "theme": {
         "type": "option",

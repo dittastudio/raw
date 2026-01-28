@@ -94,7 +94,7 @@ export interface BlockImpactDetails {
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
-  media: Image[];
+  media?: Image[];
   theme?: number | string;
   accent?: number | string;
   component: "block_impact_details";

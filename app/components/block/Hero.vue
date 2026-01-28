@@ -93,7 +93,6 @@ onUnmounted(() => {
 
       <UiMuxVideo
         v-else-if="media && isMuxVideoComponent(media) && media.video?.playbackId"
-        class="size-full"
         :playback-id="media.video.playbackId"
         :is-cover="true"
         playsinline
