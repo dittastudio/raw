@@ -128,7 +128,15 @@ export interface BlockMuxVideo {
 }
 
 export interface BlockPosts {
+  theme?: number | string;
   component: "block_posts";
+  _uid: string;
+}
+
+export interface BlockProjects {
+  projects?: (ISbStoryData<Project> | string)[];
+  theme?: number | string;
+  component: "block_projects";
   _uid: string;
 }
 
@@ -156,6 +164,15 @@ export interface BlockTestimonials {
   items?: Testimonial[];
   theme?: number | string;
   component: "block_testimonials";
+  _uid: string;
+}
+
+export interface BlockTicker {
+  media?: (MuxVideo | Image)[];
+  text?: string;
+  logos?: StoryblokMultiasset;
+  theme?: number | string;
+  component: "block_ticker";
   _uid: string;
 }
 
@@ -237,9 +254,11 @@ export interface Page {
     | BlockLogoWall
     | BlockMuxVideo
     | BlockPosts
+    | BlockProjects
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
+    | BlockTicker
     | BlockTruths
   )[];
   seo_title: string;
@@ -336,9 +355,11 @@ export interface Project {
     | BlockLogoWall
     | BlockMuxVideo
     | BlockPosts
+    | BlockProjects
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
+    | BlockTicker
     | BlockTruths
   )[];
   seo_title: string;

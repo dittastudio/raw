@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockPosts, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 // import type { Person } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
@@ -103,7 +104,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
 <template>
   <UiTheme
     v-editable="block"
-    theme="light"
+    :theme="(block.theme as Themes)"
     class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">
@@ -187,7 +188,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                 query: { ...$route.query, page: ((Number($route.query.page) || 1) + 1).toString() },
               }"
             >
-              <UiButton theme-override="dark">
+              <UiButton>
                 Load more
               </UiButton>
             </NuxtLink>
