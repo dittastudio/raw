@@ -27,7 +27,7 @@ const { block } = defineProps<Props>()
     <UiCarouselFade
       :items="block.slides"
       :options="{ loop: true }"
-      :autoplay="false"
+      :autoplay="true"
       :autoplay-interval="4000"
     >
       <template #item="{ item }">

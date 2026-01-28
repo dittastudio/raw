@@ -1,7 +1,9 @@
 <script generic="T" lang="ts" setup>
 import type { KeenSliderInstance, KeenSliderOptions, TrackDetails } from 'keen-slider'
+import type { AutoplayControls } from '@/utils/carousels'
 import { onKeyStroke, useIntersectionObserver } from '@vueuse/core'
 import { useKeenSlider } from 'keen-slider/vue.es'
+import { createAutoplayPlugin } from '@/utils/carousels'
 
 export interface Carousel {
   slider: Ref<KeenSliderInstance | undefined>
@@ -33,86 +35,9 @@ const isInView = ref(false)
 
 const isAutoplayActive = computed(() => autoplay && isInView.value)
 
-const autoplayControls = {
+const autoplayControls: AutoplayControls = {
   start: () => {},
   stop: () => {},
-}
-
-const createAutoplayPlugin = ({
-  isActive,
-  interval,
-}: {
-  isActive: () => boolean
-  interval: () => number
-}) => {
-  return (slider: KeenSliderInstance) => {
-    let timeout: ReturnType<typeof setTimeout> | undefined
-    let mouseOver = false
-
-    const clear = () => {
-      if (timeout) {
-        clearTimeout(timeout)
-        timeout = undefined
-      }
-    }
-
-    const schedule = () => {
-      clear()
-      if (!isActive() || mouseOver) {
-        return
-      }
-
-      timeout = setTimeout(() => {
-        if (!isActive() || mouseOver) {
-          return
-        }
-
-        slider.next()
-      }, interval())
-    }
-
-    const stop = () => {
-      clear()
-    }
-
-    const start = () => {
-      schedule()
-    }
-
-    autoplayControls.start = start
-    autoplayControls.stop = stop
-
-    const handleMouseOver = () => {
-      mouseOver = true
-      stop()
-    }
-
-    const handleMouseOut = () => {
-      mouseOver = false
-      start()
-    }
-
-    slider.on('created', () => {
-      slider.container.addEventListener('mouseover', handleMouseOver)
-      slider.container.addEventListener('mouseout', handleMouseOut)
-
-      start()
-    })
-
-    slider.on('dragStarted', () => {
-      stop()
-    })
-
-    slider.on('animationEnded', start)
-    slider.on('updated', start)
-
-    slider.on('destroyed', () => {
-      stop()
-
-      slider.container.removeEventListener('mouseover', handleMouseOver)
-      slider.container.removeEventListener('mouseout', handleMouseOut)
-    })
-  }
 }
 
 const [container, slider] = useKeenSlider({
@@ -139,6 +64,7 @@ const [container, slider] = useKeenSlider({
   createAutoplayPlugin({
     isActive: () => isAutoplayActive.value,
     interval: () => autoplayInterval,
+    controls: autoplayControls,
   }),
 ])
 
