@@ -2,7 +2,6 @@
 import type { BlockPosts, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
-// import type { Person } from '@@/.storyblok/types/289672313529140/storyblok-components'
 
 interface Props {
   block: BlockPosts
@@ -36,7 +35,6 @@ interface Posts {
   first_published_at?: string
   hero: Post['hero']
   category: Post['category']
-  // author?: ISbStoryData<Person>
 }
 
 interface PostsPayload {
@@ -60,9 +58,6 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
     page: 1,
     sort_by: 'first_published_at:desc',
     version: 'published',
-    // resolve_relations: [
-    //   'post.author',
-    // ],
     filter_query: {
       category: {
         in: currentCategory.value?.value,
@@ -86,7 +81,6 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
       first_published_at: post.first_published_at ?? undefined,
       hero: post.content.hero,
       category: post.content.category,
-      // author: post.content.author as ISbStoryData<Person> | undefined,
     }))
 
     return {
@@ -162,19 +156,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                 :slug="post.full_slug"
                 :image="post.hero"
                 :category="getCategoryEntry(post.category, categories)?.name"
-              >
-                <!--
-                <template #author>
-                  <CardAuthor
-                    v-if="post.author"
-                    :name="post.author.content.name"
-                    :image="post.author.content.image"
-                    :date="post.first_published_at"
-                    size="small"
-                  />
-                </template>
-                -->
-              </CardPost>
+              />
             </li>
           </ul>
 
