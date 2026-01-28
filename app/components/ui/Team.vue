@@ -24,11 +24,24 @@ const peoples = computed(() => people?.filter(person => typeof person !== 'strin
 
     <ul
       v-if="peoples?.length"
-      class="grid grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @6xl:grid-cols-5 @7xl:grid-cols-6 gap-(--app-outer-gutter) @2xl:gap-(--app-inner-gutter) w-full"
+      class="
+        flex
+        flex-wrap
+        -ml-(--app-inner-gutter)
+        gap-y-(--app-inner-gutter)
+      "
     >
       <li
         v-for="(person, index) in peoples"
         :key="index"
+        class="
+          pl-(--app-inner-gutter)
+          w-1/2
+          @2xl:w-1/3
+          @4xl:w-1/4
+          @6xl:w-1/5
+          @7xl:w-1/6
+        "
       >
         <CardPerson
           v-if="person"
