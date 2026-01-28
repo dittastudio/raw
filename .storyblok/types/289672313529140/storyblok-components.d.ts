@@ -322,10 +322,29 @@ export interface PostWistia {
 }
 
 export interface Project {
+  blocks?: (
+    | BlockBcorp
+    | BlockCarousel
+    | BlockContact
+    | BlockGallery
+    | BlockHero
+    | BlockHeroBrand
+    | BlockHoverGrid
+    | BlockHoverList
+    | BlockImpactDetails
+    | BlockImpactStatement
+    | BlockLogoWall
+    | BlockMuxVideo
+    | BlockPosts
+    | BlockSplitText
+    | BlockTeam
+    | BlockTestimonials
+    | BlockTruths
+  )[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
-  blocks?: BlockHero[];
+  category: number | string;
   component: "project";
   _uid: string;
 }
