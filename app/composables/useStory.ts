@@ -13,7 +13,6 @@ export async function useStory<T>(
 ) {
   const runtimeConfig = useRuntimeConfig()
   const route = useRoute()
-  const isDraft = runtimeConfig.public.STORYBLOK_VERSION !== 'published'
 
   const { story, error } = await useAsyncStoryblok(storyblokSlug(slug), {
     api: {
@@ -36,8 +35,6 @@ export async function useStory<T>(
       return input
     },
     deep: true,
-    // Disable caching in draft mode - workaround for v9 caching bug
-    ...(isDraft && { getCachedData: () => undefined }),
     ...options,
   })
 
