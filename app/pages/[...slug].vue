@@ -6,6 +6,7 @@ const route = useRoute()
 const relations: string[] = [
   'post.author',
   'team.people',
+  'block_projects.projects',
 ]
 
 const story = await useStory<Page | Post | Project>(

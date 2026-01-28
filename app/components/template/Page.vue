@@ -40,11 +40,16 @@ const { story } = defineProps<Props>()
 
     <BlockMuxVideo
       v-else-if="block.component === 'block_mux_video'"
-      :block="block as TypedBlockMuxVideo"
+      :block="(block as TypedBlockMuxVideo)"
     />
 
     <BlockPosts
       v-else-if="block.component === 'block_posts'"
+      :block="block"
+    />
+
+    <BlockProjects
+      v-else-if="block.component === 'block_projects'"
       :block="block"
     />
 

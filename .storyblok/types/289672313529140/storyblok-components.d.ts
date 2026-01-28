@@ -341,6 +341,9 @@ export interface PostWistia {
 }
 
 export interface Project {
+  preview: StoryblokAsset;
+  tagline: string;
+  category: number | string;
   blocks?: (
     | BlockBcorp
     | BlockCarousel
@@ -365,7 +368,6 @@ export interface Project {
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
-  category: number | string;
   component: "project";
   _uid: string;
 }
