@@ -161,7 +161,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
           </ul>
 
           <div
-            v-if="hasMore"
+            v-if="hasMore && posts.length <= 100"
             class="w-full flex flex-col items-center justify-center"
           >
             <NuxtLink
