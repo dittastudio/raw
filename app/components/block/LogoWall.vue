@@ -34,9 +34,6 @@ const { block } = defineProps<Props>()
             :height="60"
             densities="x1 x2"
             format="webp"
-            :modifiers="{
-              smart: true,
-            }"
             loading="lazy"
           />
         </li>
