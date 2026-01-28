@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-import type { BlockPosts, Person, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockPosts, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -10,35 +11,21 @@ const { block } = defineProps<Props>()
 const storyblokApi = useStoryblokApi()
 const route = useRoute()
 
-const { data: categories } = await useAsyncData('categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
-  datasource: 'category',
+const { data: postCategories } = await useAsyncData('post-categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
+  datasource: 'post-category',
 }))
 
-interface Entry {
-  id: number
-  value: string
-  name: string
-}
+const categories = computed(() => postCategories.value?.data.datasource_entries || [])
 
-const getCategory = (value?: string | string[] | number): Entry | undefined => {
-  if (categories.value?.data.datasource_entries && value) {
-    const postCategory = Array.isArray(value) ? value[0] : value
-    const entry = categories.value.data.datasource_entries.find((entry: Entry) => entry.value === postCategory)
-    return entry as Entry ?? undefined
-  }
+const currentCategory = computed(() => {
+  const query = Array.isArray(route.query.category) ? route.query.category[0] : route.query.category
+  return getCategoryEntry(query || '', categories.value)
+})
 
-  return undefined
-}
-
-const page = computed(() => {
+const currentPage = computed(() => {
   const raw = Array.isArray(route.query.page) ? route.query.page[0] : route.query.page
   const num = Number(raw ?? 1)
   return Number.isFinite(num) && num > 0 ? num : 1
-})
-
-const categoryValue = computed(() => {
-  const query = Array.isArray(route.query.category) ? route.query.category[0] : route.query.category
-  return getCategory(query || '')?.value
 })
 
 interface Posts {
@@ -48,7 +35,6 @@ interface Posts {
   first_published_at?: string
   hero: Post['hero']
   category: Post['category']
-  author?: ISbStoryData<Person>
 }
 
 interface PostsPayload {
@@ -63,8 +49,8 @@ interface PostsTransformInput {
 
 const perPage = 8
 
-const { data: postsPayload } = await useAsyncData(() => `posts-${categoryValue.value ?? 'all'}-${page.value}`, async () => {
-  const requested = perPage * page.value
+const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory.value ?? 'all'}-${currentPage.value}`, async () => {
+  const requested = perPage * currentPage.value
 
   const { data } = await storyblokApi.get('cdn/stories', {
     content_type: 'post',
@@ -72,12 +58,9 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${categoryValue.v
     page: 1,
     sort_by: 'first_published_at:desc',
     version: 'published',
-    resolve_relations: [
-      'post.author',
-    ],
     filter_query: {
       category: {
-        in: categoryValue.value,
+        in: currentCategory.value?.value,
       },
     },
   })
@@ -98,7 +81,6 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${categoryValue.v
       first_published_at: post.first_published_at ?? undefined,
       hero: post.content.hero,
       category: post.content.category,
-      author: post.content.author as ISbStoryData<Person> | undefined,
     }))
 
     return {
@@ -106,7 +88,7 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${categoryValue.v
       hasMore,
     }
   },
-  watch: [categoryValue, page],
+  watch: [currentCategory, currentPage],
 })
 
 const posts = computed(() => postsPayload.value?.posts ?? [])
@@ -116,15 +98,15 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
 <template>
   <UiTheme
     v-editable="block"
-    theme="light"
+    :theme="(block.theme as Themes)"
     class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">
       <div class="w-full flex flex-col items-start justify-center gap-6">
         <FilterDatasource
-          v-if="categories?.data.datasource_entries.length"
+          v-if="categories.length"
           slug="category"
-          :entries="categories.data.datasource_entries"
+          :entries="categories"
         >
           <template #default="{ filters, applied }">
             <h2 class="type-display-28">
@@ -173,18 +155,8 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                 :headline="post.name"
                 :slug="post.full_slug"
                 :image="post.hero"
-                :category="getCategory(post.category)?.name"
-              >
-                <template #author>
-                  <CardAuthor
-                    v-if="post.author"
-                    :name="post.author.content.name"
-                    :image="post.author.content.image"
-                    :date="post.first_published_at"
-                    size="small"
-                  />
-                </template>
-              </CardPost>
+                :category="getCategoryEntry(post.category, categories)?.name"
+              />
             </li>
           </ul>
 
@@ -198,7 +170,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                 query: { ...$route.query, page: ((Number($route.query.page) || 1) + 1).toString() },
               }"
             >
-              <UiButton theme-override="dark">
+              <UiButton>
                 Load more
               </UiButton>
             </NuxtLink>
@@ -209,7 +181,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
           v-else
           class="type-mono-16"
         >
-          There are no posts available for {{ getCategory(categoryValue)?.name || 'this filter' }}.
+          There are no posts available for {{ currentCategory?.name || 'this filter' }}.
         </p>
       </Transition>
     </div>

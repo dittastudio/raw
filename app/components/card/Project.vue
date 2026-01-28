@@ -2,13 +2,13 @@
 import type { StoryblokAsset } from '@@/.storyblok/types/storyblok'
 
 interface Props {
-  headline?: string
   slug?: string
   image?: StoryblokAsset
-  category?: string
+  tagline?: string
+  headline?: string
 }
 
-const { headline, slug, image, category } = defineProps<Props>()
+const { slug, image, tagline, headline } = defineProps<Props>()
 </script>
 
 <template>
@@ -32,23 +32,19 @@ const { headline, slug, image, category } = defineProps<Props>()
         />
       </div>
 
-      <p v-if="category">
-        {{ category }}
+      <p
+        v-if="tagline"
+        class="text-balance"
+      >
+        {{ tagline }}
       </p>
 
       <h3
         v-if="headline"
-        class="type-h5 text-balance max-w-[64ch]"
+        class="type-h4 text-balance max-w-[64ch]"
       >
         {{ headline }}
       </h3>
-
-      <div
-        v-if="$slots.author"
-        class="mt-auto"
-      >
-        <slot name="author" />
-      </div>
     </NuxtLink>
   </article>
 </template>

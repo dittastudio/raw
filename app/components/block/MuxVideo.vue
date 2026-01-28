@@ -2,14 +2,14 @@
 import type { BlockMuxVideo } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { Themes } from '@@/types/app'
 
-interface TypedBlock extends BlockMuxVideo {
+export interface TypedBlockMuxVideo extends BlockMuxVideo {
   video: {
     playbackId?: string
   }
 }
 
 interface Props {
-  block: TypedBlock
+  block: TypedBlockMuxVideo
 }
 
 const { block } = defineProps<Props>()

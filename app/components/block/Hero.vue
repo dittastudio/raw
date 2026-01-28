@@ -14,10 +14,12 @@ const media = computed(() => block.media?.[0] || null)
 const heroRef = useTemplateRef('heroRef')
 const mediaRef = useTemplateRef('mediaRef')
 
-onMounted(() => {
+onMounted(async () => {
   if (!heroRef.value || !mediaRef.value) {
     return
   }
+
+  await nextTick()
 
   gsap.registerPlugin(ScrollTrigger)
 

@@ -4,6 +4,22 @@ import type { ImageModifiers } from '@nuxt/image'
 import type { ISbStoryData } from '@storyblok/js'
 import type { LocationQuery } from 'vue-router'
 
+interface Entry {
+  id: number
+  value: string
+  name: string
+}
+
+const getCategoryEntry = (value?: string | string[] | number, entries?: Entry[]): Entry | undefined => {
+  if (Array.isArray(entries) && value) {
+    const category = Array.isArray(value) ? value[0] : value
+    const entry = entries.find((entry: Entry) => entry.value === category)
+    return entry as Entry ?? undefined
+  }
+
+  return undefined
+}
+
 const storyblokEditor = (search: LocationQuery) => '_storyblok' in search
 
 const imageExtensions = [
@@ -115,6 +131,7 @@ const determineHref = (item: StoryblokMultilink) =>
 
 export {
   determineHref,
+  getCategoryEntry,
   isImageComponent,
   isMuxVideoComponent,
   isPage,
