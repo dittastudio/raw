@@ -29,7 +29,7 @@ const media = computed(() => block.media?.[0])
     >
       <div
         v-if="media"
-        class="col-start-1 col-span-full md:col-span-7 bg-[orange]"
+        class="col-start-1 col-span-full md:col-span-7"
         :class="{
           'max-md:row-start-2': media && (storyblokRichTextContent(block.copy) || block.cta?.cached_url),
         }"
