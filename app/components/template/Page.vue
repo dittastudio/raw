@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { ISbStoryData } from '@storyblok/js'
+import type { TypedBlockMuxVideo } from '@/components/block/MuxVideo.vue'
 
 interface Props {
   story: ISbStoryData<Page>
@@ -39,7 +40,7 @@ const { story } = defineProps<Props>()
 
     <BlockMuxVideo
       v-else-if="block.component === 'block_mux_video'"
-      :block="block"
+      :block="block as TypedBlockMuxVideo"
     />
 
     <BlockPosts
