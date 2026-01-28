@@ -33,7 +33,7 @@ const {
 
     <div
       v-if="storyblokRichTextContent(headline)"
-      class="ui-content__headline col-span-full md:col-span-9"
+      class="ui-content__headline col-span-full sm:col-start-2 sm:col-span-7 md:col-span-9"
       :class="{
         'md:col-start-4': title,
         'md:col-start-2': !title,
@@ -74,6 +74,7 @@ const {
     @apply type-h2;
 
     text-wrap: balance;
+    max-width: 18ch;
   }
 }
 

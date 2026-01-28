@@ -17,10 +17,12 @@ const lists = useTemplateRef('lists')
 
 let scrollTrigger: ScrollTrigger | null = null
 
-onMounted(() => {
+onMounted(async () => {
   if (!container.value) {
     return
   }
+
+  await nextTick()
 
   let lastProgress = 0
 
@@ -60,10 +62,15 @@ onMounted(() => {
   })
 })
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
   if (scrollTrigger) {
     scrollTrigger.kill()
     scrollTrigger = null
+  }
+
+  // Reset GSAP properties
+  if (container.value) {
+    gsap.set(container.value, { clearProps: 'all' })
   }
 })
 </script>
