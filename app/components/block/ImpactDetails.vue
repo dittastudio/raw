@@ -67,7 +67,7 @@ const media = computed(() => block.media?.[0])
           class="inline-block"
           :item="block.cta"
         >
-          <UiButton>
+          <UiButton :type="block.theme === 'dark' ? 'outline' : 'solid'">
             {{ block.cta_title }}
           </UiButton>
         </StoryblokLink>
