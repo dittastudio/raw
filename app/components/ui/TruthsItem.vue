@@ -94,7 +94,7 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
             {{ item.title }}
           </h3>
 
-          <UiExpandable open-on-hover>
+          <UiExpandable open-on-hover="group/expandable">
             <p class="type-p text-[min(6cqi,13px)] pt-[1em] text-pretty">
               {{ item.copy }}
             </p>

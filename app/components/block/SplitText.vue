@@ -13,22 +13,32 @@ const { block } = defineProps<Props>()
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="wrapper-max split-text flex flex-col gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20"
+    class="
+      split-text
+      wrapper-max
+      flex
+      flex-col
+      gap-y-10
+      md:gap-y-20
+    "
   >
-    <template
+    <div
       v-for="(item, index) in block.items"
       :key="item._uid"
+      class="
+        col-span-full grid
+        grid-cols-(--app-grid)
+        gap-x-(--app-inner-gutter)
+      "
     >
       <div
         v-if="storyblokRichTextContent(item.copy)"
-        class="md:w-[calc(50%-var(--app-inner-gutter)/2)]"
-        :class="{
-          'md:ml-auto': index % 2 !== 0,
-        }"
+        class="col-span-3 sm:col-span-4 md:col-span-5"
+        :class="index % 2 === 0 ? 'col-start-1 md:col-start-2' : 'col-start-2 sm:col-start-5 md:col-start-7'"
       >
         <StoryblokText :html="item.copy" />
       </div>
-    </template>
+    </div>
   </UiTheme>
 </template>
 
