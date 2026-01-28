@@ -11,19 +11,17 @@ const { isOpen = false, isDisabled = false, openOnHover = false } = defineProps<
 <template>
   <div
     data-component="ui-expandable"
-    class="only-touch:!grid-rows-[1fr]"
     :class="{
       'grid overflow-hidden transition-[grid-template-rows] duration-300 ease-inOutExpo': !isDisabled,
-      'grid-rows-[0fr] group-hover/expandable:grid-rows-[1fr]': openOnHover && !isDisabled,
+      'only-touch:!grid-rows-[1fr] grid-rows-[0fr] group-hover/expandable:grid-rows-[1fr]': openOnHover && !isDisabled,
       'grid-rows-[0fr]': !isOpen && !isDisabled && !openOnHover,
       'grid-rows-[1fr]': isOpen && !isDisabled && !openOnHover,
     }"
   >
     <div
-      class="only-touch:!opacity-100"
       :class="{
         'min-h-0': !isDisabled,
-        'opacity-0 group-hover/expandable:opacity-100 transition-opacity duration-200 ease-out group-hover/expandable:duration-300 group-hover/expandable:delay-250': openOnHover && !isDisabled,
+        'only-touch:!opacity-100 opacity-0 group-hover/expandable:opacity-100 transition-opacity duration-200 ease-out group-hover/expandable:duration-300 group-hover/expandable:delay-250': openOnHover && !isDisabled,
         'opacity-0 transition-opacity duration-200 ease-out': !isOpen && !isDisabled && !openOnHover,
         'opacity-100 transition-opacity duration-300 ease-out delay-250': isOpen && !isDisabled && !openOnHover,
       }"
