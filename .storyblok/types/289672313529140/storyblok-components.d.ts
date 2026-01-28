@@ -159,6 +159,15 @@ export interface BlockTestimonials {
   _uid: string;
 }
 
+export interface BlockTicker {
+  media?: (MuxVideo | Image)[];
+  text?: string;
+  logos?: StoryblokMultiasset;
+  theme?: number | string;
+  component: "block_ticker";
+  _uid: string;
+}
+
 export interface BlockTruths {
   title?: string;
   headline?: StoryblokRichtext;
@@ -240,6 +249,7 @@ export interface Page {
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
+    | BlockTicker
     | BlockTruths
   )[];
   seo_title: string;
@@ -322,10 +332,30 @@ export interface PostWistia {
 }
 
 export interface Project {
+  blocks?: (
+    | BlockBcorp
+    | BlockCarousel
+    | BlockContact
+    | BlockGallery
+    | BlockHero
+    | BlockHeroBrand
+    | BlockHoverGrid
+    | BlockHoverList
+    | BlockImpactDetails
+    | BlockImpactStatement
+    | BlockLogoWall
+    | BlockMuxVideo
+    | BlockPosts
+    | BlockSplitText
+    | BlockTeam
+    | BlockTestimonials
+    | BlockTicker
+    | BlockTruths
+  )[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;
-  blocks?: BlockHero[];
+  category: number | string;
   component: "project";
   _uid: string;
 }

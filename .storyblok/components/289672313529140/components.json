@@ -1023,7 +1023,7 @@
     "display_name": "Team",
     "description": "Display teams of selected people.",
     "created_at": "2026-01-20T12:22:18.524Z",
-    "updated_at": "2026-01-22T16:44:24.163Z",
+    "updated_at": "2026-01-28T16:23:28.620Z",
     "id": 136077879403799,
     "schema": {
       "title": {
@@ -1079,7 +1079,8 @@
           "team"
         ],
         "component_denylist": [],
-        "id": "8TfK8RQPS-CJSXv6ciDEtA"
+        "id": "8TfK8RQPS-CJSXv6ciDEtA",
+        "display_name": "Team Group"
       },
       "theme": {
         "type": "option",
@@ -1161,6 +1162,72 @@
     "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
     "color": "var(--sb-color-accent-background-green-cyan)",
     "icon": "align-center",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "block_ticker",
+    "display_name": "Logo Ticker",
+    "description": "Displays a logo ticker with optional background media & title",
+    "created_at": "2026-01-28T18:19:09.336Z",
+    "updated_at": "2026-01-28T18:22:10.562Z",
+    "id": 138996733287616,
+    "schema": {
+      "media": {
+        "type": "bloks",
+        "pos": 0,
+        "id": "773CtmxyTrW1s0CgBGp0aw",
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "mux_video",
+          "image"
+        ],
+        "component_denylist": [],
+        "maximum": 1
+      },
+      "text": {
+        "type": "text",
+        "pos": 2,
+        "id": "XHKygncmRlmndE_tLtHJig",
+        "customize_toolbar": true,
+        "toolbar": [
+          "paragraph",
+          "unset"
+        ]
+      },
+      "logos": {
+        "type": "multiasset",
+        "pos": 3,
+        "id": "hyBP33ZmSCa9jGXAsnhb2w"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "required": false,
+        "options": [],
+        "exclude_empty_option": false,
+        "default_value": "light",
+        "id": "BmrYdk1fTiOQo5l9tMEL_A",
+        "display_name": "Theme",
+        "source": "internal",
+        "datasource_slug": "theme"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Logo Ticker",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "sticker",
     "internal_tags_list": [],
     "internal_tag_ids": [],
     "content_type_asset_preview": null,
@@ -1729,7 +1796,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-01-24T15:20:42.424Z",
+    "updated_at": "2026-01-28T17:00:28.870Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -1757,7 +1824,7 @@
         "type": "option",
         "pos": 2,
         "source": "internal",
-        "datasource_slug": "category",
+        "datasource_slug": "post-category",
         "exclude_empty_option": true,
         "required": false,
         "id": "YsFi5nf_SnqY-8m3_FpyxQ",
@@ -2106,43 +2173,40 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-01-10T17:08:15.470Z",
+    "updated_at": "2026-01-28T18:06:02.112Z",
     "id": 131189203587517,
     "schema": {
+      "blocks": {
+        "type": "bloks",
+        "pos": 0,
+        "id": "ZEk25vg0QYOxGeK3TRO1gQ",
+        "restrict_type": "groups",
+        "restrict_components": true,
+        "component_whitelist": [],
+        "component_denylist": [],
+        "component_group_whitelist": [
+          "790a2850-0eb3-4a25-884f-b297e8a1d61e"
+        ],
+        "component_group_denylist": [],
+        "component_tag_whitelist": [],
+        "component_tag_denylist": []
+      },
+      "tab-0c7882b0-9f8b-4e24-83f1-096af4e560d1": {
+        "display_name": "Content",
+        "keys": [
+          "blocks"
+        ],
+        "pos": 1,
+        "type": "tab",
+        "name": "tab-0c7882b0-9f8b-4e24-83f1-096af4e560d1",
+        "id": "DHiCsJ-LTiSD8Qlq9OVg0Q"
+      },
       "seo_title": {
         "type": "text",
-        "pos": 0,
+        "pos": 2,
         "id": "D6UJXhPbSJaJbbL5h383UQ",
         "display_name": "Title",
         "required": true
-      },
-      "seo_description": {
-        "type": "text",
-        "pos": 1,
-        "id": "6hDt2n0RRQ68wXLTnKElTA",
-        "display_name": "Description",
-        "required": true
-      },
-      "seo_image": {
-        "type": "asset",
-        "pos": 2,
-        "required": true,
-        "filetypes": [
-          "images"
-        ],
-        "display_name": "Image",
-        "id": "u9KjwvbHTWuJ6TZ8G1o6bA"
-      },
-      "blocks": {
-        "type": "bloks",
-        "pos": 3,
-        "id": "ZEk25vg0QYOxGeK3TRO1gQ",
-        "restrict_type": "",
-        "restrict_components": true,
-        "component_whitelist": [
-          "block_hero"
-        ],
-        "component_denylist": []
       },
       "tab-0df61d3a-3a9f-4508-b1f3-edda3b534d36": {
         "display_name": "SEO",
@@ -2151,9 +2215,37 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 4,
+        "pos": 3,
         "type": "tab",
-        "id": "DfYdOjqfRQix8-3aO1NNNg"
+        "id": "DfYdOjqfRQix8-3aO1NNNg",
+        "name": "tab-0df61d3a-3a9f-4508-b1f3-edda3b534d36"
+      },
+      "seo_description": {
+        "type": "text",
+        "pos": 4,
+        "id": "6hDt2n0RRQ68wXLTnKElTA",
+        "display_name": "Description",
+        "required": true
+      },
+      "seo_image": {
+        "type": "asset",
+        "pos": 5,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "display_name": "Image",
+        "id": "u9KjwvbHTWuJ6TZ8G1o6bA"
+      },
+      "category": {
+        "type": "option",
+        "pos": 6,
+        "use_uuid": true,
+        "id": "0H5G2s8pRNqs3GQ-0A25nw",
+        "required": true,
+        "source": "internal",
+        "datasource_slug": "project-category",
+        "exclude_empty_option": true
       }
     },
     "image": null,
