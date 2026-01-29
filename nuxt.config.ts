@@ -4,9 +4,9 @@ import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   modules: [
+    '@nuxtjs/seo',
     '@nuxt/eslint',
     '@nuxt/image',
-    '@nuxtjs/sitemap',
     '@regle/nuxt',
     'lenis/nuxt',
     [
@@ -125,8 +125,5 @@ export default defineNuxtConfig({
       'xl': 1440,
       '2xl': 1800,
     },
-  },
-  sitemap: {
-    sources: ['/api/sitemap'],
   },
 })
