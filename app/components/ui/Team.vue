@@ -41,6 +41,8 @@ const peoples = computed(() => people?.filter(person => typeof person !== 'strin
           @4xl:w-1/4
           @6xl:w-1/5
           @7xl:w-1/6
+          first:ml-auto
+          last:mr-auto
         "
       >
         <CardPerson
