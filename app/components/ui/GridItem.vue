@@ -14,15 +14,9 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
 <template>
   <div
-    class="ui-list-item"
-    :class="[
-      `ui-list-item--${type}`,
-      {
-        'is-open': isOpen,
-      },
-    ]"
+    class="p-(--app-outer-gutter) md:py-16"
   >
-    <h3 class="ui-list-item__title type-h4">
+    <h3 class="flex items-center justify-between gap-(--app-inner-gutter) hyphens-auto type-h4">
       {{ item.title }}
 
       <UiPlusMinus
@@ -34,7 +28,9 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
     <div
       v-if="item.copy"
-      class="ui-list-item__copy"
+      :class="{
+        'opacity-0': type === 'default',
+      }"
     >
       <UiExpandable
         :is-open="isOpen"
@@ -47,40 +43,3 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     </div>
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.ui-list-item {
-  padding: var(--app-outer-gutter);
-
-  @container (min-width: 800px) {
-    padding: --spacing(16) var(--app-outer-gutter);
-  }
-}
-
-.ui-list-item--mask {
-  @container (max-width: 799px) {
-    opacity: 0;
-    transition: opacity 0.2s var(--ease-out);
-
-    &.is-open {
-      opacity: 1;
-    }
-  }
-}
-
-.ui-list-item__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--app-inner-gutter);
-  hyphens: auto;
-}
-
-.ui-list-item__copy {
-  .ui-list-item--default & {
-    opacity: 0;
-  }
-}
-</style>

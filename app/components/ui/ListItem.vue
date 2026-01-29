@@ -22,14 +22,13 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
       items-center
       py-4
     "
-    :class="[
-      `ui-list-item--${type}`,
+    :class="
       {
         'max-md:transition-opacity max-md:duration-200 max-md:ease-out': type === 'mask',
         'max-md:opacity-0': !isOpen && type === 'mask',
         'max-md:opacity-100': isOpen && type === 'mask',
-      },
-    ]"
+      }
+    "
   >
     <span
       class="col-span-1 sm:col-span-2 md:col-span-3 type-h2"

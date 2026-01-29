@@ -7,10 +7,7 @@ interface Props {
   items: ListItem[]
 }
 
-const {
-  accent,
-  items,
-} = defineProps<Props>()
+const { accent, items } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
 
@@ -19,25 +16,13 @@ const clipTop = ref<number | null>(null)
 const clipBottom = ref<number | null>(null)
 const maskActive = ref(false)
 const maskTransitionEnabled = ref(false)
-
-const maskStyle = computed(() => {
-  const baseStyle = {
-    '--mask-opacity': maskActive.value ? '1' : '0',
-  }
-
-  if (clipTop.value === null || clipBottom.value === null) {
-    return baseStyle
-  }
-
-  return {
-    ...baseStyle,
-    '--clip-top': `${clipTop.value}px`,
-    '--clip-bottom': `${clipBottom.value}px`,
-  }
-})
-
-// Mobile
 const openIndex = ref<number | null>(null)
+
+const maskStyle = computed(() => ({
+  '--mask-opacity': maskActive.value ? '1' : '0',
+  '--clip-top': `${clipTop.value ?? 0}px`,
+  '--clip-bottom': `${clipBottom.value ?? 0}px`,
+}))
 
 const toggleItem = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
@@ -57,39 +42,32 @@ const setMaskClip = (event: MouseEvent) => {
   const listRect = listEl.value.getBoundingClientRect()
   const itemRect = itemEl.getBoundingClientRect()
 
-  clipTop.value = Math.max(0, itemRect.top - listRect.top)
-  clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+  const updateClip = () => {
+    clipTop.value = Math.max(0, itemRect.top - listRect.top)
+    clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+  }
 
-  if (!maskActive.value) {
+  if (maskActive.value) {
+    updateClip()
+    return
+  }
+
+  requestAnimationFrame(() => {
+    updateClip()
     maskActive.value = true
-    maskTransitionEnabled.value = false
 
-    if (typeof window === 'undefined') {
+    requestAnimationFrame(() => {
       maskTransitionEnabled.value = true
-    }
-    else {
-      requestAnimationFrame(() => {
-        maskTransitionEnabled.value = true
-      })
-    }
-  }
-  else if (!maskTransitionEnabled.value) {
-    maskTransitionEnabled.value = true
-  }
-}
-
-const clearMaskClip = () => {
-  clipTop.value = null
-  clipBottom.value = null
-  maskActive.value = false
-  maskTransitionEnabled.value = false
+    })
+  })
 }
 
 const handleListExit = () => {
   if (!isScreenMd.value || !listEl.value) {
-    clearMaskClip()
-    return
+    clipTop.value = null
+    clipBottom.value = null
   }
+
   maskActive.value = false
   maskTransitionEnabled.value = false
 }
@@ -154,7 +132,7 @@ const accentMaskClasses = computed(() => {
           ease-out
         "
         @click="item.copy && !isScreenMd && toggleItem(index)"
-        @mouseenter="setMaskClip($event)"
+        @mouseenter="setMaskClip"
       >
         <UiListItem
           type="default"
@@ -177,10 +155,7 @@ const accentMaskClasses = computed(() => {
         z-1
         pointer-events-none
       "
-      :class="[
-        accentMaskClasses,
-        maskTransitionEnabled ? 'is-transitioning' : '',
-      ]"
+      :class="[accentMaskClasses, { 'is-transitioning': maskTransitionEnabled }]"
       :style="maskStyle"
       aria-hidden="true"
     >
