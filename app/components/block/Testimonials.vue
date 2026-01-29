@@ -13,6 +13,7 @@ const { block } = defineProps<Props>()
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
+    class="py-20 md:py-36"
   >
     <UiCarouselFade
       :items="block.items"

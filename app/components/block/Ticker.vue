@@ -17,7 +17,7 @@ const isVideo = computed(() => media.value && isMuxVideoComponent(media.value) &
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="grid grid-cols-1 grid-rows-1 items-center"
+    class="grid grid-cols-1 grid-rows-1 items-center py-20 md:py-36"
   >
     <div
       v-if="isImage || isVideo"
