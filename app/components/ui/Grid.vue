@@ -209,14 +209,20 @@ const accentMaskClasses = computed(() => {
   flex-direction: column;
   gap: 1px;
 
-  &:not(&--mask) {
-    background-color: currentColor;
-  }
-
   @variant md {
     flex-direction: row;
     flex-wrap: wrap;
+
+    &.is-transitioning {
+      transition:
+        clip-path 0.2s var(--ease-in-out),
+        opacity 0.2s var(--ease-in-out);
+    }
   }
+}
+
+.ui-list__list--default {
+  background-color: currentColor;
 }
 
 .ui-list__list--mask {
@@ -234,14 +240,6 @@ const accentMaskClasses = computed(() => {
       var(--clip-left, 0)
     );
     transition: opacity 0.2s var(--ease-in-out);
-  }
-}
-
-.is-transitioning {
-  @variant md {
-    transition:
-      clip-path 0.2s var(--ease-in-out),
-      opacity 0.2s var(--ease-in-out);
   }
 }
 
