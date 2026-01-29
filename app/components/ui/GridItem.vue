@@ -26,12 +26,16 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
       {{ item.title }}
 
       <UiPlusMinus
-        class="md:hidden"
+        v-if="item.copy"
+        class="md:hidden shrink-0"
         :is-open="isOpen"
       />
     </h3>
 
-    <div class="ui-list-item__copy">
+    <div
+      v-if="item.copy"
+      class="ui-list-item__copy"
+    >
       <UiExpandable
         :is-open="isOpen"
         :is-disabled="isScreenMd"
@@ -70,6 +74,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--app-inner-gutter);
   hyphens: auto;
 }
 

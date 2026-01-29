@@ -144,7 +144,7 @@ const accentMaskClasses = computed(() => {
         v-for="(item, index) in items"
         :key="item._uid"
         class="ui-list__item wrapper-max"
-        @click="!isScreenMd && toggleItem(index)"
+        @click="item.copy && !isScreenMd && toggleItem(index)"
         @mouseenter="setMaskClip($event)"
       >
         <UiListItem

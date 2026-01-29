@@ -185,10 +185,10 @@ const accentMaskClasses = computed(() => {
           :key="item._uid"
           class="ui-list__item"
           :class="[
-            openIndex === index ? accentIsOpenClasses : '',
+            item.copy && openIndex === index ? accentIsOpenClasses : '',
             accentMaskClasses,
           ]"
-          @click="!isScreenMd && toggleItem(index)"
+          @click="item.copy && !isScreenMd && toggleItem(index)"
         >
           <UiGridItem
             type="mask"
