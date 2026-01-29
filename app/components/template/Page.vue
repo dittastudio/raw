@@ -15,7 +15,7 @@ const { story } = defineProps<Props>()
     v-for="block in story.content.blocks"
     :key="block._uid"
     :class="{
-      'py-20 md:py-36': !['block_hero', 'block_hero_brand'].includes(block.component),
+      'py-20 md:py-36': !['block_hero', 'block_hero_brand', 'block_testimonials', 'block_ticker'].includes(block.component),
     }"
   >
     <BlockHero
