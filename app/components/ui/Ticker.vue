@@ -27,6 +27,11 @@ onMounted(async () => {
   let lastProgress = 0
 
   scrollTrigger = ScrollTrigger.create({
+    trigger: container.value,
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: false,
+    markers: true,
     onUpdate: (self) => {
       if (!container.value) {
         return
@@ -55,8 +60,8 @@ onMounted(async () => {
 
       gsap.to(container.value, {
         x: direction === 'left'
-          ? -container.value.clientWidth * progress + 1
-          : container.value.clientWidth * progress - 1,
+          ? -container.value.clientWidth * (progress / 3) + 1
+          : container.value.clientWidth * (progress / 3) - 1,
       })
     },
   })

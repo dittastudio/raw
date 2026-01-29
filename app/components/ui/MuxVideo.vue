@@ -17,7 +17,7 @@ const { playbackId, accentColor = '#c6ea9f', isCover = false } = defineProps<Pro
     :playback-id="playbackId"
     :accent-color="accentColor"
     metadata-video-title="Test VOD"
-    class="block"
+    class="block aspect-video"
     :class="{ 'size-full': isCover }"
     :style="{
       '--controls': Object.hasOwn($attrs, 'controls') ? null : 'none',
