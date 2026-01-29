@@ -137,13 +137,22 @@ const accentMaskClasses = computed(() => {
   <div class="relative">
     <ul
       ref="listEl"
-      class="ui-list__list ui-list__list--default"
+      class="ui-list__list ui-list__list--default flex flex-col gap-px"
       @mouseleave="handleListExit"
     >
       <li
         v-for="(item, index) in items"
         :key="item._uid"
-        class="ui-list__item wrapper-max"
+        class="
+          ui-list__item
+          wrapper-max
+          relative
+          select-none
+          cursor-default
+          transition-[color,background-color]
+          duration-200
+          ease-out
+        "
         @click="item.copy && !isScreenMd && toggleItem(index)"
         @mouseenter="setMaskClip($event)"
       >
@@ -157,7 +166,17 @@ const accentMaskClasses = computed(() => {
     </ul>
 
     <ul
-      class="ui-list__list ui-list__list--mask"
+      class="
+        ui-list__list
+        ui-list__list--mask
+        flex
+        flex-col
+        gap-px
+        absolute
+        inset-0
+        z-1
+        pointer-events-none
+      "
       :class="[
         accentMaskClasses,
         maskTransitionEnabled ? 'is-transitioning' : '',
@@ -168,7 +187,16 @@ const accentMaskClasses = computed(() => {
       <li
         v-for="(item, index) in items"
         :key="item._uid"
-        class="ui-list__item wrapper-max"
+        class="
+          ui-list__item
+          wrapper-max
+          relative
+          select-none
+          cursor-default
+          transition-[color,background-color]
+          duration-200
+          ease-out
+        "
         :class="openIndex === index ? accentIsOpenClasses : ''"
         @click="!isScreenMd && toggleItem(index)"
       >
@@ -186,18 +214,7 @@ const accentMaskClasses = computed(() => {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.ui-list__list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
 .ui-list__list--mask {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
   @variant md {
     opacity: var(--mask-opacity, 0);
     clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
@@ -212,11 +229,6 @@ const accentMaskClasses = computed(() => {
 }
 
 .ui-list__item {
-  position: relative;
-  transition: background-color 0.2s var(--ease-out);
-  user-select: none;
-  cursor: default;
-
   .ui-list__list--default &::before,
   .ui-list__list--default &:last-child::after {
     content: '';

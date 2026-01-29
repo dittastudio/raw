@@ -77,7 +77,6 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
         sm:col-span-6
         md:col-span-4
         type-p
-        max-md:pt-4
       "
       :class="{
         'opacity-0': type === 'default',
