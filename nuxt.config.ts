@@ -126,4 +126,9 @@ export default defineNuxtConfig({
       '2xl': 1800,
     },
   },
+  sitemap: {
+    sources: [
+      '/api/sitemap',
+    ],
+  },
 })
