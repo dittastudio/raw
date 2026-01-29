@@ -190,14 +190,6 @@ const accentMaskClasses = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1px;
-
-  @variant md {
-  .is-transitioning {
-    transition:
-      clip-path 0.2s var(--ease-in-out),
-      opacity 0.2s var(--ease-in-out);
-    }
-  }
 }
 
 .ui-list__list--mask {
@@ -210,6 +202,12 @@ const accentMaskClasses = computed(() => {
     opacity: var(--mask-opacity, 0);
     clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
     transition: opacity 0.2s var(--ease-in-out);
+
+    &.is-transitioning {
+      transition:
+        clip-path 0.2s var(--ease-in-out),
+        opacity 0.2s var(--ease-in-out);
+    }
   }
 }
 
