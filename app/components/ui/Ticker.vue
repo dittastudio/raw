@@ -31,7 +31,7 @@ onMounted(async () => {
     start: 'top bottom',
     end: 'bottom top',
     scrub: false,
-    markers: true,
+    markers: false,
     onUpdate: (self) => {
       if (!container.value) {
         return

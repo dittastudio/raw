@@ -10,6 +10,7 @@ interface Props {
 
 const { navigation } = defineProps<Props>()
 
+const lenis = useLenis()
 const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
 const ready = ref(false)
 const hasScrolled = ref(false)
@@ -85,8 +86,6 @@ const handleKeydown = (event: KeyboardEvent) => {
 }
 
 onMounted(async () => {
-  const lenis = useLenis()
-
   if (lenis?.value) {
     handleScroll(lenis.value)
 
@@ -106,16 +105,8 @@ onUnmounted(() => {
 const isScreenLg = useAtMedia(getMediaQuery('lg'))
 
 watchEffect(() => {
-  if (import.meta.client && isScreenLg.value) {
+  if (isScreenLg.value) {
     isHeaderOpen.value = false
-  }
-})
-
-watchEffect(() => {
-  const lenis = useLenis()
-
-  if (import.meta.client && lenis?.value) {
-    isHeaderOpen.value ? lenis.value.stop() : lenis.value.start()
   }
 })
 </script>
