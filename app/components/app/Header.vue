@@ -12,7 +12,6 @@ const { navigation } = defineProps<Props>()
 
 const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
 const ready = ref(false)
-
 const hasScrolled = ref(false)
 const hasScrolledUp = ref(false)
 const hasScrolledDown = ref(false)
@@ -94,18 +93,14 @@ onMounted(async () => {
     lenis.value.on('scroll', handleScroll)
   }
 
-  if (import.meta.client) {
-    window.addEventListener('keydown', handleKeydown)
-  }
+  window.addEventListener('keydown', handleKeydown)
 
   await wait(500)
   ready.value = true
 })
 
 onUnmounted(() => {
-  if (import.meta.client) {
-    window.removeEventListener('keydown', handleKeydown)
-  }
+  window.removeEventListener('keydown', handleKeydown)
 })
 
 const isScreenLg = useAtMedia(getMediaQuery('lg'))
@@ -140,6 +135,8 @@ watchEffect(() => {
       to="/"
     >
       <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
+
+      <span class="sr-only">RAW</span>
     </NuxtLink>
 
     <button
@@ -169,6 +166,7 @@ watchEffect(() => {
   height: var(--app-header-height);
 
   & + * { /* TEMPORARY: will refactor later down the line */
+    /* ...sure you will! 🤣 */
     margin-top: calc(var(--app-header-height) * -1);
   }
 }
