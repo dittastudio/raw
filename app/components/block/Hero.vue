@@ -57,7 +57,11 @@ onUnmounted(() => {
   >
     <div
       ref="heroRef"
-      class="relative z-1 size-full flex flex-col items-center justify-center"
+      :class="{
+        'is-dark': block.theme === 'dark',
+        'is-light': block.theme === 'light',
+      }"
+      class="hero__content relative z-1 size-full flex flex-col items-center justify-center"
     >
       <div class="flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
         <div
@@ -108,6 +112,18 @@ onUnmounted(() => {
 
 <style scoped>
 @reference "@/assets/css/app.css";
+
+.hero__content {
+  background-image: radial-gradient(ellipse at 50% 50%, --alpha(var(--tint) / 50%) 0%, --alpha(var(--tint) / 0%) 100%);
+
+  &.is-dark {
+    --tint: var(--color-offblack);
+  }
+
+  &.is-light {
+    --tint: var(--color-offwhite);
+  }
+}
 
 .hero__headline {
   :deep(h1) {
