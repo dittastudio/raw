@@ -74,7 +74,7 @@ const {
     @apply type-h2;
 
     text-wrap: balance;
-    max-width: 18ch;
+    max-width: 20ch;
   }
 }
 

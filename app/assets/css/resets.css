@@ -2,10 +2,9 @@
   html {
     color: var(--app-text-color);
     background-color: var(--app-background-color);
-
-    transition:
-      color var(--app-transition-duration) var(--app-transition-ease),
+    transition: color var(--app-transition-duration) var(--app-transition-ease),
     background-color var(--app-transition-duration) var(--app-transition-ease);
+    will-change: color, background-color;
   }
 
   .is-outlined {
