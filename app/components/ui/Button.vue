@@ -208,14 +208,14 @@ const outlineThemeClasses = computed(() => {
       opacity 0.2s var(--ease-out),
       translate 0.2s var(--ease-out);
   }
+}
 
-  &--1 {
-    --direction: 0.75;
-  }
+.ui-button__blob--1 {
+  --direction: 0.75;
+}
 
-  &--2 {
-    --direction: 1;
-    scale: 0.9;
-  }
+.ui-button__blob--2 {
+  --direction: 1;
+  scale: 0.9;
 }
 </style>
