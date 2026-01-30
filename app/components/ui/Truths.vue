@@ -1,11 +1,13 @@
 <script lang="ts" setup>
+interface Item {
+  title: string
+  copy: string
+}
+
 export interface TTruthsItem {
   headline?: string
   copy?: string
-  items: {
-    title: string
-    copy: string
-  }[] | undefined
+  items: Item[]
 }
 
 interface Props {

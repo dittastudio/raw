@@ -7,10 +7,7 @@ interface Props {
   items: ListItem[]
 }
 
-const {
-  accent,
-  items,
-} = defineProps<Props>()
+const { accent, items } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
 

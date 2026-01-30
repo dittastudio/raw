@@ -8,7 +8,7 @@ interface Props {
 
 const { block } = defineProps<Props>()
 
-const media = computed(() => block.media?.[0] || null)
+const media = computed(() => block.media?.[0])
 </script>
 
 <template>

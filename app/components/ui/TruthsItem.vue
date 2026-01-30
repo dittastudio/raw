@@ -1,12 +1,14 @@
 <script lang="ts" setup>
+interface Item {
+  title: string
+  copy: string
+}
+
 interface Props {
   isMasked?: boolean
   headline?: string
   copy?: string
-  items?: {
-    title: string
-    copy: string
-  }[] | undefined
+  items?: Item[]
 }
 
 const { isMasked = false, items, headline, copy } = defineProps<Props>()

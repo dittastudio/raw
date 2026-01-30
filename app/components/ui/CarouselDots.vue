@@ -5,7 +5,6 @@ const carousel = inject<Carousel>('carousel')
 
 const totalDots = computed(() => carousel?.details.value?.slides.length ?? 0)
 const currentDot = computed(() => carousel?.details.value?.rel ?? 0)
-
 const dots = computed(() => Array.from({ length: totalDots.value }, (_, index) => index))
 
 const goTo = (index: number) => {
