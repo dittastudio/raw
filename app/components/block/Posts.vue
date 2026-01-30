@@ -58,6 +58,7 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
     page: 1,
     sort_by: 'first_published_at:desc',
     version: 'published',
+    excluding_fields: 'blocks,seo_title,seo_description,seo_image',
     filter_query: {
       category: {
         in: currentCategory.value?.value,
