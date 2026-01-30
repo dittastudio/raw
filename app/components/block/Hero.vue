@@ -3,6 +3,7 @@ import type { BlockHero } from '@@/.storyblok/types/289672313529140/storyblok-co
 import type { Themes } from '@@/types/app'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { getThemeClasses } from '@/utils/theme'
 
 interface Props {
   block: BlockHero
@@ -50,17 +51,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    :class="[
+      getThemeClasses[block.theme as Themes],
+      block.theme === 'dark' ? 'is-dark' : 'is-light',
+    ]"
     class="hero relative w-full min-h-svh overflow-hidden grid place-items-center"
   >
     <div
       ref="heroRef"
-      :class="{
-        'is-dark': block.theme === 'dark',
-        'is-light': block.theme === 'light',
-      }"
       class="hero__content relative z-1 size-full flex flex-col items-center justify-center"
     >
       <div class="flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
@@ -128,22 +128,36 @@ onUnmounted(() => {
         loop
       />
     </div>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.hero__content {
-  background-image: radial-gradient(ellipse at 50% 50%, --alpha(var(--tint) / 25%) 0%, --alpha(var(--tint) / 0%) 100%);
-
+.hero {
   &.is-dark {
-    --tint: var(--color-offblack);
+    --bg-tint: var(--color-offblack);
+    --text-tint: var(--color-offwhite);
   }
 
   &.is-light {
-    --tint: var(--color-offwhite);
+    --bg-tint: var(--color-offwhite);
+    --text-tint: var(--color-offblack);
   }
+
+  & :deep(.is-outlined) {
+    --text-stroke-width: 0.02em;
+
+    @supports((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
+      -webkit-text-stroke: var(--text-stroke-width) var(--text-tint);
+      text-stroke: var(--text-stroke-width) var(--text-tint);
+      color: transparent;
+    }
+  }
+}
+
+.hero__content {
+  background-image: radial-gradient(ellipse at 50% 50%, --alpha(var(--bg-tint) / 25%) 0%, --alpha(var(--bg-tint) / 0%) 100%);
 }
 
 .hero__headline {

@@ -46,4 +46,13 @@ const getThemeColors: Record<Themes, ThemeColors> = {
   },
 }
 
-export { getThemeColors }
+const getThemeClasses: Record<Themes, string> = {
+  dark: 'bg-offblack text-offwhite',
+  light: 'bg-offwhite text-offblack',
+  blue: 'bg-blue text-offblack',
+  green: 'bg-green text-offblack',
+  pink: 'bg-pink text-offblack',
+  purple: 'bg-purple text-offblack',
+}
+
+export { getThemeClasses, getThemeColors }

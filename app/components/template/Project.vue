@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { ISbStoryData } from '@storyblok/js'
+import type { TypedBlockMuxVideo } from '@/components/block/MuxVideo.vue'
 
 interface Props {
   story: ISbStoryData<Project>
@@ -34,6 +35,16 @@ const { story } = defineProps<Props>()
 
     <BlockTestimonials
       v-else-if="block.component === 'block_testimonials'"
+      :block="block"
+    />
+
+    <BlockMuxVideo
+      v-else-if="block.component === 'block_mux_video'"
+      :block="(block as TypedBlockMuxVideo)"
+    />
+
+    <BlockImpactStatement
+      v-else-if="block.component === 'block_impact_statement'"
       :block="block"
     />
   </section>
