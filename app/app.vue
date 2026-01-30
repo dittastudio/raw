@@ -45,6 +45,7 @@ watch(() => route.fullPath, async () => {
     <AppStatement
       v-if="story.content?.statement"
       :statement="story.content.statement"
+      :media="story.content.statement_media?.[0]"
       :title="story.content.cta_title"
       :link="story.content.cta_link"
     />

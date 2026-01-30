@@ -15,16 +15,23 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
 <template>
   <div
-    class="ui-list-item"
-    :class="[
-      `ui-list-item--${type}`,
+    class="
+      grid
+      grid-cols-(--app-grid)
+      gap-x-(--app-inner-gutter)
+      items-center
+      py-4
+    "
+    :class="
       {
-        'is-open': isOpen,
-      },
-    ]"
+        'max-md:transition-opacity max-md:duration-200 max-md:ease-out': type === 'mask',
+        'max-md:opacity-0': !isOpen && type === 'mask',
+        'max-md:opacity-100': isOpen && type === 'mask',
+      }
+    "
   >
     <span
-      class="ui-list-item__number type-h2"
+      class="col-span-1 sm:col-span-2 md:col-span-3 type-h2"
       :class="{
         'text-outline-current': type === 'default',
       }"
@@ -32,7 +39,18 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
       {{ (index + 1).toString().padStart(2, '0') }}
     </span>
 
-    <h3 class="ui-list-item__title type-h2">
+    <h3
+      class="
+        flex
+        items-center
+        justify-between
+        gap-x-(--app-inner-gutter)
+        col-span-3
+        sm:col-span-6
+        md:col-span-5
+        type-h2
+      "
+    >
       <span
         :class="{
           'text-outline-current': type === 'default',
@@ -51,7 +69,17 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
 
     <div
       v-if="item.copy"
-      class="ui-list-item__copy"
+      class="
+        col-start-2
+        col-span-3
+        sm:col-start-3
+        sm:col-span-6
+        md:col-span-4
+        type-p
+      "
+      :class="{
+        'opacity-0': type === 'default',
+      }"
     >
       <UiExpandable
         :is-open="isOpen"
@@ -64,70 +92,3 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     </div>
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.ui-list-item {
-  display: grid;
-  grid-template-columns: var(--app-grid);
-  column-gap: var(--app-inner-gutter);
-  align-items: center;
-  padding-block: --spacing(4);
-}
-
-.ui-list-item--mask {
-  @variant max-md {
-    opacity: 0;
-    transition: opacity 0.2s var(--ease-out);
-
-    &.is-open {
-      opacity: 1;
-    }
-  }
-}
-
-.ui-list-item__number {
-  grid-column: span 1;
-
-  @variant sm {
-    grid-column: span 2;
-  }
-
-  @variant md {
-    grid-column: span 3;
-  }
-}
-
-.ui-list-item__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--app-inner-gutter);
-  grid-column: span 3;
-
-  @variant sm {
-    grid-column: span 6;
-  }
-
-  @variant md {
-    grid-column: span 5;
-  }
-}
-
-.ui-list-item__copy {
-  grid-column: 2 / span 3;
-
-  @variant sm {
-    grid-column: 3 / span 6;
-  }
-
-  @variant md {
-    grid-column: span 4;
-  }
-
-  .ui-list-item--default & {
-    opacity: 0;
-  }
-}
-</style>

@@ -10,5 +10,21 @@ const { story } = defineProps<Props>()
 </script>
 
 <template>
-  <pre>{{ story }}</pre>
+  <section
+    v-for="block in story.content.blocks"
+    :key="block._uid"
+    :class="{
+      'py-20 md:py-36': !['block_hero', 'block_hero_brand', 'block_testimonials', 'block_ticker'].includes(block.component),
+    }"
+  >
+    <BlockHero
+      v-if="block.component === 'block_hero'"
+      :block="block"
+    />
+
+    <BlockWorkText
+      v-else-if="block.component === 'block_work_text'"
+      :block="block"
+    />
+  </section>
 </template>

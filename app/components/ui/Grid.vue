@@ -21,38 +21,21 @@ const clipBottom = ref<number | null>(null)
 const clipLeft = ref<number | null>(null)
 const maskActive = ref(false)
 const maskTransitionEnabled = ref(false)
-const lastHoverIndex = ref<number | null>(null)
-
-const maskStyle = computed(() => {
-  const baseStyle = {
-    '--mask-opacity': maskActive.value ? '1' : '0',
-  }
-
-  if (
-    clipTop.value === null
-    || clipRight.value === null
-    || clipBottom.value === null
-    || clipLeft.value === null
-  ) {
-    return baseStyle
-  }
-
-  return {
-    ...baseStyle,
-    '--clip-top': `${clipTop.value}px`,
-    '--clip-right': `${clipRight.value}px`,
-    '--clip-bottom': `${clipBottom.value}px`,
-    '--clip-left': `${clipLeft.value}px`,
-  }
-})
-
 const openIndex = ref<number | null>(null)
+
+const maskStyle = computed(() => ({
+  '--mask-opacity': maskActive.value ? '1' : '0',
+  '--clip-top': `${clipTop.value ?? 0}px`,
+  '--clip-right': `${clipRight.value ?? 0}px`,
+  '--clip-bottom': `${clipBottom.value ?? 0}px`,
+  '--clip-left': `${clipLeft.value ?? 0}px`,
+}))
 
 const toggleItem = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
 }
 
-const setMaskClip = (event: MouseEvent, index: number) => {
+const setMaskClip = (event: MouseEvent) => {
   if (!isScreenMd.value || !listEl.value) {
     return
   }
@@ -66,46 +49,36 @@ const setMaskClip = (event: MouseEvent, index: number) => {
   const listRect = listEl.value.getBoundingClientRect()
   const itemRect = itemEl.getBoundingClientRect()
 
-  clipTop.value = Math.max(0, itemRect.top - listRect.top)
-  clipRight.value = Math.max(0, listRect.right - itemRect.right)
-  clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
-  clipLeft.value = Math.max(0, itemRect.left - listRect.left)
+  const updateClip = () => {
+    clipTop.value = Math.max(0, itemRect.top - listRect.top)
+    clipRight.value = Math.max(0, listRect.right - itemRect.right)
+    clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+    clipLeft.value = Math.max(0, itemRect.left - listRect.left)
+  }
 
-  if (!maskActive.value) {
+  if (maskActive.value) {
+    updateClip()
+    return
+  }
+
+  requestAnimationFrame(() => {
+    updateClip()
     maskActive.value = true
-    maskTransitionEnabled.value = false
 
-    if (typeof window === 'undefined') {
+    requestAnimationFrame(() => {
       maskTransitionEnabled.value = true
-    }
-    else {
-      requestAnimationFrame(() => {
-        maskTransitionEnabled.value = true
-      })
-    }
-  }
-  else if (!maskTransitionEnabled.value) {
-    maskTransitionEnabled.value = true
-  }
-
-  lastHoverIndex.value = index
-}
-
-const clearMaskClip = () => {
-  clipTop.value = null
-  clipRight.value = null
-  clipBottom.value = null
-  clipLeft.value = null
-  maskActive.value = false
-  maskTransitionEnabled.value = false
-  lastHoverIndex.value = null
+    })
+  })
 }
 
 const handleListExit = () => {
   if (!isScreenMd.value || !listEl.value) {
-    clearMaskClip()
-    return
+    clipTop.value = null
+    clipRight.value = null
+    clipBottom.value = null
+    clipLeft.value = null
   }
+
   maskActive.value = false
   maskTransitionEnabled.value = false
 }
@@ -154,15 +127,32 @@ const accentMaskClasses = computed(() => {
     <div class="relative overflow-hidden border-t border-b border-current">
       <ul
         ref="listEl"
-        class="ui-list__list ui-list__list--default"
+        class="
+          ui-grid__list
+          ui-grid__list--default
+          flex
+          flex-col
+          gap-px
+          md:flex-row
+          md:flex-wrap
+          bg-current
+        "
         @mouseleave="handleListExit"
       >
         <li
           v-for="(item, index) in items"
           :key="item._uid"
-          class="ui-list__item"
+          class="
+            ui-grid__item
+            select-none
+            cursor-default
+            bg-(--app-background-color)
+            transition-[color,background-color]
+            duration-(--app-transition-duration)
+            ease-(--app-transition-ease)
+          "
           @click="!isScreenMd && toggleItem(index)"
-          @mouseenter="setMaskClip($event, index)"
+          @mouseenter="setMaskClip"
         >
           <UiGridItem
             type="default"
@@ -173,17 +163,34 @@ const accentMaskClasses = computed(() => {
       </ul>
 
       <ul
-        class="ui-list__list ui-list__list--mask"
-        :class="[
-          maskTransitionEnabled ? 'is-transitioning' : '',
-        ]"
+        class="
+          ui-grid__list
+          ui-grid__list--mask
+          flex
+          flex-col
+          gap-px
+          absolute
+          inset-0
+          z-1
+          pointer-events-none
+          md:flex-row
+          md:flex-wrap
+        "
+        :class="{ 'is-transitioning': maskTransitionEnabled }"
         :style="maskStyle"
         aria-hidden="true"
       >
         <li
           v-for="(item, index) in items"
           :key="item._uid"
-          class="ui-list__item"
+          class="
+            ui-grid__item
+            select-none
+            cursor-default
+            transition-[color,background-color]
+            duration-200
+            ease-out
+          "
           :class="[
             item.copy && openIndex === index ? accentIsOpenClasses : '',
             accentMaskClasses,
@@ -204,33 +211,7 @@ const accentMaskClasses = computed(() => {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.ui-list__list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-
-  @variant md {
-    flex-direction: row;
-    flex-wrap: wrap;
-
-    &.is-transitioning {
-      transition:
-        clip-path 0.2s var(--ease-in-out),
-        opacity 0.2s var(--ease-in-out);
-    }
-  }
-}
-
-.ui-list__list--default {
-  background-color: currentColor;
-}
-
-.ui-list__list--mask {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
+.ui-grid__list--mask {
   @variant md {
     opacity: var(--mask-opacity, 0);
     clip-path: inset(
@@ -240,14 +221,16 @@ const accentMaskClasses = computed(() => {
       var(--clip-left, 0)
     );
     transition: opacity 0.2s var(--ease-in-out);
+
+    &.is-transitioning {
+      transition:
+        clip-path 0.2s var(--ease-in-out),
+        opacity 0.2s var(--ease-in-out);
+    }
   }
 }
 
-.ui-list__item {
-  transition: background-color 0.2s var(--ease-out);
-  user-select: none;
-  cursor: default;
-
+.ui-grid__item {
   @variant md {
     flex-grow: 1;
     flex-basis: calc(50% - 1px);
@@ -269,11 +252,6 @@ const accentMaskClasses = computed(() => {
     @variant lg {
       flex-basis: calc(33.34% - 1px);
     }
-  }
-
-  .ui-list__list--default & {
-    background-color: var(--app-background-color);
-    transition: background-color var(--app-transition-duration) var(--app-transition-ease);
   }
 }
 </style>

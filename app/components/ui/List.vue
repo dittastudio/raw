@@ -7,10 +7,7 @@ interface Props {
   items: ListItem[]
 }
 
-const {
-  accent,
-  items,
-} = defineProps<Props>()
+const { accent, items } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
 
@@ -19,25 +16,13 @@ const clipTop = ref<number | null>(null)
 const clipBottom = ref<number | null>(null)
 const maskActive = ref(false)
 const maskTransitionEnabled = ref(false)
-
-const maskStyle = computed(() => {
-  const baseStyle = {
-    '--mask-opacity': maskActive.value ? '1' : '0',
-  }
-
-  if (clipTop.value === null || clipBottom.value === null) {
-    return baseStyle
-  }
-
-  return {
-    ...baseStyle,
-    '--clip-top': `${clipTop.value}px`,
-    '--clip-bottom': `${clipBottom.value}px`,
-  }
-})
-
-// Mobile
 const openIndex = ref<number | null>(null)
+
+const maskStyle = computed(() => ({
+  '--mask-opacity': maskActive.value ? '1' : '0',
+  '--clip-top': `${clipTop.value ?? 0}px`,
+  '--clip-bottom': `${clipBottom.value ?? 0}px`,
+}))
 
 const toggleItem = (index: number) => {
   openIndex.value = openIndex.value === index ? null : index
@@ -57,39 +42,32 @@ const setMaskClip = (event: MouseEvent) => {
   const listRect = listEl.value.getBoundingClientRect()
   const itemRect = itemEl.getBoundingClientRect()
 
-  clipTop.value = Math.max(0, itemRect.top - listRect.top)
-  clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+  const updateClip = () => {
+    clipTop.value = Math.max(0, itemRect.top - listRect.top)
+    clipBottom.value = Math.max(0, listRect.bottom - itemRect.bottom)
+  }
 
-  if (!maskActive.value) {
+  if (maskActive.value) {
+    updateClip()
+    return
+  }
+
+  requestAnimationFrame(() => {
+    updateClip()
     maskActive.value = true
-    maskTransitionEnabled.value = false
 
-    if (typeof window === 'undefined') {
+    requestAnimationFrame(() => {
       maskTransitionEnabled.value = true
-    }
-    else {
-      requestAnimationFrame(() => {
-        maskTransitionEnabled.value = true
-      })
-    }
-  }
-  else if (!maskTransitionEnabled.value) {
-    maskTransitionEnabled.value = true
-  }
-}
-
-const clearMaskClip = () => {
-  clipTop.value = null
-  clipBottom.value = null
-  maskActive.value = false
-  maskTransitionEnabled.value = false
+    })
+  })
 }
 
 const handleListExit = () => {
   if (!isScreenMd.value || !listEl.value) {
-    clearMaskClip()
-    return
+    clipTop.value = null
+    clipBottom.value = null
   }
+
   maskActive.value = false
   maskTransitionEnabled.value = false
 }
@@ -137,15 +115,24 @@ const accentMaskClasses = computed(() => {
   <div class="relative">
     <ul
       ref="listEl"
-      class="ui-list__list ui-list__list--default"
+      class="ui-list__list ui-list__list--default flex flex-col gap-px"
       @mouseleave="handleListExit"
     >
       <li
         v-for="(item, index) in items"
         :key="item._uid"
-        class="ui-list__item wrapper-max"
+        class="
+          ui-list__item
+          wrapper-max
+          relative
+          select-none
+          cursor-default
+          transition-[color,background-color]
+          duration-200
+          ease-out
+        "
         @click="item.copy && !isScreenMd && toggleItem(index)"
-        @mouseenter="setMaskClip($event)"
+        @mouseenter="setMaskClip"
       >
         <UiListItem
           type="default"
@@ -157,18 +144,34 @@ const accentMaskClasses = computed(() => {
     </ul>
 
     <ul
-      class="ui-list__list ui-list__list--mask"
-      :class="[
-        accentMaskClasses,
-        maskTransitionEnabled ? 'is-transitioning' : '',
-      ]"
+      class="
+        ui-list__list
+        ui-list__list--mask
+        flex
+        flex-col
+        gap-px
+        absolute
+        inset-0
+        z-1
+        pointer-events-none
+      "
+      :class="[accentMaskClasses, { 'is-transitioning': maskTransitionEnabled }]"
       :style="maskStyle"
       aria-hidden="true"
     >
       <li
         v-for="(item, index) in items"
         :key="item._uid"
-        class="ui-list__item wrapper-max"
+        class="
+          ui-list__item
+          wrapper-max
+          relative
+          select-none
+          cursor-default
+          transition-[color,background-color]
+          duration-200
+          ease-out
+        "
         :class="openIndex === index ? accentIsOpenClasses : ''"
         @click="!isScreenMd && toggleItem(index)"
       >
@@ -186,39 +189,21 @@ const accentMaskClasses = computed(() => {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.ui-list__list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-
-  @variant md {
-  .is-transitioning {
-    transition:
-      clip-path 0.2s var(--ease-in-out),
-      opacity 0.2s var(--ease-in-out);
-    }
-  }
-}
-
 .ui-list__list--mask {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-
   @variant md {
     opacity: var(--mask-opacity, 0);
     clip-path: inset(var(--clip-top, 0) 0 var(--clip-bottom, 100%) 0);
     transition: opacity 0.2s var(--ease-in-out);
+
+    &.is-transitioning {
+      transition:
+        clip-path 0.2s var(--ease-in-out),
+        opacity 0.2s var(--ease-in-out);
+    }
   }
 }
 
 .ui-list__item {
-  position: relative;
-  transition: background-color 0.2s var(--ease-out);
-  user-select: none;
-  cursor: default;
-
   .ui-list__list--default &::before,
   .ui-list__list--default &:last-child::after {
     content: '';

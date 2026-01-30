@@ -17,23 +17,34 @@ const isVideo = computed(() => media.value && isMuxVideoComponent(media.value) &
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="grid grid-cols-1 grid-rows-1 items-center overflow-hidden py-20 md:py-36"
+    class="relative items-center overflow-hidden py-20 md:py-36"
   >
     <div
       v-if="isImage || isVideo"
-      class="col-start-1 row-start-1"
+      class="absolute inset-0 -z-1"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
         class="block size-full object-cover"
         :src="media.image.filename"
         :alt="media.image.alt || ''"
-        :width="1000"
-        :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 1000)"
-        quality="85"
+        :width="16"
+        :height="9"
+        format="webp"
+        loading="lazy"
         :modifiers="{
           smart: true,
         }"
+        quality="85"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+          2xl:100vw
+        "
       />
 
       <UiMuxVideo
