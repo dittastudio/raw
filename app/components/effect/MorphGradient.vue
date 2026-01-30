@@ -40,7 +40,7 @@ watchEffect(() => {
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="absolute size-0 hidden"
+      class="absolute size-0 opacity-0"
     >
       <defs>
         <filter id="goo">

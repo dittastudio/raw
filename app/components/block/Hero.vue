@@ -53,7 +53,7 @@ onUnmounted(() => {
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="hero relative w-full min-h-screen overflow-hidden grid place-items-center"
+    class="hero relative w-full min-h-svh overflow-hidden grid place-items-center"
   >
     <div
       ref="heroRef"
@@ -64,6 +64,18 @@ onUnmounted(() => {
       class="hero__content relative z-1 size-full flex flex-col items-center justify-center"
     >
       <div class="flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
+        <div v-if="block.logo">
+          <NuxtImg
+            class="block w-auto h-15 md:h-25"
+            :src="block.logo.filename || ''"
+            :alt="block.logo.alt || ''"
+            :height="100"
+            densities="x1 x2"
+            format="webp"
+            loading="lazy"
+          />
+        </div>
+
         <div
           v-if="storyblokRichTextContent(block.headline)"
           class="hero__headline"
@@ -89,9 +101,18 @@ onUnmounted(() => {
         class="block size-full object-cover"
         :src="media.image.filename"
         :alt="media.image.alt || ''"
-        :width="1000"
-        :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 1000)"
-        quality="85"
+        :width="16"
+        :height="9"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+          2xl:100vw
+        "
+        format="webp"
         :modifiers="{
           smart: true,
         }"

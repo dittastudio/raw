@@ -22,8 +22,8 @@ const accentClasses = {
 </script>
 
 <template>
-  <div class="group grid grid-cols-1 grid-rows-1 place-items-end overflow-hidden">
-    <div class="col-start-1 row-start-1 w-full aspect-3/4 overflow-hidden">
+  <div class="group relative items-start overflow-hidden h-full">
+    <div class="w-full aspect-3/4 overflow-hidden">
       <NuxtImg
         v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
         class="block size-full object-cover"
@@ -31,7 +31,7 @@ const accentClasses = {
         :alt="image.alt || name"
         :width="400"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 400)"
-        quality="85"
+        format="webp"
         :modifiers="{
           smart: true,
         }"
@@ -40,12 +40,15 @@ const accentClasses = {
 
     <div
       class="
-        col-start-1
-        row-start-1
+        only-hover:absolute
+        only-hover:bottom-0
+        only-hover:left-0
+        only-hover:right-0
         flex
         flex-col
         gap-1
         w-full
+        only-touch:h-full
         p-4
         only-hover:transition-transform
         only-hover:duration-300
