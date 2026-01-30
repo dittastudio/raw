@@ -1,17 +1,54 @@
 <script lang="ts" setup>
+import type { Image, MuxVideo } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokMultilink } from '@@/.storyblok/types/storyblok'
 
 interface Props {
+  media?: (Image | MuxVideo)
   statement?: string
   title?: string
   link?: StoryblokMultilink
 }
 
-const { statement, title, link } = defineProps<Props>()
+const { media, statement, title, link } = defineProps<Props>()
 </script>
 
 <template>
-  <div class="w-full bg-green text-offblack">
+  <div class="relative isolate w-full bg-green text-offblack">
+    <div class="absolute inset-0 -z-1">
+      <NuxtImg
+        v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
+        class="block size-full object-cover"
+        :src="media.image.filename"
+        :alt="media.image.alt || ''"
+        :width="3"
+        :height="2"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+          2xl:100vw
+        "
+        loading="lazy"
+        format="webp"
+        :modifiers="{
+          smart: true,
+        }"
+      />
+
+      <UiMuxVideo
+        v-else-if="media && isMuxVideoComponent(media) && media.video?.playbackId"
+        :playback-id="media.video.playbackId"
+        :is-cover="true"
+        playsinline
+        autoplay
+        muted
+        loop
+      />
+    </div>
+
     <div class="wrapper py-35 flex flex-col items-center justify-center">
       <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
         <h5

@@ -17,11 +17,11 @@ const isVideo = computed(() => media.value && isMuxVideoComponent(media.value) &
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="grid grid-cols-1 grid-rows-1 items-center overflow-hidden py-20 md:py-36"
+    class="relative items-center overflow-hidden py-20 md:py-36"
   >
     <div
       v-if="isImage || isVideo"
-      class="col-start-1 row-start-1"
+      class="absolute inset-0 -z-1"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"

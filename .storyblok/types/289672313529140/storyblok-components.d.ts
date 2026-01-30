@@ -375,6 +375,7 @@ export interface Project {
 export interface Settings {
   navigation?: Link[];
   statement?: string;
+  statement_media?: (Image | MuxVideo)[];
   cta_title?: string;
   cta_link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   newsletter_text?: string;
