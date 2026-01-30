@@ -3,7 +3,7 @@ import type { KeenSliderInstance, KeenSliderOptions, TrackDetails } from 'keen-s
 import type { AutoplayControls } from '@/utils/carousels'
 import { onKeyStroke, useIntersectionObserver } from '@vueuse/core'
 import { useKeenSlider } from 'keen-slider/vue.es'
-import { createAutoplayPlugin, createWheelControlsPlugin } from '@/utils/carousels'
+import { getCarouselAutoplayPlugin, getCarouselSwipeControlsPlugin } from '@/utils/carousels'
 
 export interface Carousel {
   slider: Ref<KeenSliderInstance | undefined>
@@ -56,8 +56,8 @@ const [container, slider] = useKeenSlider({
   },
   ...options,
 }, [
-  createWheelControlsPlugin(),
-  createAutoplayPlugin({
+  getCarouselSwipeControlsPlugin(),
+  getCarouselAutoplayPlugin({
     isActive: () => isAutoplayActive.value,
     interval: () => autoplayInterval,
     controls: autoplayControls,

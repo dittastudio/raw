@@ -1,13 +1,13 @@
 import type { Themes } from '@@/types/app'
 
-interface ThemeColors {
+export interface ThemeColors {
   background: string
   text: string
   buttonBackground: string
   buttonText: string
 }
 
-const themeColors: Record<Themes, ThemeColors> = {
+const getThemeColors: Record<Themes, ThemeColors> = {
   dark: {
     background: 'var(--color-offblack)',
     text: 'var(--color-offwhite)',
@@ -46,5 +46,4 @@ const themeColors: Record<Themes, ThemeColors> = {
   },
 }
 
-export { themeColors }
-export type { ThemeColors }
+export { getThemeColors }

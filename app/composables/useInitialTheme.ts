@@ -1,19 +1,18 @@
 import type { Themes } from '@@/types/app'
-import { themeColors } from '@/utils/theme'
 
 interface BlockWithTheme {
   component: string
   theme?: string | number
 }
 
-export function useInitialTheme(blocks: BlockWithTheme[] | undefined | null) {
+export default function useInitialTheme(blocks: BlockWithTheme[] | undefined | null) {
   const heroBlocks = ['block_hero', 'block_hero_brand']
 
   const theme = blocks?.find(block =>
     heroBlocks.includes(block.component) && typeof block.theme === 'string',
   )?.theme as Themes | undefined
 
-  const colors = theme ? themeColors[theme] : undefined
+  const colors = theme ? getThemeColors[theme] : undefined
 
   if (!colors) {
     return

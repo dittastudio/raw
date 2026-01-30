@@ -14,8 +14,8 @@ const activeTheme = useState<string | null>('activeTheme', () => null)
 
 let observer: IntersectionObserver | null = null
 
-const updateThemeVariables = (theme: keyof typeof themeColors) => {
-  const colors = themeColors[theme]
+const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
+  const colors = getThemeColors[theme]
 
   if (colors) {
     document.documentElement.style.setProperty('--app-background-color', colors.background)
