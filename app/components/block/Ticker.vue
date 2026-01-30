@@ -28,12 +28,23 @@ const isVideo = computed(() => media.value && isMuxVideoComponent(media.value) &
         class="block size-full object-cover"
         :src="media.image.filename"
         :alt="media.image.alt || ''"
-        :width="1000"
-        :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 1000)"
-        quality="85"
+        :width="16"
+        :height="9"
+        format="webp"
+        loading="lazy"
         :modifiers="{
           smart: true,
         }"
+        quality="85"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+          2xl:100vw
+        "
       />
 
       <UiMuxVideo

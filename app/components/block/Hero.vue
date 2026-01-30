@@ -114,7 +114,7 @@ onUnmounted(() => {
 @reference "@/assets/css/app.css";
 
 .hero__content {
-  background-image: radial-gradient(ellipse at 50% 50%, --alpha(var(--tint) / 50%) 0%, --alpha(var(--tint) / 0%) 100%);
+  background-image: radial-gradient(ellipse at 50% 50%, --alpha(var(--tint) / 25%) 0%, --alpha(var(--tint) / 0%) 100%);
 
   &.is-dark {
     --tint: var(--color-offblack);

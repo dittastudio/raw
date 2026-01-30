@@ -119,10 +119,10 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
 </script>
 
 <template>
-  <div class="relative size-full">
+  <div class="relative w-full h-[inherit]">
     <div
       ref="container"
-      class="ui-carousel-fade__slider relative size-full flex touch-pan-y select-none overflow-hidden"
+      class="ui-carousel-fade__slider relative w-full h-[inherit] flex touch-pan-y select-none overflow-hidden"
     >
       <div
         v-for="(item, index) in items"
