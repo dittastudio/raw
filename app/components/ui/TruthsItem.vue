@@ -38,23 +38,23 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
       <div
         v-if="item.title && item.copy"
         class="
-        ui-truths-item__item
-        col-span-full
-        md:col-span-1
-        group/truths-item
-        group/expandable
-        relative
-        @container
-        rounded-full
-        text-center
-        grow
-        size-full
-        max-w-62.5
-        md:max-w-80
-        mx-auto
-        aspect-square
-        cursor-default
-      "
+          ui-truths-item__item
+          col-span-full
+          md:col-span-1
+          group/truths-item
+          group/expandable
+          relative
+          @container
+          rounded-full
+          text-center
+          grow
+          size-full
+          max-w-62.5
+          md:max-w-80
+          mx-auto
+          aspect-square
+          cursor-default
+        "
         :style="{
           '--index': index,
         }"
@@ -124,9 +124,9 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
           'opacity-0': isMasked,
         }"
       >
-        <h6 class="type-h2 text-[min(7cqi,50px)]">
+        <h4 class="type-h2 text-[min(7cqi,50px)]">
           {{ headline }}
-        </h6>
+        </h4>
 
         <p class="type-h4 text-[min(3.5cqi,22px)] pt-[0.75em] text-balance">
           {{ copy }}
