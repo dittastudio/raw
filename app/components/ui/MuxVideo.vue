@@ -13,17 +13,26 @@ const { playbackId, primaryColor = '#fff', accentColor = '#c6ea9f', isCover = fa
 const hasPlayed = ref(false)
 const attrs = useAttrs()
 const showPlay = computed(() => !hasPlayed.value && Object.hasOwn(attrs, 'controls'))
+const root = useTemplateRef('root')
+const setPlayed = () => hasPlayed.value = true
 
 onMounted(() => {
-  const video = document.querySelector('mux-player')
+  const video = root.value?.querySelector('mux-player')
 
-  video?.addEventListener('play', () => hasPlayed.value = true)
+  video?.addEventListener('play', setPlayed)
+})
+
+onUnmounted(() => {
+  const video = root.value?.querySelector('mux-player')
+
+  video?.removeEventListener('play', setPlayed)
 })
 </script>
 
 <template>
   <div
     v-if="playbackId"
+    ref="root"
     :class="[
       'size-full',
       { relative: showPlay },
