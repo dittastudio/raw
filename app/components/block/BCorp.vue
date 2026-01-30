@@ -13,7 +13,7 @@ const { block } = defineProps<Props>()
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="flex flex-col gap-36"
+    class="overflow-hidden flex flex-col gap-36"
   >
     <UiContent
       :title="block.title"

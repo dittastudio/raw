@@ -7,14 +7,54 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
+
+const media = computed(() => block.media?.[0] || null)
 </script>
 
 <template>
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="py-20 md:py-36"
+    class="relative isolate overflow-hidden py-20 md:py-36"
   >
+    <div
+      v-if="media"
+      class="absolute inset-0 -z-1"
+    >
+      <NuxtImg
+        v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
+        class="block size-full object-cover"
+        :src="media.image.filename"
+        :alt="media.image.alt || ''"
+        :width="6"
+        :height="2"
+        format="webp"
+        loading="lazy"
+        :modifiers="{
+          smart: true,
+        }"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+          2xl:100vw
+        "
+      />
+
+      <UiMuxVideo
+        v-else-if="media && isMuxVideoComponent(media) && media.video?.playbackId"
+        :playback-id="media.video.playbackId"
+        :is-cover="true"
+        playsinline
+        autoplay
+        muted
+        loop
+      />
+    </div>
+
     <UiCarouselFade
       :items="block.items"
       :options="{ loop: true }"

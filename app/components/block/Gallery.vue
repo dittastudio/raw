@@ -75,7 +75,11 @@ const getSizes = (index: number) => {
     v-editable="block"
     :theme="(block.theme as Themes)"
   >
-    <div class="wrapper-max">
+    <div class="wrapper-max flex flex-col gap-16 md:gap-24">
+      <h2 class="type-h5 text-balance max-w-[36ch]">
+        {{ block.title }}
+      </h2>
+
       <ul
         v-if="block.items?.length"
         v-editable="block"
@@ -84,7 +88,10 @@ const getSizes = (index: number) => {
         <li
           v-for="(image, index) in block.items"
           :key="image.id"
-          class="grow basis-1/2 md:basis-1/3 pl-(--app-inner-gutter)"
+          :class="[
+            'grow pl-(--app-inner-gutter)',
+            block.items?.length === 4 ? 'basis-1/2' : 'basis-1/2 md:basis-1/3',
+          ]"
         >
           <NuxtImg
             v-if="image.filename && storyblokAssetType(image.filename) === 'image'"

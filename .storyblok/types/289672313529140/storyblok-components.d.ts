@@ -38,6 +38,7 @@ export interface BlockContact {
 }
 
 export interface BlockGallery {
+  title?: string;
   items?: StoryblokMultiasset;
   theme?: number | string;
   component: "block_gallery";
@@ -162,6 +163,7 @@ export interface BlockTeam {
 
 export interface BlockTestimonials {
   items?: Testimonial[];
+  media?: (Image | MuxVideo)[];
   theme?: number | string;
   component: "block_testimonials";
   _uid: string;
