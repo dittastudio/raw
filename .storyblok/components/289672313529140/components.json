@@ -318,7 +318,7 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-01-27T17:51:04.267Z",
+    "updated_at": "2026-01-30T11:45:05.397Z",
     "id": 132594684570052,
     "schema": {
       "headline": {
@@ -328,8 +328,6 @@
         "customize_toolbar": true,
         "toolbar": [
           "h1",
-          "h2",
-          "h3",
           "unset"
         ],
         "style_options": [
@@ -351,9 +349,18 @@
           "unset"
         ]
       },
+      "logo": {
+        "type": "asset",
+        "pos": 2,
+        "filetypes": [
+          "images"
+        ],
+        "asset_folder_id": 134653467982768,
+        "id": "btlv0jXpRwqHBpZAz2QlfA"
+      },
       "media": {
         "type": "bloks",
-        "pos": 2,
+        "pos": 3,
         "id": "773CtmxyTrW1s0CgBGp0aw",
         "restrict_type": "",
         "restrict_components": true,
@@ -366,7 +373,7 @@
       },
       "theme": {
         "type": "option",
-        "pos": 3,
+        "pos": 4,
         "use_uuid": true,
         "required": false,
         "options": [],

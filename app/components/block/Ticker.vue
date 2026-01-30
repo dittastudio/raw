@@ -9,18 +9,16 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0] || null)
-const isImage = computed(() => media.value && isImageComponent(media.value) && media.value.image?.filename && storyblokAssetType(media.value.image.filename) === 'image')
-const isVideo = computed(() => media.value && isMuxVideoComponent(media.value) && media.value.video?.playbackId)
 </script>
 
 <template>
   <UiTheme
     v-editable="block"
     :theme="(block.theme as Themes)"
-    class="relative items-center overflow-hidden py-20 md:py-36"
+    class="relative overflow-hidden py-20 md:py-36"
   >
     <div
-      v-if="isImage || isVideo"
+      v-if="media"
       class="absolute inset-0 -z-1"
     >
       <NuxtImg
@@ -58,7 +56,7 @@ const isVideo = computed(() => media.value && isMuxVideoComponent(media.value) &
       />
     </div>
 
-    <div class="col-start-1 row-start-1 flex flex-col h-full items-center justify-center gap-20 md:gap-40">
+    <div class="flex flex-col h-full items-center justify-center gap-20 md:gap-40">
       <h4
         v-if="block.text"
         class="wrapper-max type-h4 text-center"
