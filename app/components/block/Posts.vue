@@ -54,8 +54,8 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
 
   const { data } = await storyblokApi.get('cdn/stories', {
     content_type: 'post',
-    per_page: requested + 1,
     page: 1,
+    per_page: requested + 1,
     sort_by: 'first_published_at:desc',
     version: 'published',
     excluding_fields: 'blocks,seo_title,seo_description,seo_image',

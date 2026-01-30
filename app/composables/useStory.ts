@@ -40,7 +40,7 @@ export async function useStory<T>(
 
   if (error.value) {
     throw createError({
-      statusCode: error.value.statusCode || 404,
+      statusCode: error.value.status || 404,
       statusMessage: `Page not found${slug ? ` for: ${slug}` : ''}`,
       fatal: true,
       cause: error.value,

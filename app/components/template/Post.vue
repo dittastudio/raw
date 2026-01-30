@@ -91,6 +91,7 @@ const category = computed(() => {
             <BlockPostEmbed
               v-if="block.component === 'post_embed'"
               :block="block"
+              :name="story.name"
             />
 
             <BlockPostHeading

@@ -68,6 +68,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
+    '/latest': { prerender: false },
     '/posts/**': { prerender: false },
     '/**': { prerender: process.env.NUXT_PRERENDER === 'true' },
   },

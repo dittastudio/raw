@@ -3,9 +3,10 @@ import type { PostEmbed } from '@@/.storyblok/types/289672313529140/storyblok-co
 
 interface Props {
   block: PostEmbed
+  name: string
 }
 
-const { block } = defineProps<Props>()
+const { block, name } = defineProps<Props>()
 
 const { data: oembed, error } = await useAsyncData(
   () => `oembed-${block.url}`,
@@ -13,6 +14,7 @@ const { data: oembed, error } = await useAsyncData(
     method: 'post',
     body: {
       url: block.url,
+      name,
     },
   }),
 )

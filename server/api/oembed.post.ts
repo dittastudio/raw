@@ -2,6 +2,7 @@ import { parseHTML } from 'linkedom'
 
 interface Fields {
   url: string
+  name: string
 }
 
 interface OEmbedResponse {
@@ -99,7 +100,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { url } = body
+  const { url, name } = body
 
   if (!url) {
     throw createError({
@@ -125,7 +126,7 @@ export default defineEventHandler(async (event) => {
   if (!provider) {
     throw createError({
       statusCode: 400,
-      statusMessage: 'Unsupported oEmbed provider',
+      statusMessage: `Unsupported oEmbed provider from: ${url} (${name})`,
     })
   }
 
@@ -141,8 +142,8 @@ export default defineEventHandler(async (event) => {
 
   if (!response.ok) {
     throw createError({
-      statusCode: 400,
-      statusMessage: `oEmbed request failed (${provider.provider}): ${response.status}`,
+      statusCode: response.status,
+      statusMessage: `oEmbed request failed from ${provider.provider}: ${url} (${name})`,
     })
   }
 
@@ -150,19 +151,19 @@ export default defineEventHandler(async (event) => {
   const parsed = parseHTML(data.html)
   const iframe = parsed?.document.querySelector('iframe')
 
-  if (!iframe) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: 'No iframe found in the HTML',
-    })
-  }
+  if (iframe) {
+    iframe.setAttribute('loading', 'lazy')
+    iframe.removeAttribute('width')
+    iframe.removeAttribute('height')
 
-  iframe.setAttribute('loading', 'lazy')
-  iframe.removeAttribute('width')
-  iframe.removeAttribute('height')
+    return {
+      ...data,
+      html: iframe.toString(),
+    }
+  }
 
   return {
     ...data,
-    html: iframe.toString(),
+    html: data.html,
   }
 })
