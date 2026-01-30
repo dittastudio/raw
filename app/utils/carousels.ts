@@ -4,7 +4,7 @@ import type { KeenSliderInstance } from 'keen-slider'
  * Keen Slider plugin that enables horizontal wheel/trackpad scrolling to navigate slides
  * Prevents vertical scrolling while horizontal gesture is active
  */
-export function createWheelControlsPlugin() {
+export function getCarouselSwipeControlsPlugin() {
   return (slider: KeenSliderInstance) => {
     let hTimeout: ReturnType<typeof setTimeout>
     let vTimeout: ReturnType<typeof setTimeout>
@@ -73,7 +73,7 @@ export interface AutoplayPluginOptions {
  * Pauses on mouse hover and when isActive returns false
  * Can be controlled externally via the controls ref
  */
-export function createAutoplayPlugin(options: AutoplayPluginOptions) {
+export function getCarouselAutoplayPlugin(options: AutoplayPluginOptions) {
   const { isActive, interval, controls } = options
 
   return (slider: KeenSliderInstance) => {
