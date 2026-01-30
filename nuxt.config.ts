@@ -57,7 +57,6 @@ export default defineNuxtConfig({
     name: 'RAW',
   },
   runtimeConfig: {
-    STORYBLOK_MANAGEMENT_TOKEN: process.env.NUXT_STORYBLOK_MANAGEMENT_TOKEN,
     STORYBLOK_SPACE_ID: process.env.NUXT_STORYBLOK_SPACE_ID,
     MUX_ACCESS_TOKEN: process.env.NUXT_MUX_ACCESS_TOKEN,
     MUX_SECRET_KEY: process.env.NUXT_MUX_SECRET_KEY,
