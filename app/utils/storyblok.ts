@@ -56,7 +56,7 @@ const storyblokRichTextContent = (
 ): boolean => Boolean(richtext?.content?.[0]?.content?.length)
 
 const storyblokSlug = (path: string): string =>
-  ['/', ''].includes(path) ? '/home' : path.replace(/\/+$/, '')
+  ['', '/'].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
 interface TypedMuxVideo extends MuxVideo {
   video: {
@@ -122,12 +122,20 @@ const storyblokImageDimensions = (
   return { width: Number(width), height: Number(height) }
 }
 
-const determineHref = (item: StoryblokMultilink) =>
-  item?.linktype === 'email'
-    ? `mailto:${item?.email}`
-    : item?.linktype === 'story'
-      ? `/${item?.cached_url?.replace('home', '')}`
-      : item?.cached_url
+const determineHref = (item: StoryblokMultilink) => {
+  switch (item.linktype) {
+    case 'story': {
+      const path = `/${item.cached_url}`.replace('/home', '/').trim()
+      return path === '/' ? path : path.replace(/\/$/, '')
+    }
+    case 'email': {
+      return `mailto:${item.email}`
+    }
+    default: {
+      return item.cached_url
+    }
+  }
+}
 
 export {
   determineHref,

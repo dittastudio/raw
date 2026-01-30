@@ -15,7 +15,6 @@ const story = await useStory<Page | Post | Project>(
   { resolveRelations: relations },
 )
 
-// Set initial theme
 if (story.value) {
   useInitialTheme(story.value.content.blocks)
 }

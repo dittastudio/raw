@@ -6,7 +6,6 @@ interface Props {
 }
 
 const { item } = defineProps<Props>()
-const href = determineHref(item)
 
 const customAttributes = {
   title: item?.title,
@@ -15,7 +14,7 @@ const customAttributes = {
 
 const attributes = {
   ...customAttributes,
-  to: storyblokSlug(href),
+  to: determineHref(item),
   target: item?.target ?? item?.linktype === 'asset' ? '_blank' : null,
 }
 </script>

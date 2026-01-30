@@ -88,7 +88,7 @@ const outlineThemeClasses = computed(() => {
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
-    <div class="ui-button__container absolute inset-0 flex items-center justify-center">
+    <span class="ui-button__container absolute inset-0 flex items-center justify-center">
       <span class="ui-button__blob ui-button__blob--1">
         <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-green" />
       </span>
@@ -96,7 +96,7 @@ const outlineThemeClasses = computed(() => {
       <span class="ui-button__blob ui-button__blob--2">
         <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-pink" />
       </span>
-    </div>
+    </span>
 
     <span
       class="

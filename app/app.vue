@@ -25,7 +25,7 @@ useSeoMeta({
   robots: url.host === 'raw.london' ? 'index, follow' : 'noindex, nofollow',
 })
 
-const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const isHeaderOpen = useState('isHeaderOpen', () => false)
 
 watch(() => route.fullPath, async () => {
   await wait(500)
