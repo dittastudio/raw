@@ -15,6 +15,11 @@ const story = await useStory<Page | Post | Project>(
   { resolveRelations: relations },
 )
 
+// Set initial theme
+if (isPage(story.value)) {
+  useInitialTheme(story.value.content.blocks)
+}
+
 const imageOptions = {
   width: 1200,
   height: 630,

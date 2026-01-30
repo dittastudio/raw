@@ -1,0 +1,50 @@
+import type { Themes } from '@@/types/app'
+
+interface ThemeColors {
+  background: string
+  text: string
+  buttonBackground: string
+  buttonText: string
+}
+
+const themeColors: Record<Themes, ThemeColors> = {
+  dark: {
+    background: 'var(--color-offblack)',
+    text: 'var(--color-offwhite)',
+    buttonBackground: 'var(--color-offwhite)',
+    buttonText: 'var(--color-offblack)',
+  },
+  light: {
+    background: 'var(--color-offwhite)',
+    text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-offwhite)',
+  },
+  blue: {
+    background: 'var(--color-blue)',
+    text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-offwhite)',
+  },
+  green: {
+    background: 'var(--color-green)',
+    text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-offwhite)',
+  },
+  pink: {
+    background: 'var(--color-pink)',
+    text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-offwhite)',
+  },
+  purple: {
+    background: 'var(--color-purple)',
+    text: 'var(--color-offblack)',
+    buttonBackground: 'var(--color-offblack)',
+    buttonText: 'var(--color-offwhite)',
+  },
+}
+
+export { themeColors }
+export type { ThemeColors }

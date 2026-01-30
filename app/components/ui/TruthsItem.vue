@@ -49,8 +49,8 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
         text-center
         grow
         size-full
-        max-w-[250px]
-        md:max-w-[320px]
+        max-w-62.5
+        md:max-w-80
         mx-auto
         aspect-square
         cursor-default

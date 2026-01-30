@@ -147,7 +147,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
           :key="`posts-key-${$route.fullPath}`"
           class="w-full flex flex-col items-start justify-center gap-22"
         >
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-(--app-inner-gutter) w-full">
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-(--app-inner-gutter) gap-y-(--app-outer-gutter) w-full">
             <li
               v-for="post in posts"
               :key="post.uuid"
