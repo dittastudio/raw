@@ -3,26 +3,71 @@ import '@mux/mux-player'
 
 interface Props {
   playbackId: string
+  primaryColor?: string
   accentColor?: string
   isCover?: boolean
 }
 
-const { playbackId, accentColor = '#c6ea9f', isCover = false } = defineProps<Props>()
+const { playbackId, primaryColor = '#fff', accentColor = '#c6ea9f', isCover = false } = defineProps<Props>()
+
+const hasPlayed = ref(false)
+const attrs = useAttrs()
+const showPlay = computed(() => !hasPlayed.value && Object.hasOwn(attrs, 'controls'))
+const root = useTemplateRef('root')
+const setPlayed = () => hasPlayed.value = true
+
+onMounted(() => {
+  const video = root.value?.querySelector('mux-player')
+
+  video?.addEventListener('play', setPlayed)
+})
+
+onUnmounted(() => {
+  const video = root.value?.querySelector('mux-player')
+
+  video?.removeEventListener('play', setPlayed)
+})
 </script>
 
 <template>
-  <mux-player
+  <div
     v-if="playbackId"
-    :id="playbackId"
-    :playback-id="playbackId"
-    :accent-color="accentColor"
-    metadata-video-title="Test VOD"
-    class="block aspect-video"
-    :class="{ 'size-full': isCover }"
-    :style="{
-      '--controls': Object.hasOwn($attrs, 'controls') ? null : 'none',
-      '--media-object-fit': isCover ? 'cover' : null,
-      '--media-object-position': isCover ? 'center' : null,
-    }"
-  />
+    ref="root"
+    :class="[
+      'size-full',
+      { relative: showPlay },
+    ]"
+  >
+    <div
+      v-if="showPlay"
+      class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
+    >
+      <p class="type-h4 text-offwhite">
+        Play
+      </p>
+    </div>
+
+    <mux-player
+      v-bind="attrs"
+      :id="playbackId"
+      :playback-id="playbackId"
+      :primary-color="primaryColor"
+      :accent-color="accentColor"
+      :class="[
+        'block aspect-video',
+        { 'size-full': isCover },
+      ]"
+      :style="{
+        '--controls': Object.hasOwn($attrs, 'controls') ? null : 'none',
+        '--media-object-fit': isCover ? 'cover' : null,
+        '--media-object-position': isCover ? 'center' : null,
+        '--seek-backward-button': 'none',
+        '--seek-forward-button': 'none',
+        '--playback-rate-button': 'none',
+        '--rendition-menu-button': 'none',
+        '--center-controls': 'none',
+        '--volume-range': 'none',
+      }"
+    />
+  </div>
 </template>
