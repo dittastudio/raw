@@ -16,7 +16,7 @@ const story = await useStory<Page | Post | Project>(
 )
 
 // Set initial theme
-if (isPage(story.value)) {
+if (story.value) {
   useInitialTheme(story.value.content.blocks)
 }
 
