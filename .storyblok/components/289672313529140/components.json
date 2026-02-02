@@ -318,7 +318,7 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-02-02T14:56:22.301Z",
+    "updated_at": "2026-02-02T18:31:02.052Z",
     "id": 132594684570052,
     "schema": {
       "logo": {
@@ -329,7 +329,7 @@
         ],
         "asset_folder_id": 134653467982768,
         "id": "btlv0jXpRwqHBpZAz2QlfA",
-        "description": "SVG upload recommended with ideal width and height attributes set."
+        "description": "SVG upload recommended. This will use the image's natural size and only shrink on smaller screens. Make sure the image has your most ideal dimensions for desktop set."
       },
       "headline": {
         "type": "richtext",
