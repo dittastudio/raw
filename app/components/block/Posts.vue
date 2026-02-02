@@ -62,6 +62,9 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
       category: {
         in: currentCategory.value?.value,
       },
+      // component: {
+      //   in: 'post,project',
+      // },
     },
   })
 
