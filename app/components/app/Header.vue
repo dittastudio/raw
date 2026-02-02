@@ -219,6 +219,9 @@ watchEffect(() => {
   }
 
   @variant max-lg {
+    --header-ease-in: cubic-bezier(0.76, 0, 0.66, -0.06);
+    --header-ease-out: cubic-bezier(0.34, 1.06, 0.24, 1);
+
     position: absolute;
     top: 0;
     left: 0;
@@ -237,11 +240,11 @@ watchEffect(() => {
     padding-block: var(--app-header-height);
 
     clip-path: circle(var(--disc-size) at calc(100% - var(--disc-x-offset)) var(--disc-y-offset));
-    transition: clip-path 0.5s cubic-bezier(0.34, 1.06, 0.24, 1);
+    transition: clip-path 0.5s var(--header-ease-out);
 
     .header.is-open & {
       clip-path: circle(150% at calc(100% - var(--disc-x-offset)) var(--disc-y-offset));
-      transition: clip-path 0.5s var(--ease-outQuart);
+      transition: clip-path 0.5s var(--header-ease-in);
     }
   }
 }
