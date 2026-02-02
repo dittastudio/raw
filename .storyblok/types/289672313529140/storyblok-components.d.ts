@@ -46,9 +46,9 @@ export interface BlockGallery {
 }
 
 export interface BlockHero {
+  logo?: StoryblokAsset;
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
-  logo?: StoryblokAsset;
   media?: (MuxVideo | Image)[];
   theme?: number | string;
   component: "block_hero";

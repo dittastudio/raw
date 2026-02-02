@@ -28,6 +28,7 @@ const { story } = defineProps<Props>()
       <BlockHero
         v-if="block.component === 'block_hero'"
         :block="block"
+        :name="story.name"
       />
 
       <BlockHeroBrand

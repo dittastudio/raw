@@ -318,12 +318,22 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-01-30T11:45:05.397Z",
+    "updated_at": "2026-02-02T14:56:22.301Z",
     "id": 132594684570052,
     "schema": {
+      "logo": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "asset_folder_id": 134653467982768,
+        "id": "btlv0jXpRwqHBpZAz2QlfA",
+        "description": "SVG upload recommended with ideal width and height attributes set."
+      },
       "headline": {
         "type": "richtext",
-        "pos": 0,
+        "pos": 1,
         "required": false,
         "customize_toolbar": true,
         "toolbar": [
@@ -341,22 +351,13 @@
       },
       "text": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 2,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
           "paragraph",
           "unset"
         ]
-      },
-      "logo": {
-        "type": "asset",
-        "pos": 2,
-        "filetypes": [
-          "images"
-        ],
-        "asset_folder_id": 134653467982768,
-        "id": "btlv0jXpRwqHBpZAz2QlfA"
       },
       "media": {
         "type": "bloks",
