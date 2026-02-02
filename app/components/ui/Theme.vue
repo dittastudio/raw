@@ -34,12 +34,12 @@ onMounted(() => {
     return
   }
 
-  let rootMargin = '-50% 0% -50% 0%'
+  let rootMargin = '-50% 0px -50% 0px'
   if (isHero) {
-    rootMargin = '-100% 0% -100% 0%'
+    rootMargin = '-100% 0px 0px 0px'
   }
   else if (isAfterHero) {
-    rootMargin = '-50% 0% 0% 0%'
+    rootMargin = '-50% 0px -1px 0px'
   }
 
   observer = new IntersectionObserver(
