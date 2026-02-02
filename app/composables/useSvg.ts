@@ -16,7 +16,7 @@ export async function useSvg(url: MaybeRef<string | null | undefined>) {
 
       if (!response.trim().startsWith('<svg')) {
         console.warn(`The fetched content from ${value} is not a valid SVG.`)
-        return null
+        return ref(null)
       }
 
       return sanitizeSvg(response)
