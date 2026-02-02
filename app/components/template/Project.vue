@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import type { Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
+import type { TypedBlockMuxVideo } from '@/components/block/MuxVideo.vue'
 
 interface Props {
   story: ISbStoryData<Project>
@@ -10,31 +12,53 @@ const { story } = defineProps<Props>()
 </script>
 
 <template>
-  <section
-    v-for="block in story.content.blocks"
+  <UiTheme
+    v-for="(block, index) in story.content.blocks"
     :key="block._uid"
-    :class="{
-      'py-20 md:py-36': !['block_hero', 'block_hero_brand', 'block_testimonials', 'block_ticker'].includes(block.component),
-    }"
+    :theme="'theme' in block ? (block.theme as Themes) : undefined"
+    :force="block.component === 'block_hero' || block.component === 'block_hero_brand'"
+    :is-hero="block.component === 'block_hero' || block.component === 'block_hero_brand'"
+    :is-after-hero="index > 0 && ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index - 1]?.component ?? '')"
   >
-    <BlockHero
-      v-if="block.component === 'block_hero'"
-      :block="block"
-    />
+    <section
+      :class="{
+        'py-(--app-vertical-spacing)': !['block_hero', 'block_hero_brand', 'block_testimonials', 'block_ticker'].includes(block.component),
+      }"
+    >
+      <BlockHero
+        v-if="block.component === 'block_hero'"
+        :block="block"
+      />
 
-    <BlockWorkText
-      v-else-if="block.component === 'block_work_text'"
-      :block="block"
-    />
+      <BlockWorkText
+        v-else-if="block.component === 'block_work_text'"
+        :block="block"
+      />
 
-    <BlockGallery
-      v-else-if="block.component === 'block_gallery'"
-      :block="block"
-    />
+      <BlockGallery
+        v-else-if="block.component === 'block_gallery'"
+        :block="block"
+      />
 
-    <BlockTestimonials
-      v-else-if="block.component === 'block_testimonials'"
-      :block="block"
-    />
-  </section>
+      <BlockTestimonials
+        v-else-if="block.component === 'block_testimonials'"
+        :block="block"
+      />
+
+      <BlockImpactDetails
+        v-else-if="block.component === 'block_impact_details'"
+        :block="block"
+      />
+
+      <BlockImpactStatement
+        v-else-if="block.component === 'block_impact_statement'"
+        :block="block"
+      />
+
+      <BlockMuxVideo
+        v-else-if="block.component === 'block_mux_video'"
+        :block="(block as TypedBlockMuxVideo)"
+      />
+    </section>
+  </UiTheme>
 </template>
