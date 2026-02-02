@@ -22,7 +22,7 @@ const { story } = defineProps<Props>()
   >
     <section
       :class="{
-        'py-(--app-vertical-spacing)': !['block_hero', 'block_hero_brand'].includes(block.component),
+        'py-(--app-vertical-spacing)': !['block_hero', 'block_hero_brand', 'block_ticker', 'block_testimonials'].includes(block.component),
       }"
     >
       <BlockHero

@@ -14,7 +14,7 @@ const media = computed(() => block.media?.[0])
   <div
     v-editable="block"
     data-component="testimonials"
-    class="relative isolate overflow-hidden"
+    class="py-(--app-vertical-spacing) relative isolate overflow-hidden"
   >
     <div
       v-if="media"
