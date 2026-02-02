@@ -20,11 +20,7 @@ const { block } = defineProps<Props>()
       :alt="block.image.alt || ''"
       :width="500"
       :height="Math.round(storyblokImageDimensions(block.image.filename).height / storyblokImageDimensions(block.image.filename).width * 500)"
-      quality="85"
       loading="lazy"
-      :modifiers="{
-        smart: true,
-      }"
     />
   </div>
 </template>

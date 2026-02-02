@@ -40,10 +40,6 @@ const category = computed(() => {
       :alt="story.content.hero.alt || story.name"
       :width="1000"
       :height="Math.round(storyblokImageDimensions(story.content.hero.filename).height / storyblokImageDimensions(story.content.hero.filename).width * 1000)"
-      quality="85"
-      :modifiers="{
-        smart: true,
-      }"
     />
 
     <div class="wrapper w-full flex flex-col gap-18">

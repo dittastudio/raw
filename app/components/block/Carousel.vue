@@ -47,10 +47,6 @@ const { block } = defineProps<Props>()
             "
             :width="16"
             :height="9"
-            format="webp"
-            :modifiers="{
-              smart: true,
-            }"
             loading="lazy"
           />
 

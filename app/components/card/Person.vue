@@ -31,10 +31,6 @@ const accentClasses = {
         :alt="image.alt || name"
         :width="400"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 400)"
-        format="webp"
-        :modifiers="{
-          smart: true,
-        }"
       />
     </div>
 

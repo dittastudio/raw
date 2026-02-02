@@ -100,10 +100,6 @@ const getSizes = (index: number) => {
           :width="3"
           :height="2"
           :sizes="getSizes(index)"
-          format="webp"
-          :modifiers="{
-            smart: true,
-          }"
           loading="lazy"
         />
       </li>

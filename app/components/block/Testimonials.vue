@@ -27,11 +27,7 @@ const media = computed(() => block.media?.[0])
         :alt="media.image.alt || ''"
         :width="6"
         :height="2"
-        format="webp"
         loading="lazy"
-        :modifiers="{
-          smart: true,
-        }"
         sizes="
           100vw
           xs:100vw

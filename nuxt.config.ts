@@ -110,12 +110,15 @@ export default defineNuxtConfig({
   },
   image: {
     provider: 'storyblok',
-    format: ['webp'],
     storyblok: {
       baseURL: 'https://a2.storyblok.com',
+      modifiers: {
+        smart: true,
+      },
     },
+    format: ['webp'],
     domains: ['storyblok.com', 'raw.london'],
-    quality: 80,
+    quality: 85,
     screens: {
       '2xs': 375,
       'xs': 480,

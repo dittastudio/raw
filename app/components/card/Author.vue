@@ -33,10 +33,6 @@ const { name, image, date, size = 'large' } = defineProps<Props>()
         :alt="image.alt || name"
         :width="100"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 100)"
-        quality="85"
-        :modifiers="{
-          smart: true,
-        }"
       />
     </div>
 
