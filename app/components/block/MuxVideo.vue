@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockMuxVideo } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 export interface TypedBlockMuxVideo extends BlockMuxVideo {
   video: {
@@ -22,10 +21,10 @@ const attrs = computed(() => ({
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-if="block.video && block.video.playbackId"
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="mux-video"
     class="wrapper-max grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid)"
   >
     <div class="col-span-full lg:col-span-10 lg:col-start-2">
@@ -34,5 +33,5 @@ const attrs = computed(() => ({
         :playback-id="block.video.playbackId"
       />
     </div>
-  </UiTheme>
+  </div>
 </template>

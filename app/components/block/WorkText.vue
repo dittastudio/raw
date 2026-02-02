@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockWorkText } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockWorkText
@@ -10,9 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="work-text"
     class="
       wrapper-max
       grid
@@ -60,7 +59,7 @@ const { block } = defineProps<Props>()
         <StoryblokText :html="block.copy" />
       </div>
     </div>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>

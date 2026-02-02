@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockCarousel } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockCarousel
@@ -10,10 +9,10 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
-    class="hover-list flex flex-col gap-y-30"
+    data-component="carousel"
+    class="flex flex-col gap-y-30"
   >
     <UiContent
       :title="block.title"
@@ -84,7 +83,7 @@ const { block } = defineProps<Props>()
         </div>
       </template>
     </UiCarouselFade>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>

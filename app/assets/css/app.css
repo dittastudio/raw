@@ -1,10 +1,11 @@
 @import "tailwindcss";
+@import "./fonts.css";
 @import "./resets.css";
 @import "./type.css";
+@import "./outline.css";
 @import "./transitions.css";
-@import "./utils.css";
-@import "./fonts.css";
 @import "./prose.css";
+@import "./utils.css";
 
 @theme {
   --color-\*: initial;
@@ -104,6 +105,8 @@
     --app-header-logo-width: 86px;
     --app-header-logo-height: 32px;
 
+    --app-vertical-spacing: --spacing(20);
+
     @variant sm {
       --app-inner-gutter: 20px;
 
@@ -116,6 +119,8 @@
       --app-grid: repeat(12, minmax(0, 1fr));
 
       --app-header-height: 92px;
+
+      --app-vertical-spacing: --spacing(36);
     }
   }
 

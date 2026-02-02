@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockImpactStatement } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockImpactStatement
@@ -10,9 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="impact-statement"
     class="flex flex-col gap-36"
   >
     <UiContent
@@ -21,5 +20,5 @@ const { block } = defineProps<Props>()
       :headline="item.title"
       :copy="item.copy"
     />
-  </UiTheme>
+  </div>
 </template>

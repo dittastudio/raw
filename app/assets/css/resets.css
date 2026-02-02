@@ -7,20 +7,6 @@
     will-change: color, background-color;
   }
 
-  .is-outlined {
-    --text-stroke-width: 0.02em;
-
-    @supports((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
-      -webkit-text-stroke: var(--text-stroke-width) var(--app-text-color);
-      text-stroke: var(--text-stroke-width) var(--app-text-color);
-      color: transparent;
-    }
-
-    transition:
-      -webkit-text-stroke var(--app-transition-duration) var(--app-transition-ease),
-      text-stroke var(--app-transition-duration) var(--app-transition-ease);
-  }
-
   body {
     font-family: var(--font-mono);
     -webkit-font-smoothing: antialiased;

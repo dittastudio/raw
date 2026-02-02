@@ -3,9 +3,12 @@ import type { Themes } from '@@/types/app'
 
 interface Props {
   theme?: Themes
+  force?: boolean
+  isHero?: boolean
+  isAfterHero?: boolean
 }
 
-const { theme } = defineProps<Props>()
+const { theme = 'light', force = false, isHero = false, isAfterHero = false } = defineProps<Props>()
 
 const themeRef = useTemplateRef('themeRef')
 const themeId = useId()
@@ -31,6 +34,14 @@ onMounted(() => {
     return
   }
 
+  let rootMargin = '-50% 0% -50% 0%'
+  if (isHero) {
+    rootMargin = '-100% 0% -100% 0%'
+  }
+  else if (isAfterHero) {
+    rootMargin = '-50% 0% 0% 0%'
+  }
+
   observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -41,7 +52,7 @@ onMounted(() => {
     },
     {
       threshold: 0,
-      rootMargin: '-50% 0px -50% 0px',
+      rootMargin,
     },
   )
 
@@ -58,7 +69,10 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="themeRef">
+  <div
+    ref="themeRef"
+    :class="force ? getThemeClasses[theme] : ''"
+  >
     <slot />
   </div>
 </template>

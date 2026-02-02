@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockGallery } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockGallery
@@ -71,44 +70,43 @@ const getSizes = (index: number) => {
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="gallery"
+    class="wrapper-max flex flex-col gap-16 md:gap-24"
   >
-    <div class="wrapper-max flex flex-col gap-16 md:gap-24">
-      <h2 class="type-h5 text-balance max-w-[36ch]">
-        {{ block.title }}
-      </h2>
+    <h2 class="type-h5 text-balance max-w-[36ch]">
+      {{ block.title }}
+    </h2>
 
-      <ul
-        v-if="block.items?.length"
-        v-editable="block"
-        class="flex flex-wrap -ml-(--app-inner-gutter) gap-y-(--app-inner-gutter)"
+    <ul
+      v-if="block.items?.length"
+      v-editable="block"
+      class="flex flex-wrap -ml-(--app-inner-gutter) gap-y-(--app-inner-gutter)"
+    >
+      <li
+        v-for="(image, index) in block.items"
+        :key="image.id"
+        :class="[
+          'grow pl-(--app-inner-gutter)',
+          block.items?.length === 4 ? 'basis-1/2' : 'basis-1/2 md:basis-1/3',
+        ]"
       >
-        <li
-          v-for="(image, index) in block.items"
-          :key="image.id"
-          :class="[
-            'grow pl-(--app-inner-gutter)',
-            block.items?.length === 4 ? 'basis-1/2' : 'basis-1/2 md:basis-1/3',
-          ]"
-        >
-          <NuxtImg
-            v-if="image.filename && storyblokAssetType(image.filename) === 'image'"
-            class="block size-full object-cover"
-            :src="image.filename"
-            :alt="image.alt || ''"
-            :width="3"
-            :height="2"
-            :sizes="getSizes(index)"
-            format="webp"
-            :modifiers="{
-              smart: true,
-            }"
-            loading="lazy"
-          />
-        </li>
-      </ul>
-    </div>
-  </UiTheme>
+        <NuxtImg
+          v-if="image.filename && storyblokAssetType(image.filename) === 'image'"
+          class="block size-full object-cover"
+          :src="image.filename"
+          :alt="image.alt || ''"
+          :width="3"
+          :height="2"
+          :sizes="getSizes(index)"
+          format="webp"
+          :modifiers="{
+            smart: true,
+          }"
+          loading="lazy"
+        />
+      </li>
+    </ul>
+  </div>
 </template>

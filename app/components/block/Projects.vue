@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockProjects } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockProjects
@@ -28,9 +27,9 @@ const projects = computed(() => {
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="projects"
     class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">
@@ -101,5 +100,5 @@ const projects = computed(() => {
         </p>
       </Transition>
     </div>
-  </UiTheme>
+  </div>
 </template>

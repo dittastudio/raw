@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockTestimonials } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockTestimonials
@@ -12,10 +11,10 @@ const media = computed(() => block.media?.[0])
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
-    class="relative isolate overflow-hidden py-20 md:py-36"
+    data-component="testimonials"
+    class="relative isolate overflow-hidden"
   >
     <div
       v-if="media"
@@ -90,7 +89,7 @@ const media = computed(() => block.media?.[0])
         </div>
       </template>
     </UiCarouselFade>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>

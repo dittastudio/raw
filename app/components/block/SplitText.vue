@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockSplitText } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockSplitText
@@ -10,9 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="split-text"
     class="
       split-text
       wrapper-max
@@ -39,7 +38,7 @@ const { block } = defineProps<Props>()
         <StoryblokText :html="item.copy" />
       </div>
     </div>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>

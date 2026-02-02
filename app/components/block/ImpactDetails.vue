@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockImpactDetails } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockImpactDetails
@@ -11,9 +10,9 @@ const media = computed(() => block.media?.[0])
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="impact-details"
     class="grid gap-y-10 md:gap-y-20"
   >
     <UiContent
@@ -73,7 +72,7 @@ const media = computed(() => block.media?.[0])
         </StoryblokLink>
       </div>
     </div>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>

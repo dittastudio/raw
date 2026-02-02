@@ -46,4 +46,13 @@ const getThemeColors: Record<Themes, ThemeColors> = {
   },
 }
 
-export { getThemeColors }
+const getThemeClasses: Record<Themes, string> = {
+  dark: 'bg-offblack text-offwhite text-outline-offwhite-override',
+  light: 'bg-offwhite text-offblack text-outline-offblack-override',
+  blue: 'bg-blue text-offblack text-outline-offblack-override',
+  green: 'bg-green text-offblack text-outline-offblack-override',
+  pink: 'bg-pink text-offblack text-outline-offblack-override',
+  purple: 'bg-purple text-offblack text-outline-offblack-override',
+}
+
+export { getThemeClasses, getThemeColors }

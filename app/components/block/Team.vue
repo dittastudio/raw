@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockTeam } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockTeam
@@ -10,9 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="team"
     class="grid gap-y-35"
   >
     <UiContent
@@ -35,5 +34,5 @@ const { block } = defineProps<Props>()
         :accent="(block.accent as Themes)"
       />
     </div>
-  </UiTheme>
+  </div>
 </template>

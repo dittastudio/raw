@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockHero } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -50,9 +49,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="hero"
     class="hero relative w-full min-h-svh overflow-hidden grid place-items-center"
   >
     <div
@@ -128,7 +127,7 @@ onUnmounted(() => {
         loop
       />
     </div>
-  </UiTheme>
+  </div>
 </template>
 
 <style scoped>

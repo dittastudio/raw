@@ -47,9 +47,9 @@ const slideClass = computed(() => {
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    theme="light"
+    data-component="hero"
     class="
       hero
       relative
@@ -114,7 +114,7 @@ const slideClass = computed(() => {
         </div>
       </div>
     </EffectMorphGradient>
-  </UiTheme>
+  </div>
 
   <div
     v-if="block.logo_ticker"

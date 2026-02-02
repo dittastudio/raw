@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockPosts, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -97,9 +96,9 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="posts"
     class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">
@@ -186,5 +185,5 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
         </p>
       </Transition>
     </div>
-  </UiTheme>
+  </div>
 </template>

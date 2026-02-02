@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockLogoWall } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockLogoWall
@@ -10,9 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="logo-wall"
     class="flex flex-col gap-19 md:gap-38"
   >
     <UiContent
@@ -39,5 +38,5 @@ const { block } = defineProps<Props>()
         </li>
       </ul>
     </div>
-  </UiTheme>
+  </div>
 </template>

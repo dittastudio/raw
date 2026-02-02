@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockTicker } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockTicker
@@ -12,9 +11,9 @@ const media = computed(() => block.media?.[0] || null)
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="ticker"
     class="relative overflow-hidden py-20 md:py-36"
   >
     <div
@@ -86,9 +85,5 @@ const media = computed(() => block.media?.[0] || null)
         </UiTicker>
       </div>
     </div>
-  </UiTheme>
+  </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-</style>

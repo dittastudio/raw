@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockTruths } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 import type { TTruthsItem } from '@/components/ui/Truths.vue'
 
 interface Props {
@@ -11,9 +10,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="truths"
     class="flex flex-col gap-36"
   >
     <UiContent
@@ -34,5 +33,5 @@ const { block } = defineProps<Props>()
         } as TTruthsItem)"
       />
     </div>
-  </UiTheme>
+  </div>
 </template>

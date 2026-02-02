@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockBcorp } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockBcorp
@@ -10,9 +9,9 @@ const { block } = defineProps<Props>()
 </script>
 
 <template>
-  <UiTheme
+  <div
     v-editable="block"
-    :theme="(block.theme as Themes)"
+    data-component="bcorp"
     class="overflow-hidden flex flex-col gap-36"
   >
     <UiContent
@@ -103,5 +102,5 @@ const { block } = defineProps<Props>()
         </div>
       </div>
     </div>
-  </UiTheme>
+  </div>
 </template>
