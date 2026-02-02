@@ -25,14 +25,44 @@ const { story } = defineProps<Props>()
         'py-(--app-vertical-spacing)': !['block_hero', 'block_hero_brand', 'block_ticker', 'block_testimonials'].includes(block.component),
       }"
     >
+      <BlockBCorp
+        v-if="block.component === 'block_bcorp'"
+        :block="block"
+      />
+
+      <BlockCarousel
+        v-else-if="block.component === 'block_carousel'"
+        :block="block"
+      />
+
+      <BlockContact
+        v-else-if="block.component === 'block_contact'"
+        :block="block"
+      />
+
+      <BlockGallery
+        v-else-if="block.component === 'block_gallery'"
+        :block="block"
+      />
+
       <BlockHero
-        v-if="block.component === 'block_hero'"
+        v-else-if="block.component === 'block_hero'"
         :block="block"
         :name="story.name"
       />
 
       <BlockHeroBrand
         v-else-if="block.component === 'block_hero_brand'"
+        :block="block"
+      />
+
+      <BlockHoverGrid
+        v-else-if="block.component === 'block_hover_grid'"
+        :block="block"
+      />
+
+      <BlockHoverList
+        v-else-if="block.component === 'block_hover_list'"
         :block="block"
       />
 
@@ -46,9 +76,19 @@ const { story } = defineProps<Props>()
         :block="block"
       />
 
+      <BlockLogoWall
+        v-else-if="block.component === 'block_logo_wall'"
+        :block="block"
+      />
+
       <BlockMuxVideo
         v-else-if="block.component === 'block_mux_video'"
         :block="(block as TypedBlockMuxVideo)"
+      />
+
+      <BlockNextEvent
+        v-else-if="block.component === 'block_next_event'"
+        :block="block"
       />
 
       <BlockPosts
@@ -58,6 +98,11 @@ const { story } = defineProps<Props>()
 
       <BlockProjects
         v-else-if="block.component === 'block_projects'"
+        :block="block"
+      />
+
+      <BlockSplitText
+        v-else-if="block.component === 'block_split_text'"
         :block="block"
       />
 
@@ -71,53 +116,13 @@ const { story } = defineProps<Props>()
         :block="block"
       />
 
-      <BlockHoverList
-        v-else-if="block.component === 'block_hover_list'"
-        :block="block"
-      />
-
-      <BlockHoverGrid
-        v-else-if="block.component === 'block_hover_grid'"
-        :block="block"
-      />
-
-      <BlockCarousel
-        v-else-if="block.component === 'block_carousel'"
-        :block="block"
-      />
-
-      <BlockLogoWall
-        v-else-if="block.component === 'block_logo_wall'"
-        :block="block"
-      />
-
-      <BlockSplitText
-        v-else-if="block.component === 'block_split_text'"
-        :block="block"
-      />
-
-      <BlockContact
-        v-else-if="block.component === 'block_contact'"
+      <BlockTicker
+        v-else-if="block.component === 'block_ticker'"
         :block="block"
       />
 
       <BlockTruths
         v-else-if="block.component === 'block_truths'"
-        :block="block"
-      />
-
-      <BlockGallery
-        v-else-if="block.component === 'block_gallery'"
-        :block="block"
-      />
-
-      <BlockBCorp
-        v-else-if="block.component === 'block_bcorp'"
-        :block="block"
-      />
-
-      <BlockTicker
-        v-else-if="block.component === 'block_ticker'"
         :block="block"
       />
     </section>
