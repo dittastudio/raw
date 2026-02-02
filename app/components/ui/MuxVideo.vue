@@ -14,18 +14,18 @@ const hasPlayed = ref(false)
 const attrs = useAttrs()
 const showPlay = computed(() => !hasPlayed.value && Object.hasOwn(attrs, 'controls'))
 const root = useTemplateRef('root')
+const video = ref<HTMLVideoElement | null | undefined>(null)
+
 const setPlayed = () => hasPlayed.value = true
 
 onMounted(() => {
-  const video = root.value?.querySelector('mux-player')
+  video.value = root.value?.querySelector('mux-player')
 
-  video?.addEventListener('play', setPlayed)
+  video.value?.addEventListener('play', setPlayed)
 })
 
 onUnmounted(() => {
-  const video = root.value?.querySelector('mux-player')
-
-  video?.removeEventListener('play', setPlayed)
+  video.value?.removeEventListener('play', setPlayed)
 })
 </script>
 
@@ -38,14 +38,14 @@ onUnmounted(() => {
       { relative: showPlay },
     ]"
   >
-    <div
+    <button
       v-if="showPlay"
-      class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none"
+      type="button"
+      class="absolute inset-0 z-10 flex items-center justify-center type-h4 text-offwhite bg-transparent"
+      @click="video?.play()"
     >
-      <p class="type-h4 text-offwhite">
-        Play
-      </p>
-    </div>
+      Play
+    </button>
 
     <mux-player
       v-bind="attrs"
