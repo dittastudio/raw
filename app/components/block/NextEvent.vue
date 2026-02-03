@@ -14,7 +14,8 @@ interface EventPost {
   name: string
   full_slug: string
   first_published_at?: string
-  hero: Post['hero']
+  preview_image: Post['preview_image'] | Post['hero']
+  preview_text: Post['preview_text']
   category: Post['category']
   eventDatetime: Post['event_datetime']
 }
@@ -47,7 +48,8 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
       name: post.name,
       full_slug: post.full_slug,
       first_published_at: post.first_published_at ?? undefined,
-      hero: post.content.hero,
+      preview_image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero,
+      preview_text: post.content.preview_text,
       category: post.content.category,
       eventDatetime: post.content.event_datetime ?? undefined,
     }))
@@ -59,66 +61,56 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
 
 <template>
   <div
-    v-if="post"
     v-editable="block"
     class="wrapper-max grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20"
   >
-    <div
-      class="
-        col-span-full
-        md:col-start-1
-        md:col-span-3
-      "
-    >
-      <h2 class="type-h5">
+    <div class="col-span-full md:col-start-1 md:col-span-3">
+      <p class="type-h5">
         Coming up
-      </h2>
-    </div>
-
-    <div
-      v-if="post.eventDatetime"
-      class="
-        col-span-full
-        md:col-start-4
-        md:col-span-9
-      "
-    >
-      <p class="type-h2">
-        <span class="is-outlined block">Next event</span>
-        {{ formatDateDMY(post.eventDatetime) }}
       </p>
+    </div>
 
-      <h2
-        v-if="post.name"
-        class="type-h4 mt-6"
-      >
-        {{ post.name }}
-      </h2>
+    <div class="col-span-full md:col-start-4 md:col-span-9">
+      <div class="w-full flex flex-col gap-6">
+        <p class="type-h2">
+          <span class="is-outlined block">Next event</span>
+
+          <template v-if="post?.eventDatetime">
+            {{ formatDateDMY(post.eventDatetime) }}
+          </template>
+        </p>
+
+        <h2 class="type-h4">
+          {{ post?.name ? post.name : `There are no upcoming events at this time. Please check back soon.` }}
+        </h2>
+      </div>
     </div>
 
     <div
-      v-if="post.hero"
+      v-if="post?.preview_image"
       class="col-start-1 col-span-full md:col-span-7 max-md:order-1"
     >
       <NuxtImg
-        v-if="post.hero.filename && storyblokAssetType(post.hero.filename) === 'image'"
+        v-if="post.preview_image.filename && storyblokAssetType(post.preview_image.filename) === 'image'"
         class="block w-full h-auto"
-        :src="post.hero.filename"
-        :alt="post.hero.alt || ''"
+        :src="post.preview_image.filename"
+        :alt="post.preview_image.alt || ''"
         :width="500"
-        :height="Math.round(storyblokImageDimensions(post.hero.filename).height / storyblokImageDimensions(post.hero.filename).width * 500)"
+        :height="Math.round(storyblokImageDimensions(post.preview_image.filename).height / storyblokImageDimensions(post.preview_image.filename).width * 500)"
         loading="lazy"
       />
     </div>
 
     <div
+      v-if="post"
       class="flex flex-col gap-6 md:gap-10 col-start-2 sm:col-start-5 md:col-start-9 col-span-full"
     >
-      <div
-        class="next-event__copy"
+      <p
+        v-if="post.preview_text"
+        class="type-p text-pretty max-w-[24em]"
       >
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis exercitationem fugiat ab cum eligendi ad perferendis eveniet vero corrupti recusandae explicabo tempora placeat similique, tenetur fuga necessitatibus itaque, voluptates quae!</p>
-      </div>
+        {{ post.preview_text }}
+      </p>
 
       <NuxtLink :to="`/${post.full_slug}`">
         <UiButton type="solid">
@@ -129,30 +121,4 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
       <UiPartnershipButton />
     </div>
   </div>
-
-  <template v-else>
-    <p>No upcoming events.</p>
-  </template>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.next-event__copy {
-  :deep(p),
-  :deep(li) {
-    @apply type-p;
-
-    text-wrap: pretty;
-    max-width: 24em;
-  }
-
-  :deep(p + p),
-  :deep(p + ul),
-  :deep(p + ol),
-  :deep(ul + p),
-  :deep(ol + p) {
-    padding-top: 1.25em;
-  }
-}
-</style>
