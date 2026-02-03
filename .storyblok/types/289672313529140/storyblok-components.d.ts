@@ -129,6 +129,12 @@ export interface BlockMuxVideo {
   _uid: string;
 }
 
+export interface BlockNextEvent {
+  theme?: number | string;
+  component: "block_next_event";
+  _uid: string;
+}
+
 export interface BlockPosts {
   theme?: number | string;
   component: "block_posts";
@@ -267,6 +273,7 @@ export interface Page {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMuxVideo
+    | BlockNextEvent
     | BlockPosts
     | BlockProjects
     | BlockSplitText
@@ -302,6 +309,7 @@ export interface Post {
   seo_description?: string;
   seo_image?: StoryblokAsset;
   blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
+  event_datetime?: string;
   component: "post";
   _uid: string;
 }
@@ -372,6 +380,7 @@ export interface Project {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMuxVideo
+    | BlockNextEvent
     | BlockPosts
     | BlockProjects
     | BlockSplitText

@@ -54,7 +54,7 @@ const { name, image, date, size = 'large' } = defineProps<Props>()
           'type-mono-14': size === 'small',
         }"
       >
-        {{ formatDate(date) }}
+        {{ formatDateEditorial(date) }}
       </time>
     </div>
   </div>
