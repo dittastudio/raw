@@ -53,6 +53,7 @@ const { block } = defineProps<Props>()
             v-if="storyblokRichTextContent(item.copy)"
             class="
               carousel__copy
+              prose-base
               absolute
               inset-0
               pb-[calc(var(--app-outer-gutter)*3)]
@@ -109,24 +110,9 @@ const { block } = defineProps<Props>()
     }
   }
 
-  :deep(h2, h3, h4) {
+  :deep(h3) {
     @apply type-h4;
     text-wrap: balance;
-  }
-
-  :deep(p:has(+ :is(h2, h3, h4))) {
-    padding-bottom: 2em;
-  }
-
-  :deep(p) {
-    @apply type-p;
-    text-wrap: pretty;
-
-    max-width: 24em;
-  }
-
-  :deep(p + p) {
-    padding-top: 1.25em;
   }
 }
 </style>

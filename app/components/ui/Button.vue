@@ -80,7 +80,8 @@ const outlineThemeClasses = computed(() => {
       ui-button
       relative
       isolate
-      inline-flex
+      inline-block
+      align-top
       rounded-full
       select-none
       type-p

@@ -31,7 +31,7 @@ const { block } = defineProps<Props>()
     >
       <div
         v-if="storyblokRichTextContent(item.copy)"
-        class="col-span-3 sm:col-span-4 md:col-span-5"
+        class="prose col-span-3 sm:col-span-4 md:col-span-5"
         :class="index % 2 === 0 ? 'col-start-1 md:col-start-2' : 'col-start-2 sm:col-start-5 md:col-start-7'"
       >
         <StoryblokText :html="item.copy" />
@@ -52,10 +52,6 @@ const { block } = defineProps<Props>()
     @variant md {
       max-width: 30ch;
     }
-  }
-
-  :deep(p + p) {
-    padding-top: 1.25em;
   }
 }
 </style>

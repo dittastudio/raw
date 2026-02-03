@@ -51,7 +51,7 @@ const media = computed(() => block.media?.[0])
       >
         <div
           v-if="storyblokRichTextContent(block.copy)"
-          class="ui-content__copy"
+          class="prose-base"
         >
           <StoryblokText :html="block.copy" />
         </div>
@@ -69,25 +69,3 @@ const media = computed(() => block.media?.[0])
     </div>
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.ui-content__copy {
-  :deep(p),
-  :deep(li) {
-    @apply type-p;
-
-    text-wrap: pretty;
-    max-width: 24em;
-  }
-
-  :deep(p + p),
-  :deep(p + ul),
-  :deep(p + ol),
-  :deep(ul + p),
-  :deep(ol + p) {
-    padding-top: 1.25em;
-  }
-}
-</style>

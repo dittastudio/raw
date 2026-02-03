@@ -26,7 +26,7 @@ const { block } = defineProps<Props>()
       </div>
     </div>
 
-    <ul class="contact__list flex flex-col">
+    <ul class="prose-base flex flex-col">
       <li
         v-for="info in block.info"
         :key="info._uid"
@@ -47,24 +47,3 @@ const { block } = defineProps<Props>()
     </ul>
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.contact__list {
-  :deep(p) {
-    @apply type-p;
-  }
-
-  :deep(p a) {
-    text-decoration: underline;
-    text-underline-offset: 0.1em;
-    text-decoration-thickness: 1px;
-    transition: opacity 0.2s var(--ease-out);
-
-    &:hover {
-      opacity: 0.6;
-    }
-  }
-}
-</style>

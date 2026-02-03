@@ -44,7 +44,7 @@ const {
 
     <div
       v-if="storyblokRichTextContent(copy) || cta?.cached_url"
-      class="ui-content__copy flex flex-col gap-10 items-start"
+      class="prose-base flex flex-col gap-10 items-start"
       :class="{
         'col-start-2 col-span-3 sm:col-start-5 sm:col-span-4 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-3': storyblokRichTextContent(copy),
         'col-start-1 col-span-full md:col-start-4': !storyblokRichTextContent(copy),
@@ -75,24 +75,6 @@ const {
 
     text-wrap: balance;
     max-width: 20ch;
-  }
-}
-
-.ui-content__copy {
-  :deep(p),
-  :deep(li) {
-    @apply type-p;
-
-    text-wrap: pretty;
-    max-width: 24em;
-  }
-
-  :deep(p + p),
-  :deep(p + ul),
-  :deep(p + ol),
-  :deep(ul + p),
-  :deep(ol + p) {
-    padding-top: 1.25em;
   }
 }
 </style>

@@ -12,7 +12,7 @@ const { block } = defineProps<Props>()
   <div
     v-if="storyblokRichTextContent(block.text)"
     v-editable="block"
-    class="prose w-full"
+    class="prose-post w-full"
   >
     <StoryblokText :html="block.text" />
   </div>

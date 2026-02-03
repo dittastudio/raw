@@ -53,7 +53,7 @@ const { block } = defineProps<Props>()
 
       <div
         v-if="storyblokRichTextContent(block.copy)"
-        class="work-text__copy"
+        class="prose-base"
       >
         <StoryblokText :html="block.copy" />
       </div>
@@ -90,22 +90,6 @@ const { block } = defineProps<Props>()
     @variant md {
       max-width: 20ch;
     }
-  }
-}
-
-.work-text__copy {
-  :deep(p) {
-    @apply type-p;
-
-    text-wrap: pretty;
-
-    @variant md {
-      max-width: 65ch;
-    }
-  }
-
-  :deep(p + p) {
-    padding-top: 1.25em;
   }
 }
 </style>
