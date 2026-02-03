@@ -318,12 +318,22 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-01-30T11:45:05.397Z",
+    "updated_at": "2026-02-02T18:31:02.052Z",
     "id": 132594684570052,
     "schema": {
+      "logo": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "asset_folder_id": 134653467982768,
+        "id": "btlv0jXpRwqHBpZAz2QlfA",
+        "description": "SVG upload recommended. This will use the image's natural size and only shrink on smaller screens. Make sure the image has your most ideal dimensions for desktop set."
+      },
       "headline": {
         "type": "richtext",
-        "pos": 0,
+        "pos": 1,
         "required": false,
         "customize_toolbar": true,
         "toolbar": [
@@ -341,22 +351,13 @@
       },
       "text": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 2,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
           "paragraph",
           "unset"
         ]
-      },
-      "logo": {
-        "type": "asset",
-        "pos": 2,
-        "filetypes": [
-          "images"
-        ],
-        "asset_folder_id": 134653467982768,
-        "id": "btlv0jXpRwqHBpZAz2QlfA"
       },
       "media": {
         "type": "bloks",
@@ -953,6 +954,40 @@
     "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
     "color": "var(--sb-color-accent-background-green-cyan)",
     "icon": "monitor",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
+    "name": "block_next_event",
+    "display_name": "Next Event",
+    "description": "Displays the next available event.",
+    "created_at": "2026-02-02T22:52:46.101Z",
+    "updated_at": "2026-02-02T22:53:42.472Z",
+    "id": 140833448354787,
+    "schema": {
+      "theme": {
+        "type": "option",
+        "pos": 0,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "id": "zhqZ8PAORbSXV-SV7tKuFg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Next Event",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "share-2",
     "internal_tags_list": [],
     "internal_tag_ids": [],
     "content_type_asset_preview": null,
@@ -1958,7 +1993,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-01-28T17:00:28.870Z",
+    "updated_at": "2026-02-02T20:54:43.846Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -2054,6 +2089,13 @@
           "post_wistia"
         ],
         "component_denylist": []
+      },
+      "event_datetime": {
+        "type": "datetime",
+        "pos": 9,
+        "display_name": "Event Date/Time",
+        "description": "If this is an event you can set the date and time.",
+        "id": "KhEEDxgQTrSfosMbRKjddA"
       }
     },
     "image": null,

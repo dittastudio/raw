@@ -49,7 +49,6 @@ const slideClass = computed(() => {
 <template>
   <div
     v-editable="block"
-    data-component="hero"
     class="
       hero
       relative
@@ -134,10 +133,6 @@ const slideClass = computed(() => {
           :alt="image.alt || ''"
           height="40"
           densities="x1 x2"
-          format="webp"
-          :modifiers="{
-            smart: true,
-          }"
           loading="lazy"
         />
       </template>

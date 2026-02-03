@@ -11,7 +11,6 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-editable="block"
-    data-component="contact"
     class="wrapper-max flex flex-col gap-19 md:gap-38"
   >
     <div class="grid grid-cols-1 md:grid-cols-3 gap-x-(--app-inner-gutter) gap-y-6">

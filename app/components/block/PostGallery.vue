@@ -29,11 +29,7 @@ const { block } = defineProps<Props>()
         :alt="image.alt || ''"
         :width="400"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 400)"
-        quality="85"
         loading="lazy"
-        :modifiers="{
-          smart: true,
-        }"
       />
     </li>
   </ul>

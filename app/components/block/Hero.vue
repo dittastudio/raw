@@ -5,13 +5,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 interface Props {
   block: BlockHero
+  name?: string
 }
 
-const { block } = defineProps<Props>()
+const { block, name } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0])
 const heroRef = useTemplateRef('heroRef')
 const mediaRef = useTemplateRef('mediaRef')
+
+const svg = await useSvg(block.logo?.filename)
 
 onMounted(async () => {
   if (!heroRef.value || !mediaRef.value) {
@@ -51,7 +54,6 @@ onUnmounted(() => {
 <template>
   <div
     v-editable="block"
-    data-component="hero"
     class="hero relative w-full min-h-svh overflow-hidden grid place-items-center"
   >
     <div
@@ -63,17 +65,26 @@ onUnmounted(() => {
       class="hero__content relative z-1 size-full flex flex-col items-center justify-center"
     >
       <div class="flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
-        <div v-if="block.logo">
-          <NuxtImg
-            class="block w-auto h-15 md:h-25"
-            :src="block.logo.filename || ''"
-            :alt="block.logo.alt || ''"
-            :height="100"
-            densities="x1 x2"
-            format="webp"
-            loading="lazy"
+        <template v-if="block.logo?.filename">
+          <div
+            v-if="svg"
+            class="hero__logo"
+            v-html="svg"
           />
-        </div>
+
+          <div
+            v-else
+            class="hero__logo"
+          >
+            <NuxtImg
+              :src="block.logo.filename || ''"
+              :alt="block.logo.alt || ''"
+              :height="100"
+              densities="x1 x2"
+              loading="lazy"
+            />
+          </div>
+        </template>
 
         <div
           v-if="storyblokRichTextContent(block.headline)"
@@ -81,6 +92,13 @@ onUnmounted(() => {
         >
           <StoryblokText :html="block.headline" />
         </div>
+
+        <h1
+          v-else-if="!storyblokRichTextContent(block.headline) && name"
+          class="sr-only"
+        >
+          {{ name }}
+        </h1>
 
         <div
           v-if="storyblokRichTextContent(block.text)"
@@ -111,10 +129,6 @@ onUnmounted(() => {
           xl:100vw
           2xl:100vw
         "
-        format="webp"
-        :modifiers="{
-          smart: true,
-        }"
       />
 
       <UiMuxVideo
@@ -142,6 +156,24 @@ onUnmounted(() => {
 
   &.is-light {
     --tint: var(--color-offwhite);
+  }
+}
+
+.hero__logo {
+  :deep(svg) {
+    display: block;
+    width: 85cqw;
+    max-width: max-content;
+    height: auto;
+    color: currentColor;
+    transition: color var(--app-transition-duration) var(--app-transition-ease);
+  }
+
+  :deep(img) {
+    display: block;
+    width: 85cqw;
+    max-width: max-content;
+    height: auto;
   }
 }
 

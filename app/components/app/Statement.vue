@@ -32,10 +32,6 @@ const { media, statement, title, link } = defineProps<Props>()
           2xl:100vw
         "
         loading="lazy"
-        format="webp"
-        :modifiers="{
-          smart: true,
-        }"
       />
 
       <UiMuxVideo

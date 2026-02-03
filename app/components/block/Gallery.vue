@@ -72,7 +72,6 @@ const getSizes = (index: number) => {
 <template>
   <div
     v-editable="block"
-    data-component="gallery"
     class="wrapper-max flex flex-col gap-16 md:gap-24"
   >
     <h2 class="type-h5 text-balance max-w-[36ch]">
@@ -100,10 +99,6 @@ const getSizes = (index: number) => {
           :width="3"
           :height="2"
           :sizes="getSizes(index)"
-          format="webp"
-          :modifiers="{
-            smart: true,
-          }"
           loading="lazy"
         />
       </li>

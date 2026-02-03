@@ -12,7 +12,6 @@ const media = computed(() => block.media?.[0])
 <template>
   <div
     v-editable="block"
-    data-component="impact-details"
     class="grid gap-y-10 md:gap-y-20"
   >
     <UiContent
@@ -40,11 +39,7 @@ const media = computed(() => block.media?.[0])
           :alt="media.image.alt || ''"
           :width="500"
           :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 500)"
-          quality="85"
           loading="lazy"
-          :modifiers="{
-            smart: true,
-          }"
         />
       </div>
 

@@ -25,10 +25,6 @@ const { slug, image, tagline, headline } = defineProps<Props>()
           :alt="image.alt || headline || ''"
           :width="500"
           :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
-          quality="85"
-          :modifiers="{
-            smart: true,
-          }"
         />
       </div>
 

@@ -1,4 +1,4 @@
-const formatDate = (dateString: string): string => {
+const formatDateEditorial = (dateString: string): string => {
   const date = new Date(dateString)
   const day = date.getDate()
 
@@ -24,9 +24,28 @@ const formatDate = (dateString: string): string => {
   return `${day}${getOrdinalSuffix(day)} ${monthYear}`
 }
 
+const formatDateDMY = (dateString: string): string => {
+  const date = new Date(dateString)
+
+  const formatter = new Intl.DateTimeFormat('en-GB', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  })
+
+  const parts = formatter.formatToParts(date)
+
+  const day = parts.find(p => p.type === 'day')?.value
+  const month = parts.find(p => p.type === 'month')?.value
+  const year = parts.find(p => p.type === 'year')?.value
+
+  return `${day}.${month}.${year}`
+}
+
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
 export {
-  formatDate,
+  formatDateDMY,
+  formatDateEditorial,
   wait,
 }

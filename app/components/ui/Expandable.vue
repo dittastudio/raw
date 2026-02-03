@@ -41,10 +41,7 @@ const contentClasses = computed(() => {
 </script>
 
 <template>
-  <div
-    data-component="ui-expandable"
-    :class="wrapperClasses"
-  >
+  <div :class="wrapperClasses">
     <div :class="contentClasses">
       <slot />
     </div>

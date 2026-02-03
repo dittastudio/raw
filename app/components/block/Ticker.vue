@@ -13,7 +13,6 @@ const media = computed(() => block.media?.[0] || null)
 <template>
   <div
     v-editable="block"
-    data-component="ticker"
     class="relative overflow-hidden py-20 md:py-36"
   >
     <div
@@ -27,12 +26,7 @@ const media = computed(() => block.media?.[0] || null)
         :alt="media.image.alt || ''"
         :width="16"
         :height="9"
-        format="webp"
         loading="lazy"
-        :modifiers="{
-          smart: true,
-        }"
-        quality="85"
         sizes="
           100vw
           xs:100vw
@@ -78,7 +72,6 @@ const media = computed(() => block.media?.[0] || null)
               :alt="logo.alt || ''"
               height="40"
               densities="x1 x2"
-              format="webp"
               loading="lazy"
             />
           </template>

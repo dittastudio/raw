@@ -46,9 +46,9 @@ export interface BlockGallery {
 }
 
 export interface BlockHero {
+  logo?: StoryblokAsset;
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
-  logo?: StoryblokAsset;
   media?: (MuxVideo | Image)[];
   theme?: number | string;
   component: "block_hero";
@@ -126,6 +126,12 @@ export interface BlockMuxVideo {
   loop?: boolean;
   theme?: number | string;
   component: "block_mux_video";
+  _uid: string;
+}
+
+export interface BlockNextEvent {
+  theme?: number | string;
+  component: "block_next_event";
   _uid: string;
 }
 
@@ -267,6 +273,7 @@ export interface Page {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMuxVideo
+    | BlockNextEvent
     | BlockPosts
     | BlockProjects
     | BlockSplitText
@@ -302,6 +309,7 @@ export interface Post {
   seo_description?: string;
   seo_image?: StoryblokAsset;
   blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
+  event_datetime?: string;
   component: "post";
   _uid: string;
 }
@@ -372,6 +380,7 @@ export interface Project {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMuxVideo
+    | BlockNextEvent
     | BlockPosts
     | BlockProjects
     | BlockSplitText

@@ -62,6 +62,9 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
       category: {
         in: currentCategory.value?.value,
       },
+      // component: {
+      //   in: 'post,project',
+      // },
     },
   })
 
@@ -98,7 +101,6 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
 <template>
   <div
     v-editable="block"
-    data-component="posts"
     class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">

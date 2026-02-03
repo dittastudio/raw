@@ -11,7 +11,6 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-editable="block"
-    data-component="carousel"
     class="flex flex-col gap-y-30"
   >
     <UiContent
@@ -47,10 +46,6 @@ const { block } = defineProps<Props>()
             "
             :width="16"
             :height="9"
-            format="webp"
-            :modifiers="{
-              smart: true,
-            }"
             loading="lazy"
           />
 

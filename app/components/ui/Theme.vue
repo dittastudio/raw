@@ -35,6 +35,7 @@ onMounted(() => {
   }
 
   let rootMargin = '-50% 0px -50% 0px'
+
   if (isHero) {
     rootMargin = '-100% 0px 0px 0px'
   }
@@ -71,7 +72,7 @@ onUnmounted(() => {
 <template>
   <div
     ref="themeRef"
-    :class="force ? getThemeClasses[theme] : ''"
+    :class="force ? getThemeClasses[theme] : undefined"
   >
     <slot />
   </div>
