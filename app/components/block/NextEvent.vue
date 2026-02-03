@@ -76,7 +76,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
           </template>
         </p>
 
-        <h2 class="type-h4">
+        <h2 class="type-h4 max-w-[30em] text-balance">
           {{ event?.name ? event.name : `There are no upcoming events at this time. Please check back soon.` }}
         </h2>
       </div>
@@ -84,7 +84,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
 
     <div
       v-if="event?.preview_image"
-      class="col-start-1 col-span-full md:col-span-7 max-md:order-1"
+      class="col-start-1 col-span-full md:col-span-7 max-md:order-1 flex flex-col gap-6 md:gap-10"
     >
       <NuxtImg
         v-if="event.preview_image.filename && storyblokAssetType(event.preview_image.filename) === 'image'"
@@ -95,6 +95,8 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
         :height="Math.round(storyblokImageDimensions(event.preview_image.filename).height / storyblokImageDimensions(event.preview_image.filename).width * 500)"
         loading="lazy"
       />
+
+      <UiPartnershipButton />
     </div>
 
     <div

@@ -20,3 +20,28 @@
 @custom-variant only-hover (@media (hover: hover));
 
 @custom-variant only-touch (@media (hover: none));
+
+@utility scroll-x {
+  scrollbar-width: none; /* for Firefox */
+  scroll-snap-type: x mandatory;
+  overflow: auto hidden;
+  overscroll-behavior-x: contain;
+  max-width: 100%;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    scroll-behavior: smooth;
+  }
+
+  @supports (-moz-appearance: none) {
+    /*
+      Disable in FF due to https://bugzilla.mozilla.org/show_bug.cgi?id=1744289
+      using @supports https://stackoverflow.com/a/32455002
+    */
+    scroll-snap-type: none;
+  }
+}

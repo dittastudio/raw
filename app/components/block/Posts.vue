@@ -103,89 +103,95 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
     v-editable="block"
     class="w-full"
   >
-    <div class="wrapper-max flex flex-col items-start justify-center gap-22">
-      <div class="w-full flex flex-col items-start justify-center gap-6">
+    <div class="flex flex-col gap-16 overflow-hidden">
+      <div class="w-full flex flex-col">
         <FilterDatasource
           v-if="categories.length"
           slug="category"
           :entries="categories"
         >
           <template #default="{ filters, applied }">
-            <h2 class="type-display-28">
+            <h2 class="type-display-28 wrapper-max">
               {{ applied.item?.name ? applied.item.name === 'All' ? 'All Posts' : applied.item.name : 'All Posts' }}
             </h2>
 
-            <ul class="w-full flex items-center justify-start gap-4 md:gap-5">
-              <li
-                v-for="filter in filters"
-                :key="filter.id"
-                class="type-h5 flex items-center justify-center not-last:after:content-['|'] after:ml-4 md:after:ml-5"
-              >
-                <NuxtLink
-                  :to="filter.to"
-                  class="block hover:opacity-100 transition-opacity duration-200 ease-out whitespace-nowrap"
-                  :class="[
-                    {
-                      'opacity-40': applied.slug !== filter.value,
-                      'opacity-100': applied.slug === filter.value || (!applied.slug && !filter.value),
-                    },
-                  ]"
-                >
-                  {{ filter.name }}
-                </NuxtLink>
-              </li>
-            </ul>
+            <div class="scroll-x">
+              <div class="wrapper-max">
+                <ul class="w-full flex items-center justify-start gap-4 md:gap-5">
+                  <li
+                    v-for="filter in filters"
+                    :key="filter.id"
+                    class="type-h5 flex items-center justify-center not-last:after:content-['|'] after:ml-4 md:after:ml-5"
+                  >
+                    <NuxtLink
+                      :to="filter.to"
+                      class="block hover:opacity-100 transition-opacity duration-200 ease-out whitespace-nowrap py-6"
+                      :class="[
+                        {
+                          'opacity-40': applied.slug !== filter.value,
+                          'opacity-100': applied.slug === filter.value || (!applied.slug && !filter.value),
+                        },
+                      ]"
+                    >
+                      {{ filter.name }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </template>
         </FilterDatasource>
       </div>
 
-      <Transition
-        name="fade"
-        mode="out-in"
-      >
-        <div
-          v-if="posts?.length"
-          :key="`posts-key-${$route.fullPath}`"
-          class="w-full flex flex-col items-start justify-center gap-22"
+      <div class="wrapper-max">
+        <Transition
+          name="fade"
+          mode="out-in"
         >
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-(--app-inner-gutter) gap-y-(--app-outer-gutter) w-full">
-            <li
-              v-for="post in posts"
-              :key="post.uuid"
-            >
-              <CardPost
-                :headline="post.name"
-                :slug="post.full_slug"
-                :image="post.hero"
-                :category="getCategoryEntry(post.category, categories)?.name"
-              />
-            </li>
-          </ul>
-
           <div
-            v-if="hasMore && posts.length <= 100"
-            class="w-full flex flex-col items-center justify-center"
+            v-if="posts?.length"
+            :key="`posts-key-${$route.fullPath}`"
+            class="w-full flex flex-col items-start justify-center gap-22"
           >
-            <NuxtLink
-              :to="{
-                path: $route.path,
-                query: { ...$route.query, page: ((Number($route.query.page) || 1) + 1).toString() },
-              }"
-            >
-              <UiButton>
-                Load more
-              </UiButton>
-            </NuxtLink>
-          </div>
-        </div>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-(--app-inner-gutter) gap-y-(--app-outer-gutter) w-full">
+              <li
+                v-for="post in posts"
+                :key="post.uuid"
+              >
+                <CardPost
+                  :headline="post.name"
+                  :slug="post.full_slug"
+                  :image="post.hero"
+                  :category="getCategoryEntry(post.category, categories)?.name"
+                />
+              </li>
+            </ul>
 
-        <p
-          v-else
-          class="type-mono-16"
-        >
-          There are no posts available for {{ currentCategory?.name || 'this filter' }}.
-        </p>
-      </Transition>
+            <div
+              v-if="hasMore && posts.length <= 100"
+              class="w-full flex flex-col items-center justify-center"
+            >
+              <NuxtLink
+                :to="{
+                  path: $route.path,
+                  query: { ...$route.query, page: ((Number($route.query.page) || 1) + 1).toString() },
+                }"
+              >
+                <UiButton>
+                  Load more
+                </UiButton>
+              </NuxtLink>
+            </div>
+          </div>
+
+          <p
+            v-else
+            class="type-mono-16"
+          >
+            There are no posts available for {{ currentCategory?.name || 'this filter' }}.
+          </p>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
