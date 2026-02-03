@@ -18,6 +18,8 @@
    - `components/app/`: Site UI (Header, Footer, Navigation)
    - `components/ui/`: Reusable UI (Button, Carousel, Expandable)
    - `components/storyblok/`: Storyblok helpers (Link, Text for richtext)
+   - `components/card/`: Content cards (Author, Event, Person, Post, Project)
+   - `components/effect/`: Animation wrappers (MorphGradient, TextReveal using GSAP)
 
 3. **Storyblok Integration**:
    ```typescript
@@ -32,17 +34,42 @@
    // vs: story.value.name, story.value.slug (story metadata)
    ```
 
+4. **Storyblok API Queries** (for direct API calls like filtering/sorting):
+   ```typescript
+   const storyblokApi = useStoryblokApi()
+   const { data } = await storyblokApi.get('cdn/stories', {
+     content_type: 'post',
+     sort_by: 'content.event_datetime:asc',  // Sort by content field: content.<field>:<asc|desc>
+     filter_query: {
+       category: { in: 'events' },
+       event_datetime: { gt_date: `${today} 00:01` },  // Storyblok date filter format
+     },
+   })
+   ```
+
 ## Development Workflow
 
 ### Commands
 ```bash
 npm run dev              # Auto-runs sb:generate then starts dev server
+npm run dev:ssl          # SSL proxy for visual editor (port 3010 → 3000)
 npm run sb:generate      # Pull components + generate types
 npm run lint:fix         # ESLint with @antfu/eslint-config
+npm run build            # Production build
+npm run generate         # Static site generation
 
 # Migration (from /migration dir)
 npm run migrate          # WordPress to Storyblok migration
 ```
+
+### Commit Conventions
+Uses Commitlint with Conventional Commits:
+```bash
+git commit -m "feat(blog): add post filtering"
+git commit -m "fix: resolve image dimension extraction"
+git commit -m "chore: regenerate storyblok types"
+```
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`
 
 ### Storyblok Type Generation Flow
 1. Schema changes made in Storyblok CMS
@@ -148,6 +175,36 @@ storyblokSlug(path)                    // '/' → '/home', strip trailing slashe
 determineHref(link)                    // Handle email/story/url link types
 ```
 
+### Date Helpers ([app/utils/helpers.ts](app/utils/helpers.ts))
+
+```typescript
+formatDateEditorial(dateString)        // "1st January 2026"
+formatDateDMY(dateString)              // "01.01.2026"
+```
+
+### Server API Routes (`server/api/`)
+
+| Endpoint | Method | Purpose |
+|----------|--------|--------|
+| `/api/mux-assets` | GET | Fetch Mux video assets (filtered to ready/public) |
+| `/api/oembed` | POST | oEmbed proxy for YouTube, Vimeo, Dailymotion embeds |
+| `/api/sitemap` | GET | Dynamic sitemap from Storyblok stories |
+
+### Theming System
+
+Pages support dynamic themes via hero blocks. Themes: `dark`, `light`, `blue`, `green`, `pink`, `purple`
+
+```typescript
+// In catch-all route, theme is applied from first hero block
+useInitialTheme(story.value.content.blocks)  // Sets CSS custom properties on <html>
+
+// Theme colors defined in app/utils/theme.ts
+// Types defined in types/app.d.ts
+type Themes = 'dark' | 'light' | 'blue' | 'green' | 'pink' | 'purple'
+```
+
+CSS variables set by theme: `--app-background-color`, `--app-text-color`, `--app-button-background-color`, `--app-button-text-color`
+
 ### ESLint Rules ([eslint.config.mjs](eslint.config.mjs))
 
 Custom overrides on @antfu/eslint-config:
@@ -189,6 +246,8 @@ NUXT_STORYBLOK_MANAGEMENT_TOKEN=   # Management API (for migrations)
 NUXT_STORYBLOK_SPACE_ID=           # 289672313529140
 NUXT_STORYBLOK_VERSION=            # 'draft' or 'published'
 NUXT_PRERENDER=                    # 'true' for SSG
+NUXT_MUX_ACCESS_TOKEN=             # Mux video API access token
+NUXT_MUX_SECRET_KEY=               # Mux video API secret
 ```
 
 ## Key Dependencies
@@ -204,9 +263,14 @@ NUXT_PRERENDER=                    # 'true' for SSG
 ## File References
 
 - [app/composables/useStory.ts](app/composables/useStory.ts) - Custom Storyblok story fetcher
+- [app/composables/useInitialTheme.ts](app/composables/useInitialTheme.ts) - Dynamic page theming
 - [app/pages/[...slug].vue](app/pages/[...slug].vue) - Catch-all route handler with SEO
 - [app/utils/storyblok.ts](app/utils/storyblok.ts) - Storyblok helper functions
+- [app/utils/helpers.ts](app/utils/helpers.ts) - Date formatting utilities
+- [app/utils/theme.ts](app/utils/theme.ts) - Theme color definitions
 - [app/utils/twMerge.ts](app/utils/twMerge.ts) - Tailwind merge config
+- [types/app.d.ts](types/app.d.ts) - App-level TypeScript types
+- [server/api/](server/api/) - Nitro API routes (Mux, oEmbed, sitemap)
 - [migration/migrate.ts](migration/migrate.ts) - WordPress migration script
 - [migration/utils.ts](migration/utils.ts) - Migration utilities
 - [.storyblok/types/289672313529140/storyblok-components.d.ts](.storyblok/types/289672313529140/storyblok-components.d.ts) - Auto-generated types

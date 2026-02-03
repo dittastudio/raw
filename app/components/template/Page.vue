@@ -91,6 +91,11 @@ const { story } = defineProps<Props>()
         :block="block"
       />
 
+      <BlockPastEvents
+        v-else-if="block.component === 'block_past_events'"
+        :block="block"
+      />
+
       <BlockPosts
         v-else-if="block.component === 'block_posts'"
         :block="block"
