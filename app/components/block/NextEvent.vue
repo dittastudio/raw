@@ -13,14 +13,12 @@ interface EventPost {
   uuid: string
   name: string
   full_slug: string
-  first_published_at?: string
   preview_image: Post['preview_image'] | Post['hero']
   preview_text: Post['preview_text']
-  category: Post['category']
   eventDatetime: Post['event_datetime']
 }
 
-const { data: post } = await useAsyncData(() => `next-event`, async () => {
+const { data: event } = await useAsyncData(() => `next-event`, async () => {
   const today = new Date().toISOString().split('T')[0] // Format: YYYY-MM-DD
 
   const { data } = await storyblokApi.get('cdn/stories', {
@@ -43,18 +41,16 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
   return data.stories as ISbStoryData<Post>[]
 }, {
   transform: (payload: ISbStoryData<Post>[]): EventPost | undefined => {
-    const posts = payload.map(post => ({
+    const events = payload.map(post => ({
       uuid: post.uuid,
       name: post.name,
       full_slug: post.full_slug,
-      first_published_at: post.first_published_at ?? undefined,
       preview_image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero?.filename ? post.content.hero : undefined,
       preview_text: post.content.preview_text,
-      category: post.content.category,
-      eventDatetime: post.content.event_datetime ?? undefined,
+      eventDatetime: post.content.event_datetime,
     }))
 
-    return posts.length ? posts[0] : undefined
+    return events.length ? events[0] : undefined
   },
 })
 </script>
@@ -75,44 +71,44 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
         <p class="type-h2">
           <span class="is-outlined block">Next event</span>
 
-          <template v-if="post?.eventDatetime">
-            {{ formatDateDMY(post.eventDatetime) }}
+          <template v-if="event?.eventDatetime">
+            {{ formatDateDMY(event.eventDatetime) }}
           </template>
         </p>
 
         <h2 class="type-h4">
-          {{ post?.name ? post.name : `There are no upcoming events at this time. Please check back soon.` }}
+          {{ event?.name ? event.name : `There are no upcoming events at this time. Please check back soon.` }}
         </h2>
       </div>
     </div>
 
     <div
-      v-if="post?.preview_image"
+      v-if="event?.preview_image"
       class="col-start-1 col-span-full md:col-span-7 max-md:order-1"
     >
       <NuxtImg
-        v-if="post.preview_image.filename && storyblokAssetType(post.preview_image.filename) === 'image'"
+        v-if="event.preview_image.filename && storyblokAssetType(event.preview_image.filename) === 'image'"
         class="block w-full h-auto"
-        :src="post.preview_image.filename"
-        :alt="post.preview_image.alt || ''"
+        :src="event.preview_image.filename"
+        :alt="event.preview_image.alt || ''"
         :width="500"
-        :height="Math.round(storyblokImageDimensions(post.preview_image.filename).height / storyblokImageDimensions(post.preview_image.filename).width * 500)"
+        :height="Math.round(storyblokImageDimensions(event.preview_image.filename).height / storyblokImageDimensions(event.preview_image.filename).width * 500)"
         loading="lazy"
       />
     </div>
 
     <div
-      v-if="post"
+      v-if="event"
       class="flex flex-col gap-6 md:gap-10 col-start-2 sm:col-start-5 md:col-start-9 col-span-full"
     >
       <p
-        v-if="post.preview_text"
+        v-if="event.preview_text"
         class="type-p text-pretty max-w-[24em]"
       >
-        {{ post.preview_text }}
+        {{ event.preview_text }}
       </p>
 
-      <NuxtLink :to="`/${post.full_slug}`">
+      <NuxtLink :to="`/${event.full_slug}`">
         <UiButton type="solid">
           Learn more
         </UiButton>
