@@ -15,7 +15,7 @@
         ease-(--app-transition-ease)
         text-[4.5cqi]
         aspect-295/35
-        px-[5.5%]
+        px-[7.5%]
         pb-[0.5cqi]
       "
     >
