@@ -16,8 +16,8 @@ const { story } = defineProps<Props>()
     v-for="(block, index) in story.content.blocks"
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
-    :force="block.component === 'block_hero' || block.component === 'block_hero_brand'"
-    :is-hero="block.component === 'block_hero' || block.component === 'block_hero_brand'"
+    :force="setForcedTheme(block)"
+    :is-hero="isHeroBlock(block)"
     :is-after-hero="index > 0 && ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index - 1]?.component ?? '')"
   >
     <section
