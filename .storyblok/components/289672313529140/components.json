@@ -994,6 +994,40 @@
     "metadata": {}
   },
   {
+    "name": "block_past_events",
+    "display_name": "Past Events",
+    "description": "Displays some recent past events.",
+    "created_at": "2026-02-03T12:47:57.434Z",
+    "updated_at": "2026-02-03T12:56:25.270Z",
+    "id": 141038704378105,
+    "schema": {
+      "theme": {
+        "type": "option",
+        "pos": 0,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "exclude_empty_option": true,
+        "id": "tBcrltXqQM2LYF707lff1g"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Past Events",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "share-2",
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_posts",
     "display_name": "Posts",
     "description": "Gets latest posts with filtering.",
@@ -1993,7 +2027,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-02-02T20:54:43.846Z",
+    "updated_at": "2026-02-03T13:18:29.527Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -2017,9 +2051,24 @@
         "entry_appearance": "card",
         "id": "EZb54pc2SE28YuJxQdX7_g"
       },
+      "preview_image": {
+        "type": "asset",
+        "pos": 2,
+        "id": "e-Ml53GJTYqcJ_2D2Wp8bA",
+        "filetypes": [
+          "images"
+        ],
+        "description": "Image that is shown when featured around the site.\n"
+      },
+      "preview_text": {
+        "type": "text",
+        "pos": 3,
+        "id": "3EwhUpJeQOSvlDn825PI-Q",
+        "description": "Text that is shown when featured around the site."
+      },
       "category": {
         "type": "option",
-        "pos": 2,
+        "pos": 4,
         "source": "internal",
         "datasource_slug": "post-category",
         "exclude_empty_option": true,
@@ -2027,12 +2076,19 @@
         "id": "YsFi5nf_SnqY-8m3_FpyxQ",
         "use_uuid": true
       },
+      "event_datetime": {
+        "type": "datetime",
+        "pos": 5,
+        "display_name": "Event Date/Time",
+        "description": "If this is an event you can set the date and time.",
+        "id": "KhEEDxgQTrSfosMbRKjddA"
+      },
       "tab-87c5d3eb-2390-40c7-afd8-e24b263999e5": {
         "display_name": "Content",
         "keys": [
           "blocks"
         ],
-        "pos": 3,
+        "pos": 6,
         "type": "tab",
         "id": "h8XT6yOQQMev2OJLJjmZ5Q"
       },
@@ -2043,28 +2099,28 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 4,
+        "pos": 7,
         "type": "tab",
         "id": "0b4UYYtET1WJUPupaYLE-Q",
         "name": "tab-d1be1461-8b44-4f55-8950-fba96982c4f9"
       },
       "seo_title": {
         "type": "text",
-        "pos": 5,
+        "pos": 8,
         "id": "osiPAj9TRe6WAZ5q-rIDoQ",
         "required": false,
         "display_name": "Title"
       },
       "seo_description": {
         "type": "text",
-        "pos": 6,
+        "pos": 9,
         "id": "Y1niTZM1RQKGc_rzdC4Bdg",
         "required": false,
         "display_name": "Description"
       },
       "seo_image": {
         "type": "asset",
-        "pos": 7,
+        "pos": 10,
         "required": false,
         "filetypes": [
           "images"
@@ -2074,7 +2130,7 @@
       },
       "blocks": {
         "type": "bloks",
-        "pos": 8,
+        "pos": 11,
         "id": "F8gsyVNHRcuIjE6vuldKjw",
         "restrict_type": "",
         "restrict_components": true,
@@ -2089,13 +2145,6 @@
           "post_wistia"
         ],
         "component_denylist": []
-      },
-      "event_datetime": {
-        "type": "datetime",
-        "pos": 9,
-        "display_name": "Event Date/Time",
-        "description": "If this is an event you can set the date and time.",
-        "id": "KhEEDxgQTrSfosMbRKjddA"
       }
     },
     "image": null,
@@ -2386,24 +2435,24 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-01-28T19:07:50.926Z",
+    "updated_at": "2026-02-03T13:12:43.229Z",
     "id": 131189203587517,
     "schema": {
-      "preview": {
+      "preview_image": {
         "type": "asset",
         "pos": 0,
         "required": true,
         "filetypes": [
           "images"
         ],
-        "description": "Image that is shown when this project is featured around the site.",
+        "description": "Image that is shown when featured around the site.",
         "id": "vEqi-5wSSZGBjrbVs1qM-A"
       },
-      "tagline": {
+      "preview_text": {
         "type": "text",
         "pos": 1,
         "required": true,
-        "description": "Text that is shown with the project when featured around the site.",
+        "description": "Text that is shown when featured around the site.",
         "id": "-nz7o1nxRY-Z6czHa_YOsA"
       },
       "category": {

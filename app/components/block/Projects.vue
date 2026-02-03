@@ -83,8 +83,8 @@ const projects = computed(() => {
             >
               <CardProject
                 :slug="project.full_slug"
-                :image="project.content.preview"
-                :tagline="project.content.tagline"
+                :image="project.content.preview_image"
+                :tagline="project.content.preview_text"
                 :headline="project.name"
               />
             </li>
