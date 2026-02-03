@@ -246,7 +246,7 @@ NUXT_STORYBLOK_MANAGEMENT_TOKEN=   # Management API (for migrations)
 NUXT_STORYBLOK_SPACE_ID=           # 289672313529140
 NUXT_STORYBLOK_VERSION=            # 'draft' or 'published'
 NUXT_PRERENDER=                    # 'true' for SSG
-NUXT_MUX_ACCESS_TOKEN=             # Mux video API token
+NUXT_MUX_ACCESS_TOKEN=             # Mux video API access token
 NUXT_MUX_SECRET_KEY=               # Mux video API secret
 ```
 
