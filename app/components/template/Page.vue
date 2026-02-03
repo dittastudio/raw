@@ -9,6 +9,19 @@ interface Props {
 }
 
 const { story } = defineProps<Props>()
+
+const forceTheme = (block: any) => {
+  if (block.component === 'block_hero' || block.component === 'block_hero_brand') {
+    return true
+  }
+
+  // If Testimonials has background image.
+  else if (block.component === 'block_testimonials' && block.media?.[0]) {
+    return true
+  }
+
+  return false
+}
 </script>
 
 <template>
@@ -16,7 +29,7 @@ const { story } = defineProps<Props>()
     v-for="(block, index) in story.content.blocks"
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
-    :force="block.component === 'block_hero' || block.component === 'block_hero_brand'"
+    :force="forceTheme(block)"
     :is-hero="block.component === 'block_hero' || block.component === 'block_hero_brand'"
     :is-after-hero="index > 0 && ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index - 1]?.component ?? '')"
   >

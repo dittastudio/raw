@@ -25,14 +25,14 @@ const handleAnimationEnd = () => {
       outline-(--app-text-color)/10
       rounded-full
       before:content-['']
-      before:absolute before:w-[1px]
-      before:h-[50%]
+      before:absolute before:w-px
+      before:h-1/2
       before:bg-current
       before:rounded-full
       after:content-['']
       after:absolute
-      after:w-[50%]
-      after:h-[1px]
+      after:w-1/2
+      after:h-px
       after:bg-current
       after:rounded-full
     "
