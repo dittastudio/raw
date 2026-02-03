@@ -1,5 +1,5 @@
 <template>
-  <div class="@container type-p max-w-80">
+  <div class="@container type-p max-w-84">
     <div
       class="
         mask-image
@@ -8,19 +8,20 @@
         flex
         items-center
         justify-between
-        bg-offblack
-        text-white
+        bg-(--app-button-background-color)
+        text-(--app-button-text-color)
+        transition-colors
+        duration-(--app-transition-duration)
+        ease-(--app-transition-ease)
         text-[4.5cqi]
         aspect-295/35
         px-[5.5%]
       "
     >
-      <span class="left">In partnership with</span>
+      In partnership with
 
       <svg
         class="relative top-[3cqi] left-[1cqi] w-[22cqi] h-auto aspect-65/34"
-        width="65"
-        height="34"
         viewBox="0 0 65 34"
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
