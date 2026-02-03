@@ -48,7 +48,7 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
       name: post.name,
       full_slug: post.full_slug,
       first_published_at: post.first_published_at ?? undefined,
-      preview_image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero,
+      preview_image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero?.filename ? post.content.hero : undefined,
       preview_text: post.content.preview_text,
       category: post.content.category,
       eventDatetime: post.content.event_datetime ?? undefined,
