@@ -26,7 +26,7 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
     content_type: 'post',
     page: 1,
     per_page: 1,
-    sort_by: 'first_published_at:desc',
+    sort_by: 'content.event_datetime:asc',
     version: 'published',
     excluding_fields: 'blocks,seo_title,seo_description,seo_image',
     filter_query: {
@@ -36,9 +36,6 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
       event_datetime: {
         gt_date: `${today} 00:01`, // Only events after today
       },
-      // component: {
-      //   in: 'post,project',
-      // },
     },
   })
 
