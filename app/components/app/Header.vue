@@ -118,7 +118,7 @@ watchEffect(() => {
       'opacity-0 -translate-y-2': hideHeader,
       'transition-[opacity,translate] duration-300 ease-out': ready,
     }"
-    class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10"
+    class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-100"
     @mouseenter="handleMouseEnter"
   >
     <NuxtLink
