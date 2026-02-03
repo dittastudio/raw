@@ -95,7 +95,7 @@ const { block } = defineProps<Props>()
 
         <div
           v-if="storyblokRichTextContent(block.copy)"
-          class="[&_p]:max-w-[34ch]"
+          class="prose-p"
         >
           <StoryblokText :html="block.copy" />
         </div>

@@ -182,6 +182,12 @@ export interface BlockTestimonials {
   _uid: string;
 }
 
+export interface BlockText {
+  copy?: StoryblokRichtext;
+  component: "block_text";
+  _uid: string;
+}
+
 export interface BlockTicker {
   media?: (MuxVideo | Image)[];
   text?: string;
@@ -286,6 +292,7 @@ export interface Page {
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
+    | BlockText
     | BlockTicker
     | BlockTruths
     | BlockWorkText
@@ -396,6 +403,7 @@ export interface Project {
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
+    | BlockText
     | BlockTicker
     | BlockTruths
     | BlockWorkText

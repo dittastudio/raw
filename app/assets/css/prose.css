@@ -99,7 +99,7 @@
   }
 }
 
-@utility prose-base {
+@utility prose-p {
   @apply prose;
 
   & p {
@@ -107,5 +107,50 @@
 
     text-wrap: pretty;
     max-width: 55ch;
+  }
+}
+
+@utility prose-all {
+  @apply prose;
+
+  & * + :is(h1, h2, h3, h4, h5, h6) {
+    margin-block-start: 2em;
+    margin-block-start: 2lh;
+  }
+
+  & :is(h1, h2, h3, h4, h5, h6):has(+ p) {
+    margin-block-end: 0.75em;
+    margin-block-end: 0.75lh;
+  }
+
+  & h1 {
+    @apply type-h1;
+  }
+
+  & h1:first-child {
+    margin-block: 3em;
+    margin-block: 3lh;
+  }
+
+  & h2 {
+    @apply type-h2;
+  }
+
+  & h3 {
+    @apply type-h3;
+  }
+
+  & h4 {
+    @apply type-h4;
+  }
+
+  & h5, h6 {
+    @apply type-h5;
+  }
+
+  & p {
+    @apply type-p;
+
+    text-wrap: pretty;
   }
 }

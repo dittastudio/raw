@@ -53,7 +53,7 @@ const { block } = defineProps<Props>()
             v-if="storyblokRichTextContent(item.copy)"
             class="
               carousel__copy
-              prose-base
+              prose-p
               absolute
               inset-0
               pb-[calc(var(--app-outer-gutter)*3)]

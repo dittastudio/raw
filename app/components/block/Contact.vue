@@ -26,7 +26,7 @@ const { block } = defineProps<Props>()
       </div>
     </div>
 
-    <ul class="prose-base flex flex-col">
+    <ul class="prose-p flex flex-col">
       <li
         v-for="info in block.info"
         :key="info._uid"
