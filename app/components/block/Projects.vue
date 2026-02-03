@@ -31,73 +31,83 @@ const projects = computed(() => {
     v-editable="block"
     class="w-full"
   >
-    <div class="wrapper-max flex flex-col items-start justify-center gap-22">
-      <div class="w-full flex flex-col items-start justify-center gap-6">
+    <div class="flex flex-col gap-16 overflow-hidden">
+      <div class="w-full flex flex-col">
         <FilterDatasource
           v-if="categories.length"
           slug="category"
           :entries="categories"
         >
           <template #default="{ filters, applied }">
-            <h2 class="type-display-28">
+            <h2 class="type-display-28 wrapper-max">
               {{ applied.item?.name ? applied.item.name === 'All' ? 'All Projects' : applied.item.name : 'All Projects' }}
             </h2>
 
-            <ul class="w-full flex items-center justify-start gap-4 md:gap-5">
-              <li
-                v-for="filter in filters"
-                :key="filter.id"
-                class="type-h5 flex items-center justify-center not-last:after:content-['|'] after:ml-4 md:after:ml-5"
-              >
-                <NuxtLink
-                  :to="filter.to"
-                  class="block hover:opacity-100 transition-opacity duration-200 ease-out whitespace-nowrap"
-                  :class="[
-                    {
-                      'opacity-40': applied.slug !== filter.value,
-                      'opacity-100': applied.slug === filter.value || (!applied.slug && !filter.value),
-                    },
-                  ]"
-                >
-                  {{ filter.name }}
-                </NuxtLink>
-              </li>
-            </ul>
+            <div class="scroll-x">
+              <div class="wrapper-max">
+                <ul class="w-full flex items-center justify-start gap-4 md:gap-5">
+                  <li
+                    v-for="filter in filters"
+                    :key="filter.id"
+                    class="type-h5 flex items-center justify-center not-last:after:content-['|'] after:ml-4 md:after:ml-5"
+                  >
+                    <NuxtLink
+                      :to="filter.to"
+                      class="block hover:opacity-100 transition-opacity duration-200 ease-out whitespace-nowrap py-6"
+                      :class="[
+                        {
+                          'opacity-40': applied.slug !== filter.value,
+                          'opacity-100': applied.slug === filter.value || (!applied.slug && !filter.value),
+                        },
+                      ]"
+                    >
+                      {{ filter.name }}
+                    </NuxtLink>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </template>
         </FilterDatasource>
       </div>
 
-      <Transition
-        name="fade"
-        mode="out-in"
-      >
-        <div
-          v-if="projects?.length"
-          :key="`projects-key-${$route.fullPath}`"
-          class="w-full flex flex-col items-start justify-center gap-22"
+      <div class="wrapper-max">
+        <Transition
+          name="fade"
+          mode="out-in"
         >
-          <ul class="grid grid-cols-1 md:grid-cols-2 gap-(--app-inner-gutter) w-full">
-            <li
-              v-for="project in projects"
-              :key="project.uuid"
-            >
-              <CardProject
-                :slug="project.full_slug"
-                :image="project.content.preview_image"
-                :tagline="project.content.preview_text"
-                :headline="project.name"
-              />
-            </li>
-          </ul>
-        </div>
+          <div
+            v-if="projects?.length"
+            :key="`projects-key-${$route.fullPath}`"
+            class="w-full flex flex-col items-start justify-center gap-22"
+          >
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-12 w-full">
+              <li
+                v-for="(project, index) in projects"
+                :key="project.uuid"
+                :class="{
+                  'md:col-span-2': index % 3 === 2,
+                }"
+              >
+                <CardProject
+                  :slug="project.full_slug"
+                  :image="project.content.preview_image"
+                  :tagline="project.content.preview_text"
+                  :headline="project.name"
+                  :is-large="index % 3 === 2"
+                />
+              </li>
+            </ul>
+          </div>
 
-        <p
-          v-else
-          class="type-mono-16"
-        >
-          There are no projects available for {{ currentCategory?.name || 'this filter' }}.
-        </p>
-      </Transition>
+          <p
+            v-else
+            class="type-mono-16"
+          >
+            There are no projects available for {{ currentCategory?.name || 'this filter' }}.
+          </p>
+        </Transition>
+      </div>
     </div>
   </div>
 </template>

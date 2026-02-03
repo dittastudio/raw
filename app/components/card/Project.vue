@@ -6,18 +6,24 @@ interface Props {
   image?: StoryblokAsset
   tagline?: string
   headline?: string
+  isLarge?: boolean
 }
 
-const { slug, image, tagline, headline } = defineProps<Props>()
+const { slug, image, tagline, headline, isLarge = false } = defineProps<Props>()
 </script>
 
 <template>
   <article class="size-full">
     <NuxtLink
-      class="flex flex-col items-start justify-start gap-6 size-full border-b border-(--app-text-color) pb-6"
+      class="flex flex-col gap-6 size-full border-b border-(--app-text-color) pb-6"
       :to="`/${slug}`"
     >
-      <div class="w-full overflow-hidden aspect-video">
+      <div
+        class="overflow-hidden aspect-video"
+        :class="{
+          'max-md:-mx-(--app-outer-gutter)': isLarge,
+        }"
+      >
         <NuxtImg
           v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
           class="block size-full object-cover"
