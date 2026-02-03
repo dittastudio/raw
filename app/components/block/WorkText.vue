@@ -11,7 +11,6 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-editable="block"
-    data-component="work-text"
     class="
       wrapper-max
       grid

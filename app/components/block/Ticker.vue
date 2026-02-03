@@ -13,7 +13,6 @@ const media = computed(() => block.media?.[0] || null)
 <template>
   <div
     v-editable="block"
-    data-component="ticker"
     class="relative overflow-hidden py-20 md:py-36"
   >
     <div

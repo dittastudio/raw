@@ -29,7 +29,6 @@ const projects = computed(() => {
 <template>
   <div
     v-editable="block"
-    data-component="projects"
     class="w-full"
   >
     <div class="wrapper-max flex flex-col items-start justify-center gap-22">

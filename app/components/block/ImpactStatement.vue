@@ -11,7 +11,6 @@ const { block } = defineProps<Props>()
 <template>
   <div
     v-editable="block"
-    data-component="impact-statement"
     class="flex flex-col gap-36"
   >
     <UiContent

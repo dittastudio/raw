@@ -24,7 +24,6 @@ const attrs = computed(() => ({
   <div
     v-if="block.video && block.video.playbackId"
     v-editable="block"
-    data-component="mux-video"
     class="wrapper-max grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid)"
   >
     <div class="col-span-full lg:col-span-10 lg:col-start-2">

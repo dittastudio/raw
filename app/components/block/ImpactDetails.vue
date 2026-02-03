@@ -12,7 +12,6 @@ const media = computed(() => block.media?.[0])
 <template>
   <div
     v-editable="block"
-    data-component="impact-details"
     class="grid gap-y-10 md:gap-y-20"
   >
     <UiContent

@@ -15,7 +15,6 @@ const accent = computed(() => (block.accent as Themes) ?? 'light')
 <template>
   <div
     v-editable="block"
-    data-component="hover-list"
     class="flex flex-col gap-y-20"
   >
     <UiContent

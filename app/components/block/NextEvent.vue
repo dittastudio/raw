@@ -63,7 +63,6 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
 <template>
   <div
     v-editable="block"
-    data-component="next-event"
     class="w-full"
   >
     <div class="wrapper-max">

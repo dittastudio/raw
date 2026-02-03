@@ -54,7 +54,6 @@ onUnmounted(() => {
 <template>
   <div
     v-editable="block"
-    data-component="hero"
     class="hero relative w-full min-h-svh overflow-hidden grid place-items-center"
   >
     <div

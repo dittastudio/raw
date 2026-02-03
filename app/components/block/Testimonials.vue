@@ -13,7 +13,6 @@ const media = computed(() => block.media?.[0])
 <template>
   <div
     v-editable="block"
-    data-component="testimonials"
     class="py-(--app-vertical-spacing) relative isolate overflow-hidden"
   >
     <div
