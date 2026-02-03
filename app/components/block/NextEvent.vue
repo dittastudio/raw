@@ -58,39 +58,6 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
 </script>
 
 <template>
-  <!-- <div
-    v-editable="block"
-    class="w-full"
-  >
-    <div class="wrapper-max">
-      <template v-if="post">
-        <p
-          v-if="post.eventDatetime"
-          class="type-h2"
-        >
-          <span class="text-outline-offblack block">Next event</span>
-          {{ formatDateDMY(post.eventDatetime) }}
-        </p>
-
-        <h3 class="type-h4">
-          {{ post.name }}
-        </h3>
-
-        <NuxtLink :to="`/${post.full_slug}`">
-          <UiButton type="solid">
-            Learn more
-          </UiButton>
-        </NuxtLink>
-
-        <pre>{{ post }}</pre>
-      </template>
-
-      <template v-else>
-        <p>No upcoming events.</p>
-      </template>
-    </div>
-  </div> -->
-
   <div
     v-if="post"
     v-editable="block"
@@ -158,6 +125,8 @@ const { data: post } = await useAsyncData(() => `next-event`, async () => {
           Learn more
         </UiButton>
       </NuxtLink>
+
+      <UiPartnershipButton />
     </div>
   </div>
 

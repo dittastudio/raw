@@ -135,6 +135,12 @@ export interface BlockNextEvent {
   _uid: string;
 }
 
+export interface BlockPastEvents {
+  theme?: number | string;
+  component: "block_past_events";
+  _uid: string;
+}
+
 export interface BlockPosts {
   theme?: number | string;
   component: "block_posts";
@@ -274,6 +280,7 @@ export interface Page {
     | BlockLogoWall
     | BlockMuxVideo
     | BlockNextEvent
+    | BlockPastEvents
     | BlockPosts
     | BlockProjects
     | BlockSplitText
@@ -304,12 +311,14 @@ export interface Person {
 export interface Post {
   hero?: StoryblokAsset;
   author?: ISbStoryData<Person> | string;
+  preview_image?: StoryblokAsset;
+  preview_text?: string;
   category?: number | string;
+  event_datetime?: string;
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;
   blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
-  event_datetime?: string;
   component: "post";
   _uid: string;
 }
@@ -364,8 +373,8 @@ export interface PostWistia {
 }
 
 export interface Project {
-  preview: StoryblokAsset;
-  tagline: string;
+  preview_image: StoryblokAsset;
+  preview_text: string;
   category: number | string;
   blocks?: (
     | BlockBcorp
@@ -381,6 +390,7 @@ export interface Project {
     | BlockLogoWall
     | BlockMuxVideo
     | BlockNextEvent
+    | BlockPastEvents
     | BlockPosts
     | BlockProjects
     | BlockSplitText
