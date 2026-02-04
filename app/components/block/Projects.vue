@@ -24,6 +24,30 @@ const projects = computed(() => {
   const items = Array.isArray(block.projects) ? block.projects.filter(item => typeof item !== 'string') : []
   return currentCategory.value ? items.filter(project => project.content?.category === currentCategory.value?.value) : items
 })
+
+const setSizes = (isLarge: boolean) => {
+  if (isLarge) {
+    return `
+      2xs:100vw
+      xs:100vw
+      sm:100vw
+      md:100vw
+      lg:100vw
+      xl:100vw
+      2xl:1200px
+    `
+  }
+
+  return `
+    2xs:100vw
+    xs:100vw
+    sm:100vw
+    md:50vw
+    lg:50vw
+    xl:50vw
+    2xl:860px
+  `
+}
 </script>
 
 <template>
@@ -94,7 +118,25 @@ const projects = computed(() => {
                   :image="project.content.preview_image"
                   :tagline="project.content.preview_text"
                   :headline="project.name"
-                />
+                  :logo="project.content.preview_logo"
+                >
+                  <template #image>
+                    <NuxtImg
+                      v-if="project.content.preview_image?.filename && storyblokAssetType(project.content.preview_image.filename) === 'image'"
+                      class="block size-full object-cover aspect-video"
+                      :src="project.content.preview_image.filename"
+                      :alt="project.content.preview_image.alt || project.name || ''"
+                      :width="16"
+                      :height="9"
+                      :sizes="setSizes(index % 3 === 2)"
+                      :modifiers="{
+                        smart: true,
+                      }"
+                      loading="lazy"
+                      format="webp"
+                    />
+                  </template>
+                </CardProject>
               </li>
             </ul>
           </div>

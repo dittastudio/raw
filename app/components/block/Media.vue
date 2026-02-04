@@ -18,7 +18,7 @@ const setSizes = computed(() => {
       md:100vw
       lg:100vw
       xl:100vw
-      2xl:100vw
+      2xl:1400px
     `
   }
 
@@ -29,7 +29,7 @@ const setSizes = computed(() => {
     md:80vw
     lg:80vw
     xl:80vw
-    2xl:1447px
+    2xl:1200px
   `
 })
 </script>

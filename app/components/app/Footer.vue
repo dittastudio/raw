@@ -40,15 +40,25 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
       </div>
 
       <div class="grid-area-combined">
-        <div class="grid-area-contact type-p">
-          <p v-if="email">
-            <NuxtLink :to="`mailto:${email}`">
+        <div class="grid-area-contact type-p flex flex-col gap-1">
+          <p
+            v-if="email"
+          >
+            <NuxtLink
+              class="hover:opacity-60 transition-opacity duration-200 ease-out p-1 -m-1"
+              :to="`mailto:${email}`"
+            >
               {{ email }}
             </NuxtLink>
           </p>
 
-          <p v-if="telephone">
-            <NuxtLink :to="`tel:${telephone}`">
+          <p
+            v-if="telephone"
+          >
+            <NuxtLink
+              class="hover:opacity-60 transition-opacity duration-200 ease-out p-1 -m-1"
+              :to="`tel:${telephone}`"
+            >
               {{ telephone }}
             </NuxtLink>
           </p>
@@ -57,7 +67,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
         <div class="grid-area-location">
           <address
             v-if="address"
-            class="type-p whitespace-pre-line"
+            class="block type-p whitespace-pre-line"
             v-html="address"
           />
         </div>
@@ -65,13 +75,16 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
         <div class="grid-area-links">
           <ul
             v-if="links"
-            class="type-p"
+            class="type-p flex flex-col gap-1"
           >
             <li
               v-for="item in links"
               :key="item._uid"
             >
-              <StoryblokLink :item="item.link">
+              <StoryblokLink
+                class="hover:opacity-60 transition-opacity duration-200 ease-out p-1 -m-1"
+                :item="item.link"
+              >
                 {{ item.title }}
               </StoryblokLink>
             </li>
