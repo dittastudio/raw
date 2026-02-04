@@ -57,7 +57,7 @@ const setSizes = computed(() => {
       />
 
       <UiMuxVideo
-        v-else-if="media && isMuxVideoComponent(media) && media.video?.playbackId"
+        v-else-if="media && isMuxVideoAutoplayComponent(media) && media.video?.playbackId"
         class="block size-full object-cover"
         :playback-id="media.video.playbackId"
         :is-cover="true"
@@ -65,6 +65,15 @@ const setSizes = computed(() => {
         autoplay
         muted
         loop
+      />
+
+      <UiMuxVideo
+        v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId"
+        class="block size-full object-cover"
+        :playback-id="media.video.playbackId"
+        :is-cover="true"
+        playsinline
+        controls
       />
     </div>
   </div>

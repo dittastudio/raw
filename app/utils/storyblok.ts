@@ -1,4 +1,4 @@
-import type { Image, MuxVideo, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Image, MuxVideoAutoplay, MuxVideoPlayer, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokMultilink, StoryblokRichtext } from '@@/.storyblok/types/storyblok'
 import type { ImageModifiers } from '@nuxt/image'
 import type { ISbStoryData } from '@storyblok/js'
@@ -58,14 +58,15 @@ const storyblokRichTextContent = (
 const storyblokSlug = (path: string): string =>
   ['', '/'].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
-interface TypedMuxVideo extends MuxVideo {
+interface TypedMuxVideo extends MuxVideoAutoplay {
   video: {
     playbackId?: string
   }
 }
 
-const isImageComponent = (media: Image | MuxVideo): media is Image => media.component === 'image'
-const isMuxVideoComponent = (media: Image | MuxVideo): media is TypedMuxVideo => media.component === 'mux_video'
+const isImageComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is Image => media.component === 'image'
+const isMuxVideoAutoplayComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideo => media.component === 'mux_video_autoplay'
+const isMuxVideoPlayerComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideo => media.component === 'mux_video_player'
 
 const isPage = (
   story: ISbStoryData<Page | Post | Project> | null | undefined,
@@ -141,7 +142,8 @@ export {
   determineHref,
   getCategoryEntry,
   isImageComponent,
-  isMuxVideoComponent,
+  isMuxVideoAutoplayComponent,
+  isMuxVideoPlayerComponent,
   isPage,
   isPost,
   isProject,

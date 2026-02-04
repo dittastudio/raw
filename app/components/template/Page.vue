@@ -2,7 +2,6 @@
 import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
-import type { TypedBlockMuxVideo } from '@/components/block/MuxVideo.vue'
 
 interface Props {
   story: ISbStoryData<Page>
@@ -81,9 +80,9 @@ const { story } = defineProps<Props>()
         :block="block"
       />
 
-      <BlockMuxVideo
-        v-else-if="block.component === 'block_mux_video'"
-        :block="(block as TypedBlockMuxVideo)"
+      <BlockMedia
+        v-else-if="block.component === 'block_media'"
+        :block="block"
       />
 
       <BlockNextEvent
@@ -121,6 +120,11 @@ const { story } = defineProps<Props>()
         :block="block"
       />
 
+      <BlockText
+        v-else-if="block.component === 'block_text'"
+        :block="block"
+      />
+
       <BlockTicker
         v-else-if="block.component === 'block_ticker'"
         :block="block"
@@ -128,16 +132,6 @@ const { story } = defineProps<Props>()
 
       <BlockTruths
         v-else-if="block.component === 'block_truths'"
-        :block="block"
-      />
-
-      <BlockText
-        v-else-if="block.component === 'block_text'"
-        :block="block"
-      />
-
-      <BlockMedia
-        v-else-if="block.component === 'block_media'"
         :block="block"
       />
     </section>

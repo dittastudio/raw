@@ -49,7 +49,7 @@ export interface BlockHero {
   logo?: StoryblokAsset;
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
-  media?: (MuxVideo | Image)[];
+  media?: (Image | MuxVideoAutoplay)[];
   theme?: number | string;
   component: "block_hero";
   _uid: string;
@@ -120,20 +120,10 @@ export interface BlockLogoWall {
 }
 
 export interface BlockMedia {
-  media?: (Image | MuxVideo)[];
+  media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)[];
   full_bleed?: boolean;
   theme?: number | string;
   component: "block_media";
-  _uid: string;
-}
-
-export interface BlockMuxVideo {
-  video: unknown;
-  controls?: boolean;
-  autoplay?: boolean;
-  loop?: boolean;
-  theme?: number | string;
-  component: "block_mux_video";
   _uid: string;
 }
 
@@ -184,7 +174,7 @@ export interface BlockTeam {
 
 export interface BlockTestimonials {
   items?: Testimonial[];
-  media?: (Image | MuxVideo)[];
+  media?: (Image | MuxVideoAutoplay)[];
   theme?: number | string;
   component: "block_testimonials";
   _uid: string;
@@ -197,7 +187,7 @@ export interface BlockText {
 }
 
 export interface BlockTicker {
-  media?: (MuxVideo | Image)[];
+  media?: (Image | MuxVideoAutoplay)[];
   text?: string;
   logos?: StoryblokMultiasset;
   theme?: number | string;
@@ -273,9 +263,15 @@ export interface Logo {
   _uid: string;
 }
 
-export interface MuxVideo {
+export interface MuxVideoAutoplay {
   video: unknown;
-  component: "mux_video";
+  component: "mux_video_autoplay";
+  _uid: string;
+}
+
+export interface MuxVideoPlayer {
+  video: unknown;
+  component: "mux_video_player";
   _uid: string;
 }
 
@@ -293,7 +289,6 @@ export interface Page {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMedia
-    | BlockMuxVideo
     | BlockNextEvent
     | BlockPastEvents
     | BlockPosts
@@ -405,7 +400,6 @@ export interface Project {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMedia
-    | BlockMuxVideo
     | BlockNextEvent
     | BlockPastEvents
     | BlockPosts
@@ -428,7 +422,7 @@ export interface Project {
 export interface Settings {
   navigation?: Link[];
   statement?: string;
-  statement_media?: (Image | MuxVideo)[];
+  statement_media?: (Image | MuxVideoAutoplay)[];
   cta_title?: string;
   cta_link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   newsletter_text?: string;
