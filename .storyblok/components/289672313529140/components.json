@@ -1867,6 +1867,81 @@
     "metadata": {}
   },
   {
+    "name": "event",
+    "display_name": "Event",
+    "description": null,
+    "created_at": "2026-02-04T13:18:41.535Z",
+    "updated_at": "2026-02-04T13:19:49.139Z",
+    "id": 141400152217171,
+    "schema": {
+      "blocks": {
+        "type": "bloks",
+        "id": "lyVLs15bQCmzh1VCc_gAXw",
+        "pos": 0,
+        "restrict_type": "tags",
+        "restrict_components": true,
+        "component_whitelist": [],
+        "component_denylist": [],
+        "component_group_whitelist": [],
+        "component_group_denylist": [],
+        "component_tag_whitelist": [
+          141389335883285
+        ],
+        "component_tag_denylist": []
+      },
+      "tab-a012b6af-5d9a-4985-832a-84f119d934c0": {
+        "display_name": "SEO",
+        "keys": [
+          "seo_title",
+          "seo_description",
+          "seo_image"
+        ],
+        "pos": 1,
+        "type": "tab",
+        "id": "oBK2r12aSYWDKoTxGdk0wA"
+      },
+      "seo_title": {
+        "type": "text",
+        "pos": 2,
+        "id": "n4dTWU-rTjWIP0dQX06h3A",
+        "required": true,
+        "display_name": "Title"
+      },
+      "seo_description": {
+        "type": "text",
+        "pos": 3,
+        "id": "wbN2f5lbRaazAXhoUEVYTg",
+        "required": true,
+        "display_name": "Description"
+      },
+      "seo_image": {
+        "type": "asset",
+        "pos": 4,
+        "required": true,
+        "filetypes": [
+          "images"
+        ],
+        "id": "8-T6gz7lTUmrPCnJZBgx_Q",
+        "display_name": "Image"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": true,
+    "preview_tmpl": null,
+    "is_nestable": false,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Event",
+    "component_group_uuid": "08f3ebfd-247f-4b10-b3af-dc46b5a9a80d",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "image",
     "display_name": null,
     "description": "",
@@ -2323,7 +2398,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-02-04T12:46:02.855Z",
+    "updated_at": "2026-02-04T13:00:10.021Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -2376,7 +2451,7 @@
         "type": "datetime",
         "pos": 5,
         "display_name": "Event Date/Time",
-        "description": "If this is an event you can set the date and time.",
+        "description": "⚠️ If you're creating a new Event, you should create this as an Event content type, not Post. This is used only for legacy events imported from the old site.",
         "id": "KhEEDxgQTrSfosMbRKjddA"
       },
       "tab-87c5d3eb-2390-40c7-afd8-e24b263999e5": {
@@ -2429,16 +2504,19 @@
         "type": "bloks",
         "pos": 11,
         "id": "F8gsyVNHRcuIjE6vuldKjw",
-        "restrict_type": "tags",
+        "restrict_type": "",
         "restrict_components": true,
-        "component_whitelist": [],
-        "component_denylist": [],
-        "component_group_whitelist": [],
-        "component_group_denylist": [],
-        "component_tag_whitelist": [
-          141391816982039
+        "component_whitelist": [
+          "post_gallery",
+          "post_heading",
+          "post_html",
+          "post_image",
+          "post_quote",
+          "post_text",
+          "post_embed",
+          "post_wistia"
         ],
-        "component_tag_denylist": []
+        "component_denylist": []
       }
     },
     "image": null,
@@ -2778,12 +2856,21 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-02-04T12:41:10.164Z",
+    "updated_at": "2026-02-04T13:41:03.173Z",
     "id": 131189203587517,
     "schema": {
-      "preview_image": {
+      "preview_logo": {
         "type": "asset",
         "pos": 0,
+        "description": "Logo that is shown when featured around the site. SVG upload recommended.",
+        "filetypes": [
+          "images"
+        ],
+        "id": "BRKg-8qqQ9ySyXcW1jOTfw"
+      },
+      "preview_image": {
+        "type": "asset",
+        "pos": 1,
         "required": true,
         "filetypes": [
           "images"
@@ -2793,14 +2880,14 @@
       },
       "preview_text": {
         "type": "text",
-        "pos": 1,
+        "pos": 2,
         "required": true,
         "description": "Text that is shown when featured around the site.",
         "id": "-nz7o1nxRY-Z6czHa_YOsA"
       },
       "category": {
         "type": "option",
-        "pos": 2,
+        "pos": 3,
         "use_uuid": true,
         "id": "0H5G2s8pRNqs3GQ-0A25nw",
         "required": true,
@@ -2810,7 +2897,7 @@
       },
       "blocks": {
         "type": "bloks",
-        "pos": 3,
+        "pos": 4,
         "id": "ZEk25vg0QYOxGeK3TRO1gQ",
         "restrict_type": "tags",
         "restrict_components": true,
@@ -2828,14 +2915,14 @@
         "keys": [
           "blocks"
         ],
-        "pos": 4,
+        "pos": 5,
         "type": "tab",
         "name": "tab-0c7882b0-9f8b-4e24-83f1-096af4e560d1",
         "id": "DHiCsJ-LTiSD8Qlq9OVg0Q"
       },
       "seo_title": {
         "type": "text",
-        "pos": 5,
+        "pos": 6,
         "id": "D6UJXhPbSJaJbbL5h383UQ",
         "display_name": "Title",
         "required": true
@@ -2847,21 +2934,21 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 6,
+        "pos": 7,
         "type": "tab",
         "id": "DfYdOjqfRQix8-3aO1NNNg",
         "name": "tab-0df61d3a-3a9f-4508-b1f3-edda3b534d36"
       },
       "seo_description": {
         "type": "text",
-        "pos": 7,
+        "pos": 8,
         "id": "6hDt2n0RRQ68wXLTnKElTA",
         "display_name": "Description",
         "required": true
       },
       "seo_image": {
         "type": "asset",
-        "pos": 8,
+        "pos": 9,
         "required": true,
         "filetypes": [
           "images"

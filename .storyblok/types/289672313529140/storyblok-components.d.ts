@@ -226,6 +226,15 @@ export interface Copy {
   _uid: string;
 }
 
+export interface Event {
+  blocks?: BlockTicker[];
+  seo_title: string;
+  seo_description: string;
+  seo_image: StoryblokAsset;
+  component: "event";
+  _uid: string;
+}
+
 export interface Image {
   image?: StoryblokAsset;
   component: "image";
@@ -328,7 +337,7 @@ export interface Post {
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;
-  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostWistia)[];
+  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
   component: "post";
   _uid: string;
 }
@@ -383,6 +392,7 @@ export interface PostWistia {
 }
 
 export interface Project {
+  preview_logo?: StoryblokAsset;
   preview_image: StoryblokAsset;
   preview_text: string;
   category: number | string;
@@ -449,4 +459,4 @@ export interface TitleCopy {
   _uid: string;
 }
 
-export type ContentType = Page | Person | Post | Project | Settings;
+export type ContentType = Event | Page | Person | Post | Project | Settings;
