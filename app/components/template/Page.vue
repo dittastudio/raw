@@ -135,6 +135,11 @@ const { story } = defineProps<Props>()
         v-else-if="block.component === 'block_text'"
         :block="block"
       />
+
+      <BlockMedia
+        v-else-if="block.component === 'block_media'"
+        :block="block"
+      />
     </section>
   </UiTheme>
 </template>

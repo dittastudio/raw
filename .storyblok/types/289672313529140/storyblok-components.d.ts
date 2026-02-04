@@ -119,6 +119,14 @@ export interface BlockLogoWall {
   _uid: string;
 }
 
+export interface BlockMedia {
+  media?: (Image | MuxVideo)[];
+  full_bleed?: boolean;
+  theme?: number | string;
+  component: "block_media";
+  _uid: string;
+}
+
 export interface BlockMuxVideo {
   video: unknown;
   controls?: boolean;
@@ -284,6 +292,7 @@ export interface Page {
     | BlockImpactDetails
     | BlockImpactStatement
     | BlockLogoWall
+    | BlockMedia
     | BlockMuxVideo
     | BlockNextEvent
     | BlockPastEvents
@@ -395,6 +404,7 @@ export interface Project {
     | BlockImpactDetails
     | BlockImpactStatement
     | BlockLogoWall
+    | BlockMedia
     | BlockMuxVideo
     | BlockNextEvent
     | BlockPastEvents

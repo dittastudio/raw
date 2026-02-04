@@ -894,6 +894,64 @@
     "metadata": {}
   },
   {
+    "name": "block_media",
+    "display_name": "Media",
+    "description": "Image or Background Video",
+    "created_at": "2026-02-04T08:55:58.455Z",
+    "updated_at": "2026-02-04T09:08:57.135Z",
+    "id": 141335586677156,
+    "schema": {
+      "media": {
+        "type": "bloks",
+        "pos": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image",
+          "mux_video"
+        ],
+        "component_denylist": [],
+        "component_group_whitelist": [],
+        "component_group_denylist": [],
+        "component_tag_whitelist": [],
+        "component_tag_denylist": [],
+        "id": "iALbl79kTFGUwtswoE3Hug",
+        "maximum": 1
+      },
+      "full_bleed": {
+        "type": "boolean",
+        "pos": 2,
+        "inline_label": true,
+        "id": "pyROHYJHTk6JaC1KJWYZfQ"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "default_value": "light",
+        "exclude_empty_option": true,
+        "id": "dwWJ6SkzRMabYqB-Bk0-Vg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Media",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": null,
+    "icon": null,
+    "internal_tags_list": [],
+    "internal_tag_ids": [],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_mux_video",
     "display_name": "Mux Video",
     "description": "Display a video from your Mux account.",
@@ -1322,7 +1380,7 @@
     "display_name": "Text",
     "description": "Generic Text block used for pages like privacy policy etc",
     "created_at": "2026-02-03T17:54:53.191Z",
-    "updated_at": "2026-02-03T17:58:42.355Z",
+    "updated_at": "2026-02-03T17:59:48.313Z",
     "id": 141114135317043,
     "schema": {
       "copy": {
@@ -1351,7 +1409,10 @@
           "olist",
           "paragraph",
           "underline",
-          "list"
+          "list",
+          "align-left",
+          "align-center",
+          "align-right"
         ],
         "id": "bQc-jfjcQP-b4VQtKRVveQ"
       }
