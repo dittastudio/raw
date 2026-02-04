@@ -59,6 +59,11 @@ const { story } = defineProps<Props>()
         v-else-if="block.component === 'block_mux_video'"
         :block="(block as TypedBlockMuxVideo)"
       />
+
+      <BlockMedia
+        v-else-if="block.component === 'block_media'"
+        :block="block"
+      />
     </section>
   </UiTheme>
 </template>
