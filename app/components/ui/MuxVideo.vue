@@ -41,7 +41,7 @@ onUnmounted(() => {
     <button
       v-if="showPlay"
       type="button"
-      class="absolute inset-0 z-10 flex items-center justify-center type-h4 text-offwhite bg-transparent"
+      class="mux-video__button absolute inset-0 z-10 flex items-center justify-center type-h4 text-offwhite bg-transparent"
       @click="video?.play()"
     >
       Play
@@ -71,3 +71,13 @@ onUnmounted(() => {
     />
   </div>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.mux-video__button {
+  --tint: var(--color-offblack);
+
+  background-image: radial-gradient(ellipse at 50% 50%, --alpha(var(--tint) / 25%) 0%, --alpha(var(--tint) / 0%) 33.34%);
+}
+</style>

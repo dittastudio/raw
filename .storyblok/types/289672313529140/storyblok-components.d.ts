@@ -123,6 +123,7 @@ export interface BlockMedia {
   media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)[];
   full_bleed?: boolean;
   theme?: number | string;
+  accent?: number | string;
   component: "block_media";
   _uid: string;
 }

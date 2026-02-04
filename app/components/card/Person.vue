@@ -10,15 +10,6 @@ interface Props {
 }
 
 const { image, name, position, accent } = defineProps<Props>()
-
-const accentClasses = {
-  dark: 'bg-offblack text-white',
-  light: 'bg-white text-offblack',
-  blue: 'bg-blue text-offblack',
-  green: 'bg-green text-offblack',
-  pink: 'bg-pink text-offblack',
-  purple: 'bg-purple text-offblack',
-} as const
 </script>
 
 <template>
@@ -29,8 +20,8 @@ const accentClasses = {
         class="block size-full object-cover"
         :src="image.filename"
         :alt="image.alt || name"
-        :width="400"
-        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 400)"
+        :width="300"
+        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 300)"
       />
     </div>
 
@@ -52,7 +43,7 @@ const accentClasses = {
         only-hover:translate-y-full
         group-hover:translate-y-0
       "
-      :class="accentClasses[accent]"
+      :class="getThemeClasses[accent]"
     >
       <h5
         v-if="name"

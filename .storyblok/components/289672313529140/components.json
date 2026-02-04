@@ -995,7 +995,7 @@
     "display_name": "Media",
     "description": "Displays an image or Mux video.",
     "created_at": "2026-02-04T08:55:58.455Z",
-    "updated_at": "2026-02-04T12:34:09.066Z",
+    "updated_at": "2026-02-04T17:00:39.947Z",
     "id": 141335586677156,
     "schema": {
       "media": {
@@ -1031,6 +1031,14 @@
         "default_value": "light",
         "exclude_empty_option": true,
         "id": "dwWJ6SkzRMabYqB-Bk0-Vg"
+      },
+      "accent": {
+        "type": "option",
+        "pos": 3,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "id": "2A5SJ3BORRiQ3hDk7acBjA"
       }
     },
     "image": null,

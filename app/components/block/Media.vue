@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockMedia } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockMedia
@@ -74,6 +75,7 @@ const setSizes = computed(() => {
         :is-cover="true"
         playsinline
         controls
+        :accent-color="getThemeColors[(block.accent) as Themes || 'blue'].background"
       />
     </div>
   </div>
