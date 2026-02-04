@@ -128,11 +128,17 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
           'opacity-0': isMasked,
         }"
       >
-        <h4 class="type-h2 text-[min(7cqi,50px)]">
+        <h4
+          v-if="headline"
+          class="type-h2 text-[min(7cqi,50px)]"
+        >
           {{ headline }}
         </h4>
 
-        <p class="type-h4 text-[min(3.5cqi,22px)] text-balance">
+        <p
+          v-if="copy"
+          class="type-h4 text-[min(3.5cqi,22px)] text-balance"
+        >
           {{ copy }}
         </p>
       </div>
