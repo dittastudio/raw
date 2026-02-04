@@ -51,8 +51,8 @@ const setSizes = computed(() => {
         class="block size-full object-cover"
         :src="media.image.filename"
         :alt="media.image.alt || ''"
-        :width="16"
-        :height="9"
+        :width="storyblokImageDimensions(media.image.filename).width"
+        :height="storyblokImageDimensions(media.image.filename).height"
         :sizes="setSizes"
       />
 

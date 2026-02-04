@@ -54,6 +54,11 @@ const { story } = defineProps<Props>()
         :block="block"
       />
 
+      <BlockTruths
+        v-else-if="block.component === 'block_truths'"
+        :block="block"
+      />
+
       <BlockWorkText
         v-else-if="block.component === 'block_work_text'"
         :block="block"

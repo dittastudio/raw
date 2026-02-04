@@ -106,7 +106,7 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
     </template>
 
     <div
-      v-if="headline && copy"
+      v-if="headline || copy"
       class="
         ui-truths-item__bottom
         @container
@@ -114,7 +114,8 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
         md:col-span-4
         bg-(--theme-background-color)
         rounded-full
-        p-[6%]
+        px-[12%]
+        py-[6%]
         text-center
         transition-[background-color]
         duration-(--app-transition-duration)
@@ -122,6 +123,7 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
       "
     >
       <div
+        class="flex flex-col items-center justify-center gap-4"
         :class="{
           'opacity-0': isMasked,
         }"
@@ -130,7 +132,7 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
           {{ headline }}
         </h4>
 
-        <p class="type-h4 text-[min(3.5cqi,22px)] pt-[0.75em] text-balance">
+        <p class="type-h4 text-[min(3.5cqi,22px)] text-balance">
           {{ copy }}
         </p>
       </div>

@@ -299,7 +299,6 @@ export interface Page {
     | BlockText
     | BlockTicker
     | BlockTruths
-    | BlockWorkText
   )[];
   seo_title: string;
   seo_description: string;
@@ -329,7 +328,7 @@ export interface Post {
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;
-  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
+  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostWistia)[];
   component: "post";
   _uid: string;
 }
@@ -388,26 +387,12 @@ export interface Project {
   preview_text: string;
   category: number | string;
   blocks?: (
-    | BlockBcorp
-    | BlockCarousel
-    | BlockContact
     | BlockGallery
     | BlockHero
-    | BlockHeroBrand
-    | BlockHoverGrid
-    | BlockHoverList
     | BlockImpactDetails
     | BlockImpactStatement
-    | BlockLogoWall
     | BlockMedia
-    | BlockNextEvent
-    | BlockPastEvents
-    | BlockPosts
-    | BlockProjects
-    | BlockSplitText
-    | BlockTeam
     | BlockTestimonials
-    | BlockText
     | BlockTicker
     | BlockTruths
     | BlockWorkText
