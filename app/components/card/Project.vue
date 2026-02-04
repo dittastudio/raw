@@ -6,10 +6,9 @@ interface Props {
   image?: StoryblokAsset
   tagline?: string
   headline?: string
-  isLarge?: boolean
 }
 
-const { slug, image, tagline, headline, isLarge = false } = defineProps<Props>()
+const { slug, image, tagline, headline } = defineProps<Props>()
 </script>
 
 <template>
@@ -18,21 +17,14 @@ const { slug, image, tagline, headline, isLarge = false } = defineProps<Props>()
       class="flex flex-col gap-6 size-full border-b border-(--app-text-color) pb-6"
       :to="`/${slug}`"
     >
-      <div
-        class="overflow-hidden aspect-video"
-        :class="{
-          'max-md:-mx-(--app-outer-gutter)': isLarge,
-        }"
-      >
-        <NuxtImg
-          v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
-          class="block size-full object-cover"
-          :src="image.filename"
-          :alt="image.alt || headline || ''"
-          :width="500"
-          :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
-        />
-      </div>
+      <NuxtImg
+        v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
+        class="block size-full object-cover aspect-video"
+        :src="image.filename"
+        :alt="image.alt || headline || ''"
+        :width="500"
+        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
+      />
 
       <p
         v-if="tagline"

@@ -83,7 +83,7 @@ const projects = computed(() => {
           >
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-12 w-full">
               <li
-                v-for="(project, index) in projects"
+                v-for="(project, index) in [...projects, ...projects, ...projects]"
                 :key="project.uuid"
                 :class="{
                   'md:col-span-2': index % 3 === 2,
@@ -94,7 +94,6 @@ const projects = computed(() => {
                   :image="project.content.preview_image"
                   :tagline="project.content.preview_text"
                   :headline="project.name"
-                  :is-large="index % 3 === 2"
                 />
               </li>
             </ul>
