@@ -3,14 +3,20 @@ import type { Themes } from '@@/types/app'
 import { useIntersectionObserver } from '@vueuse/core'
 
 interface Props {
+  tag?: string
   theme?: Themes
   force?: boolean
   disabled?: boolean
 }
 
-const { theme = 'light', force = false, disabled = false } = defineProps<Props>()
+const {
+  tag = 'section',
+  theme = 'light',
+  force = false,
+  disabled = false,
+} = defineProps<Props>()
 
-const themeRef = useTemplateRef('themeRef')
+const root = useTemplateRef<HTMLElement>('root')
 const themeId = useId()
 
 const activeTheme = useState<string | null>('activeTheme', () => null)
@@ -28,7 +34,7 @@ const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
 }
 
 const { stop } = useIntersectionObserver(
-  themeRef,
+  root,
   (entries) => {
     if (disabled) {
       return
@@ -56,10 +62,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    ref="themeRef"
+  <component
+    :is="tag"
+    ref="root"
     :class="force ? getThemeClasses[theme] : undefined"
   >
     <slot />
-  </div>
+  </component>
 </template>

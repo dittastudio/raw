@@ -50,7 +50,7 @@ const { block } = defineProps<Props>()
     text-wrap: balance;
 
     @variant md {
-      max-width: 30ch;
+      max-width: 24ch;
     }
   }
 }
