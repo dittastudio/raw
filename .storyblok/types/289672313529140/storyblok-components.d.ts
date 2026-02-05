@@ -50,7 +50,7 @@ export interface BlockHero {
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
   media?: (Image | MuxVideoAutoplay)[];
-  theme?: number | string;
+  theme?: "" | "dark" | "light";
   component: "block_hero";
   _uid: string;
 }
@@ -228,7 +228,27 @@ export interface Copy {
 }
 
 export interface Event {
-  blocks?: BlockTicker[];
+  preview_image: StoryblokAsset;
+  preview_text?: string;
+  event_datetime: string;
+  blocks?: (
+    | BlockBcorp
+    | BlockCarousel
+    | BlockGallery
+    | BlockHero
+    | BlockHoverGrid
+    | BlockHoverList
+    | BlockImpactDetails
+    | BlockImpactStatement
+    | BlockLogoWall
+    | BlockMedia
+    | BlockNextEvent
+    | BlockPastEvents
+    | BlockSplitText
+    | BlockTestimonials
+    | BlockText
+    | BlockTicker
+  )[];
   seo_title: string;
   seo_description: string;
   seo_image: StoryblokAsset;

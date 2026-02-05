@@ -4,7 +4,7 @@
     "display_name": "B Corp Graph",
     "description": "",
     "created_at": "2026-01-27T21:58:45.009Z",
-    "updated_at": "2026-02-04T12:31:08.984Z",
+    "updated_at": "2026-02-05T14:04:30.964Z",
     "id": 138696806447243,
     "schema": {
       "title": {
@@ -104,10 +104,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -117,7 +122,7 @@
     "display_name": "Carousel",
     "description": "",
     "created_at": "2026-01-20T17:20:53.569Z",
-    "updated_at": "2026-02-04T12:30:53.341Z",
+    "updated_at": "2026-02-05T14:04:43.165Z",
     "id": 136151259425859,
     "schema": {
       "title": {
@@ -204,10 +209,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -217,7 +227,7 @@
     "display_name": "Contact",
     "description": "",
     "created_at": "2026-01-21T18:18:48.937Z",
-    "updated_at": "2026-02-04T12:31:01.286Z",
+    "updated_at": "2026-02-05T14:30:28.479Z",
     "id": 136519388948249,
     "schema": {
       "title": {
@@ -264,7 +274,7 @@
         "default_value": "light"
       }
     },
-    "image": "//a.storyblok.com/f/289672313529140/x/243f2c3a33/screenshot-2026-01-21-at-16-54-12.jpg",
+    "image": "",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -292,7 +302,7 @@
     "display_name": "Gallery",
     "description": "",
     "created_at": "2026-01-27T10:19:51.425Z",
-    "updated_at": "2026-02-04T12:40:03.734Z",
+    "updated_at": "2026-02-05T14:04:58.950Z",
     "id": 138525046486912,
     "schema": {
       "title": {
@@ -337,11 +347,16 @@
       {
         "id": 141388670414355,
         "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
-      "141388670414355"
+      "141388670414355",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -351,7 +366,7 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-02-04T12:33:15.731Z",
+    "updated_at": "2026-02-05T15:37:35.762Z",
     "id": 132594684570052,
     "schema": {
       "logo": {
@@ -410,12 +425,22 @@
         "pos": 4,
         "use_uuid": true,
         "required": false,
-        "options": [],
+        "options": [
+          {
+            "_uid": "44cb9d20-f06e-46ca-8c3e-a8b57c996435",
+            "name": "White Text",
+            "value": "dark"
+          },
+          {
+            "_uid": "c76296ed-4d09-4705-9b98-23c1ddcea87e",
+            "value": "light",
+            "name": "Black Text"
+          }
+        ],
         "exclude_empty_option": false,
         "default_value": "light",
         "id": "BmrYdk1fTiOQo5l9tMEL_A",
         "display_name": "Theme",
-        "source": "internal",
         "datasource_slug": "theme"
       }
     },
@@ -428,7 +453,7 @@
     "preset_id": null,
     "real_name": "Hero",
     "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
-    "color": "var(--sb-color-accent-background-water)",
+    "color": "var(--sb-color-accent-background-green-cyan)",
     "icon": "gallery-vertical",
     "internal_tags_list": [
       {
@@ -438,11 +463,16 @@
       {
         "id": 141388670414355,
         "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
-      "141388670414355"
+      "141388670414355",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -452,7 +482,7 @@
     "display_name": "Hero Brand",
     "description": "Displays a large hero which houses a large central Raw logo.",
     "created_at": "2026-01-15T10:13:39.202Z",
-    "updated_at": "2026-02-04T12:31:39.851Z",
+    "updated_at": "2026-02-05T14:31:12.177Z",
     "id": 134276789061080,
     "schema": {
       "headline": {
@@ -515,7 +545,7 @@
     "preset_id": null,
     "real_name": "Hero Brand",
     "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
-    "color": "var(--sb-color-accent-background-water)",
+    "color": "var(--sb-color-accent-background-green-cyan)",
     "icon": "gallery-vertical",
     "internal_tags_list": [
       {
@@ -534,7 +564,7 @@
     "display_name": "Hover Grid",
     "description": "",
     "created_at": "2026-01-21T09:55:39.731Z",
-    "updated_at": "2026-02-04T12:33:03.906Z",
+    "updated_at": "2026-02-05T14:05:58.513Z",
     "id": 136395733949303,
     "schema": {
       "title": {
@@ -626,10 +656,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -639,7 +674,7 @@
     "display_name": "Hover List",
     "description": "",
     "created_at": "2026-01-18T18:27:53.343Z",
-    "updated_at": "2026-02-04T12:33:30.642Z",
+    "updated_at": "2026-02-05T14:06:09.554Z",
     "id": 135459935652633,
     "schema": {
       "title": {
@@ -731,10 +766,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -744,7 +784,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-02-04T12:40:15.835Z",
+    "updated_at": "2026-02-05T14:06:21.970Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -848,11 +888,16 @@
       {
         "id": 141388670414355,
         "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
-      "141388670414355"
+      "141388670414355",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -862,7 +907,7 @@
     "display_name": "Impact Statement",
     "description": "",
     "created_at": "2026-01-13T22:49:11.433Z",
-    "updated_at": "2026-02-04T12:40:22.787Z",
+    "updated_at": "2026-02-05T14:06:33.599Z",
     "id": 133754681079760,
     "schema": {
       "items": {
@@ -908,11 +953,16 @@
       {
         "id": 141388670414355,
         "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
-      "141388670414355"
+      "141388670414355",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -922,7 +972,7 @@
     "display_name": "Logo Wall",
     "description": "",
     "created_at": "2026-01-21T16:53:11.246Z",
-    "updated_at": "2026-02-04T12:33:55.701Z",
+    "updated_at": "2026-02-05T14:06:50.666Z",
     "id": 136498344949214,
     "schema": {
       "title": {
@@ -982,10 +1032,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -995,7 +1050,7 @@
     "display_name": "Media",
     "description": "Displays an image or Mux video.",
     "created_at": "2026-02-04T08:55:58.455Z",
-    "updated_at": "2026-02-04T17:00:39.947Z",
+    "updated_at": "2026-02-05T14:07:06.837Z",
     "id": 141335586677156,
     "schema": {
       "media": {
@@ -1060,11 +1115,16 @@
       {
         "id": 141388670414355,
         "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
-      "141388670414355"
+      "141388670414355",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1074,7 +1134,7 @@
     "display_name": "Next Event",
     "description": "Displays the next available event.",
     "created_at": "2026-02-02T22:52:46.101Z",
-    "updated_at": "2026-02-04T12:39:04.942Z",
+    "updated_at": "2026-02-05T14:07:43.201Z",
     "id": 140833448354787,
     "schema": {
       "theme": {
@@ -1102,10 +1162,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1115,7 +1180,7 @@
     "display_name": "Past Events",
     "description": "Displays some recent past events.",
     "created_at": "2026-02-03T12:47:57.434Z",
-    "updated_at": "2026-02-04T12:39:13.905Z",
+    "updated_at": "2026-02-05T14:07:55.944Z",
     "id": 141038704378105,
     "schema": {
       "theme": {
@@ -1143,10 +1208,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1251,7 +1321,7 @@
     "display_name": "Split Text",
     "description": "",
     "created_at": "2026-01-23T09:10:10.690Z",
-    "updated_at": "2026-02-04T12:36:24.625Z",
+    "updated_at": "2026-02-05T14:08:50.535Z",
     "id": 137092344624389,
     "schema": {
       "items": {
@@ -1293,10 +1363,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1414,7 +1489,7 @@
     "display_name": "Testimonials",
     "description": "",
     "created_at": "2026-01-16T15:37:59.970Z",
-    "updated_at": "2026-02-04T12:36:53.647Z",
+    "updated_at": "2026-02-05T14:09:06.983Z",
     "id": 134710394762064,
     "schema": {
       "items": {
@@ -1472,11 +1547,16 @@
       {
         "id": 141388670414355,
         "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
-      "141388670414355"
+      "141388670414355",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1486,7 +1566,7 @@
     "display_name": "Text",
     "description": "Generic Text block used for pages like privacy policy etc",
     "created_at": "2026-02-03T17:54:53.191Z",
-    "updated_at": "2026-02-04T12:37:02.832Z",
+    "updated_at": "2026-02-05T14:09:29.406Z",
     "id": 141114135317043,
     "schema": {
       "copy": {
@@ -1538,10 +1618,15 @@
       {
         "id": 141388315377170,
         "name": "Page"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
       }
     ],
     "internal_tag_ids": [
-      "141388315377170"
+      "141388315377170",
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1879,13 +1964,34 @@
     "display_name": "Event",
     "description": null,
     "created_at": "2026-02-04T13:18:41.535Z",
-    "updated_at": "2026-02-04T13:19:49.139Z",
+    "updated_at": "2026-02-05T16:03:19.568Z",
     "id": 141400152217171,
     "schema": {
+      "preview_image": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "id": "QjZluUS7QL2hVyVO9q3R_Q",
+        "required": true
+      },
+      "preview_text": {
+        "type": "text",
+        "pos": 1,
+        "id": "CJJ-dMYfR7KAuCGwhqJOKg"
+      },
+      "event_datetime": {
+        "type": "datetime",
+        "pos": 2,
+        "display_name": "Event Date/Time",
+        "required": true,
+        "id": "-B__BDIKQrieD6XHkrmYnw"
+      },
       "blocks": {
         "type": "bloks",
         "id": "lyVLs15bQCmzh1VCc_gAXw",
-        "pos": 0,
+        "pos": 3,
         "restrict_type": "tags",
         "restrict_components": true,
         "component_whitelist": [],
@@ -1897,6 +2003,16 @@
         ],
         "component_tag_denylist": []
       },
+      "tab-3b61b796-8ea0-4311-8609-140de487b153": {
+        "display_name": "Content",
+        "keys": [
+          "blocks"
+        ],
+        "pos": 4,
+        "type": "tab",
+        "name": "tab-3b61b796-8ea0-4311-8609-140de487b153",
+        "id": "O2G3lo6gQxGGCRQN5IexUw"
+      },
       "tab-a012b6af-5d9a-4985-832a-84f119d934c0": {
         "display_name": "SEO",
         "keys": [
@@ -1904,27 +2020,28 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 1,
+        "pos": 5,
         "type": "tab",
-        "id": "oBK2r12aSYWDKoTxGdk0wA"
+        "id": "oBK2r12aSYWDKoTxGdk0wA",
+        "name": "tab-a012b6af-5d9a-4985-832a-84f119d934c0"
       },
       "seo_title": {
         "type": "text",
-        "pos": 2,
+        "pos": 6,
         "id": "n4dTWU-rTjWIP0dQX06h3A",
         "required": true,
         "display_name": "Title"
       },
       "seo_description": {
         "type": "text",
-        "pos": 3,
+        "pos": 7,
         "id": "wbN2f5lbRaazAXhoUEVYTg",
         "required": true,
         "display_name": "Description"
       },
       "seo_image": {
         "type": "asset",
-        "pos": 4,
+        "pos": 8,
         "required": true,
         "filetypes": [
           "images"
@@ -2406,7 +2523,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-02-04T13:00:10.021Z",
+    "updated_at": "2026-02-05T15:59:54.448Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -2459,7 +2576,7 @@
         "type": "datetime",
         "pos": 5,
         "display_name": "Event Date/Time",
-        "description": "⚠️ If you're creating a new Event, you should create this as an Event content type, not Post. This is used only for legacy events imported from the old site.",
+        "description": "⚠️ If you're creating a new Event, you should create this as an Event content type in the Events folder and not as a Post.\n\nThis is used only for legacy events migrated from the old site.",
         "id": "KhEEDxgQTrSfosMbRKjddA"
       },
       "tab-87c5d3eb-2390-40c7-afd8-e24b263999e5": {

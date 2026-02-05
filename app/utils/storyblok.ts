@@ -1,4 +1,4 @@
-import type { Image, MuxVideoAutoplay, MuxVideoPlayer, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Event, Image, MuxVideoAutoplay, MuxVideoPlayer, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { StoryblokMultilink, StoryblokRichtext } from '@@/.storyblok/types/storyblok'
 import type { ImageModifiers } from '@nuxt/image'
 import type { ISbStoryData } from '@storyblok/js'
@@ -68,16 +68,22 @@ const isImageComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): med
 const isMuxVideoAutoplayComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideo => media.component === 'mux_video_autoplay'
 const isMuxVideoPlayerComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideo => media.component === 'mux_video_player'
 
+type ContentTypes = Page | Post | Project | Event
+
+const isEvent = (
+  story: ISbStoryData<ContentTypes> | null | undefined,
+): story is ISbStoryData<Event> => Boolean(story?.content?.component === 'event')
+
 const isPage = (
-  story: ISbStoryData<Page | Post | Project> | null | undefined,
+  story: ISbStoryData<ContentTypes> | null | undefined,
 ): story is ISbStoryData<Page> => Boolean(story?.content?.component === 'page')
 
 const isPost = (
-  story: ISbStoryData<Page | Post | Project> | null | undefined,
+  story: ISbStoryData<ContentTypes> | null | undefined,
 ): story is ISbStoryData<Post> => Boolean(story?.content?.component === 'post')
 
 const isProject = (
-  story: ISbStoryData<Page | Post | Project> | null | undefined,
+  story: ISbStoryData<ContentTypes> | null | undefined,
 ): story is ISbStoryData<Project> => Boolean(story?.content?.component === 'project')
 
 const storyblokImage = (
@@ -141,6 +147,7 @@ const determineHref = (item: StoryblokMultilink) => {
 export {
   determineHref,
   getCategoryEntry,
+  isEvent,
   isImageComponent,
   isMuxVideoAutoplayComponent,
   isMuxVideoPlayerComponent,
