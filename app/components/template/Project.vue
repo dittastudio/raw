@@ -23,6 +23,7 @@ const isLastBlock = (index: number) => {
     v-for="(block, index) in story.content.blocks"
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
+    :force="isHeroBlock(index, 0)"
   >
     <section
       :class="{

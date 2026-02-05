@@ -35,7 +35,7 @@ const category = computed(() => {
   <article class="w-full bg-offwhite">
     <NuxtImg
       v-if="story.content.hero?.filename && storyblokAssetType(story.content.hero.filename) === 'image'"
-      class="block w-full h-auto"
+      class="block w-full h-auto max-h-svh object-cover"
       :src="story.content.hero.filename"
       :alt="story.content.hero.alt || story.name"
       :width="1000"
