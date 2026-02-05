@@ -24,6 +24,7 @@ const isLastBlock = (index: number) => {
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
     :force="isHeroBlock(index, 0)"
+    :root-margin="isHeroBlock(index, -1) ? '-50% 0px -1px 0px' : isHeroBlock(index, 0) ? '-100% 0px 0px 0px' : '-50% 0px -50% 0px'"
   >
     <div
       :class="{
