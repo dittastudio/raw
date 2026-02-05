@@ -33,7 +33,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     <span
       class="col-span-1 sm:col-span-2 md:col-span-3 type-h2"
       :class="{
-        'text-outline-current': type === 'default',
+        'is-outlined': type === 'default',
       }"
     >
       {{ (index + 1).toString().padStart(2, '0') }}
@@ -53,7 +53,7 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     >
       <span
         :class="{
-          'text-outline-current': type === 'default',
+          'is-outlined': type === 'default',
         }"
         class="type-h2"
       >

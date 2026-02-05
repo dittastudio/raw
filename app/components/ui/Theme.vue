@@ -1,20 +1,25 @@
 <script lang="ts" setup>
 import type { Themes } from '@@/types/app'
+import { useIntersectionObserver } from '@vueuse/core'
 
 interface Props {
+  tag?: string
   theme?: Themes
   force?: boolean
-  rootMargin?: string
+  disabled?: boolean
 }
 
-const { theme = 'light', force = false, rootMargin = '-50% 0px -50% 0px' } = defineProps<Props>()
+const {
+  tag = 'section',
+  theme = 'light',
+  force = false,
+  disabled = false,
+} = defineProps<Props>()
 
-const themeRef = useTemplateRef('themeRef')
+const root = useTemplateRef<HTMLElement>('root')
 const themeId = useId()
 
 const activeTheme = useState<string | null>('activeTheme', () => null)
-
-let observer: IntersectionObserver | null = null
 
 const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
   const colors = getThemeColors[theme]
@@ -28,30 +33,27 @@ const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
   }
 }
 
-onMounted(() => {
-  if (!themeRef.value || !theme) {
-    return
-  }
+const { stop } = useIntersectionObserver(
+  root,
+  (entries) => {
+    if (disabled) {
+      return
+    }
 
-  observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          updateThemeVariables(theme)
-        }
-      })
-    },
-    {
-      threshold: 0,
-      rootMargin,
-    },
-  )
-
-  observer.observe(themeRef.value)
-})
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        updateThemeVariables(theme)
+      }
+    })
+  },
+  {
+    threshold: 0,
+    rootMargin: '-50% 0px -50% 0px',
+  },
+)
 
 onUnmounted(() => {
-  observer?.disconnect()
+  stop()
 
   if (activeTheme.value === themeId) {
     activeTheme.value = null
@@ -60,10 +62,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div
-    ref="themeRef"
+  <component
+    :is="tag"
+    ref="root"
     :class="force ? getThemeClasses[theme] : undefined"
   >
     <slot />
-  </div>
+  </component>
 </template>

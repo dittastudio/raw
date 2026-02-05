@@ -23,8 +23,9 @@ const isLastBlock = (index: number) => {
     v-for="(block, index) in story.content.blocks"
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
+    :force="isHeroBlock(index, 0)"
   >
-    <section
+    <div
       :class="{
         'py-(--app-vertical-spacing)': !isHeroBlock(index, 0),
         'pt-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, -1),
@@ -141,6 +142,6 @@ const isLastBlock = (index: number) => {
         v-else-if="block.component === 'block_truths'"
         :block="block"
       />
-    </section>
+    </div>
   </UiTheme>
 </template>
