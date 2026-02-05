@@ -67,14 +67,25 @@ const media = computed(() => block.media?.[0] || null)
             v-for="logo in block.logos"
             :key="logo.id"
           >
-            <NuxtImg
-              class="block w-auto h-10"
-              :src="logo.filename || ''"
-              :alt="logo.alt || ''"
-              height="40"
-              densities="x1 x2"
-              loading="lazy"
-            />
+            <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
+              <img
+                v-if="fileExtension(logo.filename) === 'svg'"
+                class="block w-auto h-16"
+                :src="logo.filename || ''"
+                :alt="logo.alt || ''"
+                loading="lazy"
+              >
+
+              <NuxtImg
+                v-else
+                class="block w-auto h-16"
+                :src="logo.filename || ''"
+                :alt="logo.alt || ''"
+                densities="x1 x2"
+                height="40"
+                loading="lazy"
+              />
+            </template>
           </template>
         </UiTicker>
       </div>

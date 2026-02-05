@@ -50,15 +50,25 @@ const shouldRenderUiContent = computed(() => {
           v-for="logo in block.logos"
           :key="logo.id"
         >
-          <NuxtImg
-            v-if="logo.filename"
-            class="invert-appearance block w-auto h-10 md:h-15 object-contain"
-            :src="logo.filename"
-            :alt="logo.alt"
-            :height="60"
-            densities="x1 x2"
-            loading="lazy"
-          />
+          <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
+            <img
+              v-if="fileExtension(logo.filename) === 'svg'"
+              class="invert-appearance block w-auto h-10 md:h-15 object-contain"
+              :src="logo.filename || ''"
+              :alt="logo.alt || ''"
+              loading="lazy"
+            >
+
+            <NuxtImg
+              v-else
+              class="invert-appearance block w-auto h-10 md:h-15 object-contain"
+              :src="logo.filename || ''"
+              :alt="logo.alt || ''"
+              densities="x1 x2"
+              height="60"
+              loading="lazy"
+            />
+          </template>
         </li>
       </ul>
     </div>

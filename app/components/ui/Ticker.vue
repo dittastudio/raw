@@ -48,6 +48,7 @@ onMounted(async () => {
             : (direction === 'left' ? 'paused' : 'running')
         })
       }
+
       if (lists.value) {
         lists.value.forEach((list) => {
           list.style.animationPlayState = isScrollingUp
@@ -81,12 +82,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div
-    class="ui-ticker relative contain-layout w-full isolate"
-  >
+  <div class="ui-ticker relative contain-layout w-full isolate">
     <div
       ref="container"
-      class="flex justify-center transform-gpu"
+      class="flex justify-center gap-20 transform-gpu"
     >
       <div
         v-for="i in 4"
@@ -98,9 +97,7 @@ onBeforeUnmount(() => {
           ref="lists"
           class="ui-ticker__list select-none flex justify-center shrink-0 min-w-full transform-gpu"
         >
-          <div
-            class="flex gap-10 px-5 shrink-0 items-center justify-around min-w-full"
-          >
+          <div class="flex gap-20 shrink-0 items-center justify-around min-w-full">
             <slot />
           </div>
         </div>

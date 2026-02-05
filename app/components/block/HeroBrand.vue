@@ -124,17 +124,28 @@ const slideClass = computed(() => {
       direction="right"
     >
       <template
-        v-for="image in block.logo_ticker"
-        :key="image.id"
+        v-for="logo in block.logo_ticker"
+        :key="logo.id"
       >
-        <NuxtImg
-          class="block w-auto h-10"
-          :src="image.filename || ''"
-          :alt="image.alt || ''"
-          height="40"
-          densities="x1 x2"
-          loading="lazy"
-        />
+        <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
+          <img
+            v-if="fileExtension(logo.filename) === 'svg'"
+            class="block w-auto h-16"
+            :src="logo.filename || ''"
+            :alt="logo.alt || ''"
+            loading="lazy"
+          >
+
+          <NuxtImg
+            v-else
+            class="block w-auto h-16"
+            :src="logo.filename || ''"
+            :alt="logo.alt || ''"
+            densities="x1 x2"
+            height="40"
+            loading="lazy"
+          />
+        </template>
       </template>
     </UiTicker>
   </div>

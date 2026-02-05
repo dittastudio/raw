@@ -44,7 +44,17 @@ const formatDateDMY = (dateString: string): string => {
 
 const wait = (ms: number = 0) => new Promise(resolve => setTimeout(resolve, ms))
 
+const fileExtension = (filename: string | undefined | null): string => {
+  if (!filename) {
+    return ''
+  }
+
+  const parts = filename.split('.')
+  return parts.length > 1 ? parts.pop()!.toLowerCase() : ''
+}
+
 export {
+  fileExtension,
   formatDateDMY,
   formatDateEditorial,
   wait,
