@@ -61,7 +61,6 @@ const setSizes = computed(() => {
         v-else-if="media && isMuxVideoAutoplayComponent(media) && media.video?.playbackId"
         class="block size-full object-cover"
         :playback-id="media.video.playbackId"
-        :is-cover="true"
         playsinline
         autoplay
         muted
@@ -71,11 +70,10 @@ const setSizes = computed(() => {
       <UiMuxVideo
         v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId"
         class="block size-full object-cover"
+        :accent-color="getThemeColors[(block.accent) as Themes || 'green'].background"
         :playback-id="media.video.playbackId"
-        :is-cover="true"
         playsinline
         controls
-        :accent-color="getThemeColors[(block.accent) as Themes || 'blue'].background"
       />
     </div>
   </div>
