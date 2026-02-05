@@ -129,11 +129,7 @@ const setSizes = (isLarge: boolean) => {
                       :width="16"
                       :height="9"
                       :sizes="setSizes(index % 3 === 2)"
-                      :modifiers="{
-                        smart: true,
-                      }"
                       loading="lazy"
-                      format="webp"
                     />
                   </template>
                 </CardProject>
