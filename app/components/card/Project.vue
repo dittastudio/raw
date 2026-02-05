@@ -3,13 +3,12 @@ import type { StoryblokAsset } from '@@/.storyblok/types/storyblok'
 
 interface Props {
   slug?: string
-  image?: StoryblokAsset
   tagline?: string
   headline?: string
   logo?: StoryblokAsset
 }
 
-const { slug, image, tagline, headline, logo } = defineProps<Props>()
+const { slug, tagline, headline, logo } = defineProps<Props>()
 
 const svg = await useSvg(logo?.filename)
 </script>

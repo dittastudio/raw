@@ -1,4 +1,4 @@
-import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
+// import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { Themes } from '@@/types/app'
 
 export interface ThemeColors {
@@ -56,14 +56,4 @@ const getThemeClasses: Record<Themes, string> = {
   purple: 'bg-purple text-offblack text-outline-offblack-override',
 }
 
-type PageBlock = NonNullable<Page['blocks']>[number]
-
-const isHeroBlock = (block: PageBlock): boolean => {
-  return block.component === 'block_hero' || block.component === 'block_hero_brand'
-}
-
-const setForcedTheme = (block: PageBlock): boolean => {
-  return isHeroBlock(block) || (block.component === 'block_testimonials' && Boolean(block.media?.[0]))
-}
-
-export { getThemeClasses, getThemeColors, isHeroBlock, setForcedTheme }
+export { getThemeClasses, getThemeColors }

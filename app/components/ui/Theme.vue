@@ -4,11 +4,10 @@ import type { Themes } from '@@/types/app'
 interface Props {
   theme?: Themes
   force?: boolean
-  isHero?: boolean
-  isAfterHero?: boolean
+  rootMargin?: string
 }
 
-const { theme = 'light', force = false, isHero = false, isAfterHero = false } = defineProps<Props>()
+const { theme = 'light', force = false, rootMargin = '-50% 0px -50% 0px' } = defineProps<Props>()
 
 const themeRef = useTemplateRef('themeRef')
 const themeId = useId()
@@ -32,15 +31,6 @@ const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
 onMounted(() => {
   if (!themeRef.value || !theme) {
     return
-  }
-
-  let rootMargin = '-50% 0px -50% 0px'
-
-  if (isHero) {
-    rootMargin = '-100% 0px 0px 0px'
-  }
-  else if (isAfterHero) {
-    rootMargin = '-50% 0px -1px 0px'
   }
 
   observer = new IntersectionObserver(

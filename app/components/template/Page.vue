@@ -8,6 +8,14 @@ interface Props {
 }
 
 const { story } = defineProps<Props>()
+
+const isHeroBlock = (index: number, indexFrom: number) => {
+  return ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index + indexFrom]?.component ?? '')
+}
+
+const isLastBlock = (index: number) => {
+  return index === (story.content.blocks?.length ?? 0) - 1 && !isHeroBlock(index, 0)
+}
 </script>
 
 <template>
@@ -15,13 +23,12 @@ const { story } = defineProps<Props>()
     v-for="(block, index) in story.content.blocks"
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
-    :force="setForcedTheme(block)"
-    :is-hero="isHeroBlock(block)"
-    :is-after-hero="index > 0 && ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index - 1]?.component ?? '')"
   >
     <section
       :class="{
-        'py-(--app-vertical-spacing)': !['block_hero', 'block_hero_brand', 'block_ticker', 'block_testimonials'].includes(block.component),
+        'py-(--app-vertical-spacing)': !isHeroBlock(index, 0),
+        'pt-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, -1),
+        'pb-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, 1) || isLastBlock(index),
       }"
     >
       <BlockBCorp
