@@ -20,13 +20,16 @@ const { block } = defineProps<Props>()
       gap-y-20
     "
   >
-    <h2 class="col-span-full md:col-span-1 type-h5 text-balance max-w-[36ch]">
+    <h2
+      v-if="block.title"
+      class="col-span-full md:col-span-1 type-h5 text-balance max-w-[36ch]"
+    >
       {{ block.title }}
     </h2>
 
-    <div class="col-span-full md:col-span-1 flex flex-col gap-y-16">
+    <div class="col-span-full md:col-start-2 flex flex-col gap-y-16">
       <UiCarouselFade
-        v-if="block.stats"
+        v-if="block.stats?.length"
         :items="block.stats"
         :options="{ loop: true }"
         autoplay
