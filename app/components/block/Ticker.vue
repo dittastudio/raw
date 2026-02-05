@@ -13,7 +13,8 @@ const media = computed(() => block.media?.[0] || null)
 <template>
   <div
     v-editable="block"
-    class="relative overflow-hidden py-20 md:py-36"
+    class="relative overflow-hidden"
+    :class="{ 'py-[calc(var(--app-vertical-spacing)*2)]': media }"
   >
     <div
       v-if="media"

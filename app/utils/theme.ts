@@ -1,4 +1,3 @@
-// import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
 import type { Themes } from '@@/types/app'
 
 export interface ThemeColors {
