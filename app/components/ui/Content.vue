@@ -24,7 +24,7 @@ const {
   <div class="ui-content wrapper-max grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20">
     <div
       v-if="title"
-      class="ui-content__title col-span-full md:col-start-1 md:col-span-3"
+      class="col-span-full md:col-start-1 md:col-span-3"
     >
       <h2 class="type-h5">
         {{ title }}
