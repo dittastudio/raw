@@ -1050,12 +1050,12 @@
     "display_name": "Media",
     "description": "Displays an image or Mux video.",
     "created_at": "2026-02-04T08:55:58.455Z",
-    "updated_at": "2026-02-05T14:07:06.837Z",
+    "updated_at": "2026-02-05T17:29:13.162Z",
     "id": 141335586677156,
     "schema": {
       "media": {
         "type": "bloks",
-        "pos": 1,
+        "pos": 0,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -1071,21 +1071,31 @@
         "id": "iALbl79kTFGUwtswoE3Hug",
         "maximum": 1
       },
-      "full_bleed": {
-        "type": "boolean",
-        "pos": 2,
-        "inline_label": true,
-        "id": "pyROHYJHTk6JaC1KJWYZfQ"
-      },
-      "theme": {
+      "placement": {
         "type": "option",
-        "pos": 3,
+        "pos": 2,
         "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "theme",
-        "default_value": "light",
+        "required": true,
+        "options": [
+          {
+            "_uid": "224a5208-74e2-46b8-86ce-9ba67ee0afde",
+            "name": "Inset",
+            "value": "inset"
+          },
+          {
+            "_uid": "80f77401-0a4b-4268-a90e-88451d064943",
+            "value": "wide",
+            "name": "Wide"
+          },
+          {
+            "_uid": "45aaa96c-cfa9-443e-8ceb-a19498ff65fb",
+            "value": "full",
+            "name": "Full"
+          }
+        ],
         "exclude_empty_option": true,
-        "id": "dwWJ6SkzRMabYqB-Bk0-Vg"
+        "default_value": "inset",
+        "id": "d64U2vU7SfuIHnCH8ybxoA"
       },
       "accent": {
         "type": "option",
@@ -1094,6 +1104,16 @@
         "source": "internal",
         "datasource_slug": "theme",
         "id": "2A5SJ3BORRiQ3hDk7acBjA"
+      },
+      "theme": {
+        "type": "option",
+        "pos": 4,
+        "use_uuid": true,
+        "source": "internal",
+        "datasource_slug": "theme",
+        "default_value": "light",
+        "exclude_empty_option": true,
+        "id": "dwWJ6SkzRMabYqB-Bk0-Vg"
       }
     },
     "image": null,

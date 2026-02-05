@@ -121,9 +121,9 @@ export interface BlockLogoWall {
 
 export interface BlockMedia {
   media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)[];
-  full_bleed?: boolean;
-  theme?: number | string;
+  placement: "inset" | "wide" | "full";
   accent?: number | string;
+  theme?: number | string;
   component: "block_media";
   _uid: string;
 }

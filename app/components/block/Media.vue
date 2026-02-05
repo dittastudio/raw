@@ -10,20 +10,8 @@ const { block } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0])
 
-const setSizes = computed(() => {
-  if (block.full_bleed) {
-    return `
-      2xs:100vw
-      xs:100vw
-      sm:100vw
-      md:100vw
-      lg:100vw
-      xl:100vw
-      2xl:1400px
-    `
-  }
-
-  return `
+const setSizes = computed(() => block.placement === 'inset'
+  ? `
     2xs:100vw
     xs:100vw
     sm:100vw
@@ -32,19 +20,28 @@ const setSizes = computed(() => {
     xl:80vw
     2xl:1200px
   `
-})
+  : `
+    2xs:100vw
+    xs:100vw
+    sm:100vw
+    md:100vw
+    lg:100vw
+    xl:100vw
+    2xl:1400px
+  `)
 </script>
 
 <template>
   <div
     v-editable="block"
     :class="{
-      'wrapper-max grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid)': !block.full_bleed,
+      'wrapper-max grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid)': block.placement !== 'full',
     }"
   >
     <div
       :class="{
-        'col-span-full md:col-start-2 md:col-span-10': !block.full_bleed,
+        'col-span-full': block.placement !== 'full',
+        'md:col-start-2 md:col-span-10': block.placement === 'inset',
       }"
     >
       <NuxtImg
