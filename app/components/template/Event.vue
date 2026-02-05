@@ -41,6 +41,17 @@ const isLastBlock = (index: number) => {
         :block="block"
       />
 
+      <BlockEventOverview
+        v-else-if="block.component === 'block_event_overview'"
+        :block="block"
+        :datetime="story.content.event_datetime"
+      />
+
+      <BlockEventText
+        v-else-if="block.component === 'block_event_text'"
+        :block="block"
+      />
+
       <BlockGallery
         v-else-if="block.component === 'block_gallery'"
         :block="block"

@@ -37,6 +37,25 @@ export interface BlockContact {
   _uid: string;
 }
 
+export interface BlockEventOverview {
+  copy: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  theme?: number | string;
+  component: "block_event_overview";
+  _uid: string;
+}
+
+export interface BlockEventText {
+  title?: string;
+  copy: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  theme?: number | string;
+  component: "block_event_text";
+  _uid: string;
+}
+
 export interface BlockGallery {
   title?: string;
   items?: StoryblokMultiasset;
@@ -212,9 +231,7 @@ export interface BlockTruths {
 
 export interface BlockWorkText {
   title?: string;
-  copy?: StoryblokRichtext;
-  cta_title?: string;
-  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  copy: StoryblokRichtext;
   stats?: Copy[];
   theme?: number | string;
   component: "block_work_text";
@@ -228,12 +245,14 @@ export interface Copy {
 }
 
 export interface Event {
+  event_datetime: string;
   preview_image: StoryblokAsset;
   preview_text?: string;
-  event_datetime: string;
   blocks?: (
     | BlockBcorp
     | BlockCarousel
+    | BlockEventOverview
+    | BlockEventText
     | BlockGallery
     | BlockHero
     | BlockHoverGrid
