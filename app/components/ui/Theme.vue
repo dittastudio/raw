@@ -6,14 +6,14 @@ interface Props {
   tag?: string
   theme?: Themes
   force?: boolean
-  disabled?: boolean
+  rootMargin?: string
 }
 
 const {
   tag = 'section',
   theme = 'light',
   force = false,
-  disabled = false,
+  rootMargin = '-50% 0px -50% 0px',
 } = defineProps<Props>()
 
 const root = useTemplateRef<HTMLElement>('root')
@@ -36,10 +36,6 @@ const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
 const { stop } = useIntersectionObserver(
   root,
   (entries) => {
-    if (disabled) {
-      return
-    }
-
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         updateThemeVariables(theme)
@@ -48,7 +44,7 @@ const { stop } = useIntersectionObserver(
   },
   {
     threshold: 0,
-    rootMargin: '-50% 0px -50% 0px',
+    rootMargin,
   },
 )
 
