@@ -8,17 +8,23 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0] || null)
+
+const isInView = inject<Ref<boolean>>('isInView', ref(false))
 </script>
 
 <template>
   <div
     v-editable="block"
-    class="relative overflow-hidden"
+    class="relative isolate overflow-hidden"
     :class="{ 'py-[calc(var(--app-vertical-spacing)*2)]': media }"
   >
     <div
       v-if="media"
-      class="absolute inset-0 -z-1"
+      class="absolute inset-0 -z-1 transition-opacity"
+      :class="{
+        'opacity-0 duration-100 ease-out': !isInView,
+        'opacity-100 duration-(--app-transition-duration) ease-(--app-transition-ease) delay-[calc(var(--app-transition-duration)/2)]': isInView,
+      }"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
@@ -35,7 +41,6 @@ const media = computed(() => block.media?.[0] || null)
           md:100vw
           lg:100vw
           xl:100vw
-          2xl:100vw
         "
       />
 

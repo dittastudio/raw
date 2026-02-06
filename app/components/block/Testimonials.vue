@@ -8,6 +8,8 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0])
+
+const isInView = inject<Ref<boolean>>('isInView', ref(false))
 </script>
 
 <template>
@@ -18,7 +20,11 @@ const media = computed(() => block.media?.[0])
   >
     <div
       v-if="media"
-      class="absolute inset-0 -z-1"
+      class="absolute inset-0 -z-1 transition-opacity"
+      :class="{
+        'opacity-0 duration-100 ease-out': !isInView,
+        'opacity-100 duration-(--app-transition-duration) ease-(--app-transition-ease) delay-[calc(var(--app-transition-duration)/2)]': isInView,
+      }"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"

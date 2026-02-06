@@ -831,7 +831,7 @@
     "display_name": "Hover List",
     "description": "",
     "created_at": "2026-01-18T18:27:53.343Z",
-    "updated_at": "2026-02-05T14:06:09.554Z",
+    "updated_at": "2026-02-06T10:09:35.157Z",
     "id": 135459935652633,
     "schema": {
       "title": {
@@ -889,9 +889,22 @@
         "component_denylist": [],
         "id": "8TfK8RQPS-CJSXv6ciDEtA"
       },
+      "media": {
+        "type": "bloks",
+        "pos": 6,
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image",
+          "mux_video_autoplay"
+        ],
+        "component_denylist": [],
+        "id": "0XsaX496QDaifhMz_QOVLQ"
+      },
       "theme": {
         "type": "option",
-        "pos": 6,
+        "pos": 7,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",
@@ -900,7 +913,7 @@
       },
       "accent": {
         "type": "option",
-        "pos": 7,
+        "pos": 8,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",
@@ -941,7 +954,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-02-05T14:06:21.970Z",
+    "updated_at": "2026-02-06T09:58:59.295Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1014,16 +1027,6 @@
         "default_value": "dark",
         "id": "ErZTwpRTR-en-pK9Hn5ynw",
         "exclude_empty_option": true
-      },
-      "accent": {
-        "type": "option",
-        "pos": 7,
-        "use_uuid": true,
-        "source": "internal",
-        "datasource_slug": "theme",
-        "exclude_empty_option": true,
-        "default_value": "blue",
-        "id": "oJMIG_sMSg6Ence4PVDvXg"
       }
     },
     "image": null,

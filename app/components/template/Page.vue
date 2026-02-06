@@ -16,6 +16,26 @@ const isHeroBlock = (index: number, indexFrom: number) => {
 const isLastBlock = (index: number) => {
   return index === (story.content.blocks?.length ?? 0) - 1 && !isHeroBlock(index, 0)
 }
+
+const isBlockWithBgMedia = (index: number) => {
+  return ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(story.content.blocks?.[index]?.component ?? '') && story.content.blocks?.[index]?.media?.[0]
+}
+
+const setForceTheme = (index: number) => {
+  return isHeroBlock(index, 0)
+}
+
+const setRootMargin = (index: number) => {
+  if (isHeroBlock(index, -1)) {
+    return '-50% 0px -1px 0px'
+  }
+  else if (isHeroBlock(index, 0)) {
+    return '-100% 0px 0px 0px'
+  }
+  else {
+    return '-50% 0px -50% 0px'
+  }
+}
 </script>
 
 <template>
@@ -23,14 +43,14 @@ const isLastBlock = (index: number) => {
     v-for="(block, index) in story.content.blocks"
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
-    :force="isHeroBlock(index, 0)"
-    :root-margin="isHeroBlock(index, -1) ? '-50% 0px -1px 0px' : isHeroBlock(index, 0) ? '-100% 0px 0px 0px' : '-50% 0px -50% 0px'"
+    :force="setForceTheme(index)"
+    :root-margin="setRootMargin(index)"
   >
     <div
       :class="{
-        'py-(--app-vertical-spacing)': !isHeroBlock(index, 0),
+        'py-(--app-vertical-spacing)': !isHeroBlock(index, 0) && !isBlockWithBgMedia(index),
         'pt-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, -1),
-        'pb-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, 1) || isLastBlock(index),
+        'pb-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, 1) || (isLastBlock(index) && !isBlockWithBgMedia(index)),
       }"
     >
       <BlockBCorp

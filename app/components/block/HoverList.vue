@@ -10,13 +10,44 @@ const { block } = defineProps<Props>()
 
 const items = computed(() => block.items ?? [])
 const accent = computed(() => (block.accent as Themes) ?? 'light')
+const media = computed(() => block.media?.[0] || null)
+
+const isInView = inject<Ref<boolean>>('isInView', ref(false))
 </script>
 
 <template>
   <div
     v-editable="block"
-    class="flex flex-col gap-y-20"
+    class="relative isolate flex flex-col gap-y-20"
+    :class="{ 'py-[calc(var(--app-vertical-spacing)*2)]': media }"
   >
+    <div
+      v-if="media"
+      class="absolute inset-0 -z-1 transition-opacity"
+      :class="{
+        'opacity-0 duration-100 ease-out': !isInView,
+        'opacity-100 duration-(--app-transition-duration) ease-(--app-transition-ease) delay-[calc(var(--app-transition-duration)/2)]': isInView,
+      }"
+    >
+      <NuxtImg
+        v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
+        class="block size-full object-cover"
+        :src="media.image.filename"
+        :alt="media.image.alt || ''"
+        :width="16"
+        :height="9"
+        loading="lazy"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+        "
+      />
+    </div>
+
     <UiContent
       :title="block.title"
       :headline="block.headline"

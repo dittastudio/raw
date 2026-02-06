@@ -103,6 +103,7 @@ export interface BlockHoverList {
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   items?: ListItem[];
+  media?: (Image | MuxVideoAutoplay)[];
   theme?: number | string;
   accent?: number | string;
   component: "block_hover_list";
@@ -117,7 +118,6 @@ export interface BlockImpactDetails {
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   media?: Image[];
   theme?: number | string;
-  accent?: number | string;
   component: "block_impact_details";
   _uid: string;
 }

@@ -18,8 +18,11 @@ const {
 
 const root = useTemplateRef<HTMLElement>('root')
 const themeId = useId()
+const isInView = ref(false)
 
 const activeTheme = useState<string | null>('activeTheme', () => null)
+
+provide('isInView', isInView)
 
 const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
   const colors = getThemeColors[theme]
@@ -35,12 +38,24 @@ const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
 
 const { stop } = useIntersectionObserver(
   root,
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+  ([entry]) => {
+    if (!entry) {
+      return
+    }
+
+    if (entry.isIntersecting) {
+      if (activeTheme.value !== themeId) {
         updateThemeVariables(theme)
       }
-    })
+      if (!isInView.value) {
+        isInView.value = true
+      }
+    }
+    else {
+      if (isInView.value) {
+        isInView.value = false
+      }
+    }
   },
   {
     threshold: 0,
