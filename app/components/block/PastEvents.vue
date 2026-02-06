@@ -18,20 +18,20 @@ interface EventPost {
   eventDatetime: Post['event_datetime']
 }
 
-const { data: posts } = await useAsyncData(() => `past-events`, async () => {
+const { data: events } = await useAsyncData(() => `past-events`, async () => {
   const today = new Date().toISOString().split('T')[0] // Format: YYYY-MM-DD
 
   const { data } = await storyblokApi.get('cdn/stories', {
-    content_type: 'post',
     page: 1,
     per_page: 4,
     sort_by: 'content.event_datetime:desc',
     version: 'published',
     excluding_fields: 'blocks,seo_title,seo_description,seo_image',
     filter_query: {
-      category: {
-        in: 'events',
-      },
+      __or: [
+        { component: { in: 'event' } },
+        { category: { in: 'events' } },
+      ],
       event_datetime: {
         lt_date: `${today} 00:01`, // Only events before today
       },
@@ -41,7 +41,7 @@ const { data: posts } = await useAsyncData(() => `past-events`, async () => {
   return data.stories as ISbStoryData<Post>[]
 }, {
   transform: (payload: ISbStoryData<Post>[]): EventPost[] => {
-    const posts = payload.map(post => ({
+    const events = payload.map(post => ({
       uuid: post.uuid,
       name: post.name,
       full_slug: post.full_slug,
@@ -50,7 +50,7 @@ const { data: posts } = await useAsyncData(() => `past-events`, async () => {
       eventDatetime: post.content.event_datetime,
     }))
 
-    return posts
+    return events
   },
 })
 </script>
@@ -66,7 +66,7 @@ const { data: posts } = await useAsyncData(() => `past-events`, async () => {
 
     <ul class="grid grid-cols-2 lg:grid-cols-4 gap-x-(--app-inner-gutter) gap-y-(--app-outer-gutter)">
       <li
-        v-for="event in posts"
+        v-for="event in events"
         :key="event.uuid"
       >
         <CardEvent
