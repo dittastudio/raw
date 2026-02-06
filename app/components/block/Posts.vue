@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { BlockPosts, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { ISbStoryData } from '@storyblok/js'
+import type { ISbStoriesParams, ISbStoryData } from '@storyblok/js'
 
 interface Props {
   block: BlockPosts
@@ -32,7 +32,7 @@ interface Posts {
   name: string
   full_slug: string
   first_published_at?: string
-  hero: Post['hero']
+  image: Post['hero'] | Post['preview_image'] | undefined
   category: Post['category']
 }
 
@@ -51,22 +51,64 @@ const perPage = 8
 const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory.value ?? 'all'}-${currentPage.value}`, async () => {
   const requested = perPage * currentPage.value
 
-  const { data } = await storyblokApi.get('cdn/stories', {
-    content_type: 'post',
-    page: 1,
-    per_page: requested + 1,
-    sort_by: 'first_published_at:desc',
-    version: 'published',
-    excluding_fields: 'blocks,seo_title,seo_description,seo_image',
-    filter_query: {
-      category: {
-        in: currentCategory.value?.value,
+  // Awful query hack below because we have both events as posts and events as an event content type.
+
+  let query = {} as ISbStoriesParams
+
+  // All / no category.
+  if (!currentCategory.value) {
+    query = {
+      page: 1,
+      per_page: requested + 1,
+      sort_by: 'first_published_at:desc',
+      version: 'published',
+      excluding_fields: 'blocks,seo_title,seo_description,seo_image',
+      filter_query: {
+        component: {
+          in: 'post,event',
+        },
       },
-      // component: {
-      //   in: 'post,project',
-      // },
-    },
-  })
+    }
+  }
+  // Events combined.
+  else if (currentCategory.value.value === 'events') {
+    query = {
+      page: 1,
+      per_page: requested + 1,
+      sort_by: 'content.event_datetime:desc',
+      version: 'published',
+      excluding_fields: 'blocks,seo_title,seo_description,seo_image',
+      filter_query: {
+        __or: [
+          { component: { in: 'event' } },
+          { category: { in: 'events' } },
+        ],
+        event_datetime: {
+          is: 'not_empty',
+        },
+      },
+    }
+  }
+  // Specific category.
+  else {
+    query = {
+      page: 1,
+      per_page: requested + 1,
+      sort_by: 'first_published_at:desc',
+      version: 'published',
+      excluding_fields: 'blocks,seo_title,seo_description,seo_image',
+      filter_query: {
+        component: {
+          in: 'post',
+        },
+        category: {
+          in: currentCategory.value?.value,
+        },
+      },
+    }
+  }
+
+  const { data } = await storyblokApi.get('cdn/stories', query)
 
   return {
     stories: data.stories as ISbStoryData<Post>[],
@@ -82,7 +124,7 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
       name: post.name,
       full_slug: post.full_slug,
       first_published_at: post.first_published_at ?? undefined,
-      hero: post.content.hero,
+      image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero?.filename ? post.content.hero : undefined,
       category: post.content.category,
     }))
 
@@ -161,7 +203,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                 <CardPost
                   :headline="post.name"
                   :slug="post.full_slug"
-                  :image="post.hero"
+                  :image="post.image"
                   :category="getCategoryEntry(post.category, categories)?.name"
                 />
               </li>
