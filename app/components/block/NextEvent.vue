@@ -22,16 +22,16 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
   const today = new Date().toISOString().split('T')[0] // Format: YYYY-MM-DD
 
   const { data } = await storyblokApi.get('cdn/stories', {
-    content_type: 'post',
     page: 1,
     per_page: 1,
     sort_by: 'content.event_datetime:asc',
     version: 'published',
     excluding_fields: 'blocks,seo_title,seo_description,seo_image',
     filter_query: {
-      category: {
-        in: 'events',
-      },
+      __or: [
+        { component: { in: 'event' } },
+        { category: { in: 'events' } },
+      ],
       event_datetime: {
         gt_date: `${today} 00:01`, // Only events after today
       },
