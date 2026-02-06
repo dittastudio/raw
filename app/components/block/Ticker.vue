@@ -3,13 +3,12 @@ import type { BlockTicker } from '@@/.storyblok/types/289672313529140/storyblok-
 
 interface Props {
   block: BlockTicker
+  isInView?: boolean
 }
 
-const { block } = defineProps<Props>()
+const { block, isInView = false } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0] || null)
-
-const isInView = inject<Ref<boolean>>('isInView', ref(false))
 </script>
 
 <template>

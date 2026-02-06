@@ -22,8 +22,6 @@ const isInView = ref(false)
 
 const activeTheme = useState<string | null>('activeTheme', () => null)
 
-provide('isInView', isInView)
-
 const updateThemeVariables = (theme: keyof typeof getThemeColors) => {
   const colors = getThemeColors[theme]
 
@@ -43,19 +41,11 @@ const { stop } = useIntersectionObserver(
       return
     }
 
-    if (entry.isIntersecting) {
-      if (activeTheme.value !== themeId) {
-        updateThemeVariables(theme)
-      }
-      if (!isInView.value) {
-        isInView.value = true
-      }
+    if (entry.isIntersecting && activeTheme.value !== themeId) {
+      updateThemeVariables(theme)
     }
-    else {
-      if (isInView.value) {
-        isInView.value = false
-      }
-    }
+
+    isInView.value = entry.isIntersecting
   },
   {
     threshold: 0,
@@ -78,6 +68,6 @@ onUnmounted(() => {
     ref="root"
     :class="force ? getThemeClasses[theme] : undefined"
   >
-    <slot />
+    <slot :is-in-view="isInView" />
   </component>
 </template>

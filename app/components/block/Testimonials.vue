@@ -3,13 +3,12 @@ import type { BlockTestimonials } from '@@/.storyblok/types/289672313529140/stor
 
 interface Props {
   block: BlockTestimonials
+  isInView?: boolean
 }
 
-const { block } = defineProps<Props>()
+const { block, isInView = false } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0])
-
-const isInView = inject<Ref<boolean>>('isInView', ref(false))
 </script>
 
 <template>

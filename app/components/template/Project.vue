@@ -10,7 +10,7 @@ interface Props {
 const { story } = defineProps<Props>()
 
 const isHeroBlock = (index: number, indexFrom: number) => {
-  return ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index + indexFrom]?.component ?? '')
+  return ['block_hero'].includes(story.content.blocks?.[index + indexFrom]?.component ?? '')
 }
 
 const isLastBlock = (index: number) => {
@@ -46,52 +46,55 @@ const setRootMargin = (index: number) => {
     :force="setForceTheme(index)"
     :root-margin="setRootMargin(index)"
   >
-    <div
-      :class="{
-        'py-(--app-vertical-spacing)': !isHeroBlock(index, 0) && !isBlockWithBgMedia(index),
-        'pt-calc(var(--app-vertical-spacing)*1.5)': isHeroBlock(index, -1),
-        'pb-calc(var(--app-vertical-spacing)*1.5)': isHeroBlock(index, 1) || (isLastBlock(index) && !isBlockWithBgMedia(index)),
-      }"
-    >
-      <BlockGallery
-        v-if="block.component === 'block_gallery'"
-        :block="block"
-      />
+    <template #default="{ isInView }">
+      <div
+        :class="{
+          'py-(--app-vertical-spacing)': !isHeroBlock(index, 0) && !isBlockWithBgMedia(index),
+          'pt-calc(var(--app-vertical-spacing)*1.5)': isHeroBlock(index, -1),
+          'pb-calc(var(--app-vertical-spacing)*1.5)': isHeroBlock(index, 1) || (isLastBlock(index) && !isBlockWithBgMedia(index)),
+        }"
+      >
+        <BlockGallery
+          v-if="block.component === 'block_gallery'"
+          :block="block"
+        />
 
-      <BlockHero
-        v-else-if="block.component === 'block_hero'"
-        :block="block"
-      />
+        <BlockHero
+          v-else-if="block.component === 'block_hero'"
+          :block="block"
+        />
 
-      <BlockImpactDetails
-        v-else-if="block.component === 'block_impact_details'"
-        :block="block"
-      />
+        <BlockImpactDetails
+          v-else-if="block.component === 'block_impact_details'"
+          :block="block"
+        />
 
-      <BlockImpactStatement
-        v-else-if="block.component === 'block_impact_statement'"
-        :block="block"
-      />
+        <BlockImpactStatement
+          v-else-if="block.component === 'block_impact_statement'"
+          :block="block"
+        />
 
-      <BlockMedia
-        v-else-if="block.component === 'block_media'"
-        :block="block"
-      />
+        <BlockMedia
+          v-else-if="block.component === 'block_media'"
+          :block="block"
+        />
 
-      <BlockTestimonials
-        v-else-if="block.component === 'block_testimonials'"
-        :block="block"
-      />
+        <BlockTestimonials
+          v-else-if="block.component === 'block_testimonials'"
+          :block="block"
+          :is-in-view="isInView"
+        />
 
-      <BlockTruths
-        v-else-if="block.component === 'block_truths'"
-        :block="block"
-      />
+        <BlockTruths
+          v-else-if="block.component === 'block_truths'"
+          :block="block"
+        />
 
-      <BlockWorkText
-        v-else-if="block.component === 'block_work_text'"
-        :block="block"
-      />
-    </div>
+        <BlockWorkText
+          v-else-if="block.component === 'block_work_text'"
+          :block="block"
+        />
+      </div>
+    </template>
   </UiTheme>
 </template>

@@ -4,15 +4,14 @@ import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockHoverList
+  isInView?: boolean
 }
 
-const { block } = defineProps<Props>()
+const { block, isInView = false } = defineProps<Props>()
 
 const items = computed(() => block.items ?? [])
 const accent = computed(() => (block.accent as Themes) ?? 'light')
 const media = computed(() => block.media?.[0] || null)
-
-const isInView = inject<Ref<boolean>>('isInView', ref(false))
 </script>
 
 <template>
