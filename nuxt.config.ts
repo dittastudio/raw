@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     '/posts/**': { prerender: false },
     '/**': { prerender: process.env.NUXT_PRERENDER === 'true' },
   },
-  compatibilityDate: '2025-04-13',
+  compatibilityDate: '2026-02-10',
   nitro: {
     experimental: {
       openAPI: false,
