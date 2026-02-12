@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PostHtml } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { PostHtml } from '#storyblok-components'
 
 interface Props {
   block: PostHtml

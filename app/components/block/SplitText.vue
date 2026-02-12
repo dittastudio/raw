@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockSplitText } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockSplitText } from '#storyblok-components'
 
 interface Props {
   block: BlockSplitText

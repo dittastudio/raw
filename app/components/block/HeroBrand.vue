@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockHeroBrand } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockHeroBrand } from '#storyblok-components'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {

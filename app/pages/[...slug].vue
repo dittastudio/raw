@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Event, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Event, Page, Post, Project } from '#storyblok-components'
 
 const route = useRoute()
 

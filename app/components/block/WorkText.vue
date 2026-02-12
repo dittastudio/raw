@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockWorkText } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockWorkText } from '#storyblok-components'
 
 interface Props {
   block: BlockWorkText

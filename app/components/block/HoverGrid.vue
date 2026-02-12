@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockHoverGrid } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockHoverGrid } from '#storyblok-components'
 import type { Themes } from '@@/types/app'
 
 interface Props {

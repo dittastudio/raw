@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Link } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Link } from '#storyblok-components'
 
 interface Props {
   items?: Link[]

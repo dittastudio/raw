@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockPosts, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockPosts, Post } from '#storyblok-components'
 import type { ISbStoriesParams, ISbStoryData } from '@storyblok/js'
 
 interface Props {

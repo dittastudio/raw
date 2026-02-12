@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockNextEvent, Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockNextEvent, Post } from '#storyblok-components'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {

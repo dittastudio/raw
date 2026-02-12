@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import type { Image, MuxVideoAutoplay, MuxVideoPlayer } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { StoryblokMultilink } from '@@/.storyblok/types/storyblok'
+import type { Image, MuxVideoAutoplay, MuxVideoPlayer } from '#storyblok-components'
+import type { StoryblokMultilink } from '#storyblok-types'
 
 interface Props {
   media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)

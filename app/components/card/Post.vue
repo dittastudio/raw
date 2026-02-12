@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { StoryblokAsset } from '@@/.storyblok/types/storyblok'
+import type { StoryblokAsset } from '#storyblok-types'
 
 interface Props {
   headline?: string

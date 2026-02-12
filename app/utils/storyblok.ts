@@ -1,5 +1,5 @@
-import type { Event, Image, MuxVideoAutoplay, MuxVideoPlayer, Page, Post, Project } from '@@/.storyblok/types/289672313529140/storyblok-components'
-import type { StoryblokMultilink, StoryblokRichtext } from '@@/.storyblok/types/storyblok'
+import type { Event, Image, MuxVideoAutoplay, MuxVideoPlayer, Page, Post, Project } from '#storyblok-components'
+import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
 import type { ImageModifiers } from '@nuxt/image'
 import type { ISbStoryData } from '@storyblok/js'
 import type { LocationQuery } from 'vue-router'

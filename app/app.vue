@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Settings } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Settings } from '#storyblok-components'
 import { VueLenis } from 'lenis/vue'
 
 const lenisOptions = {

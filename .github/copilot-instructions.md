@@ -75,7 +75,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 1. Schema changes made in Storyblok CMS
 2. Run `npm run sb:components` to pull component definitions to `.storyblok/components/`
 3. Run `npm run sb:types` to generate TypeScript types
-4. Import types: `import type { Post } from '@@/.storyblok/types/289672313529140/storyblok-components'`
+4. Import types: `import type { Post } from '#storyblok-components'`
 
 ### Migration Architecture (`/migration/`)
 
@@ -130,7 +130,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 1. **Template Component Props**:
    ```vue
    <script setup lang="ts">
-   import type { Post } from '@@/.storyblok/types/289672313529140/storyblok-components'
+   import type { Post } from '#storyblok-components'
    import type { ISbStoryData } from '@storyblok/js'
    
    interface Props {
@@ -143,7 +143,7 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 2. **Block Component Props**:
    ```vue
    <script setup lang="ts">
-   import type { BlockHero } from '@@/.storyblok/types/289672313529140/storyblok-components'
+   import type { BlockHero } from '#storyblok-components'
    
    interface Props {
      block: BlockHero

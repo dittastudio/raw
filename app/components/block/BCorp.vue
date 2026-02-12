@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockBcorp } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockBcorp } from '#storyblok-components'
 
 interface Props {
   block: BlockBcorp

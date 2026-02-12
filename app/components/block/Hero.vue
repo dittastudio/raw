@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockHero } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockHero } from '#storyblok-components'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { StoryblokAsset } from '@@/.storyblok/types/storyblok'
+import type { StoryblokAsset } from '#storyblok-types'
 import type { Themes } from '@@/types/app'
 
 interface Props {

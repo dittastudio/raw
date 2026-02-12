@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockTicker } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { BlockTicker } from '#storyblok-components'
 
 interface Props {
   block: BlockTicker

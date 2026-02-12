@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Link, Logo } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Link, Logo } from '#storyblok-components'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PostGallery } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { PostGallery } from '#storyblok-components'
 
 interface Props {
   block: PostGallery

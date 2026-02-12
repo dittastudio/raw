@@ -1,4 +1,4 @@
-import type { Page } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { Page } from '#storyblok-components'
 
 type BlockTypes = NonNullable<Page['blocks']>[number]
 

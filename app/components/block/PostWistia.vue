@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PostWistia } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { PostWistia } from '#storyblok-components'
 
 interface Props {
   block: PostWistia

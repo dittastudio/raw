@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ListItem } from '@@/.storyblok/types/289672313529140/storyblok-components'
+import type { ListItem } from '#storyblok-components'
 
 interface Props {
   type?: 'default' | 'mask'
