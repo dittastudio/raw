@@ -19,7 +19,10 @@ const ballCursorColourVar = computed(() => `var(--color-${ballCursorColour})`)
 
 const containerElement = ref<HTMLDivElement>()
 
-const { position, onMouseMove, onMouseLeave } = useSmoothMouse(containerElement)
+const { position, onMouseMove, onMouseLeave } = useSmoothMouse(containerElement, {
+  damping: 0.05,
+  range: 1,
+})
 
 watchEffect(() => {
   if (!containerElement.value) {
@@ -69,11 +72,17 @@ watchEffect(() => {
     <div
       class="morph-gradient__container transform-gpu backface-hidden pointer-events-none"
     >
-      <div class="g1" />
+      <div class="g1">
+        <div class="g1-inner" />
+      </div>
 
-      <div class="g2" />
+      <div class="g2">
+        <div class="g2-inner" />
+      </div>
 
-      <div class="interactive" />
+      <div class="morph-gradient__cursor">
+        <div class="morph-gradient__cursor-inner" />
+      </div>
     </div>
 
     <slot />
@@ -87,10 +96,19 @@ watchEffect(() => {
   --color1: v-bind(ballColour1Var);
   --color2: v-bind(ballColour2Var);
   --color-interactive: v-bind(ballCursorColourVar);
-  --circle-size: 50%;
+  --circle-size: 25%;
   --blending: none;
   /* --x: 0;
   --y: 0; */
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Crect x='0' y='0' width='3' height='3' fill='%23000' opacity='0.1'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23000' opacity='0.1'/%3E%3Crect x='3' y='3' width='3' height='3' fill='%23000' opacity='0.1'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23000' opacity='0.1'/%3E%3C/svg%3E");
+    /* mix-blend-mode: multiply; */
+    pointer-events: none;
+  }
 }
 
 .morph-gradient__svg {
@@ -102,7 +120,7 @@ watchEffect(() => {
 }
 
 .morph-gradient__container {
-  filter: url(#goo) blur(6px);
+  filter: url(#goo) blur(8px);
   position: absolute;
   inset: 0;
   width: 100%;
@@ -112,7 +130,8 @@ watchEffect(() => {
 
 .g1 {
   position: absolute;
-  background: radial-gradient(circle at center, --alpha(var(--color1) / 0.8) 0, --alpha(var(--color1) / 0) 50%) no-repeat;
+  /* background: radial-gradient(circle at center, --alpha(var(--color1) / 0.8) 0, --alpha(var(--color1) / 0) 50%) no-repeat; */
+  background-color: var(--color1);
 
   width: var(--circle-size);
   aspect-ratio: 1;
@@ -128,7 +147,8 @@ watchEffect(() => {
 
 .g2 {
   position: absolute;
-  background: radial-gradient(circle at center, --alpha(var(--color2) / 0.8) 0, --alpha(var(--color2) / 0) 50%) no-repeat;
+  /* background: radial-gradient(circle at center, --alpha(var(--color2) / 0.8) 0, --alpha(var(--color2) / 0) 50%) no-repeat; */
+  background-color: var(--color2);
 
   width: var(--circle-size);
   aspect-ratio: 1;
@@ -142,20 +162,26 @@ watchEffect(() => {
   z-index: -1;
 }
 
-.interactive {
-  --size: 50%;
-
+.morph-gradient__cursor {
   position: absolute;
-  background: radial-gradient(circle at center, --alpha(var(--color-interactive) / 0.8) 0, --alpha(var(--color-interactive) / 0) 50%) no-repeat;
-
-  width: var(--size);
+  width: 25%;
   aspect-ratio: 1;
   top: 50%;
   left: 50%;
   translate: calc(var(--x) * 1px - 50%) calc(var(--y) * 1px - 50%) 0;
   border-radius: 50%;
-
   opacity: 1;
+}
+
+.morph-gradient__cursor-inner {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-interactive);
+  border-radius: inherit;
+  opacity: 0.75;
+  animation:
+    morph-gradient-blob 5s var(--ease-in-out) infinite,
+    morph-gradient-rotate 10s var(--ease-in-out) infinite alternate;
 }
 
 @keyframes moveInCircle {
@@ -172,25 +198,46 @@ watchEffect(() => {
 
 @keyframes moveVertical {
   0% {
-    transform: translateY(-50%);
+    transform: translateY(-100%);
   }
   50% {
-    transform: translateY(50%);
+    transform: translateY(100%);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateY(-100%);
   }
 }
 
 @keyframes moveHorizontal {
   0% {
-    transform: translateX(-50%) translateY(-10%);
+    transform: translateX(-100%) translateY(-10%);
   }
   50% {
-    transform: translateX(50%) translateY(10%);
+    transform: translateX(100%) translateY(10%);
   }
   100% {
-    transform: translateX(-50%) translateY(-10%);
+    transform: translateX(-100%) translateY(-10%);
+  }
+}
+
+@keyframes morph-gradient-blob {
+  0% {
+    border-radius: 25% 75% 35% 65% / 30% 45% 55% 70%;
+  }
+  33% {
+    border-radius: 75% 25% 70% 30% / 60% 30% 70% 40%;
+  }
+  66% {
+    border-radius: 35% 65% 20% 80% / 75% 25% 60% 40%;
+  }
+  100% {
+    border-radius: 25% 75% 35% 65% / 30% 45% 55% 70%;
+  }
+}
+
+@keyframes morph-gradient-rotate {
+  to {
+    transform: rotate(360deg);
   }
 }
 </style>
