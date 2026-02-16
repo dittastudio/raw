@@ -49,7 +49,7 @@ const solidThemeClasses = computed(() => {
     case 'purple':
       return 'bg-purple text-offblack'
     default:
-      return 'bg-(--app-button-background-color) text-(--app-button-text-color)'
+      return 'bg-offwhite text-offblack'
   }
 })
 
@@ -68,7 +68,7 @@ const outlineThemeClasses = computed(() => {
     case 'purple':
       return 'bg-purple text-offblack outline outline-offblack -outline-offset-1'
     default:
-      return 'bg-(--app-background-color) outline outline-(--app-text-color) -outline-offset-1'
+      return 'bg-offwhite text-offblack outline outline-offblack -outline-offset-1'
   }
 })
 </script>
@@ -110,9 +110,6 @@ const outlineThemeClasses = computed(() => {
         pt-2
         pb-2.25
         rounded-full
-        transition-[border,background-color]
-        duration-(--app-transition-duration)
-        ease-(--app-transition-ease)
         overflow-hidden
       "
       :class="{

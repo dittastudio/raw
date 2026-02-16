@@ -153,57 +153,12 @@ watchEffect(() => {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-@property --app-header-gradient-color {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: #000;
-}
-
 .header {
   height: var(--app-header-height);
 
   & + * { /* TEMPORARY: will refactor later down the line */
     /* ...sure you will! 🤣 */
     margin-top: calc(var(--app-header-height) * -1);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 200%;
-    z-index: -1;
-    transition: --app-header-gradient-color var(--app-transition-duration) var(--app-transition-ease);
-    pointer-events: none;
-  }
-
-  &::after {
-    --app-header-gradient-color: var(--app-background-color);
-
-    background-image:
-      linear-gradient(
-        to bottom,
-        --alpha(var(--app-header-gradient-color) / 100%) 0%,
-        --alpha(var(--app-header-gradient-color) / 98.7%) 8.1%,
-        --alpha(var(--app-header-gradient-color) / 95.1%) 15.5%,
-        --alpha(var(--app-header-gradient-color) / 89.6%) 22.5%,
-        --alpha(var(--app-header-gradient-color) / 82.5%) 29%,
-        --alpha(var(--app-header-gradient-color) / 74.1%) 35.3%,
-        --alpha(var(--app-header-gradient-color) / 64.8%) 41.2%,
-        --alpha(var(--app-header-gradient-color) / 55%) 47.1%,
-        --alpha(var(--app-header-gradient-color) / 45%) 52.9%,
-        --alpha(var(--app-header-gradient-color) / 35.2%) 58.8%,
-        --alpha(var(--app-header-gradient-color) / 25.9%) 64.7%,
-        --alpha(var(--app-header-gradient-color) / 17.5%) 71%,
-        --alpha(var(--app-header-gradient-color) / 10.4%) 77.5%,
-        --alpha(var(--app-header-gradient-color) / 4.9%) 84.5%,
-        --alpha(var(--app-header-gradient-color) / 1.3%) 91.9%,
-        --alpha(var(--app-header-gradient-color) / 0%) 100%
-      )
-    ;
-    opacity: 0.25;
   }
 }
 

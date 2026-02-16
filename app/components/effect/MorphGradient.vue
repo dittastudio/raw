@@ -98,15 +98,12 @@ watchEffect(() => {
   --color-interactive: v-bind(ballCursorColourVar);
   --circle-size: 25%;
   --blending: none;
-  /* --x: 0;
-  --y: 0; */
 
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Crect x='0' y='0' width='3' height='3' fill='%23000' opacity='0.1'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23000' opacity='0.1'/%3E%3Crect x='3' y='3' width='3' height='3' fill='%23000' opacity='0.1'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23000' opacity='0.1'/%3E%3C/svg%3E");
-    /* mix-blend-mode: multiply; */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Crect x='0' y='0' width='3' height='3' fill='%23000' opacity='0.1'/%3E%3Crect x='1' y='1' width='1' height='1' fill='%23000' opacity='0.05'/%3E%3Crect x='3' y='3' width='3' height='3' fill='%23000' opacity='0.1'/%3E%3Crect x='4' y='4' width='1' height='1' fill='%23000' opacity='0.05'/%3E%3C/svg%3E");
     pointer-events: none;
   }
 }

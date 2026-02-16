@@ -143,10 +143,6 @@ const accentMaskClasses = computed(() => {
             ui-grid__item
             select-none
             cursor-default
-            bg-(--app-background-color)
-            transition-[color,background-color]
-            duration-(--app-transition-duration)
-            ease-(--app-transition-ease)
           "
           @click="!isScreenMd && toggleItem(index)"
           @mouseenter="setMaskClip"

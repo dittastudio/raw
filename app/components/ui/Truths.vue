@@ -36,7 +36,7 @@ watch(position, ({ x, y }) => {
 <template>
   <div
     ref="container"
-    class="ui-truths relative p-(--app-outer-gutter) -m-(--app-outer-gutter) group/truths"
+    class="ui-truths relative isolate p-(--app-outer-gutter) -m-(--app-outer-gutter) group/truths"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >

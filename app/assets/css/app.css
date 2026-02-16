@@ -91,10 +91,10 @@
 
 @layer theme {
   :root {
-    --app-transition-duration: 0.8s;
-    --app-transition-ease: var(--ease-in-out);
-    --app-text-color: var(--color-offblack);
-    --app-background-color: var(--color-offwhite);
+    /* --app-transition-duration: 0.8s; */
+    /* --app-transition-ease: var(--ease-in-out); */
+    /* --app-text-color: var(--color-offblack); */
+    /* --app-background-color: var(--color-offwhite); */
 
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
