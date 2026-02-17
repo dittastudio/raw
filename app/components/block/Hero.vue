@@ -17,7 +17,6 @@ const media = computed(() => block.media?.[0])
 const svg = await useSvg(block.logo?.filename)
 
 const mediaLoaded = () => {
-  console.log('Media loaded')
   mediaReady.value = true
 }
 
