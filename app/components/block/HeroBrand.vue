@@ -8,42 +8,33 @@ interface Props {
 
 const { block } = defineProps<Props>()
 
-const activeSlide = ref<1 | 2 | null>(null)
+const activeSlide = ref<1 | 2>(1)
+const mediaRef = useTemplateRef('mediaRef')
+const mediaReady = ref(false)
+const media = computed(() => block.media?.[0])
 const slideIntervalMs = 4000
+
 let slideIntervalId: ReturnType<typeof setInterval> | null = null
-let slideTimeoutId: ReturnType<typeof setTimeout> | null = null
 
 const startSlideRotation = () => {
-  slideTimeoutId = setTimeout(() => {
-    activeSlide.value = 2
-    slideIntervalId = setInterval(() => {
-      activeSlide.value = activeSlide.value === 1 ? 2 : 1
-    }, slideIntervalMs)
+  slideIntervalId = setInterval(() => {
+    activeSlide.value = activeSlide.value === 1 ? 2 : 1
   }, slideIntervalMs)
 }
 
 const stopSlideRotation = () => {
-  if (slideTimeoutId) {
-    clearTimeout(slideTimeoutId)
-    slideTimeoutId = null
-  }
-
   if (slideIntervalId) {
     clearInterval(slideIntervalId)
     slideIntervalId = null
   }
 }
 
+const mediaLoaded = () => {
+  mediaReady.value = true
+}
+
 onMounted(startSlideRotation)
 onBeforeUnmount(stopSlideRotation)
-
-const slideClass = computed(() => {
-  if (activeSlide.value === null) {
-    return ''
-  }
-
-  return activeSlide.value === 1 ? 'is-slide-1' : 'is-slide-2'
-})
 </script>
 
 <template>
@@ -61,58 +52,87 @@ const slideClass = computed(() => {
       justify-center
       text-offblack
     "
-    :class="slideClass"
+    :class="activeSlide === 2 ? 'is-slide-2' : 'is-slide-1'"
   >
-    <!-- <div class="absolute inset-0"> -->
-    <EffectMorphGradient
-      ball-colour1="pink"
-      ball-colour2="pink"
-      ball-cursor-colour="pink"
+    <div
+      class="
+      @container/hero
+      z-1
+      wrapper-max
+      pt-60
+      pb-50
+      flex
+      flex-col
+      items-center
+      justify-center
+      gap-10
+      text-center
+      size-full
+    "
     >
-      <!-- </div> -->
-
       <div
-        class="
-        @container/hero
-        z-1
-        wrapper-max
-        pt-60
-        pb-50
-        flex
-        flex-col
-        items-center
-        justify-center
-        gap-10
-        text-center
-        w-full
-        h-full
-      "
+        v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
+        class="hero__headline relative"
       >
-        <div
-          v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
-          class="hero__headline relative"
-        >
-          <div class="hero__headline-1 opacity-100">
-            <StoryblokText :html="block.headline" />
-          </div>
-
-          <div class="hero__headline-2 absolute inset-0 opacity-0">
-            <StoryblokText :html="block.headline_2" />
-          </div>
+        <div class="hero__headline-1 opacity-100">
+          <StoryblokText :html="block.headline" />
         </div>
 
-        <div class="w-full max-h-full">
-          <IconLogo class="size-full" />
-        </div>
-
-        <div
-          v-if="storyblokRichTextContent(block.text)"
-          class="hero__text"
-        >
-          <StoryblokText :html="block.text" />
+        <div class="hero__headline-2 absolute inset-0 opacity-0">
+          <StoryblokText :html="block.headline_2" />
         </div>
       </div>
-    </EffectMorphGradient>
+
+      <div class="w-full max-h-full">
+        <IconLogo class="size-full" />
+      </div>
+
+      <div
+        v-if="storyblokRichTextContent(block.text)"
+        class="hero__text"
+      >
+        <StoryblokText :html="block.text" />
+      </div>
+    </div>
+
+    <div
+      ref="mediaRef"
+      class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter] duration-1000 ease-out"
+      :class="[
+        mediaReady ? 'opacity-100' : 'opacity-0',
+        activeSlide === 1 ? 'grayscale-100' : 'grayscale-0',
+      ]"
+    >
+      <NuxtImg
+        v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
+        class="block size-full object-cover"
+        :src="media.image.filename"
+        :alt="media.image.alt || ''"
+        :width="16"
+        :height="9"
+        sizes="
+          100vw
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+          2xl:100vw
+        "
+        @vue:mounted="mediaLoaded"
+      />
+
+      <UiMuxVideo
+        v-else-if="media && isMuxVideoAutoplayComponent(media) && media.video?.playbackId"
+        :playback-id="media.video.playbackId"
+        :is-cover="true"
+        playsinline
+        autoplay
+        muted
+        loop
+        @loadeddata="mediaLoaded"
+      />
+    </div>
   </div>
 
   <div
@@ -130,7 +150,7 @@ const slideClass = computed(() => {
         <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
           <img
             v-if="fileExtension(logo.filename) === 'svg'"
-            class="block w-auto h-16"
+            class="block w-auto h-11"
             :src="logo.filename || ''"
             :alt="logo.alt || ''"
             loading="lazy"
@@ -138,7 +158,7 @@ const slideClass = computed(() => {
 
           <NuxtImg
             v-else
-            class="block w-auto h-16"
+            class="block w-auto h-11"
             :src="logo.filename || ''"
             :alt="logo.alt || ''"
             densities="x1 x2"
@@ -173,7 +193,6 @@ const slideClass = computed(() => {
 
 /* Animations */
 .hero {
-  position: relative;
   background-color: var(--color-offwhite);
 
   &::before {

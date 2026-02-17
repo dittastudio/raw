@@ -86,6 +86,12 @@ const isProject = (
   story: ISbStoryData<ContentTypes> | null | undefined,
 ): story is ISbStoryData<Project> => Boolean(story?.content?.component === 'project')
 
+type ContentTypeBlocks = NonNullable<Page['blocks']> | NonNullable<Event['blocks']> | NonNullable<Project['blocks']>
+type ContentTypeBlock = ContentTypeBlocks[number]
+type ContentTypeBlockWithMedia = Extract<ContentTypeBlock, { media?: unknown }>
+
+const isBlockWithMedia = (block: ContentTypeBlock): block is ContentTypeBlockWithMedia => 'media' in block && Array.isArray(block.media) && block.media.length > 0
+
 const storyblokImage = (
   filename: string | null | undefined,
   modifiers?: Partial<ImageModifiers> | undefined,
@@ -147,6 +153,7 @@ const determineHref = (item: StoryblokMultilink) => {
 export {
   determineHref,
   getCategoryEntry,
+  isBlockWithMedia,
   isEvent,
   isImageComponent,
   isMuxVideoAutoplayComponent,

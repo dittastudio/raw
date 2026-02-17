@@ -1,6 +1,13 @@
 <script lang="ts" setup>
 import '@mux/mux-player'
 
+interface Events {
+  (event: 'play'): void
+  (event: 'loadeddata'): void
+}
+
+const emit = defineEmits<Events>()
+
 interface Props {
   playbackId: string
   primaryColor?: string
@@ -17,16 +24,25 @@ const root = useTemplateRef('root')
 
 const video = ref<HTMLVideoElement | null | undefined>(null)
 
-const setPlayed = () => hasPlayed.value = true
+const setPlayed = () => {
+  hasPlayed.value = true
+  emit('play')
+}
+
+const setLoadedData = () => {
+  emit('loadeddata')
+}
 
 onMounted(() => {
   video.value = root.value?.querySelector('mux-player')
 
   video.value?.addEventListener('play', setPlayed)
+  video.value?.addEventListener('loadeddata', setLoadedData)
 })
 
 onUnmounted(() => {
   video.value?.removeEventListener('play', setPlayed)
+  video.value?.removeEventListener('loadeddata', setLoadedData)
 })
 
 const mainMouse = useSmoothMouse(root, { range: 0.05 })
