@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockLogoWall } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockLogoWall
@@ -45,10 +46,14 @@ const shouldRenderUiContent = computed(() => {
         </h2>
       </div>
 
-      <ul class="col-span-full md:col-start-4 md:col-span-9 flex flex-wrap gap-10 md:gap-x-30 md:gap-y-15">
+      <ul
+        class="col-span-full md:col-start-4 md:col-span-9 grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4"
+        :class="block.theme && typeof block.theme === 'string' ? getThemeClasses[block.theme as Themes] : undefined"
+      >
         <li
           v-for="logo in block.logos"
           :key="logo.id"
+          class="w-full aspect-square flex items-center justify-center p-5 outline outline-current bg-inherit"
         >
           <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
             <img
