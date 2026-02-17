@@ -50,6 +50,7 @@ const peoples = computed(() => people?.filter(person => typeof person !== 'strin
           :image="person.content.image"
           :name="person.content.name"
           :position="person.content.position"
+          :linked-in="person.content.linkedin"
           :accent="accent"
         />
       </li>
