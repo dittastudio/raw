@@ -18,7 +18,13 @@ const isLastBlock = (index: number) => {
 }
 
 const isBlockWithBgMedia = (index: number) => {
-  return ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(story.content.blocks?.[index]?.component ?? '') && story.content.blocks?.[index]?.media?.[0]
+  const block = story.content.blocks?.[index]
+
+  if (!block) {
+    return false
+  }
+
+  return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block.component) && block.media?.[0]
 }
 </script>
 

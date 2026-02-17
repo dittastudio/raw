@@ -24,7 +24,7 @@ const isBlockWithBgMedia = (index: number) => {
     return false
   }
 
-  return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block?.component ?? '') && block?.media?.[0]
+  return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block.component) && block.media?.[0]
 }
 </script>
 
