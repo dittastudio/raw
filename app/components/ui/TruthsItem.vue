@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { Themes } from '@@/types/app'
+
 interface Item {
   title: string
   copy: string
@@ -9,9 +11,28 @@ interface Props {
   headline?: string
   copy?: string
   items?: Item[]
+  theme?: Themes
 }
 
-const { isMasked = false, items, headline, copy } = defineProps<Props>()
+const { isMasked = false, items, headline, copy, theme = 'light' } = defineProps<Props>()
+
+const textThemeClasses = computed(() => {
+  switch (theme) {
+    case 'dark':
+      return 'text-offblack'
+    default:
+      return 'text-offwhite'
+  }
+})
+
+const backgroundThemeClasses = computed(() => {
+  switch (theme) {
+    case 'dark':
+      return 'bg-offwhite'
+    default:
+      return 'bg-offblack'
+  }
+})
 </script>
 
 <template>
@@ -24,13 +45,10 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
       md:grid-cols-4
       gap-[calc(var(--app-inner-gutter)*2)]
       md:gap-y-[calc(var(--app-inner-gutter)*4)]
-      text-(--app-background-color)
-      transition-[color]
-      duration-(--app-transition-duration)
-      ease-(--app-transition-ease)
     "
     :class="{
       'is-masked': isMasked,
+      [textThemeClasses]: true,
     }"
   >
     <template
@@ -67,13 +85,16 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
             inset-0
             size-full
             rounded-[inherit]
-            bg-(--theme-background-color)
-            transition-[scale,background-color]
-            duration-(--app-transition-duration)
-            ease-(--app-transition-ease)
+            transition-[scale]
+            duration-500
+            ease-in-out
             -z-1
             group-hover/truths-item:scale-110
           "
+          :class="{
+            [backgroundThemeClasses]: !isMasked,
+            'bg-pink': isMasked,
+          }"
         />
 
         <div
@@ -112,15 +133,15 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
         @container
         col-span-full
         md:col-span-4
-        bg-(--theme-background-color)
         rounded-full
         px-[12%]
         py-[6%]
         text-center
-        transition-[background-color]
-        duration-(--app-transition-duration)
-        ease-(--app-transition-ease)
       "
+      :class="{
+        [backgroundThemeClasses]: !isMasked,
+        'bg-pink': isMasked,
+      }"
     >
       <div
         class="flex flex-col items-center justify-center gap-4"
@@ -151,11 +172,6 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
 
 .ui-truths-item {
   --breathe-duration: 3s;
-  --theme-background-color: var(--app-text-color);
-
-  &.is-masked {
-    --theme-background-color: var(--color-pink);
-  }
 }
 
 .ui-truths-item__item {

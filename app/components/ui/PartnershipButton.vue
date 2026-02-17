@@ -8,11 +8,6 @@
         flex
         items-center
         justify-between
-        bg-(--app-button-background-color)
-        text-(--app-button-text-color)
-        transition-[background-color,color]
-        duration-(--app-transition-duration)
-        ease-(--app-transition-ease)
         text-[4.5cqi]
         aspect-295/35
         px-[7.5%]
@@ -30,10 +25,6 @@
         w-[22cqi]
         h-auto
         aspect-65/34
-        text-(--app-button-text-color)
-        transition-[color]
-        duration-(--app-transition-duration)
-        ease-(--app-transition-ease)
       "
       viewBox="0 0 65 34"
       fill="currentColor"

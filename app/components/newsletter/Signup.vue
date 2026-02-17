@@ -97,8 +97,8 @@ const onSubmit = async () => {
 
             <button type="submit">
               <UiButton
-                theme-override="dark"
                 type="outline"
+                theme="dark"
               >
                 {{ loading ? '...' : 'Submit' }}
               </UiButton>

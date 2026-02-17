@@ -3,10 +3,9 @@ import type { BlockTicker } from '#storyblok-components'
 
 interface Props {
   block: BlockTicker
-  isInView?: boolean
 }
 
-const { block, isInView = false } = defineProps<Props>()
+const { block } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0] || null)
 </script>
@@ -19,11 +18,7 @@ const media = computed(() => block.media?.[0] || null)
   >
     <div
       v-if="media"
-      class="absolute inset-0 -z-1 transition-opacity"
-      :class="{
-        'opacity-0 duration-100 ease-out': !isInView,
-        'opacity-100 duration-(--app-transition-duration) ease-(--app-transition-ease) delay-[calc(var(--app-transition-duration)/2)]': isInView,
-      }"
+      class="absolute inset-0 -z-1"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"

@@ -300,7 +300,7 @@ export interface Link {
 export interface ListItem {
   title?: string;
   copy?: string;
-  cta?: Exclude<StoryblokMultilink, {linktype?: "email"} | {linktype?: "asset"}>;
+  arrow_icon?: boolean;
   component: "list_item";
   _uid: string;
 }

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   title?: string
@@ -8,6 +9,7 @@ interface Props {
   cta?: StoryblokMultilink
   ctaTitle?: string
   ctaType?: 'solid' | 'outline'
+  ctaTheme?: Themes
 }
 
 const {
@@ -17,6 +19,7 @@ const {
   cta,
   ctaTitle,
   ctaType = 'solid',
+  ctaTheme = 'light',
 } = defineProps<Props>()
 </script>
 
@@ -58,7 +61,10 @@ const {
         v-if="ctaTitle && cta?.cached_url"
         :item="cta"
       >
-        <UiButton :type="ctaType">
+        <UiButton
+          :type="ctaType"
+          :theme="ctaTheme"
+        >
           {{ ctaTitle }}
         </UiButton>
       </StoryblokLink>

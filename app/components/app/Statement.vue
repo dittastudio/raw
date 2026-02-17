@@ -59,7 +59,6 @@ const { media, statement, title, link } = defineProps<Props>()
           :item="link"
         >
           <UiButton
-            theme-override="dark"
             type="solid"
           >
             {{ title }}
