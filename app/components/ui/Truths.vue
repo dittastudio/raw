@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { Themes } from '@@/types/app'
+
 interface Item {
   title: string
   copy: string
@@ -12,9 +14,10 @@ export interface TTruthsItem {
 
 interface Props {
   item: TTruthsItem
+  theme?: Themes
 }
 
-const { item } = defineProps<Props>()
+const { item, theme = 'light' } = defineProps<Props>()
 
 const container = useTemplateRef('container')
 
@@ -47,6 +50,7 @@ watch(position, ({ x, y }) => {
           :headline="item.headline"
           :copy="item.copy"
           :items="item.items"
+          :theme="theme"
         />
 
         <div
@@ -96,6 +100,7 @@ watch(position, ({ x, y }) => {
             :headline="item.headline"
             :copy="item.copy"
             :items="item.items"
+            :theme="theme"
           />
 
           <div class="ui-truths__cursor">

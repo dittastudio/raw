@@ -34,6 +34,15 @@ watchEffect(() => {
   hover.value.style.setProperty('--blob-y', String(blobMouse.position.value.y))
 })
 
+const solidThemeClasses = computed(() => {
+  switch (theme) {
+    case 'dark':
+      return 'bg-offwhite text-offblack'
+    default:
+      return 'bg-offblack text-offwhite'
+  }
+})
+
 const outlineThemeClasses = computed(() => {
   return 'outline outline-current -outline-offset-1'
 })
@@ -79,9 +88,10 @@ const outlineThemeClasses = computed(() => {
         overflow-hidden
       "
       :class="[
-        getThemeClasses[theme as Themes],
         {
+          [getThemeClasses[theme]]: type === 'outline',
           [outlineThemeClasses]: type === 'outline',
+          [solidThemeClasses]: type === 'solid',
         },
       ]"
     >

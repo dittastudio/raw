@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import type { Themes } from '@@/types/app'
+
 interface Item {
   title: string
   copy: string
@@ -9,9 +11,28 @@ interface Props {
   headline?: string
   copy?: string
   items?: Item[]
+  theme?: Themes
 }
 
-const { isMasked = false, items, headline, copy } = defineProps<Props>()
+const { isMasked = false, items, headline, copy, theme = 'light' } = defineProps<Props>()
+
+const textThemeClasses = computed(() => {
+  switch (theme) {
+    case 'dark':
+      return 'text-offblack'
+    default:
+      return 'text-offwhite'
+  }
+})
+
+const backgroundThemeClasses = computed(() => {
+  switch (theme) {
+    case 'dark':
+      return 'bg-offwhite'
+    default:
+      return 'bg-offblack'
+  }
+})
 </script>
 
 <template>
@@ -24,10 +45,10 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
       md:grid-cols-4
       gap-[calc(var(--app-inner-gutter)*2)]
       md:gap-y-[calc(var(--app-inner-gutter)*4)]
-      text-offwhite
     "
     :class="{
       'is-masked': isMasked,
+      [textThemeClasses]: true,
     }"
   >
     <template
@@ -71,7 +92,7 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
             group-hover/truths-item:scale-110
           "
           :class="{
-            'bg-offblack': !isMasked,
+            [backgroundThemeClasses]: !isMasked,
             'bg-pink': isMasked,
           }"
         />
@@ -118,7 +139,7 @@ const { isMasked = false, items, headline, copy } = defineProps<Props>()
         text-center
       "
       :class="{
-        'bg-offblack': !isMasked,
+        [backgroundThemeClasses]: !isMasked,
         'bg-pink': isMasked,
       }"
     >

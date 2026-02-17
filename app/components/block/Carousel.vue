@@ -26,8 +26,6 @@ const theme = computed(() => (block.theme as Themes) ?? 'light')
       :cta-theme="theme"
     />
 
-    {{ block.theme }}
-
     <UiCarouselFade
       :items="block.slides"
       :options="{ loop: true }"

@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import type { BlockImpactDetails } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockImpactDetails
 }
 
 const { block } = defineProps<Props>()
+
+const theme = computed(() => (block.theme as Themes) ?? 'light')
 const media = computed(() => block.media?.[0])
 </script>
 
@@ -61,7 +64,10 @@ const media = computed(() => block.media?.[0])
           class="inline-block"
           :item="block.cta"
         >
-          <UiButton :type="block.theme === 'dark' ? 'outline' : 'solid'">
+          <UiButton
+            :type="block.theme === 'dark' ? 'outline' : 'solid'"
+            :theme="theme"
+          >
             {{ block.cta_title }}
           </UiButton>
         </StoryblokLink>
