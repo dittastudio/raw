@@ -4,12 +4,12 @@ import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockHoverList
-  isInView?: boolean
 }
 
-const { block, isInView = false } = defineProps<Props>()
+const { block } = defineProps<Props>()
 
 const items = computed(() => block.items ?? [])
+const theme = computed(() => (block.theme as Themes) ?? 'light')
 const accent = computed(() => (block.accent as Themes) ?? 'light')
 const media = computed(() => block.media?.[0] || null)
 </script>
@@ -22,11 +22,7 @@ const media = computed(() => block.media?.[0] || null)
   >
     <div
       v-if="media"
-      class="absolute inset-0 -z-1 transition-opacity"
-      :class="{
-        'opacity-0 duration-100 ease-out': !isInView,
-        'opacity-100 duration-(--app-transition-duration) ease-(--app-transition-ease) delay-[calc(var(--app-transition-duration)/2)]': isInView,
-      }"
+      class="absolute inset-0 -z-1"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
@@ -53,6 +49,8 @@ const media = computed(() => block.media?.[0] || null)
       :copy="block.copy"
       :cta="block.cta"
       :cta-title="block.cta_title"
+      :cta-type="block.theme === 'dark' ? 'outline' : 'solid'"
+      :cta-theme="theme"
     />
 
     <UiList

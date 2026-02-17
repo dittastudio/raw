@@ -3,6 +3,7 @@ import type { ListItem } from '#storyblok-components'
 import type { Themes } from '@@/types/app'
 
 interface Props {
+  theme: Themes
   accent: Themes
   items: ListItem[]
 }
@@ -143,11 +144,8 @@ const accentMaskClasses = computed(() => {
             ui-grid__item
             select-none
             cursor-default
-            bg-(--app-background-color)
-            transition-[color,background-color]
-            duration-(--app-transition-duration)
-            ease-(--app-transition-ease)
           "
+          :class="getThemeClasses[theme]"
           @click="!isScreenMd && toggleItem(index)"
           @mouseenter="setMaskClip"
         >

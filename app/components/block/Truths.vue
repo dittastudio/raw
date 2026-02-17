@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockTruths } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 import type { TTruthsItem } from '@/components/ui/Truths.vue'
 
 interface Props {
@@ -7,6 +8,8 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
+
+const theme = computed(() => (block.theme as Themes) ?? 'light')
 </script>
 
 <template>
@@ -21,6 +24,7 @@ const { block } = defineProps<Props>()
       :cta="block.cta"
       :cta-title="block.cta_title"
       :cta-type="block.theme === 'dark' ? 'outline' : 'solid'"
+      :cta-theme="theme"
     />
 
     <div class="wrapper-max">
@@ -30,6 +34,7 @@ const { block } = defineProps<Props>()
           copy: block.bottom_copy,
           items: block.items,
         } as TTruthsItem)"
+        :theme="theme"
       />
     </div>
   </div>

@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import type { BlockCarousel } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockCarousel
 }
 
 const { block } = defineProps<Props>()
+
+const theme = computed(() => (block.theme as Themes) ?? 'light')
 </script>
 
 <template>
@@ -20,6 +23,7 @@ const { block } = defineProps<Props>()
       :cta="block.cta"
       :cta-title="block.cta_title"
       :cta-type="block.theme === 'dark' ? 'outline' : 'solid'"
+      :cta-theme="theme"
     />
 
     <UiCarouselFade

@@ -3,10 +3,10 @@ import type { Themes } from '@@/types/app'
 
 interface Props {
   type?: 'solid' | 'outline'
-  themeOverride?: Themes
+  theme?: Themes
 }
 
-const { type = 'solid', themeOverride } = defineProps<Props>()
+const { type = 'solid', theme = 'light' } = defineProps<Props>()
 
 const hover = useTemplateRef('hover')
 
@@ -35,41 +35,16 @@ watchEffect(() => {
 })
 
 const solidThemeClasses = computed(() => {
-  switch (themeOverride) {
-    case 'light':
-      return 'bg-offwhite text-offblack'
+  switch (theme) {
     case 'dark':
-      return 'bg-offblack text-offwhite'
-    case 'blue':
-      return 'bg-blue text-offblack'
-    case 'green':
-      return 'bg-green text-offblack'
-    case 'pink':
-      return 'bg-pink text-offblack'
-    case 'purple':
-      return 'bg-purple text-offblack'
+      return 'bg-offwhite text-offblack'
     default:
-      return 'bg-(--app-button-background-color) text-(--app-button-text-color)'
+      return 'bg-offblack text-offwhite'
   }
 })
 
 const outlineThemeClasses = computed(() => {
-  switch (themeOverride) {
-    case 'light':
-      return 'bg-offwhite text-offblack outline outline-offblack -outline-offset-1'
-    case 'dark':
-      return 'bg-offblack text-offwhite outline outline-offwhite -outline-offset-1'
-    case 'blue':
-      return 'bg-blue text-offblack outline outline-offblack -outline-offset-1'
-    case 'green':
-      return 'bg-green text-offblack outline outline-offblack -outline-offset-1'
-    case 'pink':
-      return 'bg-pink text-offblack outline outline-offblack -outline-offset-1'
-    case 'purple':
-      return 'bg-purple text-offblack outline outline-offblack -outline-offset-1'
-    default:
-      return 'bg-(--app-background-color) outline outline-(--app-text-color) -outline-offset-1'
-  }
+  return 'outline outline-current -outline-offset-1'
 })
 </script>
 
@@ -110,15 +85,15 @@ const outlineThemeClasses = computed(() => {
         pt-2
         pb-2.25
         rounded-full
-        transition-[border,background-color]
-        duration-(--app-transition-duration)
-        ease-(--app-transition-ease)
         overflow-hidden
       "
-      :class="{
-        [solidThemeClasses]: type === 'solid',
-        [outlineThemeClasses]: type === 'outline',
-      }"
+      :class="[
+        {
+          [getThemeClasses[theme]]: type === 'outline',
+          [outlineThemeClasses]: type === 'outline',
+          [solidThemeClasses]: type === 'solid',
+        },
+      ]"
     >
       <span class="ui-button__shadow" />
 
@@ -169,7 +144,7 @@ const outlineThemeClasses = computed(() => {
   margin: auto;
 
   opacity: 0;
-  background-color: white;
+  background-color: var(--color-white);
   filter: blur(20px);
   border-radius: 50%;
 

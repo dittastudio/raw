@@ -78,6 +78,7 @@ export interface BlockHeroBrand {
   headline?: StoryblokRichtext;
   headline_2?: StoryblokRichtext;
   text?: StoryblokRichtext;
+  media?: (MuxVideoAutoplay | Image)[];
   logo_ticker?: StoryblokMultiasset;
   component: "block_hero_brand";
   _uid: string;

@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import type { BlockBcorp } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockBcorp
 }
 
 const { block } = defineProps<Props>()
+
+const theme = computed(() => (block.theme as Themes) ?? 'light')
 </script>
 
 <template>
@@ -18,7 +21,7 @@ const { block } = defineProps<Props>()
       :headline="block.headline"
       :cta="block.cta"
       :cta-title="block.cta_title"
-      :cta-type="block.theme === 'dark' ? 'outline' : 'solid'"
+      :cta-type="theme === 'dark' ? 'outline' : 'solid'"
     />
 
     <div class="wrapper-max grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-20">

@@ -166,7 +166,6 @@ onUnmounted(() => {
     max-width: max-content;
     height: auto;
     color: currentColor;
-    transition: color var(--app-transition-duration) var(--app-transition-ease);
   }
 
   :deep(img) {
