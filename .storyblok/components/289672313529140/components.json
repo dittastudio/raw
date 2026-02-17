@@ -639,12 +639,12 @@
     "display_name": "Hero Brand",
     "description": "Displays a large hero which houses a large central Raw logo.",
     "created_at": "2026-01-15T10:13:39.202Z",
-    "updated_at": "2026-02-05T14:31:12.177Z",
+    "updated_at": "2026-02-17T15:19:33.690Z",
     "id": 134276789061080,
     "schema": {
       "headline": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 0,
         "required": false,
         "customize_toolbar": true,
         "toolbar": [
@@ -663,7 +663,7 @@
       },
       "headline_2": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 1,
         "customize_toolbar": true,
         "toolbar": [
           "h2",
@@ -674,7 +674,7 @@
       },
       "text": {
         "type": "richtext",
-        "pos": 3,
+        "pos": 2,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
@@ -682,9 +682,22 @@
           "unset"
         ]
       },
+      "media": {
+        "type": "bloks",
+        "pos": 3,
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "mux_video_autoplay",
+          "image"
+        ],
+        "component_denylist": [],
+        "id": "AxoU_I5hRzem4JMtnSdKGQ"
+      },
       "logo_ticker": {
         "type": "multiasset",
-        "pos": 3,
+        "pos": 4,
         "filetypes": [
           "images"
         ],

@@ -10,11 +10,16 @@ interface Props {
 
 const { block, name } = defineProps<Props>()
 
-const media = computed(() => block.media?.[0])
 const heroRef = useTemplateRef('heroRef')
 const mediaRef = useTemplateRef('mediaRef')
-
+const mediaReady = ref(false)
+const media = computed(() => block.media?.[0])
 const svg = await useSvg(block.logo?.filename)
+
+const mediaLoaded = () => {
+  console.log('Media loaded')
+  mediaReady.value = true
+}
 
 onMounted(async () => {
   if (!heroRef.value || !mediaRef.value) {
@@ -111,7 +116,10 @@ onUnmounted(() => {
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden"
+      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-opacity duration-1000 ease-out"
+      :class="[
+        mediaReady ? 'opacity-100' : 'opacity-0',
+      ]"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
@@ -129,6 +137,7 @@ onUnmounted(() => {
           xl:100vw
           2xl:100vw
         "
+        @vue:mounted="mediaLoaded"
       />
 
       <UiMuxVideo
@@ -139,6 +148,7 @@ onUnmounted(() => {
         autoplay
         muted
         loop
+        @loadeddata="mediaLoaded"
       />
     </div>
   </div>
