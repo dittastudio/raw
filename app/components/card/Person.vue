@@ -6,10 +6,11 @@ interface Props {
   image?: StoryblokAsset
   name?: string | null
   position?: string | null
+  linkedIn?: string | null
   accent: Themes
 }
 
-const { image, name, position, accent } = defineProps<Props>()
+const { image, name, position, linkedIn, accent } = defineProps<Props>()
 </script>
 
 <template>
@@ -57,6 +58,20 @@ const { image, name, position, accent } = defineProps<Props>()
         class="type-mono-14"
       >
         {{ position }}
+      </p>
+
+      <p
+        v-if="linkedIn"
+        class="type-mono-14"
+      >
+        <NuxtLink
+          :to="linkedIn"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-underline"
+        >
+          LinkedIn
+        </NuxtLink>
       </p>
     </div>
   </div>

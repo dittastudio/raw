@@ -7,9 +7,23 @@
 
 @utility wrapper-max {
   width: 100%;
-  max-width: var(--breakpoint-2xl);
+  max-width: var(--breakpoint-xl);
   margin-inline: auto;
   padding-inline: var(--app-outer-gutter);
+}
+
+@utility text-underline {
+  text-decoration-style: solid;
+  text-decoration-thickness: 0.075em;
+  text-decoration-color: currentColor;
+  text-decoration-line: underline;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s var(--ease-out);
+
+  &:hover,
+  &:focus {
+    text-decoration-color: transparent;
+  }
 }
 
 @utility invert-appearance {
