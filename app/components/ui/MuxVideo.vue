@@ -82,8 +82,11 @@ watchEffect(() => {
       :primary-color="primaryColor"
       :accent-color="accentColor"
       :class="[
-        'block aspect-video',
-        { 'size-full': isCover },
+        'block',
+        {
+          'aspect-video': !isCover,
+          'size-full': isCover,
+        },
       ]"
       :style="{
         '--controls': Object.hasOwn($attrs, 'controls') ? null : 'none',

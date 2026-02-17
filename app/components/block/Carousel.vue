@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import type { BlockCarousel } from '#storyblok-components'
+import type { BlockCarousel, Project } from '#storyblok-components'
 import type { Themes } from '@@/types/app'
+import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
   block: BlockCarousel
@@ -9,6 +10,11 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const theme = computed(() => (block.theme as Themes) ?? 'light')
+
+function getProjectSlug(project?: (ISbStoryData<Project> | string)[]) {
+  const ref = project?.[0]
+  return ref && typeof ref !== 'string' ? `/${ref.full_slug}` : undefined
+}
 </script>
 
 <template>
@@ -29,28 +35,37 @@ const theme = computed(() => (block.theme as Themes) ?? 'light')
     <UiCarouselFade
       :items="block.slides"
       :options="{ loop: true }"
-      :autoplay="true"
+      :autoplay="false"
       :autoplay-interval="4000"
     >
       <template #item="{ item }">
         <div class="relative size-full isolate aspect-10/16 sm:aspect-video max-h-svh">
           <NuxtImg
-            v-if="item.media?.filename"
+            v-if="item.media?.[0] && isImageComponent(item.media?.[0]) && item.media?.[0]?.image?.filename && storyblokAssetType(item.media?.[0]?.image?.filename) === 'image'"
             class="block size-full object-cover"
-            :src="item.media.filename"
-            :alt="item.media.alt || ''"
+            :src="item.media?.[0]?.image?.filename"
+            :alt="item.media?.[0]?.image?.alt || ''"
+            :width="storyblokImageDimensions(item.media?.[0]?.image?.filename).width"
+            :height="storyblokImageDimensions(item.media?.[0]?.image?.filename).height"
             sizes="
-              2xs:100vw
               xs:100vw
               sm:100vw
               md:100vw
               lg:100vw
               xl:100vw
-              2xl:100vw
             "
-            :width="16"
-            :height="9"
             loading="lazy"
+          />
+
+          <UiMuxVideo
+            v-else-if="item.media?.[0] && isMuxVideoAutoplayComponent(item.media?.[0]) && item.media?.[0]?.video?.playbackId"
+            class="block size-full object-cover"
+            :is-cover="true"
+            :playback-id="item.media?.[0]?.video?.playbackId"
+            playsinline
+            autoplay
+            muted
+            loop
           />
 
           <div
@@ -70,6 +85,13 @@ const theme = computed(() => (block.theme as Themes) ?? 'light')
           >
             <div class="wrapper-max text-offwhite">
               <StoryblokText :html="item.copy" />
+
+              <NuxtLink
+                v-if="getProjectSlug(item.project)"
+                :to="getProjectSlug(item.project)"
+              >
+                View Project
+              </NuxtLink>
             </div>
           </div>
         </div>

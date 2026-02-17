@@ -3401,21 +3401,44 @@
     "display_name": "Slide",
     "description": "Slide",
     "created_at": "2026-01-20T17:23:08.792Z",
-    "updated_at": "2026-02-03T17:33:35.232Z",
+    "updated_at": "2026-02-17T17:33:48.936Z",
     "id": 136151813303369,
     "schema": {
-      "media": {
+      "project": {
+        "type": "options",
+        "pos": 0,
+        "is_reference_type": true,
+        "source": "internal_stories",
+        "entry_appearance": "card",
+        "allow_advanced_search": true,
+        "max_options": 1,
+        "filter_content_type": [
+          "project"
+        ],
+        "min_options": 1,
+        "id": "65oG5SDJQXaHEhSf7PEK2A"
+      },
+      "logo": {
         "type": "asset",
         "pos": 1,
-        "id": "EPzwH52cRAG7t-GC_lAMtA",
-        "filetypes": [
-          "images",
-          "videos"
-        ]
+        "id": "CmtWcYRwSTGu6xdD2-wGsA"
+      },
+      "media": {
+        "type": "bloks",
+        "pos": 2,
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image",
+          "mux_video_autoplay"
+        ],
+        "component_denylist": [],
+        "id": "FOlpLD7gR9GJo-2Cq3rymg"
       },
       "copy": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 3,
         "style_options": [
           {
             "_uid": "fb715ca3-c9a0-4fcd-8470-022c9bf238a6",

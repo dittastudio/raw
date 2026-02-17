@@ -472,7 +472,9 @@ export interface Settings {
 }
 
 export interface Slide {
-  media?: StoryblokAsset;
+  project?: (ISbStoryData<Project> | string)[];
+  logo?: StoryblokAsset;
+  media?: (Image | MuxVideoAutoplay)[];
   copy?: StoryblokRichtext;
   component: "slide";
   _uid: string;

@@ -7,6 +7,7 @@ const relations: string[] = [
   'post.author',
   'team.people',
   'block_projects.projects',
+  'slide.project',
 ]
 
 const story = await useStory<Event | Page | Post | Project>(
