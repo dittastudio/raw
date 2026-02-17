@@ -33,10 +33,10 @@ const theme = computed(() => (block.theme as Themes) ?? 'light')
       :autoplay-interval="4000"
     >
       <template #item="{ item }">
-        <div class="relative size-full isolate">
+        <div class="relative size-full isolate aspect-10/16 sm:aspect-video max-h-svh">
           <NuxtImg
             v-if="item.media?.filename"
-            class="block size-full aspect-10/16 sm:aspect-video object-cover"
+            class="block size-full object-cover"
             :src="item.media.filename"
             :alt="item.media.alt || ''"
             sizes="
