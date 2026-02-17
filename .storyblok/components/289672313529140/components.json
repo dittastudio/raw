@@ -2398,7 +2398,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-19T11:08:45.655Z",
-    "updated_at": "2026-01-19T11:11:49.350Z",
+    "updated_at": "2026-02-17T15:55:05.077Z",
     "id": 135705909889037,
     "schema": {
       "title": {
@@ -2411,10 +2411,10 @@
         "pos": 1,
         "id": "UrYietPOThSNnb98X-WaYw"
       },
-      "cta": {
-        "type": "multilink",
-        "pos": 2,
-        "id": "exKTIqrjR3GqKVSAg2v5DA"
+      "arrow_icon": {
+        "type": "boolean",
+        "pos": 3,
+        "id": "Z1kYgCegQmGNBNaLiHb-OQ"
       }
     },
     "image": null,

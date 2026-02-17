@@ -153,6 +153,7 @@ const accentMaskClasses = computed(() => {
             type="default"
             :item="item"
             :is-open="openIndex === index"
+            :has-icon="item.arrow_icon"
           />
         </li>
       </ul>
@@ -196,6 +197,7 @@ const accentMaskClasses = computed(() => {
             type="mask"
             :item="item"
             :is-open="openIndex === index"
+            :has-icon="item.arrow_icon"
           />
         </li>
       </ul>
