@@ -9,6 +9,7 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const items = computed(() => block.items ?? [])
+const theme = computed(() => (block.theme as Themes) ?? 'light')
 const accent = computed(() => (block.accent as Themes) ?? 'light')
 </script>
 
@@ -27,6 +28,7 @@ const accent = computed(() => (block.accent as Themes) ?? 'light')
 
     <UiGrid
       v-if="items.length"
+      :theme="theme"
       :accent="accent"
       :items="items"
     />
