@@ -16,18 +16,6 @@ export interface BlockBcorp {
   _uid: string;
 }
 
-export interface BlockCarousel {
-  title?: string;
-  headline?: StoryblokRichtext;
-  copy?: StoryblokRichtext;
-  cta_title?: string;
-  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
-  slides?: Slide[];
-  theme?: number | string;
-  component: "block_carousel";
-  _uid: string;
-}
-
 export interface BlockContact {
   title?: string;
   headline?: StoryblokRichtext;
@@ -166,6 +154,18 @@ export interface BlockPosts {
   _uid: string;
 }
 
+export interface BlockProjectCarousel {
+  title?: string;
+  headline?: StoryblokRichtext;
+  copy?: StoryblokRichtext;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  projects?: (ISbStoryData<Project> | string)[];
+  theme?: number | string;
+  component: "block_project_carousel";
+  _uid: string;
+}
+
 export interface BlockProjects {
   projects?: (ISbStoryData<Project> | string)[];
   theme?: number | string;
@@ -251,7 +251,6 @@ export interface Event {
   preview_text?: string;
   blocks?: (
     | BlockBcorp
-    | BlockCarousel
     | BlockEventOverview
     | BlockEventText
     | BlockGallery
@@ -264,6 +263,7 @@ export interface Event {
     | BlockMedia
     | BlockNextEvent
     | BlockPastEvents
+    | BlockProjectCarousel
     | BlockSplitText
     | BlockTestimonials
     | BlockText
@@ -328,7 +328,6 @@ export interface MuxVideoPlayer {
 export interface Page {
   blocks?: (
     | BlockBcorp
-    | BlockCarousel
     | BlockContact
     | BlockGallery
     | BlockHero
@@ -342,6 +341,7 @@ export interface Page {
     | BlockNextEvent
     | BlockPastEvents
     | BlockPosts
+    | BlockProjectCarousel
     | BlockProjects
     | BlockSplitText
     | BlockTeam
@@ -435,6 +435,7 @@ export interface PostWistia {
 export interface Project {
   preview_logo?: StoryblokAsset;
   preview_image: StoryblokAsset;
+  preview_headline: string;
   preview_text: string;
   category: number | string;
   blocks?: (

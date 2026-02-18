@@ -28,7 +28,7 @@ const isBlockWithBgMedia = (index: number) => {
 }
 
 const isBlockCarousel = (index: number) => {
-  return ['block_carousel'].includes(story.content.blocks?.[index]?.component ?? '')
+  return ['block_project_carousel'].includes(story.content.blocks?.[index]?.component ?? '')
 }
 </script>
 
@@ -51,8 +51,8 @@ const isBlockCarousel = (index: number) => {
         :block="block"
       />
 
-      <BlockCarousel
-        v-else-if="block.component === 'block_carousel'"
+      <BlockProjectCarousel
+        v-else-if="block.component === 'block_project_carousel'"
         :block="block"
       />
 

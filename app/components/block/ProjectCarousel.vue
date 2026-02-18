@@ -1,20 +1,15 @@
 <script lang="ts" setup>
-import type { BlockCarousel, Project } from '#storyblok-components'
+import type { BlockProjectCarousel, Project } from '#storyblok-components'
 import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
-  block: BlockCarousel
+  block: BlockProjectCarousel
 }
 
 const { block } = defineProps<Props>()
 
 const theme = computed(() => (block.theme as Themes) ?? 'light')
-
-function getProjectSlug(project?: (ISbStoryData<Project> | string)[]) {
-  const ref = project?.[0]
-  return ref && typeof ref !== 'string' ? `/${ref.full_slug}` : undefined
-}
 </script>
 
 <template>
@@ -33,20 +28,24 @@ function getProjectSlug(project?: (ISbStoryData<Project> | string)[]) {
     />
 
     <UiCarouselFade
-      :items="block.slides"
+      :items="(block.projects as ISbStoryData<Project>[])"
       :options="{ loop: true }"
       :autoplay="false"
       :autoplay-interval="4000"
     >
       <template #item="{ item }">
-        <div class="relative size-full isolate aspect-10/16 sm:aspect-video max-h-svh">
+        <NuxtLink
+          v-if="item.full_slug"
+          :to="`/${item.full_slug}`"
+          class="block relative size-full isolate aspect-10/16 sm:aspect-video max-h-svh"
+        >
           <NuxtImg
-            v-if="item.media?.[0] && isImageComponent(item.media?.[0]) && item.media?.[0]?.image?.filename && storyblokAssetType(item.media?.[0]?.image?.filename) === 'image'"
+            v-if="item.content.preview_image?.filename && storyblokAssetType(item.content.preview_image.filename) === 'image'"
             class="block size-full object-cover"
-            :src="item.media?.[0]?.image?.filename"
-            :alt="item.media?.[0]?.image?.alt || ''"
-            :width="storyblokImageDimensions(item.media?.[0]?.image?.filename).width"
-            :height="storyblokImageDimensions(item.media?.[0]?.image?.filename).height"
+            :src="item.content.preview_image.filename"
+            :alt="item.content.preview_image.alt || ''"
+            :width="storyblokImageDimensions(item.content.preview_image.filename).width"
+            :height="storyblokImageDimensions(item.content.preview_image.filename).height"
             sizes="
               xs:100vw
               sm:100vw
@@ -57,22 +56,9 @@ function getProjectSlug(project?: (ISbStoryData<Project> | string)[]) {
             loading="lazy"
           />
 
-          <UiMuxVideo
-            v-else-if="item.media?.[0] && isMuxVideoAutoplayComponent(item.media?.[0]) && item.media?.[0]?.video?.playbackId"
-            class="block size-full object-cover"
-            :is-cover="true"
-            :playback-id="item.media?.[0]?.video?.playbackId"
-            playsinline
-            autoplay
-            muted
-            loop
-          />
-
           <div
-            v-if="storyblokRichTextContent(item.copy)"
             class="
               carousel__copy
-              prose-p
               absolute
               inset-0
               pb-[calc(var(--app-outer-gutter)*3)]
@@ -83,21 +69,23 @@ function getProjectSlug(project?: (ISbStoryData<Project> | string)[]) {
               z-1
             "
           >
-            <div class="wrapper-max text-offwhite">
-              <StoryblokText :html="item.copy" />
+            <div class="wrapper-max text-offwhite text-balance flex flex-col gap-y-6 md:gap-y-10">
+              <h3 class="type-p max-w-[32ch]">
+                {{ item.content.preview_text }}
+              </h3>
 
-              <NuxtLink
-                v-if="getProjectSlug(item.project)"
-                :to="getProjectSlug(item.project)"
-              >
-                View Project
-              </NuxtLink>
+              <p class="type-h4 max-w-[24ch]">
+                {{ item.content.preview_headline }}
+              </p>
             </div>
           </div>
-        </div>
+        </NuxtLink>
       </template>
 
-      <template #other>
+      <template
+        v-if="block.projects && block.projects.length > 1"
+        #other
+      >
         <div class="absolute bottom-0 left-0 right-0 z-1 wrapper-max pb-[calc(var(--app-outer-gutter)*1.25)] lg:pb-20 pointer-events-none">
           <div class="pointer-events-auto">
             <UiCarouselDots class="text-offwhite" />
@@ -134,11 +122,6 @@ function getProjectSlug(project?: (ISbStoryData<Project> | string)[]) {
         --alpha(var(--color-black) / 0%) 100%
       );
     }
-  }
-
-  :deep(h3) {
-    @apply type-h4;
-    text-wrap: balance;
   }
 }
 </style>
