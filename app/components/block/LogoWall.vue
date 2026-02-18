@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import type { BlockLogoWall } from '#storyblok-components'
 import type { Themes } from '@@/types/app'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
   block: BlockLogoWall
@@ -13,6 +17,36 @@ const shouldRenderUiContent = computed(() => {
   const headline = storyblokRichTextContent(block.headline)
 
   return (title && headline) || (!title && headline)
+})
+
+const container = useTemplateRef('container')
+
+onMounted(() => {
+  const items = container.value?.querySelectorAll('li img')
+
+  if (!items?.length) {
+    return
+  }
+
+  gsap.fromTo(items, {
+    opacity: 0,
+    scale: 0.75,
+  }, {
+    opacity: 1,
+    scale: 1,
+    duration: 1.5,
+    ease: 'expo.out',
+    stagger: {
+      amount: 0.9,
+    },
+    scrollTrigger: {
+      trigger: container.value,
+      start: 'top 80%',
+      end: 'bottom 20%',
+      scrub: 1,
+      markers: false,
+    },
+  })
 })
 </script>
 
@@ -47,6 +81,7 @@ const shouldRenderUiContent = computed(() => {
       </div>
 
       <ul
+        ref="container"
         class="col-span-full md:col-start-4 md:col-span-9 grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4"
         :class="block.theme && typeof block.theme === 'string' ? getThemeClasses[block.theme as Themes] : undefined"
       >
