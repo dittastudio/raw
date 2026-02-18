@@ -17,7 +17,9 @@ const { title, people, accent } = defineProps<Props>()
 const peoples = computed(() => people?.filter(person => typeof person !== 'string'))
 const container = useTemplateRef('container')
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+
   const items = container.value?.querySelectorAll('li')
 
   if (!items?.length) {

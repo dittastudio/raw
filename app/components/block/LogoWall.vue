@@ -21,7 +21,9 @@ const shouldRenderUiContent = computed(() => {
 
 const container = useTemplateRef('container')
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+
   const items = container.value?.querySelectorAll('li img')
 
   if (!items?.length) {
