@@ -6,9 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 interface Props {
   block: BlockHero
   name?: string
+  headlineAs?: 'h1' | 'h2'
 }
 
-const { block, name } = defineProps<Props>()
+const { block, name, headlineAs = 'h1' } = defineProps<Props>()
 
 const heroRef = useTemplateRef('heroRef')
 const mediaRef = useTemplateRef('mediaRef')
@@ -93,6 +94,7 @@ onUnmounted(() => {
         <div
           v-if="storyblokRichTextContent(block.headline)"
           class="hero__headline"
+          :class="headlineAs === 'h2' ? 'hero__headline--h2' : 'hero__headline--h1'"
         >
           <StoryblokText :html="block.headline" />
         </div>
@@ -100,6 +102,7 @@ onUnmounted(() => {
         <h1
           v-else-if="!storyblokRichTextContent(block.headline) && name"
           class="sr-only"
+          :class="headlineAs === 'h2' ? 'type-h2' : 'type-h1'"
         >
           {{ name }}
         </h1>
@@ -185,17 +188,17 @@ onUnmounted(() => {
   }
 }
 
-.hero__headline {
-  :deep(h1) {
+.hero__headline--h1 {
+  :deep(h1),
+  :deep(h2) {
     @apply type-h1;
   }
+}
 
+.hero__headline--h2 {
+  :deep(h1),
   :deep(h2) {
     @apply type-h2;
-  }
-
-  :deep(h3) {
-    @apply type-h3;
   }
 }
 

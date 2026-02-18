@@ -117,7 +117,7 @@ const setSizes = (isLarge: boolean) => {
                   :slug="project.full_slug"
                   :image="project.content.preview_image"
                   :tagline="project.content.preview_text"
-                  :headline="project.name"
+                  :headline="project.content.preview_headline || project.name"
                   :logo="project.content.preview_logo"
                 >
                   <template #image>
@@ -125,7 +125,7 @@ const setSizes = (isLarge: boolean) => {
                       v-if="project.content.preview_image?.filename && storyblokAssetType(project.content.preview_image.filename) === 'image'"
                       class="block size-full object-cover aspect-video"
                       :src="project.content.preview_image.filename"
-                      :alt="project.content.preview_image.alt || project.name || ''"
+                      :alt="project.content.preview_image.alt || project.content.preview_headline || project.name || ''"
                       :width="16"
                       :height="9"
                       :sizes="setSizes(index % 3 === 2)"

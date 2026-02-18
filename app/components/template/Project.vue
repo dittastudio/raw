@@ -49,6 +49,7 @@ const isBlockWithBgMedia = (index: number) => {
       <BlockHero
         v-else-if="block.component === 'block_hero'"
         :block="block"
+        :headline-as="index === 0 ? 'h2' : 'h1'"
       />
 
       <BlockImpactDetails
