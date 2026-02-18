@@ -10,8 +10,8 @@ const { story } = defineProps<Props>()
 const author = computed(() => typeof story.content.author !== 'string' ? story.content.author : null)
 const storyblokApi = useStoryblokApi()
 
-const { data: categories } = await useAsyncData('categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
-  datasource: 'category',
+const { data: categories } = await useAsyncData('post-categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {
+  datasource: 'post-category',
 }))
 
 interface CategoryEntry {
