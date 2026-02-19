@@ -61,7 +61,7 @@ const run = async () => {
           duration,
           autoAlpha: 0,
           yPercent: 100,
-          stagger: 0.15,
+          stagger: 0.1,
           ease: 'expo.out',
           ...isTriggerScroll,
           ...isTriggerInView,

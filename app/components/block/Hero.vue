@@ -17,18 +17,18 @@ const mediaReady = ref(false)
 const media = computed(() => block.media?.[0])
 const svg = await useSvg(block.logo?.filename)
 
+gsap.registerPlugin(ScrollTrigger)
+
 const mediaLoaded = () => {
   mediaReady.value = true
 }
 
-onMounted(async () => {
-  if (!heroRef.value || !mediaRef.value) {
+watch(mediaReady, async (ready) => {
+  if (!ready || !heroRef.value || !mediaRef.value) {
     return
   }
 
   await nextTick()
-
-  gsap.registerPlugin(ScrollTrigger)
 
   const amount = 15
 
@@ -119,10 +119,10 @@ onUnmounted(() => {
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-opacity duration-1000 ease-out"
-      :class="[
-        mediaReady ? 'opacity-100' : 'opacity-0',
-      ]"
+      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-out"
+      :class="{
+        'opacity-0 scale-120': !mediaReady,
+      }"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
@@ -151,7 +151,7 @@ onUnmounted(() => {
         autoplay
         muted
         loop
-        @loadeddata="mediaLoaded"
+        @ready="mediaLoaded"
       />
     </div>
   </div>

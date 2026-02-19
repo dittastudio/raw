@@ -70,8 +70,9 @@ onBeforeUnmount(stopSlideRotation)
       size-full
     "
     >
-      <div
+      <EffectTextReveal
         v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
+        :delay="1000"
         class="hero__headline relative"
       >
         <div class="hero__headline-1 opacity-100">
@@ -81,26 +82,36 @@ onBeforeUnmount(stopSlideRotation)
         <div class="hero__headline-2 absolute inset-0 opacity-0">
           <StoryblokText :html="block.headline_2" />
         </div>
-      </div>
+      </EffectTextReveal>
 
-      <div class="w-full max-h-full">
+      <div
+        class="w-full max-h-full transition-[opacity,scale] duration-1000 ease-out"
+        :class="[
+          {
+            'opacity-0 scale-90': !mediaReady,
+          },
+        ]"
+      >
         <IconLogo class="size-full" />
       </div>
 
-      <div
+      <EffectTextReveal
         v-if="storyblokRichTextContent(block.text)"
+        :delay="1500"
         class="hero__text"
       >
         <StoryblokText :html="block.text" />
-      </div>
+      </EffectTextReveal>
     </div>
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter] duration-1000 ease-out"
+      class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter,scale] duration-1000 ease-out"
       :class="[
-        mediaReady ? 'opacity-100' : 'opacity-0',
-        activeSlide === 1 ? 'grayscale-100' : 'grayscale-0',
+        {
+          'opacity-0 scale-120': !mediaReady,
+          'grayscale-100': activeSlide === 1,
+        },
       ]"
     >
       <NuxtImg
@@ -130,7 +141,7 @@ onBeforeUnmount(stopSlideRotation)
         autoplay
         muted
         loop
-        @loadeddata="mediaLoaded"
+        @ready="mediaLoaded"
       />
     </div>
   </div>

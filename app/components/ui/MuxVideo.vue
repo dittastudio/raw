@@ -3,7 +3,7 @@ import '@mux/mux-player'
 
 interface Events {
   (event: 'play'): void
-  (event: 'loadeddata'): void
+  (event: 'ready'): void
 }
 
 const emit = defineEmits<Events>()
@@ -30,19 +30,27 @@ const setPlayed = () => {
 }
 
 const setLoadedData = () => {
-  emit('loadeddata')
+  emit('ready')
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+
   video.value = root.value?.querySelector('mux-player')
 
   video.value?.addEventListener('play', setPlayed)
   video.value?.addEventListener('loadeddata', setLoadedData)
+  video.value?.addEventListener('canplay', setLoadedData)
+
+  if (video.value && video.value.readyState >= 2) {
+    setLoadedData()
+  }
 })
 
 onUnmounted(() => {
   video.value?.removeEventListener('play', setPlayed)
   video.value?.removeEventListener('loadeddata', setLoadedData)
+  video.value?.removeEventListener('canplay', setLoadedData)
 })
 
 const mainMouse = useSmoothMouse(root, { range: 0.05 })
