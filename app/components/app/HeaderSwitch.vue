@@ -22,7 +22,9 @@ const handleAnimationEnd = () => {
       text-offwhite
       outline-1
       outline-offset-0
-      outline-(--app-text-color)/10
+      transition-[outline-color]
+      duration-500
+      ease-inOutBack
       rounded-full
       before:content-['']
       before:absolute before:w-px
@@ -39,6 +41,8 @@ const handleAnimationEnd = () => {
     :class="{
       'is-open': isHeaderOpen,
       'is-animating': isAnimating,
+      'outline-offwhite/10': !isHeaderOpen,
+      'outline-offblack/0': isHeaderOpen,
     }"
     @animationend="handleAnimationEnd"
   />

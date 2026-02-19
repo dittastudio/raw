@@ -39,7 +39,7 @@ const { items } = defineProps<Props>()
       >
         <StoryblokLink
           :item="item.link"
-          class="navigation__link block pointer-events-auto p-2 lg:py-7.5 lg:px-(--link-padding-x)"
+          class="navigation__link block pointer-events-auto p-2 lg:p-(--app-outer-gutter)"
         >
           {{ item.title }}
         </StoryblokLink>
