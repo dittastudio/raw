@@ -26,6 +26,10 @@ const isBlockWithBgMedia = (index: number) => {
 
   return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block.component) && block.media?.[0]
 }
+
+const isBlockCarousel = (index: number) => {
+  return ['block_project_carousel'].includes(story.content.blocks?.[index]?.component ?? '')
+}
 </script>
 
 <template>
@@ -36,7 +40,8 @@ const isBlockWithBgMedia = (index: number) => {
   >
     <div
       :class="{
-        'py-(--app-vertical-spacing)': !isHeroBlock(index, 0) && !isBlockWithBgMedia(index),
+        'py-(--app-vertical-spacing)': !isHeroBlock(index, 0) && !isBlockWithBgMedia(index) && !isBlockCarousel(index),
+        'pt-(--app-vertical-spacing)': isBlockCarousel(index),
         'pt-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, -1),
         'pb-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, 1) || (isLastBlock(index) && !isBlockWithBgMedia(index)),
       }"
@@ -46,8 +51,8 @@ const isBlockWithBgMedia = (index: number) => {
         :block="block"
       />
 
-      <BlockCarousel
-        v-else-if="block.component === 'block_carousel'"
+      <BlockProjectCarousel
+        v-else-if="block.component === 'block_project_carousel'"
         :block="block"
       />
 

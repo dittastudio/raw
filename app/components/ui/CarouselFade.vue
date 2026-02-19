@@ -82,6 +82,8 @@ const carousel = {
 // Provide carousel to child components
 provide('carousel', carousel)
 
+defineExpose({ slider, details, next, previous })
+
 useIntersectionObserver(
   container,
   ([entry]) => {
