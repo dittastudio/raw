@@ -63,9 +63,17 @@ const setSizes = (isLarge: boolean) => {
           :entries="categories"
         >
           <template #default="{ filters, applied }">
-            <h2 class="type-display-28 wrapper-max">
-              {{ applied.item?.name ? applied.item.name === 'All' ? 'All Projects' : applied.item.name : 'All Projects' }}
-            </h2>
+            <Transition
+              name="fade"
+              mode="out-in"
+            >
+              <h2
+                :key="applied.item?.name ?? 'all'"
+                class="type-display-28 wrapper-max"
+              >
+                {{ applied.item?.name ? applied.item.name === 'All' ? 'All Projects' : applied.item.name : 'All Projects' }}
+              </h2>
+            </Transition>
 
             <div class="scroll-x">
               <div class="wrapper-max">

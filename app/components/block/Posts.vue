@@ -155,9 +155,17 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
           :entries="categories"
         >
           <template #default="{ filters, applied }">
-            <h2 class="type-display-28 wrapper-max">
-              {{ applied.item?.name ? applied.item.name === 'All' ? 'All Posts' : applied.item.name : 'All Posts' }}
-            </h2>
+            <Transition
+              name="fade"
+              mode="out-in"
+            >
+              <h2
+                :key="applied.item?.name ?? 'all'"
+                class="type-display-28 wrapper-max"
+              >
+                {{ applied.item?.name ? applied.item.name === 'All' ? 'All Posts' : applied.item.name : 'All Posts' }}
+              </h2>
+            </Transition>
 
             <div class="scroll-x">
               <div class="wrapper-max">
