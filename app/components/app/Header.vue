@@ -81,6 +81,10 @@ const hideHeader = computed(() => {
     )
 })
 
+const hasNotScrolledThemeClasses = computed(() =>
+  activeTheme.value === 'dark' ? 'text-offwhite' : 'text-offblack',
+)
+
 const headerThemeClasses: Record<Themes, string> = {
   dark: 'lg:bg-offblack lg:text-offwhite',
   light: 'lg:bg-offwhite lg:text-offblack',
@@ -90,7 +94,7 @@ const headerThemeClasses: Record<Themes, string> = {
   purple: 'lg:bg-purple lg:text-offblack',
 }
 
-const scrolledHeaderClasses = computed(() => headerThemeClasses[activeTheme.value])
+const hasScrolledThemeClasses = computed(() => headerThemeClasses[activeTheme.value])
 
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
@@ -155,9 +159,11 @@ watchEffect(() => {
       :class="[
         {
           '-translate-y-full': hideHeader,
-          'lg:before:opacity-[0]': !hasScrolled,
-          'lg:before:opacity-[0.1]': hasScrolled,
-          [scrolledHeaderClasses]: hasScrolled,
+          'delay-[0s,0s,0.3s,0.3s]': hasScrolledDown,
+          'lg:before:opacity-0': !hasScrolled,
+          'lg:before:opacity-10': hasScrolled,
+          [hasNotScrolledThemeClasses]: !hasScrolled,
+          [hasScrolledThemeClasses]: hasScrolled,
         },
       ]"
     >
