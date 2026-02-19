@@ -34,8 +34,9 @@ const {
       </h2>
     </div>
 
-    <div
+    <EffectTextReveal
       v-if="storyblokRichTextContent(headline)"
+      :delay="500"
       class="col-span-full sm:col-start-2 sm:col-span-7 md:col-span-9 [&_h3]:type-h2 [&_h3]:text-wrap[balance] [&_h3]:max-w-[20ch]"
       :class="{
         'md:col-start-4': title,
@@ -43,7 +44,7 @@ const {
       }"
     >
       <StoryblokText :html="headline" />
-    </div>
+    </EffectTextReveal>
 
     <div
       v-if="storyblokRichTextContent(copy) || cta?.cached_url"
