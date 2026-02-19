@@ -36,7 +36,7 @@ const run = async () => {
           start: 'top 80%',
           end: 'bottom 30%',
           scrub: 1,
-          markers: true,
+          markers: false,
         },
       }
     : {}
@@ -46,7 +46,7 @@ const run = async () => {
         scrollTrigger: {
           trigger: text.value,
           start: 'top 80%',
-          markers: true,
+          markers: false,
         },
       }
     : {}
