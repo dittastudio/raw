@@ -160,7 +160,7 @@ export interface BlockProjectCarousel {
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
-  projects?: (ISbStoryData<Project> | string)[];
+  projects: (ISbStoryData<Project> | string)[];
   theme?: number | string;
   component: "block_project_carousel";
   _uid: string;
@@ -497,8 +497,8 @@ export interface Testimonial {
 }
 
 export interface TitleCopy {
-  title?: StoryblokRichtext;
-  copy?: StoryblokRichtext;
+  title: StoryblokRichtext;
+  copy: StoryblokRichtext;
   component: "title_copy";
   _uid: string;
 }
