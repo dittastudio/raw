@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockPosts, Post } from '#storyblok-components'
+import type { BlockPosts, Event, Post } from '#storyblok-components'
 import type { ISbStoriesParams, ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -34,6 +34,7 @@ interface Posts {
   first_published_at?: string
   image: Post['hero'] | Post['preview_image'] | undefined
   category: Post['category']
+  component: Post['component'] | Event['component']
 }
 
 interface PostsPayload {
@@ -126,6 +127,7 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
       first_published_at: post.first_published_at ?? undefined,
       image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero?.filename ? post.content.hero : undefined,
       category: post.content.category,
+      component: post.content.component,
     }))
 
     return {
@@ -204,7 +206,7 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                   :headline="post.name"
                   :slug="post.full_slug"
                   :image="post.image"
-                  :category="getCategoryEntry(post.category, categories)?.name"
+                  :category="getCategoryEntry(post.category, categories)?.name || (post.component === 'event' ? 'Events' : undefined)"
                 />
               </li>
             </ul>

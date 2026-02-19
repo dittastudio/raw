@@ -91,28 +91,29 @@ onUnmounted(() => {
           </div>
         </template>
 
-        <div
+        <EffectTextReveal
           v-if="storyblokRichTextContent(block.headline)"
           class="hero__headline"
           :class="headlineAs === 'h2' ? 'hero__headline--h2' : 'hero__headline--h1'"
+          :delay="500"
         >
           <StoryblokText :html="block.headline" />
-        </div>
+        </EffectTextReveal>
 
         <h1
           v-else-if="!storyblokRichTextContent(block.headline) && name"
           class="sr-only"
-          :class="headlineAs === 'h2' ? 'type-h2' : 'type-h1'"
         >
           {{ name }}
         </h1>
 
-        <div
+        <EffectTextReveal
           v-if="storyblokRichTextContent(block.text)"
           class="hero__text"
+          :delay="storyblokRichTextContent(block.headline) ? 1000 : 500"
         >
           <StoryblokText :html="block.text" />
-        </div>
+        </EffectTextReveal>
       </div>
     </div>
 

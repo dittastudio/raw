@@ -24,7 +24,7 @@ const {
 </script>
 
 <template>
-  <div class="ui-content wrapper-max grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20">
+  <div class="wrapper-max grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20">
     <div
       v-if="title"
       class="col-span-full md:col-start-1 md:col-span-3"
@@ -36,7 +36,7 @@ const {
 
     <div
       v-if="storyblokRichTextContent(headline)"
-      class="ui-content__headline col-span-full sm:col-start-2 sm:col-span-7 md:col-span-9"
+      class="col-span-full sm:col-start-2 sm:col-span-7 md:col-span-9 [&_h3]:type-h2 [&_h3]:text-wrap[balance] [&_h3]:max-w-[20ch]"
       :class="{
         'md:col-start-4': title,
         'md:col-start-2': !title,
@@ -71,16 +71,3 @@ const {
     </div>
   </div>
 </template>
-
-<style scoped>
-@reference "@/assets/css/app.css";
-
-.ui-content__headline {
-  :deep(h3) {
-    @apply type-h2;
-
-    text-wrap: balance;
-    max-width: 20ch;
-  }
-}
-</style>

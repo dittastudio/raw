@@ -37,9 +37,7 @@ const immediateFn = async () => {
           duration,
           autoAlpha: 0,
           yPercent: 100,
-          skewY: -3,
-          transformOrigin: 'top left',
-          stagger: 0.1,
+          stagger: 0.15,
           ease: 'expo.out',
         })
       },
