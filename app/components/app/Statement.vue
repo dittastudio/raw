@@ -47,7 +47,6 @@ const { media, statement, title, link } = defineProps<Props>()
 
     <div class="wrapper py-35 flex flex-col items-center justify-center">
       <EffectTextReveal
-        :key="$route.fullPath"
         :delay="500"
         class="flex flex-col items-center justify-center gap-8 w-full max-w-325"
       >
