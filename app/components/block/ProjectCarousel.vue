@@ -42,7 +42,7 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
         <NuxtLink
           v-if="item.full_slug"
           :to="`/${item.full_slug}`"
-          class="block relative size-full isolate aspect-10/16 sm:aspect-video min-h-140 max-h-svh"
+          class="block relative size-full isolate aspect-10/16 sm:aspect-video md:min-h-160 max-h-svh"
         >
           <NuxtImg
             v-if="item.content.preview_image?.filename && storyblokAssetType(item.content.preview_image.filename) === 'image'"
@@ -68,7 +68,7 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
               inset-0
               pt-(--app-outer-gutter)
               pb-[calc(var(--app-outer-gutter)*3)]
-              lg:pb-40
+              xl:pb-40
               flex
               flex-col
               justify-end
@@ -105,7 +105,7 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
         v-if="block.projects && block.projects.length > 1"
         #other
       >
-        <div class="absolute inset-0 pointer-events-none flex items-center justify-between wrapper-max">
+        <div class="max-md:hidden absolute inset-0 pointer-events-none flex items-center justify-between wrapper-max">
           <button
             type="button"
             class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
@@ -123,7 +123,7 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
           </button>
         </div>
 
-        <div class="absolute bottom-0 left-0 right-0 z-1 wrapper-max pb-[calc(var(--app-outer-gutter)*1.25)] lg:pb-20 pointer-events-none">
+        <div class="absolute bottom-0 left-0 right-0 z-1 wrapper-max pb-[calc(var(--app-outer-gutter)*1.25)] xl:pb-20 pointer-events-none">
           <div class="pointer-events-auto">
             <UiCarouselDots class="text-offwhite" />
           </div>
