@@ -122,8 +122,8 @@ const isBlockCarousel = (index: number) => {
         :block="block"
       />
 
-      <BlockProjects
-        v-else-if="block.component === 'block_projects'"
+      <BlockProjectsFiltered
+        v-else-if="block.component === 'block_projects_filtered'"
         :block="block"
       />
 

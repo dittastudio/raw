@@ -6,7 +6,7 @@ const route = useRoute()
 const relations: string[] = [
   'post.author',
   'team.people',
-  'block_projects.projects',
+  'block_projects_filtered.projects',
   'block_project_carousel.projects',
 ]
 
