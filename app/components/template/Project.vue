@@ -67,6 +67,11 @@ const isBlockWithBgMedia = (index: number) => {
         :block="block"
       />
 
+      <BlockProjectsSelected
+        v-else-if="block.component === 'block_projects_selected'"
+        :block="block"
+      />
+
       <BlockTestimonials
         v-else-if="block.component === 'block_testimonials'"
         :block="block"

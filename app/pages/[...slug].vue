@@ -7,6 +7,7 @@ const relations: string[] = [
   'post.author',
   'team.people',
   'block_projects_filtered.projects',
+  'block_projects_selected.projects',
   'block_project_carousel.projects',
 ]
 

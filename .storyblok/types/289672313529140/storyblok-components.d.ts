@@ -173,6 +173,14 @@ export interface BlockProjectsFiltered {
   _uid: string;
 }
 
+export interface BlockProjectsSelected {
+  title?: string;
+  projects: (ISbStoryData<Project> | string)[];
+  theme?: number | string;
+  component: "block_projects_selected";
+  _uid: string;
+}
+
 export interface BlockSplitText {
   items?: Copy[];
   theme?: number | string;
@@ -343,6 +351,7 @@ export interface Page {
     | BlockPosts
     | BlockProjectCarousel
     | BlockProjectsFiltered
+    | BlockProjectsSelected
     | BlockSplitText
     | BlockTeam
     | BlockTestimonials
@@ -444,6 +453,7 @@ export interface Project {
     | BlockImpactDetails
     | BlockImpactStatement
     | BlockMedia
+    | BlockProjectsSelected
     | BlockTestimonials
     | BlockTicker
     | BlockTruths
