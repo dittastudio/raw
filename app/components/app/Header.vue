@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { Link } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 import type Lenis from 'lenis'
 import { useLenis } from 'lenis/vue'
 import IconLogo from '@/assets/icons/logo.svg?component'
@@ -12,6 +13,7 @@ const { navigation } = defineProps<Props>()
 
 const lenis = useLenis()
 const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const activeTheme = useState<Themes>('activeTheme', () => 'light')
 const ready = ref(false)
 const hasScrolled = ref(false)
 const hasScrolledUp = ref(false)
@@ -79,6 +81,17 @@ const hideHeader = computed(() => {
     )
 })
 
+const headerThemeClasses: Record<Themes, string> = {
+  dark: 'lg:bg-offblack lg:text-offwhite',
+  light: 'lg:bg-offwhite lg:text-offblack',
+  blue: 'lg:bg-blue lg:text-offblack',
+  green: 'lg:bg-green lg:text-offblack',
+  pink: 'lg:bg-pink lg:text-offblack',
+  purple: 'lg:bg-purple lg:text-offblack',
+}
+
+const scrolledHeaderClasses = computed(() => headerThemeClasses[activeTheme.value])
+
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
     closeHeaderMenu()
@@ -115,37 +128,75 @@ watchEffect(() => {
   <header
     :class="{
       'is-open': isHeaderOpen,
-      'opacity-0 -translate-y-2': hideHeader,
-      'transition-[opacity,translate] duration-300 ease-out': ready,
+      'has-scrolled': hasScrolled,
     }"
-    class="header sticky top-0 wrapper py-7.5 w-full flex flex-row items-center justify-between z-10"
+    class="header sticky top-0 w-full h-(--app-header-height) z-20"
     @mouseenter="handleMouseEnter"
   >
-    <NuxtLink
-      class="p-5 -m-5 md:p-7.5 md:-m-7.5"
-      to="/"
-    >
-      <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
-
-      <span class="sr-only">RAW</span>
-    </NuxtLink>
-
-    <button
-      class="z-1 block lg:hidden outline-none"
-      type="button"
-      @click="toggleHeaderMenu"
-    >
-      <AppHeaderSwitch />
-    </button>
-
     <div
-      data-lenis-prevent
-      class="header__navigation w-full"
+      class="
+        relative
+        lg:before:content-['']
+        lg:before:absolute
+        lg:before:top-full
+        lg:before:inset-x-0
+        lg:before:h-px
+        lg:before:bg-current
+        lg:before:transition-opacity
+        lg:before:duration-300
+        lg:before:ease-in-out
+        lg:before:pointer-events-none
+        lg:before:z-1
+        transition-[opacity,translate,background-color,color]
+        duration-300
+        ease-in-out
+        transform-gpu
+      "
+      :class="[
+        {
+          '-translate-y-full': hideHeader,
+          'lg:before:opacity-[0]': !hasScrolled,
+          'lg:before:opacity-[0.1]': hasScrolled,
+          [scrolledHeaderClasses]: hasScrolled,
+        },
+      ]"
     >
-      <AppNavigation
-        v-if="navigation"
-        :items="navigation"
-      />
+      <div
+        class="
+        wrapper
+        flex
+        flex-row
+        items-center
+        justify-between
+      "
+      >
+        <NuxtLink
+          class="p-(--app-outer-gutter) -mx-(--app-outer-gutter) md:-mx-(--app-outer-gutter)"
+          to="/"
+        >
+          <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
+
+          <span class="sr-only">RAW</span>
+        </NuxtLink>
+
+        <button
+          class="z-1 block lg:hidden outline-none p-(--app-outer-gutter) -m-(--app-outer-gutter)"
+          type="button"
+          @click="toggleHeaderMenu"
+        >
+          <AppHeaderSwitch />
+        </button>
+
+        <div
+          data-lenis-prevent
+          class="header__navigation w-full"
+        >
+          <AppNavigation
+            v-if="navigation"
+            :items="navigation"
+          />
+        </div>
+      </div>
     </div>
   </header>
 </template>
@@ -165,7 +216,7 @@ watchEffect(() => {
 .header__navigation {
   --disc-size: 19px;
   --disc-x-offset: 39px;
-  --disc-y-offset: 49px;
+  --disc-y-offset: 36px;
 
   @variant md {
     --disc-size: 19px;
