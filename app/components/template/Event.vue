@@ -46,8 +46,8 @@ const isBlockWithBgMedia = (index: number) => {
         :block="block"
       />
 
-      <BlockCarousel
-        v-else-if="block.component === 'block_carousel'"
+      <BlockProjectCarousel
+        v-else-if="block.component === 'block_project_carousel'"
         :block="block"
       />
 
