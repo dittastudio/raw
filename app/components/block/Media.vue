@@ -64,14 +64,21 @@ const setSizes = computed(() => block.placement === 'inset'
         loop
       />
 
-      <UiMuxVideo
-        v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId"
-        class="block size-full object-cover"
-        :accent-color="getThemeColors[(block.accent) as Themes || 'green'].background"
-        :playback-id="media.video.playbackId"
-        playsinline
-        controls
-      />
+      <template v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId">
+        <UiMuxVideo
+          class="block size-full object-cover"
+          :accent-color="getThemeColors[(block.accent) as Themes || 'green'].background"
+          :playback-id="media.video.playbackId"
+          :poster="media.poster?.filename ? storyblokImage(media.poster.filename, {
+            width: 1600,
+            height: 900,
+            format: 'webp',
+            quality: 80,
+          }) : null"
+          playsinline
+          controls
+        />
+      </template>
     </div>
   </div>
 </template>
