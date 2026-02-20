@@ -162,7 +162,7 @@ onBeforeUnmount(stopSlideRotation)
           <img
             v-if="fileExtension(logo.filename) === 'svg'"
             class="block w-auto h-11"
-            :src="logo.filename || ''"
+            :src="logo.filename"
             :alt="logo.alt || ''"
             loading="lazy"
           >
@@ -170,7 +170,7 @@ onBeforeUnmount(stopSlideRotation)
           <NuxtImg
             v-else
             class="block w-auto h-11"
-            :src="logo.filename || ''"
+            :src="logo.filename"
             :alt="logo.alt || ''"
             densities="x1 x2"
             height="40"

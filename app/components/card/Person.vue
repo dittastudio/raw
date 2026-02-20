@@ -21,7 +21,7 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
         v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
         class="block size-full object-cover"
         :src="image.filename"
-        :alt="image.alt || name"
+        :alt="image.alt || name || ''"
         :width="300"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 300)"
       />

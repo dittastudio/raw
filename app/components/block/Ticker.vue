@@ -24,7 +24,7 @@ const media = computed(() => block.media?.[0] || null)
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
         class="block size-full object-cover"
         :src="media.image.filename"
-        :alt="media.image.alt || ''"
+        :alt="media.image.alt || block.text || ''"
         :width="16"
         :height="9"
         loading="lazy"
@@ -66,20 +66,20 @@ const media = computed(() => block.media?.[0] || null)
             v-for="logo in block.logos"
             :key="logo.id"
           >
-            <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
+            <template v-if="logo.filename">
               <img
                 v-if="fileExtension(logo.filename) === 'svg'"
                 class="block w-auto h-16"
-                :src="logo.filename || ''"
-                :alt="logo.alt || ''"
+                :src="logo.filename"
+                :alt="logo.alt || block.text || ''"
                 loading="lazy"
               >
 
               <NuxtImg
                 v-else
                 class="block w-auto h-16"
-                :src="logo.filename || ''"
-                :alt="logo.alt || ''"
+                :src="logo.filename"
+                :alt="logo.alt || block.text || ''"
                 densities="x1 x2"
                 height="40"
                 loading="lazy"

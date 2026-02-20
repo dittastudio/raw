@@ -82,7 +82,7 @@ onUnmounted(() => {
             class="hero__logo"
           >
             <NuxtImg
-              :src="block.logo.filename || ''"
+              :src="block.logo.filename"
               :alt="block.logo.alt || ''"
               :height="100"
               densities="x1 x2"

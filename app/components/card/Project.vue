@@ -9,8 +9,6 @@ interface Props {
 }
 
 const { slug, tagline, headline, logo } = defineProps<Props>()
-
-const svg = await useSvg(logo?.filename)
 </script>
 
 <template>
@@ -38,10 +36,14 @@ const svg = await useSvg(logo?.filename)
           </h3>
         </div>
 
-        <div
-          v-if="svg"
-          class="w-31 h-auto mb-1 [&_svg]:size-full"
-          v-html="svg"
+        <NuxtImg
+          v-if="logo?.filename"
+          class="block w-31 h-auto mb-1 mix-blend-difference"
+          :src="logo.filename"
+          :alt="logo.alt || headline || tagline || ''"
+          densities="x1 x2"
+          height="40"
+          loading="lazy"
         />
       </div>
     </NuxtLink>

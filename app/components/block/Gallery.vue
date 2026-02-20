@@ -95,7 +95,7 @@ const getSizes = (index: number) => {
           v-if="image.filename && storyblokAssetType(image.filename) === 'image'"
           class="block size-full object-cover"
           :src="image.filename"
-          :alt="image.alt || ''"
+          :alt="image.alt || block.title || ''"
           :width="3"
           :height="2"
           :sizes="getSizes(index)"

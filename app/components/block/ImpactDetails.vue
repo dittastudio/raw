@@ -39,7 +39,7 @@ const media = computed(() => block.media?.[0])
           v-if="isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
           class="block w-full h-auto"
           :src="media.image.filename"
-          :alt="media.image.alt || ''"
+          :alt="media.image.alt || block.headline || block.title || ''"
           :width="500"
           :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 500)"
           loading="lazy"

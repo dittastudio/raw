@@ -96,16 +96,16 @@ onMounted(async () => {
             <img
               v-if="fileExtension(logo.filename) === 'svg'"
               class="invert-appearance block w-auto h-10 md:h-15 object-contain"
-              :src="logo.filename || ''"
-              :alt="logo.alt || ''"
+              :src="logo.filename"
+              :alt="logo.alt || block.title || ''"
               loading="lazy"
             >
 
             <NuxtImg
               v-else
               class="invert-appearance block w-auto h-10 md:h-15 object-contain"
-              :src="logo.filename || ''"
-              :alt="logo.alt || ''"
+              :src="logo.filename"
+              :alt="logo.alt || block.title || ''"
               densities="x1 x2"
               height="60"
               loading="lazy"
