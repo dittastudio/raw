@@ -444,7 +444,7 @@ export interface PostWistia {
 
 export interface Project {
   preview_logo?: StoryblokAsset;
-  preview_image: StoryblokAsset;
+  preview_media: (Image | MuxVideoAutoplay)[];
   preview_headline: string;
   preview_text: string;
   category: number | string;

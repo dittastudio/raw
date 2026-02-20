@@ -17,7 +17,7 @@ const { slug, tagline, headline, logo } = defineProps<Props>()
       class="flex flex-col gap-6 size-full border-b border-(--app-text-color) pb-6"
       :to="`/${slug}`"
     >
-      <slot name="image" />
+      <slot name="media" />
 
       <div class="size-full flex items-end justify-between gap-(--app-inner-gutter)">
         <div class="size-full flex flex-col gap-6 justify-between">

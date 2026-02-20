@@ -44,22 +44,33 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
           :to="`/${item.full_slug}`"
           class="block relative size-full isolate aspect-10/16 sm:aspect-video md:min-h-160 max-h-svh"
         >
-          <NuxtImg
-            v-if="item.content.preview_image?.filename && storyblokAssetType(item.content.preview_image.filename) === 'image'"
-            class="block size-full object-cover"
-            :src="item.content.preview_image.filename"
-            :alt="item.content.preview_image.alt || block.title || item.content?.preview_text || ''"
-            :width="storyblokImageDimensions(item.content.preview_image.filename).width"
-            :height="storyblokImageDimensions(item.content.preview_image.filename).height"
-            sizes="
-              xs:100vw
-              sm:100vw
-              md:100vw
-              lg:100vw
-              xl:100vw
-            "
-            loading="lazy"
-          />
+          <template v-if="item.content.preview_media?.[0]">
+            <NuxtImg
+              v-if="isImageComponent(item.content.preview_media[0]) && item.content.preview_media[0].image?.filename && storyblokAssetType(item.content.preview_media[0].image.filename) === 'image'"
+              class="block size-full object-cover"
+              :src="item.content.preview_media[0].image.filename"
+              :alt="item.content.preview_media[0].image.alt || block.title || item.content?.preview_text || ''"
+              :width="storyblokImageDimensions(item.content.preview_media[0].image.filename).width"
+              :height="storyblokImageDimensions(item.content.preview_media[0].image.filename).height"
+              sizes="
+                xs:100vw
+                sm:100vw
+                md:100vw
+                lg:100vw
+                xl:100vw
+              "
+            />
+
+            <UiMuxVideo
+              v-else-if="isMuxVideoAutoplayComponent(item.content.preview_media[0]) && item.content.preview_media[0].video?.playbackId"
+              :playback-id="item.content.preview_media[0].video.playbackId"
+              :is-cover="true"
+              playsinline
+              autoplay
+              muted
+              loop
+            />
+          </template>
 
           <div
             class="

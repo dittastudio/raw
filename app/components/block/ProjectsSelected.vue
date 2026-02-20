@@ -63,21 +63,33 @@ const setSizes = (isLarge: boolean) => {
             >
               <CardProject
                 :slug="project.full_slug"
-                :image="project.content.preview_image"
                 :tagline="project.content.preview_text"
                 :headline="project.content.preview_headline || project.name"
                 :logo="project.content.preview_logo"
               >
-                <template #image>
+                <template
+                  v-if="project.content.preview_media?.[0]"
+                  #media
+                >
                   <NuxtImg
-                    v-if="project.content.preview_image?.filename && storyblokAssetType(project.content.preview_image.filename) === 'image'"
+                    v-if="isImageComponent(project.content.preview_media[0]) && project.content.preview_media[0].image?.filename && storyblokAssetType(project.content.preview_media[0].image.filename) === 'image'"
                     class="block w-full object-cover aspect-video"
-                    :src="project.content.preview_image.filename"
-                    :alt="project.content.preview_image.alt || project.content.preview_headline || project.name || ''"
+                    :src="project.content.preview_media[0].image.filename"
+                    :alt="project.content.preview_media[0].image.alt || project.content.preview_headline || project.name || ''"
                     :width="16"
                     :height="9"
                     :sizes="setSizes(index % 3 === 2)"
                     loading="lazy"
+                  />
+
+                  <UiMuxVideo
+                    v-else-if="isMuxVideoAutoplayComponent(project.content.preview_media[0]) && project.content.preview_media[0].video?.playbackId"
+                    :playback-id="project.content.preview_media[0].video.playbackId"
+                    class="block w-full object-cover aspect-video"
+                    playsinline
+                    autoplay
+                    muted
+                    loop
                   />
                 </template>
               </CardProject>

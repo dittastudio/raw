@@ -3245,7 +3245,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-02-18T13:31:07.940Z",
+    "updated_at": "2026-02-20T17:09:52.501Z",
     "id": 131189203587517,
     "schema": {
       "preview_logo": {
@@ -3257,33 +3257,38 @@
         ],
         "id": "BRKg-8qqQ9ySyXcW1jOTfw"
       },
-      "preview_image": {
-        "type": "asset",
-        "pos": 1,
+      "preview_media": {
+        "type": "bloks",
+        "pos": 2,
         "required": true,
-        "filetypes": [
-          "images"
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image",
+          "mux_video_autoplay"
         ],
-        "description": "Image that is shown when featured around the site.",
-        "id": "vEqi-5wSSZGBjrbVs1qM-A"
+        "component_denylist": [],
+        "description": "The Image or video that is shown when featured around the site.",
+        "id": "kRWrB4VuRreUarOKc455jQ"
       },
       "preview_headline": {
         "type": "text",
-        "pos": 2,
+        "pos": 3,
         "description": "Headline that is shown when featured around the site.",
         "required": true,
         "id": "fkNbwlsXQXiS2ncPJ_wZ3g"
       },
       "preview_text": {
         "type": "text",
-        "pos": 3,
+        "pos": 4,
         "required": true,
         "description": "Text that is shown when featured around the site.",
         "id": "-nz7o1nxRY-Z6czHa_YOsA"
       },
       "category": {
         "type": "option",
-        "pos": 4,
+        "pos": 5,
         "use_uuid": true,
         "id": "0H5G2s8pRNqs3GQ-0A25nw",
         "required": true,
@@ -3293,7 +3298,7 @@
       },
       "blocks": {
         "type": "bloks",
-        "pos": 5,
+        "pos": 6,
         "id": "ZEk25vg0QYOxGeK3TRO1gQ",
         "restrict_type": "tags",
         "restrict_components": true,
@@ -3311,14 +3316,14 @@
         "keys": [
           "blocks"
         ],
-        "pos": 6,
+        "pos": 7,
         "type": "tab",
         "name": "tab-0c7882b0-9f8b-4e24-83f1-096af4e560d1",
         "id": "DHiCsJ-LTiSD8Qlq9OVg0Q"
       },
       "seo_title": {
         "type": "text",
-        "pos": 7,
+        "pos": 8,
         "id": "D6UJXhPbSJaJbbL5h383UQ",
         "display_name": "Title",
         "required": true
@@ -3330,21 +3335,21 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 8,
+        "pos": 9,
         "type": "tab",
         "id": "DfYdOjqfRQix8-3aO1NNNg",
         "name": "tab-0df61d3a-3a9f-4508-b1f3-edda3b534d36"
       },
       "seo_description": {
         "type": "text",
-        "pos": 9,
+        "pos": 10,
         "id": "6hDt2n0RRQ68wXLTnKElTA",
         "display_name": "Description",
         "required": true
       },
       "seo_image": {
         "type": "asset",
-        "pos": 10,
+        "pos": 11,
         "required": true,
         "filetypes": [
           "images"
