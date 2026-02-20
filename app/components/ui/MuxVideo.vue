@@ -159,4 +159,9 @@ watchEffect(() => {
     transition: transform 0.2s var(--ease-out);
   }
 }
+
+mux-player::part(bottom play button),
+mux-player::part(bottom time display) {
+  display: inline-flex;
+}
 </style>
