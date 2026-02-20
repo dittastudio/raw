@@ -102,10 +102,11 @@ export interface BlockHoverList {
 export interface BlockImpactDetails {
   title?: string;
   headline?: StoryblokRichtext;
+  media?: Image[];
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
-  media?: Image[];
+  logos?: StoryblokMultiasset;
   theme?: number | string;
   component: "block_impact_details";
   _uid: string;
