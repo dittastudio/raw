@@ -44,22 +44,55 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
           :to="`/${item.full_slug}`"
           class="block relative size-full isolate aspect-10/16 sm:aspect-video md:min-h-160 max-h-svh"
         >
-          <NuxtImg
-            v-if="item.content.preview_image?.filename && storyblokAssetType(item.content.preview_image.filename) === 'image'"
-            class="block size-full object-cover"
+          <picture v-if="item.content.preview_image?.filename && storyblokAssetType(item.content.preview_image.filename) === 'image'">
+            <!-- <MediaSource
+              media="(orientation: landscape)"
+              :width="16"
+              :height="9"
+              :src="item.content.preview_image.filename"
+            />
+
+            <MediaSource
+              media="(orientation: portrait)"
+              :width="10"
+              :height="16"
+              :src="item.content.preview_image.filename"
+            /> -->
+
+            <NuxtImg
+              :src="item.content.preview_image.filename"
+              :alt="item.content.preview_image.alt"
+            />
+          </picture>
+          <!-- <NuxtImg
+
+            class="block sm:hidden size-full object-cover"
             :src="item.content.preview_image.filename"
             :alt="item.content.preview_image.alt || ''"
-            :width="storyblokImageDimensions(item.content.preview_image.filename).width"
-            :height="storyblokImageDimensions(item.content.preview_image.filename).height"
+            :width="10"
+            :height="16"
             sizes="
               xs:100vw
               sm:100vw
+              md:100vw
+            "
+            loading="lazy"
+          />
+
+          <NuxtImg
+            v-if="item.content.preview_image?.filename && storyblokAssetType(item.content.preview_image.filename) === 'image'"
+            class="hidden sm:block size-full object-cover"
+            :src="item.content.preview_image.filename"
+            :alt="item.content.preview_image.alt || ''"
+            :width="16"
+            :height="9"
+            sizes="
               md:100vw
               lg:100vw
               xl:100vw
             "
             loading="lazy"
-          />
+          /> -->
 
           <div
             class="

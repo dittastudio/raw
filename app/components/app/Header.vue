@@ -263,7 +263,6 @@ watchEffect(() => {
 
   .header.has-scrolled &::before {
     opacity: 0;
-    transition: opacity 0.15s var(--ease-out);
   }
 }
 
