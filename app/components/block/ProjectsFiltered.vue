@@ -131,7 +131,7 @@ const setSizes = (isLarge: boolean) => {
                   <template #image>
                     <NuxtImg
                       v-if="project.content.preview_image?.filename && storyblokAssetType(project.content.preview_image.filename) === 'image'"
-                      class="block size-full object-cover aspect-video"
+                      class="block w-full object-cover aspect-video"
                       :src="project.content.preview_image.filename"
                       :alt="project.content.preview_image.alt || project.content.preview_headline || project.name || ''"
                       :width="16"
