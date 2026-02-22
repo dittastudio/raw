@@ -21,7 +21,6 @@ const imageOptions = {
   width: 1200,
   height: 630,
   format: 'jpg',
-  smart: true,
   quality: 80,
 }
 

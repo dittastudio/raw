@@ -862,7 +862,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-02-06T09:58:59.295Z",
+    "updated_at": "2026-02-20T13:20:26.221Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -887,9 +887,22 @@
           }
         ]
       },
+      "media": {
+        "type": "bloks",
+        "pos": 2,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image"
+        ],
+        "component_denylist": [],
+        "maximum": 1,
+        "id": "peWMo6W2T-yN123xL6PJEA",
+        "required": false
+      },
       "copy": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 3,
         "id": "smv5StJ1TiuGHdeYWVfzrw",
         "customize_toolbar": true,
         "toolbar": [
@@ -903,32 +916,24 @@
       },
       "cta_title": {
         "type": "text",
-        "pos": 3,
+        "pos": 4,
         "id": "3wQLCrLPTmOL5GkyubG5Nw"
       },
       "cta": {
         "type": "multilink",
-        "pos": 4,
+        "pos": 5,
         "email_link_type": true,
         "allow_target_blank": true,
         "id": "FBvAqJ90TSeEs-KkB_lcGQ"
       },
-      "media": {
-        "type": "bloks",
-        "pos": 5,
-        "restrict_type": "",
-        "restrict_components": true,
-        "component_whitelist": [
-          "image"
-        ],
-        "component_denylist": [],
-        "maximum": 1,
-        "id": "peWMo6W2T-yN123xL6PJEA",
-        "required": false
+      "logos": {
+        "type": "multiasset",
+        "pos": 6,
+        "id": "7DDxPCRDR8qSNn2R2d3dHg"
       },
       "theme": {
         "type": "option",
-        "pos": 6,
+        "pos": 7,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",
@@ -2328,7 +2333,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-21T13:29:13.287Z",
-    "updated_at": "2026-01-21T13:32:19.987Z",
+    "updated_at": "2026-02-20T18:01:37.726Z",
     "id": 136448218275795,
     "schema": {
       "image": {
@@ -2340,7 +2345,7 @@
     "image": null,
     "preview_field": null,
     "is_root": false,
-    "preview_tmpl": null,
+    "preview_tmpl": "{{@if(it.image)}}\n{{@image(it.image.filename)/}}\n{{/if}}",
     "is_nestable": true,
     "all_presets": [],
     "preset_id": null,
@@ -2604,12 +2609,21 @@
     "display_name": "Mux Video Player",
     "description": "Creates a Mux video player.",
     "created_at": "2026-02-04T11:44:36.156Z",
-    "updated_at": "2026-02-04T11:46:07.010Z",
+    "updated_at": "2026-02-20T18:03:12.103Z",
     "id": 141377028756591,
     "schema": {
+      "poster": {
+        "type": "asset",
+        "pos": 0,
+        "filetypes": [
+          "images"
+        ],
+        "description": "Image that is shown as the poster for the video before it's played.",
+        "id": "aYiTIWoVSUWP8ac5zUn7fA"
+      },
       "video": {
         "type": "custom",
-        "pos": 0,
+        "pos": 1,
         "field_type": "storyblok-mux-assets",
         "options": [
           {
@@ -3240,7 +3254,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-02-18T13:31:07.940Z",
+    "updated_at": "2026-02-20T17:09:52.501Z",
     "id": 131189203587517,
     "schema": {
       "preview_logo": {
@@ -3252,33 +3266,38 @@
         ],
         "id": "BRKg-8qqQ9ySyXcW1jOTfw"
       },
-      "preview_image": {
-        "type": "asset",
-        "pos": 1,
+      "preview_media": {
+        "type": "bloks",
+        "pos": 2,
         "required": true,
-        "filetypes": [
-          "images"
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image",
+          "mux_video_autoplay"
         ],
-        "description": "Image that is shown when featured around the site.",
-        "id": "vEqi-5wSSZGBjrbVs1qM-A"
+        "component_denylist": [],
+        "description": "The Image or video that is shown when featured around the site.",
+        "id": "kRWrB4VuRreUarOKc455jQ"
       },
       "preview_headline": {
         "type": "text",
-        "pos": 2,
+        "pos": 3,
         "description": "Headline that is shown when featured around the site.",
         "required": true,
         "id": "fkNbwlsXQXiS2ncPJ_wZ3g"
       },
       "preview_text": {
         "type": "text",
-        "pos": 3,
+        "pos": 4,
         "required": true,
         "description": "Text that is shown when featured around the site.",
         "id": "-nz7o1nxRY-Z6czHa_YOsA"
       },
       "category": {
         "type": "option",
-        "pos": 4,
+        "pos": 5,
         "use_uuid": true,
         "id": "0H5G2s8pRNqs3GQ-0A25nw",
         "required": true,
@@ -3288,7 +3307,7 @@
       },
       "blocks": {
         "type": "bloks",
-        "pos": 5,
+        "pos": 6,
         "id": "ZEk25vg0QYOxGeK3TRO1gQ",
         "restrict_type": "tags",
         "restrict_components": true,
@@ -3306,14 +3325,14 @@
         "keys": [
           "blocks"
         ],
-        "pos": 6,
+        "pos": 7,
         "type": "tab",
         "name": "tab-0c7882b0-9f8b-4e24-83f1-096af4e560d1",
         "id": "DHiCsJ-LTiSD8Qlq9OVg0Q"
       },
       "seo_title": {
         "type": "text",
-        "pos": 7,
+        "pos": 8,
         "id": "D6UJXhPbSJaJbbL5h383UQ",
         "display_name": "Title",
         "required": true
@@ -3325,21 +3344,21 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 8,
+        "pos": 9,
         "type": "tab",
         "id": "DfYdOjqfRQix8-3aO1NNNg",
         "name": "tab-0df61d3a-3a9f-4508-b1f3-edda3b534d36"
       },
       "seo_description": {
         "type": "text",
-        "pos": 9,
+        "pos": 10,
         "id": "6hDt2n0RRQ68wXLTnKElTA",
         "display_name": "Description",
         "required": true
       },
       "seo_image": {
         "type": "asset",
-        "pos": 10,
+        "pos": 11,
         "required": true,
         "filetypes": [
           "images"

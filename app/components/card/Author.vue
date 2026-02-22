@@ -30,7 +30,7 @@ const { name, image, date, size = 'large' } = defineProps<Props>()
       <NuxtImg
         class="block size-full object-cover rounded-full"
         :src="image.filename"
-        :alt="image.alt || name"
+        :alt="image.alt || name || ''"
         :width="100"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 100)"
       />

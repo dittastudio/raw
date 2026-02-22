@@ -143,46 +143,49 @@ const accentMaskClasses = computed(() => {
       </li>
     </ul>
 
-    <ul
-      class="
-        ui-list__list
-        ui-list__list--mask
-        flex
-        flex-col
-        gap-px
-        absolute
-        inset-0
-        z-1
-        pointer-events-none
-      "
-      :class="[accentMaskClasses, { 'is-transitioning': maskTransitionEnabled }]"
-      :style="maskStyle"
-      aria-hidden="true"
-    >
-      <li
-        v-for="(item, index) in items"
-        :key="item._uid"
+    <ClientOnly>
+      <ul
         class="
-          ui-list__item
-          wrapper-max
-          relative
-          select-none
-          cursor-default
-          transition-[color,background-color]
-          duration-200
-          ease-out
+          ui-list__list
+          ui-list__list--mask
+          flex
+          flex-col
+          gap-px
+          absolute
+          inset-0
+          z-1
+          pointer-events-none
         "
-        :class="openIndex === index ? accentIsOpenClasses : ''"
-        @click="!isScreenMd && toggleItem(index)"
+        :class="[accentMaskClasses, { 'is-transitioning': maskTransitionEnabled }]"
+        :style="maskStyle"
+        aria-hidden="true"
+        role="presentation"
       >
-        <UiListItem
-          type="mask"
-          :index="index"
-          :item="item"
-          :is-open="openIndex === index"
-        />
-      </li>
-    </ul>
+        <li
+          v-for="(item, index) in items"
+          :key="item._uid"
+          class="
+            ui-list__item
+            wrapper-max
+            relative
+            select-none
+            cursor-default
+            transition-[color,background-color]
+            duration-200
+            ease-out
+          "
+          :class="openIndex === index ? accentIsOpenClasses : ''"
+          @click="!isScreenMd && toggleItem(index)"
+        >
+          <UiListItem
+            type="mask"
+            :index="index"
+            :item="item"
+            :is-open="openIndex === index"
+          />
+        </li>
+      </ul>
+    </ClientOnly>
   </div>
 </template>
 

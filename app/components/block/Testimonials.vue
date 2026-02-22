@@ -58,10 +58,10 @@ const media = computed(() => block.media?.[0])
     >
       <template #item="{ item, isActive }">
         <blockquote
-          class="testimonials__quote wrapper-max flex flex-col items-center justify-center text-center gap-y-10 md:gap-y-15"
+          class="testimonials__quote wrapper-max flex flex-col items-center justify-between text-center gap-y-10 md:gap-y-15 h-full"
           :class="{ 'is-active': isActive }"
         >
-          <p class="type-h4 max-w-[35ch] before:content-[open-quote] after:content-[close-quote] text-balance">
+          <p class="my-auto type-h4 max-w-[35ch] before:content-[open-quote] after:content-[close-quote] text-balance">
             {{ item.quote }}
           </p>
 

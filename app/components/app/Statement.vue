@@ -19,7 +19,7 @@ const { media, statement, title, link } = defineProps<Props>()
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
         class="block size-full object-cover"
         :src="media.image.filename"
-        :alt="media.image.alt || ''"
+        :alt="media.image.alt || statement || ''"
         :width="3"
         :height="2"
         sizes="

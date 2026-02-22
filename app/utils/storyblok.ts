@@ -58,7 +58,7 @@ const storyblokRichTextContent = (
 const storyblokSlug = (path: string): string =>
   ['', '/'].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
-interface TypedMuxVideo extends MuxVideoAutoplay {
+interface TypedMuxVideo extends MuxVideoPlayer {
   video: {
     playbackId?: string
   }

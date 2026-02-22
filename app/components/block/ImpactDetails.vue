@@ -39,7 +39,7 @@ const media = computed(() => block.media?.[0])
           v-if="isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
           class="block w-full h-auto"
           :src="media.image.filename"
-          :alt="media.image.alt || ''"
+          :alt="media.image.alt || block.headline || block.title || ''"
           :width="500"
           :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 500)"
           loading="lazy"
@@ -56,6 +56,7 @@ const media = computed(() => block.media?.[0])
           v-if="storyblokRichTextContent(block.copy)"
           class="prose-p"
         >
+          erergerge
           <StoryblokText :html="block.copy" />
         </div>
 
@@ -71,6 +72,37 @@ const media = computed(() => block.media?.[0])
             {{ block.cta_title }}
           </UiButton>
         </StoryblokLink>
+
+        <ul
+          v-if="block.logos?.length"
+          class="w-full grid grid-cols-3 gap-5 mt-auto -ml-2"
+        >
+          <li
+            v-for="logo in block.logos"
+            :key="logo.id"
+            class="w-full flex items-center justify-center aspect-square"
+          >
+            <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
+              <img
+                v-if="fileExtension(logo.filename) === 'svg'"
+                class="block size-full object-contain"
+                :src="logo.filename"
+                :alt="logo.alt || block.title || ''"
+                loading="lazy"
+              >
+
+              <NuxtImg
+                v-else
+                class="block w-auto h-10 md:h-15 object-contain"
+                :src="logo.filename"
+                :alt="logo.alt || block.title || ''"
+                densities="x1 x2"
+                height="60"
+                loading="lazy"
+              />
+            </template>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

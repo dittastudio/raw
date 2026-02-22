@@ -9,8 +9,6 @@ interface Props {
 }
 
 const { slug, tagline, headline, logo } = defineProps<Props>()
-
-const svg = await useSvg(logo?.filename)
 </script>
 
 <template>
@@ -19,10 +17,10 @@ const svg = await useSvg(logo?.filename)
       class="flex flex-col gap-6 size-full border-b border-(--app-text-color) pb-6"
       :to="`/${slug}`"
     >
-      <slot name="image" />
+      <slot name="media" />
 
-      <div class="flex items-end justify-between gap-(--app-inner-gutter)">
-        <div class="flex flex-col gap-6">
+      <div class="size-full flex items-end justify-between gap-(--app-inner-gutter)">
+        <div class="size-full flex flex-col gap-6 justify-between">
           <p
             v-if="tagline"
             class="text-balance"
@@ -38,11 +36,25 @@ const svg = await useSvg(logo?.filename)
           </h3>
         </div>
 
-        <div
-          v-if="svg"
-          class="w-31 h-auto mb-1 [&_svg]:size-full"
-          v-html="svg"
-        />
+        <template v-if="logo?.filename && storyblokAssetType(logo.filename) === 'image'">
+          <img
+            v-if="fileExtension(logo.filename) === 'svg'"
+            class="block w-31 h-auto mb-1 mix-blend-difference"
+            :src="logo.filename"
+            :alt="logo.alt || headline || tagline || ''"
+            loading="lazy"
+          >
+
+          <NuxtImg
+            v-else
+            class="block w-31 h-auto mb-1 mix-blend-difference"
+            :src="logo.filename"
+            :alt="logo.alt || headline || tagline || ''"
+            densities="x1 x2"
+            height="40"
+            loading="lazy"
+          />
+        </template>
       </div>
     </NuxtLink>
   </article>
