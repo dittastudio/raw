@@ -114,7 +114,7 @@ onMounted(async () => {
 
   window.addEventListener('keydown', handleKeydown)
 
-  await wait(500)
+  // await wait(500)
   ready.value = true
 })
 

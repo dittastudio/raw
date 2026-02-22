@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 interface Props {
   src: string
-  media: string
+  media?: string | undefined
   width: number
   height: number
   sizes?: string
