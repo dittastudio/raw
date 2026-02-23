@@ -175,7 +175,7 @@ onBeforeUnmount(stopSlideRotation)
             :src="logo.filename"
             :alt="logo.alt || ''"
             densities="x1 x2"
-            height="40"
+            height="44"
             loading="lazy"
           />
         </template>

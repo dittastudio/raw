@@ -68,7 +68,7 @@ const media = computed(() => block.media?.[0] || null)
           <template v-if="logo.filename">
             <img
               v-if="fileExtension(logo.filename) === 'svg'"
-              class="block w-auto h-16"
+              class="block w-auto h-11"
               :src="logo.filename"
               :alt="logo.alt || block.text || ''"
               loading="lazy"
@@ -76,11 +76,11 @@ const media = computed(() => block.media?.[0] || null)
 
             <NuxtImg
               v-else
-              class="block w-auto h-16"
+              class="block w-auto h-11"
               :src="logo.filename"
               :alt="logo.alt || block.text || ''"
               densities="x1 x2"
-              height="40"
+              height="44"
               loading="lazy"
             />
           </template>
