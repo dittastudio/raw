@@ -67,12 +67,12 @@ const hasNotScrolledThemeClasses = computed(() =>
 )
 
 const headerThemeClasses: Record<Themes, string> = {
-  dark: 'lg:bg-offblack lg:text-offwhite',
-  light: 'lg:bg-offwhite lg:text-offblack',
-  blue: 'lg:bg-blue lg:text-offblack',
-  green: 'lg:bg-green lg:text-offblack',
-  pink: 'lg:bg-pink lg:text-offblack',
-  purple: 'lg:bg-purple lg:text-offblack',
+  dark: 'lg:bg-offblack text-offwhite',
+  light: 'lg:bg-offwhite text-offblack',
+  blue: 'lg:bg-blue text-offblack',
+  green: 'lg:bg-green text-offblack',
+  pink: 'lg:bg-pink text-offblack',
+  purple: 'lg:bg-purple text-offblack',
 }
 
 const hasScrolledThemeClasses = computed(() => headerThemeClasses[activeTheme.value])
