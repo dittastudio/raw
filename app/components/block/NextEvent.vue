@@ -113,7 +113,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
 
       <NuxtLink :to="`/${event.full_slug}`">
         <UiButton>
-          Learn more
+          Book tickets
         </UiButton>
       </NuxtLink>
     </div>
