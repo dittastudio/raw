@@ -53,8 +53,8 @@ const media = computed(() => block.media?.[0])
     <UiCarouselFade
       :items="block.items"
       :options="{ loop: true }"
-      autoplay
       :autoplay-interval="4000"
+      autoplay
     >
       <template #item="{ item, isActive }">
         <blockquote

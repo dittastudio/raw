@@ -30,6 +30,7 @@ const details = ref<TrackDetails>()
 const isInView = ref(false)
 const opacities = ref<number[]>([])
 
+const enabled = computed(() => items && items.length >= 2)
 const isAutoplayActive = computed(() => autoplay && isInView.value)
 
 const autoplayControls: AutoplayControls = {
@@ -40,6 +41,7 @@ const autoplayControls: AutoplayControls = {
 const [container, slider] = useKeenSlider({
   loop: false,
   mode: 'snap',
+  disabled: !enabled.value,
   defaultAnimation: {
     duration: 500,
   },
@@ -56,12 +58,14 @@ const [container, slider] = useKeenSlider({
   },
   ...options,
 }, [
-  getCarouselSwipeControlsPlugin(),
-  getCarouselAutoplayPlugin({
-    isActive: () => isAutoplayActive.value,
-    interval: () => autoplayInterval,
-    controls: autoplayControls,
-  }),
+  enabled.value ? getCarouselSwipeControlsPlugin() : () => {},
+  enabled.value
+    ? getCarouselAutoplayPlugin({
+        isActive: () => isAutoplayActive.value,
+        interval: () => autoplayInterval,
+        controls: autoplayControls,
+      })
+    : () => {},
 ])
 
 const next = () => {
@@ -144,7 +148,9 @@ onKeyStroke('ArrowRight', (e: KeyboardEvent) => {
       </div>
     </div>
 
-    <slot name="other" />
+    <template v-if="enabled">
+      <slot name="other" />
+    </template>
   </div>
 </template>
 

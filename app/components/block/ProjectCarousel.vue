@@ -37,8 +37,8 @@ const isSmBreakpoint = '600px'
       ref="carouselFade"
       :items="(block.projects as ISbStoryData<Project>[])"
       :options="{ loop: true }"
-      :autoplay="false"
       :autoplay-interval="4000"
+      autoplay
     >
       <template #item="{ item }">
         <NuxtLink
