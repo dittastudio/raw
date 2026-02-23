@@ -219,7 +219,7 @@ export interface BlockText {
 export interface BlockTicker {
   media?: (Image | MuxVideoAutoplay)[];
   text?: string;
-  logos?: StoryblokMultiasset;
+  logos: StoryblokMultiasset;
   theme?: number | string;
   component: "block_ticker";
   _uid: string;

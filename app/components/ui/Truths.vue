@@ -160,28 +160,7 @@ watch(position, ({ x, y }) => {
   border-radius: 50%;
   opacity: 0.75;
   animation:
-    ui-truths-blob 5s var(--ease-in-out) infinite,
-    ui-truths-rotate 10s var(--ease-in-out) infinite alternate;
-}
-
-@keyframes ui-truths-blob {
-  0% {
-    border-radius: 25% 75% 35% 65% / 30% 45% 55% 70%;
-  }
-  33% {
-    border-radius: 75% 25% 70% 30% / 60% 30% 70% 40%;
-  }
-  66% {
-    border-radius: 35% 65% 20% 80% / 75% 25% 60% 40%;
-  }
-  100% {
-    border-radius: 25% 75% 35% 65% / 30% 45% 55% 70%;
-  }
-}
-
-@keyframes ui-truths-rotate {
-  to {
-    transform: rotate(360deg);
-  }
+    animate-morph-circle 5s var(--ease-in-out) infinite,
+    animate-rotate 10s var(--ease-in-out) infinite alternate;
 }
 </style>
