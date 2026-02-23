@@ -33,16 +33,6 @@ const toggleHeaderMenu = () => {
   return isHeaderOpen.value ? closeHeaderMenu() : openHeaderMenu()
 }
 
-const openScrollHeader = () => {
-  hasScrolledUp.value = true
-  hasScrolledDown.value = false
-}
-
-const closeScrollHeader = () => {
-  hasScrolledUp.value = false
-  hasScrolledDown.value = true
-}
-
 const resetScrollHeader = () => {
   hasScrolled.value = false
   hasScrolledUp.value = false
@@ -50,7 +40,8 @@ const resetScrollHeader = () => {
 }
 
 const onHeaderHover = () => {
-  openScrollHeader()
+  hasScrolledUp.value = true
+  hasScrolledDown.value = false
 }
 
 const handleScroll = (lenis: Lenis) => {
@@ -107,7 +98,6 @@ onMounted(async () => {
 
   window.addEventListener('keydown', handleKeydown)
 
-  await wait(500)
   ready.value = true
 })
 
@@ -117,10 +107,9 @@ onUnmounted(() => {
 
 watch(() => route.fullPath, async () => {
   ready.value = false
-  closeHeaderMenu()
-  closeScrollHeader()
 
-  await wait(800)
+  await wait(600)
+
   resetScrollHeader()
   ready.value = true
 })
@@ -153,7 +142,7 @@ watchEffect(() => {
       <div
         class="header__inner"
         :class="{
-          [hasNotScrolledThemeClasses]: !hasScrolled && ready,
+          [hasNotScrolledThemeClasses]: !hasScrolled,
           [hasScrolledThemeClasses]: hasScrolled && ready,
         } "
       >
@@ -255,12 +244,16 @@ watchEffect(() => {
       )
     ;
 
-    opacity: 0.6;
-    translate: 0 0% 0;
+    opacity: 0;
     transition: opacity 0.3s var(--ease-out);
+    display: none;
   }
 
-  .header.has-scrolled &::before {
+  .header.is-ready &::before {
+    opacity: 0.6;
+  }
+
+  .header.is-ready.has-scrolled &::before {
     opacity: 0;
   }
 }
@@ -272,7 +265,7 @@ watchEffect(() => {
     color 0.3s var(--ease-out),
     background-color 0.3s var(--ease-out);
 
-  .header.has-scrolled-down & {
+  .header.is-ready.has-scrolled-down & {
     transition-delay: 0.3s;
   }
 
@@ -290,7 +283,7 @@ watchEffect(() => {
       transition: opacity 0.3s var(--ease-out);
       pointer-events: none;
 
-      .header.has-scrolled & {
+      .header.is-ready.has-scrolled & {
         opacity: 0.1;
       }
     }
@@ -349,16 +342,16 @@ watchEffect(() => {
     .header.is-ready & {
       opacity: 1;
       translate: 0 0 0;
-
-      &:nth-child(1) { transition-delay: calc(var(--header-delay) * 1);}
-      &:nth-child(2) { transition-delay: calc(var(--header-delay) * 2);}
-      &:nth-child(3) { transition-delay: calc(var(--header-delay) * 3);}
-      &:nth-child(4) { transition-delay: calc(var(--header-delay) * 4);}
-      &:nth-child(5) { transition-delay: calc(var(--header-delay) * 5);}
-      &:nth-child(6) { transition-delay: calc(var(--header-delay) * 6);}
-      &:nth-child(7) { transition-delay: calc(var(--header-delay) * 7);}
-      &:nth-child(8) { transition-delay: calc(var(--header-delay) * 8);}
     }
+
+    &:nth-child(1) { transition-delay: calc(var(--header-delay) * 1);}
+    &:nth-child(2) { transition-delay: calc(var(--header-delay) * 2);}
+    &:nth-child(3) { transition-delay: calc(var(--header-delay) * 3);}
+    &:nth-child(4) { transition-delay: calc(var(--header-delay) * 4);}
+    &:nth-child(5) { transition-delay: calc(var(--header-delay) * 5);}
+    &:nth-child(6) { transition-delay: calc(var(--header-delay) * 6);}
+    &:nth-child(7) { transition-delay: calc(var(--header-delay) * 7);}
+    &:nth-child(8) { transition-delay: calc(var(--header-delay) * 8);}
   }
 }
 
