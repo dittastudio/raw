@@ -2,18 +2,13 @@
 import type { Themes } from '@@/types/app'
 
 interface Props {
-  theme: Themes
+  theme?: Themes
 }
 
 const { theme } = defineProps<Props>()
 
-const themeTextClasses = computed(() => (
-  theme === 'dark' ? 'text-offblack' : 'text-offwhite'
-))
-
-const themeBgClasses = computed(() => (
-  theme === 'dark' ? 'bg-offwhite' : 'bg-offblack'
-))
+const themeTextClasses = computed(() => theme === 'dark' ? 'text-offblack' : 'text-offwhite')
+const themeBgClasses = computed(() => theme === 'dark' ? 'bg-offwhite' : 'bg-offblack')
 </script>
 
 <template>

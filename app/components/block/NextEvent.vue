@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { BlockNextEvent, Event, Post } from '#storyblok-components'
+import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -96,7 +97,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
         loading="lazy"
       />
 
-      <UiPartnershipButton :theme="block.theme" />
+      <UiPartnershipButton" :theme="(block.theme as Themes) ?? 'light'" />
     </div>
 
     <div
