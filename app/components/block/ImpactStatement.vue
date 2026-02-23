@@ -133,7 +133,7 @@ onUnmounted(() => {
       <div
         v-if="storyblokRichTextContent(item.title)"
         data-js="title"
-        class="md:col-start-2 col-span-full sm:col-start-2 sm:col-span-7 md:col-span-9 [&_h3]:type-h2 [&_h3]:text-wrap[balance] [&_h3]:max-w-[20ch]"
+        class="md:col-start-2 col-span-full sm:col-start-2 sm:col-span-7 md:col-span-full [&_h3]:type-h2"
       >
         <StoryblokText :html="item.title" />
       </div>
