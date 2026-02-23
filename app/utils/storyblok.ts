@@ -58,15 +58,21 @@ const storyblokRichTextContent = (
 const storyblokSlug = (path: string): string =>
   ['', '/'].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
-interface TypedMuxVideo extends MuxVideoPlayer {
+interface TypedMuxVideoAutoplay extends Omit<MuxVideoAutoplay, 'video'> {
+  video: {
+    playbackId?: string
+  }
+}
+
+interface TypedMuxVideoPlayer extends Omit<MuxVideoPlayer, 'video'> {
   video: {
     playbackId?: string
   }
 }
 
 const isImageComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is Image => media.component === 'image'
-const isMuxVideoAutoplayComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideo => media.component === 'mux_video_autoplay'
-const isMuxVideoPlayerComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideo => media.component === 'mux_video_player'
+const isMuxVideoAutoplayComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideoAutoplay => media.component === 'mux_video_autoplay'
+const isMuxVideoPlayerComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideoPlayer => media.component === 'mux_video_player'
 
 type ContentTypes = Page | Post | Project | Event
 
