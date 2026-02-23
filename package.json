@@ -52,7 +52,7 @@
     "del-cli": "^7.0.0",
     "eslint": "^9.39.2",
     "husky": "^9.1.7",
-    "storyblok": "^4.15.0",
+    "storyblok": "^4.15.1",
     "storyblok-markdown-richtext": "^1.0.3",
     "tailwind-merge": "^3.5.0",
     "typescript": "^5.9.3",
