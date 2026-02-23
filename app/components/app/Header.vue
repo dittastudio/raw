@@ -246,7 +246,6 @@ watchEffect(() => {
 
     opacity: 0;
     transition: opacity 0.3s var(--ease-out);
-    display: none;
   }
 
   .header.is-ready &::before {
