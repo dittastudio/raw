@@ -1,5 +1,24 @@
+<script lang="ts" setup>
+interface Props {
+  theme: 'dark' | 'light'
+}
+
+const { theme } = defineProps<Props>()
+
+const themeTextClasses = computed(() => (
+  theme === 'dark' ? 'text-offblack' : 'text-offwhite'
+))
+
+const themeBgClasses = computed(() => (
+  theme === 'dark' ? 'bg-offwhite' : 'bg-offblack'
+))
+</script>
+
 <template>
-  <div class="@container relative type-p max-w-84">
+  <div
+    class="@container relative isolate type-p max-w-84"
+    :class="themeTextClasses"
+  >
     <div
       class="
         mask-image
@@ -13,6 +32,7 @@
         px-[7.5%]
         pb-[0.5cqi]
       "
+      :class="themeBgClasses"
     >
       In partnership with
     </div>
@@ -45,10 +65,10 @@
   </div>
 </template>
 
-<style scoped>
+<style>
 @reference "@/assets/css/app.css";
 
 .mask-image {
-  mask: url("/imgs/button-mask.svg") no-repeat center / contain;
+  mask: url(/imgs/button-mask.svg) no-repeat center / contain;
 }
 </style>
