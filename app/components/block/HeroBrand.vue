@@ -56,41 +56,45 @@ onBeforeUnmount(stopSlideRotation)
   >
     <div
       class="
-      @container/hero
-      z-1
-      wrapper-max
-      pt-60
-      pb-50
-      flex
-      flex-col
-      items-center
-      justify-center
-      gap-10
-      text-center
-      size-full
-    "
+        @container/hero
+        z-1
+        wrapper-max
+        pt-60
+        pb-50
+        flex
+        flex-col
+        items-center
+        justify-center
+        gap-10
+        text-center
+        size-full
+      "
     >
       <EffectTextReveal
         v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
         :delay="1000"
         class="hero__headline relative"
       >
-        <div class="hero__headline-1 opacity-100">
+        <div
+          v-if="storyblokRichTextContent(block.headline)"
+          class="hero__headline-1 opacity-100"
+        >
           <StoryblokText :html="block.headline" />
         </div>
 
-        <div class="hero__headline-2 absolute inset-0 opacity-0">
+        <div
+          v-if="storyblokRichTextContent(block.headline_2)"
+          class="hero__headline-2 absolute inset-0 opacity-0"
+        >
           <StoryblokText :html="block.headline_2" />
         </div>
       </EffectTextReveal>
 
       <div
         class="w-full max-h-full transition-[opacity,scale] duration-1000 ease-outBack"
-        :class="[
-          {
-            'opacity-0 scale-120': !mediaReady,
-          },
-        ]"
+        :class="{
+          'opacity-0 scale-120': !mediaReady,
+        }"
       >
         <IconLogo class="size-full" />
       </div>
@@ -107,12 +111,10 @@ onBeforeUnmount(stopSlideRotation)
     <div
       ref="mediaRef"
       class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter,scale] duration-1000 ease-in-out"
-      :class="[
-        {
-          'opacity-0 scale-120': !mediaReady,
-          'grayscale-100': activeSlide === 1,
-        },
-      ]"
+      :class="{
+        'opacity-0 scale-120': !mediaReady,
+        'grayscale-100': activeSlide === 1,
+      }"
     >
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
@@ -173,7 +175,7 @@ onBeforeUnmount(stopSlideRotation)
             :src="logo.filename"
             :alt="logo.alt || ''"
             densities="x1 x2"
-            height="40"
+            height="44"
             loading="lazy"
           />
         </template>

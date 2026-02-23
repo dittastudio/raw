@@ -95,7 +95,7 @@ onMounted(async () => {
           <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
             <img
               v-if="fileExtension(logo.filename) === 'svg'"
-              class="invert-appearance block w-auto h-10 md:h-15 object-contain"
+              class="block w-auto h-10 md:h-15 object-contain"
               :src="logo.filename"
               :alt="logo.alt || block.title || ''"
               loading="lazy"
@@ -103,7 +103,7 @@ onMounted(async () => {
 
             <NuxtImg
               v-else
-              class="invert-appearance block w-auto h-10 md:h-15 object-contain"
+              class="block w-auto h-10 md:h-15 object-contain"
               :src="logo.filename"
               :alt="logo.alt || block.title || ''"
               densities="x1 x2"
