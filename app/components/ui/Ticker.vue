@@ -85,7 +85,7 @@ onBeforeUnmount(() => {
   <div class="ui-ticker relative contain-layout w-full isolate">
     <div
       ref="container"
-      class="flex justify-center gap-20 transform-gpu"
+      class="flex justify-center transform-gpu"
     >
       <div
         v-for="i in 4"
