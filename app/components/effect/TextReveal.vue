@@ -63,6 +63,11 @@ const run = async () => {
           yPercent: 100,
           stagger: 0.1,
           ease: 'expo.out',
+          onComplete: () => {
+            self.lines.forEach((line: Element) => {
+              (line as HTMLElement).parentElement?.style.removeProperty('overflow')
+            })
+          },
           ...isTriggerScroll,
           ...isTriggerInView,
         })
