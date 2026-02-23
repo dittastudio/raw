@@ -11,6 +11,8 @@ interface Props {
 
 const { navigation } = defineProps<Props>()
 
+const route = useRoute()
+
 const lenis = useLenis()
 const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
 const activeTheme = useState<Themes>('activeTheme', () => 'light')
@@ -70,12 +72,12 @@ const handleScroll = (lenis: Lenis) => {
 }
 
 const hideHeader = computed(() => {
-  return !ready.value
-    || (
-      hasScrolledDown.value
-      && !isHeaderOpen.value
-      && !hasScrolledUp.value
-    )
+  // return !ready.value
+  // || (
+  return hasScrolledDown.value
+    && !isHeaderOpen.value
+    && !hasScrolledUp.value
+  // )
 })
 
 const hasNotScrolledThemeClasses = computed(() =>
@@ -96,7 +98,7 @@ const hasScrolledThemeClasses = computed(() => headerThemeClasses[activeTheme.va
 const gradientColorVar = computed(() => ({
   '--app-header-gradient-color': activeTheme.value === 'dark'
     ? 'var(--color-offblack)'
-    : 'var(--color-offwhite)',
+    : '',
 }))
 
 const handleKeydown = (event: KeyboardEvent) => {
@@ -114,12 +116,23 @@ onMounted(async () => {
 
   window.addEventListener('keydown', handleKeydown)
 
-  // await wait(500)
+  await wait(500)
   ready.value = true
 })
 
 onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
+})
+
+watch(() => route.fullPath, async () => {
+  ready.value = false
+  isHeaderOpen.value = false
+  hasScrolledUp.value = false
+  hasScrolledDown.value = true
+  await wait(2000)
+  ready.value = true
+  hasScrolledUp.value = false
+  hasScrolledDown.value = false
 })
 
 const isScreenLg = useAtMedia(getMediaQuery('lg'))
@@ -134,6 +147,7 @@ watchEffect(() => {
 <template>
   <header
     :class="{
+      'is-ready': ready,
       'is-open': isHeaderOpen,
       'has-scrolled': hasScrolled,
     }"
@@ -173,15 +187,15 @@ watchEffect(() => {
     >
       <div
         class="
-        wrapper
-        flex
-        flex-row
-        items-center
-        justify-between
-      "
+          wrapper
+          flex
+          flex-row
+          items-center
+          justify-between
+        "
       >
         <NuxtLink
-          class="p-(--app-outer-gutter) -mx-(--app-outer-gutter) md:-mx-(--app-outer-gutter)"
+          class="header__logo p-(--app-outer-gutter) -mx-(--app-outer-gutter) md:-mx-(--app-outer-gutter)"
           to="/"
         >
           <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
@@ -215,8 +229,13 @@ watchEffect(() => {
 @reference "@/assets/css/app.css";
 
 .header {
-  & + * { /* TEMPORARY: will refactor later down the line */
-    /* ...sure you will! 🤣 */
+  --header-duration: 0.3s;
+  --header-ease: var(--ease-outQuart);
+  --header-pre-delay: 0.5s;
+  --header-delay: 0.05s;
+  --header-nudge: -12px;
+
+  & + * {
     margin-top: calc(var(--app-header-height) * -1);
   }
 }
@@ -263,6 +282,71 @@ watchEffect(() => {
 
   .header.has-scrolled &::before {
     opacity: 0;
+  }
+}
+
+.header__logo {
+  @variant lg {
+    opacity: 0;
+    translate: 0 var(--header-nudge) 0;
+    transition:
+      opacity var(--header-duration) var(--header-ease),
+      translate var(--header-duration) var(--header-ease);
+
+    .header.is-ready & {
+      opacity: 1;
+      translate: 0 0 0;
+    }
+  }
+}
+
+.header__navigation :deep(ul li) {
+  @variant max-lg {
+    --header-nudge: -12px;
+    --header-pre-delay: 0.4s;
+    --header-delay: 0.02s;
+
+    opacity: 0;
+    translate: 0 var(--header-nudge) 0;
+    transition:
+      opacity var(--header-duration) var(--header-ease),
+      translate var(--header-duration) var(--header-ease) 0.3s;
+
+    .header.is-open & {
+      opacity: 1;
+      translate: 0 0 0;
+
+      &:nth-child(1) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 1));}
+      &:nth-child(2) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 2));}
+      &:nth-child(3) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 3));}
+      &:nth-child(4) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 4));}
+      &:nth-child(5) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 5));}
+      &:nth-child(6) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 6));}
+      &:nth-child(7) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 7));}
+      &:nth-child(8) { transition-delay: calc(var(--header-pre-delay) + (var(--header-delay) * 8));}
+    }
+  }
+
+  @variant lg {
+    opacity: 0;
+    translate: 0 var(--header-nudge) 0;
+    transition:
+      opacity var(--header-duration) var(--header-ease),
+      translate var(--header-duration) var(--header-ease);
+
+    .header.is-ready & {
+      opacity: 1;
+      translate: 0 0 0;
+
+      &:nth-child(1) { transition-delay: calc(var(--header-delay) * 1);}
+      &:nth-child(2) { transition-delay: calc(var(--header-delay) * 2);}
+      &:nth-child(3) { transition-delay: calc(var(--header-delay) * 3);}
+      &:nth-child(4) { transition-delay: calc(var(--header-delay) * 4);}
+      &:nth-child(5) { transition-delay: calc(var(--header-delay) * 5);}
+      &:nth-child(6) { transition-delay: calc(var(--header-delay) * 6);}
+      &:nth-child(7) { transition-delay: calc(var(--header-delay) * 7);}
+      &:nth-child(8) { transition-delay: calc(var(--header-delay) * 8);}
+    }
   }
 }
 

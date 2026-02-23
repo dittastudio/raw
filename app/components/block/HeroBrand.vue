@@ -85,10 +85,10 @@ onBeforeUnmount(stopSlideRotation)
       </EffectTextReveal>
 
       <div
-        class="w-full max-h-full transition-[opacity,scale] duration-1000 ease-out"
+        class="w-full max-h-full transition-[opacity,scale] duration-1000 ease-outBack"
         :class="[
           {
-            'opacity-0 scale-90': !mediaReady,
+            'opacity-0 scale-120': !mediaReady,
           },
         ]"
       >
@@ -106,7 +106,7 @@ onBeforeUnmount(stopSlideRotation)
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter,scale] duration-1000 ease-out"
+      class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter,scale] duration-1000 ease-in-out"
       :class="[
         {
           'opacity-0 scale-120': !mediaReady,

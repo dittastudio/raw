@@ -18,7 +18,7 @@ const media = computed(() => block.media?.[0] || null)
   <div
     v-editable="block"
     class="relative isolate flex flex-col gap-y-20"
-    :class="{ 'py-[calc(var(--app-vertical-spacing)*2)]': media }"
+    :class="{ 'py-(--app-vertical-spacing)': media }"
   >
     <div
       v-if="media"
