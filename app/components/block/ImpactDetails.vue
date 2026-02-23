@@ -56,7 +56,6 @@ const media = computed(() => block.media?.[0])
           v-if="storyblokRichTextContent(block.copy)"
           class="prose-p"
         >
-          erergerge
           <StoryblokText :html="block.copy" />
         </div>
 
