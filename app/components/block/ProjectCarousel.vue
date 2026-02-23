@@ -56,16 +56,11 @@ const isSmBreakpoint = '600px'
                 sizes="sm:100vw md:100vw lg:100vw"
               />
 
-              <MediaSource
+              <NuxtImg
+                class="size-full object-cover"
+                sizes="2xs:100vw xs:100vw sm:100vw"
                 :width="10"
                 :height="16"
-                :src="item.content.preview_media[0].image.filename"
-                sizes="2xs:100vw xs:100vw sm:100vw"
-              />
-
-              <NuxtImg
-                srcset=""
-                class="size-full object-cover"
                 :src="item.content.preview_media[0].image.filename"
                 :alt="item.content.preview_media[0].image.alt"
               />
