@@ -200,7 +200,7 @@ const backgroundThemeClasses = computed(() => {
 
 .ui-truths-item__bottom {
   .ui-truths-item.is-masked & {
-    animation: breathe var(--breathe-duration) var(--ease-inOutSine) infinite forwards;
+    animation: animate-breathe var(--breathe-duration) var(--ease-inOutSine) infinite forwards;
     animation-delay: calc(5 * 0.5s);
   }
 
@@ -234,18 +234,6 @@ const backgroundThemeClasses = computed(() => {
         pointer-events: none;
       }
     }
-  }
-}
-
-@keyframes breathe {
-  0% {
-    transform: scale(1) translateZ(0);
-  }
-  50% {
-    transform: scale(1.05) translateZ(0);
-  }
-  100% {
-    transform: scale(1) translateZ(0);
   }
 }
 </style>
