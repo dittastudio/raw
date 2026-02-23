@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockNextEvent, Post } from '#storyblok-components'
+import type { BlockNextEvent, Event, Post } from '#storyblok-components'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -13,9 +13,9 @@ interface EventPost {
   uuid: string
   name: string
   full_slug: string
-  preview_image: Post['preview_image'] | Post['hero']
-  preview_text: Post['preview_text']
-  eventDatetime: Post['event_datetime']
+  preview_image: Post['preview_image'] | Post['hero'] | Event['preview_image']
+  preview_text: Post['preview_text'] | Event['preview_text']
+  eventDatetime: Post['event_datetime'] | Event['event_datetime']
 }
 
 const { data: event } = await useAsyncData(() => `next-event`, async () => {
@@ -38,14 +38,14 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
     },
   })
 
-  return data.stories as ISbStoryData<Post>[]
+  return data.stories as ISbStoryData<Post | Event>[]
 }, {
-  transform: (payload: ISbStoryData<Post>[]): EventPost | undefined => {
+  transform: (payload: ISbStoryData<Post | Event>[]): EventPost | undefined => {
     const events = payload.map(post => ({
       uuid: post.uuid,
       name: post.name,
       full_slug: post.full_slug,
-      preview_image: post.content.preview_image?.filename ? post.content.preview_image : post.content.hero?.filename ? post.content.hero : undefined,
+      preview_image: post.content.preview_image?.filename ? post.content.preview_image : undefined,
       preview_text: post.content.preview_text,
       eventDatetime: post.content.event_datetime,
     }))
@@ -105,7 +105,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
     >
       <p
         v-if="event.preview_text"
-        class="type-p text-pretty max-w-[24em]"
+        class="type-p text-pretty max-w-[24em] whitespace-pre-wrap"
       >
         {{ event.preview_text }}
       </p>
