@@ -1,6 +1,8 @@
 <script lang="ts" setup>
+import type { Themes } from '@@/types/app'
+
 interface Props {
-  theme: 'dark' | 'light'
+  theme: Themes
 }
 
 const { theme } = defineProps<Props>()

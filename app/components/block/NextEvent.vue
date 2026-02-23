@@ -96,7 +96,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
         loading="lazy"
       />
 
-      <UiPartnershipButton :theme="theme" />
+      <UiPartnershipButton :theme="block.theme" />
     </div>
 
     <div
