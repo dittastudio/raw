@@ -14,6 +14,8 @@ const { block } = defineProps<Props>()
 const theme = computed(() => (block.theme as Themes) ?? 'light')
 
 const carouselRef = useTemplateRef<Carousel>('carouselFade')
+
+const isSmBreakpoint = '600px'
 </script>
 
 <template>
@@ -45,21 +47,29 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
           class="block relative size-full isolate aspect-10/16 sm:aspect-video md:min-h-160 max-h-svh"
         >
           <template v-if="item.content.preview_media?.[0]">
-            <NuxtImg
-              v-if="isImageComponent(item.content.preview_media[0]) && item.content.preview_media[0].image?.filename && storyblokAssetType(item.content.preview_media[0].image.filename) === 'image'"
-              class="block size-full object-cover"
-              :src="item.content.preview_media[0].image.filename"
-              :alt="item.content.preview_media[0].image.alt || block.title || item.content?.preview_text || ''"
-              :width="storyblokImageDimensions(item.content.preview_media[0].image.filename).width"
-              :height="storyblokImageDimensions(item.content.preview_media[0].image.filename).height"
-              sizes="
-                xs:100vw
-                sm:100vw
-                md:100vw
-                lg:100vw
-                xl:100vw
-              "
-            />
+            <picture v-if="isImageComponent(item.content.preview_media[0]) && item.content.preview_media[0].image?.filename && storyblokAssetType(item.content.preview_media[0].image.filename) === 'image'">
+              <MediaSource
+                :media="`(min-width: ${isSmBreakpoint})`"
+                :width="16"
+                :height="9"
+                :src="item.content.preview_media[0].image.filename"
+                sizes="sm:100vw md:100vw lg:100vw"
+              />
+
+              <MediaSource
+                :width="10"
+                :height="16"
+                :src="item.content.preview_media[0].image.filename"
+                sizes="2xs:100vw xs:100vw sm:100vw"
+              />
+
+              <NuxtImg
+                srcset=""
+                class="size-full object-cover"
+                :src="item.content.preview_media[0].image.filename"
+                :alt="item.content.preview_media[0].image.alt"
+              />
+            </picture>
 
             <UiMuxVideo
               v-else-if="isMuxVideoAutoplayComponent(item.content.preview_media[0]) && item.content.preview_media[0].video?.playbackId"

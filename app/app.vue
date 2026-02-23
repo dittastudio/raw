@@ -25,12 +25,12 @@ useSeoMeta({
   robots: url.host === 'raw.london' ? 'index, follow' : 'noindex, nofollow',
 })
 
-const isHeaderOpen = useState('isHeaderOpen', () => false)
+// const isHeaderOpen = useState('isHeaderOpen', () => false)
 
-watch(() => route.fullPath, async () => {
-  await wait(500)
-  isHeaderOpen.value = false
-})
+// watch(() => route.fullPath, async () => {
+//   await wait(500)
+//   isHeaderOpen.value = false
+// })
 </script>
 
 <template>

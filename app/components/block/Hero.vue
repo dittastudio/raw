@@ -119,29 +119,36 @@ onUnmounted(() => {
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-out"
+      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-inOutQuart"
       :class="{
         'opacity-0 scale-120': !mediaReady,
       }"
     >
-      <NuxtImg
-        v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
-        class="block size-full object-cover"
-        :src="media.image.filename"
-        :alt="media.image.alt || ''"
-        :width="16"
-        :height="9"
-        sizes="
-          100vw
-          xs:100vw
-          sm:100vw
-          md:100vw
-          lg:100vw
-          xl:100vw
-          2xl:100vw
-        "
-        @vue:mounted="mediaLoaded"
-      />
+      <picture v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'">
+        <MediaSource
+          media="(orientation: landscape)"
+          :width="16"
+          :height="9"
+          :src="media.image.filename"
+          sizes="sm:100vw md:100vw lg:100vw"
+        />
+
+        <MediaSource
+          media="(orientation: portrait)"
+          :width="10"
+          :height="16"
+          :src="media.image.filename"
+          sizes="2xs:100vw xs:100vw sm:100vw"
+        />
+
+        <NuxtImg
+          srcset=""
+          class="size-full object-cover"
+          :src="media.image.filename"
+          :alt="media.image.alt || ''"
+          @vue:mounted="mediaLoaded"
+        />
+      </picture>
 
       <UiMuxVideo
         v-else-if="media && isMuxVideoAutoplayComponent(media) && media.video?.playbackId"

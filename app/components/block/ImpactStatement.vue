@@ -47,51 +47,59 @@ const createAnimations = () => {
   tl = gsap.timeline({
     scrollTrigger: {
       trigger: container.value,
-      start: 'top 90%',
-      end: 'bottom 20%',
+      start: 'top 35%',
+      end: '10% 35%',
       scrub: 1,
       markers: false,
     },
   })
 
-  items.forEach((item) => {
+  items.forEach((item, index) => {
+    const isFirst = index === 0
+    const isLast = index === items.length - 1
     const title = item.querySelector('[data-js="title"]')
     const copy = item.querySelector('[data-js="copy"]')
 
-    if (tl && title) {
-      tl.fromTo(title, {
-        opacity: 0,
-        y: 20,
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 1.5,
-        ease: 'expo.out',
-      })
+    if (!isFirst) {
+      if (tl && title) {
+        tl.fromTo(title, {
+          opacity: 0,
+          y: 40,
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.inOut',
+        }, '')
+      }
+
+      if (tl && copy) {
+        tl.fromTo(copy, {
+          opacity: 0,
+          y: 40,
+        }, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.inOut',
+        }, '<')
+      }
     }
 
-    if (tl && copy) {
-      tl.fromTo(copy, {
-        opacity: 0,
-        x: 20,
-      }, {
-        opacity: 1,
-        x: 0,
-        duration: 1.5,
-        ease: 'expo.out',
-      })
-    }
+    if (!isLast) {
+      if (tl && title) {
+        tl.to(title, {
+          opacity: 0,
+          y: -40,
+        }, '<')
+      }
 
-    if (tl && title) {
-      tl.to(title, {
-        opacity: 0,
-      })
-    }
-
-    if (tl && copy) {
-      tl.to(copy, {
-        opacity: 0,
-      }, '<')
+      if (tl && copy) {
+        tl.to(copy, {
+          opacity: 0,
+          y: -40,
+        }, '')
+      }
     }
   })
 }
@@ -114,7 +122,7 @@ onUnmounted(() => {
   <div
     ref="container"
     v-editable="block"
-    class="flex flex-col gap-36 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-0 md:place-items-start"
+    class="flex flex-col gap-36 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-0 md:place-items-center min-h-svhx"
   >
     <div
       v-for="item in block.items"

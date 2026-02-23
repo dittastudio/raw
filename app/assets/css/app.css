@@ -91,11 +91,6 @@
 
 @layer theme {
   :root {
-    /* --app-transition-duration: 0.8s; */
-    /* --app-transition-ease: var(--ease-in-out); */
-    /* --app-text-color: var(--color-offblack); */
-    /* --app-background-color: var(--color-offwhite); */
-
     --app-inner-gutter: 10px;
     --app-outer-gutter: 20px;
 
@@ -105,7 +100,7 @@
     --app-header-logo-width: 86px;
     --app-header-logo-height: 32px;
 
-    --app-vertical-spacing: --spacing(15);
+    --app-vertical-spacing: --spacing(18.75);
 
     @variant sm {
       --app-inner-gutter: 20px;
@@ -120,7 +115,7 @@
 
       --app-header-height: 92px;
 
-      --app-vertical-spacing: --spacing(30);
+      --app-vertical-spacing: --spacing(37.5);
     }
   }
 
