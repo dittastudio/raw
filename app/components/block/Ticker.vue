@@ -57,37 +57,35 @@ const media = computed(() => block.media?.[0] || null)
         {{ block.text }}
       </h4>
 
-      <div class="invert-appearance">
-        <UiTicker
-          duration="30s"
-          direction="right"
+      <UiTicker
+        duration="30s"
+        direction="right"
+      >
+        <template
+          v-for="logo in block.logos"
+          :key="logo.id"
         >
-          <template
-            v-for="logo in block.logos"
-            :key="logo.id"
-          >
-            <template v-if="logo.filename">
-              <img
-                v-if="fileExtension(logo.filename) === 'svg'"
-                class="block w-auto h-16"
-                :src="logo.filename"
-                :alt="logo.alt || block.text || ''"
-                loading="lazy"
-              >
+          <template v-if="logo.filename">
+            <img
+              v-if="fileExtension(logo.filename) === 'svg'"
+              class="block w-auto h-16"
+              :src="logo.filename"
+              :alt="logo.alt || block.text || ''"
+              loading="lazy"
+            >
 
-              <NuxtImg
-                v-else
-                class="block w-auto h-16"
-                :src="logo.filename"
-                :alt="logo.alt || block.text || ''"
-                densities="x1 x2"
-                height="40"
-                loading="lazy"
-              />
-            </template>
+            <NuxtImg
+              v-else
+              class="block w-auto h-16"
+              :src="logo.filename"
+              :alt="logo.alt || block.text || ''"
+              densities="x1 x2"
+              height="40"
+              loading="lazy"
+            />
           </template>
-        </UiTicker>
-      </div>
+        </template>
+      </UiTicker>
     </div>
   </div>
 </template>

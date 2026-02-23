@@ -26,11 +26,6 @@
   }
 }
 
-@utility invert-appearance {
-  filter: invert(1) brightness(200%);
-  mix-blend-mode: difference;
-}
-
 @custom-variant only-hover (@media (hover: hover));
 
 @custom-variant only-touch (@media (hover: none));
