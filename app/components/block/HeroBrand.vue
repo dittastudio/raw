@@ -199,8 +199,6 @@ onBeforeUnmount(stopSlideRotation)
 .hero__text {
   :deep(p) {
     @apply type-h4;
-
-    text-wrap: balance;
   }
 }
 

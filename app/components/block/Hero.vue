@@ -214,7 +214,6 @@ onUnmounted(() => {
   :deep(p) {
     @apply type-h4;
 
-    text-wrap: balance;
     max-width: 30em;
   }
 }

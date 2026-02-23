@@ -147,8 +147,8 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
     v-editable="block"
     class="w-full"
   >
-    <div class="flex flex-col gap-16 overflow-hidden">
-      <div class="w-full flex flex-col">
+    <div class="flex flex-col gap-16">
+      <div class="w-full flex flex-col overflow-hidden">
         <FilterDatasource
           v-if="categories.length"
           slug="category"

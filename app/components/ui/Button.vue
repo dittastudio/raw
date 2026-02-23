@@ -11,7 +11,7 @@ const { type = 'solid', theme = 'light' } = defineProps<Props>()
 const hover = useTemplateRef('hover')
 
 const mainMouse = useSmoothMouse(hover, { range: 0.9 })
-const blobMouse = useSmoothMouse(hover, { damping: 1, range: 1 })
+const blobMouse = useSmoothMouse(hover, { damping: 0.2, range: 1 })
 
 const onMouseMove = (event: MouseEvent) => {
   mainMouse.onMouseMove(event)
@@ -60,6 +60,8 @@ const outlineThemeClasses = computed(() => {
       rounded-full
       select-none
       type-p
+      p-1
+      -m-1
     "
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
@@ -92,18 +94,19 @@ const outlineThemeClasses = computed(() => {
       </defs>
     </svg>
 
-    <span class="ui-button__container absolute inset-0 flex items-center justify-center">
-      <span class="ui-button__blob ui-button__blob--1">
-        <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-green" />
+    <span class="relative">
+      <span class="ui-button__container absolute inset-0 flex items-center justify-center">
+        <span class="ui-button__blob ui-button__blob--1">
+          <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-green" />
+        </span>
+
+        <span class="ui-button__blob ui-button__blob--2">
+          <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-pink" />
+        </span>
       </span>
 
-      <span class="ui-button__blob ui-button__blob--2">
-        <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-pink" />
-      </span>
-    </span>
-
-    <span
-      class="
+      <span
+        class="
         ui-button__inner
         block
         pointer-events-none
@@ -115,17 +118,18 @@ const outlineThemeClasses = computed(() => {
         rounded-full
         overflow-hidden
       "
-      :class="[
-        {
-          [getThemeClasses[theme]]: type === 'outline',
-          [outlineThemeClasses]: type === 'outline',
-          [solidThemeClasses]: type === 'solid',
-        },
-      ]"
-    >
-      <span class="ui-button__shadow" />
+        :class="[
+          {
+            [getThemeClasses[theme]]: type === 'outline',
+            [outlineThemeClasses]: type === 'outline',
+            [solidThemeClasses]: type === 'solid',
+          },
+        ]"
+      >
+        <span class="ui-button__shadow" />
 
-      <slot />
+        <slot />
+      </span>
     </span>
   </span>
 </template>
