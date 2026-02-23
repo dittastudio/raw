@@ -20,30 +20,37 @@ const ready = ref(false)
 const hasScrolled = ref(false)
 const hasScrolledUp = ref(false)
 const hasScrolledDown = ref(false)
-const ignoreNextHide = ref(false)
 
-const pinHeader = () => {
-  hasScrolledUp.value = true
-  hasScrolledDown.value = false
-  ignoreNextHide.value = true
+const openHeaderMenu = () => {
+  isHeaderOpen.value = true
 }
 
 const closeHeaderMenu = () => {
-  if (!isHeaderOpen.value) {
-    return
-  }
-
   isHeaderOpen.value = false
-  pinHeader()
 }
 
 const toggleHeaderMenu = () => {
-  if (isHeaderOpen.value) {
-    closeHeaderMenu()
-    return
-  }
+  return isHeaderOpen.value ? closeHeaderMenu() : openHeaderMenu()
+}
 
-  isHeaderOpen.value = true
+const openScrollHeader = () => {
+  hasScrolledUp.value = true
+  hasScrolledDown.value = false
+}
+
+const closeScrollHeader = () => {
+  hasScrolledUp.value = false
+  hasScrolledDown.value = true
+}
+
+const resetScrollHeader = () => {
+  hasScrolled.value = false
+  hasScrolledUp.value = false
+  hasScrolledDown.value = false
+}
+
+const onHeaderHover = () => {
+  openScrollHeader()
 }
 
 const handleScroll = (lenis: Lenis) => {
@@ -60,25 +67,9 @@ const handleScroll = (lenis: Lenis) => {
   else if (lenis.direction === 1) {
     // Scrolling down
     hasScrolledUp.value = false
-
-    if (ignoreNextHide.value) {
-      ignoreNextHide.value = false
-      hasScrolledDown.value = false
-    }
-    else {
-      hasScrolledDown.value = scrollPos > triggerPoint
-    }
+    hasScrolledDown.value = scrollPos > triggerPoint
   }
 }
-
-const hideHeader = computed(() => {
-  // return !ready.value
-  // || (
-  return hasScrolledDown.value
-    && !isHeaderOpen.value
-    && !hasScrolledUp.value
-  // )
-})
 
 const hasNotScrolledThemeClasses = computed(() =>
   activeTheme.value === 'dark' ? 'text-offwhite' : 'text-offblack',
@@ -126,13 +117,12 @@ onUnmounted(() => {
 
 watch(() => route.fullPath, async () => {
   ready.value = false
-  isHeaderOpen.value = false
-  hasScrolledUp.value = false
-  hasScrolledDown.value = true
-  await wait(2000)
+  closeHeaderMenu()
+  closeScrollHeader()
+
+  await wait(800)
+  resetScrollHeader()
   ready.value = true
-  hasScrolledUp.value = false
-  hasScrolledDown.value = false
 })
 
 const isScreenLg = useAtMedia(getMediaQuery('lg'))
@@ -150,75 +140,58 @@ watchEffect(() => {
       'is-ready': ready,
       'is-open': isHeaderOpen,
       'has-scrolled': hasScrolled,
+      'has-scrolled-down': hasScrolledDown,
+      'has-scrolled-up': hasScrolledUp,
     }"
     class="header isolate h-(--app-header-height) sticky top-0 w-full z-20"
-    @mouseenter="pinHeader"
+    @mouseenter="onHeaderHover"
   >
     <div
       :style="gradientColorVar"
-      class="
-        header__bar
-        relative
-        lg:after:absolute
-        lg:after:top-full
-        lg:after:inset-x-0
-        lg:after:h-px
-        lg:after:bg-current
-        lg:after:transition-opacity
-        lg:after:duration-300
-        lg:after:ease-in-out
-        lg:after:pointer-events-none
-        lg:after:z-1
-        transition-[opacity,translate,background-color,color]
-        duration-300
-        ease-in-out
-        transform-gpu
-      "
-      :class="[
-        {
-          '-translate-y-[calc(100%+1px)]': hideHeader,
-          'delay-[0s,0s,0.3s,0.3s]': hasScrolledDown,
-          'lg:after:opacity-0': !hasScrolled,
-          'lg:after:opacity-10': hasScrolled,
-          [hasNotScrolledThemeClasses]: !hasScrolled,
-          [hasScrolledThemeClasses]: hasScrolled,
-        },
-      ]"
+      class="header__outer"
     >
       <div
-        class="
-          wrapper
-          flex
-          flex-row
-          items-center
-          justify-between
-        "
+        class="header__inner"
+        :class="{
+          [hasNotScrolledThemeClasses]: !hasScrolled && ready,
+          [hasScrolledThemeClasses]: hasScrolled && ready,
+        } "
       >
-        <NuxtLink
-          class="header__logo p-(--app-outer-gutter) -mx-(--app-outer-gutter) md:-mx-(--app-outer-gutter)"
-          to="/"
-        >
-          <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
-
-          <span class="sr-only">RAW</span>
-        </NuxtLink>
-
-        <button
-          class="z-1 block lg:hidden outline-none p-(--app-outer-gutter) -m-(--app-outer-gutter)"
-          type="button"
-          @click="toggleHeaderMenu"
-        >
-          <AppHeaderSwitch />
-        </button>
-
         <div
-          data-lenis-prevent
-          class="header__navigation w-full"
+          class="
+            wrapper
+            flex
+            flex-row
+            items-center
+            justify-between
+          "
         >
-          <AppNavigation
-            v-if="navigation"
-            :items="navigation"
-          />
+          <NuxtLink
+            class="header__logo p-(--app-outer-gutter) -mx-(--app-outer-gutter) md:-mx-(--app-outer-gutter)"
+            to="/"
+          >
+            <IconLogo class="w-(--app-header-logo-width) h-(--app-header-logo-height) block" />
+
+            <span class="sr-only">RAW</span>
+          </NuxtLink>
+
+          <button
+            class="z-1 block lg:hidden outline-none p-(--app-outer-gutter) -m-(--app-outer-gutter)"
+            type="button"
+            @click="toggleHeaderMenu"
+          >
+            <AppHeaderSwitch />
+          </button>
+
+          <div
+            data-lenis-prevent
+            class="header__navigation w-full"
+          >
+            <AppNavigation
+              v-if="navigation"
+              :items="navigation"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -240,9 +213,16 @@ watchEffect(() => {
   }
 }
 
-.header__bar {
+.header__outer {
+  --header-border-height: 1px;
+
   position: relative;
-  z-index: 1;
+  translate: 0 0 0;
+  transition: translate 0.3s var(--ease-out);
+
+  .header.has-scrolled-down & {
+    translate: 0 calc((100% + var(--header-border-height)) * -1) 0;
+  }
 
   &::before {
     content: '';
@@ -282,6 +262,38 @@ watchEffect(() => {
 
   .header.has-scrolled &::before {
     opacity: 0;
+  }
+}
+
+.header__inner {
+  position: relative;
+
+  transition:
+    color 0.3s var(--ease-out),
+    background-color 0.3s var(--ease-out);
+
+  .header.has-scrolled-down & {
+    transition-delay: 0.3s;
+  }
+
+  @variant lg {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: var(--header-border-height);
+      background-color: currentColor;
+      opacity: 0;
+      z-index: 1;
+      transition: opacity 0.3s var(--ease-out);
+      pointer-events: none;
+
+      .header.has-scrolled & {
+        opacity: 0.1;
+      }
+    }
   }
 }
 
