@@ -9,38 +9,11 @@ interface Props {
 
 const { story } = defineProps<Props>()
 
-const checkBackgroundMatchesPrevBackground = (index: number) => {
-  if (index === 0) {
-    return false
-  }
-
-  const currentBlock = story.content.blocks?.[index]
-  const prevBlock = story.content.blocks?.[index - 1]
-
-  return currentBlock && prevBlock && 'theme' in currentBlock && 'theme' in prevBlock
-    ? currentBlock.theme === prevBlock.theme
-    : false
-}
-
-const checkBlockHasFullWidthBgMedia = (index: number) => {
-  const block = story.content.blocks?.[index]
-
-  if (!block) {
-    return false
-  }
-
-  return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block.component) && block.media?.[0]
-}
-
-const checkMediaIsFull = (index: number) => {
-  const block = story.content.blocks?.[index]
-
-  if (!block) {
-    return false
-  }
-
-  return isBlockWithMedia(block) && 'placement' in block && block.placement === 'full'
-}
+const {
+  checkBackgroundMatchesPrevBackground,
+  checkBlockHasFullWidthBgMedia,
+  checkMediaIsFull,
+} = blockHelpers(story)
 </script>
 
 <template>

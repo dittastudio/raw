@@ -78,5 +78,15 @@ const { data: events } = await useAsyncData(() => `past-events`, async () => {
         />
       </li>
     </ul>
+
+    <StoryblokLink
+      v-if="block.cta_title && block.cta?.cached_url"
+      :item="block.cta"
+      class="block mx-auto"
+    >
+      <UiButton>
+        {{ block.cta_title }}
+      </UiButton>
+    </StoryblokLink>
   </div>
 </template>
