@@ -71,6 +71,8 @@ const media = computed(() => block.media?.[0] || null)
               class="block w-auto h-11"
               :src="logo.filename"
               :alt="logo.alt || block.text || ''"
+              :width="storyblokImageDimensions(logo.filename).width"
+              :height="storyblokImageDimensions(logo.filename).height"
               loading="lazy"
             >
 
@@ -79,8 +81,9 @@ const media = computed(() => block.media?.[0] || null)
               class="block w-auto h-11"
               :src="logo.filename"
               :alt="logo.alt || block.text || ''"
+              :width="storyblokImageDimensions(logo.filename).width"
+              :height="storyblokImageDimensions(logo.filename).height"
               densities="x1 x2"
-              height="44"
               loading="lazy"
             />
           </template>

@@ -165,6 +165,8 @@ onBeforeUnmount(stopSlideRotation)
             class="block w-auto h-9 md:h-11"
             :src="logo.filename"
             :alt="logo.alt || ''"
+            :width="storyblokImageDimensions(logo.filename).width"
+            :height="storyblokImageDimensions(logo.filename).height"
             loading="lazy"
           >
 
@@ -173,8 +175,9 @@ onBeforeUnmount(stopSlideRotation)
             class="block w-auto h-9 md:h-11"
             :src="logo.filename"
             :alt="logo.alt || ''"
+            :width="storyblokImageDimensions(logo.filename).width"
+            :height="storyblokImageDimensions(logo.filename).height"
             densities="x1 x2"
-            height="44"
             loading="lazy"
           />
         </template>
