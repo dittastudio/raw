@@ -79,6 +79,11 @@ const media = computed(() => block.media?.[0])
           </UiButton>
         </StoryblokLink>
 
+        <UiPartnershipButton
+          v-if="block.jaa_partnership"
+          :theme="(block.theme as Themes) ?? 'light'"
+        />
+
         <ul
           v-if="block.logos?.length"
           class="w-full grid grid-cols-3 gap-5 mt-auto -ml-2"

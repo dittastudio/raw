@@ -17,6 +17,7 @@ interface EventPost {
   preview_image: Post['preview_image'] | Post['hero'] | Event['preview_image']
   preview_text: Post['preview_text'] | Event['preview_text']
   eventDatetime: Post['event_datetime'] | Event['event_datetime']
+  jaaPartnership: Post['jaa_partnership'] | Event['jaa_partnership']
 }
 
 const { data: event } = await useAsyncData(() => `next-event`, async () => {
@@ -49,6 +50,7 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
       preview_image: post.content.preview_image?.filename ? post.content.preview_image : undefined,
       preview_text: post.content.preview_text,
       eventDatetime: post.content.event_datetime,
+      jaaPartnership: post.content.jaa_partnership,
     }))
 
     return events.length ? events[0] : undefined
@@ -97,7 +99,10 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
         loading="lazy"
       />
 
-      <UiPartnershipButton :theme="(block.theme as Themes) ?? 'light'" />
+      <UiPartnershipButton
+        v-if="event.jaaPartnership"
+        :theme="(block.theme as Themes) ?? 'light'"
+      />
     </div>
 
     <div

@@ -31,7 +31,7 @@ const themeBgClasses = computed(() => theme === 'dark' ? 'bg-offwhite' : 'bg-off
       "
       :class="themeBgClasses"
     >
-      In partnership with
+      In partnership with <span class="sr-only">JAA Media</span>
     </div>
 
     <svg
