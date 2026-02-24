@@ -98,6 +98,49 @@ type ContentTypeBlockWithMedia = Extract<ContentTypeBlock, { media?: unknown }>
 
 const isBlockWithMedia = (block: ContentTypeBlock): block is ContentTypeBlockWithMedia => 'media' in block && Array.isArray(block.media) && block.media.length > 0
 
+const blockHelpers = <T extends { blocks?: ContentTypeBlocks }>(story: ISbStoryData<T>) => {
+  const blocks = story.content.blocks
+
+  const checkBackgroundMatchesPrevBackground = (index: number) => {
+    if (index === 0) {
+      return false
+    }
+
+    const currentBlock = blocks?.[index]
+    const prevBlock = blocks?.[index - 1]
+
+    return currentBlock && prevBlock && 'theme' in currentBlock && 'theme' in prevBlock
+      ? currentBlock.theme === prevBlock.theme
+      : false
+  }
+
+  const checkBlockHasFullWidthBgMedia = (index: number) => {
+    const block = blocks?.[index]
+
+    if (!block) {
+      return false
+    }
+
+    return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block.component) && block.media?.[0]
+  }
+
+  const checkMediaIsFull = (index: number) => {
+    const block = blocks?.[index]
+
+    if (!block) {
+      return false
+    }
+
+    return isBlockWithMedia(block) && 'placement' in block && block.placement === 'full'
+  }
+
+  return {
+    checkBackgroundMatchesPrevBackground,
+    checkBlockHasFullWidthBgMedia,
+    checkMediaIsFull,
+  }
+}
+
 const storyblokImage = (
   filename: string | null | undefined,
   modifiers?: Partial<ImageModifiers> | undefined,
@@ -157,6 +200,7 @@ const determineHref = (item: StoryblokMultilink) => {
 }
 
 export {
+  blockHelpers,
   determineHref,
   getCategoryEntry,
   isBlockWithMedia,
