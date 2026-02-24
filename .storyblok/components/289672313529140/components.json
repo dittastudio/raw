@@ -1535,9 +1535,9 @@
   {
     "name": "block_projects_selected",
     "display_name": "Projects Selected",
-    "description": "Select projects to showcase with filtering.",
+    "description": "Select projects to showcase.",
     "created_at": "2026-02-19T16:16:11.192Z",
-    "updated_at": "2026-02-19T16:18:06.106Z",
+    "updated_at": "2026-02-24T16:01:34.413Z",
     "id": 146752189209273,
     "schema": {
       "title": {
