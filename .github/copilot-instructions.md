@@ -49,19 +49,6 @@
 
 ## Development Workflow
 
-### Commands
-```bash
-npm run dev              # Auto-runs sb:generate then starts dev server
-npm run dev:ssl          # SSL proxy for visual editor (port 3010 → 3000)
-npm run sb:generate      # Pull components + generate types
-npm run lint:fix         # ESLint with @antfu/eslint-config
-npm run build            # Production build
-npm run generate         # Static site generation
-
-# Migration (from /migration dir)
-npm run migrate          # WordPress to Storyblok migration
-```
-
 ### Commit Conventions
 Uses Commitlint with Conventional Commits:
 ```bash
@@ -77,50 +64,15 @@ Types: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`
 3. Run `npm run sb:types` to generate TypeScript types
 4. Import types: `import type { Post } from '#storyblok-components'`
 
-### Migration Architecture (`/migration/`)
-
-**WordPress → Storyblok migration** with custom block transformation:
-
-1. **Process**: Authors (Person) first → Posts with author references
-2. **Block Mapping**: Gutenberg blocks → Storyblok nested components
-   - `core/paragraph` → `post_text` (with HTML→richtext conversion)
-   - `core/heading` → `post_heading`
-   - `core/image` → `post_image` (uploads to Storyblok assets)
-   - `core/quote` → `post_quote`
-   - `core/gallery` → `post_gallery`
-   - `core/list` → `post_text` (wrapped in `<ul>`)
-   - `core/embed` → `post_embed`
-
-3. **Key Utilities** ([migration/utils.ts](migration/utils.ts)):
-   - `decodeHtmlEntities()`: Fix WordPress HTML entities (`&#8217;` → `'`)
-   - `uploadFileToStoryblok()`: 3-step upload (signed request → S3 → finalize)
-   - `convertHtmlToJson()`: HTML → Markdown → Storyblok richtext
-   - `wait()`: Rate limit protection between API calls
-
-4. **Critical Details**:
-   - Hard-coded author UUID, parent folder ID, space ID
-   - `INTERVAL_WAIT_MS = 500` to prevent rate limits
-   - WordPress fields filtered via `wpFields` array
-   - Excluded posts via `wpExcludedPosts` array
-
 ## Project Conventions
 
 ### Path Aliases
 - `@@/` → Workspace root (for `.storyblok` access)
-- `~/` → `app/` directory
+- `@/` → `app/` directory
 
 ### Styling
 
 1. **Tailwind Extensions** ([app/utils/twMerge.ts](app/utils/twMerge.ts)):
-   ```typescript
-   // Custom font sizes
-   text-14, text-16, text-20, text-26, text-28, text-32, text-42, text-50, text-84
-   text-fluid-h1, text-fluid-h2, text-fluid-h3, text-fluid-h4, text-fluid-h5, text-fluid-p
-   
-   // Custom colors
-   text-offblack, text-blue, text-green, text-pink, text-purple
-   ```
-
 2. **CSS Custom Properties**: `gap-x-(--app-inner-gutter)`, `p-(--app-outer-gutter)`
 3. **Utility Classes**: `wrapper`, `type-display-28`, etc. in [app/assets/css/utils.css](app/assets/css/utils.css)
 4. **Nested CSS**: Uses `postcss-nested` plugin (configured in [nuxt.config.ts](nuxt.config.ts))
@@ -190,21 +142,6 @@ formatDateDMY(dateString)              // "01.01.2026"
 | `/api/oembed` | POST | oEmbed proxy for YouTube, Vimeo, Dailymotion embeds |
 | `/api/sitemap` | GET | Dynamic sitemap from Storyblok stories |
 
-### Theming System
-
-Pages support dynamic themes via hero blocks. Themes: `dark`, `light`, `blue`, `green`, `pink`, `purple`
-
-```typescript
-// In catch-all route, theme is applied from first hero block
-useInitialTheme(story.value.content.blocks)  // Sets CSS custom properties on <html>
-
-// Theme colors defined in app/utils/theme.ts
-// Types defined in types/app.d.ts
-type Themes = 'dark' | 'light' | 'blue' | 'green' | 'pink' | 'purple'
-```
-
-CSS variables set by theme: `--app-background-color`, `--app-text-color`, `--app-button-background-color`, `--app-button-text-color`
-
 ### ESLint Rules ([eslint.config.mjs](eslint.config.mjs))
 
 Custom overrides on @antfu/eslint-config:
@@ -234,21 +171,7 @@ Custom overrides on @antfu/eslint-config:
 
 3. **Story vs Content**: `story.name` = metadata, `story.content.seo_title` = content fields
 
-4. **Migration HTML Entities**: WordPress returns `&#8217;` etc. Always use `decodeHtmlEntities()` on titles/text
-
-5. **Slug Handling**: Root path `/` must map to `/home` in Storyblok (handled by `storyblokSlug()`)
-
-## Environment Variables
-
-```bash
-NUXT_STORYBLOK_TOKEN=              # Public access (draft/published content)
-NUXT_STORYBLOK_MANAGEMENT_TOKEN=   # Management API (for migrations)
-NUXT_STORYBLOK_SPACE_ID=           # 289672313529140
-NUXT_STORYBLOK_VERSION=            # 'draft' or 'published'
-NUXT_PRERENDER=                    # 'true' for SSG
-NUXT_MUX_ACCESS_TOKEN=             # Mux video API access token
-NUXT_MUX_SECRET_KEY=               # Mux video API secret
-```
+4. **Slug Handling**: Root path `/` must map to `/home` in Storyblok (handled by `storyblokSlug()`)
 
 ## Key Dependencies
 
@@ -259,18 +182,3 @@ NUXT_MUX_SECRET_KEY=               # Mux video API secret
 - **GSAP**: Animations in `components/effect/`
 - **keen-slider**: Carousel component
 - **storyblok-markdown-richtext**: HTML → Storyblok richtext conversion
-
-## File References
-
-- [app/composables/useStory.ts](app/composables/useStory.ts) - Custom Storyblok story fetcher
-- [app/composables/useInitialTheme.ts](app/composables/useInitialTheme.ts) - Dynamic page theming
-- [app/pages/[...slug].vue](app/pages/[...slug].vue) - Catch-all route handler with SEO
-- [app/utils/storyblok.ts](app/utils/storyblok.ts) - Storyblok helper functions
-- [app/utils/helpers.ts](app/utils/helpers.ts) - Date formatting utilities
-- [app/utils/theme.ts](app/utils/theme.ts) - Theme color definitions
-- [app/utils/twMerge.ts](app/utils/twMerge.ts) - Tailwind merge config
-- [types/app.d.ts](types/app.d.ts) - App-level TypeScript types
-- [server/api/](server/api/) - Nitro API routes (Mux, oEmbed, sitemap)
-- [migration/migrate.ts](migration/migrate.ts) - WordPress migration script
-- [migration/utils.ts](migration/utils.ts) - Migration utilities
-- [.storyblok/types/289672313529140/storyblok-components.d.ts](.storyblok/types/289672313529140/storyblok-components.d.ts) - Auto-generated types
