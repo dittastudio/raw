@@ -9,34 +9,6 @@ interface Props {
 
 const { story } = defineProps<Props>()
 
-// const isHeroBlock = (index: number, indexFrom: number) => {
-//   return ['block_hero', 'block_hero_brand'].includes(story.content.blocks?.[index + indexFrom]?.component ?? '')
-// }
-
-// const isLastBlock = (index: number) => {
-//   return index === (story.content.blocks?.length ?? 0) - 1 && !isHeroBlock(index, 0)
-// }
-
-// const isBlockWithBgMedia = (index: number) => {
-//   const block = story.content.blocks?.[index]
-
-//   if (!block) {
-//     return false
-//   }
-
-//   return isBlockWithMedia(block) && ['block_testimonials', 'block_ticker', 'block_hover_list'].includes(block.component) && block.media?.[0]
-// }
-
-// const isBlockCarousel = (index: number) => {
-//   return ['block_project_carousel'].includes(story.content.blocks?.[index]?.component ?? '')
-// }
-
-// :class="{
-//       'py-(--app-vertical-spacing)': !isHeroBlock(index, 0) && !isBlockWithBgMedia(index) && !isBlockCarousel(index),
-//       'pt-(--app-vertical-spacing)': isBlockCarousel(index),
-//       'pt-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, -1),
-//       'pb-[calc(var(--app-vertical-spacing)*1.5)]': isHeroBlock(index, 1) || (isLastBlock(index) && !isBlockWithBgMedia(index)),
-//     }"
 const checkBackgroundMatchesPrevBackground = (index: number) => {
   if (index === 0) {
     return false
@@ -63,7 +35,11 @@ const checkBlockHasFullWidthBgMedia = (index: number) => {
 const checkMediaIsFull = (index: number) => {
   const block = story.content.blocks?.[index]
 
-  return block && 'media' in block && block.media?.[0] && 'placement' in block && block.placement === 'full'
+  if (!block) {
+    return false
+  }
+
+  return isBlockWithMedia(block) && 'placement' in block && block.placement === 'full'
 }
 </script>
 
