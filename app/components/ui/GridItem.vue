@@ -12,6 +12,14 @@ interface Props {
 const { item, isOpen, type = 'default', hasIcon = false } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
+
+const titleParts = computed(() => {
+  const words = item.title?.split(' ') ?? []
+  return {
+    leading: words.slice(0, -1).join(' '),
+    last: words.at(-1) ?? '',
+  }
+})
 </script>
 
 <template>
@@ -19,13 +27,12 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     class="p-(--app-outer-gutter) md:py-16"
   >
     <h3 class="flex items-center justify-between gap-(--app-inner-gutter) hyphens-auto type-h4">
-      <span class="flex items-center gap-(--app-inner-gutter)">
-        {{ item.title }}
-
-        <IconArrowRightStem
+      <span>
+        {{ titleParts.leading }} <span class="whitespace-nowrap">{{ titleParts.last }}<IconArrowRightStem
           v-if="hasIcon"
-          class="shrink-0 w-[0.9em] h-auto"
+          class="ml-[0.5em] inline w-[0.9em] h-auto align-baseline"
         />
+        </span>
       </span>
 
       <UiPlusMinus
