@@ -5,11 +5,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 interface Props {
   duration?: string
   direction?: 'left' | 'right'
+  spacingClasses?: string
 }
 
 gsap.registerPlugin(ScrollTrigger)
 
-const { direction = 'left', duration = '60s' } = defineProps<Props>()
+const { direction = 'left', duration = '60s', spacingClasses = 'gap-20 px-10' } = defineProps<Props>()
 
 const container = useTemplateRef('container')
 const wrappers = useTemplateRef('wrappers')
@@ -97,7 +98,10 @@ onBeforeUnmount(() => {
           ref="lists"
           class="ui-ticker__list select-none flex justify-center shrink-0 min-w-full transform-gpu"
         >
-          <div class="flex gap-20 shrink-0 items-center justify-around min-w-full">
+          <div
+            :class="spacingClasses"
+            class="flex shrink-0 items-center justify-around min-w-full"
+          >
             <slot />
           </div>
         </div>

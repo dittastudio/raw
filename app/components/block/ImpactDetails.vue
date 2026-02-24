@@ -46,6 +46,7 @@ const media = computed(() => block.media?.[0])
             xs:100vw
             sm:100vw
             md:66vw
+            lg:66vw
             xl:800px
           "
           loading="lazy"

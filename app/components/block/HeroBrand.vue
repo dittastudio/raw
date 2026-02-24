@@ -124,13 +124,11 @@ onBeforeUnmount(stopSlideRotation)
         :width="16"
         :height="9"
         sizes="
-          100vw
           xs:100vw
           sm:100vw
           md:100vw
           lg:100vw
           xl:100vw
-          2xl:100vw
         "
         @vue:mounted="mediaLoaded"
       />
@@ -155,6 +153,7 @@ onBeforeUnmount(stopSlideRotation)
     <UiTicker
       duration="30s"
       direction="right"
+      spacing-classes="gap-10 px-5 md:gap-20 md:px-10"
     >
       <template
         v-for="logo in block.logo_ticker"
@@ -163,7 +162,7 @@ onBeforeUnmount(stopSlideRotation)
         <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
           <img
             v-if="fileExtension(logo.filename) === 'svg'"
-            class="block w-auto h-11"
+            class="block w-auto h-9 md:h-11"
             :src="logo.filename"
             :alt="logo.alt || ''"
             loading="lazy"
@@ -171,7 +170,7 @@ onBeforeUnmount(stopSlideRotation)
 
           <NuxtImg
             v-else
-            class="block w-auto h-11"
+            class="block w-auto h-9 md:h-11"
             :src="logo.filename"
             :alt="logo.alt || ''"
             densities="x1 x2"
