@@ -32,18 +32,30 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
             {{ text }}
           </h6>
 
-          <NewsletterSignup
-            legend="Newsletter"
-            class="md:max-w-82 pb-6"
-          />
+          <UiModal>
+            <template #trigger>
+              <UiButton theme="dark">
+                Sign up
+              </UiButton>
+            </template>
+
+            <div class="flex flex-col gap-10">
+              <h6
+                v-if="text"
+                class="type-h4 text-balance md:max-w-140"
+              >
+                {{ text }}
+              </h6>
+
+              <NewsletterSignup legend="Newsletter" />
+            </div>
+          </UiModal>
         </div>
       </div>
 
       <div class="grid-area-combined">
         <div class="grid-area-contact type-p flex flex-col gap-1">
-          <p
-            v-if="email"
-          >
+          <p v-if="email">
             <NuxtLink
               class="hover:opacity-60 transition-opacity duration-200 ease-out p-1 -m-1"
               :to="`mailto:${email}`"
@@ -52,9 +64,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
             </NuxtLink>
           </p>
 
-          <p
-            v-if="telephone"
-          >
+          <p v-if="telephone">
             <NuxtLink
               class="hover:opacity-60 transition-opacity duration-200 ease-out p-1 -m-1"
               :to="`tel:${telephone}`"
