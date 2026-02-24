@@ -107,6 +107,7 @@ export interface BlockImpactDetails {
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   logos?: StoryblokMultiasset;
+  jaa_partnership?: boolean;
   theme?: number | string;
   component: "block_impact_details";
   _uid: string;
@@ -258,6 +259,7 @@ export interface Event {
   event_datetime: string;
   preview_image: StoryblokAsset;
   preview_text?: string;
+  jaa_partnership?: boolean;
   blocks?: (
     | BlockBcorp
     | BlockEventOverview
@@ -391,6 +393,7 @@ export interface Post {
   seo_description?: string;
   seo_image?: StoryblokAsset;
   blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
+  jaa_partnership?: boolean;
   component: "post";
   _uid: string;
 }

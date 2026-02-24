@@ -82,9 +82,9 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
               :to="linkedIn"
               target="_blank"
               rel="noopener noreferrer"
-              class="block p-4 -m-4 transition-opacity duration-200 ease-out hover:opacity-60"
+              class="block p-2 -m-2 transition-opacity duration-200 ease-out hover:opacity-60"
             >
-              <IconLinkedIn class="block size-4" />
+              <IconLinkedIn class="block size-4 fill-white" />
 
               <span class="sr-only">LinkedIn</span>
             </NuxtLink>
