@@ -58,7 +58,7 @@ const setSizes = (isLarge: boolean) => {
               v-for="(project, index) in projects"
               :key="project.uuid"
               :class="{
-                'md:col-span-2': index % 3 === 2,
+                'md:col-span-2': index % 3 === 2 && projects.length % 2 === 1,
               }"
             >
               <CardProject
@@ -78,7 +78,7 @@ const setSizes = (isLarge: boolean) => {
                     :alt="project.content.preview_media[0].image.alt || project.content.preview_headline || project.name || ''"
                     :width="16"
                     :height="9"
-                    :sizes="setSizes(index % 3 === 2)"
+                    :sizes="setSizes(index % 3 === 2 && projects.length % 2 === 1)"
                     loading="lazy"
                   />
 
