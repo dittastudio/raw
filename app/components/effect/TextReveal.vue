@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useIntersectionObserver } from '@vueuse/core'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
@@ -34,7 +33,7 @@ const run = async () => {
         scrollTrigger: {
           trigger: text.value,
           start: 'top 80%',
-          end: 'bottom 30%',
+          end: 'bottom 50%',
           scrub: 1,
           markers: false,
         },
@@ -63,11 +62,11 @@ const run = async () => {
           yPercent: 100,
           stagger: 0.1,
           ease: 'expo.out',
-          // onComplete: () => {
-          //   self.lines.forEach((line: Element) => {
-          //     (line as HTMLElement).parentElement?.style.removeProperty('overflow')
-          //   })
-          // },
+          onComplete: () => {
+            self.lines.forEach((line: Element) => {
+              (line as HTMLElement).parentElement?.style.removeProperty('overflow')
+            })
+          },
           ...isTriggerScroll,
           ...isTriggerInView,
         })
