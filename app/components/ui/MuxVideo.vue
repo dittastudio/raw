@@ -13,9 +13,10 @@ interface Props {
   primaryColor?: string
   accentColor?: string
   isCover?: boolean
+  disableTracking?: boolean
 }
 
-const { playbackId, primaryColor = '#fff', accentColor = '#c6ea9f', isCover = false } = defineProps<Props>()
+const { playbackId, primaryColor = '#fff', accentColor = '#c6ea9f', isCover = false, disableTracking = true } = defineProps<Props>()
 
 const hasPlayed = ref(false)
 const attrs = useAttrs()
@@ -105,6 +106,7 @@ watchEffect(() => {
       :playback-id="playbackId"
       :primary-color="primaryColor"
       :accent-color="accentColor"
+      :disable-tracking="disableTracking"
       :class="[
         'block',
         {
