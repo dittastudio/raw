@@ -40,8 +40,14 @@ const media = computed(() => block.media?.[0])
           class="block w-full h-auto"
           :src="media.image.filename"
           :alt="media.image.alt || block.headline || block.title || ''"
-          :width="500"
-          :height="Math.round(storyblokImageDimensions(media.image.filename).height / storyblokImageDimensions(media.image.filename).width * 500)"
+          :width="storyblokImageDimensions(media.image.filename).width"
+          :height="storyblokImageDimensions(media.image.filename).height"
+          sizes="
+            xs:100vw
+            sm:100vw
+            md:66vw
+            xl:800px
+          "
           loading="lazy"
         />
       </div>
