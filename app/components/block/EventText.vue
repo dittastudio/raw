@@ -13,12 +13,12 @@ const { block } = defineProps<Props>()
     v-editable="block"
     class="wrapper-max grid grid-cols-1 md:grid-cols-2 gap-x-(--app-inner-gutter) gap-y-20"
   >
-    <time
+    <p
       v-if="block.title"
       class="col-span-full md:col-span-1 type-h5 text-balance max-w-[36ch]"
     >
       {{ block.title }}
-    </time>
+    </p>
 
     <div class="col-span-full md:col-start-2 flex flex-col gap-10 items-start">
       <div

@@ -16,6 +16,7 @@ const { block, datetime } = defineProps<Props>()
   >
     <time
       v-if="datetime"
+      :datetime="datetime"
       class="col-span-full md:col-span-1 type-h5 text-balance max-w-[36ch]"
     >
       {{ formatDateDMY(datetime) }}
