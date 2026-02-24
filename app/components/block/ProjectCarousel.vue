@@ -127,6 +127,7 @@ const isSmBreakpoint = '600px'
           <button
             type="button"
             class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
+            aria-label="Previous Project"
             @click="carouselRef?.previous()"
           >
             <IconArrow class="size-8 fill-current group-hover:scale-105 transition-[scale] duration-200 ease-out" />
@@ -135,6 +136,7 @@ const isSmBreakpoint = '600px'
           <button
             type="button"
             class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
+            aria-label="Next Project"
             @click="carouselRef?.next()"
           >
             <IconArrow class="size-8 fill-current rotate-180 group-hover:scale-105 transition-[scale] duration-200 ease-out" />
