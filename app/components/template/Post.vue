@@ -41,6 +41,7 @@ const category = computed(() => {
         :alt="story.content.hero.alt || story.name || ''"
         :width="1000"
         :height="Math.round(storyblokImageDimensions(story.content.hero.filename).height / storyblokImageDimensions(story.content.hero.filename).width * 1000)"
+        loading="lazy"
       />
     </UiTheme>
 

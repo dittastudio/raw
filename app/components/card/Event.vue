@@ -26,6 +26,7 @@ const { slug, image, datetime, headline, description } = defineProps<Props>()
           :alt="image.alt || headline || ''"
           :width="500"
           :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
+          loading="lazy"
         />
       </div>
 

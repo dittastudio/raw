@@ -63,6 +63,7 @@ const isSmBreakpoint = '600px'
                 :height="16"
                 :src="item.content.preview_media[0].image.filename"
                 :alt="item.content.preview_media[0].image.alt"
+                loading="lazy"
               />
             </picture>
 
@@ -101,6 +102,7 @@ const isSmBreakpoint = '600px'
                 :height="92"
                 densities="x1 x2"
                 :modifiers="{ smart: false }"
+                loading="lazy"
               />
 
               <div class="flex flex-col gap-y-6 md:gap-y-10">

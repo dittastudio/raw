@@ -52,6 +52,7 @@ const setSizes = computed(() => block.placement === 'inset'
         :width="storyblokImageDimensions(media.image.filename).width"
         :height="storyblokImageDimensions(media.image.filename).height"
         :sizes="setSizes"
+        loading="lazy"
       />
 
       <UiMuxVideo

@@ -24,6 +24,7 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
         :alt="image.alt || name || ''"
         :width="300"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 300)"
+        loading="lazy"
       />
     </div>
 

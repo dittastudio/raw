@@ -146,6 +146,7 @@ onUnmounted(() => {
           class="size-full object-cover"
           :src="media.image.filename"
           :alt="media.image.alt || ''"
+          loading="lazy"
           @vue:mounted="mediaLoaded"
         />
       </picture>
