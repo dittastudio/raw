@@ -293,6 +293,7 @@ export interface Image {
 
 export interface InfoItem {
   title?: string;
+  media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)[];
   column_one?: StoryblokRichtext;
   column_two?: StoryblokRichtext;
   component: "info_item";

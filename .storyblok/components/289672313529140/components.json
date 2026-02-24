@@ -2377,7 +2377,7 @@
     "display_name": "Info Item",
     "description": "",
     "created_at": "2026-01-21T18:25:51.654Z",
-    "updated_at": "2026-01-21T18:32:23.080Z",
+    "updated_at": "2026-02-24T09:46:59.595Z",
     "id": 136521120380730,
     "schema": {
       "title": {
@@ -2399,9 +2399,23 @@
           "h4"
         ]
       },
+      "media": {
+        "type": "bloks",
+        "pos": 1,
+        "maximum": 1,
+        "restrict_type": "",
+        "restrict_components": true,
+        "component_whitelist": [
+          "image",
+          "mux_video_autoplay",
+          "mux_video_player"
+        ],
+        "component_denylist": [],
+        "id": "LPpXZn7wSMmmQvAnmyhjxA"
+      },
       "column_one": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 2,
         "id": "DAfQWVQfRtKh44893qpCiw",
         "customize_toolbar": true,
         "toolbar": [
@@ -2415,7 +2429,7 @@
       },
       "column_two": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 3,
         "customize_toolbar": true,
         "toolbar": [
           "bold",
