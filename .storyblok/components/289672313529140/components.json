@@ -862,7 +862,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-02-20T13:20:26.221Z",
+    "updated_at": "2026-02-24T12:17:10.401Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -931,9 +931,16 @@
         "pos": 6,
         "id": "7DDxPCRDR8qSNn2R2d3dHg"
       },
+      "jaa_partnership": {
+        "type": "boolean",
+        "pos": 7,
+        "description": "Check to display the JAA Partnership.",
+        "inline_label": true,
+        "id": "2gk08YNvTiKehd5Fp0ew4Q"
+      },
       "theme": {
         "type": "option",
-        "pos": 7,
+        "pos": 8,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",
@@ -2231,7 +2238,7 @@
     "display_name": "Event",
     "description": null,
     "created_at": "2026-02-04T13:18:41.535Z",
-    "updated_at": "2026-02-23T17:29:26.051Z",
+    "updated_at": "2026-02-24T12:13:27.757Z",
     "id": 141400152217171,
     "schema": {
       "event_datetime": {
@@ -2264,10 +2271,18 @@
         ],
         "allow_target_blank": true
       },
+      "jaa_partnership": {
+        "type": "boolean",
+        "pos": 3,
+        "description": "Check to display the JAA Partnership.",
+        "inline_label": true,
+        "display_name": "JAA Partnership",
+        "id": "zhO92JfNRCaRQmRRwZf3Lw"
+      },
       "blocks": {
         "type": "bloks",
         "id": "lyVLs15bQCmzh1VCc_gAXw",
-        "pos": 3,
+        "pos": 4,
         "restrict_type": "tags",
         "restrict_components": true,
         "component_whitelist": [],
@@ -2284,7 +2299,7 @@
         "keys": [
           "blocks"
         ],
-        "pos": 4,
+        "pos": 5,
         "type": "tab",
         "name": "tab-3b61b796-8ea0-4311-8609-140de487b153",
         "id": "O2G3lo6gQxGGCRQN5IexUw"
@@ -2296,28 +2311,28 @@
           "seo_description",
           "seo_image"
         ],
-        "pos": 5,
+        "pos": 6,
         "type": "tab",
         "id": "oBK2r12aSYWDKoTxGdk0wA",
         "name": "tab-a012b6af-5d9a-4985-832a-84f119d934c0"
       },
       "seo_title": {
         "type": "text",
-        "pos": 6,
+        "pos": 7,
         "id": "n4dTWU-rTjWIP0dQX06h3A",
         "required": true,
         "display_name": "Title"
       },
       "seo_description": {
         "type": "text",
-        "pos": 7,
+        "pos": 8,
         "id": "wbN2f5lbRaazAXhoUEVYTg",
         "required": true,
         "display_name": "Description"
       },
       "seo_image": {
         "type": "asset",
-        "pos": 8,
+        "pos": 9,
         "required": true,
         "filetypes": [
           "images"
@@ -2824,7 +2839,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-02-05T15:59:54.448Z",
+    "updated_at": "2026-02-24T12:19:37.598Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -2943,6 +2958,13 @@
           "post_wistia"
         ],
         "component_denylist": []
+      },
+      "jaa_partnership": {
+        "type": "boolean",
+        "pos": 12,
+        "description": "Check to display the JAA Partnership.",
+        "inline_label": true,
+        "id": "3inANyNSRKO8tCT5jKPoLA"
       }
     },
     "image": null,
