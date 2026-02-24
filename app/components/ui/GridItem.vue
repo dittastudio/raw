@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { ListItem } from '#storyblok-components'
+import IconArrowRightStem from '@/assets/icons/arrow-right-stem.svg'
 
 interface Props {
   type?: 'default' | 'mask'
@@ -21,19 +22,10 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
       <span class="flex items-center gap-(--app-inner-gutter)">
         {{ item.title }}
 
-        <svg
+        <IconArrowRightStem
           v-if="hasIcon"
           class="shrink-0 w-[0.9em] h-auto"
-          viewBox="0 0 26 25"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M25.0505 12.111L9.51671e-06 12.1084M25.0505 12.111L13.2929 0.353456M25.0505 12.111L13.1617 23.936"
-            stroke="#1E2021"
-            stroke-miterlimit="10"
-          />
-        </svg>
+        />
       </span>
 
       <UiPlusMinus
