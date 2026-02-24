@@ -15,7 +15,6 @@ const heroRef = useTemplateRef('heroRef')
 const mediaRef = useTemplateRef('mediaRef')
 const mediaReady = ref(false)
 const media = computed(() => block.media?.[0])
-const svg = await useSvg(block.logo?.filename)
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -70,26 +69,25 @@ onUnmounted(() => {
       class="hero__content relative z-1 size-full flex flex-col items-center justify-center"
     >
       <div class="flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
-        <template v-if="block.logo?.filename">
-          <div
-            v-if="svg"
-            class="hero__logo"
-            v-html="svg"
-          />
-
-          <div
-            v-else
-            class="hero__logo"
+        <div v-if="block.logo?.filename">
+          <img
+            v-if="fileExtension(block.logo.filename) === 'svg'"
+            class="block w-[85cqw] max-w-max h-auto"
+            :src="block.logo.filename"
+            :alt="block.logo.alt || name || ''"
+            loading="lazy"
           >
-            <NuxtImg
-              :src="block.logo.filename"
-              :alt="block.logo.alt || ''"
-              :height="100"
-              densities="x1 x2"
-              loading="lazy"
-            />
-          </div>
-        </template>
+
+          <NuxtImg
+            v-else
+            class="block w-[85cqw] max-w-max h-auto"
+            :src="block.logo.filename"
+            :alt="block.logo.alt || name || ''"
+            :height="100"
+            densities="x1 x2"
+            loading="lazy"
+          />
+        </div>
 
         <EffectTextReveal
           v-if="storyblokRichTextContent(block.headline)"
@@ -145,7 +143,7 @@ onUnmounted(() => {
           srcset=""
           class="size-full object-cover"
           :src="media.image.filename"
-          :alt="media.image.alt || ''"
+          :alt="media.image.alt || name || ''"
           loading="lazy"
           @vue:mounted="mediaLoaded"
         />
@@ -177,23 +175,6 @@ onUnmounted(() => {
 
   &.is-light {
     --tint: var(--color-offwhite);
-  }
-}
-
-.hero__logo {
-  :deep(svg) {
-    display: block;
-    width: 85cqw;
-    max-width: max-content;
-    height: auto;
-    color: currentColor;
-  }
-
-  :deep(img) {
-    display: block;
-    width: 85cqw;
-    max-width: max-content;
-    height: auto;
   }
 }
 
