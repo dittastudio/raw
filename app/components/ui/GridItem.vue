@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { ListItem } from '#storyblok-components'
+import IconArrowRightStem from '@/assets/icons/arrow-right-stem.svg'
 
 interface Props {
   type?: 'default' | 'mask'
@@ -11,6 +12,14 @@ interface Props {
 const { item, isOpen, type = 'default', hasIcon = false } = defineProps<Props>()
 
 const isScreenMd = useAtMedia(getMediaQuery('md'))
+
+const titleParts = computed(() => {
+  const words = item.title?.split(' ') ?? []
+  return {
+    leading: words.slice(0, -1).join(' '),
+    last: words.at(-1) ?? '',
+  }
+})
 </script>
 
 <template>
@@ -18,22 +27,12 @@ const isScreenMd = useAtMedia(getMediaQuery('md'))
     class="p-(--app-outer-gutter) md:py-16"
   >
     <h3 class="flex items-center justify-between gap-(--app-inner-gutter) hyphens-auto type-h4">
-      <span class="flex items-center gap-(--app-inner-gutter)">
-        {{ item.title }}
-
-        <svg
+      <span>
+        {{ titleParts.leading }} <span class="whitespace-nowrap">{{ titleParts.last }}<IconArrowRightStem
           v-if="hasIcon"
-          class="shrink-0 w-[0.9em] h-auto"
-          viewBox="0 0 26 25"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M25.0505 12.111L9.51671e-06 12.1084M25.0505 12.111L13.2929 0.353456M25.0505 12.111L13.1617 23.936"
-            stroke="#1E2021"
-            stroke-miterlimit="10"
-          />
-        </svg>
+          class="ml-[0.5em] inline w-[0.9em] h-auto align-baseline"
+        />
+        </span>
       </span>
 
       <UiPlusMinus

@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { BlockTestimonials } from '#storyblok-components'
+import type { Carousel } from '@/components/ui/CarouselFade.vue'
+import IconArrow from '@/assets/icons/arrow-left.svg'
 
 interface Props {
   block: BlockTestimonials
@@ -8,6 +10,8 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const media = computed(() => block.media?.[0])
+
+const carouselRef = useTemplateRef<Carousel>('carouselFade')
 </script>
 
 <template>
@@ -51,6 +55,7 @@ const media = computed(() => block.media?.[0])
     </div>
 
     <UiCarouselFade
+      ref="carouselFade"
       :items="block.items"
       :options="{ loop: true }"
       :autoplay-interval="4000"
@@ -78,6 +83,24 @@ const media = computed(() => block.media?.[0])
       </template>
 
       <template #other>
+        <div class="max-md:hidden absolute inset-0 pointer-events-none flex items-center justify-between wrapper-max">
+          <button
+            type="button"
+            class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
+            @click="carouselRef?.previous()"
+          >
+            <IconArrow class="size-8 fill-current group-hover:scale-105 transition-[scale] duration-200 ease-out" />
+          </button>
+
+          <button
+            type="button"
+            class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
+            @click="carouselRef?.next()"
+          >
+            <IconArrow class="size-8 fill-current rotate-180 group-hover:scale-105 transition-[scale] duration-200 ease-out" />
+          </button>
+        </div>
+
         <div class="wrapper-max flex justify-center pt-10 md:pt-15 pointer-events-none">
           <div class="pointer-events-auto">
             <UiCarouselDots />

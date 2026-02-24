@@ -44,7 +44,7 @@ const isSmBreakpoint = '600px'
         <NuxtLink
           v-if="item.full_slug"
           :to="`/${item.full_slug}`"
-          class="block relative size-full isolate aspect-10/16 sm:aspect-video md:min-h-160 max-h-svh"
+          class="block relative size-full isolate aspect-10/16 sm:aspect-video md:min-h-160 max-h-[calc(100svh-var(--app-header-height))]"
         >
           <template v-if="item.content.preview_media?.[0]">
             <picture v-if="isImageComponent(item.content.preview_media[0]) && item.content.preview_media[0].image?.filename && storyblokAssetType(item.content.preview_media[0].image.filename) === 'image'">

@@ -74,7 +74,10 @@ const getSizes = (index: number) => {
     v-editable="block"
     class="wrapper-max flex flex-col gap-16 md:gap-24"
   >
-    <h2 class="type-h5 text-balance max-w-[36ch]">
+    <h2
+      v-if="block.title"
+      class="type-h5 text-balance max-w-[36ch]"
+    >
       {{ block.title }}
     </h2>
 
