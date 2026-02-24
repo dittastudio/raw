@@ -145,6 +145,8 @@ export interface BlockNextEvent {
 }
 
 export interface BlockPastEvents {
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   theme?: number | string;
   component: "block_past_events";
   _uid: string;
