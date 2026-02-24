@@ -8,15 +8,95 @@ interface Props {
 const { theme } = defineProps<Props>()
 
 const themeTextClasses = computed(() => theme === 'dark' ? 'text-offblack' : 'text-offwhite')
-const themeBgClasses = computed(() => theme === 'dark' ? 'bg-offwhite' : 'bg-offblack')
+
+const containerElement = ref<HTMLDivElement>()
+
+const { position, onMouseMove, onMouseLeave } = useSmoothMouse(containerElement, {
+  damping: 0.2,
+  range: 1,
+})
+
+watchEffect(() => {
+  if (!containerElement.value) {
+    return
+  }
+
+  containerElement.value.style.setProperty('--x', String(position.value.x))
+  containerElement.value.style.setProperty('--y', String(position.value.y))
+})
 </script>
 
 <template>
   <div
-    class="@container relative isolate type-p max-w-84"
+    ref="containerElement"
+    class="partner-button @container relative isolate type-p max-w-84"
     :class="themeTextClasses"
+    @mousemove="onMouseMove"
+    @mouseleave="onMouseLeave"
   >
-    <div
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="absolute size-0 opacity-0"
+    >
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="8"
+            result="blur"
+          />
+
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 17 -8"
+            result="goo"
+          />
+
+          <feComposite
+            in="SourceGraphic"
+            in2="goo"
+            operator="atop"
+          />
+        </filter>
+      </defs>
+    </svg>
+
+    <div class="relative flex items-center gap-5 partner-button__container">
+      <div class="partner-button__cursor shrink-0 aspect-square rounded-full">
+        <div class="partner-button__cursor-inner size-full aspect-square bg-offblack rounded-full" />
+      </div>
+
+      <div class="bg-offblack rounded-full py-2 px-6 whitespace-nowrap">
+        In partnership with <span class="sr-only">JAA Media</span>
+      </div>
+
+      <div class="bg-offblack rounded-full py-2 px-6">
+        <svg
+          class="
+            w-12
+            h-auto
+            aspect-65/34
+          "
+          viewBox="0 0 65 34"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M23.695 0C24.3677 0.0786991 25.3523 0.405604 25.1811 1.27129C24.2515 1.8343 23.3954 0.980712 23.5972 0C23.6277 0 23.6644 0 23.695 0Z"
+          />
+
+          <path
+            d="M34.1337 5.96297C34.9715 5.56948 36.4331 6.19907 36.0172 7.25243C36.6899 7.96677 37.1669 8.68112 38.1882 8.9717C39.766 9.41968 43.478 8.60847 45.0436 7.98493C45.8936 7.64592 46.6702 6.76207 47.6181 7.16767C48.9329 7.73068 46.4623 8.4995 46.0832 8.71744C45.759 8.90511 45.5144 9.18358 45.3187 9.49233C46.5479 9.50443 47.6242 8.74771 48.8351 8.46924C49.7891 8.2513 50.6697 8.08785 51.5931 8.48134C52.8712 9.03224 53.3116 9.74053 54.9811 9.88582C55.4336 9.92214 57.5495 9.61946 57.6046 10.3338C57.6046 10.3943 57.3966 10.7939 57.3355 10.8302C56.9686 11.0542 54.3083 10.6486 53.7457 10.5154C53.2504 10.3943 52.7245 10.2127 52.2597 10.0069C51.0427 9.47416 50.9816 8.99591 49.4466 9.3652C48.034 9.70421 46.5907 10.4246 45.1659 10.7818C44.909 10.7878 44.4565 10.6547 44.2669 10.4851C43.9856 10.2369 43.9122 9.54076 43.5697 9.48627C43.1967 9.43179 41.4416 9.90398 40.8545 9.97057C39.1606 10.1643 37.4666 10.3035 36.2129 8.94143C36.0845 8.80219 35.7176 8.05758 35.5097 8.20287C35.5036 8.28762 35.473 8.38448 35.4118 8.44502C34.7269 9.15937 34.0114 10.0493 33.2592 10.6789C32.2563 11.5143 31.1677 12.2226 30.8559 10.3762L30.6785 10.2914L23.9577 12.4647C23.762 12.61 23.6581 13.6694 23.6152 14.0024C22.9426 18.7546 22.4289 28.8523 18.1297 31.7279C10.8647 36.589 5.05506 31.2254 1.56929 24.9839C0.126064 22.4111 -0.980823 20.5586 1.33691 17.9918C5.09787 13.8208 12.6871 13.8026 17.9218 12.8159C19.5057 12.5192 21.0835 12.1802 22.6429 11.7685C23.3278 9.74053 23.1444 7.52485 23.707 5.47262C24.343 4.86118 25.0646 6.19301 25.0646 6.65916C25.0646 6.90131 24.6304 7.80332 24.5387 8.1726C24.4164 8.63269 23.8843 10.9997 24.2023 11.2177H24.8139C26.6913 10.4549 29.2292 10.1764 31.021 9.33493C31.7365 8.99592 31.8466 8.48134 32.3174 7.94861C32.9168 7.27059 33.5772 6.64705 34.1459 5.94481L34.1337 5.96297ZM22.49 12.8643C20.7288 13.0519 19.047 13.5907 17.3042 13.9237C12.7849 14.7773 5.61155 14.9105 2.41932 18.5064C0.352324 20.8371 1.20236 22.6411 2.51717 25.0384C4.27229 28.2348 8.14333 33.1142 12.2284 32.8539C13.7328 32.757 16.2034 31.5523 17.5427 30.7895C20.9 28.8886 21.4259 22.3808 21.8663 18.9362C22.1231 16.9203 22.3677 14.8984 22.4778 12.8643H22.49Z"
+          />
+
+          <path
+            d="M63.4994 9.12298C64.007 9.02006 64.6185 9.24405 64.8142 9.7223C64.3861 10.7454 63.3343 10.1824 62.9307 9.44383C62.9368 9.35908 63.3954 9.14114 63.4994 9.12298Z"
+          />
+        </svg>
+      </div>
+    </div>
+    <!-- <div
       class="
         mask-image
         @container
@@ -32,9 +112,9 @@ const themeBgClasses = computed(() => theme === 'dark' ? 'bg-offwhite' : 'bg-off
       :class="themeBgClasses"
     >
       In partnership with <span class="sr-only">JAA Media</span>
-    </div>
+    </div> -->
 
-    <svg
+    <!-- <svg
       class="
         absolute
         top-[3.5cqi]
@@ -58,14 +138,52 @@ const themeBgClasses = computed(() => theme === 'dark' ? 'bg-offwhite' : 'bg-off
       <path
         d="M63.4994 9.12298C64.007 9.02006 64.6185 9.24405 64.8142 9.7223C64.3861 10.7454 63.3343 10.1824 62.9307 9.44383C62.9368 9.35908 63.3954 9.14114 63.4994 9.12298Z"
       />
-    </svg>
+    </svg> -->
   </div>
 </template>
 
 <style>
 @reference "@/assets/css/app.css";
 
-.mask-image {
+/* .mask-image {
   mask: url(/imgs/button-mask.svg) no-repeat center / contain;
+} */
+
+.partner-button__container {
+  filter: url(#goo);
+}
+
+.partner-button__cursor {
+  pointer-events: none;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  transform-style: preserve-3d;
+  translate: 0 0 0;
+  backface-visibility: hidden;
+
+  width: 16px;
+  height: 16px;
+  translate: calc(-50% + 72 * 1px) calc(-50% + 0 * 1px) 0;
+  background-color: var(--color-offblack);
+
+  transition: all 1s var(--ease-inOutQuart);
+
+  .partner-button:hover & {
+    translate: calc(-50% + var(--x) * 1px) calc(-50% + var(--y) * 1px) 0;
+    width: 32px;
+    height: 32px;
+
+    transition: all 0.5s var(--ease-out);
+  }
+}
+
+.partner-button__cursor-inner {
+  animation:
+    animate-breathe 3s var(--ease-inOutSine) infinite forwards,
+    animate-morph-circle 5s var(--ease-in-out) infinite forwards,
+    animate-rotate 10s var(--ease-in-out) infinite forwards alternate;
 }
 </style>
