@@ -30,20 +30,20 @@ const { slug, image, datetime, headline, description } = defineProps<Props>()
         />
       </div>
 
+      <time
+        v-if="datetime"
+        :datetime="datetime"
+        class="type-display-16 bg-purple px-2 py-1.25 border border-offblack"
+      >
+        {{ formatDateDMY(datetime) }}
+      </time>
+
       <h3
         v-if="headline"
         class="type-h5 text-balance max-w-[64ch]"
       >
         {{ headline }}
       </h3>
-
-      <time
-        v-if="datetime"
-        :datetime="datetime"
-        class="type-display-16 bg-purple px-2 py-1.5 outline outline-offblack"
-      >
-        {{ formatDateDMY(datetime) }}
-      </time>
 
       <p
         v-if="description"
