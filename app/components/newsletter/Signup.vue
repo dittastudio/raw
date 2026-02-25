@@ -8,10 +8,28 @@ interface Props {
 
 const { legend } = defineProps<Props>()
 
-const { r$ } = useRegle({ email: '' }, {
+const { r$ } = useRegle({
+  name: '',
+  email: '',
+  role: '',
+  company: '',
+  sector: '',
+}, {
+  name: {
+    ruleRequired,
+  },
   email: {
     ruleRequired,
     ruleEmail,
+  },
+  role: {
+    ruleRequired,
+  },
+  company: {
+    ruleRequired,
+  },
+  sector: {
+    ruleRequired,
   },
 })
 
@@ -80,36 +98,110 @@ const onSubmit = async () => {
           :legend="legend"
           a11y
         >
-          <div class="w-full flex gap-4 border-b border-current">
-            <FormField
+          <FormField
+            id="name"
+            a11y
+            label="Name *"
+          >
+            <FormInput
+              id="name"
+              v-model="r$.$value.name"
+              placeholder="Name"
+              class="type-mono-16"
+            />
+
+            <FormMessages
+              v-if="r$.name.$error"
+              :messages="r$.name.$errors"
+              class="type-mono-14"
+            />
+          </FormField>
+
+          <FormField
+            id="email"
+            a11y
+            label="Email address *"
+          >
+            <FormInput
               id="email"
-              a11y
-              label="Email address *"
+              v-model="r$.$value.email"
+              placeholder="Email address"
+              field="email"
+              class="type-mono-16"
+            />
+
+            <FormMessages
+              v-if="r$.email.$error"
+              :messages="r$.email.$errors"
+              class="type-mono-14"
+            />
+          </FormField>
+
+          <FormField
+            id="role"
+            a11y
+            label="Role *"
+          >
+            <FormInput
+              id="role"
+              v-model="r$.$value.role"
+              placeholder="Role"
+              class="type-mono-16"
+            />
+
+            <FormMessages
+              v-if="r$.role.$error"
+              :messages="r$.role.$errors"
+              class="type-mono-14"
+            />
+          </FormField>
+
+          <FormField
+            id="company"
+            a11y
+            label="Company *"
+          >
+            <FormInput
+              id="company"
+              v-model="r$.$value.company"
+              placeholder="Company"
+              class="type-mono-16"
+            />
+
+            <FormMessages
+              v-if="r$.company.$error"
+              :messages="r$.company.$errors"
+              class="type-mono-14"
+            />
+          </FormField>
+
+          <FormField
+            id="sector"
+            a11y
+            label="Sector *"
+          >
+            <FormInput
+              id="sector"
+              v-model="r$.$value.sector"
+              placeholder="Sector"
+              class="type-mono-16"
+            />
+
+            <FormMessages
+              v-if="r$.sector.$error"
+              :messages="r$.sector.$errors"
+              class="type-mono-14"
+            />
+          </FormField>
+
+          <button type="submit">
+            <UiButton
+              type="outline"
+              theme="dark"
             >
-              <FormInput
-                id="email"
-                v-model="r$.$value.email"
-                placeholder="Your email address"
-                field="email"
-                class="border-none type-p"
-              />
-            </FormField>
-
-            <button type="submit">
-              <UiButton
-                type="outline"
-                theme="dark"
-              >
-                {{ loading ? '...' : 'Submit' }}
-              </UiButton>
-            </button>
-          </div>
-
-          <FormMessages
-            v-if="r$.email.$error"
-            :messages="r$.email.$errors"
-            class="type-p"
-          />
+              {{ loading ? '...' : 'Submit' }}
+            </UiButton>
+          </button>
         </FormFieldset>
       </FormBase>
     </template>
