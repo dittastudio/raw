@@ -78,12 +78,16 @@ const outlineThemeClasses = computed(() => {
             result="blur"
           />
 
-          <feColorMatrix
+          <feComponentTransfer
             in="blur"
-            mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
             result="goo"
-          />
+          >
+            <feFuncA
+              type="linear"
+              slope="18"
+              intercept="-7"
+            />
+          </feComponentTransfer>
 
           <feComposite
             in="SourceGraphic"
@@ -94,7 +98,7 @@ const outlineThemeClasses = computed(() => {
       </defs>
     </svg>
 
-    <span class="relative">
+    <span class="relative block transform-gpu preserve-3d">
       <span class="ui-button__container absolute inset-0 flex items-center justify-center">
         <span class="ui-button__blob ui-button__blob--1">
           <span class="ui-button__blob__inner block size-full rounded-[inherit] bg-green" />

@@ -53,12 +53,16 @@ watchEffect(() => {
             result="blur"
           />
 
-          <feColorMatrix
+          <feComponentTransfer
             in="blur"
-            mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
             result="goo"
-          />
+          >
+            <feFuncA
+              type="linear"
+              slope="18"
+              intercept="-7"
+            />
+          </feComponentTransfer>
 
           <feComposite
             in="SourceGraphic"

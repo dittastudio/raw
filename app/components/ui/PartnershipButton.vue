@@ -27,54 +27,75 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div
-    ref="containerElement"
-    class="partner-button @container relative isolate type-p max-w-84"
-    :class="themeTextClasses"
-    @mousemove="onMouseMove"
-    @mouseleave="onMouseLeave"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="absolute size-0 opacity-0"
+  <div>
+    <div
+      class="partner-button @container max-w-100 flex relative isolate type-p"
+      :class="themeTextClasses"
     >
-      <defs>
-        <filter id="goo">
-          <feGaussianBlur
-            in="SourceGraphic"
-            stdDeviation="8"
-            result="blur"
-          />
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute size-0 opacity-0"
+      >
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="7"
+              result="blur"
+            />
 
-          <feColorMatrix
-            in="blur"
-            mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 17 -8"
-            result="goo"
-          />
+            <feComponentTransfer
+              in="blur"
+              result="goo"
+            >
+              <feFuncA
+                type="linear"
+                slope="17"
+                intercept="-8"
+              />
+            </feComponentTransfer>
 
-          <feComposite
-            in="SourceGraphic"
-            in2="goo"
-            operator="atop"
-          />
-        </filter>
-      </defs>
-    </svg>
+            <feComposite
+              in="SourceGraphic"
+              in2="goo"
+              operator="atop"
+            />
+          </filter>
+        </defs>
+      </svg>
 
-    <div class="relative flex items-center gap-5 partner-button__container">
-      <div class="partner-button__cursor shrink-0 aspect-square rounded-full">
-        <div class="partner-button__cursor-inner size-full aspect-square bg-offblack rounded-full" />
-      </div>
+      <div
+        ref="containerElement"
+        class="relative inline-block xtext-[clamp(14px,5cqi,16px)] transform-gpu preserve-3d"
+        @mousemove="onMouseMove"
+        @mouseleave="onMouseLeave"
+      >
+        <div class="relative flex flex-col items-center @sm:flex-row @sm:items-stretch @sm:justify-stretch partner-button__container">
+          <div class="partner-button__cursor shrink-0 aspect-square rounded-full">
+            <div class="partner-button__cursor-inner size-full aspect-square bg-offblack rounded-full" />
+          </div>
 
-      <div class="bg-offblack rounded-full py-2 px-6 whitespace-nowrap">
-        In partnership with <span class="sr-only">JAA Media</span>
-      </div>
+          <div class="bg-offblack rounded-full py-2.5 px-5 whitespace-nowrap">
+            In partnership with <span class="sr-only">JAA Media</span>
+          </div>
 
-      <div class="bg-offblack rounded-full py-2 px-6">
+          <div class="partner-button__circle @sm:self-center w-3 @sm:w-[5cqi] h-6 @sm:h-[3cqi] aspect-square bg-offblack rounded-full" />
+
+          <div class="bg-offblack rounded-full py-2.5 w-26 @sm:w-[25cqi] h-9 @sm:h-auto whitespace-nowrap" />
+        </div>
+
         <svg
           class="
-            w-12
+            absolute
+            z-1
+            top-[72%]
+            left-[47%]
+            translate-x-[-50%]
+            @sm:top-[30%]
+            @sm:right-[6%]
+            @sm:translate-x-0
+            @sm:left-auto
+            w-20
             h-auto
             aspect-65/34
           "
@@ -95,7 +116,7 @@ watchEffect(() => {
           />
         </svg>
       </div>
-    </div>
+
     <!-- <div
       class="
         mask-image
@@ -139,6 +160,7 @@ watchEffect(() => {
         d="M63.4994 9.12298C64.007 9.02006 64.6185 9.24405 64.8142 9.7223C64.3861 10.7454 63.3343 10.1824 62.9307 9.44383C62.9368 9.35908 63.3954 9.14114 63.4994 9.12298Z"
       />
     </svg> -->
+    </div>
   </div>
 </template>
 
@@ -166,17 +188,21 @@ watchEffect(() => {
 
   width: 16px;
   height: 16px;
-  translate: calc(-50% + 72 * 1px) calc(-50% + 0 * 1px) 0;
   background-color: var(--color-offblack);
+  opacity: 0;
 
-  transition: all 1s var(--ease-inOutQuart);
+  transition:
+    opacity 0.5s var(--ease-out),
+    translate 0.3s 0.5s;
 
   .partner-button:hover & {
-    translate: calc(-50% + var(--x) * 1px) calc(-50% + var(--y) * 1px) 0;
     width: 32px;
     height: 32px;
-
-    transition: all 0.5s var(--ease-out);
+    opacity: 1;
+    translate: calc(-50% + var(--x) * 1px) calc(-50% + var(--y) * 1px) 0;
+    transition:
+      opacity 0.3s var(--ease-out),
+      translate 0.3s var(--ease-out);
   }
 }
 
