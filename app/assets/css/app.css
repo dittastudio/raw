@@ -17,6 +17,7 @@
   --color-green: hsla(89, 64%, 77%, 1); /* #c6ea9f */
   --color-pink: hsla(335, 100%, 88%, 1); /* #ffc3dc */
   --color-purple: hsla(276, 92%, 81%, 1); /* #d8a4fb */
+  --color-red: hsla(0, 100%, 75%, 1); /* #ff8080 */
 
   --breakpoint-\*: initial;
   --breakpoint-2xs: 375px;
@@ -36,6 +37,7 @@
 
   --text-\*: initial;
 
+  --text-12: 0.75rem; /* 12px */
   --text-14: 0.875rem; /* 14px */
   --text-16: 1rem; /* 16px */
   --text-20: 1.25rem; /* 20px */

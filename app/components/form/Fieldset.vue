@@ -10,7 +10,7 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const mergedAttrs = useMergedAttrs('w-full flex flex-col items-start gap-4')
+const mergedAttrs = useMergedAttrs('w-full flex flex-col items-start gap-6')
 </script>
 
 <template>

@@ -31,7 +31,7 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const mergedAttrs = useMergedAttrs('w-full border-b border-current ring-0 outline-0 transition-colors duration-200 ease-in-out px-0 py-4')
+const mergedAttrs = useMergedAttrs('w-full border-b border-current ring-0 outline-0 transition-colors duration-200 ease-in-out px-0 py-3')
 </script>
 
 <template>
