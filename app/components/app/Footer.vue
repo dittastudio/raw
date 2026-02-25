@@ -22,9 +22,9 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
       </div>
     </div>
 
-    <div class="w-full grid grid-footer gap-(--app-inner-gutter) py-(--app-outer-gutter) sm:pb-[clamp(20px,10vw,130px)]">
+    <div class="w-full grid grid-footer gap-(--app-outer-gutter) py-(--app-outer-gutter) sm:pb-[clamp(20px,10vw,130px)]">
       <div class="grid-area-newsletter">
-        <div class="w-full flex flex-col gap-12">
+        <div class="w-full flex flex-col gap-(--app-outer-gutter) pb-(--app-outer-gutter)">
           <h6
             v-if="text"
             class="type-h4 text-balance md:max-w-140"
@@ -39,16 +39,22 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
               </UiButton>
             </template>
 
-            <div class="flex flex-col gap-10">
-              <h6
-                v-if="text"
-                class="type-h4 text-balance md:max-w-140"
-              >
-                {{ text }}
-              </h6>
+            <NewsletterSignup legend="Newsletter Signup">
+              <template #pre>
+                <h6
+                  v-if="text"
+                  class="type-h4 text-pretty pr-6"
+                >
+                  {{ text }}
+                </h6>
+              </template>
 
-              <NewsletterSignup legend="Newsletter" />
-            </div>
+              <template #post>
+                <h6 class="type-h4 text-pretty pr-6">
+                  Thanks for your submission
+                </h6>
+              </template>
+            </NewsletterSignup>
           </UiModal>
         </div>
       </div>

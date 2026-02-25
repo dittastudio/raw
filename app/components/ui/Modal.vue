@@ -91,19 +91,45 @@ defineOptions({
       @click.self="close"
     >
       <div
-        class="relative w-full max-w-180 m-auto"
+        class="relative w-full max-w-140 m-auto"
         :class="{
           'opacity-0 scale-95 transition-[opacity,scale] duration-500 ease-out delay-0': !modalOpen,
           'opacity-100 scale-100 transition-[opacity,scale] duration-500 ease-outQuart delay-500': modalOpen,
         }"
       >
         <button
-          class="absolute top-5 right-5 z-50 flex flex-col items-center justify-center pointer-events-auto bg-white text-offblack outline-0 size-10 rounded-full"
+          class="
+            absolute
+            top-5
+            right-5
+            z-50
+            flex
+            flex-col
+            items-center
+            justify-center
+            pointer-events-auto
+            bg-white
+            text-offblack
+            outline-0
+            size-10
+            rounded-full
+            rotate-45
+            before:content-['']
+            before:absolute before:w-px
+            before:h-1/2
+            before:bg-current
+            before:rounded-full
+            after:content-['']
+            after:absolute
+            after:w-1/2
+            after:h-px
+            after:bg-current
+            after:rounded-full
+          "
           type="button"
           @click="close"
         >
           <span class="sr-only">Close</span>
-          X
         </button>
 
         <div class="w-full text-left p-10 bg-offblack text-white border border-white">

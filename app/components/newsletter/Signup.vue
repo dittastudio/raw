@@ -33,7 +33,7 @@ const { r$ } = useRegle({
   },
 })
 
-const loading = ref<boolean>(false)
+const loading = ref(false)
 const status = ref<{
   type: 'error' | 'success'
   message: string
@@ -47,13 +47,17 @@ const onSubmit = async () => {
 
     const { valid, data } = await r$.$validate()
 
-    if (!valid || !data.email) {
+    if (!valid || !data.name || !data.email || !data.role || !data.company || !data.sector) {
       return
     }
 
     const formData = new FormData()
 
+    formData.append('name', data.name.trim())
     formData.append('email', data.email.trim())
+    formData.append('role', data.role.trim())
+    formData.append('company', data.company.trim())
+    formData.append('sector', data.sector.trim())
 
     const createApplication = await $fetch('/api/highlevel', {
       method: 'POST',
@@ -82,14 +86,14 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div>
-    <div v-if="status && status.type === 'success'">
-      <p class="type-p">
-        Thanks for applying with us. We'll review your submission shortly.
-      </p>
-    </div>
+  <div class="flex flex-col gap-10">
+    <template v-if="status && status.type === 'success'">
+      <slot name="post" />
+    </template>
 
     <template v-else>
+      <slot name="pre" />
+
       <FormBase
         :loading="loading"
         @submit.prevent="onSubmit"
@@ -100,32 +104,30 @@ const onSubmit = async () => {
         >
           <FormField
             id="name"
-            a11y
             label="Name *"
           >
             <FormInput
               id="name"
               v-model="r$.$value.name"
-              placeholder="Name"
+              placeholder="Joe Bloggs"
               class="type-mono-16"
             />
 
             <FormMessages
               v-if="r$.name.$error"
               :messages="r$.name.$errors"
-              class="type-mono-14"
+              class="type-mono-12 text-red mt-2"
             />
           </FormField>
 
           <FormField
             id="email"
-            a11y
             label="Email address *"
           >
             <FormInput
               id="email"
               v-model="r$.$value.email"
-              placeholder="Email address"
+              placeholder="joe.bloggs@example.com"
               field="email"
               class="type-mono-16"
             />
@@ -133,64 +135,61 @@ const onSubmit = async () => {
             <FormMessages
               v-if="r$.email.$error"
               :messages="r$.email.$errors"
-              class="type-mono-14"
+              class="type-mono-12 text-red mt-2"
             />
           </FormField>
 
           <FormField
             id="role"
-            a11y
             label="Role *"
           >
             <FormInput
               id="role"
               v-model="r$.$value.role"
-              placeholder="Role"
+              placeholder="Marketing Manager"
               class="type-mono-16"
             />
 
             <FormMessages
               v-if="r$.role.$error"
               :messages="r$.role.$errors"
-              class="type-mono-14"
+              class="type-mono-12 text-red mt-2"
             />
           </FormField>
 
           <FormField
             id="company"
-            a11y
             label="Company *"
           >
             <FormInput
               id="company"
               v-model="r$.$value.company"
-              placeholder="Company"
+              placeholder="Example Inc."
               class="type-mono-16"
             />
 
             <FormMessages
               v-if="r$.company.$error"
               :messages="r$.company.$errors"
-              class="type-mono-14"
+              class="type-mono-12 text-red mt-2"
             />
           </FormField>
 
           <FormField
             id="sector"
-            a11y
             label="Sector *"
           >
             <FormInput
               id="sector"
               v-model="r$.$value.sector"
-              placeholder="Sector"
+              placeholder="Charity Healthcare"
               class="type-mono-16"
             />
 
             <FormMessages
               v-if="r$.sector.$error"
               :messages="r$.sector.$errors"
-              class="type-mono-14"
+              class="type-mono-12 text-red mt-2"
             />
           </FormField>
 

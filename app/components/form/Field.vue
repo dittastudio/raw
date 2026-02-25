@@ -17,7 +17,7 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const mergedAttrs = useMergedAttrs('flex flex-col gap-2 w-full')
+const mergedAttrs = useMergedAttrs('flex flex-col w-full')
 </script>
 
 <template>
@@ -25,8 +25,8 @@ const mergedAttrs = useMergedAttrs('flex flex-col gap-2 w-full')
     <Component
       :is="as"
       v-if="label"
-      :class="a11y ? 'sr-only' : 'flex flex-col gap-0.5 items-baseline w-auto text-balance'"
-      :for="id && as === 'label' ? id : null"
+      :class="a11y ? 'sr-only' : 'flex flex-col gap-0.5 items-baseline w-auto text-balance type-mono-12'"
+      :for="id"
     >
       {{ label }}
     </Component>
