@@ -24,7 +24,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
 
     <div class="w-full grid grid-footer gap-(--app-outer-gutter) py-(--app-outer-gutter) sm:pb-[clamp(20px,10vw,130px)]">
       <div class="grid-area-newsletter">
-        <div class="w-full flex flex-col gap-(--app-outer-gutter) pb-(--app-outer-gutter)">
+        <div class="w-full flex flex-col items-start gap-(--app-outer-gutter) pb-(--app-outer-gutter)">
           <h6
             v-if="text"
             class="type-h4 text-balance md:max-w-140"

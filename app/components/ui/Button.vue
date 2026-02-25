@@ -10,7 +10,7 @@ const { type = 'solid', theme = 'light' } = defineProps<Props>()
 
 const hover = useTemplateRef('hover')
 
-const mainMouse = useSmoothMouse(hover, { range: 0.9 })
+const mainMouse = useSmoothMouse(hover, { damping: 0.8, range: 0.9 })
 const blobMouse = useSmoothMouse(hover, { damping: 0.2, range: 1 })
 
 const onMouseMove = (event: MouseEvent) => {
@@ -132,7 +132,8 @@ const outlineThemeClasses = computed(() => {
   }
 
   a:active &::after,
-  button:not(:disabled):active &::after {
+  button:not(:disabled):active &::after,
+  [role="button"]:active &::after {
     opacity: 1;
   }
 }
@@ -154,7 +155,7 @@ const outlineThemeClasses = computed(() => {
 
   opacity: 0;
   background-color: var(--color-white);
-  filter: blur(20px);
+  filter: blur(16px);
   border-radius: 50%;
 
   transition:
@@ -162,7 +163,8 @@ const outlineThemeClasses = computed(() => {
     translate 0s 0.4s;
 
   a:hover &,
-  button:not(:disabled):hover & {
+  button:not(:disabled):hover &,
+  [role="button"]:hover & {
     translate: calc(var(--x) * 1px) calc(var(--y) * 1px) 0;
     opacity: 0.3;
     transition:
@@ -190,7 +192,8 @@ const outlineThemeClasses = computed(() => {
     translate 0s 0.4s;
 
   a:hover &,
-  button:not(:disabled):hover &  {
+  button:not(:disabled):hover &,
+  [role="button"]:hover & {
     opacity: 1;
     translate: calc((var(--blob-x) / 12) * var(--direction) * 1px) calc((var(--blob-y) / 3) * var(--direction) * 1px) 0;
     transition:
@@ -214,7 +217,8 @@ const outlineThemeClasses = computed(() => {
   aspect-ratio: 1;
 
   a:hover &,
-  button:not(:disabled):hover &  {
+  button:not(:disabled):hover &,
+  [role="button"]:hover & {
     opacity: 1;
     translate: calc(var(--blob-x) * 1px - 50%) calc(var(--blob-y) * 1px - 50%) 0;
     transition:

@@ -69,7 +69,7 @@ defineOptions({
       role="button"
       tabindex="0"
       :aria-pressed="modalOpen"
-      class="size-full cursor-pointer"
+      class="block cursor-pointer"
       @click="open"
     >
       <slot name="trigger" />
