@@ -24,9 +24,9 @@ const titleParts = computed(() => {
 
 <template>
   <div
-    class="p-(--app-outer-gutter) md:py-16"
+    class="@container p-(--app-outer-gutter) md:py-16"
   >
-    <h3 class="flex items-center justify-between gap-(--app-inner-gutter) hyphens-auto type-h4">
+    <h3 class="flex items-center justify-between gap-(--app-inner-gutter) type-h4 md:text-[min(7.25cqmin,1.75rem)]">
       <span>
         {{ titleParts.leading }} <span class="whitespace-nowrap">{{ titleParts.last }}<IconArrowRightStem
           v-if="hasIcon"

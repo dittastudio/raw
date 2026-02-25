@@ -197,7 +197,7 @@
     "display_name": "Divider Line",
     "description": "",
     "created_at": "2026-02-25T17:21:21.398Z",
-    "updated_at": "2026-02-25T19:30:53.504Z",
+    "updated_at": "2026-02-25T20:20:40.987Z",
     "id": 148891571835997,
     "schema": {
       "placement": {
@@ -225,20 +225,20 @@
         ],
         "default_value": "wide"
       },
-      "line_color": {
+      "theme": {
         "type": "option",
         "pos": 1,
         "use_uuid": true,
         "options": [
           {
             "_uid": "ba9532a0-951a-4ab6-8250-ed820138b00a",
-            "name": "White",
-            "value": "white"
+            "name": "White Line",
+            "value": "dark"
           },
           {
             "_uid": "b09ce60f-47c7-4c33-bee1-ce36665f11cc",
-            "value": "black",
-            "name": "Black"
+            "value": "light",
+            "name": "Black Line"
           }
         ],
         "default_value": "light",
@@ -268,17 +268,12 @@
       {
         "id": 141389335883285,
         "name": "Event"
-      },
-      {
-        "id": 141391816982039,
-        "name": "Post"
       }
     ],
     "internal_tag_ids": [
       "141388315377170",
       "141388670414355",
-      "141389335883285",
-      "141391816982039"
+      "141389335883285"
     ],
     "content_type_asset_preview": null,
     "metadata": {}
@@ -1371,7 +1366,7 @@
     "display_name": "Past Events",
     "description": "Displays some recent past events.",
     "created_at": "2026-02-03T12:47:57.434Z",
-    "updated_at": "2026-02-24T18:30:04.694Z",
+    "updated_at": "2026-02-25T20:10:43.001Z",
     "id": 141038704378105,
     "schema": {
       "cta_title": {
@@ -1384,7 +1379,9 @@
         "pos": 1,
         "email_link_type": true,
         "allow_target_blank": true,
-        "id": "MDEI5_shStq1VRMtLMcknw"
+        "id": "MDEI5_shStq1VRMtLMcknw",
+        "show_anchor": false,
+        "allow_custom_attributes": false
       },
       "theme": {
         "type": "option",
