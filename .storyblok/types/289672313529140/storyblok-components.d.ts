@@ -25,6 +25,13 @@ export interface BlockContact {
   _uid: string;
 }
 
+export interface BlockDivider {
+  placement: "" | "inset" | "wide" | "full";
+  line_color?: "" | "white" | "black";
+  component: "block_divider";
+  _uid: string;
+}
+
 export interface BlockEventOverview {
   copy: StoryblokRichtext;
   cta_title?: string;
@@ -264,6 +271,7 @@ export interface Event {
   jaa_partnership?: boolean;
   blocks?: (
     | BlockBcorp
+    | BlockDivider
     | BlockEventOverview
     | BlockEventText
     | BlockGallery
@@ -344,6 +352,7 @@ export interface Page {
   blocks?: (
     | BlockBcorp
     | BlockContact
+    | BlockDivider
     | BlockGallery
     | BlockHero
     | BlockHeroBrand
@@ -456,6 +465,7 @@ export interface Project {
   preview_text: string;
   category: number | string;
   blocks?: (
+    | BlockDivider
     | BlockGallery
     | BlockHero
     | BlockImpactDetails

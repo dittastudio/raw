@@ -28,7 +28,7 @@ const { block } = defineProps<Props>()
       </EffectTextReveal>
     </div>
 
-    <ul class="prose-p flex flex-col">
+    <ul class="flex flex-col">
       <li
         v-for="info in block.info"
         :key="info._uid"
@@ -39,7 +39,7 @@ const { block } = defineProps<Props>()
           gap-y-6
           border-b
           border-current
-          py-15
+          py-10
           md:py-20
           first:border-t
         "
@@ -95,14 +95,14 @@ const { block } = defineProps<Props>()
 
           <div
             v-if="storyblokRichTextContent(info.column_one)"
-            class="col-span-full md:col-span-1"
+            class="prose-p col-span-full md:col-span-1"
           >
             <StoryblokText :html="info.column_one" />
           </div>
 
           <div
             v-if="storyblokRichTextContent(info.column_two)"
-            class="col-span-full md:col-span-1"
+            class="prose-p col-span-full md:col-span-1"
           >
             <StoryblokText :html="info.column_two" />
           </div>

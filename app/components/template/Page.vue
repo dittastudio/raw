@@ -44,6 +44,11 @@ const {
       :block="block"
     />
 
+    <BlockDivider
+      v-else-if="block.component === 'block_divider'"
+      :block="block"
+    />
+
     <BlockGallery
       v-else-if="block.component === 'block_gallery'"
       :block="block"
@@ -162,5 +167,9 @@ const {
 
 .block.block--block_project_carousel {
   padding-block-end: 0;
+}
+
+.block.block--block_divider {
+  background-color: transparent;
 }
 </style>

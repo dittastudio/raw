@@ -66,37 +66,10 @@ watch(position, ({ x, y }) => {
           translate-z-0
         "
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="absolute size-0 opacity-0"
-          >
-            <defs>
-              <filter id="goo">
-                <feGaussianBlur
-                  in="SourceGraphic"
-                  stdDeviation="40"
-                  result="blur"
-                />
-
-                <feComponentTransfer
-                  in="blur"
-                  result="goo"
-                >
-                  <feFuncA
-                    type="linear"
-                    slope="18"
-                    intercept="-7"
-                  />
-                </feComponentTransfer>
-
-                <feComposite
-                  in="SourceGraphic"
-                  in2="goo"
-                  operator="atop"
-                />
-              </filter>
-            </defs>
-          </svg>
+          <EffectGaussianBlur
+            filter-id="truths-goo"
+            :std-deviation="40"
+          />
 
           <UiTruthsItem
             class="opacity-0 group-hover/truths:opacity-100 transition-opacity duration-1000 ease-out"
@@ -125,7 +98,7 @@ watch(position, ({ x, y }) => {
 }
 
 .ui-truths__background {
-  filter: url(#goo) blur(3px);
+  filter: url(#truths-goo) blur(3px);
 }
 
 .ui-truths__cursor {

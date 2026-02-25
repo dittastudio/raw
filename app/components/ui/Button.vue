@@ -66,37 +66,10 @@ const outlineThemeClasses = computed(() => {
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="absolute size-0 opacity-0"
-    >
-      <defs>
-        <filter id="goo">
-          <feGaussianBlur
-            in="SourceGraphic"
-            stdDeviation="10"
-            result="blur"
-          />
-
-          <feComponentTransfer
-            in="blur"
-            result="goo"
-          >
-            <feFuncA
-              type="linear"
-              slope="18"
-              intercept="-7"
-            />
-          </feComponentTransfer>
-
-          <feComposite
-            in="SourceGraphic"
-            in2="goo"
-            operator="atop"
-          />
-        </filter>
-      </defs>
-    </svg>
+    <EffectGaussianBlur
+      filter-id="button-goo"
+      :std-deviation="10"
+    />
 
     <span class="relative block transform-gpu preserve-3d">
       <span class="ui-button__container absolute inset-0 flex items-center justify-center">
@@ -199,7 +172,7 @@ const outlineThemeClasses = computed(() => {
 }
 
 .ui-button__container {
-  filter: url(#goo);
+  filter: url(#button-goo);
 }
 
 .ui-button__blob {

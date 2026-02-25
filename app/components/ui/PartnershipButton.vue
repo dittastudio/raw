@@ -32,37 +32,7 @@ watchEffect(() => {
       class="partner-button @container w-full max-w-100 flex relative isolate type-p"
       :class="themeTextClasses"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="absolute size-0 opacity-0 pointer-events-none"
-      >
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur
-              in="SourceGraphic"
-              stdDeviation="7"
-              result="blur"
-            />
-
-            <feComponentTransfer
-              in="blur"
-              result="goo"
-            >
-              <feFuncA
-                type="linear"
-                slope="17"
-                intercept="-8"
-              />
-            </feComponentTransfer>
-
-            <feComposite
-              in="SourceGraphic"
-              in2="goo"
-              operator="atop"
-            />
-          </filter>
-        </defs>
-      </svg>
+      <EffectGaussianBlur filter-id="partner-button-goo" />
 
       <div
         ref="containerElement"
@@ -129,7 +99,7 @@ watchEffect(() => {
 @reference "@/assets/css/app.css";
 
 .partner-button__filter {
-  filter: url(#goo);
+  filter: url(#partner-button-goo);
 }
 
 .partner-button__cursor {

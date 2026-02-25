@@ -193,6 +193,97 @@
     "metadata": {}
   },
   {
+    "name": "block_divider",
+    "display_name": "Divider Line",
+    "description": "",
+    "created_at": "2026-02-25T17:21:21.398Z",
+    "updated_at": "2026-02-25T19:30:53.504Z",
+    "id": 148891571835997,
+    "schema": {
+      "placement": {
+        "type": "option",
+        "pos": 0,
+        "use_uuid": true,
+        "id": "TR8mVZpJRKyMQFPjSoK4iQ",
+        "required": true,
+        "options": [
+          {
+            "_uid": "60ffb865-1e26-477b-9cec-24bbb21f3cb6",
+            "name": "Inset",
+            "value": "inset"
+          },
+          {
+            "_uid": "1441a85b-3ae6-4207-a372-2b65304b5659",
+            "value": "wide",
+            "name": "Wide"
+          },
+          {
+            "_uid": "994ccbf6-7242-43ee-84d8-8ae2ae19311f",
+            "value": "full",
+            "name": "Full"
+          }
+        ],
+        "default_value": "wide"
+      },
+      "line_color": {
+        "type": "option",
+        "pos": 1,
+        "use_uuid": true,
+        "options": [
+          {
+            "_uid": "ba9532a0-951a-4ab6-8250-ed820138b00a",
+            "name": "White",
+            "value": "white"
+          },
+          {
+            "_uid": "b09ce60f-47c7-4c33-bee1-ce36665f11cc",
+            "value": "black",
+            "name": "Black"
+          }
+        ],
+        "default_value": "light",
+        "id": "wNKySIDiTKO-RiuXjQlCGg"
+      }
+    },
+    "image": null,
+    "preview_field": null,
+    "is_root": false,
+    "preview_tmpl": null,
+    "is_nestable": true,
+    "all_presets": [],
+    "preset_id": null,
+    "real_name": "Divider Line",
+    "component_group_uuid": "790a2850-0eb3-4a25-884f-b297e8a1d61e",
+    "color": "var(--sb-color-accent-background-green-cyan)",
+    "icon": "align-center",
+    "internal_tags_list": [
+      {
+        "id": 141388315377170,
+        "name": "Page"
+      },
+      {
+        "id": 141388670414355,
+        "name": "Project"
+      },
+      {
+        "id": 141389335883285,
+        "name": "Event"
+      },
+      {
+        "id": 141391816982039,
+        "name": "Post"
+      }
+    ],
+    "internal_tag_ids": [
+      "141388315377170",
+      "141388670414355",
+      "141389335883285",
+      "141391816982039"
+    ],
+    "content_type_asset_preview": null,
+    "metadata": {}
+  },
+  {
     "name": "block_event_overview",
     "display_name": "Event Overview",
     "description": "Displays the overview for your event with date.",

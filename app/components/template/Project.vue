@@ -29,8 +29,13 @@ const {
       },
     ]"
   >
+    <BlockDivider
+      v-if="block.component === 'block_divider'"
+      :block="block"
+    />
+
     <BlockGallery
-      v-if="block.component === 'block_gallery'"
+      v-else-if="block.component === 'block_gallery'"
       :block="block"
     />
 
@@ -88,5 +93,9 @@ const {
   &:not(.block--media-full,.block--block_hero) + &.block--same-background {
     padding-block-start: 0;
   }
+}
+
+.block.block--block_divider {
+  background-color: transparent;
 }
 </style>
