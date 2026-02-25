@@ -71,23 +71,27 @@ watch(position, ({ x, y }) => {
             class="absolute size-0 opacity-0"
           >
             <defs>
-              <filter id="filter-core-values">
+              <filter id="goo">
                 <feGaussianBlur
                   in="SourceGraphic"
                   stdDeviation="40"
                   result="blur"
                 />
 
-                <feColorMatrix
+                <feComponentTransfer
                   in="blur"
-                  mode="matrix"
-                  values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-                  result="filter-core-values"
-                />
+                  result="goo"
+                >
+                  <feFuncA
+                    type="linear"
+                    slope="18"
+                    intercept="-7"
+                  />
+                </feComponentTransfer>
 
                 <feComposite
                   in="SourceGraphic"
-                  in2="filter-core-values"
+                  in2="goo"
                   operator="atop"
                 />
               </filter>
@@ -121,7 +125,7 @@ watch(position, ({ x, y }) => {
 }
 
 .ui-truths__background {
-  filter: url(#filter-core-values) blur(3px);
+  filter: url(#goo) blur(3px);
 }
 
 .ui-truths__cursor {
@@ -136,7 +140,7 @@ watch(position, ({ x, y }) => {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 10;
+  z-index: 1;
   border-radius: 50%;
   pointer-events: none;
   opacity: 0;

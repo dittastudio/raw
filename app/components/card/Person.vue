@@ -85,7 +85,7 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
               rel="noopener noreferrer"
               class="block p-2 -m-2 transition-opacity duration-200 ease-out hover:opacity-60"
             >
-              <IconLinkedIn class="block size-4 fill-white" />
+              <IconLinkedIn class="block size-4" />
 
               <span class="sr-only">LinkedIn</span>
             </NuxtLink>
