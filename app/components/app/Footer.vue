@@ -51,7 +51,7 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
 
               <template #post>
                 <h6 class="type-h4 text-pretty pr-6">
-                  Thanks for your submission
+                  Thanks for signing up to our newsletter
                 </h6>
               </template>
             </NewsletterSignup>

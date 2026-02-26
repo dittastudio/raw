@@ -104,7 +104,7 @@ const onSubmit = async () => {
         >
           <FormField
             id="name"
-            label="Name *"
+            label="Name"
           >
             <FormInput
               id="name"
@@ -122,7 +122,7 @@ const onSubmit = async () => {
 
           <FormField
             id="email"
-            label="Email address *"
+            label="Email"
           >
             <FormInput
               id="email"
@@ -141,7 +141,7 @@ const onSubmit = async () => {
 
           <FormField
             id="role"
-            label="Role *"
+            label="Role"
           >
             <FormInput
               id="role"
@@ -159,7 +159,7 @@ const onSubmit = async () => {
 
           <FormField
             id="company"
-            label="Company *"
+            label="Company"
           >
             <FormInput
               id="company"
@@ -177,7 +177,7 @@ const onSubmit = async () => {
 
           <FormField
             id="sector"
-            label="Sector *"
+            label="Sector"
           >
             <FormInput
               id="sector"
