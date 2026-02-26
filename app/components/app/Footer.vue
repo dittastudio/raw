@@ -110,41 +110,59 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
         <div class="grid-area-logos">
           <ul
             v-if="logos"
-            class="flex items-center justify-start gap-[calc(var(--app-outer-gutter)/2)] sm:gap-(--app-outer-gutter) type-p pt-6"
+            class="flex items-center justify-start gap-[calc(var(--app-outer-gutter)/2)] sm:gap-(--app-outer-gutter) pt-6"
           >
-            <li
+            <template
               v-for="item in logos"
               :key="item._uid"
             >
-              <StoryblokLink
-                v-if="item.link"
-                :item="item.link"
-                class="block size-10 sm:size-15"
-              >
-                <NuxtImg
-                  v-if="item.image?.filename"
-                  class="block size-full object-contain"
-                  :src="item.image.filename"
-                  :alt="item.image.alt || item.title || 'Logo'"
-                  :width="200"
-                  loading="lazy"
-                />
-              </StoryblokLink>
+              <li v-if="item.image?.filename">
+                <StoryblokLink
+                  v-if="item.link"
+                  :item="item.link"
+                  class="block size-10 sm:size-15"
+                >
+                  <img
+                    v-if="fileExtension(item.image.filename) === 'svg'"
+                    class="block size-full object-contain"
+                    :src="item.image.filename"
+                    :alt="item.image.alt || item.title || 'Logo'"
+                    loading="lazy"
+                  >
 
-              <span
-                v-else
-                class="block size-10 sm:size-15"
-              >
-                <NuxtImg
-                  v-if="item.image?.filename"
-                  class="block size-full object-contain"
-                  :src="item.image.filename"
-                  :alt="item.image.alt || item.title || 'Logo'"
-                  :width="200"
-                  loading="lazy"
-                />
-              </span>
-            </li>
+                  <NuxtImg
+                    v-else
+                    class="block size-full object-contain"
+                    :src="item.image.filename"
+                    :alt="item.image.alt || item.title || 'Logo'"
+                    :width="200"
+                    loading="lazy"
+                  />
+                </StoryblokLink>
+
+                <span
+                  v-else
+                  class="block size-10 sm:size-15"
+                >
+                  <img
+                    v-if="fileExtension(item.image.filename) === 'svg'"
+                    class="block size-full object-contain"
+                    :src="item.image.filename"
+                    :alt="item.image.alt || item.title || 'Logo'"
+                    loading="lazy"
+                  >
+
+                  <NuxtImg
+                    v-else
+                    class="block size-full object-contain"
+                    :src="item.image.filename"
+                    :alt="item.image.alt || item.title || 'Logo'"
+                    :width="200"
+                    loading="lazy"
+                  />
+                </span>
+              </li>
+            </template>
           </ul>
         </div>
       </div>

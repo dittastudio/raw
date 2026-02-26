@@ -86,33 +86,33 @@ const media = computed(() => block.media?.[0])
 
         <ul
           v-if="block.logos?.length"
-          class="w-full grid grid-cols-3 gap-5 mt-auto -ml-2"
+          class="flex items-center justify-start gap-[calc(var(--app-outer-gutter)/2)] sm:gap-(--app-outer-gutter) mt-auto"
         >
-          <li
-            v-for="logo in block.logos"
-            :key="logo.id"
-            class="w-full flex items-center justify-center aspect-square"
+          <template
+            v-for="item in block.logos"
+            :key="item.id"
           >
-            <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
-              <img
-                v-if="fileExtension(logo.filename) === 'svg'"
-                class="block size-full object-contain"
-                :src="logo.filename"
-                :alt="logo.alt || block.title || ''"
-                loading="lazy"
-              >
+            <li v-if="item?.filename">
+              <span class="block size-10 sm:size-15">
+                <img
+                  v-if="fileExtension(item.filename) === 'svg'"
+                  class="block size-full object-contain"
+                  :src="item.filename"
+                  :alt="item.alt || item.title || 'Logo'"
+                  loading="lazy"
+                >
 
-              <NuxtImg
-                v-else
-                class="block w-auto h-10 md:h-15 object-contain"
-                :src="logo.filename"
-                :alt="logo.alt || block.title || ''"
-                densities="x1 x2"
-                height="60"
-                loading="lazy"
-              />
-            </template>
-          </li>
+                <NuxtImg
+                  v-else
+                  class="block size-full object-contain"
+                  :src="item.filename"
+                  :alt="item.alt || item.title || 'Logo'"
+                  :width="200"
+                  loading="lazy"
+                />
+              </span>
+            </li>
+          </template>
         </ul>
       </div>
     </div>
