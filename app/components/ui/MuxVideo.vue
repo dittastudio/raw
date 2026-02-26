@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { useIntersectionObserver } from '@vueuse/core'
 import '@mux/mux-player'
 
 interface Events {
@@ -14,16 +15,35 @@ interface Props {
   accentColor?: string
   isCover?: boolean
   disableTracking?: boolean
+  lazyLoad?: boolean
 }
 
-const { playbackId, primaryColor = '#fff', accentColor = '#c6ea9f', isCover = false, disableTracking = true } = defineProps<Props>()
+const {
+  playbackId,
+  primaryColor = '#fff',
+  accentColor = '#c6ea9f',
+  isCover = false,
+  disableTracking = true,
+  lazyLoad = true,
+} = defineProps<Props>()
 
 const hasPlayed = ref(false)
 const attrs = useAttrs()
 const showPlay = computed(() => !hasPlayed.value && Object.hasOwn(attrs, 'controls'))
 const root = useTemplateRef('root')
-
 const video = ref<HTMLVideoElement | null | undefined>(null)
+const isInView = ref(!lazyLoad)
+
+const { stop } = useIntersectionObserver(
+  root,
+  ([entry]) => {
+    if (entry?.isIntersecting) {
+      isInView.value = true
+      stop()
+    }
+  },
+  { rootMargin: '300px' },
+)
 
 const setPlayed = () => {
   hasPlayed.value = true
@@ -34,7 +54,7 @@ const setLoadedData = () => {
   emit('ready')
 }
 
-onMounted(async () => {
+const setupVideo = async () => {
   await nextTick()
 
   video.value = root.value?.querySelector('mux-player')
@@ -45,6 +65,18 @@ onMounted(async () => {
 
   if (video.value && video.value.readyState >= 2) {
     setLoadedData()
+  }
+}
+
+watch(isInView, (value) => {
+  if (value) {
+    setupVideo()
+  }
+})
+
+onMounted(() => {
+  if (isInView.value) {
+    setupVideo()
   }
 })
 
@@ -101,12 +133,14 @@ watchEffect(() => {
     </button>
 
     <mux-player
+      v-if="isInView"
       v-bind="attrs"
       :id="playbackId"
       :playback-id="playbackId"
       :primary-color="primaryColor"
       :accent-color="accentColor"
       :disable-tracking="disableTracking"
+      preload="metadata"
       :class="[
         'block',
         {
