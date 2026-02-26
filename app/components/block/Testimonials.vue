@@ -47,6 +47,12 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
         v-else-if="media && isMuxVideoAutoplayComponent(media) && media.video?.playbackId"
         :playback-id="media.video.playbackId"
         :is-cover="true"
+        :poster="media.poster?.filename ? storyblokImage(media.poster.filename, {
+          width: 1600,
+          height: 900,
+          format: 'webp',
+          quality: 80,
+        }) : null"
         playsinline
         autoplay
         muted

@@ -72,6 +72,12 @@ const { block } = defineProps<Props>()
               v-else-if="info.media?.[0] && isMuxVideoAutoplayComponent(info.media?.[0]) && info.media?.[0].video?.playbackId"
               class="block size-full object-cover"
               :playback-id="info.media?.[0].video.playbackId"
+              :poster="info.media?.[0].poster?.filename ? storyblokImage(info.media?.[0].poster.filename, {
+                width: 1600,
+                height: 900,
+                format: 'webp',
+                quality: 80,
+              }) : null"
               playsinline
               autoplay
               muted

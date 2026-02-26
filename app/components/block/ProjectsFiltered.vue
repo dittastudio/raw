@@ -144,8 +144,14 @@ const setSizes = (isLarge: boolean) => {
 
                     <UiMuxVideo
                       v-else-if="isMuxVideoAutoplayComponent(project.content.preview_media[0]) && project.content.preview_media[0].video?.playbackId"
-                      :playback-id="project.content.preview_media[0].video.playbackId"
                       class="block w-full object-cover aspect-video"
+                      :playback-id="project.content.preview_media[0].video.playbackId"
+                      :poster="project.content.preview_media[0].poster?.filename ? storyblokImage(project.content.preview_media[0].poster.filename, {
+                        width: 1600,
+                        height: 900,
+                        format: 'webp',
+                        quality: 80,
+                      }) : null"
                       playsinline
                       autoplay
                       muted

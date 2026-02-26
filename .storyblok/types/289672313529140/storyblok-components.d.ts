@@ -336,6 +336,7 @@ export interface Logo {
 }
 
 export interface MuxVideoAutoplay {
+  poster?: StoryblokAsset;
   video: unknown;
   component: "mux_video_autoplay";
   _uid: string;
