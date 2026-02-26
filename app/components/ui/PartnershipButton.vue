@@ -51,7 +51,7 @@ const containerElement = useTemplateRef('containerElement')
 
 const { position, onMouseEnter, onMouseMove } = useSmoothMouse(containerElement, {
   damping: 0.2,
-  range: 1,
+  range: 2,
 })
 
 watchEffect(() => {
@@ -73,42 +73,42 @@ watchEffect(() => {
   >
     <div
       ref="containerElement"
-      class="relative"
+      class="partner-button__container relative"
       @mouseenter="onMouseEnter"
       @mousemove="onMouseMove"
     >
-      <div class="partner-button__cursor">
-        <div class="partner-button__cursor-inner" />
-      </div>
-
       <div
         class="
-        mask-image
-        @container
-        size-full
-        flex
-        items-center
-        justify-between
-        text-[4.5cqi]
-        aspect-295/35
-        px-[7.5%]
-        pb-[0.5cqi]
-      "
+          mask-image
+          @container
+          size-full
+          flex
+          items-center
+          justify-between
+          text-[4.5cqi]
+          aspect-295/35
+          px-[7.5%]
+          pb-[0.5cqi]
+        "
         :class="themeBgClasses"
       >
         In partnership with <span class="sr-only">JAA Media</span>
+
+        <div class="partner-button__cursor">
+          <div class="partner-button__cursor-inner" />
+        </div>
       </div>
 
       <svg
         ref="logoElement"
         class="
-        absolute
-        top-[3.5cqi]
-        right-[4cqi]
-        w-[22cqi]
-        h-auto
-        aspect-65/34
-      "
+          absolute
+          top-[3.5cqi]
+          right-[4cqi]
+          w-[22cqi]
+          h-auto
+          aspect-65/34
+        "
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 198.2 104"
       >
@@ -150,6 +150,36 @@ watchEffect(() => {
 <style>
 @reference "@/assets/css/app.css";
 
+.partner-button {
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    perspective: 800px;
+    transform-style: preserve-3d;
+  }
+}
+
+.partner-button__container {
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    --t: 50;
+
+    transform-style: preserve-3d;
+    transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+    transition: transform 0.8s var(--ease-inOutBack);
+    outline: 1px solid transparent;
+
+    .partner-button:hover & {
+      transform:
+        translate3d(
+          calc(var(--x) / var(--t) * 3px),
+          calc(var(--y) / var(--t) * 2px),
+          1rem
+        )
+        rotateX(calc(var(--y) / var(--t) * -1deg))
+        rotateY(calc(var(--x) / var(--t) * 1deg));
+      transition: transform 0.4s var(--ease-out);
+    }
+  }
+}
+
 .mask-image {
   mask: url(/imgs/button-mask.svg) no-repeat center / contain;
 }
@@ -160,34 +190,23 @@ watchEffect(() => {
   position: absolute;
   top: 50%;
   left: 50%;
-  z-index: 1;
+  z-index: -1;
   transform-style: preserve-3d;
-  translate: calc(-50% + var(--x) * 1px) calc(-50% + var(--y) * 1px) 0;
+  translate: calc(-50% + var(--x) * -1px) calc(-50% + var(--y) * 1px) 0;
   backface-visibility: hidden;
 
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
   opacity: 0;
+  background-color: var(--color-white);
+  transform: skew(20deg, 20deg);
+  filter: blur(10px);
 
   transition: opacity 0.5s var(--ease-out);
 
   .partner-button:hover & {
-    opacity: 1;
-    transition: opacity 0.3s var(--ease-out);
+    opacity: 0.2;
+    transition: opacity 0.2s var(--ease-out);
   }
-}
-
-.partner-button__cursor-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: var(--color-purple);
-  filter: blur(5px);
-
-  animation:
-    animate-breathe 3s var(--ease-inOutSine) infinite forwards,
-    animate-morph-circle 5s var(--ease-in-out) infinite forwards,
-    animate-rotate 10s var(--ease-in-out) infinite forwards alternate;
 }
 </style>
