@@ -386,6 +386,7 @@ export interface Page {
 
 export interface Person {
   image: StoryblokAsset;
+  image_selected?: StoryblokAsset;
   name: string;
   biography?: string;
   position: string;

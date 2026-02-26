@@ -89,6 +89,7 @@ onMounted(async () => {
         <CardPerson
           v-if="person"
           :image="person.content.image"
+          :image-selected="person.content.image_selected"
           :name="person.content.name"
           :position="person.content.position"
           :linked-in="person.content.linkedin"

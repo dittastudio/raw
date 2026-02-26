@@ -11,7 +11,6 @@ const { block } = defineProps<Props>()
 
 <template>
   <div
-    v-if="block.teams"
     v-editable="block"
     class="wrapper-max grid gap-18 md:gap-36"
   >

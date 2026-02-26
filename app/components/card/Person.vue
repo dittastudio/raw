@@ -5,25 +5,36 @@ import IconLinkedIn from '@/assets/icons/linkedin.svg'
 
 interface Props {
   image?: StoryblokAsset
+  imageSelected?: StoryblokAsset
   name?: string | null
   position?: string | null
   linkedIn?: string | null
   accent: Themes
 }
 
-const { image, name, position, linkedIn, accent } = defineProps<Props>()
+const { image, imageSelected, name, position, linkedIn, accent } = defineProps<Props>()
 </script>
 
 <template>
   <div class="group relative items-start overflow-hidden h-full">
-    <div class="w-full aspect-3/4 overflow-hidden">
+    <div class="w-full aspect-3/4 overflow-hidden relative">
       <NuxtImg
         v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
         class="block size-full object-cover"
         :src="image.filename"
-        :alt="image.alt || name || ''"
+        :alt="image.alt || name || 'Team Member'"
         :width="300"
         :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 300)"
+        loading="lazy"
+      />
+
+      <NuxtImg
+        v-if="imageSelected?.filename && storyblokAssetType(imageSelected.filename) === 'image'"
+        class="absolute inset-0 z-10 block size-full object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+        :src="imageSelected.filename"
+        :alt="imageSelected.alt || name || 'Team Member'"
+        :width="300"
+        :height="Math.round(storyblokImageDimensions(imageSelected.filename).height / storyblokImageDimensions(imageSelected.filename).width * 300)"
         loading="lazy"
       />
     </div>
@@ -34,8 +45,9 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
         only-hover:bottom-0
         only-hover:left-0
         only-hover:right-0
+        only-hover:z-20
         only-hover:transition-transform
-        only-hover:duration-200
+        only-hover:duration-300
         only-hover:ease-out
         only-hover:translate-y-[101%]
         only-touch:h-full
@@ -51,22 +63,15 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
           flex
           flex-col
           gap-1
-          only-hover:opacity-0
-          only-hover:transition-opacity
-          only-hover:duration-100
-          only-hover:ease-out
-          group-hover:opacity-100
-          group-hover:delay-50
-          group-hover:duration-500
         "
       >
         <div
           class="
-          flex
-          items-start
-          justify-between
-          gap-1
-        "
+            flex
+            items-start
+            justify-between
+            gap-1
+          "
         >
           <h5
             v-if="name"
@@ -83,7 +88,7 @@ const { image, name, position, linkedIn, accent } = defineProps<Props>()
               :to="linkedIn"
               target="_blank"
               rel="noopener noreferrer"
-              class="block p-2 -m-2 transition-opacity duration-200 ease-out hover:opacity-60"
+              class="block p-2 -m-2"
             >
               <IconLinkedIn class="block size-4" />
 
