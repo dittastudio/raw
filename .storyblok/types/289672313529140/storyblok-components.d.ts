@@ -27,6 +27,8 @@ export interface BlockContact {
 
 export interface BlockDivider {
   placement: "" | "inset" | "wide" | "full";
+  spacing_top?: string;
+  spacing_bottom?: string;
   theme?: "" | "dark" | "light";
   component: "block_divider";
   _uid: string;
@@ -121,7 +123,7 @@ export interface BlockImpactDetails {
 }
 
 export interface BlockImpactStatement {
-  items?: TitleCopy[];
+  items: TitleCopy[];
   theme?: number | string;
   component: "block_impact_statement";
   _uid: string;
@@ -200,12 +202,7 @@ export interface BlockSplitText {
 }
 
 export interface BlockTeam {
-  title?: string;
-  headline?: StoryblokRichtext;
-  copy?: StoryblokRichtext;
-  cta_title?: string;
-  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
-  teams?: Team[];
+  teams: Team[];
   theme?: number | string;
   accent?: number | string;
   component: "block_team";

@@ -155,7 +155,7 @@ const {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.block:not(.block--block_hero,.block--block_hero_brand,.block--media-full) {
+.block:not(.block--block_hero,.block--block_hero_brand,.block--media-full,.block--block_divider) {
   padding-block: var(--app-vertical-spacing);
 }
 

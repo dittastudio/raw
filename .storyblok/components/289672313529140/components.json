@@ -197,7 +197,7 @@
     "display_name": "Divider Line",
     "description": "",
     "created_at": "2026-02-25T17:21:21.398Z",
-    "updated_at": "2026-02-25T20:20:40.987Z",
+    "updated_at": "2026-02-26T16:19:17.101Z",
     "id": 148891571835997,
     "schema": {
       "placement": {
@@ -225,9 +225,27 @@
         ],
         "default_value": "wide"
       },
+      "spacing_top": {
+        "type": "number",
+        "pos": 1,
+        "id": "RsrYmOa4QpSiK6tuloL0vA",
+        "min_value": 0,
+        "max_value": 300,
+        "steps": 10,
+        "default_value": "150"
+      },
+      "spacing_bottom": {
+        "type": "number",
+        "pos": 2,
+        "id": "IgGKTaVUSEyP_5Ctr-dyKg",
+        "min_value": 0,
+        "max_value": 300,
+        "steps": 10,
+        "default_value": "150"
+      },
       "theme": {
         "type": "option",
-        "pos": 1,
+        "pos": 3,
         "use_uuid": true,
         "options": [
           {
@@ -1073,7 +1091,7 @@
     "display_name": "Impact Statement",
     "description": "",
     "created_at": "2026-01-13T22:49:11.433Z",
-    "updated_at": "2026-02-05T14:06:33.599Z",
+    "updated_at": "2026-02-26T15:28:07.526Z",
     "id": 133754681079760,
     "schema": {
       "items": {
@@ -1087,7 +1105,8 @@
         ],
         "component_denylist": [],
         "id": "0FAQ5Gy4QqCyYSPe5v5xLA",
-        "display_name": "Items"
+        "display_name": "Items",
+        "required": true
       },
       "theme": {
         "type": "option",
@@ -1761,53 +1780,9 @@
     "display_name": "Team",
     "description": "Display teams of selected people.",
     "created_at": "2026-01-20T12:22:18.524Z",
-    "updated_at": "2026-02-04T12:36:35.361Z",
+    "updated_at": "2026-02-26T13:39:34.966Z",
     "id": 136077879403799,
     "schema": {
-      "title": {
-        "type": "text",
-        "pos": 0,
-        "id": "ngxAVQX-SGmtXTKuC5RJsA"
-      },
-      "headline": {
-        "type": "richtext",
-        "pos": 1,
-        "id": "FuO6792QSiK7MgQHPMNtqA",
-        "customize_toolbar": true,
-        "toolbar": [
-          "h3",
-          "unset"
-        ],
-        "style_options": [
-          {
-            "_uid": "32b97c2c-2de3-40bd-ad77-6d92f718c63c",
-            "name": "Outlined",
-            "value": "is-outlined"
-          }
-        ]
-      },
-      "copy": {
-        "type": "richtext",
-        "pos": 2,
-        "id": "smv5StJ1TiuGHdeYWVfzrw",
-        "customize_toolbar": true,
-        "toolbar": [
-          "unset",
-          "paragraph"
-        ]
-      },
-      "cta_title": {
-        "type": "text",
-        "pos": 3,
-        "id": "3wQLCrLPTmOL5GkyubG5Nw"
-      },
-      "cta": {
-        "type": "multilink",
-        "pos": 4,
-        "email_link_type": true,
-        "allow_target_blank": true,
-        "id": "FBvAqJ90TSeEs-KkB_lcGQ"
-      },
       "teams": {
         "type": "bloks",
         "pos": 5,
@@ -1818,7 +1793,9 @@
         ],
         "component_denylist": [],
         "id": "8TfK8RQPS-CJSXv6ciDEtA",
-        "display_name": "Team Group"
+        "display_name": "Team Group",
+        "minimum": 1,
+        "required": true
       },
       "theme": {
         "type": "option",
