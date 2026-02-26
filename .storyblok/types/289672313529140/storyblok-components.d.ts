@@ -121,7 +121,7 @@ export interface BlockImpactDetails {
 }
 
 export interface BlockImpactStatement {
-  items?: TitleCopy[];
+  items: TitleCopy[];
   theme?: number | string;
   component: "block_impact_statement";
   _uid: string;

@@ -12,7 +12,6 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const container = useTemplateRef('container')
-const isScreenMd = useAtMedia(getMediaQuery('md'))
 
 let tl: gsap.core.Timeline | null = null
 
@@ -47,74 +46,81 @@ const createAnimations = () => {
   tl = gsap.timeline({
     scrollTrigger: {
       trigger: container.value,
-      start: 'center center',
-      end: '+=50%',
+      start: 'top top',
+      end: 'bottom bottom',
       scrub: true,
-      pin: true,
       markers: false,
     },
   })
 
-  items.forEach((item, index) => {
-    const isFirst = index === 0
-    const isLast = index === items.length - 1
+  for (let i = 0; i < items.length; i++) {
+    if (!tl) {
+      break
+    }
+
+    const item = items[i]
+
+    if (!item) {
+      continue
+    }
+
     const title = item.querySelector('[data-js="title"]')
     const copy = item.querySelector('[data-js="copy"]')
 
-    if (!isFirst) {
-      if (tl && title) {
-        tl.fromTo(title, {
+    if (title) {
+      tl
+        .fromTo(title, {
           opacity: 0,
-          y: 20,
+          scale: 0.95,
+          filter: 'blur(5px)',
         }, {
           opacity: 1,
           y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
           duration: 1,
-          ease: 'power2.out',
-        }, '<0.4')
-      }
+        })
+    }
 
-      if (tl && copy) {
-        tl.fromTo(copy, {
+    if (copy) {
+      tl
+        .fromTo(copy, {
           opacity: 0,
-          y: 20,
+          scale: 0.95,
+          filter: 'blur(5px)',
         }, {
           opacity: 1,
           y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
           duration: 1,
-          ease: 'power2.out',
-        }, '<0.1')
-      }
+        }, '<0.5')
     }
 
-    if (!isLast) {
-      if (tl && title) {
-        tl.to(title, {
-          opacity: 0,
-          y: -20,
-          ease: 'power2.in',
-        }, '<0.4')
-      }
+    tl
+      .to({}, { duration: 1 })
 
-      if (tl && copy) {
-        tl.to(copy, {
+    if (title) {
+      tl
+        .to(title, {
           opacity: 0,
-          y: -20,
-          ease: 'power2.in',
-        }, '<0.1')
-      }
+          duration: 1,
+        })
     }
-  })
+
+    if (copy) {
+      tl
+        .to(copy, {
+          opacity: 0,
+          duration: 1,
+        }, '<')
+    }
+  }
 }
 
-watch(isScreenMd, (value) => {
-  if (value) {
-    createAnimations()
-  }
-  else {
-    removeAnimations()
-  }
-}, { immediate: true })
+onMounted(() => {
+  createAnimations()
+})
 
 onUnmounted(() => {
   removeAnimations()
@@ -125,32 +131,37 @@ onUnmounted(() => {
   <div
     ref="container"
     v-editable="block"
-    class="flex flex-col gap-36 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-0 md:place-items-center md:min-h-svh"
+    class="w-full"
+    :style="{
+      height: block.items?.length ? `${(block.items.length * 100) * 2}vh` : '100vh',
+    }"
   >
-    <div
-      v-for="item in block.items"
-      :key="item._uid"
-      data-js="item"
-      class="wrapper-max md:col-start-1 md:row-start-1 grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20"
-    >
+    <div class="sticky top-0 w-full h-screen grid grid-cols-1 grid-rows-1 gap-0 place-items-center">
       <div
-        v-if="storyblokRichTextContent(item.title)"
-        data-js="title"
-        class="md:col-start-2 col-span-full sm:col-start-2 sm:col-span-7 md:col-span-full [&_h3]:type-h2"
+        v-for="item in block.items"
+        :key="item._uid"
+        data-js="item"
+        class="wrapper-max col-start-1 row-start-1 grid grid-cols-(--app-grid) gap-x-(--app-inner-gutter) gap-y-10 md:gap-y-20"
       >
-        <StoryblokText :html="item.title" />
-      </div>
+        <div
+          v-if="storyblokRichTextContent(item.title)"
+          data-js="title"
+          class="col-span-full sm:col-start-2 [&_h3]:type-h2"
+        >
+          <StoryblokText :html="item.title" />
+        </div>
 
-      <div
-        v-if="storyblokRichTextContent(item.copy)"
-        data-js="copy"
-        class="prose-p"
-        :class="{
-          'col-start-2 col-span-3 sm:col-start-5 sm:col-span-4 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-3': storyblokRichTextContent(item.copy),
-          'col-start-1 col-span-full md:col-start-4': !storyblokRichTextContent(item.copy),
-        }"
-      >
-        <StoryblokText :html="item.copy" />
+        <div
+          v-if="storyblokRichTextContent(item.copy)"
+          data-js="copy"
+          class="prose-p"
+          :class="{
+            'col-start-2 col-span-3 sm:col-start-5 sm:col-span-4 md:col-start-9 md:col-span-4 lg:col-start-9 lg:col-span-3': storyblokRichTextContent(item.copy),
+            'col-start-1 col-span-full md:col-start-4': !storyblokRichTextContent(item.copy),
+          }"
+        >
+          <StoryblokText :html="item.copy" />
+        </div>
       </div>
     </div>
   </div>
