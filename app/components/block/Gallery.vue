@@ -1,5 +1,9 @@
 <script lang="ts" setup>
 import type { BlockGallery } from '#storyblok-components'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
   block: BlockGallery
@@ -67,6 +71,41 @@ const getSizes = (index: number) => {
 
   return formatSizes(mobileSize, desktopSize, desktop2xlSize)
 }
+
+const container = useTemplateRef('container')
+
+onMounted(async () => {
+  await nextTick()
+
+  const items = container.value?.querySelectorAll('li')
+
+  if (!items?.length) {
+    return
+  }
+
+  gsap.fromTo(items, {
+    opacity: 0,
+    scale: 0.85,
+    filter: 'blur(5px)',
+    transformOrigin: 'center center',
+  }, {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    duration: 1.5,
+    ease: 'expo.out',
+    stagger: {
+      amount: 0.9,
+    },
+    scrollTrigger: {
+      trigger: container.value,
+      start: 'top 80%',
+      end: 'bottom 50%',
+      scrub: 1,
+      markers: false,
+    },
+  })
+})
 </script>
 
 <template>
@@ -83,6 +122,7 @@ const getSizes = (index: number) => {
 
     <ul
       v-if="block.items?.length"
+      ref="container"
       v-editable="block"
       class="flex flex-wrap -ml-(--app-inner-gutter) gap-y-(--app-inner-gutter)"
     >
