@@ -13,6 +13,8 @@ const { block } = defineProps<Props>()
     v-editable="block"
     :class="{
       'wrapper-max grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid)': block.placement !== 'full',
+      'pt-(--app-vertical-spacing)': block.spacing_top,
+      'pb-(--app-vertical-spacing)': block.spacing_bottom,
     }"
   >
     <div
