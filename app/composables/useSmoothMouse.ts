@@ -110,6 +110,29 @@ export default function useSmoothMouse(
     isAnimating = false
   })
 
+  const getDisplacement = (event: MouseEvent): { x: number, y: number } => {
+    const { top, left, width, height } = targetElement.value!.getBoundingClientRect()
+    return {
+      x: (event.clientX - (left + Math.floor(width / 2))) * range,
+      y: (event.clientY - (top + Math.floor(height / 2))) * range,
+    }
+  }
+
+  /**
+   * Mouse enter handler - snaps position to cursor immediately (no damping)
+   */
+  const onMouseEnter = (event: MouseEvent): void => {
+    if (!targetElement.value) {
+      return
+    }
+
+    const { x, y } = getDisplacement(event)
+    currentX.value = x
+    currentY.value = y
+    targetX.value = x
+    targetY.value = y
+  }
+
   /**
    * Mouse move handler - updates target position relative to element center
    */
@@ -118,13 +141,9 @@ export default function useSmoothMouse(
       return
     }
 
-    const { top, left, width, height } = targetElement.value.getBoundingClientRect()
-
-    const displacementX = event.clientX - (left + Math.floor(width / 2))
-    const displacementY = event.clientY - (top + Math.floor(height / 2))
-
-    targetX.value = displacementX * range
-    targetY.value = displacementY * range
+    const { x, y } = getDisplacement(event)
+    targetX.value = x
+    targetY.value = y
 
     startAnimation()
   }
@@ -147,6 +166,7 @@ export default function useSmoothMouse(
 
   return {
     position,
+    onMouseEnter,
     onMouseMove,
     onMouseLeave,
   }

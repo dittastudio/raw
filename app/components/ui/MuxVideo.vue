@@ -86,7 +86,7 @@ onUnmounted(() => {
   video.value?.removeEventListener('canplay', setLoadedData)
 })
 
-const mainMouse = useSmoothMouse(root, { range: 0.05 })
+const mainMouse = useSmoothMouse(root, { damping: 1, range: 0.05 })
 
 const onMouseMove = (event: MouseEvent) => {
   if (showPlay.value) {
@@ -186,13 +186,13 @@ watchEffect(() => {
 }
 
 .mux-video__button-inner {
-  transition: transform 0.5s var(--ease-out);
-  transform: 0 0 0;
+  transition: translate 0.5s var(--ease-out);
+  translate: 0 0 0;
   backface-visibility: hidden;
 
   .mux-video__button:hover & {
-    transform: translate(calc(var(--x) * 1px), calc(var(--y) * 1px));
-    transition: transform 0.2s var(--ease-out);
+    translate: calc(var(--x) * 1px) calc(var(--y) * 1px) 0;
+    transition: translate 0.2s var(--ease-out);
   }
 }
 

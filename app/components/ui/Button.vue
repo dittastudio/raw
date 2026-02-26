@@ -13,14 +13,14 @@ const hover = useTemplateRef('hover')
 const mainMouse = useSmoothMouse(hover, { damping: 0.8, range: 0.9 })
 const blobMouse = useSmoothMouse(hover, { damping: 0.2, range: 1 })
 
+const onMouseEnter = (event: MouseEvent) => {
+  mainMouse.onMouseEnter(event)
+  blobMouse.onMouseEnter(event)
+}
+
 const onMouseMove = (event: MouseEvent) => {
   mainMouse.onMouseMove(event)
   blobMouse.onMouseMove(event)
-}
-
-const onMouseLeave = () => {
-  mainMouse.onMouseLeave()
-  blobMouse.onMouseLeave()
 }
 
 watchEffect(() => {
@@ -63,8 +63,8 @@ const outlineThemeClasses = computed(() => {
       p-1
       -m-1
     "
+    @mouseenter="onMouseEnter"
     @mousemove="onMouseMove"
-    @mouseleave="onMouseLeave"
   >
     <EffectGaussianBlur
       filter-id="button-goo"
@@ -146,7 +146,7 @@ const outlineThemeClasses = computed(() => {
   z-index: -1;
   inset: 0;
   transform-style: preserve-3d;
-  translate: 0 0 0;
+  translate: calc(var(--x) * 1px) calc(var(--y) * 1px) 0;
   backface-visibility: hidden;
 
   width: 25%;
@@ -158,18 +158,13 @@ const outlineThemeClasses = computed(() => {
   filter: blur(16px);
   border-radius: 50%;
 
-  transition:
-    opacity 0.4s var(--ease-out),
-    translate 0s 0.4s;
+  transition: opacity 0.4s var(--ease-out);
 
   a:hover &,
   button:not(:disabled):hover &,
   [role="button"]:hover & {
-    translate: calc(var(--x) * 1px) calc(var(--y) * 1px) 0;
     opacity: 0.3;
-    transition:
-      opacity 0.2s var(--ease-out),
-      translate 0.2s var(--ease-out);
+    transition: opacity 0.2s var(--ease-out);
   }
 }
 
@@ -187,18 +182,14 @@ const outlineThemeClasses = computed(() => {
   border-radius: 999px;
   filter: blur(1px);
   opacity: 0;
-  transition:
-    opacity 0.4s var(--ease-out),
-    translate 0s 0.4s;
+  translate: calc((var(--blob-x) / 12) * var(--direction) * 1px) calc((var(--blob-y) / 3) * var(--direction) * 1px) 0;
+  transition: opacity 0.4s var(--ease-out);
 
   a:hover &,
   button:not(:disabled):hover &,
   [role="button"]:hover & {
     opacity: 1;
-    translate: calc((var(--blob-x) / 12) * var(--direction) * 1px) calc((var(--blob-y) / 3) * var(--direction) * 1px) 0;
-    transition:
-      opacity 0.2s var(--ease-out),
-      translate 0.2s var(--ease-out);
+    transition: opacity 0.2s var(--ease-out);
   }
 }
 
@@ -215,15 +206,13 @@ const outlineThemeClasses = computed(() => {
   left: 50%;
   width: auto;
   aspect-ratio: 1;
+  translate: calc(var(--blob-x) * 1px - 50%) calc(var(--blob-y) * 1px - 50%) 0;
 
   a:hover &,
   button:not(:disabled):hover &,
   [role="button"]:hover & {
     opacity: 1;
-    translate: calc(var(--blob-x) * 1px - 50%) calc(var(--blob-y) * 1px - 50%) 0;
-    transition:
-      opacity 0.2s var(--ease-out),
-      translate 0.2s var(--ease-out);
+    transition: opacity 0.2s var(--ease-out);
 
     animation:
       animate-morph-circle 5s var(--ease-in-out) infinite,
