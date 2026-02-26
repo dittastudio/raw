@@ -116,7 +116,10 @@ watchEffect(() => {
     ref="root"
     :class="[
       'size-full',
-      { relative: showPlay },
+      {
+        'relative': showPlay,
+        'aspect-video': !isCover || !isInView,
+      },
     ]"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
