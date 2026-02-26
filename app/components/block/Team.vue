@@ -11,28 +11,16 @@ const { block } = defineProps<Props>()
 
 <template>
   <div
+    v-if="block.teams"
     v-editable="block"
-    class="grid gap-y-35"
+    class="wrapper-max grid gap-18 md:gap-36"
   >
-    <UiContent
-      :title="block.title"
-      :headline="block.headline"
-      :copy="block.copy"
-      :cta="block.cta"
-      :cta-title="block.cta_title"
+    <UiTeam
+      v-for="team in block.teams"
+      :key="team._uid"
+      :title="team.title"
+      :people="team.people"
+      :accent="(block.accent as Themes)"
     />
-
-    <div
-      v-if="block.teams"
-      class="wrapper-max grid gap-18 md:gap-36"
-    >
-      <UiTeam
-        v-for="team in block.teams"
-        :key="team._uid"
-        :title="team.title"
-        :people="team.people"
-        :accent="(block.accent as Themes)"
-      />
-    </div>
   </div>
 </template>
