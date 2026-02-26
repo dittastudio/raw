@@ -111,6 +111,7 @@ const onSubmit = async () => {
               v-model="r$.$value.name"
               placeholder="Joe Bloggs"
               class="type-mono-16"
+              autofocus
             />
 
             <FormMessages
