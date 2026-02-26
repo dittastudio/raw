@@ -10,10 +10,11 @@ interface Props {
   tag?: string
   delay?: number
   duration?: number
+  ease?: string
   trigger?: 'immediate' | 'scroll' | 'inview'
 }
 
-const { tag = 'div', delay = 0, duration = 1, trigger = 'inview' } = defineProps<Props>()
+const { tag = 'div', delay = 0, duration = 1, ease = 'expo.out', trigger = 'inview' } = defineProps<Props>()
 const text = useTemplateRef('text')
 const ready = ref(false)
 
@@ -61,7 +62,7 @@ const run = async () => {
           autoAlpha: 0,
           yPercent: 100,
           stagger: 0.1,
-          ease: 'expo.out',
+          ease,
           onComplete: () => {
             self.lines.forEach((line: Element) => {
               (line as HTMLElement).parentElement?.style.removeProperty('overflow')
