@@ -197,7 +197,7 @@
     "display_name": "Divider Line",
     "description": "",
     "created_at": "2026-02-25T17:21:21.398Z",
-    "updated_at": "2026-02-26T16:19:17.101Z",
+    "updated_at": "2026-02-26T17:52:38.880Z",
     "id": 148891571835997,
     "schema": {
       "placement": {
@@ -226,22 +226,24 @@
         "default_value": "wide"
       },
       "spacing_top": {
-        "type": "number",
+        "type": "boolean",
         "pos": 1,
         "id": "RsrYmOa4QpSiK6tuloL0vA",
         "min_value": 0,
         "max_value": 300,
         "steps": 10,
-        "default_value": "150"
+        "default_value": "150",
+        "inline_label": true
       },
       "spacing_bottom": {
-        "type": "number",
+        "type": "boolean",
         "pos": 2,
         "id": "IgGKTaVUSEyP_5Ctr-dyKg",
         "min_value": 0,
         "max_value": 300,
         "steps": 10,
-        "default_value": "150"
+        "default_value": "150",
+        "inline_label": true
       },
       "theme": {
         "type": "option",

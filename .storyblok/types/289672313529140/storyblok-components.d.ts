@@ -27,8 +27,8 @@ export interface BlockContact {
 
 export interface BlockDivider {
   placement: "" | "inset" | "wide" | "full";
-  spacing_top?: string;
-  spacing_bottom?: string;
+  spacing_top?: boolean;
+  spacing_bottom?: boolean;
   theme?: "" | "dark" | "light";
   component: "block_divider";
   _uid: string;

@@ -163,7 +163,7 @@ watchEffect(() => {
 
     transform-style: preserve-3d;
     transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
-    transition: transform 0.8s var(--ease-inOutBack);
+    transition: transform 0.6s var(--ease-inOutBack);
     outline: 1px solid transparent;
 
     .partner-button:hover & {
@@ -175,7 +175,7 @@ watchEffect(() => {
         )
         rotateX(calc(var(--y) / var(--t) * -1deg))
         rotateY(calc(var(--x) / var(--t) * 1deg));
-      transition: transform 0.4s var(--ease-out);
+      transition: transform 0.3s var(--ease-out);
     }
   }
 }
