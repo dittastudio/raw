@@ -200,11 +200,6 @@ export interface BlockSplitText {
 }
 
 export interface BlockTeam {
-  title?: string;
-  headline?: StoryblokRichtext;
-  copy?: StoryblokRichtext;
-  cta_title?: string;
-  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   teams?: Team[];
   theme?: number | string;
   accent?: number | string;
