@@ -52,10 +52,7 @@ const { media, statement, title, link } = defineProps<Props>()
     </div>
 
     <div class="wrapper py-35 flex flex-col items-center justify-center">
-      <EffectTextReveal
-        :delay="500"
-        class="flex flex-col items-center justify-center gap-8 w-full max-w-325"
-      >
+      <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
         <h5
           v-if="statement"
           class="type-h2 text-center"
@@ -67,13 +64,11 @@ const { media, statement, title, link } = defineProps<Props>()
           v-if="title && link"
           :item="link"
         >
-          <UiButton
-            type="solid"
-          >
+          <UiButton type="solid">
             {{ title }}
           </UiButton>
         </StoryblokLink>
-      </EffectTextReveal>
+      </div>
     </div>
   </div>
 </template>
