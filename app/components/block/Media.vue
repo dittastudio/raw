@@ -38,12 +38,21 @@ const setSizes = computed(() => block.placement === 'inset'
       'wrapper-max grid gap-x-(--app-inner-gutter) grid-cols-(--app-grid)': block.placement !== 'full',
     }"
   >
-    <div
+    <figure
       :class="{
-        'col-span-full': block.placement !== 'full',
+        'col-span-full': block.placement === 'wide',
         'md:col-start-2 md:col-span-10': block.placement === 'inset',
+        'flex flex-col items-center text-center gap-12': block.title,
+        'pt-(--app-vertical-spacing)': block.placement === 'full' && block.title,
       }"
     >
+      <figcaption
+        v-if="block.title"
+        class="type-h5"
+      >
+        {{ block.title }}
+      </figcaption>
+
       <NuxtImg
         v-if="media && isImageComponent(media) && media.image?.filename && storyblokAssetType(media.image.filename) === 'image'"
         class="block size-full object-cover"
@@ -71,21 +80,20 @@ const setSizes = computed(() => block.placement === 'inset'
         loop
       />
 
-      <template v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId">
-        <UiMuxVideo
-          class="block size-full object-cover"
-          :accent-color="getThemeColors[(block.accent) as Themes || 'green'].background"
-          :playback-id="media.video.playbackId"
-          :poster="media.poster?.filename ? storyblokImage(media.poster.filename, {
-            width: 1600,
-            height: 900,
-            format: 'webp',
-            quality: 80,
-          }) : null"
-          playsinline
-          controls
-        />
-      </template>
-    </div>
+      <UiMuxVideo
+        v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId"
+        class="block size-full object-cover"
+        :accent-color="getThemeColors[(block.accent) as Themes || 'green'].background"
+        :playback-id="media.video.playbackId"
+        :poster="media.poster?.filename ? storyblokImage(media.poster.filename, {
+          width: 1600,
+          height: 900,
+          format: 'webp',
+          quality: 80,
+        }) : null"
+        playsinline
+        controls
+      />
+    </figure>
   </div>
 </template>

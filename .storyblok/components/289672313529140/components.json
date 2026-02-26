@@ -197,7 +197,7 @@
     "display_name": "Divider Line",
     "description": "",
     "created_at": "2026-02-25T17:21:21.398Z",
-    "updated_at": "2026-02-25T20:20:40.987Z",
+    "updated_at": "2026-02-26T17:52:38.880Z",
     "id": 148891571835997,
     "schema": {
       "placement": {
@@ -225,9 +225,29 @@
         ],
         "default_value": "wide"
       },
+      "spacing_top": {
+        "type": "boolean",
+        "pos": 1,
+        "id": "RsrYmOa4QpSiK6tuloL0vA",
+        "min_value": 0,
+        "max_value": 300,
+        "steps": 10,
+        "default_value": "150",
+        "inline_label": true
+      },
+      "spacing_bottom": {
+        "type": "boolean",
+        "pos": 2,
+        "id": "IgGKTaVUSEyP_5Ctr-dyKg",
+        "min_value": 0,
+        "max_value": 300,
+        "steps": 10,
+        "default_value": "150",
+        "inline_label": true
+      },
       "theme": {
         "type": "option",
-        "pos": 1,
+        "pos": 3,
         "use_uuid": true,
         "options": [
           {
@@ -1217,12 +1237,17 @@
     "display_name": "Media",
     "description": "Displays an image or Mux video.",
     "created_at": "2026-02-04T08:55:58.455Z",
-    "updated_at": "2026-02-05T17:29:13.162Z",
+    "updated_at": "2026-02-26T18:35:37.668Z",
     "id": 141335586677156,
     "schema": {
+      "title": {
+        "type": "text",
+        "pos": 0,
+        "id": "2ERlcP5sT2C1TVYOyuwjsA"
+      },
       "media": {
         "type": "bloks",
-        "pos": 0,
+        "pos": 1,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -1469,7 +1494,7 @@
     "display_name": "Project Carousel",
     "description": "",
     "created_at": "2026-01-20T17:20:53.569Z",
-    "updated_at": "2026-02-19T13:34:32.862Z",
+    "updated_at": "2026-02-26T18:02:08.133Z",
     "id": 136151259425859,
     "schema": {
       "title": {
@@ -1517,9 +1542,19 @@
         "show_anchor": false,
         "allow_target_blank": true
       },
+      "autoplay_delay": {
+        "type": "number",
+        "pos": 5,
+        "id": "pBoNCqqUQkiVlGl0A8tbYQ",
+        "min_value": 1,
+        "max_value": 10,
+        "steps": 0.5,
+        "default_value": "3",
+        "decimals": 1
+      },
       "projects": {
         "type": "options",
-        "pos": 5,
+        "pos": 6,
         "restrict_type": "",
         "restrict_components": true,
         "minimum": 1,
@@ -1542,7 +1577,7 @@
       },
       "theme": {
         "type": "option",
-        "pos": 6,
+        "pos": 7,
         "use_uuid": true,
         "id": "9tVuSuyyT-2CTpvlqiYblQ",
         "source": "internal",
@@ -1828,12 +1863,22 @@
     "display_name": "Testimonials",
     "description": "",
     "created_at": "2026-01-16T15:37:59.970Z",
-    "updated_at": "2026-02-05T14:09:06.983Z",
+    "updated_at": "2026-02-26T18:01:53.580Z",
     "id": 134710394762064,
     "schema": {
+      "autoplay_delay": {
+        "type": "number",
+        "pos": 0,
+        "default_value": "3",
+        "min_value": 1,
+        "max_value": 10,
+        "steps": 0.5,
+        "decimals": 1,
+        "id": "y8MrQ91FTXWctFaaT49Gqw"
+      },
       "items": {
         "type": "bloks",
-        "pos": 0,
+        "pos": 1,
         "restrict_type": "",
         "restrict_components": true,
         "minimum": 1,
@@ -1846,7 +1891,7 @@
       },
       "media": {
         "type": "bloks",
-        "pos": 1,
+        "pos": 2,
         "id": "GbBae6CPSziv8jaFYd80Mw",
         "restrict_type": "",
         "restrict_components": true,
@@ -1858,7 +1903,7 @@
       },
       "theme": {
         "type": "option",
-        "pos": 2,
+        "pos": 3,
         "use_uuid": true,
         "id": "9tVuSuyyT-2CTpvlqiYblQ",
         "source": "internal",
@@ -2181,7 +2226,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-02-05T19:54:56.652Z",
+    "updated_at": "2026-02-26T18:02:44.498Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2204,9 +2249,19 @@
         ],
         "required": true
       },
+      "autoplay_delay": {
+        "type": "number",
+        "pos": 2,
+        "min_value": 1,
+        "max_value": 10,
+        "decimals": 1,
+        "steps": 0.5,
+        "id": "cthqy8LBTlmoejyiOKeZWQ",
+        "default_value": "3"
+      },
       "stats": {
         "type": "bloks",
-        "pos": 4,
+        "pos": 3,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -2221,7 +2276,7 @@
       },
       "theme": {
         "type": "option",
-        "pos": 5,
+        "pos": 4,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",

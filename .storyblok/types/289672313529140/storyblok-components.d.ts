@@ -27,6 +27,8 @@ export interface BlockContact {
 
 export interface BlockDivider {
   placement: "" | "inset" | "wide" | "full";
+  spacing_top?: boolean;
+  spacing_bottom?: boolean;
   theme?: "" | "dark" | "light";
   component: "block_divider";
   _uid: string;
@@ -137,6 +139,7 @@ export interface BlockLogoWall {
 }
 
 export interface BlockMedia {
+  title?: string;
   media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)[];
   placement: "inset" | "wide" | "full";
   accent?: number | string;
@@ -171,6 +174,7 @@ export interface BlockProjectCarousel {
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  autoplay_delay?: string;
   projects: (ISbStoryData<Project> | string)[];
   theme?: number | string;
   component: "block_project_carousel";
@@ -208,6 +212,7 @@ export interface BlockTeam {
 }
 
 export interface BlockTestimonials {
+  autoplay_delay?: string;
   items?: Testimonial[];
   media?: (Image | MuxVideoAutoplay)[];
   theme?: number | string;
@@ -247,6 +252,7 @@ export interface BlockTruths {
 export interface BlockWorkText {
   title?: string;
   copy: StoryblokRichtext;
+  autoplay_delay?: string;
   stats?: Copy[];
   theme?: number | string;
   component: "block_work_text";
