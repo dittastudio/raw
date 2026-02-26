@@ -64,7 +64,7 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
       ref="carouselFade"
       :items="block.items"
       :options="{ loop: true }"
-      :autoplay-interval="4000"
+      :autoplay-interval="Number(block.autoplay_delay) * 1000 || 5000"
       autoplay
     >
       <template #item="{ item, isActive }">

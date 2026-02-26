@@ -173,6 +173,7 @@ export interface BlockProjectCarousel {
   copy?: StoryblokRichtext;
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  autoplay_delay?: string;
   projects: (ISbStoryData<Project> | string)[];
   theme?: number | string;
   component: "block_project_carousel";
@@ -210,6 +211,7 @@ export interface BlockTeam {
 }
 
 export interface BlockTestimonials {
+  autoplay_delay?: string;
   items?: Testimonial[];
   media?: (Image | MuxVideoAutoplay)[];
   theme?: number | string;
@@ -249,6 +251,7 @@ export interface BlockTruths {
 export interface BlockWorkText {
   title?: string;
   copy: StoryblokRichtext;
+  autoplay_delay?: string;
   stats?: Copy[];
   theme?: number | string;
   component: "block_work_text";

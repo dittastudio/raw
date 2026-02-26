@@ -33,7 +33,7 @@ const { block } = defineProps<Props>()
         :items="block.stats"
         :options="{ loop: true }"
         autoplay
-        :autoplay-interval="4000"
+        :autoplay-interval="Number(block.autoplay_delay) * 1000 || 5000"
       >
         <template #item="{ item, isActive }">
           <div

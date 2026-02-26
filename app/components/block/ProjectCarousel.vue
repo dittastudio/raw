@@ -37,7 +37,7 @@ const isSmBreakpoint = '600px'
       ref="carouselFade"
       :items="(block.projects as ISbStoryData<Project>[])"
       :options="{ loop: true }"
-      :autoplay-interval="4000"
+      :autoplay-interval="Number(block.autoplay_delay) * 1000 || 5000"
       autoplay
     >
       <template #item="{ item }">
