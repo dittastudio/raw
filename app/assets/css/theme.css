@@ -1,0 +1,30 @@
+@layer theme {
+  :root {
+    --app-inner-gutter: 10px;
+    --app-outer-gutter: 20px;
+
+    --app-grid: repeat(4, minmax(0, 1fr));
+
+    --app-header-height: 98px;
+    --app-header-logo-width: 86px;
+    --app-header-logo-height: 32px;
+
+    --app-vertical-spacing: --spacing(18.75);
+
+    @variant sm {
+      --app-inner-gutter: 20px;
+
+      --app-grid: repeat(8, minmax(0, 1fr));
+    }
+
+    @variant md {
+      --app-outer-gutter: 30px;
+
+      --app-grid: repeat(12, minmax(0, 1fr));
+
+      --app-header-height: 92px;
+
+      --app-vertical-spacing: --spacing(37.5);
+    }
+  }
+}

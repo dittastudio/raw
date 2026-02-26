@@ -1,4 +1,15 @@
 @layer base {
+  ::selection {
+    color: --alpha(var(--color-offblack) / 99%);
+    background-color: var(--color-green);
+  }
+
+  .is-storyblok-editor {
+    a {
+      pointer-events: none !important;
+    }
+  }
+
   html {
     color: var(--color-offblack);
     background-color: var(--color-offwhite);
