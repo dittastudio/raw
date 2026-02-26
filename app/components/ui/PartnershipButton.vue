@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { Themes } from '@@/types/app'
+import { useIntersectionObserver } from '@vueuse/core'
 import { gsap } from 'gsap'
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(DrawSVGPlugin, ScrollTrigger)
+gsap.registerPlugin(DrawSVGPlugin)
 
 interface Props {
   theme?: Themes
@@ -34,24 +34,33 @@ const logoElement = useTemplateRef('logoElement')
 const lineElement = useTemplateRef('lineElement')
 const maskId = useId()
 
+let drawAnimation: gsap.core.Tween | undefined
+
 onMounted(() => {
   if (!logoElement.value || !lineElement.value) {
     return
   }
 
-  gsap.from(lineElement.value, {
+  drawAnimation = gsap.from(lineElement.value, {
     drawSVG: '0%',
     duration: 2,
     ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: logoElement.value,
-      start: 'top 80%',
-      end: 'top 80%',
-      toggleActions: 'play none reverse none',
-      markers: false,
-    },
+    paused: true,
   })
 })
+
+useIntersectionObserver(
+  logoElement,
+  (entries: IntersectionObserverEntry[]) => {
+    const entry = entries[0]
+    if (!drawAnimation || !entry) {
+      return
+    }
+
+    entry.isIntersecting ? drawAnimation.play() : drawAnimation.reverse()
+  },
+  { threshold: 0, rootMargin: '0px 0px -10% 0px' },
+)
 </script>
 
 <template>
