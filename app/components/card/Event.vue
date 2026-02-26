@@ -47,7 +47,7 @@ const { slug, image, datetime, headline, description } = defineProps<Props>()
 
       <p
         v-if="description"
-        class="type-p text-balance"
+        class="max-sm:hidden type-p text-balance"
       >
         {{ description }}
       </p>

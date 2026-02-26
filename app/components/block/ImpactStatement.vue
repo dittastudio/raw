@@ -47,9 +47,10 @@ const createAnimations = () => {
   tl = gsap.timeline({
     scrollTrigger: {
       trigger: container.value,
-      start: 'top 35%',
-      end: '10% 35%',
-      scrub: 1,
+      start: 'center center',
+      end: '+=50%',
+      scrub: true,
+      pin: true,
       markers: false,
     },
   })
@@ -64,25 +65,25 @@ const createAnimations = () => {
       if (tl && title) {
         tl.fromTo(title, {
           opacity: 0,
-          y: 40,
+          y: 20,
         }, {
           opacity: 1,
           y: 0,
           duration: 1,
-          ease: 'power2.inOut',
-        }, '')
+          ease: 'power2.out',
+        }, '<0.4')
       }
 
       if (tl && copy) {
         tl.fromTo(copy, {
           opacity: 0,
-          y: 40,
+          y: 20,
         }, {
           opacity: 1,
           y: 0,
           duration: 1,
-          ease: 'power2.inOut',
-        }, '<')
+          ease: 'power2.out',
+        }, '<0.1')
       }
     }
 
@@ -90,15 +91,17 @@ const createAnimations = () => {
       if (tl && title) {
         tl.to(title, {
           opacity: 0,
-          y: -40,
-        }, '<')
+          y: -20,
+          ease: 'power2.in',
+        }, '<0.4')
       }
 
       if (tl && copy) {
         tl.to(copy, {
           opacity: 0,
-          y: -40,
-        }, '')
+          y: -20,
+          ease: 'power2.in',
+        }, '<0.1')
       }
     }
   })
@@ -122,7 +125,7 @@ onUnmounted(() => {
   <div
     ref="container"
     v-editable="block"
-    class="flex flex-col gap-36 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-0 md:place-items-center min-h-svhx"
+    class="flex flex-col gap-36 md:grid md:grid-cols-1 md:grid-rows-1 md:gap-0 md:place-items-center md:min-h-svh"
   >
     <div
       v-for="item in block.items"
