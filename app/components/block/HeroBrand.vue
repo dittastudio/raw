@@ -9,7 +9,6 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const activeSlide = ref<1 | 2>(1)
-const mediaRef = useTemplateRef('mediaRef')
 const mediaReady = ref(false)
 const media = computed(() => block.media?.[0])
 const slideIntervalMs = 4000
@@ -72,7 +71,10 @@ onBeforeUnmount(stopSlideRotation)
     >
       <EffectTextReveal
         v-if="storyblokRichTextContent(block.headline) || storyblokRichTextContent(block.headline_2)"
-        :delay="1000"
+        :delay="600"
+        :duration="1.2"
+        ease="expo.inOut"
+        trigger="immediate"
         class="hero__headline relative"
       >
         <div
@@ -101,7 +103,10 @@ onBeforeUnmount(stopSlideRotation)
 
       <EffectTextReveal
         v-if="storyblokRichTextContent(block.text)"
-        :delay="1500"
+        :delay="600"
+        :duration="1.2"
+        ease="expo.inOut"
+        trigger="immediate"
         class="hero__text"
       >
         <StoryblokText :html="block.text" />
@@ -109,7 +114,6 @@ onBeforeUnmount(stopSlideRotation)
     </div>
 
     <div
-      ref="mediaRef"
       class="absolute z-0 inset-0 will-change-transform overflow-hidden transition-[opacity,filter,scale] duration-1000 ease-in-out"
       :class="{
         'opacity-0 scale-120': !mediaReady,
