@@ -71,6 +71,12 @@ const isSmBreakpoint = '600px'
               v-else-if="isMuxVideoAutoplayComponent(item.content.preview_media[0]) && item.content.preview_media[0].video?.playbackId"
               :playback-id="item.content.preview_media[0].video.playbackId"
               :is-cover="true"
+              :poster="item.content.preview_media[0].poster?.filename ? storyblokImage(item.content.preview_media[0].poster.filename, {
+                width: 1600,
+                height: 900,
+                format: 'webp',
+                quality: 80,
+              }) : null"
               playsinline
               autoplay
               muted

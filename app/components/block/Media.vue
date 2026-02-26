@@ -59,6 +59,12 @@ const setSizes = computed(() => block.placement === 'inset'
         v-else-if="media && isMuxVideoAutoplayComponent(media) && media.video?.playbackId"
         class="block size-full object-cover"
         :playback-id="media.video.playbackId"
+        :poster="media.poster?.filename ? storyblokImage(media.poster.filename, {
+          width: 1600,
+          height: 900,
+          format: 'webp',
+          quality: 80,
+        }) : null"
         playsinline
         autoplay
         muted
