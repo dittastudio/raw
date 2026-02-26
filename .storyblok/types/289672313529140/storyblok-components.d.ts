@@ -200,7 +200,7 @@ export interface BlockSplitText {
 }
 
 export interface BlockTeam {
-  teams?: Team[];
+  teams: Team[];
   theme?: number | string;
   accent?: number | string;
   component: "block_team";

@@ -1761,7 +1761,7 @@
     "display_name": "Team",
     "description": "Display teams of selected people.",
     "created_at": "2026-01-20T12:22:18.524Z",
-    "updated_at": "2026-02-26T13:31:50.094Z",
+    "updated_at": "2026-02-26T13:39:34.966Z",
     "id": 136077879403799,
     "schema": {
       "teams": {
@@ -1774,7 +1774,9 @@
         ],
         "component_denylist": [],
         "id": "8TfK8RQPS-CJSXv6ciDEtA",
-        "display_name": "Team Group"
+        "display_name": "Team Group",
+        "minimum": 1,
+        "required": true
       },
       "theme": {
         "type": "option",
