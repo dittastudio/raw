@@ -118,7 +118,9 @@ const createAnimations = () => {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
+
   createAnimations()
 })
 
