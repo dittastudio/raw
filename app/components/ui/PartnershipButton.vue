@@ -152,6 +152,8 @@ watchEffect(() => {
 
 .partner-button {
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    padding: --spacing(3);
+    margin: --spacing(-3);
     perspective: 800px;
     transform-style: preserve-3d;
   }
@@ -159,7 +161,7 @@ watchEffect(() => {
 
 .partner-button__container {
   @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-    --t: 50;
+    --t: 150;
 
     transform-style: preserve-3d;
     transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
@@ -205,7 +207,7 @@ watchEffect(() => {
   transition: opacity 0.5s var(--ease-out);
 
   .partner-button:hover & {
-    opacity: 0.2;
+    opacity: 0.15;
     transition: opacity 0.2s var(--ease-out);
   }
 }
