@@ -12,6 +12,8 @@ interface Props {
 }
 
 const { text, links, email, telephone, address, logos } = defineProps<Props>()
+
+const form = useTemplateRef('form')
 </script>
 
 <template>
@@ -39,7 +41,10 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
               </UiButton>
             </template>
 
-            <NewsletterSignup legend="Newsletter Signup">
+            <NewsletterSignup
+              ref="form"
+              legend="Newsletter Signup"
+            >
               <template #pre>
                 <h6
                   v-if="text"
@@ -53,6 +58,19 @@ const { text, links, email, telephone, address, logos } = defineProps<Props>()
                 <h6 class="type-h4 text-pretty pr-6">
                   Thanks for signing up to our newsletter
                 </h6>
+
+                <button
+                  v-if="form"
+                  type="button"
+                  @click="form.resetForm()"
+                >
+                  <UiButton
+                    type="outline"
+                    theme="dark"
+                  >
+                    Go back to signup
+                  </UiButton>
+                </button>
               </template>
             </NewsletterSignup>
           </UiModal>

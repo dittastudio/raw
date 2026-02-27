@@ -34,50 +34,48 @@ const { r$ } = useRegle({
 })
 
 const loading = ref(false)
-const status = ref<{
-  type: 'error' | 'success'
-  message: string
-} | null>(null)
+const success = ref(false)
 
-const defaultErrorMessage = 'Please check the form and try again.'
+const resetForm = () => {
+  loading.value = false
+  success.value = false
+
+  r$.$reset({
+    toOriginalState: true,
+  })
+}
+
+defineExpose({
+  resetForm,
+})
 
 const onSubmit = async () => {
   try {
     loading.value = true
+    success.value = false
 
     const { valid, data } = await r$.$validate()
 
-    if (!valid || !data.name || !data.email || !data.role || !data.company || !data.sector) {
+    if (!valid) {
       return
     }
 
-    const formData = new FormData()
-
-    formData.append('name', data.name.trim())
-    formData.append('email', data.email.trim())
-    formData.append('role', data.role.trim())
-    formData.append('company', data.company.trim())
-    formData.append('sector', data.sector.trim())
-
-    const createApplication = await $fetch('/api/highlevel', {
+    await $fetch('/api/ghl', {
       method: 'POST',
-      body: formData,
+      body: {
+        name: data.name.trim(),
+        email: data.email.trim(),
+        role: data.role.trim(),
+        company: data.company.trim(),
+        sector: data.sector.trim(),
+      },
     })
 
-    if (!createApplication || createApplication.statusCode !== 200) {
-      throw new Error(createApplication?.statusMessage || defaultErrorMessage)
-    }
-
-    status.value = {
-      type: 'success',
-      message: 'Your application has been successfully made.',
-    }
+    success.value = true
   }
   catch (error: any) {
-    status.value = {
-      type: 'error',
-      message: error.statusMessage || defaultErrorMessage,
-    }
+    console.error(error)
+    success.value = false
   }
   finally {
     loading.value = false
@@ -86,8 +84,8 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-10">
-    <template v-if="status && status.type === 'success'">
+  <div class="flex flex-col gap-10 items-start">
+    <template v-if="success">
       <slot name="post" />
     </template>
 
@@ -180,10 +178,17 @@ const onSubmit = async () => {
             id="sector"
             label="Sector"
           >
-            <FormInput
+            <FormSelect
               id="sector"
               v-model="r$.$value.sector"
-              placeholder="Charity Healthcare"
+              :options="[
+                { label: 'Charity / Not-for-profit', value: 'Charity / Not-for-profit' },
+                { label: 'Consumer Goods / Retail', value: 'Consumer Goods / Retail' },
+                { label: 'Pharma / Healthcare', value: 'Pharma / Healthcare' },
+                { label: 'Financial Services', value: 'Financial Services' },
+                { label: 'Agency', value: 'Agency' },
+                { label: 'Other', value: 'Other' },
+              ]"
               class="type-mono-16"
             />
 
@@ -194,12 +199,15 @@ const onSubmit = async () => {
             />
           </FormField>
 
-          <button type="submit">
+          <button
+            type="submit"
+            :disabled="loading || undefined"
+          >
             <UiButton
               type="outline"
               theme="dark"
             >
-              {{ loading ? '...' : 'Submit' }}
+              {{ loading ? 'Please wait...' : 'Submit' }}
             </UiButton>
           </button>
         </FormFieldset>

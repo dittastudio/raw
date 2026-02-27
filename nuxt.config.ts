@@ -62,6 +62,8 @@ export default defineNuxtConfig({
     MUX_ACCESS_TOKEN: process.env.NUXT_MUX_ACCESS_TOKEN,
     MUX_SECRET_KEY: process.env.NUXT_MUX_SECRET_KEY,
     CORS_ORIGINS: process.env.NUXT_CORS_ORIGINS,
+    GHL_TOKEN: process.env.NUXT_GHL_TOKEN,
+    GHL_LOCATION_ID: process.env.NUXT_GHL_LOCATION_ID,
     public: {
       STORYBLOK_TOKEN: process.env.NUXT_STORYBLOK_TOKEN,
       STORYBLOK_VERSION: process.env.NUXT_STORYBLOK_VERSION,
