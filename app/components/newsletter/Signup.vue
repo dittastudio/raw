@@ -17,6 +17,7 @@ const { r$ } = useRegle({
 }, {
   name: {
     ruleRequired,
+    $autoDirty: true,
   },
   email: {
     ruleRequired,
@@ -31,7 +32,16 @@ const { r$ } = useRegle({
   sector: {
     ruleRequired,
   },
+}, {
+  autoDirty: false,
 })
+
+const touchOnBlur = (event: FocusEvent, field: { $touch: () => void }) => {
+  const form = (event.target as HTMLElement)?.closest('form')
+  if (form?.contains(event.relatedTarget as Node)) {
+    field.$touch()
+  }
+}
 
 const loading = ref(false)
 const status = ref<{
@@ -59,7 +69,7 @@ const onSubmit = async () => {
     formData.append('company', data.company.trim())
     formData.append('sector', data.sector.trim())
 
-    const createApplication = await $fetch('/api/highlevel', {
+    const createApplication = await $fetch<{ statusCode: number, statusMessage: string }>('/api/highlevel', {
       method: 'POST',
       body: formData,
     })
@@ -131,6 +141,7 @@ const onSubmit = async () => {
               placeholder="joe.bloggs@example.com"
               field="email"
               class="type-mono-16"
+              @blur="touchOnBlur($event, r$.email)"
             />
 
             <FormMessages
@@ -149,6 +160,7 @@ const onSubmit = async () => {
               v-model="r$.$value.role"
               placeholder="Marketing Manager"
               class="type-mono-16"
+              @blur="touchOnBlur($event, r$.role)"
             />
 
             <FormMessages
@@ -167,6 +179,7 @@ const onSubmit = async () => {
               v-model="r$.$value.company"
               placeholder="Example Inc."
               class="type-mono-16"
+              @blur="touchOnBlur($event, r$.company)"
             />
 
             <FormMessages
@@ -185,6 +198,7 @@ const onSubmit = async () => {
               v-model="r$.$value.sector"
               placeholder="Charity Healthcare"
               class="type-mono-16"
+              @blur="touchOnBlur($event, r$.sector)"
             />
 
             <FormMessages
