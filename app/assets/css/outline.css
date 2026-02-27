@@ -1,14 +1,3 @@
-/* Global */
-.is-outlined {
-  --text-stroke-width: 0.02em;
-
-  @supports((text-stroke: 1px white) or (-webkit-text-stroke: 1px white)) {
-    -webkit-text-stroke: var(--text-stroke-width) var(--app-text-color);
-    text-stroke: var(--text-stroke-width) var(--app-text-color);
-    color: transparent;
-  }
-}
-
 /* Helpers */
 @utility text-outline-offblack {
   --text-stroke-width: 0.02em;

@@ -14,7 +14,7 @@ const { slug, tagline, headline, logo } = defineProps<Props>()
 <template>
   <article class="size-full">
     <NuxtLink
-      class="flex flex-col gap-6 size-full border-b border-(--app-text-color) pb-6"
+      class="flex flex-col gap-6 size-full border-b border-current pb-6"
       :to="`/${slug}`"
     >
       <slot name="media" />

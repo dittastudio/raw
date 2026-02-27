@@ -15,7 +15,7 @@ const theme = computed(() => (block.theme as Themes) ?? 'light')
 <template>
   <div
     v-editable="block"
-    class="flex flex-col gap-36"
+    class="flex flex-col gap-36 contain-layout"
   >
     <UiContent
       :title="block.title"

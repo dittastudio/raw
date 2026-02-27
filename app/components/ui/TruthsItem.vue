@@ -33,6 +33,12 @@ const backgroundThemeClasses = computed(() => {
       return 'bg-offblack'
   }
 })
+
+const lineColourStyles = computed(() => {
+  return {
+    '--line-color': theme === 'dark' ? 'var(--color-offwhite)' : 'var(--color-offblack)',
+  }
+})
 </script>
 
 <template>
@@ -50,6 +56,7 @@ const backgroundThemeClasses = computed(() => {
       'is-masked': isMasked,
       [textThemeClasses]: true,
     }"
+    :style="lineColourStyles"
   >
     <template
       v-for="(item, index) in items"
@@ -81,6 +88,7 @@ const backgroundThemeClasses = computed(() => {
       >
         <div
           class="
+            ui-truths-item__circle
             absolute
             inset-0
             size-full
@@ -175,11 +183,6 @@ const backgroundThemeClasses = computed(() => {
 }
 
 .ui-truths-item__item {
-  .ui-truths-item.is-masked & {
-    animation: breathe var(--breathe-duration) var(--ease-inOutSine) infinite forwards;
-    animation-delay: calc(var(--index) * 0.5s);
-  }
-
   .ui-truths-item:not(.is-masked) & {
     position: relative;
 
@@ -192,9 +195,16 @@ const backgroundThemeClasses = computed(() => {
       margin-inline: auto;
       width: 2px;
       height: calc(var(--app-inner-gutter) * 2);
-      background-color: var(--app-text-color);
+      background-color: var(--line-color);
       pointer-events: none;
     }
+  }
+}
+
+.ui-truths-item__circle {
+  .ui-truths-item.is-masked & {
+    animation: animate-breathe var(--breathe-duration) var(--ease-inOutSine) infinite forwards;
+    animation-delay: calc(var(--index) * 0.5s);
   }
 }
 
@@ -217,7 +227,7 @@ const backgroundThemeClasses = computed(() => {
         margin-inline: auto;
         width: calc(75% - (var(--app-inner-gutter) * -1.5));
         height: 2px;
-        background-color: var(--app-text-color);
+        background-color: var(--line-color);
         pointer-events: none;
       }
 
@@ -230,7 +240,7 @@ const backgroundThemeClasses = computed(() => {
         margin-inline: auto;
         width: 2px;
         height: calc(var(--app-inner-gutter) * 2);
-        background-color: var(--app-text-color);
+        background-color: var(--line-color);
         pointer-events: none;
       }
     }

@@ -55,16 +55,17 @@ watch(position, ({ x, y }) => {
 
         <div
           class="
-          ui-truths__background
-          absolute
-          inset-0
-          -z-1
-          size-full
-          pointer-events-none
-          backface-hidden
-          preserve-3d
-          translate-z-0
-        "
+            ui-truths__background
+            absolute
+            inset-0
+            -z-1
+            size-full
+            pointer-events-none
+            backface-hidden
+            preserve-3d
+            translate-z-0
+          "
+          aria-hidden="true"
         >
           <EffectGaussianBlur
             filter-id="truths-goo"
