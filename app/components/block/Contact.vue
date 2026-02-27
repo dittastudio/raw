@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { BlockContact } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
 
 interface Props {
   block: BlockContact
