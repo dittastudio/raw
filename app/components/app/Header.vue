@@ -207,6 +207,7 @@ watchEffect(() => {
 
   position: relative;
   translate: 0 0 0;
+  backface-visibility: hidden;
   transition: translate 0.3s var(--ease-out);
 
   .header.has-scrolled-down & {
@@ -222,6 +223,7 @@ watchEffect(() => {
     height: 150%;
     z-index: -1;
     pointer-events: none;
+    transform: translateZ(0);
     background-image:
       linear-gradient(
         to bottom,

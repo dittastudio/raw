@@ -92,7 +92,9 @@ watchEffect(() => {
         "
         :class="themeBgClasses"
       >
-        In partnership with <span class="sr-only">JAA Media</span>
+        <div class="transform-gpu">
+          In partnership with <span class="sr-only">JAA Media</span>
+        </div>
 
         <div class="partner-button__cursor">
           <div class="partner-button__cursor-inner" />

@@ -121,7 +121,7 @@ const lineColourStyles = computed(() => {
             'opacity-0': isMasked,
           }"
         >
-          <h3 class="type-h4 text-[min(10cqi,22px)] max-w-[8ch]">
+          <h3 class="transform-gpu type-h4 text-[min(10cqi,22px)] max-w-[8ch]">
             {{ item.title }}
           </h3>
 

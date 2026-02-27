@@ -132,7 +132,7 @@ const isSmBreakpoint = '600px'
         <div class="max-md:hidden absolute inset-0 pointer-events-none flex items-center justify-between wrapper-max">
           <button
             type="button"
-            class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
+            class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out transform-gpu"
             aria-label="Previous Project"
             @click="carouselRef?.previous()"
           >
@@ -141,7 +141,7 @@ const isSmBreakpoint = '600px'
 
           <button
             type="button"
-            class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out"
+            class="group pointer-events-auto p-6 -m-6 opacity-70 hover:opacity-100 transition-opacity duration-200 ease-out transform-gpu"
             aria-label="Next Project"
             @click="carouselRef?.next()"
           >

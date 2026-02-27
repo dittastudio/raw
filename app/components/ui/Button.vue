@@ -30,6 +30,13 @@ watchEffect(() => {
 
   hover.value.style.setProperty('--x', String(mainMouse.position.value.x))
   hover.value.style.setProperty('--y', String(mainMouse.position.value.y))
+})
+
+watchEffect(() => {
+  if (!hover.value) {
+    return
+  }
+
   hover.value.style.setProperty('--blob-x', String(blobMouse.position.value.x))
   hover.value.style.setProperty('--blob-y', String(blobMouse.position.value.y))
 })
@@ -145,9 +152,7 @@ const outlineThemeClasses = computed(() => {
   position: absolute;
   z-index: -1;
   inset: 0;
-  transform-style: preserve-3d;
   translate: calc(var(--x) * 1px) calc(var(--y) * 1px) 0;
-  backface-visibility: hidden;
 
   width: 25%;
   aspect-ratio: 1 / 1;
@@ -157,6 +162,7 @@ const outlineThemeClasses = computed(() => {
   background-color: var(--color-white);
   filter: blur(16px);
   border-radius: 50%;
+  transform: translateZ(0);
 
   transition: opacity 0.4s var(--ease-out);
 

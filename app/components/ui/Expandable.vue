@@ -28,7 +28,7 @@ const contentClasses = computed(() => {
     return ''
   }
 
-  const base = 'min-h-0 transition-opacity ease-out'
+  const base = 'min-h-0 transition-opacity ease-out transform-gpu'
 
   if (isHoverMode.value) {
     return `${base} only-touch:!opacity-100 opacity-0 duration-200 group-hover/expandable:opacity-100 group-hover/expandable:duration-300 group-hover/expandable:delay-250`

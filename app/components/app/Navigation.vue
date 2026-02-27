@@ -72,6 +72,7 @@ const { items } = defineProps<Props>()
 .navigation__link {
   --link-padding-x: --spacing(6);
 
+  transform: translateZ(0);
   transition:
     opacity 0.2s var(--ease-out),
     -webkit-text-stroke 0.2s var(--ease-out),
