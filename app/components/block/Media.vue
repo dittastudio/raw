@@ -41,7 +41,7 @@ const setSizes = computed(() => block.placement === 'inset'
     <figure
       :class="{
         'col-span-full': block.placement === 'wide',
-        'md:col-start-2 md:col-span-10': block.placement === 'inset',
+        'col-span-full md:col-start-2 md:col-span-10': block.placement === 'inset',
         'flex flex-col items-center text-center gap-12': block.title,
         'pt-(--app-vertical-spacing)': block.placement === 'full' && block.title,
       }"

@@ -16,9 +16,10 @@ interface Props {
 
 const { tag = 'div', delay = 0, duration = 1, ease = 'expo.out', trigger = 'inview' } = defineProps<Props>()
 const text = useTemplateRef('text')
+const ready = ref(false)
 
 const run = async () => {
-  if (!text.value) {
+  if (!text.value?.children?.length) {
     return
   }
 
@@ -26,23 +27,29 @@ const run = async () => {
     await wait(delay)
   }
 
-  const scrollTriggerConfig = trigger === 'scroll'
+  ready.value = true
+
+  const isTriggerScroll = trigger === 'scroll'
     ? {
         scrollTrigger: {
           trigger: text.value,
           start: 'top 80%',
           end: 'bottom 50%',
           scrub: 1,
+          markers: false,
         },
       }
-    : trigger === 'inview'
-      ? {
-          scrollTrigger: {
-            trigger: text.value,
-            start: 'top 80%',
-          },
-        }
-      : {}
+    : {}
+
+  const isTriggerInView = trigger === 'inview'
+    ? {
+        scrollTrigger: {
+          trigger: text.value,
+          start: 'top 80%',
+          markers: false,
+        },
+      }
+    : {}
 
   SplitText.create(
     text.value.children,
@@ -50,9 +57,9 @@ const run = async () => {
       type: 'lines',
       autoSplit: true,
       onSplit: (self) => {
-        const tl = gsap.from(self.lines, {
+        return gsap.from(self.lines, {
           duration,
-          opacity: 0,
+          autoAlpha: 0,
           yPercent: 100,
           stagger: 0.1,
           ease,
@@ -60,16 +67,14 @@ const run = async () => {
           immediateRender: true,
           onComplete: () => {
             gsap.set(self.lines, { clearProps: 'transform' })
+
             self.lines.forEach((line: Element) => {
               (line as HTMLElement).parentElement?.style.removeProperty('overflow')
             })
           },
-          ...scrollTriggerConfig,
+          ...isTriggerScroll,
+          ...isTriggerInView,
         })
-
-        gsap.set(text.value, { visibility: 'inherit' })
-
-        return tl
       },
       mask: 'lines',
       tag,
@@ -79,10 +84,11 @@ const run = async () => {
 }
 
 onMounted(async () => {
-  if (!text.value) {
+  if (!text.value?.children?.length) {
     return
   }
 
+  await nextTick()
   await run()
 })
 </script>
@@ -91,7 +97,9 @@ onMounted(async () => {
   <Component
     :is="tag"
     ref="text"
-    class="invisible"
+    :class="{
+      'opacity-0': !ready,
+    }"
   >
     <slot />
   </Component>
