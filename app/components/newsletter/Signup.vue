@@ -32,16 +32,7 @@ const { r$ } = useRegle({
   sector: {
     ruleRequired,
   },
-}, {
-  autoDirty: false,
 })
-
-const touchOnBlur = (event: FocusEvent, field: { $touch: () => void }) => {
-  const form = (event.target as HTMLElement)?.closest('form')
-  if (form?.contains(event.relatedTarget as Node)) {
-    field.$touch()
-  }
-}
 
 const loading = ref(false)
 const success = ref(false)
@@ -139,7 +130,6 @@ const onSubmit = async () => {
               placeholder="joe.bloggs@example.com"
               field="email"
               class="type-mono-16"
-              @blur="touchOnBlur($event, r$.email)"
             />
 
             <FormMessages
@@ -158,7 +148,6 @@ const onSubmit = async () => {
               v-model="r$.$value.role"
               placeholder="Marketing Manager"
               class="type-mono-16"
-              @blur="touchOnBlur($event, r$.role)"
             />
 
             <FormMessages
@@ -177,7 +166,6 @@ const onSubmit = async () => {
               v-model="r$.$value.company"
               placeholder="Example Inc."
               class="type-mono-16"
-              @blur="touchOnBlur($event, r$.company)"
             />
 
             <FormMessages
@@ -203,7 +191,6 @@ const onSubmit = async () => {
                 { label: 'Other', value: 'Other' },
               ]"
               class="type-mono-16"
-              @blur="touchOnBlur($event, r$.sector)"
             />
 
             <FormMessages
