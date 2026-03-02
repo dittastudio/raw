@@ -93,7 +93,7 @@ onBeforeUnmount(stopSlideRotation)
       </EffectTextReveal>
 
       <div
-        class="w-full max-h-full transition-[opacity,scale] duration-1000 ease-outBack"
+        class="w-full max-h-full transition-[opacity,scale] duration-1000 ease-spring-1"
         :class="{
           'opacity-0 scale-120': !mediaReady,
         }"

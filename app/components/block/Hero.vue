@@ -117,7 +117,7 @@ onUnmounted(() => {
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-inOutQuart"
+      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-spring-1"
       :class="{
         'opacity-0 scale-120': !mediaReady,
       }"
