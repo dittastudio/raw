@@ -22,10 +22,10 @@ const {
     :key="block._uid"
     :theme="'theme' in block ? (block.theme as Themes) : undefined"
     :class="[
-      `block block--${block.component}`,
+      `section section--${block.component}`,
       {
-        'block--same-background': checkBackgroundMatchesPrevBackground(index),
-        'block--media-full': checkMediaIsFull(index) || checkBlockHasFullWidthBgMedia(index),
+        'section--same-background': checkBackgroundMatchesPrevBackground(index),
+        'section--media-full': checkMediaIsFull(index) || checkBlockHasFullWidthBgMedia(index),
       },
     ]"
   >
@@ -85,17 +85,17 @@ const {
 <style scoped>
 @reference "@/assets/css/app.css";
 
-.block:not(.block--block_hero,.block--media-full,.block--block_divider) {
+.section:not(.section--block_hero,.section--media-full,.section--block_divider) {
   padding-block: var(--app-vertical-spacing);
 }
 
-.block {
-  &:not(.block--media-full,.block--block_hero) + &.block--same-background {
+.section {
+  &:not(.section--media-full,.section--block_hero) + &.section--same-background {
     padding-block-start: 0;
   }
 }
 
-.block.block--block_divider {
+.section.section--block_divider {
   background-color: transparent;
 }
 </style>
