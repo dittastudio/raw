@@ -183,6 +183,7 @@ const onSubmit = async () => {
               id="sector"
               v-model="r$.$value.sector"
               :options="[
+                { label: 'Please select...', value: '' },
                 { label: 'Charity / Not-for-profit', value: 'Charity / Not-for-profit' },
                 { label: 'Consumer Goods / Retail', value: 'Consumer Goods / Retail' },
                 { label: 'Pharma / Healthcare', value: 'Pharma / Healthcare' },
