@@ -283,10 +283,10 @@ watchEffect(() => {
       z-index: 1;
       transition: opacity 0.3s var(--ease-out);
       pointer-events: none;
+    }
 
-      .header.is-ready.has-scrolled & {
-        opacity: 0.1;
-      }
+    .header.is-ready.has-scrolled &::after {
+      opacity: 0.1;
     }
   }
 }
