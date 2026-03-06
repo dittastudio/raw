@@ -201,17 +201,21 @@ const onSubmit = async () => {
             />
           </FormField>
 
-          <button
-            type="submit"
-            :disabled="loading || undefined"
-          >
-            <UiButton
-              type="outline"
-              theme="dark"
+          <div>
+            <button
+              type="submit"
+              :disabled="loading || undefined"
             >
-              {{ loading ? 'Please wait...' : 'Submit' }}
-            </UiButton>
-          </button>
+              <UiButton
+                type="outline"
+                theme="dark"
+              >
+                {{ loading ? 'Please wait...' : 'Submit' }}
+              </UiButton>
+            </button>
+
+            <slot name="subtext" />
+          </div>
         </FormFieldset>
       </FormBase>
     </template>
