@@ -70,7 +70,6 @@ export interface AutoplayPluginOptions {
 
 /**
  * Keen Slider plugin that automatically advances slides at a set interval
- * Pauses on mouse hover and when isActive returns false
  * Can be controlled externally via the controls ref
  */
 export function getCarouselAutoplayPlugin(options: AutoplayPluginOptions) {
@@ -78,7 +77,6 @@ export function getCarouselAutoplayPlugin(options: AutoplayPluginOptions) {
 
   return (slider: KeenSliderInstance) => {
     let timeout: ReturnType<typeof setTimeout> | undefined
-    let mouseOver = false
 
     const clear = () => {
       if (timeout) {
@@ -89,12 +87,12 @@ export function getCarouselAutoplayPlugin(options: AutoplayPluginOptions) {
 
     const schedule = () => {
       clear()
-      if (!isActive() || mouseOver) {
+      if (!isActive()) {
         return
       }
 
       timeout = setTimeout(() => {
-        if (!isActive() || mouseOver) {
+        if (!isActive()) {
           return
         }
 
@@ -110,28 +108,12 @@ export function getCarouselAutoplayPlugin(options: AutoplayPluginOptions) {
       schedule()
     }
 
-    // Expose controls if provided
     if (controls) {
       controls.start = start
       controls.stop = stop
     }
 
-    const handleMouseOver = () => {
-      mouseOver = true
-      stop()
-    }
-
-    const handleMouseOut = () => {
-      mouseOver = false
-      start()
-    }
-
-    slider.on('created', () => {
-      slider.container.addEventListener('mouseover', handleMouseOver)
-      slider.container.addEventListener('mouseout', handleMouseOut)
-
-      start()
-    })
+    slider.on('created', start)
 
     slider.on('dragStarted', () => {
       stop()
@@ -140,11 +122,6 @@ export function getCarouselAutoplayPlugin(options: AutoplayPluginOptions) {
     slider.on('animationEnded', start)
     slider.on('updated', start)
 
-    slider.on('destroyed', () => {
-      stop()
-
-      slider.container.removeEventListener('mouseover', handleMouseOver)
-      slider.container.removeEventListener('mouseout', handleMouseOut)
-    })
+    slider.on('destroyed', stop)
   }
 }
