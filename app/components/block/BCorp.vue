@@ -28,6 +28,7 @@ const theme = computed(() => (block.theme as Themes) ?? 'light')
       <div class="col-span-full md:col-start-4 md:col-span-4">
         <div class="w-full max-w-100 max-md:mx-auto">
           <UiGraph
+            :max-score="Number(block.max_score) ?? 150"
             :value1="Number(block.overall_score)"
             :value2="Number(block.qualify_score)"
             :value3="Number(block.median_score)"

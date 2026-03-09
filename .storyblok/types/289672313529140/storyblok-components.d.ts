@@ -12,6 +12,7 @@ export interface BlockBcorp {
   overall_score?: string;
   qualify_score?: string;
   median_score?: string;
+  max_score?: string;
   component: "block_bcorp";
   _uid: string;
 }

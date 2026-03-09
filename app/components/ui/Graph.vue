@@ -2,19 +2,20 @@
 import { TransitionPresets, useIntersectionObserver, useTransition } from '@vueuse/core'
 
 interface Props {
+  maxScore?: number
   value1?: number
   value2?: number
   value3?: number
 }
 
-const { value1 = 109.5, value2 = 80, value3 = 50.9 } = defineProps<Props>()
+const { value1 = 109.5, value2 = 80, value3 = 50.9, maxScore = 150 } = defineProps<Props>()
 
 const root = useTemplateRef<HTMLElement>('root')
 const bar1 = useTemplateRef<SVGCircleElement>('bar1')
 const bar2 = useTemplateRef<SVGCircleElement>('bar2')
 const bar3 = useTemplateRef<SVGCircleElement>('bar3')
 
-const maxValue = 250
+const maxValue = computed(() => maxScore)
 const durationMs = 2000
 const isAnimated = ref(false)
 
@@ -45,7 +46,7 @@ const setCircleProgress = (element: SVGCircleElement | null, value: number) => {
 
   const radius = Number.parseFloat(element.getAttribute('r') || '180')
   const circumference = 2 * Math.PI * radius
-  const percentage = (value / maxValue) * 100
+  const percentage = (value / maxValue.value) * 100
   const clamped = Math.max(0, Math.min(100, percentage))
   const offset = circumference - (clamped / 100) * circumference
 
