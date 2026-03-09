@@ -255,6 +255,7 @@ export interface BlockWorkText {
   copy: StoryblokRichtext;
   autoplay_delay?: string;
   stats?: Copy[];
+  logos?: StoryblokMultiasset;
   theme?: number | string;
   component: "block_work_text";
   _uid: string;

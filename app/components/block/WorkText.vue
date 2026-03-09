@@ -60,6 +60,37 @@ const { block } = defineProps<Props>()
       >
         <StoryblokText :html="block.copy" />
       </div>
+
+      <ul
+        v-if="block.logos?.length"
+        class="flex flex-wrap items-center justify-start gap-(--app-outer-gutter)"
+      >
+        <template
+          v-for="item in block.logos"
+          :key="item.id"
+        >
+          <li v-if="item?.filename">
+            <span class="block w-auto h-10 md:h-14">
+              <img
+                v-if="fileExtension(item.filename) === 'svg'"
+                class="block size-full object-contain"
+                :src="item.filename"
+                :alt="item.alt || item.title || 'Logo'"
+                loading="lazy"
+              >
+
+              <NuxtImg
+                v-else
+                class="block size-full object-contain"
+                :src="item.filename"
+                :alt="item.alt || item.title || 'Logo'"
+                :width="200"
+                loading="lazy"
+              />
+            </span>
+          </li>
+        </template>
+      </ul>
     </div>
   </div>
 </template>
