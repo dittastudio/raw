@@ -54,6 +54,17 @@ export interface BlockEventText {
   _uid: string;
 }
 
+export interface BlockFeaturedEvent {
+  title?: string;
+  headline?: StoryblokRichtext;
+  event: ISbStoryData<Event> | string;
+  cta_title?: string;
+  cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
+  theme?: number | string;
+  component: "block_featured_event";
+  _uid: string;
+}
+
 export interface BlockGallery {
   title?: string;
   items?: StoryblokMultiasset;
@@ -285,7 +296,6 @@ export interface Event {
     | BlockImpactStatement
     | BlockLogoWall
     | BlockMedia
-    | BlockNextEvent
     | BlockPastEvents
     | BlockProjectCarousel
     | BlockSplitText
@@ -357,6 +367,7 @@ export interface Page {
     | BlockBcorp
     | BlockContact
     | BlockDivider
+    | BlockFeaturedEvent
     | BlockGallery
     | BlockHero
     | BlockHeroBrand

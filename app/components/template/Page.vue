@@ -49,6 +49,11 @@ const {
       :block="block"
     />
 
+    <BlockFeaturedEvent
+      v-else-if="block.component === 'block_featured_event'"
+      :block="block"
+    />
+
     <BlockGallery
       v-else-if="block.component === 'block_gallery'"
       :block="block"

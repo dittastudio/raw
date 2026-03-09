@@ -71,17 +71,24 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
 
     <div class="col-span-full md:col-start-4 md:col-span-9">
       <div class="w-full flex flex-col gap-6">
-        <p class="type-h2">
-          <span class="is-outlined block">Next event</span>
+        <EffectTextReveal :delay="500">
+          <p class="type-h2">
+            <span class="is-outlined block">Next event</span>
 
-          <template v-if="event?.eventDatetime">
-            {{ formatDateDMY(event.eventDatetime) }}
-          </template>
-        </p>
+            <time
+              v-if="event?.eventDatetime"
+              :datetime="event.eventDatetime"
+            >
+              {{ formatDateDMY(event.eventDatetime) }}
+            </time>
+          </p>
+        </EffectTextReveal>
 
-        <h2 class="type-h4 max-w-[30em] text-balance">
-          {{ event?.name ? event.name : `There are no upcoming events at this time. Please check back soon.` }}
-        </h2>
+        <EffectTextReveal :delay="1000">
+          <h2 class="type-h4 max-w-[30em] text-balance">
+            {{ event?.name ? event.name : `There are no upcoming events at this time. Please check back soon.` }}
+          </h2>
+        </EffectTextReveal>
       </div>
     </div>
 
