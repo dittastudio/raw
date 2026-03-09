@@ -34,6 +34,8 @@
 
   & ol,
   & ul {
+    @apply type-p;
+
     text-align: left;
   }
 
@@ -42,27 +44,24 @@
   }
 
   & ol li {
-    position: relative;
-    padding-left: --spacing(5);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
     counter-increment: list-counter;
 
     &::before {
       content: counter(list-counter) ".";
-      position: absolute;
-      bottom: 0.15em;
-      left: 0;
-      color: currentColor;
     }
   }
 
   & ul li {
     position: relative;
-    padding-left: --spacing(5);
+    padding-left: 1.25em;
 
     &::before {
       content: '';
       position: absolute;
-      top: 0.65em;
+      top: 0.5em;
       left: 0;
       width: 5px;
       height: 5px;
@@ -87,6 +86,43 @@
     &:hover {
       opacity: 0.6;
     }
+  }
+
+  & table {
+    @apply type-p;
+
+    display: block;
+    padding-inline: var(--app-outer-gutter);
+    overflow: auto hidden;
+    overscroll-behavior-x: contain;
+    margin-inline: calc(var(--app-outer-gutter) * -1);
+
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  & th,
+  & td {
+    padding: 1em;
+  }
+
+  & td {
+    border: 1px solid currentColor;
+  }
+
+  & tr {
+    vertical-align: baseline;
+  }
+
+  & tbody tr:first-child {
+    background-color: --alpha(currentColor / 20%);
+  }
+
+  & tbody tr:not(:first-child):nth-child(odd) {
+    background-color: --alpha(currentColor / 5%);
   }
 }
 
