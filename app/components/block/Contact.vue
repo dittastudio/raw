@@ -49,8 +49,22 @@ const { block } = defineProps<Props>()
 
         <div class="col-span-full md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-(--app-inner-gutter) gap-y-6">
           <div
+            v-if="storyblokRichTextContent(info.column_one)"
+            class="prose-p col-span-full md:col-span-1"
+          >
+            <StoryblokText :html="info.column_one" />
+          </div>
+
+          <div
+            v-if="storyblokRichTextContent(info.column_two)"
+            class="prose-p col-span-full md:col-span-1"
+          >
+            <StoryblokText :html="info.column_two" />
+          </div>
+
+          <div
             v-if="info.media?.[0]"
-            class="col-span-full max-md:order-1"
+            class="col-span-full"
           >
             <NuxtImg
               v-if="info.media?.[0] && isImageComponent(info.media?.[0]) && info.media?.[0].image?.filename && storyblokAssetType(info.media?.[0].image.filename) === 'image'"
@@ -96,20 +110,6 @@ const { block } = defineProps<Props>()
               playsinline
               controls
             />
-          </div>
-
-          <div
-            v-if="storyblokRichTextContent(info.column_one)"
-            class="prose-p col-span-full md:col-span-1"
-          >
-            <StoryblokText :html="info.column_one" />
-          </div>
-
-          <div
-            v-if="storyblokRichTextContent(info.column_two)"
-            class="prose-p col-span-full md:col-span-1"
-          >
-            <StoryblokText :html="info.column_two" />
           </div>
         </div>
       </li>
