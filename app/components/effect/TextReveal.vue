@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(SplitText)
 
 interface Props {
+  wrapper?: string
   tag?: string
   delay?: number
   duration?: number
@@ -14,7 +15,7 @@ interface Props {
   trigger?: 'immediate' | 'scroll' | 'inview'
 }
 
-const { tag = 'div', delay = 0, duration = 1, ease = 'expo.out', trigger = 'inview' } = defineProps<Props>()
+const { wrapper = 'div', tag = 'span', delay = 0, duration = 1, ease = 'expo.out', trigger = 'inview' } = defineProps<Props>()
 const text = useTemplateRef('text')
 const ready = ref(false)
 
@@ -95,8 +96,9 @@ onMounted(async () => {
 
 <template>
   <Component
-    :is="tag"
+    :is="wrapper"
     ref="text"
+    class="text-reveal"
     :class="{
       'opacity-0': !ready,
     }"
@@ -104,3 +106,14 @@ onMounted(async () => {
     <slot />
   </Component>
 </template>
+
+<style scoped>
+@reference "@/assets/css/app.css";
+
+.text-reveal {
+  :deep(.lines),
+  :deep(.lines-mask) {
+    display: block;
+  }
+}
+</style>
