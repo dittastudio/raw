@@ -15,7 +15,6 @@ const bar1 = useTemplateRef<SVGCircleElement>('bar1')
 const bar2 = useTemplateRef<SVGCircleElement>('bar2')
 const bar3 = useTemplateRef<SVGCircleElement>('bar3')
 
-const maxValue = computed(() => maxScore)
 const durationMs = 2000
 const isAnimated = ref(false)
 
@@ -46,7 +45,7 @@ const setCircleProgress = (element: SVGCircleElement | null, value: number) => {
 
   const radius = Number.parseFloat(element.getAttribute('r') || '180')
   const circumference = 2 * Math.PI * radius
-  const percentage = (value / maxValue.value) * 100
+  const percentage = (value / maxScore) * 100
   const clamped = Math.max(0, Math.min(100, percentage))
   const offset = circumference - (clamped / 100) * circumference
 
