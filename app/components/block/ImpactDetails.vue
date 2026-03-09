@@ -93,7 +93,7 @@ const media = computed(() => block.media?.[0])
             :key="item.id"
           >
             <li v-if="item?.filename">
-              <span class="block size-10 sm:size-15">
+              <span class="block size-20 sm:size-24">
                 <img
                   v-if="fileExtension(item.filename) === 'svg'"
                   class="block size-full object-contain"
