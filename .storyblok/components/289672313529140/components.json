@@ -977,7 +977,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-02-24T12:17:10.401Z",
+    "updated_at": "2026-03-09T18:10:54.581Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1044,7 +1044,10 @@
       "logos": {
         "type": "multiasset",
         "pos": 6,
-        "id": "7DDxPCRDR8qSNn2R2d3dHg"
+        "id": "7DDxPCRDR8qSNn2R2d3dHg",
+        "filetypes": [
+          "images"
+        ]
       },
       "jaa_partnership": {
         "type": "boolean",
@@ -1503,7 +1506,7 @@
     "display_name": "Project Carousel",
     "description": "",
     "created_at": "2026-01-20T17:20:53.569Z",
-    "updated_at": "2026-02-26T18:02:08.133Z",
+    "updated_at": "2026-03-09T15:54:55.421Z",
     "id": 136151259425859,
     "schema": {
       "title": {
@@ -1559,7 +1562,8 @@
         "max_value": 10,
         "steps": 0.5,
         "default_value": "3",
-        "decimals": 1
+        "decimals": 1,
+        "description": "Seconds between each slide"
       },
       "projects": {
         "type": "options",
@@ -2235,13 +2239,14 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-02-26T18:02:44.498Z",
+    "updated_at": "2026-03-09T18:11:08.693Z",
     "id": 139567924016608,
     "schema": {
       "title": {
         "type": "text",
         "pos": 0,
-        "id": "ngxAVQX-SGmtXTKuC5RJsA"
+        "id": "ngxAVQX-SGmtXTKuC5RJsA",
+        "required": false
       },
       "copy": {
         "type": "richtext",
@@ -2266,7 +2271,8 @@
         "decimals": 1,
         "steps": 0.5,
         "id": "cthqy8LBTlmoejyiOKeZWQ",
-        "default_value": "3"
+        "default_value": "3",
+        "description": "Seconds between each slide"
       },
       "stats": {
         "type": "bloks",
@@ -2283,9 +2289,17 @@
         "component_tag_denylist": [],
         "id": "Ylz8x_l4TQWmGxz38218mg"
       },
+      "logos": {
+        "type": "multiasset",
+        "pos": 4,
+        "id": "WMCAh05GQr2rfEijz70_Aw",
+        "filetypes": [
+          "images"
+        ]
+      },
       "theme": {
         "type": "option",
-        "pos": 4,
+        "pos": 5,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",
