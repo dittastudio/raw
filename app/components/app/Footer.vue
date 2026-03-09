@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import type { Link, Logo } from '#storyblok-components'
+import type { StoryblokRichtext } from '#storyblok-types'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {
   text?: string
+  subtext?: StoryblokRichtext
   links?: Link[]
   email?: string
   telephone?: string
@@ -11,7 +13,7 @@ interface Props {
   logos?: Logo[]
 }
 
-const { text, links, email, telephone, address, logos } = defineProps<Props>()
+const { text, subtext, links, email, telephone, address, logos } = defineProps<Props>()
 
 const form = useTemplateRef('form')
 </script>
@@ -71,6 +73,15 @@ const form = useTemplateRef('form')
                     Go back to signup
                   </UiButton>
                 </button>
+              </template>
+
+              <template #subtext>
+                <div
+                  v-if="storyblokRichTextContent(subtext)"
+                  class="prose [&_p]:type-mono-12 text-pretty opacity-60 mt-4"
+                >
+                  <StoryblokText :html="subtext" />
+                </div>
               </template>
             </NewsletterSignup>
           </UiModal>

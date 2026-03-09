@@ -52,6 +52,7 @@ watch(() => route.fullPath, async () => {
 
     <AppFooter
       :text="story.content.newsletter_text"
+      :subtext="story.content.newsletter_subtext"
       :links="story.content.links"
       :email="story.content.company_email"
       :telephone="story.content.company_telephone"

@@ -3571,7 +3571,7 @@
     "display_name": null,
     "description": "Settings for the global content of the website",
     "created_at": "2026-01-06T16:27:28.640Z",
-    "updated_at": "2026-02-04T11:46:39.303Z",
+    "updated_at": "2026-03-06T13:04:43.974Z",
     "id": 131183610438016,
     "schema": {
       "navigation": {
@@ -3622,9 +3622,23 @@
         "pos": 5,
         "id": "zXg7pzRfQGGdO8PD98UkPw"
       },
+      "newsletter_subtext": {
+        "type": "richtext",
+        "pos": 6,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "unset",
+          "italic",
+          "link",
+          "paragraph"
+        ],
+        "allow_target_blank": true,
+        "id": "QqMKz4TDRV2zlNqZBspebA"
+      },
       "links": {
         "type": "bloks",
-        "pos": 6,
+        "pos": 7,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [
@@ -3639,22 +3653,22 @@
       },
       "company_email": {
         "type": "text",
-        "pos": 7,
+        "pos": 8,
         "id": "d52tHlAtSn-R_jedEJJxzw"
       },
       "company_telephone": {
         "type": "text",
-        "pos": 8,
+        "pos": 9,
         "id": "Wqedvb7-SdC62myJrsfrFw"
       },
       "company_address": {
         "type": "textarea",
-        "pos": 9,
+        "pos": 10,
         "id": "pn_At08IRwCLl-RwRal48A"
       },
       "logos": {
         "type": "bloks",
-        "pos": 10,
+        "pos": 11,
         "restrict_type": "",
         "restrict_components": true,
         "component_whitelist": [

@@ -494,6 +494,7 @@ export interface Settings {
   cta_title?: string;
   cta_link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   newsletter_text?: string;
+  newsletter_subtext?: StoryblokRichtext;
   links?: Link[];
   company_email?: string;
   company_telephone?: string;
