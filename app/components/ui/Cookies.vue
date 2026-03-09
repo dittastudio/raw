@@ -78,7 +78,7 @@ defineOptions({
 
   <dialog
     ref="modal"
-    class="fixed inset-0 z-100 block w-full h-dvh max-w-full max-h-none backdrop-blur-xl transition-opacity duration-500 overflow-hidden backdrop:hidden bg-offblack/80"
+    class="fixed left-auto top-auto right-0 bottom-0 z-100 block max-w-full max-h-none transition-opacity duration-500 overflow-hidden backdrop:hidden bg-transparent"
     :class="{
       'opacity-0 delay-500 pointer-events-none': !modalOpen,
       'opacity-100 delay-0 pointer-events-auto': modalOpen,
@@ -87,8 +87,7 @@ defineOptions({
   >
     <div
       data-lenis-prevent
-      class="flex flex-col items-center size-full wrapper p-(--app-outer-gutter) overflow-y-scroll overscroll-contain"
-      @click.self="close"
+      class="flex flex-col items-center size-full wrapper p-4 overflow-y-scroll overscroll-contain"
     >
       <div
         class="relative w-full max-w-140 m-auto"

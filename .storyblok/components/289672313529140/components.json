@@ -1503,7 +1503,7 @@
     "display_name": "Project Carousel",
     "description": "",
     "created_at": "2026-01-20T17:20:53.569Z",
-    "updated_at": "2026-02-26T18:02:08.133Z",
+    "updated_at": "2026-03-09T15:54:55.421Z",
     "id": 136151259425859,
     "schema": {
       "title": {
@@ -1559,7 +1559,8 @@
         "max_value": 10,
         "steps": 0.5,
         "default_value": "3",
-        "decimals": 1
+        "decimals": 1,
+        "description": "Seconds between each slide"
       },
       "projects": {
         "type": "options",
@@ -2235,7 +2236,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-02-26T18:02:44.498Z",
+    "updated_at": "2026-03-09T15:54:45.354Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2266,7 +2267,8 @@
         "decimals": 1,
         "steps": 0.5,
         "id": "cthqy8LBTlmoejyiOKeZWQ",
-        "default_value": "3"
+        "default_value": "3",
+        "description": "Seconds between each slide"
       },
       "stats": {
         "type": "bloks",

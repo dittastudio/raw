@@ -9,13 +9,11 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@regle/nuxt',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
     'lenis/nuxt',
-    [
-      '@storyblok/nuxt',
-      {
-        accessToken: process.env.NUXT_STORYBLOK_TOKEN,
-      },
-    ],
+    ['@storyblok/nuxt', { accessToken: process.env.NUXT_STORYBLOK_TOKEN }],
+    ['nuxt-gtag', { id: 'G-P5WQCFSK22', initMode: 'manual' }],
   ],
   ssr: true,
   devtools: false,

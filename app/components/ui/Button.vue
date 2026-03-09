@@ -53,23 +53,14 @@ const solidThemeClasses = computed(() => {
 const outlineThemeClasses = computed(() => {
   return 'outline outline-current -outline-offset-1'
 })
+
+const mergedAttrs = useMergedAttrs('ui-button relative isolate inline-block align-top rounded-full select-none type-p p-1 -m-1')
 </script>
 
 <template>
   <span
     ref="hover"
-    class="
-      ui-button
-      relative
-      isolate
-      inline-block
-      align-top
-      rounded-full
-      select-none
-      type-p
-      p-1
-      -m-1
-    "
+    v-bind="mergedAttrs"
     @mouseenter="onMouseEnter"
     @mousemove="onMouseMove"
   >
