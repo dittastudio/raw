@@ -69,10 +69,18 @@ onUnmounted(() => {
       class="hero__content relative z-1 size-full flex flex-col items-center justify-center"
     >
       <div class="flex flex-col items-center justify-center gap-10 text-center p-(--app-outer-gutter)">
-        <div v-if="block.logo?.filename">
+        <div
+          v-if="block.logo?.filename"
+          class="w-full flex items-center justify-center"
+        >
           <img
             v-if="fileExtension(block.logo.filename) === 'svg'"
-            class="block w-[85cqw] max-w-max h-auto"
+            class="block h-auto"
+            :class="{
+              'w-full': block.max_width,
+              'w-[85cqw] max-w-max': !block.max_width,
+            }"
+            :style="block.max_width ? { maxWidth: `${block.max_width}px` } : null"
             :src="block.logo.filename"
             :alt="block.logo.alt || name || ''"
             loading="lazy"
@@ -80,7 +88,12 @@ onUnmounted(() => {
 
           <NuxtImg
             v-else
-            class="block w-[85cqw] max-w-max h-auto"
+            class="block h-auto"
+            :class="{
+              'w-full': block.max_width,
+              'w-[85cqw] max-w-max': !block.max_width,
+            }"
+            :style="block.max_width ? { maxWidth: `${block.max_width}px` } : null"
             :src="block.logo.filename"
             :alt="block.logo.alt || name || ''"
             :height="100"
