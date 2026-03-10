@@ -103,11 +103,11 @@ onMounted(async () => {
 
             <NuxtImg
               v-else
-              class="block w-auto h-10 md:h-15 object-contain"
+              class="block w-auto h-10 md:h-15 object-contain mix-blend-multiply"
               :src="logo.filename"
               :alt="logo.alt || block.title || ''"
               densities="x1 x2"
-              height="60"
+              :height="60"
               loading="lazy"
             />
           </template>

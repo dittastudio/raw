@@ -76,6 +76,7 @@ watch(() => route.fullPath, async () => {
     />
 
     <UiCookies
+      v-if="!storyblokEditor(route.query)"
       ref="cookiesDialog"
       :immediate="!appStore.hasDecidedCookies"
     >
