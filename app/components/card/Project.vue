@@ -6,9 +6,10 @@ interface Props {
   tagline?: string
   headline?: string
   logo?: StoryblokAsset
+  maxWidth?: string
 }
 
-const { slug, tagline, headline, logo } = defineProps<Props>()
+const { slug, tagline, headline, logo, maxWidth } = defineProps<Props>()
 </script>
 
 <template>
@@ -39,7 +40,12 @@ const { slug, tagline, headline, logo } = defineProps<Props>()
         <template v-if="logo?.filename && storyblokAssetType(logo.filename) === 'image'">
           <img
             v-if="fileExtension(logo.filename) === 'svg'"
-            class="block w-31 h-auto mb-1 mix-blend-difference"
+            class="block h-auto"
+            :class="{
+              'w-full': maxWidth,
+              'w-30 max-w-max': !maxWidth,
+            }"
+            v-bind="maxWidth ? { style: { maxWidth: `${maxWidth}px` } } : {}"
             :src="logo.filename"
             :alt="logo.alt || headline || tagline || ''"
             loading="lazy"
@@ -47,7 +53,12 @@ const { slug, tagline, headline, logo } = defineProps<Props>()
 
           <NuxtImg
             v-else
-            class="block w-31 h-auto mb-1 mix-blend-difference"
+            class="block h-auto"
+            :class="{
+              'w-full': maxWidth,
+              'w-30 max-w-max': !maxWidth,
+            }"
+            v-bind="maxWidth ? { style: { maxWidth: `${maxWidth}px` } } : {}"
             :src="logo.filename"
             :alt="logo.alt || headline || tagline || ''"
             densities="x1 x2"

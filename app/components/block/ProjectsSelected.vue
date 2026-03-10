@@ -66,6 +66,7 @@ const setSizes = (isLarge: boolean) => {
                 :tagline="project.content.preview_text"
                 :headline="project.content.preview_headline || project.name"
                 :logo="project.content.preview_logo"
+                :max-width="project.content.preview_max_width"
               >
                 <template
                   v-if="project.content.preview_media?.[0]"

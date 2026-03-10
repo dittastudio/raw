@@ -268,6 +268,8 @@ export interface BlockWorkText {
   autoplay_delay?: string;
   stats?: Copy[];
   logos?: StoryblokMultiasset;
+  logo_strength?: unknown;
+  logo_height?: string;
   theme?: number | string;
   component: "block_work_text";
   _uid: string;
@@ -477,6 +479,7 @@ export interface PostWistia {
 
 export interface Project {
   preview_logo?: StoryblokAsset;
+  preview_max_width?: string;
   preview_media: (Image | MuxVideoAutoplay)[];
   preview_headline: string;
   preview_text: string;
