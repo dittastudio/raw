@@ -63,9 +63,8 @@ const { block } = defineProps<Props>()
 
       <UiLogoRow
         :items="block.logos"
-        :width="100"
         :strength="Number((block.logo_strength as { value?: string })?.value)"
-        :base-height="Number(block.logo_height)"
+        :base-height="Number((block.logo_scale as { value?: string })?.value)"
       />
     </div>
   </div>

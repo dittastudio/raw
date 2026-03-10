@@ -2330,7 +2330,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-03-10T13:25:58.246Z",
+    "updated_at": "2026-03-10T14:57:48.969Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2395,12 +2395,12 @@
         "options": [
           {
             "name": "marks",
-            "value": "",
+            "value": "[0,25,50,75,100]",
             "_uid": "b1d431e9-bf1e-4d06-8eaa-3f43e9aec5d9"
           },
           {
             "name": "defaultValue",
-            "value": "50",
+            "value": "60",
             "_uid": "b63ea48d-4228-40ea-becf-be6dfb6de9cd"
           },
           {
@@ -2415,7 +2415,7 @@
           },
           {
             "name": "stepSize",
-            "value": "1",
+            "value": "5",
             "_uid": "91a83890-a57e-4bc1-8ee6-8638e8a93fa3"
           },
           {
@@ -2441,8 +2441,8 @@
         ],
         "id": "EsxDXKy_TluUbMwt0UKpyQ"
       },
-      "logo_height": {
-        "type": "number",
+      "logo_scale": {
+        "type": "custom",
         "pos": 6,
         "id": "Iv4ZIXXURg6OJf8-f6cC4w",
         "field_type": "storyblok-slider",
@@ -2497,7 +2497,8 @@
         "max_value": 6,
         "decimals": 1,
         "steps": 0.5,
-        "default_value": "3"
+        "default_value": "3",
+        "display_name": "Logo Scale"
       },
       "theme": {
         "type": "option",
@@ -3662,7 +3663,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-02-20T17:09:52.501Z",
+    "updated_at": "2026-03-10T13:41:06.345Z",
     "id": 131189203587517,
     "schema": {
       "preview_logo": {
@@ -3673,6 +3674,14 @@
           "images"
         ],
         "id": "BRKg-8qqQ9ySyXcW1jOTfw"
+      },
+      "preview_max_width": {
+        "type": "number",
+        "pos": 1,
+        "description": "Adjust the logo max-width in pixels to get fine-tuned sizing. Leave blank to use the image's natural size.",
+        "decimals": 0,
+        "steps": 1,
+        "id": "mRHwrA_YTbe1mIsUmzpf1A"
       },
       "preview_media": {
         "type": "bloks",
