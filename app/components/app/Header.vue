@@ -14,24 +14,15 @@ const { navigation } = defineProps<Props>()
 const route = useRoute()
 
 const lenis = useLenis()
-const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const appStore = useAppStore()
 const activeTheme = useState<Themes>('activeTheme', () => 'light')
 const ready = ref(false)
 const hasScrolled = ref(false)
 const hasScrolledUp = ref(false)
 const hasScrolledDown = ref(false)
 
-const openHeaderMenu = () => {
-  isHeaderOpen.value = true
-}
-
-const closeHeaderMenu = () => {
-  isHeaderOpen.value = false
-}
-
-const toggleHeaderMenu = () => {
-  return isHeaderOpen.value ? closeHeaderMenu() : openHeaderMenu()
-}
+const { isHeaderOpen } = storeToRefs(appStore)
+const { setHeaderMenu, toggleHeaderMenu } = appStore
 
 const resetScrollHeader = () => {
   hasScrolled.value = false
@@ -85,7 +76,7 @@ const gradientColorVar = computed(() => ({
 
 const handleKeydown = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
-    closeHeaderMenu()
+    setHeaderMenu(false)
   }
 }
 
@@ -118,7 +109,7 @@ const isScreenLg = useAtMedia(getMediaQuery('lg'))
 
 watchEffect(() => {
   if (isScreenLg.value) {
-    isHeaderOpen.value = false
+    setHeaderMenu(false)
   }
 })
 </script>

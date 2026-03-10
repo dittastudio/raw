@@ -35,11 +35,9 @@ useSeoMeta({
   robots: 'index, follow',
 })
 
-const isHeaderOpen = useState('isHeaderOpen', () => false)
-
 watch(() => route.fullPath, async () => {
   await wait(500)
-  isHeaderOpen.value = false
+  appStore.setHeaderMenu(false)
 })
 </script>
 

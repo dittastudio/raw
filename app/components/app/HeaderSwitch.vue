@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-const isHeaderOpen = useState<boolean>('isHeaderOpen', () => false)
+const appStore = useAppStore()
+const { isHeaderOpen } = storeToRefs(appStore)
 const isAnimating = ref(false)
 
 watch(isHeaderOpen, () => {
