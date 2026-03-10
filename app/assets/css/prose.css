@@ -91,6 +91,9 @@
   & table {
     @apply type-p;
 
+    margin-block: 1.5em;
+    margin-block: 1.5lh;
+
     display: block;
     padding-inline: var(--app-outer-gutter);
     overflow: auto hidden;
