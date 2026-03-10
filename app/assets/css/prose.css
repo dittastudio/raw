@@ -112,20 +112,22 @@
     padding: 1em;
   }
 
-  & td {
+  & td,
+  & th {
     min-width: 200px;
     border: 1px solid currentColor;
   }
 
   & tr {
+    text-align: left;
     vertical-align: baseline;
   }
 
-  & tbody tr:first-child {
+  & tr:has(th) {
     background-color: --alpha(currentColor / 20%);
   }
 
-  & tbody tr:not(:first-child):nth-child(odd) {
+  & tr:has(td):nth-child(odd) {
     background-color: --alpha(currentColor / 5%);
   }
 }
