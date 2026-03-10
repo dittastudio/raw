@@ -12,7 +12,7 @@ const {
   theme = 'light',
 } = defineProps<Props>()
 
-const activeTheme = useState<Themes>('activeTheme', () => 'light')
+const appStore = useAppStore()
 const el = useTemplateRef<HTMLElement>('el')
 
 useIntersectionObserver(
@@ -20,7 +20,7 @@ useIntersectionObserver(
   (entries: IntersectionObserverEntry[]) => {
     const entry = entries[0]
     if (entry?.isIntersecting) {
-      activeTheme.value = theme
+      appStore.setActiveTheme(theme)
     }
   },
   {

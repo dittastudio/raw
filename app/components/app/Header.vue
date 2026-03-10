@@ -15,13 +15,12 @@ const route = useRoute()
 
 const lenis = useLenis()
 const appStore = useAppStore()
-const activeTheme = useState<Themes>('activeTheme', () => 'light')
 const ready = ref(false)
 const hasScrolled = ref(false)
 const hasScrolledUp = ref(false)
 const hasScrolledDown = ref(false)
 
-const { isHeaderOpen } = storeToRefs(appStore)
+const { isHeaderOpen, activeTheme } = storeToRefs(appStore)
 const { setHeaderMenu, toggleHeaderMenu } = appStore
 
 const resetScrollHeader = () => {
