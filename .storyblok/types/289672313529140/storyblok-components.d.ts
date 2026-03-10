@@ -269,7 +269,7 @@ export interface BlockWorkText {
   stats?: Copy[];
   logos?: StoryblokMultiasset;
   logo_strength?: unknown;
-  logo_height?: string;
+  logo_scale?: unknown;
   theme?: number | string;
   component: "block_work_text";
   _uid: string;
