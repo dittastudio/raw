@@ -134,6 +134,9 @@ export default defineNuxtConfig({
       '2xl': 1800,
     },
   },
+  linkChecker: {
+    skipInspections: ['no-uppercase-chars', 'link-text'],
+  },
   sitemap: {
     sources: [
       '/api/sitemap',
