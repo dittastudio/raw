@@ -6,6 +6,8 @@ interface Props {
 }
 
 const { items } = defineProps<Props>()
+
+const isLgScreen = useAtMedia(getMediaQuery('lg'))
 </script>
 
 <template>
@@ -32,6 +34,18 @@ const { items } = defineProps<Props>()
         uppercase
       "
     >
+      <li
+        v-if="!isLgScreen"
+        class="navigation__item lg:hidden"
+      >
+        <NuxtLink
+          to="/"
+          class="navigation__link block pointer-events-auto p-2 lg:p-(--app-outer-gutter)"
+        >
+          Home
+        </NuxtLink>
+      </li>
+
       <li
         v-for="item in items"
         :key="item._uid"
