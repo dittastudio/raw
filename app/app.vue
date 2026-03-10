@@ -75,51 +75,53 @@ watch(() => route.fullPath, async () => {
       :logos="story.content.logos"
     />
 
-    <UiCookies
-      v-if="!storyblokEditor(route.query)"
-      ref="cookiesDialog"
-      :immediate="!appStore.hasDecidedCookies"
-    >
-      <div class="flex flex-col gap-5 items-start">
-        <h6 class="type-h4 text-pretty">
-          Accept Cookies
-        </h6>
+    <ClientOnly>
+      <UiCookies
+        v-if="!storyblokEditor(route.query)"
+        ref="cookiesDialog"
+        :immediate="!appStore.hasDecidedCookies"
+      >
+        <div class="flex flex-col gap-5 items-start">
+          <h6 class="type-h4 text-pretty">
+            Accept Cookies
+          </h6>
 
-        <p class="type-p">
-          We use cookies to improve your experience.<br>
-          Confirm your choice using the buttons below.
-        </p>
+          <p class="type-p">
+            We use cookies to improve your experience.<br>
+            Confirm your choice using the buttons below.
+          </p>
 
-        <div class="flex gap-5 w-full">
-          <button
-            type="button"
-            class="w-30"
-            @click="decide('decline')"
-          >
-            <UiButton
-              theme="dark"
-              type="outline"
-              class="w-full p-0 m-0"
+          <div class="flex gap-5 w-full">
+            <button
+              type="button"
+              class="w-30"
+              @click="decide('decline')"
             >
-              Decline
-            </UiButton>
-          </button>
+              <UiButton
+                theme="dark"
+                type="outline"
+                class="w-full p-0 m-0"
+              >
+                Decline
+              </UiButton>
+            </button>
 
-          <button
-            type="button"
-            class="w-30"
-            @click="decide('accept')"
-          >
-            <UiButton
-              theme="dark"
-              class="w-full p-0 m-0"
+            <button
+              type="button"
+              class="w-30"
+              @click="decide('accept')"
             >
-              Accept
-            </UiButton>
-          </button>
+              <UiButton
+                theme="dark"
+                class="w-full p-0 m-0"
+              >
+                Accept
+              </UiButton>
+            </button>
+          </div>
         </div>
-      </div>
-    </UiCookies>
+      </UiCookies>
+    </ClientOnly>
 
     <DevOnly>
       <DevGuide />
