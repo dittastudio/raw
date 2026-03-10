@@ -2,10 +2,6 @@
 import type { Settings } from '#storyblok-components'
 import { VueLenis } from 'lenis/vue'
 
-const lenisOptions = {
-  lerp: 0.5,
-}
-
 const story = await useStory<Settings>('/settings')
 const route = useRoute()
 const url = useRequestURL()
@@ -51,7 +47,9 @@ watch(() => route.fullPath, async () => {
 <template>
   <VueLenis
     root
-    :options="lenisOptions"
+    :options="{
+      lerp: 0.5,
+    }"
   >
     <AppHeader :navigation="story.content.navigation" />
 
