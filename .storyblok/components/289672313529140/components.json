@@ -621,7 +621,7 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-02-05T15:37:35.762Z",
+    "updated_at": "2026-03-10T12:55:06.801Z",
     "id": 132594684570052,
     "schema": {
       "logo": {
@@ -632,11 +632,19 @@
         ],
         "asset_folder_id": 134653467982768,
         "id": "btlv0jXpRwqHBpZAz2QlfA",
-        "description": "SVG upload recommended. This will use the image's natural size and only shrink on smaller screens. Make sure the image has your most ideal dimensions for desktop set."
+        "description": "SVG upload recommended."
+      },
+      "max_width": {
+        "type": "number",
+        "pos": 1,
+        "description": "Adjust the logo max-width in pixels to get fine-tuned sizing. Leave blank to use the image's natural size.",
+        "decimals": 0,
+        "steps": 1,
+        "id": "TuAsk-TlQKiLJjLUSgd--g"
       },
       "headline": {
         "type": "richtext",
-        "pos": 1,
+        "pos": 2,
         "required": false,
         "customize_toolbar": true,
         "toolbar": [
@@ -654,7 +662,7 @@
       },
       "text": {
         "type": "richtext",
-        "pos": 2,
+        "pos": 3,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
@@ -664,7 +672,7 @@
       },
       "media": {
         "type": "bloks",
-        "pos": 3,
+        "pos": 4,
         "id": "773CtmxyTrW1s0CgBGp0aw",
         "restrict_type": "",
         "restrict_components": true,
@@ -677,7 +685,7 @@
       },
       "theme": {
         "type": "option",
-        "pos": 4,
+        "pos": 5,
         "use_uuid": true,
         "required": false,
         "options": [

@@ -75,6 +75,7 @@ export interface BlockGallery {
 
 export interface BlockHero {
   logo?: StoryblokAsset;
+  max_width?: string;
   headline?: StoryblokRichtext;
   text?: StoryblokRichtext;
   media?: (Image | MuxVideoAutoplay)[];
