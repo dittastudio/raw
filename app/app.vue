@@ -4,7 +4,6 @@ import { VueLenis } from 'lenis/vue'
 
 const story = await useStory<Settings>('/settings')
 const route = useRoute()
-const url = useRequestURL()
 const cookiesDialog = useTemplateRef('cookiesDialog')
 const appStore = useAppStore()
 const { initialize } = useGtag()
@@ -33,7 +32,7 @@ useHead({
 
 useSeoMeta({
   titleTemplate: title => (title ? `${title} - RAW` : 'RAW'),
-  robots: url.host === 'raw.london' ? 'index, follow' : 'noindex, nofollow',
+  robots: 'index, follow',
 })
 
 const isHeaderOpen = useState('isHeaderOpen', () => false)
