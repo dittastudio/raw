@@ -84,36 +84,12 @@ const media = computed(() => block.media?.[0])
           :theme="(block.theme as Themes) ?? 'light'"
         />
 
-        <ul
+        <UiLogoRow
           v-if="block.logos?.length"
-          class="flex items-center justify-start gap-[calc(var(--app-outer-gutter)/2)] sm:gap-(--app-outer-gutter) mt-auto"
-        >
-          <template
-            v-for="item in block.logos"
-            :key="item.id"
-          >
-            <li v-if="item?.filename">
-              <span class="block size-20 sm:size-24">
-                <img
-                  v-if="fileExtension(item.filename) === 'svg'"
-                  class="block size-full object-contain"
-                  :src="item.filename"
-                  :alt="item.alt || item.title || 'Logo'"
-                  loading="lazy"
-                >
-
-                <NuxtImg
-                  v-else
-                  class="block size-full object-contain"
-                  :src="item.filename"
-                  :alt="item.alt || item.title || 'Logo'"
-                  :width="200"
-                  loading="lazy"
-                />
-              </span>
-            </li>
-          </template>
-        </ul>
+          :items="block.logos"
+          :strength="Number((block.logo_strength as { value?: string })?.value)"
+          :base-height="Number((block.logo_scale as { value?: string })?.value)"
+        />
       </div>
     </div>
   </div>

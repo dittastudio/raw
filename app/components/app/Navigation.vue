@@ -7,6 +7,7 @@ interface Props {
 
 const { items } = defineProps<Props>()
 
+// Used to hide the home link on lg screens as first-child still sees hidden node.
 const isLgScreen = useAtMedia(getMediaQuery('lg'))
 </script>
 

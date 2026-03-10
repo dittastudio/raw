@@ -1073,7 +1073,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-03-09T18:10:54.581Z",
+    "updated_at": "2026-03-10T15:39:23.372Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1145,16 +1145,122 @@
           "images"
         ]
       },
+      "logo_strength": {
+        "type": "custom",
+        "pos": 7,
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "0,25,50,75,100",
+            "_uid": "6f7b8e9b-d11a-4fb7-86b3-ee106d97fd04"
+          },
+          {
+            "name": "defaultValue",
+            "value": "60",
+            "_uid": "1f9fd4ba-c0f5-4a9f-aa0b-0d2aa5d36120"
+          },
+          {
+            "name": "minValue",
+            "value": "0",
+            "_uid": "ddae7a41-4264-4cda-bcdc-5aada093374e"
+          },
+          {
+            "name": "maxValue",
+            "value": "100",
+            "_uid": "b58cc580-cceb-4d85-911e-02eb0c40ec30"
+          },
+          {
+            "name": "stepSize",
+            "value": "5",
+            "_uid": "79df0eb2-b8f0-4900-8ced-ca515900315e"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "0",
+            "_uid": "17c8ceba-e0e2-4f9d-b9dd-204cc5ea21fd"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "100",
+            "_uid": "df57b3e8-0ec6-44c2-baf8-cc3234bc61c4"
+          },
+          {
+            "name": "style",
+            "value": "percent",
+            "_uid": "e0cfa2cd-f16b-49f7-8a5e-425cebe0259c"
+          },
+          {
+            "name": "unit",
+            "value": "percent",
+            "_uid": "fb1deffe-4207-40d3-91a0-1cb80948d42c"
+          }
+        ],
+        "id": "dph4hgT1T0CO_emKhnAbIw"
+      },
+      "logo_scale": {
+        "type": "custom",
+        "pos": 8,
+        "id": "tWwLxSwRSDW6n_A_6YuP8g",
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "",
+            "_uid": "6b8dc437-97ad-4f35-9f8d-3eefe7fe34c4"
+          },
+          {
+            "name": "defaultValue",
+            "value": "3.5",
+            "_uid": "5fda3313-b3d7-4f36-96fd-244588af0027"
+          },
+          {
+            "name": "minValue",
+            "value": "1",
+            "_uid": "a69abd38-e524-45a6-801d-3d86036759e5"
+          },
+          {
+            "name": "maxValue",
+            "value": "6",
+            "_uid": "ab246362-eb8f-4152-9e48-b4636dc1cbfb"
+          },
+          {
+            "name": "stepSize",
+            "value": "0.5",
+            "_uid": "45810e79-d9d8-4bd3-b448-bda33b8ae876"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "1",
+            "_uid": "640ca05f-946f-4e9b-b5ba-d05f35b244c3"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "6",
+            "_uid": "4682baac-b6a9-4a38-bce1-9e2a55f7fd02"
+          },
+          {
+            "name": "style",
+            "value": "decimal",
+            "_uid": "233597d5-28f1-41a2-b49c-8073734a5da0"
+          },
+          {
+            "name": "unit",
+            "value": "",
+            "_uid": "a4dd757d-e48d-4176-af3d-5f350047efaf"
+          }
+        ]
+      },
       "jaa_partnership": {
         "type": "boolean",
-        "pos": 7,
+        "pos": 9,
         "description": "Check to display the JAA Partnership.",
         "inline_label": true,
         "id": "2gk08YNvTiKehd5Fp0ew4Q"
       },
       "theme": {
         "type": "option",
-        "pos": 8,
+        "pos": 10,
         "use_uuid": true,
         "source": "internal",
         "datasource_slug": "theme",

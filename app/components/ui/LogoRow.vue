@@ -19,10 +19,7 @@ const {
 </script>
 
 <template>
-  <ul
-    v-if="items?.length"
-    class="logo-row"
-  >
+  <ul class="logo-row">
     <template
       v-for="item in items"
       :key="item.id"

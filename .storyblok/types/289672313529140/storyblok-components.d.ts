@@ -129,6 +129,8 @@ export interface BlockImpactDetails {
   cta_title?: string;
   cta?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   logos?: StoryblokMultiasset;
+  logo_strength?: unknown;
+  logo_scale?: unknown;
   jaa_partnership?: boolean;
   theme?: number | string;
   component: "block_impact_details";
