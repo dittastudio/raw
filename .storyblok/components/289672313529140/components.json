@@ -2330,7 +2330,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-03-10T14:57:48.969Z",
+    "updated_at": "2026-03-10T15:00:13.509Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2454,7 +2454,7 @@
           },
           {
             "name": "defaultValue",
-            "value": "1",
+            "value": "3.5",
             "_uid": "112792e5-fc72-4572-b718-87df00088e6f"
           },
           {

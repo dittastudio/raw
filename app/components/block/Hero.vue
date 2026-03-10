@@ -80,7 +80,7 @@ onUnmounted(() => {
               'w-full': block.max_width,
               'w-[85cqw] max-w-max': !block.max_width,
             }"
-            :style="block.max_width ? { maxWidth: `${block.max_width}px` } : null"
+            v-bind="block.max_width ? { style: { maxWidth: `${block.max_width}px` } } : {}"
             :src="block.logo.filename"
             :alt="block.logo.alt || name || ''"
             loading="lazy"
@@ -93,7 +93,7 @@ onUnmounted(() => {
               'w-full': block.max_width,
               'w-[85cqw] max-w-max': !block.max_width,
             }"
-            :style="block.max_width ? { maxWidth: `${block.max_width}px` } : null"
+            v-bind="block.max_width ? { style: { maxWidth: `${block.max_width}px` } } : {}"
             :src="block.logo.filename"
             :alt="block.logo.alt || name || ''"
             :height="100"
