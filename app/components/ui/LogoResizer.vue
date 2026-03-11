@@ -1,57 +1,52 @@
 <script lang="ts" setup>
-import type { StoryblokMultiasset } from '#storyblok-types'
+import type { StoryblokAsset } from '#storyblok-types'
 
 interface Props {
-  items?: StoryblokMultiasset
+  asset: StoryblokAsset
   cropWidth?: number
-  gap?: string
   strength?: number
   baseHeight?: number
 }
 
 const {
-  items,
+  asset,
   cropWidth = 100,
-  gap = 'var(--app-outer-gutter)',
-  strength = 60,
+  strength = 65,
   baseHeight = 3.5,
 } = defineProps<Props>()
 </script>
 
 <template>
-  <ul class="logo-row">
-    <template
-      v-for="item in items"
-      :key="item.id"
+  <span
+    v-if="asset.filename"
+    class="logo-resizer block"
+  >
+    <span
+      class="logo-resizer__inner block w-full"
+      :style="{
+        '--width': storyblokImageDimensions(asset.filename).width,
+        '--height': storyblokImageDimensions(asset.filename).height,
+      }"
     >
-      <li
-        v-if="item?.filename"
-        class="logo-row__item"
-        :style="{
-          '--width': storyblokImageDimensions(item.filename).width,
-          '--height': storyblokImageDimensions(item.filename).height,
-        }"
+      <img
+        v-if="fileExtension(asset.filename) === 'svg'"
+        class="block size-full object-contain"
+        :src="asset.filename"
+        :alt="asset.alt || asset.title || 'Logo'"
+        loading="lazy"
       >
-        <img
-          v-if="fileExtension(item.filename) === 'svg'"
-          class="block size-full object-contain"
-          :src="item.filename"
-          :alt="item.alt || item.title || 'Logo'"
-          loading="lazy"
-        >
 
-        <NuxtImg
-          v-else
-          class="block size-full object-contain"
-          :src="item.filename"
-          :alt="item.alt || item.title || 'Logo'"
-          :width="cropWidth"
-          densities="x1 x2"
-          loading="lazy"
-        />
-      </li>
-    </template>
-  </ul>
+      <NuxtImg
+        v-else
+        class="block size-full object-contain"
+        :src="asset.filename"
+        :alt="asset.alt || asset.title || 'Logo'"
+        :width="cropWidth"
+        densities="x1 x2"
+        loading="lazy"
+      />
+    </span>
+  </span>
 </template>
 
 <style>
@@ -64,7 +59,7 @@ const {
   inherits: false;
 }
 
-.logo-row {
+.logo-resizer {
   --strength: calc(v-bind(strength) / 100);
   --base-height: calc(v-bind(baseHeight) * 16px);
   --logo-min-size-factor: 0.375;
@@ -73,15 +68,9 @@ const {
   @variant md {
     --base-height: calc((v-bind(baseHeight) * 16px) * 1.25);
   }
-
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: v-bind(gap);
-  container-type: inline-size;
 }
 
-.logo-row__item {
+.logo-resizer__inner {
   --captured-length: var(--base-height);
   --area: pow(
     tan(atan2(var(--captured-length), 1px)),

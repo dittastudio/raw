@@ -58,6 +58,11 @@ const storyblokRichTextContent = (
 const storyblokSlug = (path: string): string =>
   ['', '/'].includes(path) ? '/home' : path.replace(/\/+$/, '')
 
+const storyblokRangeNumber = (field: unknown): number | undefined => {
+  const value = (field as { value?: string })?.value
+  return value !== undefined && value !== '' ? Number(value) : undefined
+}
+
 interface TypedMuxVideoAutoplay extends Omit<MuxVideoAutoplay, 'video'> {
   video: {
     playbackId?: string
@@ -215,6 +220,7 @@ export {
   storyblokEditor,
   storyblokImage,
   storyblokImageDimensions,
+  storyblokRangeNumber,
   storyblokRichTextContent,
   storyblokSlug,
 }

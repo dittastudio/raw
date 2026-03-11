@@ -88,11 +88,20 @@ const media = computed(() => block.media?.[0])
           v-if="block.logos?.length"
           class="mt-auto"
         >
-          <UiLogoRow
-            :items="block.logos"
-            :strength="Number((block.logo_strength as { value?: string })?.value)"
-            :base-height="Number((block.logo_scale as { value?: string })?.value)"
-          />
+          <ul class="flex flex-wrap items-center gap-(--app-outer-gutter)">
+            <template
+              v-for="item in block.logos"
+              :key="item.id"
+            >
+              <li v-if="item?.filename">
+                <UiLogoResizer
+                  :asset="item"
+                  :strength="storyblokRangeNumber(block.logo_strength)"
+                  :base-height="storyblokRangeNumber(block.logo_scale)"
+                />
+              </li>
+            </template>
+          </ul>
         </div>
       </div>
     </div>

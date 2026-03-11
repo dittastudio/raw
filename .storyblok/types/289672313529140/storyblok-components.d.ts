@@ -89,7 +89,9 @@ export interface BlockHeroBrand {
   headline_2?: StoryblokRichtext;
   text?: StoryblokRichtext;
   media?: (MuxVideoAutoplay | Image)[];
-  logo_ticker?: StoryblokMultiasset;
+  logos?: StoryblokMultiasset;
+  logo_strength?: unknown;
+  logo_scale?: unknown;
   component: "block_hero_brand";
   _uid: string;
 }
@@ -245,6 +247,8 @@ export interface BlockTicker {
   media?: (Image | MuxVideoAutoplay)[];
   text?: string;
   logos: StoryblokMultiasset;
+  logo_strength?: unknown;
+  logo_scale?: unknown;
   theme?: number | string;
   component: "block_ticker";
   _uid: string;

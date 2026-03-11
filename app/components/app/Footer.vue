@@ -2,6 +2,7 @@
 import type { Link, Logo } from '#storyblok-components'
 import type { StoryblokRichtext } from '#storyblok-types'
 import IconLogo from '@/assets/icons/logo.svg?component'
+import StoryblokLink from '@/components/storyblok/Link.vue'
 
 interface Props {
   text?: string
@@ -146,50 +147,17 @@ const form = useTemplateRef('form')
               :key="item._uid"
             >
               <li v-if="item.image?.filename">
-                <StoryblokLink
-                  v-if="item.link"
-                  :item="item.link"
-                  class="block size-10 sm:size-15"
+                <component
+                  :is="item.link ? StoryblokLink : 'span'"
+                  v-bind="item.link ? { item: item.link } : {}"
+                  class="block size-full"
                 >
-                  <img
-                    v-if="fileExtension(item.image.filename) === 'svg'"
-                    class="block size-full object-contain"
-                    :src="item.image.filename"
-                    :alt="item.image.alt || item.title || 'Logo'"
-                    loading="lazy"
-                  >
-
-                  <NuxtImg
-                    v-else
-                    class="block size-full object-contain"
-                    :src="item.image.filename"
-                    :alt="item.image.alt || item.title || 'Logo'"
-                    :width="200"
-                    loading="lazy"
+                  <UiLogoResizer
+                    :asset="item.image"
+                    :strength="60"
+                    :base-height="3"
                   />
-                </StoryblokLink>
-
-                <span
-                  v-else
-                  class="block size-10 sm:size-15"
-                >
-                  <img
-                    v-if="fileExtension(item.image.filename) === 'svg'"
-                    class="block size-full object-contain"
-                    :src="item.image.filename"
-                    :alt="item.image.alt || item.title || 'Logo'"
-                    loading="lazy"
-                  >
-
-                  <NuxtImg
-                    v-else
-                    class="block size-full object-contain"
-                    :src="item.image.filename"
-                    :alt="item.image.alt || item.title || 'Logo'"
-                    :width="200"
-                    loading="lazy"
-                  />
-                </span>
+                </component>
               </li>
             </template>
           </ul>

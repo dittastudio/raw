@@ -745,7 +745,7 @@
     "display_name": "Hero Brand",
     "description": "Displays a large hero which houses a large central Raw logo.",
     "created_at": "2026-01-15T10:13:39.202Z",
-    "updated_at": "2026-02-17T15:19:33.690Z",
+    "updated_at": "2026-03-11T12:05:45.714Z",
     "id": 134276789061080,
     "schema": {
       "headline": {
@@ -801,7 +801,7 @@
         "component_denylist": [],
         "id": "AxoU_I5hRzem4JMtnSdKGQ"
       },
-      "logo_ticker": {
+      "logos": {
         "type": "multiasset",
         "pos": 4,
         "filetypes": [
@@ -810,6 +810,113 @@
         "id": "6DjiyvloT_ikNyHHol8Y5A",
         "asset_folder_id": 134653467982768,
         "description": "Upload black and white SVGs for best results."
+      },
+      "logo_strength": {
+        "type": "custom",
+        "pos": 5,
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation",
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "[0,25,50,75,100]",
+            "_uid": "d1b06139-d081-481f-a0d7-ae60530dd367"
+          },
+          {
+            "name": "defaultValue",
+            "value": "60",
+            "_uid": "856db0c9-b9e8-46d9-abc5-3b4104f278a8"
+          },
+          {
+            "name": "minValue",
+            "value": "0",
+            "_uid": "ae069086-e436-46ce-a1d1-3af2981702c0"
+          },
+          {
+            "name": "maxValue",
+            "value": "100",
+            "_uid": "4fd150cf-d4b6-4244-9966-e81231c68758"
+          },
+          {
+            "name": "stepSize",
+            "value": "5",
+            "_uid": "da318328-fd3e-4bd6-8934-7971774c6357"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "",
+            "_uid": "883ea65d-862c-4a8a-af31-f49812ce80c6"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "",
+            "_uid": "d3d8954b-f2ef-41f3-8a40-99d8ce49f1a3"
+          },
+          {
+            "name": "style",
+            "value": "unit",
+            "_uid": "5f55d4c9-95ab-4e74-83e7-546db342750d"
+          },
+          {
+            "name": "unit",
+            "value": "percent",
+            "_uid": "a1a2dc4d-280e-4464-8aa7-0a5444bab3ea"
+          }
+        ],
+        "id": "p5MbPY37TCeZQ6ToqGHmTw"
+      },
+      "logo_scale": {
+        "type": "custom",
+        "pos": 6,
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "",
+            "_uid": "785247b2-b56a-42cf-be0c-efa1a75256b1"
+          },
+          {
+            "name": "defaultValue",
+            "value": "3.5",
+            "_uid": "dbe83b2c-68dc-415d-9417-a39f9408657e"
+          },
+          {
+            "name": "minValue",
+            "value": "1",
+            "_uid": "25da75ad-aa77-429c-a993-a1d24e44b6e3"
+          },
+          {
+            "name": "maxValue",
+            "value": "6",
+            "_uid": "ce837826-d985-4ec3-9e86-ecdeff5b10d4"
+          },
+          {
+            "name": "stepSize",
+            "value": "0.5",
+            "_uid": "67609598-e4bb-4013-9efb-fae733270bf0"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "",
+            "_uid": "9a220608-abf4-4f57-b473-5c6ffd29d2a3"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "",
+            "_uid": "7dbf2fb8-df2c-4fee-9298-34db0d360b6b"
+          },
+          {
+            "name": "style",
+            "value": "decimal",
+            "_uid": "6cf57087-a799-47fc-a818-c234a8fd820e"
+          },
+          {
+            "name": "unit",
+            "value": "",
+            "_uid": "3c9ab323-744a-4d77-b536-83dd7e0fa400"
+          }
+        ],
+        "id": "GAUiM3PIRY2xgBpHmSK54g"
       }
     },
     "image": "//a.storyblok.com/f/289672313529140/x/1b570cbc46/screenshot-2026-01-15-at-10-15-11.jpg",
@@ -1073,7 +1180,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-03-10T15:39:23.372Z",
+    "updated_at": "2026-03-11T11:56:50.799Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1152,7 +1259,7 @@
         "options": [
           {
             "name": "marks",
-            "value": "0,25,50,75,100",
+            "value": "[0,25,50,75,100]",
             "_uid": "6f7b8e9b-d11a-4fb7-86b3-ee106d97fd04"
           },
           {
@@ -1177,17 +1284,17 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "0",
+            "value": "",
             "_uid": "17c8ceba-e0e2-4f9d-b9dd-204cc5ea21fd"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "100",
+            "value": "",
             "_uid": "df57b3e8-0ec6-44c2-baf8-cc3234bc61c4"
           },
           {
             "name": "style",
-            "value": "percent",
+            "value": "unit",
             "_uid": "e0cfa2cd-f16b-49f7-8a5e-425cebe0259c"
           },
           {
@@ -1196,7 +1303,8 @@
             "_uid": "fb1deffe-4207-40d3-91a0-1cb80948d42c"
           }
         ],
-        "id": "dph4hgT1T0CO_emKhnAbIw"
+        "id": "dph4hgT1T0CO_emKhnAbIw",
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation"
       },
       "logo_scale": {
         "type": "custom",
@@ -1231,12 +1339,12 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "1",
+            "value": "",
             "_uid": "640ca05f-946f-4e9b-b5ba-d05f35b244c3"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "6",
+            "value": "",
             "_uid": "4682baac-b6a9-4a38-bce1-9e2a55f7fd02"
           },
           {
@@ -2245,7 +2353,7 @@
     "display_name": "Logo Ticker",
     "description": "Displays a logo ticker with optional background media & title",
     "created_at": "2026-01-28T18:19:09.336Z",
-    "updated_at": "2026-02-23T12:24:20.502Z",
+    "updated_at": "2026-03-11T11:58:36.624Z",
     "id": 138996733287616,
     "schema": {
       "media": {
@@ -2263,7 +2371,7 @@
       },
       "text": {
         "type": "text",
-        "pos": 2,
+        "pos": 1,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
@@ -2273,7 +2381,7 @@
       },
       "logos": {
         "type": "multiasset",
-        "pos": 3,
+        "pos": 2,
         "id": "hyBP33ZmSCa9jGXAsnhb2w",
         "description": "For best results use SVG images.",
         "filetypes": [
@@ -2281,9 +2389,116 @@
         ],
         "required": true
       },
+      "logo_strength": {
+        "type": "custom",
+        "pos": 3,
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation",
+        "id": "q3q2loBrQgCoOmqAJ-Zt2Q",
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "[0,25,50,75,100]",
+            "_uid": "26a74fda-efb4-437f-a1ca-e92d830efd10"
+          },
+          {
+            "name": "defaultValue",
+            "value": "60",
+            "_uid": "fc6be388-6e5a-4c1e-8cc7-a5b3312ad3bc"
+          },
+          {
+            "name": "minValue",
+            "value": "0",
+            "_uid": "1fde76b0-df90-4460-bc86-41abeeebdda6"
+          },
+          {
+            "name": "maxValue",
+            "value": "100",
+            "_uid": "30a73fa2-a86b-4372-b2a8-ff79b2c3601f"
+          },
+          {
+            "name": "stepSize",
+            "value": "5",
+            "_uid": "f9a4d54c-76c2-48de-9abb-c37b025c5a53"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "",
+            "_uid": "9cf54542-77de-4f77-a00f-384c26ae9b4a"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "",
+            "_uid": "eddc758c-06f0-4217-a66d-26b9ac873def"
+          },
+          {
+            "name": "style",
+            "value": "unit",
+            "_uid": "1e300b5e-4eef-4d13-bae6-26615388acdc"
+          },
+          {
+            "name": "unit",
+            "value": "percent",
+            "_uid": "8459f493-71ca-4e82-8d81-7f3e2eb71f1e"
+          }
+        ]
+      },
+      "logo_scale": {
+        "type": "custom",
+        "pos": 4,
+        "id": "2mv4ryybSvegHfI2rUrj2w",
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "",
+            "_uid": "4de387dd-e694-4407-9ec9-e2d8360a18e0"
+          },
+          {
+            "name": "defaultValue",
+            "value": "3.5",
+            "_uid": "488edf69-8858-4f4b-8f14-474a82be186d"
+          },
+          {
+            "name": "minValue",
+            "value": "1",
+            "_uid": "c7a391a8-c1ab-49b9-930e-8f0a24c973fc"
+          },
+          {
+            "name": "maxValue",
+            "value": "6",
+            "_uid": "ac1dfc91-a2e9-4047-a30a-00fde005f8a1"
+          },
+          {
+            "name": "stepSize",
+            "value": "0.5",
+            "_uid": "bfb2b28a-11d0-40d0-a43c-bde39498b90f"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "",
+            "_uid": "5dd19743-64e9-44f5-8492-b75a6cb5bf38"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "",
+            "_uid": "7486390c-3263-433c-86cb-58f4a3a92074"
+          },
+          {
+            "name": "style",
+            "value": "decimal",
+            "_uid": "bfb38d3d-b1e9-4a18-95ed-072cc8e525d0"
+          },
+          {
+            "name": "unit",
+            "value": "",
+            "_uid": "b67f0a71-7666-4eb1-9df9-b1de5fb151d4"
+          }
+        ]
+      },
       "theme": {
         "type": "option",
-        "pos": 4,
+        "pos": 5,
         "use_uuid": true,
         "required": false,
         "options": [],
@@ -2451,7 +2666,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-03-10T15:00:13.509Z",
+    "updated_at": "2026-03-11T11:57:07.297Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2541,17 +2756,17 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "0",
+            "value": "",
             "_uid": "ef8d8b77-626a-4d58-8a93-f8db28a5daf5"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "100",
+            "value": "",
             "_uid": "b5bad0ff-c836-4687-8a81-c692c6ae9fa6"
           },
           {
             "name": "style",
-            "value": "percent",
+            "value": "unit",
             "_uid": "9bd7a0c1-305a-4e21-81a5-ddf66d90cc66"
           },
           {
@@ -2560,7 +2775,8 @@
             "_uid": "87fb323a-6434-4163-a2e3-5f0b2cc8ea61"
           }
         ],
-        "id": "EsxDXKy_TluUbMwt0UKpyQ"
+        "id": "EsxDXKy_TluUbMwt0UKpyQ",
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation"
       },
       "logo_scale": {
         "type": "custom",
@@ -2595,12 +2811,12 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "1",
+            "value": "",
             "_uid": "d7bf0704-245e-49d8-b5ca-a31c91b066e8"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "6",
+            "value": "",
             "_uid": "5e6fd3ea-cbb8-41ee-abf3-dd22e4d18ff8"
           },
           {
