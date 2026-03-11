@@ -78,7 +78,7 @@ watch(() => route.fullPath, async () => {
       >
         <div class="flex flex-col gap-5 items-start">
           <h6 class="type-h4 text-pretty">
-            Cookie Consent
+            Cookies
           </h6>
 
           <p class="type-p">
@@ -102,7 +102,7 @@ watch(() => route.fullPath, async () => {
                 type="outline"
                 class="w-full p-0 m-0"
               >
-                Accept Cookies
+                Accept
               </UiButton>
             </button>
           </div>

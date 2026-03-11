@@ -621,7 +621,7 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-03-10T12:55:06.801Z",
+    "updated_at": "2026-03-11T16:44:40.369Z",
     "id": 132594684570052,
     "schema": {
       "logo": {
@@ -630,7 +630,7 @@
         "filetypes": [
           "images"
         ],
-        "asset_folder_id": 134653467982768,
+        "asset_folder_id": 149570834252135,
         "id": "btlv0jXpRwqHBpZAz2QlfA",
         "description": "SVG upload recommended."
       },
@@ -708,7 +708,7 @@
       }
     },
     "image": null,
-    "preview_field": null,
+    "preview_field": "headline",
     "is_root": false,
     "preview_tmpl": null,
     "is_nestable": true,
@@ -1559,7 +1559,7 @@
     "display_name": "Media",
     "description": "Displays an image or Mux video.",
     "created_at": "2026-02-04T08:55:58.455Z",
-    "updated_at": "2026-02-26T18:35:37.668Z",
+    "updated_at": "2026-03-11T17:21:31.972Z",
     "id": 141335586677156,
     "schema": {
       "title": {
@@ -1633,7 +1633,7 @@
     "image": null,
     "preview_field": null,
     "is_root": false,
-    "preview_tmpl": null,
+    "preview_tmpl": "{{@if(it.media[0].component === 'image')}}\n  {{@if(it.media[0].image.filename)}}\n    {{@image(it.media[0].image.filename)/}}\n  {{/if}}\n{{/if}}\n\n{{@if(it.media[0].component === 'mux_video_player')}}\n  {{@if(it.media[0].poster.filename)}}\n    {{@image(it.media[0].poster.filename)/}}\n  {{/if}}\n{{/if}}\n\n{{@if(it.media[0].component === 'mux_video_autoplay')}}\n  {{@if(it.media[0].poster.filename)}}\n    {{@image(it.media[0].poster.filename)/}}\n  {{/if}}\n{{/if}}",
     "is_nestable": true,
     "all_presets": [],
     "preset_id": null,
@@ -4000,7 +4000,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-03-10T13:41:06.345Z",
+    "updated_at": "2026-03-11T16:36:49.877Z",
     "id": 131189203587517,
     "schema": {
       "preview_logo": {
@@ -4010,7 +4010,8 @@
         "filetypes": [
           "images"
         ],
-        "id": "BRKg-8qqQ9ySyXcW1jOTfw"
+        "id": "BRKg-8qqQ9ySyXcW1jOTfw",
+        "asset_folder_id": 149570834252135
       },
       "preview_max_width": {
         "type": "number",
