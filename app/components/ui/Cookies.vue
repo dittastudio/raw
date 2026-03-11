@@ -78,10 +78,10 @@ defineOptions({
 
   <dialog
     ref="modal"
-    class="fixed left-auto top-auto right-0 bottom-0 z-100 block max-w-full max-h-none transition-opacity duration-500 overflow-hidden backdrop:hidden bg-transparent"
+    class="fixed inset-0 z-100 block w-full h-dvh max-w-full max-h-none transition-opacity duration-500 overflow-hidden backdrop:hidden bg-transparent pointer-events-none"
     :class="{
-      'opacity-0 delay-500 pointer-events-none': !modalOpen,
-      'opacity-100 delay-0 pointer-events-auto': modalOpen,
+      'opacity-0 delay-500': !modalOpen,
+      'opacity-100 delay-0': modalOpen,
     }"
     @cancel.prevent="cancel"
   >
@@ -90,10 +90,10 @@ defineOptions({
       class="flex flex-col items-center size-full wrapper p-4 overflow-y-scroll overscroll-contain"
     >
       <div
-        class="relative w-full max-w-140 m-auto"
+        class="relative w-full max-w-110 mt-auto ml-auto"
         :class="{
-          'opacity-0 scale-95 transition-[opacity,scale] duration-500 ease-out delay-0': !modalOpen,
-          'opacity-100 scale-100 transition-[opacity,scale] duration-500 ease-outQuart delay-500': modalOpen,
+          'opacity-0 scale-95 transition-[opacity,scale] duration-500 ease-out delay-0 pointer-events-none': !modalOpen,
+          'opacity-100 scale-100 transition-[opacity,scale] duration-500 ease-outQuart delay-500 pointer-events-auto': modalOpen,
         }"
       >
         <button

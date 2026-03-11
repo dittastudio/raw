@@ -78,39 +78,31 @@ watch(() => route.fullPath, async () => {
       >
         <div class="flex flex-col gap-5 items-start">
           <h6 class="type-h4 text-pretty">
-            Accept Cookies
+            Cookie Consent
           </h6>
 
           <p class="type-p">
-            We use cookies to improve your experience.<br>
-            Confirm your choice using the buttons below.
+            We use cookies to personalise content and ads. You consent to our cookies if you continue to use our website.
+            Read our
+            <NuxtLink
+              to="/privacy-policy"
+              class="text-link"
+            >
+              Privacy Policy
+            </NuxtLink>
           </p>
 
           <div class="flex gap-5 w-full">
             <button
               type="button"
-              class="w-30"
-              @click="decide('decline')"
+              @click="decide('accept')"
             >
               <UiButton
                 theme="dark"
                 type="outline"
                 class="w-full p-0 m-0"
               >
-                Decline
-              </UiButton>
-            </button>
-
-            <button
-              type="button"
-              class="w-30"
-              @click="decide('accept')"
-            >
-              <UiButton
-                theme="dark"
-                class="w-full p-0 m-0"
-              >
-                Accept
+                Accept Cookies
               </UiButton>
             </button>
           </div>
