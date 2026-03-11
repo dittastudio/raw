@@ -245,6 +245,8 @@ export interface BlockTicker {
   media?: (Image | MuxVideoAutoplay)[];
   text?: string;
   logos: StoryblokMultiasset;
+  logo_strength?: unknown;
+  logo_scale?: unknown;
   theme?: number | string;
   component: "block_ticker";
   _uid: string;

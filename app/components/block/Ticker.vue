@@ -72,25 +72,10 @@ const media = computed(() => block.media?.[0] || null)
           :key="logo.id"
         >
           <template v-if="logo.filename">
-            <img
-              v-if="fileExtension(logo.filename) === 'svg'"
-              class="block w-auto h-11"
-              :src="logo.filename"
-              :alt="logo.alt || block.text || ''"
-              :width="storyblokImageDimensions(logo.filename).width"
-              :height="storyblokImageDimensions(logo.filename).height"
-              loading="lazy"
-            >
-
-            <NuxtImg
-              v-else
-              class="block w-auto h-11"
-              :src="logo.filename"
-              :alt="logo.alt || block.text || ''"
-              :width="storyblokImageDimensions(logo.filename).width"
-              :height="storyblokImageDimensions(logo.filename).height"
-              densities="x1 x2"
-              loading="lazy"
+            <UiLogoResizer
+              :asset="logo"
+              :strength="storyblokRangeNumber(block.logo_strength)"
+              :base-height="storyblokRangeNumber(block.logo_scale)"
             />
           </template>
         </template>

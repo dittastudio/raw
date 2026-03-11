@@ -19,10 +19,10 @@ const {
 <template>
   <span
     v-if="asset.filename"
-    class="logo-resizer"
+    class="logo-resizer block"
   >
     <span
-      class="logo-resizer__inner block size-full"
+      class="logo-resizer__inner block w-full"
       :style="{
         '--width': storyblokImageDimensions(asset.filename).width,
         '--height': storyblokImageDimensions(asset.filename).height,

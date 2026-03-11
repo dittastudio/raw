@@ -1073,7 +1073,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-03-11T11:23:44.472Z",
+    "updated_at": "2026-03-11T11:56:50.799Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1196,7 +1196,8 @@
             "_uid": "fb1deffe-4207-40d3-91a0-1cb80948d42c"
           }
         ],
-        "id": "dph4hgT1T0CO_emKhnAbIw"
+        "id": "dph4hgT1T0CO_emKhnAbIw",
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation"
       },
       "logo_scale": {
         "type": "custom",
@@ -2245,7 +2246,7 @@
     "display_name": "Logo Ticker",
     "description": "Displays a logo ticker with optional background media & title",
     "created_at": "2026-01-28T18:19:09.336Z",
-    "updated_at": "2026-02-23T12:24:20.502Z",
+    "updated_at": "2026-03-11T11:58:36.624Z",
     "id": 138996733287616,
     "schema": {
       "media": {
@@ -2263,7 +2264,7 @@
       },
       "text": {
         "type": "text",
-        "pos": 2,
+        "pos": 1,
         "id": "XHKygncmRlmndE_tLtHJig",
         "customize_toolbar": true,
         "toolbar": [
@@ -2273,7 +2274,7 @@
       },
       "logos": {
         "type": "multiasset",
-        "pos": 3,
+        "pos": 2,
         "id": "hyBP33ZmSCa9jGXAsnhb2w",
         "description": "For best results use SVG images.",
         "filetypes": [
@@ -2281,9 +2282,116 @@
         ],
         "required": true
       },
+      "logo_strength": {
+        "type": "custom",
+        "pos": 3,
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation",
+        "id": "q3q2loBrQgCoOmqAJ-Zt2Q",
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "[0,25,50,75,100]",
+            "_uid": "26a74fda-efb4-437f-a1ca-e92d830efd10"
+          },
+          {
+            "name": "defaultValue",
+            "value": "60",
+            "_uid": "fc6be388-6e5a-4c1e-8cc7-a5b3312ad3bc"
+          },
+          {
+            "name": "minValue",
+            "value": "0",
+            "_uid": "1fde76b0-df90-4460-bc86-41abeeebdda6"
+          },
+          {
+            "name": "maxValue",
+            "value": "100",
+            "_uid": "30a73fa2-a86b-4372-b2a8-ff79b2c3601f"
+          },
+          {
+            "name": "stepSize",
+            "value": "5",
+            "_uid": "f9a4d54c-76c2-48de-9abb-c37b025c5a53"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "",
+            "_uid": "9cf54542-77de-4f77-a00f-384c26ae9b4a"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "",
+            "_uid": "eddc758c-06f0-4217-a66d-26b9ac873def"
+          },
+          {
+            "name": "style",
+            "value": "unit",
+            "_uid": "1e300b5e-4eef-4d13-bae6-26615388acdc"
+          },
+          {
+            "name": "unit",
+            "value": "percent",
+            "_uid": "8459f493-71ca-4e82-8d81-7f3e2eb71f1e"
+          }
+        ]
+      },
+      "logo_scale": {
+        "type": "custom",
+        "pos": 4,
+        "id": "2mv4ryybSvegHfI2rUrj2w",
+        "field_type": "storyblok-slider",
+        "options": [
+          {
+            "name": "marks",
+            "value": "",
+            "_uid": "4de387dd-e694-4407-9ec9-e2d8360a18e0"
+          },
+          {
+            "name": "defaultValue",
+            "value": "3.5",
+            "_uid": "488edf69-8858-4f4b-8f14-474a82be186d"
+          },
+          {
+            "name": "minValue",
+            "value": "1",
+            "_uid": "c7a391a8-c1ab-49b9-930e-8f0a24c973fc"
+          },
+          {
+            "name": "maxValue",
+            "value": "6",
+            "_uid": "ac1dfc91-a2e9-4047-a30a-00fde005f8a1"
+          },
+          {
+            "name": "stepSize",
+            "value": "0.5",
+            "_uid": "bfb2b28a-11d0-40d0-a43c-bde39498b90f"
+          },
+          {
+            "name": "minimumSignificantDigits",
+            "value": "",
+            "_uid": "5dd19743-64e9-44f5-8492-b75a6cb5bf38"
+          },
+          {
+            "name": "maximumSignificantDigits",
+            "value": "",
+            "_uid": "7486390c-3263-433c-86cb-58f4a3a92074"
+          },
+          {
+            "name": "style",
+            "value": "decimal",
+            "_uid": "bfb38d3d-b1e9-4a18-95ed-072cc8e525d0"
+          },
+          {
+            "name": "unit",
+            "value": "",
+            "_uid": "b67f0a71-7666-4eb1-9df9-b1de5fb151d4"
+          }
+        ]
+      },
       "theme": {
         "type": "option",
-        "pos": 4,
+        "pos": 5,
         "use_uuid": true,
         "required": false,
         "options": [],
@@ -2451,7 +2559,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-03-11T11:27:05.698Z",
+    "updated_at": "2026-03-11T11:57:07.297Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2560,7 +2668,8 @@
             "_uid": "87fb323a-6434-4163-a2e3-5f0b2cc8ea61"
           }
         ],
-        "id": "EsxDXKy_TluUbMwt0UKpyQ"
+        "id": "EsxDXKy_TluUbMwt0UKpyQ",
+        "description": "How much logos can differ in size.\nLower = more uniform\nHigher = more variation"
       },
       "logo_scale": {
         "type": "custom",
