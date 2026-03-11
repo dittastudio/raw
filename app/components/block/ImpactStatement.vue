@@ -67,7 +67,10 @@ const createAnimations = () => {
     const title = item.querySelector('[data-js="title"]')
     const copy = item.querySelector('[data-js="copy"]')
 
-    if (title) {
+    const isFirst = i === 0
+    const isLast = i === items.length - 1
+
+    if (title && !isFirst) {
       tl
         .fromTo(title, {
           opacity: 0,
@@ -75,14 +78,13 @@ const createAnimations = () => {
           filter: 'blur(5px)',
         }, {
           opacity: 1,
-          y: 0,
           scale: 1,
           filter: 'blur(0px)',
           duration: 1,
         })
     }
 
-    if (copy) {
+    if (copy && !isFirst) {
       tl
         .fromTo(copy, {
           opacity: 0,
@@ -98,22 +100,26 @@ const createAnimations = () => {
     }
 
     tl
-      .to({}, { duration: 1 })
+      .to({}, { duration: 0.5 })
 
-    if (title) {
+    if (title && !isLast) {
       tl
         .to(title, {
           opacity: 0,
+          scale: 0.95,
+          filter: 'blur(5px)',
           duration: 1,
         })
     }
 
-    if (copy) {
+    if (copy && !isLast) {
       tl
         .to(copy, {
           opacity: 0,
+          scale: 0.95,
+          filter: 'blur(5px)',
           duration: 1,
-        }, '<')
+        }, '<0.5')
     }
   }
 }
