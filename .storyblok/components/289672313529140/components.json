@@ -1073,7 +1073,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-03-10T15:39:23.372Z",
+    "updated_at": "2026-03-11T11:23:44.472Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1152,7 +1152,7 @@
         "options": [
           {
             "name": "marks",
-            "value": "0,25,50,75,100",
+            "value": "[0,25,50,75,100]",
             "_uid": "6f7b8e9b-d11a-4fb7-86b3-ee106d97fd04"
           },
           {
@@ -1177,17 +1177,17 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "0",
+            "value": "",
             "_uid": "17c8ceba-e0e2-4f9d-b9dd-204cc5ea21fd"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "100",
+            "value": "",
             "_uid": "df57b3e8-0ec6-44c2-baf8-cc3234bc61c4"
           },
           {
             "name": "style",
-            "value": "percent",
+            "value": "unit",
             "_uid": "e0cfa2cd-f16b-49f7-8a5e-425cebe0259c"
           },
           {
@@ -1231,12 +1231,12 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "1",
+            "value": "",
             "_uid": "640ca05f-946f-4e9b-b5ba-d05f35b244c3"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "6",
+            "value": "",
             "_uid": "4682baac-b6a9-4a38-bce1-9e2a55f7fd02"
           },
           {
@@ -2451,7 +2451,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-03-10T15:00:13.509Z",
+    "updated_at": "2026-03-11T11:27:05.698Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2541,17 +2541,17 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "0",
+            "value": "",
             "_uid": "ef8d8b77-626a-4d58-8a93-f8db28a5daf5"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "100",
+            "value": "",
             "_uid": "b5bad0ff-c836-4687-8a81-c692c6ae9fa6"
           },
           {
             "name": "style",
-            "value": "percent",
+            "value": "unit",
             "_uid": "9bd7a0c1-305a-4e21-81a5-ddf66d90cc66"
           },
           {
@@ -2595,12 +2595,12 @@
           },
           {
             "name": "minimumSignificantDigits",
-            "value": "1",
+            "value": "",
             "_uid": "d7bf0704-245e-49d8-b5ca-a31c91b066e8"
           },
           {
             "name": "maximumSignificantDigits",
-            "value": "6",
+            "value": "",
             "_uid": "5e6fd3ea-cbb8-41ee-abf3-dd22e4d18ff8"
           },
           {
