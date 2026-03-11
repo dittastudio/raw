@@ -157,7 +157,7 @@ onBeforeUnmount(stopSlideRotation)
   </div>
 
   <div
-    v-if="block.logo_ticker"
+    v-if="block.logos?.length"
     class="py-10 bg-offwhite"
   >
     <UiTicker
@@ -166,29 +166,14 @@ onBeforeUnmount(stopSlideRotation)
       spacing-classes="gap-10 px-5 md:gap-20 md:px-10"
     >
       <template
-        v-for="logo in block.logo_ticker"
+        v-for="logo in block.logos"
         :key="logo.id"
       >
         <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
-          <img
-            v-if="fileExtension(logo.filename) === 'svg'"
-            class="block w-auto h-9 md:h-11"
-            :src="logo.filename"
-            :alt="logo.alt || ''"
-            :width="storyblokImageDimensions(logo.filename).width"
-            :height="storyblokImageDimensions(logo.filename).height"
-            loading="lazy"
-          >
-
-          <NuxtImg
-            v-else
-            class="block w-auto h-9 md:h-11"
-            :src="logo.filename"
-            :alt="logo.alt || ''"
-            :width="storyblokImageDimensions(logo.filename).width"
-            :height="storyblokImageDimensions(logo.filename).height"
-            densities="x1 x2"
-            loading="lazy"
+          <UiLogoResizer
+            :asset="logo"
+            :strength="storyblokRangeNumber(block.logo_strength)"
+            :base-height="storyblokRangeNumber(block.logo_scale)"
           />
         </template>
       </template>
