@@ -150,7 +150,7 @@ const form = useTemplateRef('form')
                 <component
                   :is="item.link ? StoryblokLink : 'span'"
                   v-bind="item.link ? { item: item.link } : {}"
-                  class="block size-full"
+                  class="block"
                 >
                   <UiLogoResizer
                     :asset="item.image"

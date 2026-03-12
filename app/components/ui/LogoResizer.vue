@@ -19,10 +19,10 @@ const {
 <template>
   <span
     v-if="asset.filename"
-    class="logo-resizer block"
+    class="logo-resizer"
   >
     <span
-      class="logo-resizer__inner block w-full"
+      class="logo-resizer__inner"
       :style="{
         '--width': storyblokImageDimensions(asset.filename).width,
         '--height': storyblokImageDimensions(asset.filename).height,
@@ -30,7 +30,7 @@ const {
     >
       <img
         v-if="fileExtension(asset.filename) === 'svg'"
-        class="block size-full object-contain"
+        class="block size-[inherit] object-contain"
         :src="asset.filename"
         :alt="asset.alt || asset.title || 'Logo'"
         loading="lazy"
