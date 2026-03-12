@@ -3,14 +3,14 @@ import type { StoryblokAsset } from '#storyblok-types'
 
 interface Props {
   asset: StoryblokAsset
-  cropWidth?: number
+  cropHeight?: string
   strength?: number
   baseHeight?: number
 }
 
 const {
   asset,
-  cropWidth = 100,
+  cropHeight = '100',
   strength = 65,
   baseHeight = 3.5,
 } = defineProps<Props>()
@@ -38,11 +38,14 @@ const {
 
       <NuxtImg
         v-else
-        class="block size-full object-contain"
+        class="block size-[inherit] object-contain"
         :src="asset.filename"
         :alt="asset.alt || asset.title || 'Logo'"
-        :width="cropWidth"
+        :height="cropHeight"
         densities="x1 x2"
+        :modifiers="{
+          smart: false,
+        }"
         loading="lazy"
       />
     </span>
