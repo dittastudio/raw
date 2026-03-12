@@ -512,7 +512,7 @@ export interface Project {
 
 export interface Settings {
   navigation?: Link[];
-  statement?: string;
+  statement?: StoryblokRichtext;
   statement_media?: (Image | MuxVideoAutoplay)[];
   cta_title?: string;
   cta_link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;

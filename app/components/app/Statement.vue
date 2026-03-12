@@ -1,10 +1,10 @@
 <script lang="ts" setup>
 import type { Image, MuxVideoAutoplay, MuxVideoPlayer } from '#storyblok-components'
-import type { StoryblokMultilink } from '#storyblok-types'
+import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
 
 interface Props {
   media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)
-  statement?: string
+  statement?: StoryblokRichtext
   title?: string
   link?: StoryblokMultilink
 }
@@ -53,12 +53,12 @@ const { media, statement, title, link } = defineProps<Props>()
 
     <div class="wrapper py-35 flex flex-col items-center justify-center">
       <div class="flex flex-col items-center justify-center gap-8 w-full max-w-325">
-        <h5
-          v-if="statement"
-          class="type-h2 text-center"
+        <div
+          v-if="storyblokRichTextContent(statement)"
+          class="[&_h5]:type-h2 text-center"
         >
-          {{ statement }}
-        </h5>
+          <StoryblokText :html="statement" />
+        </div>
 
         <StoryblokLink
           v-if="title && link"
