@@ -87,6 +87,21 @@ export default defineNuxtConfig({
     },
   },
   vite: {
+    optimizeDeps: {
+      include: [
+        '@storyblok/vue',
+        '@regle/rules',
+        '@regle/core',
+        '@vueuse/core',
+        '@mux/mux-player',
+        'tailwind-merge',
+        'gsap',
+        'gsap/ScrollTrigger',
+        'gsap/SplitText',
+        'gsap/DrawSVGPlugin',
+        'keen-slider/vue.es',
+      ],
+    },
     plugins: [
       devtoolsJson(),
       tailwindcss(),
