@@ -12,10 +12,19 @@ interface Props {
 const { block } = defineProps<Props>()
 
 const theme = computed(() => (block.theme as Themes) ?? 'light')
-
 const carouselRef = useTemplateRef<Carousel>('carouselFade')
-
 const isSmBreakpoint = '600px'
+
+const projects = computed(() => {
+  const currentProjects = block.projects as ISbStoryData<Project>[] || []
+
+  const newProjects = currentProjects.map(project => ({
+    ...project,
+    logoMaxWidth: project.content.blocks?.find(block => block.component === 'block_hero')?.max_width,
+  }))
+
+  return newProjects
+})
 </script>
 
 <template>
@@ -35,7 +44,7 @@ const isSmBreakpoint = '600px'
 
     <UiCarouselFade
       ref="carouselFade"
-      :items="(block.projects as ISbStoryData<Project>[])"
+      :items="projects"
       :options="{ loop: true }"
       :autoplay-interval="Number(block.autoplay_delay) * 1000 || 5000"
       autoplay
@@ -99,17 +108,38 @@ const isSmBreakpoint = '600px'
             "
           >
             <div class="wrapper-max text-offwhite text-balance size-full flex flex-col items-start justify-between">
-              <NuxtImg
+              <div
                 v-if="item.content.preview_logo?.filename && storyblokAssetType(item.content.preview_logo.filename) === 'image'"
-                class="block w-auto h-17 md:h-23"
-                :src="item.content.preview_logo.filename"
-                :alt="item.content.preview_logo.alt || block.title || item.content?.preview_text || ''"
-                :width="Math.round(storyblokImageDimensions(item.content.preview_logo.filename).height / storyblokImageDimensions(item.content.preview_logo.filename).width * 92)"
-                :height="92"
-                densities="x1 x2"
-                :modifiers="{ smart: false }"
-                loading="lazy"
-              />
+                class="w-full flex items-start justify-start"
+              >
+                <img
+                  v-if="fileExtension(item.content.preview_logo.filename) === 'svg'"
+                  class="block h-auto"
+                  :class="{
+                    'w-full': item.logoMaxWidth,
+                    'w-[85cqw] max-w-max': !item.logoMaxWidth,
+                  }"
+                  v-bind="item.logoMaxWidth ? { style: { maxWidth: `${item.logoMaxWidth}px` } } : {}"
+                  :src="item.content.preview_logo.filename"
+                  :alt="item.content.preview_logo.alt || block.title || item.content?.preview_text || ''"
+                  loading="lazy"
+                >
+
+                <NuxtImg
+                  v-else
+                  class="block h-auto"
+                  :class="{
+                    'w-full': item.logoMaxWidth,
+                    'w-[85cqw] max-w-max': !item.logoMaxWidth,
+                  }"
+                  v-bind="item.logoMaxWidth ? { style: { maxWidth: `${item.logoMaxWidth}px` } } : {}"
+                  :src="item.content.preview_logo.filename"
+                  :alt="item.content.preview_logo.alt || block.title || item.content?.preview_text || ''"
+                  :height="100"
+                  densities="x1 x2"
+                  loading="lazy"
+                />
+              </div>
 
               <div class="flex flex-col gap-y-6 md:gap-y-10">
                 <h3 class="type-p max-w-[32ch]">
