@@ -148,14 +148,15 @@ const form = useTemplateRef('form')
             >
               <li v-if="item.image?.filename">
                 <component
-                  :is="item.link ? StoryblokLink : 'span'"
-                  v-bind="item.link ? { item: item.link } : {}"
+                  :is="item.link?.cached_url ? StoryblokLink : 'span'"
+                  v-bind="item.link?.cached_url ? { item: item.link } : {}"
                   class="block"
                 >
                   <UiLogoResizer
                     :asset="item.image"
                     :strength="60"
                     :base-height="3"
+                    :title="item.title"
                   />
                 </component>
               </li>

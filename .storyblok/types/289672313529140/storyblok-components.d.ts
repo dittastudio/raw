@@ -150,6 +150,7 @@ export interface BlockLogoWall {
   title?: string;
   headline?: StoryblokRichtext;
   logos?: StoryblokMultiasset;
+  items: Logo[];
   theme?: number | string;
   component: "block_logo_wall";
   _uid: string;
@@ -351,7 +352,7 @@ export interface ListItem {
 
 export interface Logo {
   image: StoryblokAsset;
-  title: string;
+  title?: string;
   link?: Exclude<StoryblokMultilink, {linktype?: "asset"}>;
   component: "logo";
   _uid: string;

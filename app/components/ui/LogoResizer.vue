@@ -6,6 +6,7 @@ interface Props {
   cropHeight?: string
   strength?: number
   baseHeight?: number
+  title?: string
 }
 
 const {
@@ -32,7 +33,7 @@ const {
         v-if="fileExtension(asset.filename) === 'svg'"
         class="block size-[inherit] object-contain"
         :src="asset.filename"
-        :alt="asset.alt || asset.title || 'Logo'"
+        :alt="title || asset.alt || asset.title || 'Logo'"
         loading="lazy"
       >
 
@@ -40,7 +41,7 @@ const {
         v-else
         class="block size-[inherit] object-contain"
         :src="asset.filename"
-        :alt="asset.alt || asset.title || 'Logo'"
+        :alt="title || asset.alt || asset.title || 'Logo'"
         :height="cropHeight"
         densities="x1 x2"
         :modifiers="{

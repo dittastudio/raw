@@ -1481,7 +1481,7 @@
     "display_name": "Logo Wall",
     "description": "",
     "created_at": "2026-01-21T16:53:11.246Z",
-    "updated_at": "2026-02-05T14:06:50.666Z",
+    "updated_at": "2026-03-16T17:50:21.176Z",
     "id": 136498344949214,
     "schema": {
       "title": {
@@ -1513,11 +1513,25 @@
         "description": "Upload black and white SVGs for best results.",
         "filetypes": [
           "images"
-        ]
+        ],
+        "display_name": "Logos (Legacy)"
+      },
+      "items": {
+        "type": "bloks",
+        "pos": 3,
+        "restrict_type": "",
+        "restrict_components": true,
+        "minimum": 1,
+        "required": true,
+        "component_whitelist": [
+          "logo"
+        ],
+        "component_denylist": [],
+        "id": "mIJBojBVR1u3l6c7gnKUJg"
       },
       "theme": {
         "type": "option",
-        "pos": 3,
+        "pos": 4,
         "use_uuid": true,
         "id": "9tVuSuyyT-2CTpvlqiYblQ",
         "source": "internal",
@@ -1529,7 +1543,7 @@
     "image": "//a.storyblok.com/f/289672313529140/x/243f2c3a33/screenshot-2026-01-21-at-16-54-12.jpg",
     "preview_field": null,
     "is_root": false,
-    "preview_tmpl": null,
+    "preview_tmpl": "",
     "is_nestable": true,
     "all_presets": [],
     "preset_id": null,
@@ -3238,7 +3252,7 @@
     "display_name": null,
     "description": "Creates a link to anywhere",
     "created_at": "2026-01-09T16:09:46.828Z",
-    "updated_at": "2026-01-09T16:10:37.528Z",
+    "updated_at": "2026-03-16T17:45:42.498Z",
     "id": 132240944454403,
     "schema": {
       "image": {
@@ -3254,7 +3268,8 @@
         "type": "text",
         "pos": 1,
         "id": "bBwTuIOwTlizek3escaIFg",
-        "required": true
+        "required": false,
+        "display_name": ""
       },
       "link": {
         "type": "multilink",
@@ -3272,7 +3287,7 @@
     "image": null,
     "preview_field": null,
     "is_root": false,
-    "preview_tmpl": null,
+    "preview_tmpl": "{{@if(it.image.filename)}}\n  {{@image(it.image.filename)/}}\n{{/if}}\n",
     "is_nestable": true,
     "all_presets": [],
     "preset_id": null,
