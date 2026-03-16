@@ -149,7 +149,6 @@ export interface BlockImpactStatement {
 export interface BlockLogoWall {
   title?: string;
   headline?: StoryblokRichtext;
-  logos?: StoryblokMultiasset;
   items: Logo[];
   theme?: number | string;
   component: "block_logo_wall";

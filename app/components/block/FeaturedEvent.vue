@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockFeaturedEvent, Event, Post } from '#storyblok-components'
+import type { BlockFeaturedEvent, Event } from '#storyblok-components'
 import type { Themes } from '@@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
@@ -8,10 +8,19 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
-// const storyblokApi = useStoryblokApi()
 
 const event = computed(() => {
-  const eventData = block.event as ISbStoryData<Event>
+  const eventData = block.event as ISbStoryData<Event> | undefined
+
+  if (!eventData?.content) {
+    return {
+      name: eventData?.name,
+      preview_image: undefined,
+      preview_text: undefined,
+      eventDatetime: undefined,
+      jaaPartnership: undefined,
+    }
+  }
 
   return {
     name: eventData.name,
@@ -40,7 +49,7 @@ const event = computed(() => {
     <div class="col-span-full md:col-start-4 md:col-span-9">
       <div class="w-full flex flex-col gap-6">
         <EffectTextReveal
-          v-if="storyblokRichTextContent(block.headline) || event.eventDatetime"
+          v-if="storyblokRichTextContent(block.headline) || event?.eventDatetime"
           :delay="500"
           class="**:type-h2"
         >
@@ -49,12 +58,18 @@ const event = computed(() => {
             :html="block.headline"
           />
 
-          <time :datetime="event.eventDatetime">
+          <time
+            v-if="event?.eventDatetime"
+            :datetime="event.eventDatetime"
+          >
             {{ formatDateDMY(event.eventDatetime) }}
           </time>
         </EffectTextReveal>
 
-        <EffectTextReveal :delay="1000">
+        <EffectTextReveal
+          v-if="event?.name"
+          :delay="1000"
+        >
           <h2 class="type-h4 max-w-[30em] text-balance">
             {{ event.name }}
           </h2>
@@ -77,14 +92,14 @@ const event = computed(() => {
       />
 
       <UiPartnershipButton
-        v-if="event.jaaPartnership"
+        v-if="event?.jaaPartnership"
         :theme="(block.theme as Themes) ?? 'light'"
       />
     </div>
 
     <div class="flex flex-col gap-6 md:gap-10 col-start-2 sm:col-start-5 md:col-start-9 col-span-full">
       <p
-        v-if="event.preview_text"
+        v-if="event?.preview_text"
         class="type-p text-pretty max-w-[24em] whitespace-pre-wrap"
       >
         {{ event.preview_text }}

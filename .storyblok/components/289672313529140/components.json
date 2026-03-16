@@ -4,7 +4,7 @@
     "display_name": "B Corp Graph",
     "description": "",
     "created_at": "2026-01-27T21:58:45.009Z",
-    "updated_at": "2026-03-09T15:43:52.399Z",
+    "updated_at": "2026-03-16T18:37:22.641Z",
     "id": 138696806447243,
     "schema": {
       "title": {
@@ -98,7 +98,7 @@
         "default_value": "150"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/e0099d60a5/screenshot-2026-03-16-at-18-37-11.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -131,7 +131,7 @@
     "display_name": "Contact",
     "description": "",
     "created_at": "2026-01-21T18:18:48.937Z",
-    "updated_at": "2026-02-05T14:30:28.479Z",
+    "updated_at": "2026-03-16T18:26:35.496Z",
     "id": 136519388948249,
     "schema": {
       "title": {
@@ -178,7 +178,7 @@
         "default_value": "light"
       }
     },
-    "image": "",
+    "image": "//a.storyblok.com/f/289672313529140/x/afa00dc0b1/screenshot-2026-03-16-at-18-26-19.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -312,7 +312,7 @@
     "display_name": "Event Overview",
     "description": "Displays the overview for your event with date.",
     "created_at": "2026-02-05T19:42:48.330Z",
-    "updated_at": "2026-02-05T20:33:59.109Z",
+    "updated_at": "2026-03-16T18:52:55.676Z",
     "id": 141848446285775,
     "schema": {
       "copy": {
@@ -360,7 +360,7 @@
         "exclude_empty_option": true
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/b484db9473/screenshot-2026-03-16-at-18-52-26.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -388,7 +388,7 @@
     "display_name": "Event Text",
     "description": "Displays the text block for an event.",
     "created_at": "2026-02-05T20:47:01.867Z",
-    "updated_at": "2026-02-05T20:48:01.378Z",
+    "updated_at": "2026-03-16T18:53:57.566Z",
     "id": 141864230377645,
     "schema": {
       "title": {
@@ -441,7 +441,7 @@
         "exclude_empty_option": true
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/c2a32802cd/screenshot-2026-03-16-at-18-53-42.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -469,7 +469,7 @@
     "display_name": "Featured Event",
     "description": "Displays a standalone event to feature",
     "created_at": "2026-03-09T20:56:38.442Z",
-    "updated_at": "2026-03-09T21:18:35.913Z",
+    "updated_at": "2026-03-16T18:30:44.656Z",
     "id": 153191212830757,
     "schema": {
       "title": {
@@ -529,7 +529,7 @@
         "id": "ErZTwpRTR-en-pK9Hn5ynw"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/6d3e2e758a/screenshot-2026-03-16-at-18-30-24.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -557,7 +557,7 @@
     "display_name": "Gallery",
     "description": "",
     "created_at": "2026-01-27T10:19:51.425Z",
-    "updated_at": "2026-02-05T14:04:58.950Z",
+    "updated_at": "2026-03-16T18:31:31.971Z",
     "id": 138525046486912,
     "schema": {
       "title": {
@@ -583,7 +583,7 @@
         "id": "rhoSSCRfSZakGiqqnN1X6Q"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/5a1948eb6d/screenshot-2026-03-16-at-18-31-17.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -621,7 +621,7 @@
     "display_name": "Hero",
     "description": "Displays a large hero, typically used at the top of pages.",
     "created_at": "2026-01-10T16:09:09.160Z",
-    "updated_at": "2026-03-11T16:44:40.369Z",
+    "updated_at": "2026-03-16T18:32:16.753Z",
     "id": 132594684570052,
     "schema": {
       "logo": {
@@ -707,7 +707,7 @@
         "datasource_slug": "theme"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/11b6c664e3/screenshot-2026-03-16-at-18-32-04.jpg",
     "preview_field": "headline",
     "is_root": false,
     "preview_tmpl": null,
@@ -947,7 +947,7 @@
     "display_name": "Hover Grid",
     "description": "",
     "created_at": "2026-01-21T09:55:39.731Z",
-    "updated_at": "2026-02-05T14:05:58.513Z",
+    "updated_at": "2026-03-16T18:34:15.691Z",
     "id": 136395733949303,
     "schema": {
       "title": {
@@ -1024,7 +1024,7 @@
         "default_value": "blue"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/0d8048b4ae/screenshot-2026-03-16-at-18-34-00.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -1057,7 +1057,7 @@
     "display_name": "Hover List",
     "description": "",
     "created_at": "2026-01-18T18:27:53.343Z",
-    "updated_at": "2026-02-06T10:09:35.157Z",
+    "updated_at": "2026-03-16T18:34:58.582Z",
     "id": 135459935652633,
     "schema": {
       "title": {
@@ -1147,7 +1147,7 @@
         "default_value": "blue"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/729bbf0ad0/screenshot-2026-03-16-at-18-34-45.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -1180,7 +1180,7 @@
     "display_name": "Impact Details",
     "description": "Impactful headline with content for further details.",
     "created_at": "2026-01-20T21:36:05.929Z",
-    "updated_at": "2026-03-11T11:56:50.799Z",
+    "updated_at": "2026-03-16T18:36:13.021Z",
     "id": 136213978857390,
     "schema": {
       "title": {
@@ -1377,7 +1377,7 @@
         "exclude_empty_option": true
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/8eb3382699/screenshot-2026-03-16-at-18-35-59.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -1481,7 +1481,7 @@
     "display_name": "Logo Wall",
     "description": "",
     "created_at": "2026-01-21T16:53:11.246Z",
-    "updated_at": "2026-03-16T17:50:21.176Z",
+    "updated_at": "2026-03-16T18:36:41.034Z",
     "id": 136498344949214,
     "schema": {
       "title": {
@@ -1505,16 +1505,6 @@
           "unset"
         ],
         "id": "jMTnAVgTRDmQ7xk7xG49FA"
-      },
-      "logos": {
-        "type": "multiasset",
-        "pos": 2,
-        "id": "qOVM0yITQKOffPrG3iAbSg",
-        "description": "Upload black and white SVGs for best results.",
-        "filetypes": [
-          "images"
-        ],
-        "display_name": "Logos (Legacy)"
       },
       "items": {
         "type": "bloks",
@@ -1540,7 +1530,7 @@
         "default_value": "light"
       }
     },
-    "image": "//a.storyblok.com/f/289672313529140/x/243f2c3a33/screenshot-2026-01-21-at-16-54-12.jpg",
+    "image": "//a.storyblok.com/f/289672313529140/x/509a33bbca/screenshot-2026-03-16-at-18-24-43.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": "",
@@ -1573,7 +1563,7 @@
     "display_name": "Media",
     "description": "Displays an image or Mux video.",
     "created_at": "2026-02-04T08:55:58.455Z",
-    "updated_at": "2026-03-11T17:21:31.972Z",
+    "updated_at": "2026-03-16T18:38:33.330Z",
     "id": 141335586677156,
     "schema": {
       "title": {
@@ -1644,7 +1634,7 @@
         "id": "dwWJ6SkzRMabYqB-Bk0-Vg"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/8363106473/screenshot-2026-03-16-at-18-38-15.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": "{{@if(it.media[0].component === 'image')}}\n  {{@if(it.media[0].image.filename)}}\n    {{@image(it.media[0].image.filename)/}}\n  {{/if}}\n{{/if}}\n\n{{@if(it.media[0].component === 'mux_video_player')}}\n  {{@if(it.media[0].poster.filename)}}\n    {{@image(it.media[0].poster.filename)/}}\n  {{/if}}\n{{/if}}\n\n{{@if(it.media[0].component === 'mux_video_autoplay')}}\n  {{@if(it.media[0].poster.filename)}}\n    {{@image(it.media[0].poster.filename)/}}\n  {{/if}}\n{{/if}}",
@@ -1723,7 +1713,7 @@
     "display_name": "Past Events",
     "description": "Displays some recent past events.",
     "created_at": "2026-02-03T12:47:57.434Z",
-    "updated_at": "2026-02-25T20:10:43.001Z",
+    "updated_at": "2026-03-16T18:43:35.995Z",
     "id": 141038704378105,
     "schema": {
       "cta_title": {
@@ -1750,7 +1740,7 @@
         "id": "tBcrltXqQM2LYF707lff1g"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/1b91db9ca2/screenshot-2026-03-16-at-18-40-06.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -2069,7 +2059,7 @@
     "display_name": "Split Text",
     "description": "",
     "created_at": "2026-01-23T09:10:10.690Z",
-    "updated_at": "2026-02-05T14:08:50.535Z",
+    "updated_at": "2026-03-16T18:45:38.726Z",
     "id": 137092344624389,
     "schema": {
       "items": {
@@ -2096,7 +2086,7 @@
         "default_value": "light"
       }
     },
-    "image": "//a.storyblok.com/f/289672313529140/x/76aa71aad7/screenshot-2026-01-13-at-22-51-13.jpg",
+    "image": "//a.storyblok.com/f/289672313529140/x/482c8aedf9/screenshot-2026-03-16-at-18-45-27.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -2129,7 +2119,7 @@
     "display_name": "Team",
     "description": "Display teams of selected people.",
     "created_at": "2026-01-20T12:22:18.524Z",
-    "updated_at": "2026-02-26T13:39:34.966Z",
+    "updated_at": "2026-03-16T18:44:32.273Z",
     "id": 136077879403799,
     "schema": {
       "teams": {
@@ -2167,7 +2157,7 @@
         "id": "oJMIG_sMSg6Ence4PVDvXg"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/24f86b6d9e/screenshot-2026-03-16-at-18-44-19.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -2367,7 +2357,7 @@
     "display_name": "Logo Ticker",
     "description": "Displays a logo ticker with optional background media & title",
     "created_at": "2026-01-28T18:19:09.336Z",
-    "updated_at": "2026-03-11T11:58:36.624Z",
+    "updated_at": "2026-03-16T18:48:03.214Z",
     "id": 138996733287616,
     "schema": {
       "media": {
@@ -2524,7 +2514,7 @@
         "datasource_slug": "theme"
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/01f45f4f4f/screenshot-2026-03-16-at-18-47-50.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -2562,7 +2552,7 @@
     "display_name": "Raw Truths",
     "description": "",
     "created_at": "2026-01-26T18:42:18.974Z",
-    "updated_at": "2026-02-04T12:51:58.167Z",
+    "updated_at": "2026-03-16T18:49:11.673Z",
     "id": 138294636445153,
     "schema": {
       "title": {
@@ -2647,7 +2637,7 @@
         "exclude_empty_option": true
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/807bdd4297/screenshot-2026-03-16-at-18-48-56.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
@@ -2680,7 +2670,7 @@
     "display_name": "Work Text",
     "description": "Standard text for Work pages",
     "created_at": "2026-01-30T09:03:20.197Z",
-    "updated_at": "2026-03-11T11:57:07.297Z",
+    "updated_at": "2026-03-16T18:47:25.859Z",
     "id": 139567924016608,
     "schema": {
       "title": {
@@ -2862,7 +2852,7 @@
         "exclude_empty_option": true
       }
     },
-    "image": null,
+    "image": "//a.storyblok.com/f/289672313529140/x/5bd324a273/screenshot-2026-03-16-at-18-47-06.jpg",
     "preview_field": null,
     "is_root": false,
     "preview_tmpl": null,
