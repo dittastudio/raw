@@ -34,6 +34,8 @@ const {
         class="block size-[inherit] object-contain"
         :src="asset.filename"
         :alt="title || asset.alt || asset.title || 'Logo'"
+        :width="storyblokImageDimensions(asset.filename).width"
+        :height="storyblokImageDimensions(asset.filename).height"
         loading="lazy"
       >
 
@@ -42,6 +44,7 @@ const {
         class="block size-[inherit] object-contain"
         :src="asset.filename"
         :alt="title || asset.alt || asset.title || 'Logo'"
+        :width="Math.round(storyblokImageDimensions(asset.filename).width / storyblokImageDimensions(asset.filename).height * Number(cropHeight))"
         :height="cropHeight"
         densities="x1 x2"
         :modifiers="{
