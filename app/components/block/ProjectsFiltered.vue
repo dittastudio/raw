@@ -28,24 +28,20 @@ const projects = computed(() => {
 const setSizes = (isLarge: boolean) => {
   if (isLarge) {
     return `
-      2xs:100vw
       xs:100vw
       sm:100vw
       md:100vw
       lg:100vw
-      xl:100vw
-      2xl:1200px
+      xl:1380px
     `
   }
 
   return `
-    2xs:100vw
     xs:100vw
     sm:100vw
     md:50vw
     lg:50vw
-    xl:50vw
-    2xl:860px
+    xl:680px
   `
 }
 </script>

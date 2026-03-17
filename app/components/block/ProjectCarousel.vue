@@ -62,7 +62,7 @@ const projects = computed(() => {
                 :width="16"
                 :height="9"
                 :src="item.content.preview_media[0].image.filename"
-                sizes="sm:100vw md:100vw lg:100vw"
+                sizes="sm:100vw md:100vw lg:100vw xl:100vw"
               />
 
               <NuxtImg
