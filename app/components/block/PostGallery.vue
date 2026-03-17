@@ -6,6 +6,9 @@ interface Props {
 }
 
 const { block } = defineProps<Props>()
+
+const sizesFull = 'xs:100vw sm:100vw md:60vw lg:50vw xl:800px'
+const sizesHalf = 'xs:50vw sm:50vw md:30vw lg:25vw xl:400px'
 </script>
 
 <template>
@@ -27,8 +30,9 @@ const { block } = defineProps<Props>()
         class="block size-full object-cover"
         :src="image.filename"
         :alt="image.alt || ''"
-        :width="400"
-        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 400)"
+        :width="storyblokImageDimensions(image.filename).width"
+        :height="storyblokImageDimensions(image.filename).height"
+        :sizes="block.items.length === 1 ? sizesFull : sizesHalf"
         loading="lazy"
       />
     </li>

@@ -1,14 +1,11 @@
 <script lang="ts" setup>
-import type { StoryblokAsset } from '#storyblok-types'
-
 interface Props {
   headline?: string
   slug?: string
-  image?: StoryblokAsset
   category?: string
 }
 
-const { headline, slug, image, category } = defineProps<Props>()
+const { headline, slug, category } = defineProps<Props>()
 </script>
 
 <template>
@@ -18,15 +15,7 @@ const { headline, slug, image, category } = defineProps<Props>()
       :to="`/${slug}`"
     >
       <div class="w-full overflow-hidden aspect-video">
-        <NuxtImg
-          v-if="image?.filename && storyblokAssetType(image.filename) === 'image'"
-          class="block size-full object-cover"
-          :src="image.filename"
-          :alt="image.alt || headline || ''"
-          :width="500"
-          :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 500)"
-          loading="lazy"
-        />
+        <slot name="image" />
       </div>
 
       <p v-if="category">

@@ -23,8 +23,8 @@ const { image, imageSelected, name, position, linkedIn, accent } = defineProps<P
         class="block size-full object-cover"
         :src="image.filename"
         :alt="image.alt || name || 'Team Member'"
-        :width="300"
-        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 300)"
+        :width="350"
+        :height="Math.round(storyblokImageDimensions(image.filename).height / storyblokImageDimensions(image.filename).width * 350)"
         loading="lazy"
       />
 
@@ -33,8 +33,8 @@ const { image, imageSelected, name, position, linkedIn, accent } = defineProps<P
         class="absolute inset-0 z-10 block size-full object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
         :src="imageSelected.filename"
         :alt="imageSelected.alt || name || 'Team Member'"
-        :width="300"
-        :height="Math.round(storyblokImageDimensions(imageSelected.filename).height / storyblokImageDimensions(imageSelected.filename).width * 300)"
+        :width="350"
+        :height="Math.round(storyblokImageDimensions(imageSelected.filename).height / storyblokImageDimensions(imageSelected.filename).width * 350)"
         loading="lazy"
       />
     </div>

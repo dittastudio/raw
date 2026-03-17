@@ -18,8 +18,15 @@ const { block } = defineProps<Props>()
       class="block w-full h-auto"
       :src="block.image.filename"
       :alt="block.image.alt || ''"
-      :width="500"
-      :height="Math.round(storyblokImageDimensions(block.image.filename).height / storyblokImageDimensions(block.image.filename).width * 500)"
+      :width="storyblokImageDimensions(block.image.filename).width"
+      :height="storyblokImageDimensions(block.image.filename).height"
+      sizes="
+        xs:100vw
+        sm:100vw
+        md:60vw
+        lg:50vw
+        xl:815px
+      "
       loading="lazy"
     />
   </div>

@@ -101,8 +101,15 @@ const { data: event } = await useAsyncData(() => `next-event`, async () => {
         class="block w-full h-auto"
         :src="event.preview_image.filename"
         :alt="event.preview_image.alt || event.name || event.preview_text || ''"
-        :width="500"
-        :height="Math.round(storyblokImageDimensions(event.preview_image.filename).height / storyblokImageDimensions(event.preview_image.filename).width * 500)"
+        :width="storyblokImageDimensions(event.preview_image.filename).width"
+        :height="storyblokImageDimensions(event.preview_image.filename).height"
+        sizes="
+          xs:100vw
+          sm:100vw
+          md:66vw
+          lg:66vw
+          xl:800px
+        "
         loading="lazy"
       />
 
