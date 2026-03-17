@@ -38,28 +38,26 @@ const getDesktopSize = (total: number, index: number) => {
   return '33vw'
 }
 
-const getDesktop2xlSize = (total: number) => {
+const getDesktopXlSize = (total: number) => {
   const desktopRemainder = getRemainder(total, DESKTOP_COLUMNS)
 
   if (desktopRemainder === 0) {
-    return '567px'
+    return '447px'
   }
 
   if (desktopRemainder === 2) {
-    return '880px'
+    return '680px'
   }
 
-  return '1740px'
+  return '1380px'
 }
 
-const formatSizes = (mobile: string, desktop: string, desktop2xl: string) => `
-  2xs:${mobile}
+const formatSizes = (mobile: string, desktop: string, desktopXl: string) => `
   xs:${mobile}
   sm:${mobile}
   md:${desktop}
   lg:${desktop}
-  xl:${desktop}
-  2xl:${desktop2xl}
+  xl:${desktopXl}
 `
 
 const getSizes = (index: number) => {
@@ -67,9 +65,9 @@ const getSizes = (index: number) => {
   const isLast = index === total - 1
   const mobileSize = getMobileSize(total, isLast)
   const desktopSize = getDesktopSize(total, index)
-  const desktop2xlSize = getDesktop2xlSize(total)
+  const desktopXlSize = getDesktopXlSize(total)
 
-  return formatSizes(mobileSize, desktopSize, desktop2xlSize)
+  return formatSizes(mobileSize, desktopSize, desktopXlSize)
 }
 
 const container = useTemplateRef('container')

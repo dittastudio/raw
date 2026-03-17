@@ -39,8 +39,15 @@ const category = computed(() => {
         class="block w-full h-auto max-h-svh object-cover"
         :src="story.content.hero.filename"
         :alt="story.content.hero.alt || story.name || ''"
-        :width="1000"
-        :height="Math.round(storyblokImageDimensions(story.content.hero.filename).height / storyblokImageDimensions(story.content.hero.filename).width * 1000)"
+        :width="storyblokImageDimensions(story.content.hero.filename).width"
+        :height="storyblokImageDimensions(story.content.hero.filename).height"
+        sizes="
+          xs:100vw
+          sm:100vw
+          md:100vw
+          lg:100vw
+          xl:100vw
+        "
         loading="lazy"
       />
     </UiTheme>

@@ -213,9 +213,27 @@ const hasMore = computed(() => postsPayload.value?.hasMore ?? false)
                 <CardPost
                   :headline="post.name"
                   :slug="post.full_slug"
-                  :image="post.image"
                   :category="getCategoryEntry(post.category, categories)?.name || (post.component === 'event' ? 'Events' : undefined)"
-                />
+                >
+                  <template #image>
+                    <NuxtImg
+                      v-if="post.image?.filename && storyblokAssetType(post.image.filename) === 'image'"
+                      class="block size-full object-cover"
+                      :src="post.image.filename"
+                      :alt="post.image.alt || post.name || ''"
+                      :width="storyblokImageDimensions(post.image.filename).width"
+                      :height="storyblokImageDimensions(post.image.filename).height"
+                      sizes="
+                        xs:100vw
+                        sm:100vw
+                        md:50vw
+                        lg:50vw
+                        xl:680px
+                      "
+                      loading="lazy"
+                    />
+                  </template>
+                </cardpost>
               </li>
             </ul>
 

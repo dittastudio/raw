@@ -71,11 +71,29 @@ const { data: events } = await useAsyncData(() => `past-events`, async () => {
       >
         <CardEvent
           :slug="event.full_slug"
-          :image="event.preview_image"
           :datetime="event.eventDatetime"
           :headline="event.name"
           :description="event.preview_text"
-        />
+        >
+          <template #image>
+            <NuxtImg
+              v-if="event.preview_image?.filename && storyblokAssetType(event.preview_image.filename) === 'image'"
+              class="block size-full object-cover"
+              :src="event.preview_image.filename"
+              :alt="event.preview_image.alt || event.name || event.preview_text || ''"
+              :width="storyblokImageDimensions(event.preview_image.filename).width"
+              :height="storyblokImageDimensions(event.preview_image.filename).height"
+              sizes="
+                xs:50vw
+                sm:50vw
+                md:50vw
+                lg:25vw
+                xl:330px
+              "
+              loading="lazy"
+            />
+          </template>
+        </CardEvent>
       </li>
     </ul>
 

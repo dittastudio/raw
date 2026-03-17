@@ -23,13 +23,11 @@ const { media, statement, title, link } = defineProps<Props>()
         :width="3"
         :height="2"
         sizes="
-          100vw
           xs:100vw
           sm:100vw
           md:100vw
           lg:100vw
           xl:100vw
-          2xl:100vw
         "
         loading="lazy"
       />
