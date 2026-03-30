@@ -367,6 +367,7 @@ export interface MuxVideoAutoplay {
 export interface MuxVideoPlayer {
   poster?: StoryblokAsset;
   video: unknown;
+  name: string;
   data_capture?: boolean;
   component: "mux_video_player";
   _uid: string;

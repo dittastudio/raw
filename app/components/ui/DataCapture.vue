@@ -5,9 +5,14 @@ import { email as ruleEmail, required as ruleRequired } from '@regle/rules'
 
 interface Props {
   legend?: string
+  metadata?: {
+    name?: string
+    playbackId?: string
+    url?: string
+  }
 }
 
-const { legend } = defineProps<Props>()
+const { legend, metadata } = defineProps<Props>()
 
 interface Emits {
   (event: 'success'): void
@@ -55,13 +60,16 @@ const onSubmit = async () => {
       return
     }
 
-    // await $fetch('/api/ghl', {
-    //   method: 'POST',
-    //   body: {
-    //     name: data.name.trim(),
-    //     email: data.email.trim(),
-    //   },
-    // })
+    await $fetch('/api/ghl-data-capture', {
+      method: 'POST',
+      body: {
+        name: data.name.trim(),
+        email: data.email.trim(),
+        videoName: metadata?.name,
+        videoPlaybackId: metadata?.playbackId,
+        videoUrl: metadata?.url,
+      },
+    })
 
     emit('success')
   }

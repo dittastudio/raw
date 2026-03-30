@@ -10,6 +10,8 @@ interface Events {
 const emit = defineEmits<Events>()
 
 interface Props {
+  name?: string
+  dataCapture?: boolean
   playbackId: string
   primaryColor?: string
   accentColor?: string
@@ -19,6 +21,8 @@ interface Props {
 }
 
 const {
+  name,
+  dataCapture = false,
   playbackId,
   primaryColor = '#fff',
   accentColor = '#c6ea9f',
@@ -113,25 +117,21 @@ watchEffect(() => {
 
 const showDataCapture = ref(false)
 
-const dataCaptureSuccess = () => {
+const onDataCaptureSuccess = () => {
   appStore.setDataCaptured(true)
   showDataCapture.value = false
   video.value?.play()
 }
 
-const tryPlayVideo = () => {
-  if (!appStore.dataCaptured) {
+const tryPlayVideo = async () => {
+  if (dataCapture && !appStore.dataCaptured) {
     showDataCapture.value = true
     return
   }
 
   // TODO: If cookie for data captured is already set:
   // 1. Play the video immediately.
-  // 2. Send data off to high-level from the cookie.
-
-  // Insert tag: "Video: 'Title of Video'"
-  // Email from workflow will be used to send follow-up email?
-  // await $fetch('/api/ghl')
+  // 2. Send data off to high-level from the cookie + user info.
 
   video.value?.play()
 }
@@ -151,7 +151,7 @@ const tryPlayVideo = () => {
     @mouseleave="onMouseLeave"
   >
     <div
-      v-if="hasControls"
+      v-if="dataCapture && hasControls"
       :class="[
         'absolute inset-0 z-20 size-full text-left p-10 bg-offblack/80 text-white transition-opacity duration-250',
         { 'opacity-0 pointer-events-none': !showDataCapture || appStore.dataCaptured },
@@ -159,8 +159,8 @@ const tryPlayVideo = () => {
     >
       <UiDataCapture
         legend="Enter your details to watch the video"
-        :info="{ title: 'sdfdsfs', url: 'sdfsdf' }"
-        @success="dataCaptureSuccess"
+        :metadata="{ name, playbackId, url: $route.fullPath }"
+        @success="onDataCaptureSuccess"
       />
     </div>
 

@@ -9,10 +9,10 @@ interface Props {
 const { legend } = defineProps<Props>()
 
 const { r$ } = useRegle({
-  name: '',
-  email: '',
-  role: '',
-  company: '',
+  name: 'Michael',
+  email: 'michael@ditta.studio',
+  role: 'Devver',
+  company: 'ditta',
   sector: '',
 }, {
   name: {
@@ -61,7 +61,7 @@ const onSubmit = async () => {
       return
     }
 
-    await $fetch('/api/ghl', {
+    await $fetch('/api/ghl-newsletter', {
       method: 'POST',
       body: {
         name: data.name.trim(),

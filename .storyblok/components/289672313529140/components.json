@@ -3343,7 +3343,7 @@
     "display_name": "Mux Video Player",
     "description": "Creates a Mux video player.",
     "created_at": "2026-02-04T11:44:36.156Z",
-    "updated_at": "2026-03-30T11:21:27.146Z",
+    "updated_at": "2026-03-30T16:19:53.285Z",
     "id": 141377028756591,
     "schema": {
       "poster": {
@@ -3369,9 +3369,17 @@
         "required": true,
         "id": "SyvanaWGR969UYcJAg28KA"
       },
+      "name": {
+        "type": "text",
+        "pos": 2,
+        "display_name": "Name",
+        "required": true,
+        "description": "Name the video (for use in GHL)",
+        "id": "P7eldiGGTIC4x_QJi2vpzg"
+      },
       "data_capture": {
         "type": "boolean",
-        "pos": 2,
+        "pos": 3,
         "inline_label": true,
         "default_value": true,
         "id": "_RBk7rKoTdiK0uKPtdYo6A",

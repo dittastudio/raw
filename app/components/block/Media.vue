@@ -93,6 +93,8 @@ const setSizes = computed(() => {
         v-else-if="media && isMuxVideoPlayerComponent(media) && media.video?.playbackId"
         class="block size-full object-cover"
         :accent-color="getThemeColors[(block.accent) as Themes || 'green'].background"
+        :name="media?.name"
+        :data-capture="media?.data_capture"
         :playback-id="media.video.playbackId"
         :poster="media.poster?.filename ? storyblokImage(media.poster.filename, {
           width: 1600,
