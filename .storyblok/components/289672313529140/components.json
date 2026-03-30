@@ -3343,7 +3343,7 @@
     "display_name": "Mux Video Player",
     "description": "Creates a Mux video player.",
     "created_at": "2026-02-04T11:44:36.156Z",
-    "updated_at": "2026-02-20T18:08:36.825Z",
+    "updated_at": "2026-03-30T11:21:27.146Z",
     "id": 141377028756591,
     "schema": {
       "poster": {
@@ -3368,6 +3368,14 @@
         ],
         "required": true,
         "id": "SyvanaWGR969UYcJAg28KA"
+      },
+      "data_capture": {
+        "type": "boolean",
+        "pos": 2,
+        "inline_label": true,
+        "default_value": true,
+        "id": "_RBk7rKoTdiK0uKPtdYo6A",
+        "description": "Should this video ask for a user's data before it can play?"
       }
     },
     "image": null,
@@ -4148,7 +4156,7 @@
     "display_name": null,
     "description": "Settings for the global content of the website",
     "created_at": "2026-01-06T16:27:28.640Z",
-    "updated_at": "2026-03-12T18:36:05.618Z",
+    "updated_at": "2026-03-30T11:24:52.049Z",
     "id": 131183610438016,
     "schema": {
       "navigation": {
@@ -4265,6 +4273,20 @@
         ],
         "component_denylist": [],
         "id": "Pzrc_gzxRfOBjjVh-OwOtQ"
+      },
+      "data_capture_headline": {
+        "type": "text",
+        "pos": 12,
+        "required": true,
+        "description": "Headline that is shown on video's with data capture enabled.",
+        "id": "BlhwBy7vRiCq9v3ILhmMPw"
+      },
+      "data_capture_text": {
+        "type": "text",
+        "pos": 13,
+        "required": true,
+        "description": "Text that is shown on video's with data capture enabled.",
+        "id": "rGwKDf8tRiqFh5ux57rL9g"
       }
     },
     "image": null,

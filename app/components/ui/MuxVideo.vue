@@ -29,10 +29,12 @@ const {
 
 const hasPlayed = ref(false)
 const attrs = useAttrs()
-const showPlay = computed(() => !hasPlayed.value && Object.hasOwn(attrs, 'controls'))
+const hasControls = computed(() => Object.hasOwn(attrs, 'controls'))
+const showPlay = computed(() => !hasPlayed.value && hasControls.value)
 const root = useTemplateRef('root')
 const video = ref<HTMLVideoElement | null | undefined>(null)
 const isInView = ref(!lazyLoad)
+const appStore = useAppStore()
 
 const { stop } = useIntersectionObserver(
   root,
@@ -108,6 +110,31 @@ watchEffect(() => {
   root.value.style.setProperty('--x', String(mainMouse.position.value.x))
   root.value.style.setProperty('--y', String(mainMouse.position.value.y))
 })
+
+const showDataCapture = ref(false)
+
+const dataCaptureSuccess = () => {
+  appStore.setDataCaptured(true)
+  showDataCapture.value = false
+  video.value?.play()
+}
+
+const tryPlayVideo = () => {
+  if (!appStore.dataCaptured) {
+    showDataCapture.value = true
+    return
+  }
+
+  // TODO: If cookie for data captured is already set:
+  // 1. Play the video immediately.
+  // 2. Send data off to high-level from the cookie.
+
+  // Insert tag: "Video: 'Title of Video'"
+  // Email from workflow will be used to send follow-up email?
+  // await $fetch('/api/ghl')
+
+  video.value?.play()
+}
 </script>
 
 <template>
@@ -115,20 +142,33 @@ watchEffect(() => {
     v-if="playbackId"
     ref="root"
     :class="[
-      'size-full',
+      'size-full relative',
       {
-        'relative': showPlay,
         'aspect-video': !isCover || !isInView,
       },
     ]"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
+    <div
+      v-if="hasControls"
+      :class="[
+        'absolute inset-0 z-20 size-full text-left p-10 bg-offblack/80 text-white transition-opacity duration-250',
+        { 'opacity-0 pointer-events-none': !showDataCapture || appStore.dataCaptured },
+      ]"
+    >
+      <UiDataCapture
+        legend="Enter your details to watch the video"
+        :info="{ title: 'sdfdsfs', url: 'sdfsdf' }"
+        @success="dataCaptureSuccess"
+      />
+    </div>
+
     <button
       v-if="showPlay"
       type="button"
       class="mux-video__button absolute inset-0 z-10 flex items-center justify-center type-h4 text-offwhite bg-transparent"
-      @click="video?.play()"
+      @click="tryPlayVideo()"
     >
       <div class="mux-video__button-inner">
         Play

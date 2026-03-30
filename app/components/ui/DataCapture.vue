@@ -1,0 +1,155 @@
+<script lang="ts" setup>
+import type { Settings } from '#storyblok-components'
+import { useRegle } from '#imports'
+import { email as ruleEmail, required as ruleRequired } from '@regle/rules'
+
+interface Props {
+  legend?: string
+}
+
+const { legend } = defineProps<Props>()
+
+interface Emits {
+  (event: 'success'): void
+}
+
+const emit = defineEmits<Emits>()
+
+const { r$ } = useRegle({
+  name: '',
+  email: '',
+}, {
+  name: {
+    ruleRequired,
+    $autoDirty: true,
+  },
+  email: {
+    ruleRequired,
+    ruleEmail,
+  },
+})
+
+const loading = ref(false)
+
+const resetForm = () => {
+  loading.value = false
+
+  r$.$reset({
+    toOriginalState: true,
+  })
+}
+
+defineExpose({
+  resetForm,
+})
+
+const settings = await useStory<Settings>('/settings')
+
+const onSubmit = async () => {
+  try {
+    loading.value = true
+
+    const { valid, data } = await r$.$validate()
+
+    if (!valid) {
+      return
+    }
+
+    // await $fetch('/api/ghl', {
+    //   method: 'POST',
+    //   body: {
+    //     name: data.name.trim(),
+    //     email: data.email.trim(),
+    //   },
+    // })
+
+    emit('success')
+  }
+  catch (error: any) {
+    console.error(error)
+  }
+  finally {
+    loading.value = false
+  }
+}
+</script>
+
+<template>
+  <div class="flex flex-col gap-10 items-start">
+    <h6
+      v-if="settings.content.data_capture_headline"
+      class="type-h4 text-pretty pr-6"
+    >
+      {{ settings.content.data_capture_headline }}
+    </h6>
+
+    <FormBase
+      :loading="loading"
+      @submit.prevent="onSubmit"
+    >
+      <FormFieldset
+        :legend="legend"
+        a11y
+      >
+        <div class="w-full grid grid-cols-2 gap-6">
+          <FormField
+            id="name"
+            label="Name"
+          >
+            <FormInput
+              id="name"
+              v-model="r$.$value.name"
+              placeholder="Joe Bloggs"
+              class="type-mono-16"
+              autofocus
+            />
+
+            <FormMessages
+              v-if="r$.name.$error"
+              :messages="r$.name.$errors"
+              class="type-mono-12 text-red mt-2"
+            />
+          </FormField>
+
+          <FormField
+            id="email"
+            label="Email"
+          >
+            <FormInput
+              id="email"
+              v-model="r$.$value.email"
+              placeholder="joe.bloggs@example.com"
+              field="email"
+              class="type-mono-16"
+            />
+
+            <FormMessages
+              v-if="r$.email.$error"
+              :messages="r$.email.$errors"
+              class="type-mono-12 text-red mt-2"
+            />
+          </FormField>
+        </div>
+
+        <button
+          type="submit"
+          :disabled="loading || undefined"
+        >
+          <UiButton
+            type="outline"
+            theme="dark"
+          >
+            {{ loading ? 'Please wait...' : 'Submit' }}
+          </UiButton>
+        </button>
+      </FormFieldset>
+    </FormBase>
+
+    <p
+      v-if="settings.content.data_capture_text"
+      class="type-mono-12 text-pretty opacity-60"
+    >
+      {{ settings.content.data_capture_text }}
+    </p>
+  </div>
+</template>

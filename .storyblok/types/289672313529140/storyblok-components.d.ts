@@ -367,6 +367,7 @@ export interface MuxVideoAutoplay {
 export interface MuxVideoPlayer {
   poster?: StoryblokAsset;
   video: unknown;
+  data_capture?: boolean;
   component: "mux_video_player";
   _uid: string;
 }
@@ -523,6 +524,8 @@ export interface Settings {
   company_telephone?: string;
   company_address?: string;
   logos?: Logo[];
+  data_capture_headline: string;
+  data_capture_text: string;
   component: "settings";
   _uid: string;
 }
