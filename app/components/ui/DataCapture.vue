@@ -83,81 +83,87 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-10 items-start">
-    <h6
-      v-if="settings.content.data_capture_headline"
-      class="type-h4 text-pretty pr-6"
+  <div class="size-[inherit] bg-offblack/80 text-white">
+    <div
+      data-lenis-prevent
+      class="w-full h-full px-(--app-outer-gutter) py-[calc(var(--app-outer-gutter)*1.5)] overflow-y-auto"
     >
-      {{ settings.content.data_capture_headline }}
-    </h6>
-
-    <FormBase
-      :loading="loading"
-      @submit.prevent="onSubmit"
-    >
-      <FormFieldset
-        :legend="legend"
-        a11y
-      >
-        <div class="w-full grid grid-cols-2 gap-6">
-          <FormField
-            id="name"
-            label="Name"
-          >
-            <FormInput
-              id="name"
-              v-model="r$.$value.name"
-              placeholder="Joe Bloggs"
-              class="type-mono-16"
-              autofocus
-            />
-
-            <FormMessages
-              v-if="r$.name.$error"
-              :messages="r$.name.$errors"
-              class="type-mono-12 text-red mt-2"
-            />
-          </FormField>
-
-          <FormField
-            id="email"
-            label="Email"
-          >
-            <FormInput
-              id="email"
-              v-model="r$.$value.email"
-              placeholder="joe.bloggs@example.com"
-              field="email"
-              class="type-mono-16"
-            />
-
-            <FormMessages
-              v-if="r$.email.$error"
-              :messages="r$.email.$errors"
-              class="type-mono-12 text-red mt-2"
-            />
-          </FormField>
-        </div>
-
-        <button
-          type="submit"
-          :disabled="loading || undefined"
+      <div class="flex flex-col min-h-full gap-6 sm:gap-10 justify-center items-start max-w-xl mx-auto">
+        <h6
+          v-if="settings.content.data_capture_headline"
+          class="type-h4 text-[clamp(0.875rem,3vw,1.5rem)] pr-6 text-balance"
         >
-          <UiButton
-            type="outline"
-            theme="dark"
-          >
-            {{ loading ? 'Please wait...' : 'Submit' }}
-          </UiButton>
-        </button>
-      </FormFieldset>
-    </FormBase>
+          {{ settings.content.data_capture_headline }}
+        </h6>
 
-    <p
-      v-if="settings.content.data_capture_text"
-      class="type-mono-12 text-pretty opacity-60"
-    >
-      {{ settings.content.data_capture_text }}
-    </p>
+        <FormBase
+          :loading="loading"
+          @submit.prevent="onSubmit"
+        >
+          <FormFieldset
+            :legend="legend"
+            a11y
+          >
+            <div class="w-full grid grid-cols-1 xs:grid-cols-2 gap-6">
+              <FormField
+                id="name"
+                label="Name"
+              >
+                <FormInput
+                  id="name"
+                  v-model="r$.$value.name"
+                  placeholder="Joe Bloggs"
+                  class="type-mono-16"
+                />
+
+                <FormMessages
+                  v-if="r$.name.$error"
+                  :messages="r$.name.$errors"
+                  class="type-mono-12 text-red mt-2"
+                />
+              </FormField>
+
+              <FormField
+                id="email"
+                label="Email"
+              >
+                <FormInput
+                  id="email"
+                  v-model="r$.$value.email"
+                  placeholder="joe.bloggs@example.com"
+                  field="email"
+                  class="type-mono-16"
+                />
+
+                <FormMessages
+                  v-if="r$.email.$error"
+                  :messages="r$.email.$errors"
+                  class="type-mono-12 text-red mt-2"
+                />
+              </FormField>
+            </div>
+
+            <button
+              type="submit"
+              :disabled="loading || undefined"
+            >
+              <UiButton
+                type="outline"
+                theme="dark"
+              >
+                {{ loading ? 'Please wait...' : 'Play' }}
+              </UiButton>
+            </button>
+          </FormFieldset>
+        </FormBase>
+
+        <p
+          v-if="settings.content.data_capture_text"
+          class="type-mono-12 text-pretty opacity-60"
+        >
+          {{ settings.content.data_capture_text }}
+        </p>
+      </div>
+    </div>
   </div>
 </template>

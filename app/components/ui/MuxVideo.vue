@@ -142,7 +142,7 @@ const tryPlayVideo = async () => {
     v-if="playbackId"
     ref="root"
     :class="[
-      'size-full relative',
+      'size-full relative isolate',
       {
         'aspect-video': !isCover || !isInView,
       },
@@ -153,7 +153,7 @@ const tryPlayVideo = async () => {
     <div
       v-if="dataCapture && hasControls"
       :class="[
-        'absolute inset-0 z-20 size-full text-left p-10 bg-offblack/80 text-white transition-opacity duration-250',
+        'absolute inset-0 z-2 size-full transition-opacity duration-250 backdrop-blur-md',
         { 'opacity-0 pointer-events-none': !showDataCapture || appStore.dataCaptured },
       ]"
     >
@@ -167,7 +167,7 @@ const tryPlayVideo = async () => {
     <button
       v-if="showPlay"
       type="button"
-      class="mux-video__button absolute inset-0 z-10 flex items-center justify-center type-h4 text-offwhite bg-transparent"
+      class="mux-video__button absolute inset-0 z-1 flex items-center justify-center type-h4 text-offwhite bg-transparent"
       @click="tryPlayVideo()"
     >
       <div class="mux-video__button-inner">
