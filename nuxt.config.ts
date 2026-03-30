@@ -103,11 +103,8 @@ export default defineNuxtConfig({
       ],
     },
     plugins: [
-      // @ts-expect-error Plugin type mismatch.
       devtoolsJson(),
-      // @ts-expect-error Plugin type mismatch.
       tailwindcss(),
-      // @ts-expect-error Plugin type mismatch.
       svgLoader({
         svgo: false,
       }),
