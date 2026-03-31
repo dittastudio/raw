@@ -15,7 +15,7 @@ const resolvers = {
 }
 
 interface Props {
-  html?: StoryblokRichtext | undefined
+  html?: StoryblokRichtext
 }
 
 const { html } = defineProps<Props>()
