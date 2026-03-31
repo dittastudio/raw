@@ -115,6 +115,7 @@ watchEffect(() => {
   root.value.style.setProperty('--y', String(mainMouse.position.value.y))
 })
 
+const requestUrl = useRequestURL()
 const showDataCapture = ref(false)
 
 const onDataCaptureSuccess = () => {
@@ -159,7 +160,7 @@ const tryPlayVideo = async () => {
     >
       <UiDataCapture
         legend="Enter your details to watch the video"
-        :metadata="{ name, playbackId, url: $route.fullPath }"
+        :metadata="{ name, playbackId, url: requestUrl.href }"
         @success="onDataCaptureSuccess"
       />
     </div>

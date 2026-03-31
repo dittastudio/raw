@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
         {
           body: `
 <p><strong>${data.name}</strong> (${data.email}) filled out the form on your video <strong>${data.videoName || 'N/A'}</strong></p>
-<p><strong>Details:</strong><br>Playback Id: ${data.videoPlaybackId || 'N/A'}<br>URL: ${data.videoUrl || 'N/A'}</p>
+<p><strong>Details:</strong><br>Page: <a href="${data.videoUrl}" target="_blank" rel="noopener noreferrer">${data.videoUrl || 'N/A'}</a><br>Mux playbackId: ${data.videoPlaybackId || 'N/A'}</p>
 `,
         },
       )
