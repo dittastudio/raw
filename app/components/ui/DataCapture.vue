@@ -157,12 +157,12 @@ const onSubmit = async () => {
           </FormFieldset>
         </FormBase>
 
-        <p
-          v-if="settings.content.data_capture_text"
-          class="type-mono-12 text-pretty opacity-60"
+        <div
+          v-if="storyblokRichTextContent(settings.content.data_capture_text)"
+          class="prose [&_p]:type-mono-12 text-pretty opacity-60"
         >
-          {{ settings.content.data_capture_text }}
-        </p>
+          <StoryblokText :html="settings.content.data_capture_text" />
+        </div>
       </div>
     </div>
   </div>

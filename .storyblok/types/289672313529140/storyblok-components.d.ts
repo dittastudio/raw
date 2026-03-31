@@ -526,7 +526,7 @@ export interface Settings {
   company_address?: string;
   logos?: Logo[];
   data_capture_headline: string;
-  data_capture_text: string;
+  data_capture_text: StoryblokRichtext;
   component: "settings";
   _uid: string;
 }

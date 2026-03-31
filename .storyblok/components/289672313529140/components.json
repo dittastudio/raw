@@ -4164,7 +4164,7 @@
     "display_name": null,
     "description": "Settings for the global content of the website",
     "created_at": "2026-01-06T16:27:28.640Z",
-    "updated_at": "2026-03-30T11:24:52.049Z",
+    "updated_at": "2026-03-31T09:03:11.599Z",
     "id": 131183610438016,
     "schema": {
       "navigation": {
@@ -4290,11 +4290,20 @@
         "id": "BlhwBy7vRiCq9v3ILhmMPw"
       },
       "data_capture_text": {
-        "type": "text",
+        "type": "richtext",
         "pos": 13,
         "required": true,
         "description": "Text that is shown on video's with data capture enabled.",
-        "id": "rGwKDf8tRiqFh5ux57rL9g"
+        "id": "rGwKDf8tRiqFh5ux57rL9g",
+        "allow_target_blank": true,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "unset",
+          "italic",
+          "link",
+          "paragraph"
+        ]
       }
     },
     "image": null,
