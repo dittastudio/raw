@@ -100,6 +100,7 @@ export default defineNuxtConfig({
         'gsap/SplitText',
         'gsap/DrawSVGPlugin',
         'keen-slider/vue.es',
+        '@tiptap/core',
       ],
     },
     plugins: [
