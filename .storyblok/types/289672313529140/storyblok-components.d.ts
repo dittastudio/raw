@@ -430,7 +430,18 @@ export interface Post {
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;
-  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
+  blocks?: (
+    | PostGallery
+    | PostHeading
+    | PostHtml
+    | PostImage
+    | PostQuote
+    | PostText
+    | PostEmbed
+    | PostWistia
+    | MuxVideoPlayer
+    | MuxVideoAutoplay
+  )[];
   jaa_partnership?: boolean;
   component: "post";
   _uid: string;
