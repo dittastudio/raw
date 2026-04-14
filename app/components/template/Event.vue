@@ -96,11 +96,6 @@ const {
       :block="block"
     />
 
-    <BlockNextEvent
-      v-else-if="block.component === 'block_next_event'"
-      :block="block"
-    />
-
     <BlockPastEvents
       v-else-if="block.component === 'block_past_events'"
       :block="block"
