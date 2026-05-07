@@ -159,7 +159,7 @@ const tryPlayVideo = async () => {
     >
       <UiDataCapture
         legend="Enter your details to watch the video"
-        :metadata="{ name, playbackId, url: $route.fullPath }"
+        :metadata="{ name, playbackId, path: $route.fullPath }"
         @success="onDataCaptureSuccess"
       />
     </div>

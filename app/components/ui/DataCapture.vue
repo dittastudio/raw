@@ -8,7 +8,7 @@ interface Props {
   metadata?: {
     name?: string
     playbackId?: string
-    url?: string
+    path?: string
   }
 }
 
@@ -67,7 +67,7 @@ const onSubmit = async () => {
         email: data.email.trim(),
         videoName: metadata?.name,
         videoPlaybackId: metadata?.playbackId,
-        videoUrl: metadata?.url,
+        videoPath: metadata?.path,
       },
     })
 
