@@ -15,7 +15,7 @@ interface Props {
 const { legend, metadata } = defineProps<Props>()
 
 interface Emits {
-  (event: 'success'): void
+  (event: 'success', data: { name: string; email: string }): void
 }
 
 const emit = defineEmits<Emits>()
@@ -44,11 +44,14 @@ const resetForm = () => {
   })
 }
 
-defineExpose({
-  resetForm,
-})
-
 const settings = await useStory<Settings>('/settings')
+
+const postToGhl = async (data: { name: string; email: string, videoName?: string, videoPlaybackId?: string, videoPath?: string }) => {
+  return $fetch('/api/ghl-data-capture', {
+    method: 'POST',
+    body: data,
+  })
+}
 
 const onSubmit = async () => {
   try {
@@ -60,18 +63,15 @@ const onSubmit = async () => {
       return
     }
 
-    await $fetch('/api/ghl-data-capture', {
-      method: 'POST',
-      body: {
-        name: data.name.trim(),
-        email: data.email.trim(),
-        videoName: metadata?.name,
-        videoPlaybackId: metadata?.playbackId,
-        videoPath: metadata?.path,
-      },
+    await postToGhl({
+      name: data.name.trim(),
+      email: data.email.trim(),
+      videoName: metadata?.name,
+      videoPlaybackId: metadata?.playbackId,
+      videoPath: metadata?.path,
     })
 
-    emit('success')
+    emit('success', { name: data.name.trim(), email: data.email.trim() })
   }
   catch (error: any) {
     console.error(error)
@@ -80,6 +80,11 @@ const onSubmit = async () => {
     loading.value = false
   }
 }
+
+defineExpose({
+  postToGhl,
+  resetForm,
+})
 </script>
 
 <template>

@@ -31,6 +31,7 @@ const {
   lazyLoad = true,
 } = defineProps<Props>()
 
+const route = useRoute()
 const hasPlayed = ref(false)
 const attrs = useAttrs()
 const hasControls = computed(() => Object.hasOwn(attrs, 'controls'))
@@ -115,23 +116,32 @@ watchEffect(() => {
   root.value.style.setProperty('--y', String(mainMouse.position.value.y))
 })
 
-const showDataCapture = ref(false)
+const uiDataCapture = useTemplateRef('uiDataCapture')
+const showVideoDataCapture = ref(false)
 
-const onDataCaptureSuccess = () => {
-  appStore.setDataCaptured(true)
-  showDataCapture.value = false
+const onVideoDataCaptureSuccess = (data: { name: string; email: string }) => {
+  appStore.setVideoDataCapture({ ...data, captured: true })
+  showVideoDataCapture.value = false
   video.value?.play()
 }
 
 const tryPlayVideo = async () => {
-  if (dataCapture && !appStore.dataCaptured) {
-    showDataCapture.value = true
+  if (dataCapture && !appStore.videoDataCapture.captured) {
+    showVideoDataCapture.value = true
     return
+  } else if (dataCapture && appStore.videoDataCapture.captured) {  
+    try {
+      await uiDataCapture.value?.postToGhl({
+        name: appStore.videoDataCapture.name,
+        email: appStore.videoDataCapture.email,
+        videoName: name,
+        videoPlaybackId: playbackId,
+        videoPath: route.fullPath,
+      })
+    } catch (error) {
+      console.error('Error posting note to GHL:', error)
+    }
   }
-
-  // TODO: If cookie for data captured is already set:
-  // 1. Play the video immediately.
-  // 2. Send data off to high-level from the cookie + user info.
 
   video.value?.play()
 }
@@ -154,13 +164,14 @@ const tryPlayVideo = async () => {
       v-if="dataCapture && hasControls"
       :class="[
         'absolute inset-0 z-2 size-full transition-opacity duration-250 backdrop-blur-md',
-        { 'opacity-0 pointer-events-none': !showDataCapture || appStore.dataCaptured },
+        { 'opacity-0 pointer-events-none': !showVideoDataCapture || appStore.videoDataCapture.captured },
       ]"
     >
       <UiDataCapture
+        ref="uiDataCapture"
         legend="Enter your details to watch the video"
         :metadata="{ name, playbackId, path: $route.fullPath }"
-        @success="onDataCaptureSuccess"
+        @success="onVideoDataCaptureSuccess"
       />
     </div>
 
