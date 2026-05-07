@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     email: z.email(),
     videoName: z.string().optional(),
     videoPlaybackId: z.string().optional(),
-    videoUrl: z.string().optional(),
+    videoPath: z.string().optional(),
   })
 
   const parsed = schema.safeParse(body)
@@ -23,6 +23,7 @@ export default defineEventHandler(async (event) => {
   }
 
   const data = parsed.data
+  const videoUrl = `https://raw.london${data.videoPath}`
   const config = useRuntimeConfig()
 
   const ghl = new HighLevel({
@@ -31,7 +32,7 @@ export default defineEventHandler(async (event) => {
   })
 
   try {
-    const response = await ghl.contacts.upsertContact({
+    const contactsResponse = await ghl.contacts.upsertContact({
       locationId: config.GHL_LOCATION_ID,
       name: data.name,
       email: data.email,
@@ -41,24 +42,39 @@ export default defineEventHandler(async (event) => {
           id: 'source',
           value: 'RAW Website',
         },
+        {
+          id: 'last_video_watched_name',
+          value: data.videoName,
+        },
+        {
+          id: 'last_video_watched_id',
+          value: data.videoPlaybackId,
+        },
+        {
+          id: 'last_video_watched_url',
+          value: videoUrl,
+        },
+        {
+          id: 'last_video_watched_datetime',
+          value: new Date().toISOString(),
+        },
       ],
     })
 
-    const contactId = response.contact?.id
+    const contactId = contactsResponse.contact?.id
 
     if (contactId) {
       await ghl.contacts.createNote(
         { contactId },
         {
-          body: `
-<p><strong>${data.name}</strong> (${data.email}) filled out the form on your video <strong>${data.videoName || 'N/A'}</strong></p>
-<p><strong>Details:</strong><br>Page: <a href="${data.videoUrl}" target="_blank" rel="noopener noreferrer">${data.videoUrl || 'N/A'}</a><br>Mux playbackId: ${data.videoPlaybackId || 'N/A'}</p>
-`,
+          title: 'Video Form Submission',
+          body: `<p><strong>${data.name}</strong> (${data.email}) filled out the form on your video <strong>${data.videoName || 'N/A'}</strong></p>
+<p><strong>Details:</strong><br>Playback Id: ${data.videoPlaybackId || 'N/A'}<br>URL: ${videoUrl || 'N/A'}</p>`,
         },
       )
     }
 
-    return response
+    return { success: true, contactId }
   }
   catch (error: any) {
     throw createError({

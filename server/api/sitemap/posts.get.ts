@@ -1,5 +1,6 @@
 import type { ISbStoryData } from 'storyblok-js-client'
-import { asSitemapUrl, defineSitemapEventHandler } from '#imports'
+import type { SitemapUrlInput } from '#sitemap/types'
+import { defineSitemapEventHandler } from '#imports'
 import StoryblokClient from 'storyblok-js-client'
 
 export default defineSitemapEventHandler(async () => {
@@ -15,17 +16,19 @@ export default defineSitemapEventHandler(async () => {
       version: 'published',
       page: 1,
       per_page: 100,
+      starts_with: 'posts/',
       excluding_fields: 'blocks,hero,seo_title,category,author,seo_description,seo_image',
     })
 
-    const pages = response
-      .filter((link: ISbStoryData) => link.slug !== 'settings' && !link.full_slug.startsWith('people/'))
-      .map((link: ISbStoryData) => asSitemapUrl({
-        loc: link.slug === 'home' ? '/' : `/${link.full_slug}`,
+    const posts = response
+      .filter((link: ISbStoryData) => link.full_slug.startsWith('posts/'))
+      .map((link: ISbStoryData) => ({
+        loc: `/${link.full_slug}`,
         lastmod: link.updated_at,
+        _sitemap: 'posts'
       }))
 
-    return pages
+    return posts satisfies SitemapUrlInput[]
   }
   catch (error: any) {
     throw createError({

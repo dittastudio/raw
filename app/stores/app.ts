@@ -1,6 +1,12 @@
 import type { Themes } from '@@/types/app'
 import { defineStore } from 'pinia'
 
+type VideoCapture = {
+  name: string
+  email: string
+  captured: boolean
+}
+
 export const useAppStore = defineStore('app', () => {
   // Cookies.
   const cookieConsent = ref<'accepted' | 'declined' | null>(null)
@@ -11,10 +17,14 @@ export const useAppStore = defineStore('app', () => {
   }
 
   // Data capture.
-  const dataCaptured = ref(false)
+  const videoDataCapture = ref({
+    name: '',
+    email: '',
+    captured: false
+  })
 
-  function setDataCaptured(value: boolean) {
-    dataCaptured.value = value
+  function setVideoDataCapture(value: VideoCapture) {
+    videoDataCapture.value = value
   }
 
   // Header.
@@ -39,8 +49,8 @@ export const useAppStore = defineStore('app', () => {
     cookieConsent,
     hasDecidedCookies,
     setAcceptedCookies,
-    dataCaptured,
-    setDataCaptured,
+    videoDataCapture,
+    setVideoDataCapture,
     isHeaderOpen,
     setHeaderMenu,
     toggleHeaderMenu,
@@ -49,7 +59,7 @@ export const useAppStore = defineStore('app', () => {
   }
 }, {
   persist: {
-    pick: ['cookieConsent', 'dataCaptured'],
+    pick: ['cookieConsent', 'videoDataCapture'],
     storage: piniaPluginPersistedstate.cookies(),
   },
 })

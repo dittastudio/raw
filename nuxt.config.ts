@@ -51,9 +51,24 @@ export default defineNuxtConfig({
       isCustomElement: tag => tag.startsWith('mux-'),
     },
   },
+  sitemap: {
+    excludeAppSources: true,
+    sitemaps: {
+      posts: {
+        sources: [
+          '/api/sitemap/posts',
+        ]
+      },
+      pages: {
+        sources: [
+          '/api/sitemap/pages',
+        ]
+      }
+    }
+  },
   site: {
     url: 'https://raw.london',
-    name: 'RAW',
+    name: 'RAW',    
   },
   runtimeConfig: {
     STORYBLOK_SPACE_ID: process.env.NUXT_STORYBLOK_SPACE_ID,
@@ -152,10 +167,5 @@ export default defineNuxtConfig({
   },
   linkChecker: {
     skipInspections: ['no-uppercase-chars', 'link-text'],
-  },
-  sitemap: {
-    sources: [
-      '/api/sitemap',
-    ],
   },
 })
