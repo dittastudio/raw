@@ -9,10 +9,10 @@ interface Props {
 const { legend } = defineProps<Props>()
 
 const { r$ } = useRegle({
-  name: 'Michael',
-  email: 'michael@ditta.studio',
-  role: 'Devver',
-  company: 'ditta',
+  name: '',
+  email: '',
+  role: '',
+  company: '',
   sector: '',
 }, {
   name: {

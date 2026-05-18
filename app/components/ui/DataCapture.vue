@@ -164,7 +164,7 @@ defineExpose({
 
         <div
           v-if="storyblokRichTextContent(settings.content.data_capture_text)"
-          class="prose [&_p]:type-mono-12 text-pretty opacity-60"
+          class="prose [&_p]:type-mono-12 text-pretty text-white/60"
         >
           <StoryblokText :html="settings.content.data_capture_text" />
         </div>

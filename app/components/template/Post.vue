@@ -135,6 +135,36 @@ const category = computed(() => {
                 v-else-if="block.component === 'post_wistia'"
                 :block="block"
               />
+
+              <UiMuxVideo
+                v-else-if="isMuxVideoAutoplayComponent(block) && block.video?.playbackId"
+                :playback-id="block.video.playbackId"
+                :poster="block.poster?.filename ? storyblokImage(block.poster.filename, {
+                  width: 1600,
+                  height: 900,
+                  format: 'webp',
+                  quality: 80,
+                }) : null"
+                playsinline
+                autoplay
+                muted
+                loop
+              />
+
+              <UiMuxVideo
+                v-else-if="isMuxVideoPlayerComponent(block) && block.video?.playbackId"
+                :name="block?.name"
+                :data-capture="block?.data_capture"
+                :playback-id="block.video.playbackId"
+                :poster="block.poster?.filename ? storyblokImage(block.poster.filename, {
+                  width: 1600,
+                  height: 900,
+                  format: 'webp',
+                  quality: 80,
+                }) : null"
+                playsinline
+                controls
+              />
             </section>
           </div>
         </div>

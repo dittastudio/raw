@@ -4,6 +4,7 @@ import type { Component, VNode } from 'vue'
 import type { StoryblokRichtext } from '#storyblok-types'
 import { Mark } from '@tiptap/core'
 import { NuxtLink } from '#components'
+import { Mark } from '@tiptap/core'
 
 interface Props {
   html?: StoryblokRichtext
