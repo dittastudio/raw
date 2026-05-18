@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 
 interface Item {
   title: string

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { BlockTruths } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import type { TTruthsItem } from '@/components/ui/Truths.vue'
 
 interface Props {

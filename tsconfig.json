@@ -1,7 +1,4 @@
 {
-  "files": [
-    "./types/reset.d.ts"
-  ],
   "references": [
     {
       "path": "./.nuxt/tsconfig.app.json"
@@ -15,5 +12,6 @@
     {
       "path": "./.nuxt/tsconfig.node.json"
     }
-  ]
+  ],
+  "files": []
 }

@@ -1,4 +1,4 @@
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 
 export interface ThemeColors {
   background: string

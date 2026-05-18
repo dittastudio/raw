@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import { useIntersectionObserver } from '@vueuse/core'
 import { gsap } from 'gsap'
 import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin'
