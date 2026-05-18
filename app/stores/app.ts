@@ -1,4 +1,4 @@
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import { defineStore } from 'pinia'
 
 type VideoCapture = {

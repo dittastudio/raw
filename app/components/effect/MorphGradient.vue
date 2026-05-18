@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 
 interface Props {
   ballColour1?: Themes

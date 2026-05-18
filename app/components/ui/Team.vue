@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Person } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

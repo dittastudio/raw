@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 
 interface Props {
   title?: string
