@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { BlockProjectCarousel, Project } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 import type { Carousel } from '@/components/ui/CarouselFade.vue'
 import IconArrow from '@/assets/icons/arrow-left.svg'

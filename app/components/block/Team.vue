@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { BlockTeam } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 
 interface Props {
   block: BlockTeam

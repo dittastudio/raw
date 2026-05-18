@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Project } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {

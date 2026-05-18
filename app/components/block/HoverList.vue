@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { BlockHoverList } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 
 interface Props {
   block: BlockHoverList
