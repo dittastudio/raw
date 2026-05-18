@@ -21,7 +21,6 @@ export default defineSitemapEventHandler(async () => {
     })
 
     const posts = response
-      .filter((link: ISbStoryData) => link.full_slug.startsWith('posts/'))
       .map((link: ISbStoryData) => ({
         loc: `/${link.full_slug}`,
         lastmod: link.updated_at,
