@@ -61,7 +61,7 @@ const onSubmit = async () => {
       return
     }
 
-    await $fetch('/api/ghl', {
+    await $fetch('/api/ghl-newsletter', {
       method: 'POST',
       body: {
         name: data.name.trim(),

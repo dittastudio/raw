@@ -1,9 +1,6 @@
 import type { ISbStoriesParams, ISbStoryData, StoryblokBridgeConfigV2 } from '@storyblok/js'
 
-type UseAsyncDataOptions = Omit<
-  Parameters<typeof useAsyncStoryblok>[1],
-  'api' | 'bridge'
->
+type UseAsyncDataOptions = Omit<Parameters<typeof useAsyncStoryblok>[1], 'api' | 'bridge'>
 
 export async function useStory<T>(
   slug: string = '',
@@ -14,12 +11,13 @@ export async function useStory<T>(
   const runtimeConfig = useRuntimeConfig()
   const route = useRoute()
 
+  const isDraft = runtimeConfig.public.STORYBLOK_VERSION !== 'published'
+  // const cv = useState('storyblok-cv', () => Date.now())
+
   const { story, error } = await useAsyncStoryblok(storyblokSlug(slug), {
     api: {
-      version:
-        runtimeConfig.public.STORYBLOK_VERSION === 'published'
-          ? 'published'
-          : 'draft',
+      version: isDraft ? 'draft' : 'published',
+      // cv: isDraft ? cv.value : undefined,
       from_release:
         typeof route.query?._storyblok_release === 'string'
           ? route.query?._storyblok_release

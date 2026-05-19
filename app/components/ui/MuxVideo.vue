@@ -10,6 +10,8 @@ interface Events {
 const emit = defineEmits<Events>()
 
 interface Props {
+  name?: string
+  dataCapture?: boolean
   playbackId: string
   primaryColor?: string
   accentColor?: string
@@ -19,6 +21,8 @@ interface Props {
 }
 
 const {
+  name,
+  dataCapture = false,
   playbackId,
   primaryColor = '#fff',
   accentColor = '#c6ea9f',
@@ -27,12 +31,15 @@ const {
   lazyLoad = true,
 } = defineProps<Props>()
 
+const route = useRoute()
 const hasPlayed = ref(false)
 const attrs = useAttrs()
-const showPlay = computed(() => !hasPlayed.value && Object.hasOwn(attrs, 'controls'))
+const hasControls = computed(() => Object.hasOwn(attrs, 'controls'))
+const showPlay = computed(() => !hasPlayed.value && hasControls.value)
 const root = useTemplateRef('root')
 const video = ref<HTMLVideoElement | null | undefined>(null)
 const isInView = ref(!lazyLoad)
+const appStore = useAppStore()
 
 const { stop } = useIntersectionObserver(
   root,
@@ -108,6 +115,36 @@ watchEffect(() => {
   root.value.style.setProperty('--x', String(mainMouse.position.value.x))
   root.value.style.setProperty('--y', String(mainMouse.position.value.y))
 })
+
+const uiDataCapture = useTemplateRef('uiDataCapture')
+const showVideoDataCapture = ref(false)
+
+const onVideoDataCaptureSuccess = (data: { name: string; email: string }) => {
+  appStore.setVideoDataCapture({ ...data, captured: true })
+  showVideoDataCapture.value = false
+  video.value?.play()
+}
+
+const tryPlayVideo = async () => {
+  if (dataCapture && !appStore.videoDataCapture.captured) {
+    showVideoDataCapture.value = true
+    return
+  } else if (dataCapture && appStore.videoDataCapture.captured) {  
+    try {
+      await uiDataCapture.value?.postToGhl({
+        name: appStore.videoDataCapture.name,
+        email: appStore.videoDataCapture.email,
+        videoName: name,
+        videoPlaybackId: playbackId,
+        videoPath: route.fullPath,
+      })
+    } catch (error) {
+      console.error('Error posting note to GHL:', error)
+    }
+  }
+
+  video.value?.play()
+}
 </script>
 
 <template>
@@ -115,20 +152,34 @@ watchEffect(() => {
     v-if="playbackId"
     ref="root"
     :class="[
-      'size-full',
+      'size-full relative isolate',
       {
-        'relative': showPlay,
         'aspect-video': !isCover || !isInView,
       },
     ]"
     @mousemove="onMouseMove"
     @mouseleave="onMouseLeave"
   >
+    <div
+      v-if="dataCapture && hasControls"
+      :class="[
+        'absolute inset-0 z-2 size-full transition-opacity duration-250 backdrop-blur-md',
+        { 'opacity-0 pointer-events-none': !showVideoDataCapture || appStore.videoDataCapture.captured },
+      ]"
+    >
+      <UiDataCapture
+        ref="uiDataCapture"
+        legend="Enter your details to watch the video"
+        :metadata="{ name, playbackId, path: $route.fullPath }"
+        @success="onVideoDataCaptureSuccess"
+      />
+    </div>
+
     <button
       v-if="showPlay"
       type="button"
-      class="mux-video__button absolute inset-0 z-10 flex items-center justify-center type-h4 text-offwhite bg-transparent"
-      @click="video?.play()"
+      class="mux-video__button absolute inset-0 z-1 flex items-center justify-center type-h4 text-offwhite bg-transparent"
+      @click="tryPlayVideo()"
     >
       <div class="mux-video__button-inner">
         Play

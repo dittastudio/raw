@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Event } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
@@ -93,11 +93,6 @@ const {
 
     <BlockMedia
       v-else-if="block.component === 'block_media'"
-      :block="block"
-    />
-
-    <BlockNextEvent
-      v-else-if="block.component === 'block_next_event'"
       :block="block"
     />
 

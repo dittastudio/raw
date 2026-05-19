@@ -100,6 +100,8 @@ const { block } = defineProps<Props>()
             <UiMuxVideo
               v-else-if="info.media?.[0] && isMuxVideoPlayerComponent(info.media?.[0]) && info.media?.[0].video?.playbackId"
               class="block size-full object-cover"
+              :name="info.media?.[0]?.name"
+              :data-capture="info.media?.[0].data_capture"
               :playback-id="info.media?.[0].video.playbackId"
               :poster="info.media?.[0].poster?.filename ? storyblokImage(info.media?.[0].poster.filename, {
                 width: 1600,

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { StoryblokAsset } from '#storyblok-types'
-import type { Themes } from '@@/types/app'
+import type { Themes } from '@/types/app'
 import IconLinkedIn from '@/assets/icons/linkedin.svg'
 
 interface Props {

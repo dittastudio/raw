@@ -106,7 +106,6 @@ defineOptions({
             flex-col
             items-center
             justify-center
-            pointer-events-auto
             bg-white
             text-offblack
             outline-0

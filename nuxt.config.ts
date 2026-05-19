@@ -78,9 +78,6 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2026-02-10',
   nitro: {
-    experimental: {
-      openAPI: false,
-    },
     prerender: {
       crawlLinks: true,
       routes: ['/'],
@@ -100,14 +97,12 @@ export default defineNuxtConfig({
         'gsap/SplitText',
         'gsap/DrawSVGPlugin',
         'keen-slider/vue.es',
+        '@tiptap/core',
       ],
     },
     plugins: [
-      // @ts-expect-error Plugin type mismatch.
       devtoolsJson(),
-      // @ts-expect-error Plugin type mismatch.
       tailwindcss(),
-      // @ts-expect-error Plugin type mismatch.
       svgLoader({
         svgo: false,
       }),
@@ -156,8 +151,18 @@ export default defineNuxtConfig({
     skipInspections: ['no-uppercase-chars', 'link-text'],
   },
   sitemap: {
-    sources: [
-      '/api/sitemap',
-    ],
+    excludeAppSources: true,
+    sitemaps: {
+      posts: {
+        sources: [
+          '/api/sitemap/posts',
+        ],
+      },
+      pages: {
+        sources: [
+          '/api/sitemap/pages',
+        ],
+      },
+    },
   },
 })

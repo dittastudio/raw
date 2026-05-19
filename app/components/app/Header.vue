@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import type { Link } from '#storyblok-components'
-import type { Themes } from '@@/types/app'
 import type Lenis from 'lenis'
+import type { Link } from '#storyblok-components'
+import type { Themes } from '@/types/app'
 import { useLenis } from 'lenis/vue'
 import IconLogo from '@/assets/icons/logo.svg?component'
 

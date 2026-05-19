@@ -367,6 +367,8 @@ export interface MuxVideoAutoplay {
 export interface MuxVideoPlayer {
   poster?: StoryblokAsset;
   video: unknown;
+  name: string;
+  data_capture?: boolean;
   component: "mux_video_player";
   _uid: string;
 }
@@ -428,7 +430,18 @@ export interface Post {
   seo_title?: string;
   seo_description?: string;
   seo_image?: StoryblokAsset;
-  blocks?: (PostGallery | PostHeading | PostHtml | PostImage | PostQuote | PostText | PostEmbed | PostWistia)[];
+  blocks?: (
+    | PostGallery
+    | PostHeading
+    | PostHtml
+    | PostImage
+    | PostQuote
+    | PostText
+    | PostEmbed
+    | PostWistia
+    | MuxVideoPlayer
+    | MuxVideoAutoplay
+  )[];
   jaa_partnership?: boolean;
   component: "post";
   _uid: string;
@@ -523,6 +536,8 @@ export interface Settings {
   company_telephone?: string;
   company_address?: string;
   logos?: Logo[];
+  data_capture_headline: string;
+  data_capture_text: StoryblokRichtext;
   component: "settings";
   _uid: string;
 }

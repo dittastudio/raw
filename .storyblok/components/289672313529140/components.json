@@ -3343,7 +3343,7 @@
     "display_name": "Mux Video Player",
     "description": "Creates a Mux video player.",
     "created_at": "2026-02-04T11:44:36.156Z",
-    "updated_at": "2026-02-20T18:08:36.825Z",
+    "updated_at": "2026-03-30T16:19:53.285Z",
     "id": 141377028756591,
     "schema": {
       "poster": {
@@ -3368,6 +3368,22 @@
         ],
         "required": true,
         "id": "SyvanaWGR969UYcJAg28KA"
+      },
+      "name": {
+        "type": "text",
+        "pos": 2,
+        "display_name": "Name",
+        "required": true,
+        "description": "Name the video (for use in GHL)",
+        "id": "P7eldiGGTIC4x_QJi2vpzg"
+      },
+      "data_capture": {
+        "type": "boolean",
+        "pos": 3,
+        "inline_label": true,
+        "default_value": true,
+        "id": "_RBk7rKoTdiK0uKPtdYo6A",
+        "description": "Should this video ask for a user's data before it can play?"
       }
     },
     "image": null,
@@ -3540,7 +3556,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:45:38.978Z",
-    "updated_at": "2026-02-24T12:19:37.598Z",
+    "updated_at": "2026-04-14T17:05:59.438Z",
     "id": 131188076458425,
     "schema": {
       "hero": {
@@ -3656,7 +3672,9 @@
           "post_quote",
           "post_text",
           "post_embed",
-          "post_wistia"
+          "post_wistia",
+          "mux_video_player",
+          "mux_video_autoplay"
         ],
         "component_denylist": []
       },
@@ -4005,7 +4023,7 @@
     "display_name": null,
     "description": "",
     "created_at": "2026-01-06T16:50:14.156Z",
-    "updated_at": "2026-03-11T16:36:49.877Z",
+    "updated_at": "2026-05-15T16:39:43.731Z",
     "id": 131189203587517,
     "schema": {
       "preview_logo": {
@@ -4140,7 +4158,7 @@
     "icon": null,
     "internal_tags_list": [],
     "internal_tag_ids": [],
-    "content_type_asset_preview": null,
+    "content_type_asset_preview": "preview_logo",
     "metadata": {}
   },
   {
@@ -4148,7 +4166,7 @@
     "display_name": null,
     "description": "Settings for the global content of the website",
     "created_at": "2026-01-06T16:27:28.640Z",
-    "updated_at": "2026-03-12T18:36:05.618Z",
+    "updated_at": "2026-03-31T09:03:11.599Z",
     "id": 131183610438016,
     "schema": {
       "navigation": {
@@ -4265,6 +4283,29 @@
         ],
         "component_denylist": [],
         "id": "Pzrc_gzxRfOBjjVh-OwOtQ"
+      },
+      "data_capture_headline": {
+        "type": "text",
+        "pos": 12,
+        "required": true,
+        "description": "Headline that is shown on video's with data capture enabled.",
+        "id": "BlhwBy7vRiCq9v3ILhmMPw"
+      },
+      "data_capture_text": {
+        "type": "richtext",
+        "pos": 13,
+        "required": true,
+        "description": "Text that is shown on video's with data capture enabled.",
+        "id": "rGwKDf8tRiqFh5ux57rL9g",
+        "allow_target_blank": true,
+        "customize_toolbar": true,
+        "toolbar": [
+          "bold",
+          "unset",
+          "italic",
+          "link",
+          "paragraph"
+        ]
       }
     },
     "image": null,
