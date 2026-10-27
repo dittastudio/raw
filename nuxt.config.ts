@@ -1,6 +1,5 @@
 import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
-import devtoolsJson from 'vite-plugin-devtools-json'
 import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
@@ -101,7 +100,6 @@ export default defineNuxtConfig({
       ],
     },
     plugins: [
-      devtoolsJson(),
       tailwindcss(),
       svgLoader({
         svgo: false,
