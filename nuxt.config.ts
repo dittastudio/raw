@@ -23,8 +23,6 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en-GB',
       },
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
       meta: [
         { name: 'author', content: 'RAW' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
@@ -147,6 +145,9 @@ export default defineNuxtConfig({
   },
   linkChecker: {
     skipInspections: ['no-uppercase-chars', 'link-text'],
+  },
+  seo: {
+    automaticOgAndTwitterTags: false,
   },
   sitemap: {
     excludeAppSources: true,
