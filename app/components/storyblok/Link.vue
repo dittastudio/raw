@@ -1,13 +1,28 @@
 <script lang="ts" setup>
-import type { StoryblokMultilink } from '#storyblok-types'
+import type { MultilinkFieldValue } from '@storyblok/schema'
 
 interface Props {
-  item: StoryblokMultilink
+  item: MultilinkFieldValue
 }
 
 const { item } = defineProps<Props>()
 
 const route = useRoute()
+
+const determineHref = (item: MultilinkFieldValue) => {
+  switch (item.linktype) {
+    case 'story': {
+      const path = `/${item.cached_url}`.replace('/home', '/').trim()
+      return path === '/' ? path : path.replace(/\/$/, '')
+    }
+    case 'email': {
+      return `mailto:${item.email}`
+    }
+    default: {
+      return item.cached_url
+    }
+  }
+}
 
 const isActiveLink = computed(() => {
   const href = determineHref(item)
@@ -15,10 +30,10 @@ const isActiveLink = computed(() => {
 })
 
 const attributes = {
-  title: item?.title,
-  rel: item?.rel,
+  title: 'title' in item ? item.title : undefined,
+  rel: 'rel' in item ? item.rel : undefined,
   to: determineHref(item),
-  target: item?.target ?? item?.linktype === 'asset' ? '_blank' : null,
+  target: (item?.target ?? item?.linktype === 'asset') ? '_blank' : null,
 }
 </script>
 
