@@ -1,0 +1,45 @@
+// Every path falls through to app/pages/[...slug].vue, which hits the Storyblok API
+// (settings + story) even for bot probes like /wp-login.php or /.env.
+// Reject those here, before the Nuxt renderer runs.
+
+const passthroughPrefixes = ['/api/', '/_nuxt/', '/__']
+
+// Extensions the server legitimately responds to (payloads, robots, sitemaps).
+const allowedExtensions = new Set(['json', 'txt', 'xml', 'xsl'])
+
+const junkPrefixes = ['/wp-', '/wordpress', '/cgi-bin', '/phpmyadmin']
+
+const isJunkPath = (pathname: string) => {
+  const path = pathname.toLowerCase()
+
+  if (passthroughPrefixes.some(prefix => path.startsWith(prefix))) {
+    return false
+  }
+
+  if (junkPrefixes.some(prefix => path.startsWith(prefix))) {
+    return true
+  }
+
+  const segments = path.split('/').filter(Boolean)
+
+  // Dotfiles and dot-directories, e.g. /.env, /.git/config.
+  if (segments.some(segment => segment.startsWith('.'))) {
+    return true
+  }
+
+  const extension = segments.at(-1)?.match(/\.([a-z0-9]+)$/)?.[1]
+
+  return Boolean(extension && !allowedExtensions.has(extension))
+}
+
+export default defineEventHandler((event) => {
+  const { pathname } = getRequestURL(event)
+
+  if (!isJunkPath(pathname)) {
+    return
+  }
+
+  setResponseHeader(event, 'cache-control', 'public, max-age=3600')
+
+  throw createError({ statusCode: 404, statusMessage: `Page not found for: ${pathname}` })
+})
