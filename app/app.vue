@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { Settings } from '#storyblok-components'
+import type { StoryOf } from '#storyblok-schema'
 import { VueLenis } from 'lenis/vue'
 
-const story = await useStory<Settings>('/settings')
+const story = await useStory<StoryOf<'settings'>>('/settings')
 const route = useRoute()
 const cookiesDialog = useTemplateRef('cookiesDialog')
 const appStore = useAppStore()

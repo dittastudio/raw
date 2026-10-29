@@ -1,7 +1,6 @@
-import type { Event, Image, MuxVideoAutoplay, MuxVideoPlayer, Page, Post, Project } from '#storyblok-components'
-import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
+import type { Block, StoryOf } from '#storyblok-schema'
+import type { MultilinkFieldValue, RichTextFieldValue } from '@storyblok/schema'
 import type { ImageModifiers } from '@nuxt/image'
-import type { ISbStoryData } from '@storyblok/js'
 import type { LocationQuery } from 'vue-router'
 
 interface Entry {
@@ -10,7 +9,7 @@ interface Entry {
   name: string
 }
 
-const getCategoryEntry = (value?: string | string[] | number, entries?: Entry[]): Entry | undefined => {
+const getCategoryEntry = (value?: string | string[] | number | null, entries?: Entry[]): Entry | undefined => {
   if (Array.isArray(entries) && value) {
     const category = Array.isArray(value) ? value[0] : value
     const entry = entries.find((entry: Entry) => entry.value === category)
@@ -52,8 +51,11 @@ const storyblokAssetType = (filename: string): 'image' | 'video' | 'other' => {
 }
 
 const storyblokRichTextContent = (
-  richtext: StoryblokRichtext | undefined,
-): boolean => Boolean(richtext?.content?.[0]?.content?.length)
+  richtext: RichTextFieldValue | null | undefined,
+): boolean => {
+  const node = richtext?.content?.[0]
+  return Boolean(node && 'content' in node && node.content?.length)
+}
 
 const storyblokSlug = (path: string): string =>
   ['', '/'].includes(path) ? '/home' : path.replace(/\/+$/, '')
@@ -63,47 +65,37 @@ const storyblokRangeNumber = (field: unknown): number | undefined => {
   return value !== undefined && value !== '' ? Number(value) : undefined
 }
 
-interface TypedMuxVideoAutoplay extends Omit<MuxVideoAutoplay, 'video'> {
-  video: {
-    playbackId?: string
-  }
-}
+type Media = Block<'image'> | Block<'mux_video_autoplay'> | Block<'mux_video_player'>
 
-interface TypedMuxVideoPlayer extends Omit<MuxVideoPlayer, 'video'> {
-  video: {
-    playbackId?: string
-  }
-}
+const isImageComponent = (media: Media): media is Block<'image'> => media.component === 'image'
+const isMuxVideoAutoplayComponent = (media: Media): media is Block<'mux_video_autoplay'> => media.component === 'mux_video_autoplay'
+const isMuxVideoPlayerComponent = (media: Media): media is Block<'mux_video_player'> => media.component === 'mux_video_player'
 
-const isImageComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is Image => media.component === 'image'
-const isMuxVideoAutoplayComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideoAutoplay => media.component === 'mux_video_autoplay'
-const isMuxVideoPlayerComponent = (media: Image | MuxVideoAutoplay | MuxVideoPlayer): media is TypedMuxVideoPlayer => media.component === 'mux_video_player'
-
-type ContentTypes = Page | Post | Project | Event
+type ContentTypes = StoryOf<'page' | 'post' | 'project' | 'event'>
 
 const isEvent = (
-  story: ISbStoryData<ContentTypes> | null | undefined,
-): story is ISbStoryData<Event> => Boolean(story?.content?.component === 'event')
+  story: ContentTypes | null | undefined,
+): story is StoryOf<'event'> => Boolean(story?.content?.component === 'event')
 
 const isPage = (
-  story: ISbStoryData<ContentTypes> | null | undefined,
-): story is ISbStoryData<Page> => Boolean(story?.content?.component === 'page')
+  story: ContentTypes | null | undefined,
+): story is StoryOf<'page'> => Boolean(story?.content?.component === 'page')
 
 const isPost = (
-  story: ISbStoryData<ContentTypes> | null | undefined,
-): story is ISbStoryData<Post> => Boolean(story?.content?.component === 'post')
+  story: ContentTypes | null | undefined,
+): story is StoryOf<'post'> => Boolean(story?.content?.component === 'post')
 
 const isProject = (
-  story: ISbStoryData<ContentTypes> | null | undefined,
-): story is ISbStoryData<Project> => Boolean(story?.content?.component === 'project')
+  story: ContentTypes | null | undefined,
+): story is StoryOf<'project'> => Boolean(story?.content?.component === 'project')
 
-type ContentTypeBlocks = NonNullable<Page['blocks']> | NonNullable<Event['blocks']> | NonNullable<Project['blocks']>
+type ContentTypeBlocks = NonNullable<Block<'page' | 'event' | 'project'>['blocks']>
 type ContentTypeBlock = ContentTypeBlocks[number]
 type ContentTypeBlockWithMedia = Extract<ContentTypeBlock, { media?: unknown }>
 
 const isBlockWithMedia = (block: ContentTypeBlock): block is ContentTypeBlockWithMedia => 'media' in block && Array.isArray(block.media) && block.media.length > 0
 
-const blockHelpers = <T extends { blocks?: ContentTypeBlocks }>(story: ISbStoryData<T>) => {
+const blockHelpers = <T extends { content: { blocks?: ContentTypeBlocks | null } }>(story: T) => {
   const blocks = story.content.blocks
 
   const checkBackgroundMatchesPrevBackground = (index: number) => {
@@ -189,7 +181,7 @@ const storyblokImageDimensions = (
   return { width: Number(width), height: Number(height) }
 }
 
-const determineHref = (item: StoryblokMultilink) => {
+const determineHref = (item: MultilinkFieldValue) => {
   switch (item.linktype) {
     case 'story': {
       const path = `/${item.cached_url}`.replace('/home', '/').trim()

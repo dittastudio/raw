@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { StoryblokAsset } from '#storyblok-types'
+import type { AssetFieldValue } from '@storyblok/schema'
 
 interface Props {
-  asset: StoryblokAsset
+  asset: AssetFieldValue
   cropHeight?: string
   strength?: number
   baseHeight?: number
-  title?: string
+  title?: string | null
 }
 
 const {

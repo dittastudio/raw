@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { BlockPosts, Event, Post } from '#storyblok-components'
-import type { ISbStoriesParams, ISbStoryData } from '@storyblok/js'
+import type { ISbStoriesParams } from '@storyblok/js'
+import type { Block, StoryOf } from '#storyblok-schema'
 
 interface Props {
-  block: BlockPosts
+  block: Block<'block_posts'>
 }
 
 const { block } = defineProps<Props>()
@@ -32,9 +32,9 @@ interface Posts {
   name: string
   full_slug: string
   first_published_at?: string
-  image: Post['hero'] | Post['preview_image'] | undefined
-  category: Post['category']
-  component: Post['component'] | Event['component']
+  image: Block<'post'>['hero'] | Block<'post'>['preview_image'] | undefined
+  category: Block<'post'>['category']
+  component: Block<'post'>['component'] | Block<'event'>['component']
 }
 
 interface PostsPayload {
@@ -43,7 +43,7 @@ interface PostsPayload {
 }
 
 interface PostsTransformInput {
-  stories: ISbStoryData<Post>[]
+  stories: StoryOf<'post'>[]
   requested: number
 }
 
@@ -112,7 +112,7 @@ const { data: postsPayload } = await useAsyncData(() => `posts-${currentCategory
   const { data } = await storyblokApi.get('cdn/stories', query)
 
   return {
-    stories: data.stories as ISbStoryData<Post>[],
+    stories: data.stories as StoryOf<'post'>[],
     requested,
   }
 }, {

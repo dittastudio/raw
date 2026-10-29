@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Event, Page, Post, Project } from '#storyblok-components'
+import type { StoryOf } from '#storyblok-schema'
 
 const route = useRoute()
 
@@ -12,7 +12,7 @@ const relations: string[] = [
   'block_project_carousel.projects',
 ]
 
-const story = await useStory<Event | Page | Post | Project>(
+const story = await useStory<StoryOf<'event' | 'page' | 'post' | 'project'>>(
   route.path,
   { resolve_relations: relations },
   { resolveRelations: relations },

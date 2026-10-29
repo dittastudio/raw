@@ -1,8 +1,9 @@
-import type { ISbStoriesParams, ISbStoryData, StoryblokBridgeConfigV2 } from '@storyblok/js'
+import type { ISbStoriesParams, StoryblokBridgeConfigV2 } from '@storyblok/js'
+import type { Story } from '#storyblok-schema'
 
 type UseAsyncDataOptions = Omit<Parameters<typeof useAsyncStoryblok>[1], 'api' | 'bridge'>
 
-export async function useStory<T>(
+export async function useStory<T extends Story = Story>(
   slug: string = '',
   api: ISbStoriesParams = {},
   bridge: StoryblokBridgeConfigV2 = {},
@@ -45,5 +46,5 @@ export async function useStory<T>(
     })
   }
 
-  return story as ComputedRef<ISbStoryData<T>>
+  return story as unknown as ComputedRef<T>
 }

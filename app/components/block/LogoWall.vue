@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { BlockLogoWall } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import StoryblokLink from '@/components/storyblok/Link.vue'
@@ -7,7 +7,7 @@ import StoryblokLink from '@/components/storyblok/Link.vue'
 gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
-  block: BlockLogoWall
+  block: Block<'block_logo_wall'>
 }
 
 const { block } = defineProps<Props>()

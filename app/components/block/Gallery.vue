@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { BlockGallery } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
-  block: BlockGallery
+  block: Block<'block_gallery'>
 }
 
 const { block } = defineProps<Props>()
@@ -126,7 +126,7 @@ onMounted(async () => {
     >
       <li
         v-for="(image, index) in block.items"
-        :key="image.id"
+        :key="image.id ?? image.filename"
         :class="[
           'grow pl-(--app-inner-gutter)',
           block.items?.length === 4 ? 'basis-1/2' : 'basis-1/2 md:basis-1/3',

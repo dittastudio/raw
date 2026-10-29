@@ -13,7 +13,7 @@ export interface Carousel {
 }
 
 interface Props<T> {
-  items?: T[]
+  items?: T[] | null
   options?: KeenSliderOptions
   autoplay?: boolean
   autoplayInterval?: number

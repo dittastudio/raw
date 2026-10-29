@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 interface Props {
   slug?: string
-  datetime?: string
+  datetime?: string | null
   headline?: string
-  description?: string
+  description?: string | null
 }
 
 const { slug, datetime, headline, description } = defineProps<Props>()

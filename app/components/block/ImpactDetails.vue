@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { BlockImpactDetails } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
 
 interface Props {
-  block: BlockImpactDetails
+  block: Block<'block_impact_details'>
 }
 
 const { block } = defineProps<Props>()
@@ -91,7 +91,7 @@ const media = computed(() => block.media?.[0])
           <ul class="flex flex-wrap items-center gap-(--app-outer-gutter)">
             <template
               v-for="item in block.logos"
-              :key="item.id"
+              :key="item.id ?? item.filename"
             >
               <li v-if="item?.filename">
                 <UiLogoResizer

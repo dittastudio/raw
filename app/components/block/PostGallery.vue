@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { PostGallery } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: PostGallery
+  block: Block<'post_gallery'>
 }
 
 const { block } = defineProps<Props>()
@@ -23,7 +23,7 @@ const sizesHalf = 'xs:50vw sm:50vw md:30vw lg:25vw xl:400px'
   >
     <li
       v-for="image in block.items"
-      :key="image.id"
+      :key="image.id ?? image.filename"
     >
       <NuxtImg
         v-if="image.filename && storyblokAssetType(image.filename) === 'image'"

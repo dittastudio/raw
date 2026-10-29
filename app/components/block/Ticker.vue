@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockTicker } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: BlockTicker
+  block: Block<'block_ticker'>
 }
 
 const { block } = defineProps<Props>()
@@ -69,7 +69,7 @@ const media = computed(() => block.media?.[0] || null)
       >
         <template
           v-for="logo in block.logos"
-          :key="logo.id"
+          :key="logo.id ?? logo.filename"
         >
           <template v-if="logo.filename">
             <UiLogoResizer

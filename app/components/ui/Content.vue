@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
+import type { MultilinkFieldValue, RichTextFieldValue } from '@storyblok/schema'
 import type { Themes } from '@/types/app'
 
 interface Props {
-  title?: string
-  headline?: StoryblokRichtext
-  copy?: StoryblokRichtext
-  cta?: StoryblokMultilink
-  ctaTitle?: string
+  title?: string | null
+  headline?: RichTextFieldValue | null
+  copy?: RichTextFieldValue | null
+  cta?: MultilinkFieldValue | null
+  ctaTitle?: string | null
   ctaType?: 'solid' | 'outline'
   ctaTheme?: Themes
 }

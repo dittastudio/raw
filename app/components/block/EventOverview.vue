@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockEventOverview } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: BlockEventOverview
+  block: Block<'block_event_overview'>
   datetime?: string
 }
 

@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import type { BlockPastEvents, Post } from '#storyblok-components'
-import type { ISbStoryData } from '@storyblok/js'
+import type { Block, StoryOf } from '#storyblok-schema'
 
 interface Props {
-  block: BlockPastEvents
+  block: Block<'block_past_events'>
 }
 
 const { block } = defineProps<Props>()
@@ -13,9 +12,9 @@ interface EventPost {
   uuid: string
   name: string
   full_slug: string
-  preview_image: Post['preview_image'] | Post['hero']
-  preview_text: Post['preview_text']
-  eventDatetime: Post['event_datetime']
+  preview_image: Block<'post'>['preview_image'] | Block<'post'>['hero']
+  preview_text: Block<'post'>['preview_text']
+  eventDatetime: Block<'post'>['event_datetime']
 }
 
 const { data: events } = await useAsyncData(() => `past-events`, async () => {
@@ -38,9 +37,9 @@ const { data: events } = await useAsyncData(() => `past-events`, async () => {
     },
   })
 
-  return data.stories as ISbStoryData<Post>[]
+  return data.stories as StoryOf<'post'>[]
 }, {
-  transform: (payload: ISbStoryData<Post>[]): EventPost[] => {
+  transform: (payload: StoryOf<'post'>[]): EventPost[] => {
     const events = payload.map(post => ({
       uuid: post.uuid,
       name: post.name,

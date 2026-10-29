@@ -11,7 +11,7 @@ const emit = defineEmits<Events>()
 
 interface Props {
   name?: string
-  dataCapture?: boolean
+  dataCapture?: boolean | null
   playbackId: string
   primaryColor?: string
   accentColor?: string

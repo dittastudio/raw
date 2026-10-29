@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockDivider } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: BlockDivider
+  block: Block<'block_divider'>
 }
 
 const { block } = defineProps<Props>()

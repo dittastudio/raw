@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { BlockHoverList } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
 
 interface Props {
-  block: BlockHoverList
+  block: Block<'block_hover_list'>
 }
 
 const { block } = defineProps<Props>()

@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockProjectsFiltered } from '#storyblok-components'
+import type { Block, Relation } from '#storyblok-schema'
 
 interface Props {
-  block: BlockProjectsFiltered
+  block: Block<'block_projects_filtered'>
 }
 
 const { block } = defineProps<Props>()
@@ -21,7 +21,7 @@ const currentCategory = computed(() => {
 })
 
 const projects = computed(() => {
-  const items = Array.isArray(block.projects) ? block.projects.filter(item => typeof item !== 'string') : []
+  const items = Array.isArray(block.projects) ? (block.projects as Relation<'project'>[]).filter(item => typeof item !== 'string') : []
   return currentCategory.value ? items.filter(project => project.content?.category === currentCategory.value?.value) : items
 })
 

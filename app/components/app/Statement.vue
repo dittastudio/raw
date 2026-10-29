@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { Image, MuxVideoAutoplay, MuxVideoPlayer } from '#storyblok-components'
-import type { StoryblokMultilink, StoryblokRichtext } from '#storyblok-types'
+import type { MultilinkFieldValue, RichTextFieldValue } from '@storyblok/schema'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  media?: (Image | MuxVideoAutoplay | MuxVideoPlayer)
-  statement?: StoryblokRichtext
-  title?: string
-  link?: StoryblokMultilink
+  media?: (Block<'image'> | Block<'mux_video_autoplay'> | Block<'mux_video_player'>)
+  statement?: RichTextFieldValue | null
+  title?: string | null
+  link?: MultilinkFieldValue | null
 }
 
 const { media, statement, title, link } = defineProps<Props>()

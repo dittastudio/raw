@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { StoryblokAsset } from '#storyblok-types'
+import type { AssetFieldValue } from '@storyblok/schema'
 import type { Themes } from '@/types/app'
 import IconLinkedIn from '@/assets/icons/linkedin.svg'
 
 interface Props {
-  image?: StoryblokAsset
-  imageSelected?: StoryblokAsset
+  image?: AssetFieldValue
+  imageSelected?: AssetFieldValue | null
   name?: string | null
   position?: string | null
   linkedIn?: string | null

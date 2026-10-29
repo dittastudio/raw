@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { BlockTestimonials } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import type { Carousel } from '@/components/ui/CarouselFade.vue'
 import IconArrow from '@/assets/icons/arrow-left.svg'
 
 interface Props {
-  block: BlockTestimonials
+  block: Block<'block_testimonials'>
 }
 
 const { block } = defineProps<Props>()

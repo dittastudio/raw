@@ -1,13 +1,15 @@
 <script lang="ts" setup>
-import type { Post } from '#storyblok-components'
-import type { ISbStoryData } from '@storyblok/js'
+import type { Relation, StoryOf } from '#storyblok-schema'
 
 interface Props {
-  story: ISbStoryData<Post>
+  story: StoryOf<'post'>
 }
 
 const { story } = defineProps<Props>()
-const author = computed(() => typeof story.content.author !== 'string' ? story.content.author : null)
+const author = computed(() => {
+  const relation = story.content.author as Relation<'person'> | null | undefined
+  return typeof relation === 'string' ? null : relation
+})
 const storyblokApi = useStoryblokApi()
 
 const { data: categories } = await useAsyncData('post-categories', async () => await storyblokApi.get(`cdn/datasource_entries`, {

@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { BlockImpactStatement } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
-  block: BlockImpactStatement
+  block: Block<'block_impact_statement'>
 }
 
 const { block } = defineProps<Props>()

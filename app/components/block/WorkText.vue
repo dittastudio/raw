@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockWorkText } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: BlockWorkText
+  block: Block<'block_work_text'>
 }
 
 const { block } = defineProps<Props>()
@@ -64,7 +64,7 @@ const { block } = defineProps<Props>()
       <ul class="flex flex-wrap items-center gap-(--app-outer-gutter)">
         <template
           v-for="item in block.logos"
-          :key="item.id"
+          :key="item.id ?? item.filename"
         >
           <li v-if="item?.filename">
             <UiLogoResizer

@@ -1,16 +1,16 @@
 <script lang="ts" setup>
-import type { BlockFeaturedEvent, Event } from '#storyblok-components'
+import type { Block, Relation } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
-import type { ISbStoryData } from '@storyblok/js'
 
 interface Props {
-  block: BlockFeaturedEvent
+  block: Block<'block_featured_event'>
 }
 
 const { block } = defineProps<Props>()
 
 const event = computed(() => {
-  const eventData = block.event as ISbStoryData<Event> | undefined
+  const relation = block.event as Relation<'event'> | undefined
+  const eventData = typeof relation === 'string' ? undefined : relation
 
   if (!eventData?.content) {
     return {
