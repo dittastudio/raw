@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { Link } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  items?: Link[]
+  items?: Block<'link'>[]
 }
 
 const { items } = defineProps<Props>()

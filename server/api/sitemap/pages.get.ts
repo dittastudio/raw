@@ -1,6 +1,5 @@
 import type { ISbStoryData } from 'storyblok-js-client'
 import type { SitemapUrlInput } from '#sitemap/types'
-import { defineSitemapEventHandler } from '#imports'
 import StoryblokClient from 'storyblok-js-client'
 
 export default defineSitemapEventHandler(async () => {
@@ -24,7 +23,7 @@ export default defineSitemapEventHandler(async () => {
       .map((link: ISbStoryData) => ({
         loc: link.slug === 'home' ? '/' : `/${link.full_slug}`,
         lastmod: link.updated_at,
-        _sitemap: 'pages'
+        _sitemap: 'pages',
       }))
 
     return pages satisfies SitemapUrlInput[]

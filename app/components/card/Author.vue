@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { StoryblokAsset } from '#storyblok-types'
+import type { AssetFieldValue } from '@storyblok/schema'
 
 interface Props {
   name?: string | null
-  image?: StoryblokAsset
+  image?: AssetFieldValue
   date?: string | null
   size?: 'small' | 'large'
 }

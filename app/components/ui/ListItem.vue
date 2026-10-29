@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { ListItem } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
   type?: 'default' | 'mask'
   index: number
-  item: ListItem
+  item: Block<'list_item'>
   isOpen: boolean
 }
 

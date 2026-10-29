@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import type { Link, Logo } from '#storyblok-components'
-import type { StoryblokRichtext } from '#storyblok-types'
+import type { RichTextFieldValue } from '@storyblok/schema'
+import type { Block } from '#storyblok-schema'
 import IconLogo from '@/assets/icons/logo.svg?component'
 import StoryblokLink from '@/components/storyblok/Link.vue'
 
 interface Props {
-  text?: string
-  subtext?: StoryblokRichtext
-  links?: Link[]
-  email?: string
-  telephone?: string
-  address?: string
-  logos?: Logo[]
+  text?: string | null
+  subtext?: RichTextFieldValue | null
+  links?: Block<'link'>[] | null
+  email?: string | null
+  telephone?: string | null
+  address?: string | null
+  logos?: Block<'logo'>[] | null
 }
 
 const { text, subtext, links, email, telephone, address, logos } = defineProps<Props>()

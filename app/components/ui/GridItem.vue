@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import type { ListItem } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import IconArrowRightStem from '@/assets/icons/arrow-right-stem.svg'
 
 interface Props {
   type?: 'default' | 'mask'
-  item: ListItem
+  item: Block<'list_item'>
   isOpen: boolean
-  hasIcon?: boolean
+  hasIcon?: boolean | null
 }
 
 const { item, isOpen, type = 'default', hasIcon = false } = defineProps<Props>()

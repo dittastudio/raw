@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { BlockSplitText } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: BlockSplitText
+  block: Block<'block_split_text'>
 }
 
 const { block } = defineProps<Props>()

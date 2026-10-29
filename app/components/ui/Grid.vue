@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import type { ListItem } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
 
 interface Props {
   theme: Themes
   accent: Themes
-  items: ListItem[]
+  items: Block<'list_item'>[]
 }
 
 const { accent, items } = defineProps<Props>()

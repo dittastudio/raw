@@ -1,7 +1,10 @@
+import type { ISbLink } from 'storyblok-js-client'
 import { fileURLToPath } from 'node:url'
 import tailwindcss from '@tailwindcss/vite'
-import devtoolsJson from 'vite-plugin-devtools-json'
+import StoryblokClient from 'storyblok-js-client'
 import svgLoader from 'vite-svg-loader'
+
+const isSpa = process.env.IS_SPA === 'true'
 
 export default defineNuxtConfig({
   modules: [
@@ -15,7 +18,7 @@ export default defineNuxtConfig({
     ['@storyblok/nuxt', { accessToken: process.env.NUXT_STORYBLOK_TOKEN }],
     ['nuxt-gtag', { id: 'G-P5WQCFSK22', initMode: 'manual' }],
   ],
-  ssr: true,
+  ssr: !isSpa,
   devtools: false,
   app: {
     pageTransition: { name: 'fade', mode: 'out-in' },
@@ -24,8 +27,6 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en-GB',
       },
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
       meta: [
         { name: 'author', content: 'RAW' },
         { name: 'msapplication-TileColor', content: '#ffffff' },
@@ -68,19 +69,23 @@ export default defineNuxtConfig({
     },
   },
   alias: {
-    '#storyblok-components': fileURLToPath(new URL('./.storyblok/types/289672313529140/storyblok-components', import.meta.url)),
-    '#storyblok-types': fileURLToPath(new URL('./.storyblok/types/storyblok', import.meta.url)),
+    '#storyblok-schema': fileURLToPath(new URL('./.storyblok/schema/schema', import.meta.url)),
   },
   routeRules: {
-    '/latest': { prerender: false },
-    '/posts/**': { prerender: false },
-    '/**': { prerender: process.env.NUXT_PRERENDER === 'true' },
+    '/**': {
+      prerender: !isSpa,
+    },
   },
   compatibilityDate: '2026-02-10',
   nitro: {
+    experimental: {
+      wasm: true, // ...for Cloudflare Workers
+    },
     prerender: {
-      crawlLinks: true,
-      routes: ['/'],
+      crawlLinks: !isSpa,
+      routes: isSpa ? [] : ['/'],
+      autoSubfolderIndex: false,
+      ignore: [route => route.includes('?')],
     },
   },
   vite: {
@@ -97,11 +102,9 @@ export default defineNuxtConfig({
         'gsap/SplitText',
         'gsap/DrawSVGPlugin',
         'keen-slider/vue.es',
-        '@tiptap/core',
       ],
     },
     plugins: [
-      devtoolsJson(),
       tailwindcss(),
       svgLoader({
         svgo: false,
@@ -117,6 +120,32 @@ export default defineNuxtConfig({
   postcss: {
     plugins: {
       'postcss-nested': {},
+    },
+  },
+  hooks: {
+    // Not every post is linked from the site, so the crawler can't find them all.
+    // Queue every published post explicitly.
+    'prerender:routes': async function ({ routes }) {
+      if (isSpa) {
+        return
+      }
+
+      const storyblokApi = new StoryblokClient({
+        accessToken: process.env.NUXT_STORYBLOK_TOKEN,
+        region: 'eu',
+      })
+
+      const links: ISbLink[] = await storyblokApi.getAll('cdn/links', {
+        version: 'published',
+        starts_with: 'posts/',
+        per_page: 1000,
+      })
+
+      for (const link of links) {
+        if (!link.is_folder && link.published) {
+          routes.add(`/${link.slug}`)
+        }
+      }
     },
   },
   eslint: {
@@ -149,6 +178,9 @@ export default defineNuxtConfig({
   },
   linkChecker: {
     skipInspections: ['no-uppercase-chars', 'link-text'],
+  },
+  seo: {
+    automaticOgAndTwitterTags: false,
   },
   sitemap: {
     excludeAppSources: true,

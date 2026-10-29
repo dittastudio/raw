@@ -1,7 +1,7 @@
 import type { Themes } from '@/types/app'
 import { defineStore } from 'pinia'
 
-type VideoCapture = {
+interface VideoCapture {
   name: string
   email: string
   captured: boolean
@@ -20,7 +20,7 @@ export const useAppStore = defineStore('app', () => {
   const videoDataCapture = ref({
     name: '',
     email: '',
-    captured: false
+    captured: false,
   })
 
   function setVideoDataCapture(value: VideoCapture) {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { useRegle } from '#imports'
 import { email as ruleEmail, required as ruleRequired } from '@regle/rules'
+import { useRegle } from '#imports'
 
 interface Props {
   legend?: string

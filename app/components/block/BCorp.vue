@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { BlockBcorp } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
 
 interface Props {
-  block: BlockBcorp
+  block: Block<'block_bcorp'>
 }
 
 const { block } = defineProps<Props>()

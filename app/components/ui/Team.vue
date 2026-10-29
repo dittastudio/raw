@@ -1,15 +1,14 @@
 <script lang="ts" setup>
-import type { Person } from '#storyblok-components'
+import type { StoryOf } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
-import type { ISbStoryData } from '@storyblok/js'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
 interface Props {
-  title?: string
-  people?: (string | ISbStoryData<Person>)[]
+  title?: string | null
+  people?: (string | StoryOf<'person'>)[]
   accent: Themes
 }
 

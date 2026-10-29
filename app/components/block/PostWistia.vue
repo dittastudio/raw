@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { PostWistia } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: PostWistia
+  block: Block<'post_wistia'>
 }
 
 const { block } = defineProps<Props>()

@@ -1,10 +1,10 @@
 <script lang="ts" setup>
-import type { BlockHero } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 interface Props {
-  block: BlockHero
+  block: Block<'block_hero'>
   name?: string
   headlineAs?: 'h1' | 'h2'
 }
@@ -130,7 +130,7 @@ onUnmounted(() => {
 
     <div
       ref="mediaRef"
-      class="absolute z-0 inset-x-0 -bottom-[15%] -top-[15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-spring-1"
+      class="absolute z-0 inset-x-0 bottom-[-15%] top-[-15%] will-change-transform overflow-hidden transition-[opacity,scale] duration-1000 ease-spring-1"
       :class="{
         'opacity-0 scale-120': !mediaReady,
       }"

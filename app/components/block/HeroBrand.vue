@@ -1,9 +1,9 @@
 <script lang="ts" setup>
-import type { BlockHeroBrand } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {
-  block: BlockHeroBrand
+  block: Block<'block_hero_brand'>
 }
 
 const { block } = defineProps<Props>()
@@ -167,7 +167,7 @@ onBeforeUnmount(stopSlideRotation)
     >
       <template
         v-for="logo in block.logos"
-        :key="logo.id"
+        :key="logo.id ?? logo.filename"
       >
         <template v-if="logo.filename && storyblokAssetType(logo.filename) === 'image'">
           <UiLogoResizer

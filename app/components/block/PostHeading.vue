@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { PostHeading } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 
 interface Props {
-  block: PostHeading
+  block: Block<'post_heading'>
 }
 
 const { block } = defineProps<Props>()

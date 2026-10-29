@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Settings } from '#storyblok-components'
+import type { StoryOf } from '#storyblok-schema'
 import { useRegle } from '#imports'
 import { email as ruleEmail, required as ruleRequired } from '@regle/rules'
 
@@ -44,7 +44,7 @@ const resetForm = () => {
   })
 }
 
-const settings = await useStory<Settings>('/settings')
+const settings = await useStory<StoryOf<'settings'>>('/settings')
 
 const postToGhl = async (data: { name: string; email: string, videoName?: string, videoPlaybackId?: string, videoPath?: string }) => {
   return $fetch('/api/ghl-data-capture', {

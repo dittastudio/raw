@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import type Lenis from 'lenis'
-import type { Link } from '#storyblok-components'
+import type { Block } from '#storyblok-schema'
 import type { Themes } from '@/types/app'
 import { useLenis } from 'lenis/vue'
 import IconLogo from '@/assets/icons/logo.svg?component'
 
 interface Props {
-  navigation?: Link[]
+  navigation?: Block<'link'>[] | null
 }
 
 const { navigation } = defineProps<Props>()

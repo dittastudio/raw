@@ -1,12 +1,11 @@
 <script lang="ts" setup>
-import type { BlockProjectCarousel, Project } from '#storyblok-components'
-import type { Themes } from '@/types/app'
-import type { ISbStoryData } from '@storyblok/js'
+import type { Block, Relation } from '#storyblok-schema'
 import type { Carousel } from '@/components/ui/CarouselFade.vue'
+import type { Themes } from '@/types/app'
 import IconArrow from '@/assets/icons/arrow-left.svg'
 
 interface Props {
-  block: BlockProjectCarousel
+  block: Block<'block_project_carousel'>
 }
 
 const { block } = defineProps<Props>()
@@ -16,7 +15,7 @@ const carouselRef = useTemplateRef<Carousel>('carouselFade')
 const isSmBreakpoint = '600px'
 
 const projects = computed(() => {
-  const currentProjects = block.projects as ISbStoryData<Project>[] || []
+  const currentProjects = ((block.projects ?? []) as Relation<'project'>[]).filter(item => typeof item !== 'string')
 
   const newProjects = currentProjects.map(project => ({
     ...project,

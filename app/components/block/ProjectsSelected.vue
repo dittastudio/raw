@@ -1,13 +1,13 @@
 <script lang="ts" setup>
-import type { BlockProjectsSelected } from '#storyblok-components'
+import type { Block, Relation } from '#storyblok-schema'
 
 interface Props {
-  block: BlockProjectsSelected
+  block: Block<'block_projects_selected'>
 }
 
 const { block } = defineProps<Props>()
 
-const projects = computed(() => Array.isArray(block.projects) ? block.projects.filter(item => typeof item !== 'string') : [])
+const projects = computed(() => Array.isArray(block.projects) ? (block.projects as Relation<'project'>[]).filter(item => typeof item !== 'string') : [])
 
 const setSizes = (isLarge: boolean) => {
   if (isLarge) {
