@@ -18,6 +18,7 @@ interface Props {
   isCover?: boolean
   disableTracking?: boolean
   lazyLoad?: boolean
+  maxResolution?: '720p' | '1080p' | '1440p' | '2160p'
 }
 
 const {
@@ -29,6 +30,7 @@ const {
   isCover = false,
   disableTracking = true,
   lazyLoad = true,
+  maxResolution,
 } = defineProps<Props>()
 
 const route = useRoute()
@@ -194,6 +196,7 @@ const tryPlayVideo = async () => {
       :primary-color="primaryColor"
       :accent-color="accentColor"
       :disable-tracking="disableTracking"
+      :max-resolution="maxResolution ?? (isCover ? '720p' : '1080p')"
       preload="metadata"
       :class="[
         'block',
