@@ -18,6 +18,8 @@ interface Props {
 const { wrapper = 'div', tag = 'span', delay = 0, duration = 1, ease = 'expo.out', trigger = 'inview' } = defineProps<Props>()
 const text = useTemplateRef('text')
 const ready = ref(false)
+let ctx: gsap.Context | null = null
+let unmounted = false
 
 const run = async () => {
   if (!text.value?.children?.length) {
@@ -26,6 +28,11 @@ const run = async () => {
 
   if (delay > 0) {
     await wait(delay)
+  }
+
+  // The component may have unmounted during the delay (e.g. fast page switch)
+  if (unmounted || !text.value?.children?.length) {
+    return
   }
 
   ready.value = true
@@ -52,36 +59,40 @@ const run = async () => {
       }
     : {}
 
-  SplitText.create(
-    text.value.children,
-    {
-      type: 'lines',
-      autoSplit: true,
-      onSplit: (self) => {
-        return gsap.from(self.lines, {
-          duration,
-          autoAlpha: 0,
-          yPercent: 100,
-          stagger: 0.1,
-          ease,
-          force3D: true,
-          immediateRender: true,
-          onComplete: () => {
-            gsap.set(self.lines, { clearProps: 'transform' })
+  const el = text.value
 
-            self.lines.forEach((line: Element) => {
-              (line as HTMLElement).parentElement?.style.removeProperty('overflow')
-            })
-          },
-          ...isTriggerScroll,
-          ...isTriggerInView,
-        })
+  ctx = gsap.context(() => {
+    SplitText.create(
+      el.children,
+      {
+        type: 'lines',
+        autoSplit: true,
+        onSplit: (self) => {
+          return gsap.from(self.lines, {
+            duration,
+            autoAlpha: 0,
+            yPercent: 100,
+            stagger: 0.1,
+            ease,
+            force3D: true,
+            immediateRender: true,
+            onComplete: () => {
+              gsap.set(self.lines, { clearProps: 'transform' })
+
+              self.lines.forEach((line: Element) => {
+                (line as HTMLElement).parentElement?.style.removeProperty('overflow')
+              })
+            },
+            ...isTriggerScroll,
+            ...isTriggerInView,
+          })
+        },
+        mask: 'lines',
+        tag,
+        linesClass: 'lines',
       },
-      mask: 'lines',
-      tag,
-      linesClass: 'lines',
-    },
-  )
+    )
+  }, el)
 }
 
 onMounted(async () => {
@@ -91,6 +102,12 @@ onMounted(async () => {
 
   await nextTick()
   await run()
+})
+
+onBeforeUnmount(() => {
+  unmounted = true
+  ctx?.revert()
+  ctx = null
 })
 </script>
 
