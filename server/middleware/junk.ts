@@ -11,7 +11,13 @@ const allowedExtensions = new Set(['json', 'md', 'txt', 'xml', 'xsl'])
 const junkPrefixes = ['/wp-', '/wordpress', '/cgi-bin', '/phpmyadmin']
 
 const isJunkPath = (pathname: string) => {
-  const path = pathname.toLowerCase()
+  let path: string
+  try {
+    path = decodeURIComponent(pathname).toLowerCase()
+  }
+  catch {
+    return true
+  }
 
   if (passthroughPrefixes.some(prefix => path.startsWith(prefix))) {
     return false
