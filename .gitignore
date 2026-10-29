@@ -12,6 +12,7 @@ node_modules
 # Logs
 logs
 *.log
+.storyblok/reports
 
 # Misc
 .DS_Store
